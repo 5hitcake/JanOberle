@@ -78,6 +78,24 @@ nav.links a:hover { color: var(--ink); }
 .hero p.lead { font-size: clamp(17px, 1.6vw, 20px); color: var(--ink-2); max-width: 46ch; margin: 24px 0 32px; }
 .hero .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
 .clocks { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 46px; }
+.hero-grid { display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,.85fr); gap: 32px; align-items: center; }
+.stack { position: relative; height: 540px; perspective: 1200px; }
+.stack .shot .t { font-size: clamp(20px, 2.4vw, 30px) !important; }
+.stack .shot .chip { font-size: 10px; }
+.stack .sc { position: absolute; left: var(--x); top: var(--y); width: 58%; text-decoration: none; transform: rotate(var(--r)) translate3d(calc(var(--mx, 0) * 1px), calc(var(--my, 0) * 1px), 0); transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s; border-radius: 14px; box-shadow: 0 30px 60px -28px rgba(17,19,24,.55); }
+.stack .sc .shot { border-radius: 14px; }
+.stack .sc:hover { transform: rotate(0deg) translateY(-10px) scale(1.03); z-index: 5; box-shadow: 0 40px 70px -26px rgba(17,19,24,.6); }
+.stack .sc2 { --k: 1.6; } .stack .sc1 { --k: 2.4; } .stack .sc3 { --k: 1; }
+@media (prefers-reduced-motion: no-preference) {
+  .stack .sc .shot { animation: bob 7s ease-in-out infinite; animation-delay: var(--d); }
+  @keyframes bob { 50% { transform: translateY(-10px); } }
+}
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: minmax(0,1fr); }
+  .stack { height: 420px; margin-top: 8px; }
+  .stack .sc { width: 56%; }
+}
+@media (max-width: 480px) { .stack { height: 330px; } .stack .sc { width: 58%; } }
 .clock { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 12px 16px; min-width: 170px; }
 .clock b { display: block; font: 500 26px var(--f-mono); font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
 .clock span { font-size: 13px; color: var(--muted); }
@@ -208,7 +226,8 @@ footer a:hover { color: var(--ink); }
 
 <section class="hero" id="top">
   <canvas id="bg" aria-hidden="true"></canvas>
-  <div class="wrap">
+  <div class="wrap hero-grid">
+   <div class="hero-text">
     <span class="avail"><i></i><span data-i="avail">Neue Projekte ab nächster Woche</span></span>
     <h1><span data-i="h1a">Websites, die</span> <span class="serif" data-i="h1b">Kunden bringen.</span></h1>
     <p class="lead" data-i="lead">Ich baue schnelle, moderne Websites für Restaurants, Barbershops und Handwerksbetriebe. Mit Online-Buchung, WhatsApp-Button und gut auffindbar bei Google. Fertig in 7 Tagen.</p>
@@ -221,6 +240,12 @@ footer a:hover { color: var(--ink); }
       <div class="clock"><b id="cDE">--:--</b><span>Berlin</span></div>
       <div class="clock link" data-i="clockNote">Ich arbeite zwischen beiden Zeitzonen. Antwort meist am selben Tag.</div>
     </div>
+   </div>
+   <div class="stack" id="stack" aria-label="Beispiele meiner Arbeiten">
+     <a class="sc sc3" href="farbwerk/" style="--r:4deg;--x:6%;--y:58%;--d:.0s"><div class="shot s3"><div class="bar"><i></i><i></i><i></i></div><div class="in"><span class="chip">Malermeister</span><div class="t">Saubere Wände.<br><mark>Pünktlich</mark> fertig.</div></div></div></a>
+     <a class="sc sc2" href="navaja-club/" style="--r:-5deg;--x:38%;--y:27%;--d:-2s"><div class="shot s2"><div class="bar"><i></i><i></i><i></i></div><div class="in"><span class="chip">Barbería</span><div class="t">Corte,<br>navaja<br><span>y charla.</span></div></div></div></a>
+     <a class="sc sc1" href="fuego-lento/" style="--r:3deg;--x:2%;--y:0%;--d:-4s"><div class="shot s1"><div class="bar"><i></i><i></i><i></i></div><div class="in"><span class="chip">Parrilla</span><div class="t">Fuego lento,<br><em>mesa larga.</em></div></div></div></a>
+   </div>
   </div>
 </section>
 
@@ -435,6 +460,16 @@ footer a:hover { color: var(--ink); }
     out.append(T[L].ready + " ", a);
   });
 
+
+  const stack = $("#stack");
+  if (stack && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    stack.parentElement.addEventListener("pointermove", (e) => {
+      const r = stack.getBoundingClientRect(), dx = (e.clientX - (r.left + r.width / 2)) / r.width, dy = (e.clientY - (r.top + r.height / 2)) / r.height;
+      stack.querySelectorAll(".sc").forEach((c) => { const k = parseFloat(getComputedStyle(c).getPropertyValue("--k")) || 1; c.style.setProperty("--mx", (dx * 10 * k).toFixed(1)); c.style.setProperty("--my", (dy * 8 * k).toFixed(1)); });
+    });
+    stack.parentElement.addEventListener("pointerleave", () => stack.querySelectorAll(".sc").forEach((c) => { c.style.setProperty("--mx", 0); c.style.setProperty("--my", 0); }));
+  }
+
   /* Uhren */
   function tick() {
     const f = (tz) => new Intl.DateTimeFormat("de-DE", { hour: "2-digit", minute: "2-digit", timeZone: tz }).format(new Date());
@@ -456,7 +491,6 @@ footer a:hover { color: var(--ink); }
   cv.parentElement.addEventListener("pointerleave", () => { mx = my = -999; });
   matchMedia("(prefers-color-scheme: dark)").addEventListener("change", colors);
   new MutationObserver(colors).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
-  function arcPt(k, a, b, lift) { const x = a[0] + (b[0] - a[0]) * k, y = a[1] + (b[1] - a[1]) * k - Math.sin(Math.PI * k) * lift; return [x, y]; }
   function frame(t) {
     ctx.clearRect(0, 0, W, H);
     const gap = W < 700 ? 22 : 28;
@@ -469,22 +503,6 @@ footer a:hover { color: var(--ink); }
       ctx.beginPath(); ctx.arc(x + (near ? (x - mx) * near * 0.08 : 0), y + (near ? (y - my) * near * 0.08 : 0), r, 0, 6.283); ctx.fill();
     }
     ctx.globalAlpha = 1;
-    const narrow = W < 760;
-    const A = [W * (narrow ? 0.08 : 0.52), H * 0.92], B = [W * 0.94, H * (narrow ? 0.2 : 0.16)], lift = H * 0.35;
-    ctx.strokeStyle = C.acc; ctx.lineWidth = 1.5; ctx.setLineDash([4, 6]); ctx.globalAlpha = narrow ? 0.25 : 0.55;
-    ctx.beginPath(); for (let k = 0; k <= 1.001; k += 0.02) { const p = arcPt(k, A, B, lift); k === 0 ? ctx.moveTo(p[0], p[1]) : ctx.lineTo(p[0], p[1]); } ctx.stroke(); ctx.setLineDash([]);
-    for (let i = 0; i < 3; i++) {
-      const k = ((t / 5200) + i / 3) % 1, p = arcPt(k, A, B, lift);
-      ctx.globalAlpha = (narrow ? 0.4 : 0.9) * Math.sin(Math.PI * k);
-      ctx.fillStyle = i === 1 ? C.sun : C.acc; ctx.beginPath(); ctx.arc(p[0], p[1], 4, 0, 6.283); ctx.fill();
-    }
-    ctx.globalAlpha = narrow ? 0.45 : 1;
-    for (const [p, label] of [[A, "BUENOS AIRES"], [B, "BERLIN"]]) {
-      ctx.fillStyle = C.acc; ctx.beginPath(); ctx.arc(p[0], p[1], 5, 0, 6.283); ctx.fill();
-      ctx.strokeStyle = C.acc; ctx.globalAlpha *= .4; ctx.beginPath(); ctx.arc(p[0], p[1], 10 + (t / 60 % 12), 0, 6.283); ctx.stroke(); ctx.globalAlpha = narrow ? 0.45 : 1;
-      ctx.fillStyle = C.ink; ctx.font = "500 11px 'Geist Mono', monospace";
-      ctx.textAlign = p === B ? "right" : "left"; ctx.fillText(label, p[0] + (p === B ? -14 : 14), p[1] - 10);
-    }
     ctx.globalAlpha = 1;
     if (!reduce) requestAnimationFrame(frame);
   }
