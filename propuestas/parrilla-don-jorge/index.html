@@ -113,7 +113,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 <section class="hero" id="inicio">
   <canvas id="fx" aria-hidden="true"></canvas>
   <div class="wrap">
-    <div class="eyebrow">Parrilla de barrio · Villa Crespo</div>
+    <div class="eyebrow">Parrilla y cocina · Villa Crespo</div>
     <h1>Tocá el <em>timbre.</em></h1>
     <p>Paredes blancas, mozos amables y la entraña que todo Villa Crespo recomienda. A pasos de la cancha de Atlanta.</p>
     <div class="ctas">
@@ -140,20 +140,20 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     <div>
       <div class="eyebrow">Visitanos</div>
       <h2 style="font-size:clamp(40px,6vw,72px);margin-top:10px">Tocá el timbre y pasá.</h2>
-      <p style="color:var(--dim);max-width:40ch">Estamos en la esquina de Villarroel, en pleno Villa Crespo, a pasos del estadio de Atlanta.</p>
-      <div class="ctas"><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Parrilla%20Don%20Jorge%20Villarroel%201201%20Buenos%20Aires" target="_blank" rel="noopener">Cómo llegar ↗</a><a class="btn ghost" href="https://www.instagram.com/parrilladonjorge1201/" target="_blank" rel="noopener">Instagram ↗</a></div>
+      <p style="color:var(--dim);max-width:40ch">Villarroel y Darwin, en pleno Villa Crespo, a pasos del estadio de Atlanta. De lunes a sábado, mediodía y noche.</p>
+      <div class="ctas"><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Parrilla%20Don%20Jorge%20Villarroel%201201%2C%20esq.%20Darwin%20Buenos%20Aires" target="_blank" rel="noopener">Cómo llegar ↗</a><a class="btn ghost" href="https://www.instagram.com/parrilladonjorge1201/" target="_blank" rel="noopener">Instagram ↗</a></div>
     </div>
     <div class="card">
       <h3>Datos</h3>
-      <div class="row"><span>Dirección</span><span>Villarroel 1201</span></div>
+      <div class="row"><span>Dirección</span><span>Villarroel 1201, esq. Darwin</span></div>
       <div class="row"><span>Barrio</span><span>Villa Crespo</span></div>
-      <div class="row"><span>Horarios</span><span class="ph">se completan con tus horarios</span></div>
-      <div class="row"><span>Reservas</span><span>por Instagram</span></div>
+      <div class="row"><span>Horarios</span><span>Lun a Sáb · 12 a 15 h y 20 a 23 h</span></div><div class="row"><span>Teléfono</span><span><a href="tel:+541148573403">4857-3403</a></span></div>
+      <div class="row"><span>Reservas</span><span>por teléfono o Instagram</span></div>
     </div>
   </div>
 </section>
 
-<footer><div class="wrap"><span>Parrilla Don Jorge · Villarroel 1201</span><span>Propuesta de diseño de Jan Oberle · <a href="https://5hitcake.github.io/JanOberle/#es" target="_blank" rel="noopener">ver más trabajos</a></span></div></footer>
+<footer><div class="wrap"><span>Parrilla Don Jorge · Villarroel 1201, esq. Darwin</span><span>Propuesta de diseño de Jan Oberle · <a href="https://5hitcake.github.io/JanOberle/#es" target="_blank" rel="noopener">ver más trabajos</a></span></div></footer>
 
 <a class="like" href="https://wa.me/5491130331893?text=Hola%20Jan%21%20Vi%20la%20propuesta%20de%20sitio%20web%20para%20Parrilla%20Don%20Jorge%20y%20me%20gustar%C3%ADa%20saber%20m%C3%A1s." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></svg>¿Te gusta? Hablemos</a>
 
@@ -163,7 +163,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   const mb = $("#menuBtn"), links = $("#links");
   mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
   links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
-  const CARTA = {"Para empezar": [["Provoleta", "A la parrilla, con orégano."], ["Empanadas", "De carne, para arrancar."], ["Chorizo y morcilla", "Con pan y chimichurri."]], "Cortes": [["Entraña", "El corte estrella de la casa.", "la más pedida"], ["Vacío", "Cocción lenta."], ["Asado de tira", "Para compartir."], ["Bife de chorizo", "Grueso, al punto que pidas."]], "Guarniciones": [["Papas fritas", "Famosas en el barrio. Pedí la porción grande.", "clásico"], ["Ensalada mixta", "Lechuga, tomate y cebolla."], ["Papas a la provenzal", "Ajo y perejil."]], "Postres": [["Flan casero", "Con dulce de leche."], ["Panqueques", "Con dulce de leche."]]};
+  const CARTA = {"Para empezar": [["Provoleta", "A la parrilla, con orégano."], ["Empanadas", "De carne, para arrancar."], ["Chorizo y morcilla", "Con pan y chimichurri."]], "Cortes": [["Entraña", "El corte estrella de la casa.", "la más pedida"], ["Vacío", "Cocción lenta."], ["Asado de tira", "Para compartir."], ["Bife de chorizo", "Grueso, al punto que pidas."]], "Guarniciones": [["Papas fritas", "Famosas en el barrio. Pedí la porción grande.", "clásico"], ["Ensalada mixta", "Lechuga, tomate y cebolla."], ["Papas a la provenzal", "Ajo y perejil."]], "Postres": [["Flan casero", "Con dulce de leche."], ["Panqueques", "Con dulce de leche."]], "Cocina": [["Milanesa napolitana", "Con papas fritas. Un clásico de la casa.", "cocina"], ["Papas con huevo", "Papas fritas con huevos fritos encima."]]};
   const tabs = $("#tabs"), list = $("#list");
   function show(c) {
     tabs.querySelectorAll("button").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.c === c)));
