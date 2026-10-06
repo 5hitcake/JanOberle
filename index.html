@@ -68,7 +68,13 @@ nav.links a:hover { color: var(--ink); }
 
 /* Hero */
 .hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line); }
-.hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; }
+.hero { --ink: #f1efe9; --ink-2: #cfcbc2; --muted: #9b978e; --surface: rgba(255,255,255,.06); --line: rgba(255,255,255,.13); --accent: #d6b46a; background: #08080a; color: var(--ink); border-bottom-color: #1b1a1f; }
+.vanta { position: absolute; inset: 0; z-index: -2; }
+.hero-shade { position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(90deg, rgba(8,8,10,.9) 0%, rgba(8,8,10,.72) 38%, rgba(8,8,10,.1) 62%, rgba(8,8,10,0) 80%), linear-gradient(0deg, rgba(8,8,10,.6), transparent 30%); }
+@media (max-width: 900px) { .hero-shade { background: linear-gradient(180deg, rgba(8,8,10,.15) 0%, rgba(8,8,10,.62) 22%, rgba(8,8,10,.62) 70%, rgba(8,8,10,.2) 100%); } }
+.hero .btn.accent { background: var(--accent); border-color: var(--accent); color: #0a0a0b; }
+.hero .btn.line { color: var(--ink); border-color: rgba(255,255,255,.28); }
+.hero .clock, .hero .avail { backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
 .hero .wrap { padding-block: 92px 84px; }
 .avail { display: inline-flex; align-items: center; gap: 8px; font: 500 13px var(--f-mono); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; }
 .avail i { width: 8px; height: 8px; border-radius: 50%; background: #22b35e; box-shadow: 0 0 0 4px rgba(34,179,94,.18); }
@@ -225,7 +231,8 @@ footer a:hover { color: var(--ink); }
 </header>
 
 <section class="hero" id="top">
-  <canvas id="bg" aria-hidden="true"></canvas>
+  <div id="vanta" class="vanta" aria-hidden="true"></div>
+  <div class="hero-shade" aria-hidden="true"></div>
   <div class="wrap hero-grid">
    <div class="hero-text">
     <span class="avail"><i></i><span data-i="avail">Neue Projekte ab nächster Woche</span></span>
@@ -344,6 +351,8 @@ footer a:hover { color: var(--ink); }
 </footer>
 <div class="toast" id="toast" hidden></div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.birds.min.js"></script>
 <script>
 (() => {
   const $ = (s) => document.querySelector(s);
@@ -479,34 +488,15 @@ footer a:hover { color: var(--ink); }
   tick(); setInterval(tick, 15000);
   $("#yr").textContent = new Date().getFullYear();
 
-  /* Hintergrund: Punktraster, das auf den Cursor reagiert, und ein Bogen Buenos Aires → Berlin mit wandernden Impulsen */
-  const cv = $("#bg"), ctx = cv.getContext("2d");
-  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let W = 0, H = 0, mx = -999, my = -999;
-  const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
-  let C = {};
-  function colors() { C = { dot: css("--line"), ink: css("--muted"), acc: css("--accent"), sun: css("--sun") }; }
-  function size() { const dpr = Math.min(devicePixelRatio || 1, 2); W = cv.clientWidth; H = cv.clientHeight; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); colors(); }
-  cv.parentElement.addEventListener("pointermove", (e) => { const r = cv.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; });
-  cv.parentElement.addEventListener("pointerleave", () => { mx = my = -999; });
-  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", colors);
-  new MutationObserver(colors).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
-  function frame(t) {
-    ctx.clearRect(0, 0, W, H);
-    const gap = W < 700 ? 22 : 28;
-    for (let y = gap / 2; y < H; y += gap) for (let x = gap / 2; x < W; x += gap) {
-      const d = Math.hypot(x - mx, y - my), wave = Math.sin(x / 90 + y / 140 - t / 1400);
-      const near = Math.max(0, 1 - d / 160);
-      ctx.fillStyle = near > 0.05 ? C.acc : C.dot;
-      ctx.globalAlpha = near > 0.05 ? 0.25 + near * 0.6 : 0.7 + wave * 0.3;
-      const r = 1.1 + near * 2.2 + (wave + 1) * 0.25;
-      ctx.beginPath(); ctx.arc(x + (near ? (x - mx) * near * 0.08 : 0), y + (near ? (y - my) * near * 0.08 : 0), r, 0, 6.283); ctx.fill();
-    }
-    ctx.globalAlpha = 1;
-    ctx.globalAlpha = 1;
-    if (!reduce) requestAnimationFrame(frame);
+  /* Hintergrund: Vanta Birds, Schwarm in Silber und Gold */
+  if (window.VANTA && window.THREE && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const small = innerWidth < 700;
+    try {
+      VANTA.BIRDS({ el: "#vanta", THREE, mouseControls: true, touchControls: true, gyroControls: false, minHeight: 200, minWidth: 200, scale: 1, scaleMobile: 1,
+        backgroundColor: 0x08080a, color1: 0x9c9ca6, color2: 0xd6b46a, colorMode: "lerpGradient", birdSize: small ? 1.2 : 1.1, wingSpan: 22,
+        speedLimit: 4, separation: 55, alignment: 35, cohesion: 30, quantity: small ? 3 : 3, backgroundAlpha: 1 });
+    } catch (e) { console.error(e); }
   }
-  size(); addEventListener("resize", size); requestAnimationFrame(frame);
 })();
 </script>
 
