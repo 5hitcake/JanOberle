@@ -6,7 +6,7 @@
 <meta name="description" content="Jan Oberle – Webdesign für Restaurants, Barbershops und Handwerksbetriebe. Schnelle, moderne Websites mit Online-Buchung, fertig in 7 Tagen.">
 <meta property="og:title" content="Jan Oberle Webdesign">
 <meta property="og:description" content="Jan Oberle – Webdesign für Restaurants, Barbershops und Handwerksbetriebe. Schnelle, moderne Websites mit Online-Buchung, fertig in 7 Tagen.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%23111215%22/%3E%3Ctext x=%2216%22 y=%2223%22 font-size=%2220%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22Georgia%22%3EJ%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%23111215%22/%3E%3Ctext x=%2216%22 y=%2223%22 font-size=%2220%22 text-anchor=%22middle%22 fill=%22%239be22d%22 font-family=%22Georgia%22%3EJ%3C/text%3E%3C/svg%3E">
 <title>Jan Oberle Webdesign</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,9 +29,9 @@
   --f-serif: "Instrument Serif", "Iowan Old Style", Georgia, serif;
   --f-body: "Geist", "Segoe UI", system-ui, sans-serif;
   --f-mono: "Geist Mono", ui-monospace, Menlo, monospace;
-  --acc: #8a6cf0;
-  --acc-grad: linear-gradient(100deg, #2b4fd9 0%, #7c4ce0 22%, #d65fb0 42%, #ffe6b8 50%, #f0b04a 62%, #3aa0c8 82%, #2b4fd9 100%);
-  --acc-glow: rgba(138,108,240,.45);
+  --acc: #9be22d;
+  --acc-grad: linear-gradient(100deg, #244a05 0%, #5f9a12 22%, #b7ff4a 40%, #f1ffd6 50%, #86d21e 62%, #2e5a07 82%, #244a05 100%);
+  --acc-glow: rgba(155,226,45,.40);
   color-scheme: dark;
 }
 /* Akzentfarben: eingefärbtes Metall */
@@ -552,9 +552,9 @@ section.block + section.block { border-top: 1px solid transparent; border-image:
   $("#yr").textContent = new Date().getFullYear();
 
   /* Akzentfarbe: ?farbe=rot|kupfer|blau|titan|gift|violett, Vorschau-Leiste mit ?vorschau */
-  const ACC = { titan: ["Titan", 0x8a6cf0, "linear-gradient(135deg,#2b4fd9,#d65fb0,#f0b04a)"], rot: ["Blutrot", 0xe3262f, "#e3262f"], kupfer: ["Kupfer", 0xe2783a, "#e2783a"], blau: ["Eisblau", 0x2fa8ff, "#2fa8ff"], gift: ["Giftgrün", 0x9be22d, "#9be22d"], violett: ["Violett", 0xa35cff, "#a35cff"] };
+  const ACC = { gift: ["Giftgrün", 0x9be22d, "#9be22d"], titan: ["Titan", 0x8a6cf0, "linear-gradient(135deg,#2b4fd9,#d65fb0,#f0b04a)"], rot: ["Blutrot", 0xe3262f, "#e3262f"], kupfer: ["Kupfer", 0xe2783a, "#e2783a"], blau: ["Eisblau", 0x2fa8ff, "#2fa8ff"], violett: ["Violett", 0xa35cff, "#a35cff"] };
   const qs = new URLSearchParams(location.search);
-  let accent = ACC[qs.get("farbe")] ? qs.get("farbe") : "titan";
+  let accent = ACC[qs.get("farbe")] ? qs.get("farbe") : "gift";
   document.documentElement.dataset.accent = accent;
   let birds = null;
   if (qs.has("vorschau")) {
