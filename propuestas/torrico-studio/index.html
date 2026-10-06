@@ -8,11 +8,11 @@
 <meta name="description" content="Propuesta de sitio web para Torrico Studio, preparada por Jan Oberle. No es el sitio oficial.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter+Tight:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Inter+Tight:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap">
 <style>
 :root {
-  --bg: #0f0f10; --bg2: #18181a; --fg: #f4f1ea; --dim: #a9a59c; --acc: #e8c26a; --acc-fg: #0f0f10; --hot: #e8c26a; --line: rgba(244,241,234,.14);
-  --f-display: "Syne", "Helvetica Neue", Arial, sans-serif; --f-body: "Inter Tight", Arial, sans-serif; --f-mono: "Space Mono", ui-monospace, Menlo, monospace;
+  --bg: #0c0c0c; --bg2: #161616; --fg: #f2efe9; --dim: #a8a49c; --acc: #f2efe9; --acc-fg: #0c0c0c; --hot: #f2efe9; --line: rgba(242,239,233,.16);
+  --f-display: "Cormorant Garamond", "Didot", Georgia, serif; --f-body: "Inter Tight", Arial, sans-serif; --f-mono: "Space Mono", ui-monospace, Menlo, monospace;
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -20,7 +20,7 @@ html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 var(--f-body); overflow-x: hidden; }
 a { color: inherit; }
-h1, h2, h3 { font-family: var(--f-display); margin: 0; line-height: .98; text-wrap: balance; font-weight: 800; letter-spacing: -.03em; text-transform: none; }
+h1, h2, h3 { font-family: var(--f-display); margin: 0; line-height: .98; text-wrap: balance; font-weight: 600; letter-spacing: -.01em; text-transform: none; }
 .wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
 .kicker { font: 700 12px var(--f-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--acc); }
 :focus-visible { outline: 2px solid var(--acc); outline-offset: 3px; }
@@ -30,14 +30,14 @@ h1, h2, h3 { font-family: var(--f-display); margin: 0; line-height: .98; text-wr
 
 header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
 header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 12px; }
-.logo { font-family: var(--f-display); font-size: 24px; text-decoration: none; font-weight: 800; text-transform: none; }
+.logo { font-family: var(--f-display); font-size: 24px; text-decoration: none; font-weight: 600; text-transform: none; }
 nav.links { display: flex; align-items: center; gap: 22px; }
 nav.links a { text-decoration: none; font-size: 14px; color: var(--dim); }
 nav.links a:hover { color: var(--fg); }
 .lang { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
 .lang button { border: 0; background: transparent; color: var(--dim); font: 700 11px var(--f-mono); padding: 5px 9px; border-radius: 999px; cursor: pointer; }
 .lang button[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 700 14px var(--f-body); letter-spacing: .04em; text-transform: uppercase; padding: 13px 22px; border-radius: 999px; background: var(--acc); color: var(--acc-fg); border: 2px solid var(--acc); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 700 14px var(--f-body); letter-spacing: .04em; text-transform: uppercase; padding: 13px 22px; border-radius: 0px; background: var(--acc); color: var(--acc-fg); border: 2px solid var(--acc); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
 .btn:hover { transform: translate(-2px,-2px); box-shadow: 4px 4px 0 var(--fg); }
 .btn.ghost { background: transparent; color: var(--fg); border-color: var(--fg); }
 nav.links a.btn { color: var(--acc-fg); padding: 9px 16px; font-size: 13px; }
@@ -59,7 +59,7 @@ nav.links a.btn { color: var(--acc-fg); padding: 9px 16px; font-size: 13px; }
 .hero h1 em { color: var(--acc); font-style: normal; }
 .hero p { font-size: 19px; color: var(--dim); max-width: 40ch; margin: 22px 0 30px; }
 .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
-.badge { display: inline-flex; align-items: center; gap: 10px; margin-top: 34px; font: 700 13px var(--f-mono); border: 2px solid var(--fg); padding: 8px 14px; border-radius: 999px; }
+.badge { display: inline-flex; align-items: center; gap: 10px; margin-top: 34px; font: 700 13px var(--f-mono); border: 2px solid var(--fg); padding: 8px 14px; border-radius: 0px; }
 .badge .star { color: var(--acc); }
 @media (max-width: 820px) { .hero::before { background: linear-gradient(180deg, color-mix(in srgb, var(--bg) 75%, transparent), var(--bg)); } }
 
@@ -69,7 +69,7 @@ section.block { padding-block: 90px; }
 .head p { max-width: 42ch; margin: 0; color: var(--dim); }
 .why { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
 @media (max-width: 820px) { .why { grid-template-columns: minmax(0,1fr); } }
-.why div { border: 2px solid var(--line); border-radius: 999px; padding: 24px; background: var(--bg2); }
+.why div { border: 2px solid var(--line); border-radius: 0px; padding: 24px; background: var(--bg2); }
 .why h3 { font-size: 28px; margin-bottom: 8px; }
 .why p { margin: 0; color: var(--dim); font-size: 15px; }
 .svc { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 0 56px; }
@@ -79,7 +79,7 @@ section.block { padding-block: 90px; }
 .svc .p { font: 700 16px var(--f-mono); color: var(--dim); }
 .svc p { margin: 0; grid-column: 1 / -1; color: var(--dim); font-size: 15px; }
 .note { margin-top: 20px; font-size: 13px; color: var(--dim); padding: 10px 14px; border-left: 3px solid var(--acc); background: var(--bg2); }
-.book { background: var(--fg); color: var(--bg); border-radius: 999px; padding: clamp(26px, 5vw, 56px); display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,.8fr); gap: 30px; align-items: center; }
+.book { background: var(--fg); color: var(--bg); border-radius: 0px; padding: clamp(26px, 5vw, 56px); display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,.8fr); gap: 30px; align-items: center; }
 @media (max-width: 820px) { .book { grid-template-columns: minmax(0,1fr); } }
 .book h2 { font-size: clamp(40px, 6vw, 72px); }
 .book p { opacity: .8; margin: 12px 0 0; }
@@ -113,25 +113,25 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 <section class="hero" id="inicio">
   <canvas id="fx" aria-hidden="true"></canvas>
   <div class="wrap">
-    <div class="kicker" data-en="Barbershop · Almagro · Buenos Aires">Barbería · Almagro · Buenos Aires</div>
-    <h1 data-en-html="Your barber &lt;em&gt;in Buenos Aires.&lt;/em&gt;">Tu barbero <em>en Buenos Aires.</em></h1>
-    <p data-en="Over 1,500 five-star reviews. Locals and travelers from all over the world: we speak Spanish and English.">Más de 1.500 reseñas de 5 estrellas. Clientes del barrio y de todo el mundo: acá se habla español e inglés.</p>
+    <div class="kicker" data-en="Visagism & image consulting · Buenos Aires">Visagismo & asesoría de imagen · Almagro</div>
+    <h1 data-en-html="We don&#x27;t just cut. &lt;em style=&quot;font-style:italic;color:var(--dim)&quot;&gt;We design your image.&lt;/em&gt;">No cortamos por cortar. <em style="font-style:italic;color:var(--dim)">Diseñamos tu imagen.</em></h1>
+    <p data-en="Your ideal cut based on your face shape, hair type and style. We analyze before we cut. And yes, we speak English.">Tu corte ideal según tu rostro, tu tipo de cabello y tu estilo. Analizamos antes de cortar, para que el resultado tenga un propósito.</p>
     <div class="ctas"><a class="btn" href="#turnos" data-en="Book now">Sacar turno</a><a class="btn ghost" href="#servicios" data-en="Services">Ver servicios</a></div>
-    <div class="badge"><span class="star">★ 5,0</span> · +1.500 reseñas en Fresha</div>
+    <div class="badge"><span class="star">★ 5,0</span> en Fresha · +1.500 reseñas · 8.772 seguidores</div>
   </div>
 </section>
 
 <section class="block" id="estudio">
   <div class="wrap">
-    <div class="head"><div><div class="kicker" data-en="The studio">El estudio</div><h2 data-en="Why people come back.">Por qué volver.</h2></div></div>
-    <div class="why"><div><h3 data-en="We speak English">We speak English</h3><p data-en="Explain your look in English or Spanish, no problem.">Explicá lo que querés en español o en inglés, sin problema.</p></div><div><h3 data-en="Real advice">Asesoramiento</h3><p data-en="We help you get the look you want, not just a cut.">Te ayudamos a llegar al look que buscás, no solo a cortar.</p></div><div><h3 data-en="There&#x27;s a cat">Hay un gato</h3><p data-en="Some clients come back for him too.">Muchos clientes vuelven también por él.</p></div></div>
+    <div class="head"><div><div class="kicker" data-en="The studio">El estudio</div><h2 data-en="Your image has a purpose.">Tu imagen tiene un propósito.</h2></div></div>
+    <div class="why"><div><h3 data-en="Visagism">Visagismo</h3><p data-en="We study your face shape to choose the cut that suits you best.">Estudiamos la forma de tu rostro para elegir el corte que mejor te queda.</p></div><div><h3 data-en="Hair type">Tipo de cabello</h3><p data-en="Straight, wavy or curly: every texture needs its own technique.">Lacio, ondulado o rulos: cada textura pide su técnica.</p></div><div><h3 data-en="We speak English">We speak English</h3><p data-en="Clients from all over the world. Explain your idea in English or Spanish.">Clientes de todo el mundo. Explicá tu idea en español o en inglés.</p></div></div>
   </div>
 </section>
 
 <section class="block" id="servicios" style="padding-top:0">
   <div class="wrap">
     <div class="head"><div><div class="kicker" data-en="Services">Servicios</div><h2 data-en="Menu">La lista</h2></div></div>
-    <div class="svc"><div><h3 data-en="Haircut">Corte</h3><span class="p">$ —</span><p data-en="Scissors and clippers, clean finish.">Tijera y máquina, con terminación prolija.</p></div><div><h3 data-en="Fade">Fade</h3><span class="p">$ —</span><p data-en="Custom fade, low to high.">Degradé a medida.</p></div><div><h3 data-en="Beard">Barba</h3><span class="p">$ —</span><p data-en="Shape-up and hot towel.">Perfilado y toalla caliente.</p></div><div><h3 data-en="Cut + beard">Corte + barba</h3><span class="p">$ —</span><p data-en="The full package.">El combo completo.</p></div></div>
+    <div class="svc"><div><h3 data-en="Image consulting + cut">Asesoría de imagen + corte</h3><span class="p">$ —</span><p data-en="Face and hair analysis, then the cut that fits you.">Análisis de rostro y cabello, y el corte que te queda.</p></div><div><h3 data-en="Haircut">Corte</h3><span class="p">$ —</span><p data-en="Scissors and clippers, clean finish.">Tijera y máquina, con terminación prolija.</p></div><div><h3 data-en="Beard">Barba</h3><span class="p">$ —</span><p data-en="Shaped to your face.">Perfilado según la forma de tu rostro.</p></div><div><h3 data-en="Texture &amp; curls">Textura y rulos</h3><span class="p">$ —</span><p data-en="Specific technique for wavy and curly hair.">Técnica específica para cabello ondulado y rizado.</p></div></div>
     <p class="note" data-en="Sample services for this proposal: services, prices and durations are loaded from your current menu.">Servicios de ejemplo para la propuesta: los servicios, precios y duraciones se cargan desde tu lista actual.</p>
   </div>
 </section>
@@ -139,9 +139,9 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 <section class="block" id="turnos" style="padding-top:0">
   <div class="wrap">
     <div class="book">
-      <div><h2 data-en="Book in 30 seconds.">Sacá turno en 30 segundos.</h2><p data-en="Book online in two clicks. Perfect if you're traveling: pick a slot from your hotel.">Reservá online en dos clics. Ideal si estás de viaje: elegís horario desde el hotel.</p></div>
+      <div><h2 data-en="Book in 30 seconds.">Sacá turno en 30 segundos.</h2><p data-en="Book your experience online in two clicks. Perfect if you're traveling: pick a slot from your hotel.">Reservá tu experiencia online en dos clics. Ideal si estás de viaje: elegís horario desde el hotel.</p></div>
       <div class="col">
-        <a class="btn" href="#turnos" data-en="Book a slot">Reservar turno</a><span class="ph" data-en="Here goes your Fresha booking link.">Acá va el link a tu agenda de Fresha.</span>
+        <a class="btn" href="https://www.fresha.com/a/torrico-studio-buenos-aires-treinta-y-tres-orientales-86-d07poxi2" target="_blank" rel="noopener" data-en="Book your experience ↗">Reservá tu experiencia ↗</a><a class="btn" style="background:transparent;color:inherit;border-color:currentColor" href="https://www.instagram.com/torrico.studio/" target="_blank" rel="noopener">Instagram ↗</a>
         <span class="ph" data-en="Treinta y Tres Orientales 86 · Almagro">Treinta y Tres Orientales 86 · Almagro</span>
       </div>
     </div>
@@ -171,7 +171,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   document.querySelectorAll(".lang button").forEach((b) => b.addEventListener("click", () => lang(b.dataset.l)));
   if (location.hash === "#en") lang("en");
 
-  const MODE = "pole", COLS = ["rgba(232,194,106,.22)","rgba(244,241,234,.04)","rgba(232,194,106,.08)","rgba(244,241,234,.04)"];
+  const MODE = "pole", COLS = ["rgba(242,239,233,.10)","rgba(242,239,233,.02)","rgba(242,239,233,.05)","rgba(242,239,233,.02)"];
   const cv = $("#fx"), ctx = cv.getContext("2d");
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   let W = 0, H = 0, mx = .5;
