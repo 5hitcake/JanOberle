@@ -105,7 +105,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     <nav class="links" id="links">
       <a href="#carta">La carta</a>
       <a href="#visitanos">Visitanos</a>
-      <a class="btn" href="https://www.instagram.com/rinconparrillerook/" target="_blank" rel="noopener">Reservar mesa</a>
+      <a class="btn" href="https://wa.me/5491125134458" target="_blank" rel="noopener">Reservar por WhatsApp</a>
     </nav>
   </div>
 </header>
@@ -113,22 +113,22 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 <section class="hero" id="inicio">
   <canvas id="fx" aria-hidden="true"></canvas>
   <div class="wrap">
-    <div class="eyebrow">Parrilla de barrio · Palermo</div>
-    <h1>Tu rincón <em>en Medrano.</em></h1>
-    <p>Una parrillita de barrio de las que ya casi no quedan en Palermo: brasas, buena carne y precio de vecino.</p>
+    <div class="eyebrow">Parrilla al carbón · Palermo · desde 2008</div>
+    <h1>Al carbón <em>desde 2008.</em></h1>
+    <p>Más de quince años en Medrano 1293 con cordialidad, buen trato y la parrilla al carbón de siempre. Comé en el patio o pedí a tu casa.</p>
     <div class="ctas">
-      <a class="btn" href="https://www.instagram.com/rinconparrillerook/" target="_blank" rel="noopener">Reservar mesa</a>
+      <a class="btn" href="https://wa.me/5491125134458" target="_blank" rel="noopener">Reservar por WhatsApp</a>
       <a class="btn ghost" href="#carta">Ver la carta</a>
     </div>
     <div class="stamp">Recomendada por <b>Time Out</b> entre las parrillitas de barrio</div>
   </div>
 </section>
 
-<div class="facts"><div><h3>Parrilla de barrio</h3><p>Sin vueltas: carne, brasa y mesa.</p></div><div><h3>En Palermo</h3><p>Sobre Av. Medrano, fácil de llegar.</p></div><div><h3>Reservá por Instagram</h3><p>Un mensaje y te guardamos la mesa.</p></div></div>
+<div class="facts"><div><h3>Al carbón</h3><p>Nada de gas: brasa de carbón como en 2008.</p></div><div><h3>El patio</h3><p>Mesas afuera, entre plantas, sobre Medrano.</p></div><div><h3>Delivery y take away</h3><p>Pedí por teléfono o WhatsApp, mediodía y noche.</p></div></div>
 
 <section class="block" id="carta">
   <div class="wrap">
-    <div class="head"><div><div class="eyebrow">La carta</div><h2>Lo que sale de la parrilla.</h2></div><p>Los clásicos de siempre. Pronto con fotos de cada plato.</p></div>
+    <div class="head"><div><div class="eyebrow">La carta</div><h2>Lo que sale del carbón.</h2></div><p>Parrilla, entradas, pastas, ensaladas, postres y vinos. Con precios siempre actualizados.</p></div>
     <div class="tabs" role="tablist" id="tabs"></div>
     <div class="carta" id="list"></div>
     <p class="note">Carta de ejemplo para la propuesta: los platos y precios se cargan desde tu carta real y los podés actualizar vos mismo.</p>
@@ -139,16 +139,16 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   <div class="wrap visit">
     <div>
       <div class="eyebrow">Visitanos</div>
-      <h2 style="font-size:clamp(40px,6vw,72px);margin-top:10px">Estamos en Medrano.</h2>
-      <p style="color:var(--dim);max-width:40ch">Av. Medrano 1293, Palermo. Pasá cuando quieras o avisanos por Instagram.</p>
+      <h2 style="font-size:clamp(40px,6vw,72px);margin-top:10px">Medrano 1293, Palermo.</h2>
+      <p style="color:var(--dim);max-width:40ch">Pasá a comer al patio o pedí delivery. Reservas y pedidos por teléfono o WhatsApp.</p>
       <div class="ctas"><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Rinc%C3%B3n%20Parrillero%20Av.%20Medrano%201293%20Buenos%20Aires" target="_blank" rel="noopener">Cómo llegar ↗</a><a class="btn ghost" href="https://www.instagram.com/rinconparrillerook/" target="_blank" rel="noopener">Instagram ↗</a></div>
     </div>
     <div class="card">
       <h3>Datos</h3>
       <div class="row"><span>Dirección</span><span>Av. Medrano 1293</span></div>
       <div class="row"><span>Barrio</span><span>Palermo</span></div>
-      <div class="row"><span>Horarios</span><span class="ph">se completan con tus horarios</span></div>
-      <div class="row"><span>Reservas</span><span>por Instagram</span></div>
+      <div class="row"><span>Horarios</span><span>Mar a Sáb 12–16 y 20–24 h · Dom 12–16 h · Lunes cerrado</span></div><div class="row"><span>Teléfono</span><span><a href="tel:+541148663324">4866-3324</a></span></div><div class="row"><span>WhatsApp</span><span><a href="https://wa.me/5491125134458" target="_blank" rel="noopener">11 2513-4458</a></span></div><div class="row"><span>Delivery y take away</span><span>Mar a Sáb 12–15 y 20–23 h · Dom 12–15 h</span></div>
+      <div class="row"><span>Reservas</span><span>4866-3324 o WhatsApp</span></div>
     </div>
   </div>
 </section>
@@ -163,7 +163,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   const mb = $("#menuBtn"), links = $("#links");
   mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
   links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
-  const CARTA = {"Para empezar": [["Provoleta", "A la parrilla, con orégano."], ["Empanadas", "De carne, para arrancar."], ["Chorizo y morcilla", "Con pan y chimichurri."]], "Cortes": [["Entraña", "Jugosa, a la parrilla."], ["Vacío", "Cocción lenta."], ["Asado de tira", "Para compartir."], ["Bife de chorizo", "Grueso, al punto que pidas."]], "Guarniciones": [["Papas fritas", "Cortadas a mano."], ["Ensalada mixta", "Lechuga, tomate y cebolla."], ["Papas a la provenzal", "Ajo y perejil."]], "Postres": [["Flan casero", "Con dulce de leche."], ["Panqueques", "Con dulce de leche."]]};
+  const CARTA = {"Para empezar": [["Provoleta", "A la parrilla, con orégano."], ["Empanadas", "De carne, para arrancar."], ["Chorizo y morcilla", "Con pan y chimichurri."]], "Cortes": [["Entraña", "Jugosa, a la parrilla."], ["Vacío", "Cocción lenta."], ["Asado de tira", "Para compartir."], ["Bife de chorizo", "Grueso, al punto que pidas."]], "Guarniciones": [["Papas fritas", "Cortadas a mano."], ["Ensalada mixta", "Lechuga, tomate y cebolla."], ["Papas a la provenzal", "Ajo y perejil."]], "Postres": [["Flan casero", "Con dulce de leche."], ["Panqueques", "Con dulce de leche."]], "Pastas": [["Ravioles", "Con la salsa que elijas."], ["Ñoquis", "Caseros."]], "Vinos": [["Malbec", "Por botella o por copa."], ["Cabernet", "Para acompañar la parrilla."]]};
   const tabs = $("#tabs"), list = $("#list");
   function show(c) {
     tabs.querySelectorAll("button").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.c === c)));
