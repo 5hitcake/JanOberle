@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Jan Oberle – Webdesign für Restaurants, Barbershops und Handwerksbetriebe. Schnelle, moderne Websites mit Online-Buchung, fertig in 7 Tagen.">
-<meta property="og:title" content="Jan Oberle Webdesign">
-<meta property="og:description" content="Jan Oberle – Webdesign für Restaurants, Barbershops und Handwerksbetriebe. Schnelle, moderne Websites mit Online-Buchung, fertig in 7 Tagen.">
+<meta name="description" content="Jota Labs – Webdesign für Restaurants, Barbershops und Handwerksbetriebe. Schnelle, moderne Websites mit Online-Buchung, fertig in 7 Tagen.">
+<meta property="og:title" content="Jota Labs · Webdesign">
+<meta property="og:description" content="Jota Labs – Webdesign für Restaurants, Barbershops und Handwerksbetriebe. Schnelle, moderne Websites mit Online-Buchung, fertig in 7 Tagen.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%23111215%22/%3E%3Ctext x=%2216%22 y=%2223%22 font-size=%2220%22 text-anchor=%22middle%22 fill=%22%239be22d%22 font-family=%22Georgia%22%3EJ%3C/text%3E%3C/svg%3E">
-<title>Jan Oberle Webdesign</title>
+<title>Jota Labs · Webdesign</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
@@ -55,7 +55,8 @@ h1, h2, h3 { margin: 0; font-weight: 600; letter-spacing: -.025em; line-height: 
 header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 84%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
 header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding-block: 12px; }
 .brand { text-decoration: none; font-weight: 600; font-size: 17px; display: inline-flex; align-items: center; gap: 10px; }
-.brand i { width: 30px; height: 30px; border-radius: 50%; background: var(--chrome-btn); color: #1d2024; box-shadow: inset 0 1px 0 #fff, 0 2px 8px rgba(0,0,0,.4); display: grid; place-items: center; font: italic 17px var(--f-serif); }
+.brand i { width: 30px; height: 30px; border-radius: 50%; background: radial-gradient(circle at 50% 35%, #1d2024, #0c0d0f); color: var(--acc); box-shadow: 0 0 0 1.5px var(--acc), 0 0 14px var(--acc-glow); display: grid; place-items: center; font: 800 16px var(--f-body); }
+.brand b { font-weight: 400; font-family: var(--f-serif); font-style: italic; font-size: 1.2em; margin-left: -5px; color: var(--acc); text-shadow: 0 0 14px var(--acc-glow); }
 nav.links { display: flex; align-items: center; gap: 22px; }
 nav.links a { text-decoration: none; font-size: 14px; color: var(--ink-2); }
 nav.links a:hover { color: var(--ink); }
@@ -278,7 +279,7 @@ section.block + section.block { border-top: 1px solid transparent; border-image:
 
 <header class="nav">
   <div class="wrap">
-    <a class="brand" href="#top"><i aria-hidden="true">J</i>Jan Oberle</a>
+    <a class="brand" href="#top" aria-label="Jota Labs"><i aria-hidden="true">J</i>Jota<b>Labs</b></a>
     <button class="btn line menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links" data-i="menu">Menü</button>
     <nav class="links" id="links">
       <a href="#arbeiten" data-i="nWork">Arbeiten</a>
@@ -399,6 +400,7 @@ section.block + section.block { border-top: 1px solid transparent; border-image:
       <div class="ways">
         <span class="label" data-i="cDirect">Direkt erreichen</span>
         <div class="way"><div><span class="k">WhatsApp</span><span class="v">+54 9 11 3033-1893</span></div><a class="mini" href="https://wa.me/5491130331893" target="_blank" rel="noopener" data-i="write">Schreiben ↗</a></div>
+        <div class="way"><div><span class="k">Instagram</span><span class="v">@jota_labsweb</span></div><a class="mini" href="https://www.instagram.com/jota_labsweb/" target="_blank" rel="noopener" data-i="write">Schreiben ↗</a></div>
         <div class="way"><div><span class="k">E-Mail</span><span class="v" id="mail">oberlejan@web.de</span></div><button type="button" id="copyMail" data-i="copy">Kopieren</button></div>
         <div class="way"><div><span class="k" data-i="based">Standort</span><span class="v" data-i="basedV">Buenos Aires · Kunden weltweit</span></div></div>
       </div>
@@ -408,7 +410,7 @@ section.block + section.block { border-top: 1px solid transparent; border-image:
 
 <footer>
   <div class="wrap">
-    <span>© <span id="yr"></span> Jan Oberle · <span data-i="foot">Webdesign für lokale Betriebe</span></span>
+    <span>© <span id="yr"></span> Jota Labs · Jan Oberle · <span data-i="foot">Webdesign für lokale Betriebe</span></span>
     <nav><a href="#arbeiten" data-i="nWork">Arbeiten</a><a href="#pakete" data-i="nPlans">Pakete</a><a href="#kontakt" data-i="nContact">Kontakt</a><a href="#top">↑</a></nav>
   </div>
 </footer>
