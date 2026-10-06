@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Tonsor Porteño · Propuesta de diseño</title>
+<meta name="description" content="Propuesta de sitio web para Tonsor Porteño, preparada por Jan Oberle. No es el sitio oficial.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Limelight&family=Courier+Prime:wght@400;700&family=Space+Mono:wght@400;700&display=swap">
+<style>
+:root {
+  --bg: #f3eadb; --bg2: #fbf5ea; --fg: #1b1714; --dim: #5d544b; --acc: #b3261e; --acc-fg: #fbf5ea; --hot: #1f6f6b; --line: #d8cbb6;
+  --f-display: "Limelight", "Didot", Georgia, serif; --f-body: "Courier Prime", "Courier New", monospace; --f-mono: "Space Mono", ui-monospace, Menlo, monospace;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { font-family: var(--f-display); margin: 0; line-height: .98; text-wrap: balance; font-weight: 400; letter-spacing: 0; text-transform: none; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 700 12px var(--f-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--acc); }
+:focus-visible { outline: 2px solid var(--acc); outline-offset: 3px; }
+.proposal { background: #111; color: #f2f2f2; font: 13px/1.4 var(--f-body); padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; }
+.proposal b { color: #ffd166; }
+.proposal a { color: #fff; font-weight: 600; }
+
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 12px; }
+.logo { font-family: var(--f-display); font-size: 24px; text-decoration: none; font-weight: 400; text-transform: none; }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 14px; color: var(--dim); }
+nav.links a:hover { color: var(--fg); }
+.lang { display: none; border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
+.lang button { border: 0; background: transparent; color: var(--dim); font: 700 11px var(--f-mono); padding: 5px 9px; border-radius: 999px; cursor: pointer; }
+.lang button[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 700 14px var(--f-body); letter-spacing: .04em; text-transform: uppercase; padding: 13px 22px; border-radius: 2px; background: var(--acc); color: var(--acc-fg); border: 2px solid var(--acc); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translate(-2px,-2px); box-shadow: 4px 4px 0 var(--fg); }
+.btn.ghost { background: transparent; color: var(--fg); border-color: var(--fg); }
+nav.links a.btn { color: var(--acc-fg); padding: 9px 16px; font-size: 13px; }
+.menu-btn { display: none; background: transparent; color: var(--fg); border: 1px solid var(--line); border-radius: 6px; padding: 8px 12px; font: 700 12px var(--f-mono); }
+@media (max-width: 820px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bg2); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links .lang { align-self: flex-start; margin-top: 12px; }
+  nav.links a.btn { margin-top: 12px; }
+  nav.links:not(.open) { display: none; }
+}
+
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line); }
+.hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; }
+.hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 88%, transparent) 50%, color-mix(in srgb, var(--bg) 20%, transparent) 100%); }
+.hero .wrap { padding-block: 92px 96px; }
+.hero h1 { font-size: clamp(56px, 11vw, 150px); margin-top: 16px; max-width: 11ch; }
+.hero h1 em { color: var(--acc); font-style: normal; }
+.hero p { font-size: 19px; color: var(--dim); max-width: 40ch; margin: 22px 0 30px; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+.badge { display: inline-flex; align-items: center; gap: 10px; margin-top: 34px; font: 700 13px var(--f-mono); border: 2px solid var(--fg); padding: 8px 14px; border-radius: 2px; }
+.badge .star { color: var(--acc); }
+@media (max-width: 820px) { .hero::before { background: linear-gradient(180deg, color-mix(in srgb, var(--bg) 75%, transparent), var(--bg)); } }
+
+section.block { padding-block: 90px; }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 40px; margin-bottom: 36px; }
+.head h2 { font-size: clamp(44px, 7vw, 88px); margin-top: 10px; }
+.head p { max-width: 42ch; margin: 0; color: var(--dim); }
+.why { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 820px) { .why { grid-template-columns: minmax(0,1fr); } }
+.why div { border: 2px solid var(--line); border-radius: 2px; padding: 24px; background: var(--bg2); }
+.why h3 { font-size: 28px; margin-bottom: 8px; }
+.why p { margin: 0; color: var(--dim); font-size: 15px; }
+.svc { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 0 56px; }
+@media (max-width: 760px) { .svc { grid-template-columns: minmax(0,1fr); } }
+.svc div { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 2px 14px; padding-block: 18px; border-bottom: 1px solid var(--line); align-items: baseline; }
+.svc h3 { font-size: 30px; }
+.svc .p { font: 700 16px var(--f-mono); color: var(--dim); }
+.svc p { margin: 0; grid-column: 1 / -1; color: var(--dim); font-size: 15px; }
+.note { margin-top: 20px; font-size: 13px; color: var(--dim); padding: 10px 14px; border-left: 3px solid var(--acc); background: var(--bg2); }
+.book { background: var(--fg); color: var(--bg); border-radius: 2px; padding: clamp(26px, 5vw, 56px); display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,.8fr); gap: 30px; align-items: center; }
+@media (max-width: 820px) { .book { grid-template-columns: minmax(0,1fr); } }
+.book h2 { font-size: clamp(40px, 6vw, 72px); }
+.book p { opacity: .8; margin: 12px 0 0; }
+.book .btn { background: var(--acc); color: var(--acc-fg); border-color: var(--acc); }
+.book .btn:hover { box-shadow: 4px 4px 0 var(--bg); }
+.book .col { display: flex; flex-direction: column; gap: 10px; }
+.book .ph { font-size: 13px; opacity: .7; }
+footer { padding-block: 40px 90px; border-top: 1px solid var(--line); color: var(--dim); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 600 14px var(--f-body); padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.3); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+</style>
+</head>
+<body>
+<div class="proposal"><span><b>Propuesta de diseño</b> para Tonsor Porteño · no es el sitio oficial</span><span>Hecha por <a href="https://5hitcake.github.io/JanOberle/#es" target="_blank" rel="noopener">Jan Oberle</a></span></div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#inicio">Tonsor Porteño</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENÚ</button>
+    <nav class="links" id="links">
+      <a href="#estudio" data-en="The studio">El estudio</a>
+      <a href="#servicios" data-en="Services">Servicios</a>
+      <a href="#turnos" data-en="Booking">Turnos</a>
+      <div class="lang" role="group" aria-label="Idioma / Language"><button type="button" data-l="es" aria-pressed="true">ES</button><button type="button" data-l="en" aria-pressed="false">EN</button></div>
+      <a class="btn" href="#turnos" data-en="Book now">Sacar turno</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="inicio">
+  <canvas id="fx" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="kicker" data-en="Private studio · Almagro">Estudio privado · Almagro</div>
+    <h1 data-en-html="Cuts with a &lt;em&gt;vintage soul.&lt;/em&gt;">Corte con <em>alma vintage.</em></h1>
+    <p data-en="A private studio for rockabilly fans and classic style lovers.">Un estudio privado para fans del rockabilly y la estética clásica. Cada detalle está curado para que el corte sea una experiencia.</p>
+    <div class="ctas"><a class="btn" href="#turnos" data-en="Book now">Sacar turno</a><a class="btn ghost" href="#servicios" data-en="Services">Ver servicios</a></div>
+    <div class="badge"><span class="star">★ 5,0</span> en Fresha</div>
+  </div>
+</section>
+
+<section class="block" id="estudio">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker" data-en="The studio">El estudio</div><h2 data-en="More than a haircut.">Más que un corte.</h2></div></div>
+    <div class="why"><div><h3 data-en="Vintage atmosphere">Ambiente de época</h3><p data-en="A carefully curated space.">Un espacio pensado al detalle para una experiencia multisensorial.</p></div><div><h3 data-en="Spotless hygiene">Higiene impecable</h3><p data-en="Clean tools, every step explained.">Herramientas y guías siempre limpias. Te explicamos cada paso.</p></div><div><h3 data-en="And yes, there&#x27;s a cat.">Y sí, hay un gato.</h3><p data-en="The unofficial greeter.">El encargado no oficial de recibirte.</p></div></div>
+  </div>
+</section>
+
+<section class="block" id="servicios" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker" data-en="Services">Servicios</div><h2 data-en="Menu">La lista</h2></div></div>
+    <div class="svc"><div><h3 data-en="Haircut">Corte</h3><span class="p">$ —</span><p data-en="Scissors and clippers, clean finish.">Tijera y máquina, con terminación prolija.</p></div><div><h3 data-en="Fade">Fade</h3><span class="p">$ —</span><p data-en="Custom fade, low to high.">Degradé a medida.</p></div><div><h3 data-en="Beard">Barba</h3><span class="p">$ —</span><p data-en="Shape-up and hot towel.">Perfilado y toalla caliente.</p></div><div><h3 data-en="Cut + beard">Corte + barba</h3><span class="p">$ —</span><p data-en="The full package.">El combo completo.</p></div></div>
+    <p class="note" data-en="Sample services for this proposal: services, prices and durations are loaded from your current menu.">Servicios de ejemplo para la propuesta: los servicios, precios y duraciones se cargan desde tu lista actual.</p>
+  </div>
+</section>
+
+<section class="block" id="turnos" style="padding-top:0">
+  <div class="wrap">
+    <div class="book">
+      <div><h2 data-en="Book in 30 seconds.">Sacá turno en 30 segundos.</h2><p data-en="Pick a service and time online.">Elegí servicio y horario online, sin llamar. El botón se conecta a tu sistema de turnos actual.</p></div>
+      <div class="col">
+        <a class="btn" href="#turnos">Reservar turno</a><span class="ph">Acá va el link a tu agenda de Fresha.</span>
+        <span class="ph" data-en="Gascón 619 · Almagro">Gascón 619 · Almagro</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>Tonsor Porteño · Gascón 619, Almagro</span><span>Propuesta de diseño de Jan Oberle · <a href="https://5hitcake.github.io/JanOberle/#es" target="_blank" rel="noopener">ver más trabajos</a></span></div></footer>
+
+<a class="like" href="https://wa.me/5491130331893?text=Hola%20Jan%21%20Vi%20la%20propuesta%20de%20sitio%20web%20para%20Tonsor%20Porte%C3%B1o%20y%20me%20gustar%C3%ADa%20saber%20m%C3%A1s." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></svg>¿Te gusta? Hablemos</a>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+
+  /* Sprachumschalter: data-en (Text) bzw. data-en-html (mit <em>) */
+  document.querySelectorAll("[data-en]").forEach((el) => (el.dataset.es = el.textContent));
+  document.querySelectorAll("[data-en-html]").forEach((el) => (el.dataset.esHtml = el.innerHTML));
+  function lang(l) {
+    document.documentElement.lang = l;
+    document.querySelectorAll("[data-en]").forEach((el) => (el.textContent = l === "en" ? el.dataset.en : el.dataset.es));
+    document.querySelectorAll("[data-en-html]").forEach((el) => (el.innerHTML = l === "en" ? el.dataset.enHtml : el.dataset.esHtml));
+    document.querySelectorAll(".lang button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.l === l)));
+  }
+  document.querySelectorAll(".lang button").forEach((b) => b.addEventListener("click", () => lang(b.dataset.l)));
+  if (location.hash === "#en") lang("en");
+
+  const MODE = "vinyl", COLS = ["#1b1714","#b3261e","#fbf5ea"];
+  const cv = $("#fx"), ctx = cv.getContext("2d");
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let W = 0, H = 0, mx = .5;
+  function size() { const dpr = Math.min(devicePixelRatio || 1, 2); W = cv.clientWidth; H = cv.clientHeight; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+  addEventListener("pointermove", (e) => { mx = e.clientX / innerWidth; });
+  function frame(t) {
+    ctx.clearRect(0, 0, W, H);
+    if (MODE === "vinyl") {
+      // Schallplatte, die sich dreht: Rillen + Label
+      const R = Math.min(W * .42, H * .9), cx = W * (W < 820 ? .78 : .8), cy = H * .55, a = t / 2200;
+      ctx.save(); ctx.translate(cx, cy); ctx.rotate(a);
+      ctx.fillStyle = COLS[0]; ctx.beginPath(); ctx.arc(0, 0, R, 0, 6.283); ctx.fill();
+      for (let r = R * .38; r < R * .98; r += 5) { ctx.strokeStyle = `rgba(255,255,255,${.035 + (r % 15 === 0 ? .03 : 0)})`; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(0, 0, r, 0, 6.283); ctx.stroke(); }
+      const g = ctx.createLinearGradient(-R, -R, R, R); g.addColorStop(.42, "rgba(255,255,255,0)"); g.addColorStop(.5, "rgba(255,255,255,.12)"); g.addColorStop(.58, "rgba(255,255,255,0)");
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(0, 0, R, 0, 6.283); ctx.fill();
+      ctx.fillStyle = COLS[1]; ctx.beginPath(); ctx.arc(0, 0, R * .3, 0, 6.283); ctx.fill();
+      ctx.fillStyle = COLS[2]; ctx.font = `700 ${Math.round(R * .06)}px "Space Mono", monospace`; ctx.textAlign = "center";
+      ctx.fillText("SIDE A", 0, -R * .1); ctx.fillText("GASCÓN 619", 0, R * .15);
+      ctx.fillStyle = COLS[0]; ctx.beginPath(); ctx.arc(0, 0, R * .03, 0, 6.283); ctx.fill();
+      ctx.restore();
+    } else {
+      // Barber-Pole-Streifen, langsam laufend
+      const band = 64, period = band * COLS.length, off = (t * .025) % period, span = Math.hypot(W, H);
+      ctx.save(); ctx.translate(W * (.75 + (mx - .5) * .04), H / 2); ctx.rotate(-.62);
+      for (let x = -span - period; x < span + period; x += band) {
+        const i = Math.floor((x + span * 4) / band) % COLS.length;
+        ctx.fillStyle = COLS[i]; ctx.fillRect(x + off, -span, band, span * 2);
+      }
+      ctx.restore();
+    }
+    if (!reduce) requestAnimationFrame(frame);
+  }
+  size(); addEventListener("resize", size); frame(0);
+})();
+</script>
+</body>
+</html>

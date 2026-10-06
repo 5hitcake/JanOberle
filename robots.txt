@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /JanOberle/propuestas/
+Disallow: /propuestas/
