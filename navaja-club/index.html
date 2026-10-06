@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Demo: sitio web con turnos online para una barbería en Villa Crespo. Diseño de Jan Oberle.">
+<meta property="og:title" content="Navaja Club Barbería">
+<meta property="og:description" content="Demo: sitio web con turnos online para una barbería en Villa Crespo. Diseño de Jan Oberle.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%230d1714%22/%3E%3Ctext x=%2216%22 y=%2223%22 font-size=%2220%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22Georgia%22%3EN%3C/text%3E%3C/svg%3E">
+<title>Navaja Club Barbería</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Hanken+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap">
+<style>
+/* Layout: Hero mit animierter Barber-Pole-Diagonale (Canvas), Servicios als Preisliste, Turnero (Schritt-für-Schritt-Buchung), Barberos, Estilos, Horarios. Eine Welt: Flaschengrün, Knochenweiß, Messing, Pole-Rot/Blau. */
+:root {
+  --ink: #0d1714;
+  --green: #17302a;
+  --green-2: #1f3d35;
+  --bone: #ece4d4;
+  --bone-dim: #b9b19f;
+  --brass: #cfa65a;
+  --red: #c8372f;
+  --blue: #2f5899;
+  --line: rgba(236,228,212,.14);
+  --f-display: "Big Shoulders Display", "Oswald", Impact, sans-serif;
+  --f-body: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "Space Mono", ui-monospace, Menlo, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--ink); color: var(--bone); font: 16px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 900; text-transform: uppercase; margin: 0; line-height: .92; letter-spacing: .005em; text-wrap: balance; }
+.wrap { max-width: 1200px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 700 12px var(--f-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--brass); }
+:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
+.demo { background: var(--bone); color: var(--ink); font: 400 12px var(--f-mono); text-align: center; padding: 6px 16px; }
+
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: rgba(13,23,20,.86); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 900 26px var(--f-display); text-transform: uppercase; letter-spacing: .02em; }
+.logo .pole { width: 12px; height: 30px; border-radius: 6px; background: repeating-linear-gradient(135deg, var(--red) 0 6px, var(--bone) 6px 12px, var(--blue) 12px 18px, var(--bone) 18px 24px); background-size: 100% 34px; border: 2px solid var(--brass); }
+@media (prefers-reduced-motion: no-preference) { .logo .pole { animation: pole 1.6s linear infinite; } @keyframes pole { to { background-position: 0 34px; } } }
+nav.links { display: flex; align-items: center; gap: 26px; }
+nav.links a { text-decoration: none; font-weight: 500; font-size: 14px; color: var(--bone-dim); }
+nav.links a:hover { color: var(--bone); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 700 14px var(--f-body); text-transform: uppercase; letter-spacing: .06em; padding: 13px 22px; border-radius: 2px; background: var(--brass); color: var(--ink); border: 2px solid var(--brass); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translate(-2px,-2px); box-shadow: 4px 4px 0 var(--bone); }
+.btn.line { background: transparent; color: var(--bone); border-color: var(--bone); }
+.btn:disabled { opacity: .45; cursor: default; transform: none; box-shadow: none; }
+nav.links .btn { color: var(--ink); }
+.menu-btn { display: none; background: none; color: var(--bone); border: 1px solid var(--line); border-radius: 2px; padding: 8px 12px; font: 700 12px var(--f-mono); }
+@media (max-width: 840px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--green); padding: 8px 20px 18px; border-bottom: 1px solid var(--line); }
+  nav.links a { padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links .btn { margin-top: 14px; }
+  nav.links:not(.open) { display: none; }
+}
+
+/* Hero */
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line); }
+.hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; }
+.hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, var(--ink) 0%, rgba(13,23,20,.92) 45%, rgba(13,23,20,.35) 100%); }
+.hero .wrap { padding-block: 90px 100px; display: grid; grid-template-columns: minmax(0,1.3fr) minmax(0,.7fr); gap: 40px; align-items: center; }
+.hero h1 { font-size: clamp(64px, 12vw, 168px); }
+.hero h1 .o { -webkit-text-stroke: 2px var(--bone); color: transparent; }
+.hero h1 .b { color: var(--brass); }
+.hero p { font-size: 19px; color: var(--bone-dim); max-width: 36ch; margin: 22px 0 30px; }
+.hero .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+.ticket { background: var(--bone); color: var(--ink); padding: 22px; transform: rotate(2.5deg); box-shadow: 10px 10px 0 rgba(0,0,0,.4); position: relative; justify-self: end; width: min(300px, 100%); }
+.ticket::before, .ticket::after { content: ""; position: absolute; left: -9px; width: 18px; height: 18px; border-radius: 50%; background: var(--ink); top: 50%; }
+.ticket::after { left: auto; right: -9px; }
+.ticket .kicker { color: var(--red); }
+.ticket b { display: block; font: 900 56px var(--f-display); line-height: 1; margin: 6px 0; }
+.ticket small { font: 400 12px var(--f-mono); }
+.ticket .next { border-top: 2px dashed rgba(13,23,20,.3); margin-top: 14px; padding-top: 12px; font-size: 14px; }
+@media (max-width: 840px) { .hero .wrap { grid-template-columns: minmax(0,1fr); padding-block: 60px 70px; } .ticket { justify-self: start; } .hero::before { background: linear-gradient(180deg, rgba(13,23,20,.75), var(--ink)); } }
+
+section.block { padding-block: 96px; }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px 40px; margin-bottom: 42px; }
+.head h2 { font-size: clamp(48px, 8vw, 96px); }
+.head p { max-width: 40ch; margin: 0; color: var(--bone-dim); }
+
+/* Servicios */
+.svc { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 0 56px; }
+@media (max-width: 760px) { .svc { grid-template-columns: minmax(0,1fr); } }
+.svc-item { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 2px 14px; padding-block: 20px; border-bottom: 1px solid var(--line); align-items: baseline; }
+.svc-item h3 { font-size: 34px; font-weight: 700; }
+.svc-item .p { font: 700 20px var(--f-mono); color: var(--brass); font-variant-numeric: tabular-nums; }
+.svc-item p { grid-column: 1 / -1; margin: 0; color: var(--bone-dim); font-size: 15px; }
+.svc-item .min { font: 400 12px var(--f-mono); color: var(--bone-dim); margin-left: 8px; letter-spacing: 0; text-transform: none; }
+
+/* Turnero */
+.turnero { background: var(--green); border-block: 1px solid var(--line); }
+.booker { display: grid; grid-template-columns: minmax(0,1.4fr) minmax(0,.8fr); gap: 28px; align-items: start; }
+@media (max-width: 900px) { .booker { grid-template-columns: minmax(0,1fr); } }
+.step { padding-block: 18px; border-bottom: 1px solid var(--line); }
+.step:first-child { padding-top: 0; }
+.step h3 { font-size: 22px; font-weight: 700; margin-bottom: 12px; display: flex; gap: 10px; align-items: baseline; }
+.step h3 span { font: 700 12px var(--f-mono); color: var(--brass); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font: 600 14px var(--f-body); background: transparent; color: var(--bone); border: 1px solid rgba(236,228,212,.3); padding: 9px 14px; border-radius: 2px; cursor: pointer; text-align: left; }
+.chip small { display: block; font: 400 11px var(--f-mono); color: var(--bone-dim); }
+.chip:hover { border-color: var(--bone); }
+.chip[aria-pressed="true"] { background: var(--bone); color: var(--ink); border-color: var(--bone); }
+.chip[aria-pressed="true"] small { color: var(--green); }
+.chip:disabled { opacity: .3; cursor: not-allowed; text-decoration: line-through; }
+.chip.day { min-width: 64px; text-align: center; }
+.chip.day b { display: block; font: 900 22px var(--f-display); }
+input.name { font: 15px var(--f-body); background: var(--ink); color: var(--bone); border: 1px solid rgba(236,228,212,.3); border-radius: 2px; padding: 11px 12px; width: 100%; max-width: 360px; }
+.summary { background: var(--bone); color: var(--ink); padding: 24px; position: sticky; top: calc(80px + env(safe-area-inset-top, 0px)); }
+.summary h3 { font-size: 30px; margin-bottom: 14px; }
+.summary dl { margin: 0 0 18px; display: grid; grid-template-columns: auto minmax(0,1fr); gap: 8px 14px; font-size: 14px; }
+.summary dt { font: 400 11px var(--f-mono); text-transform: uppercase; letter-spacing: .1em; color: #5c6b65; padding-top: 2px; }
+.summary dd { margin: 0; font-weight: 600; }
+.summary .total { display: flex; justify-content: space-between; border-top: 2px dashed rgba(13,23,20,.3); padding-top: 12px; margin-bottom: 16px; font: 700 20px var(--f-mono); }
+.summary .btn { width: 100%; background: var(--ink); color: var(--bone); border-color: var(--ink); }
+.summary .btn:hover { box-shadow: 4px 4px 0 var(--brass); }
+.summary .note { font-size: 12px; color: #5c6b65; margin-top: 10px; }
+
+/* Barberos */
+.team { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 20px; }
+@media (max-width: 840px) { .team { grid-template-columns: minmax(0,1fr); } }
+.barber { border: 1px solid var(--line); padding: 22px; display: flex; gap: 18px; align-items: center; transition: border-color .2s, transform .2s; }
+.barber:hover { border-color: var(--brass); transform: translateY(-3px); }
+.mono-av { flex: 0 0 auto; width: 78px; height: 78px; border-radius: 50%; display: grid; place-items: center; font: 900 34px var(--f-display); color: var(--ink); }
+.barber h3 { font-size: 30px; font-weight: 700; }
+.barber p { margin: 2px 0 0; color: var(--bone-dim); font-size: 14px; }
+.barber .ig { font: 400 12px var(--f-mono); color: var(--brass); }
+
+/* Estilos */
+.styles { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; }
+@media (max-width: 840px) { .styles { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+.style { aspect-ratio: 3/4; max-width: 100%; position: relative; overflow: hidden; background: var(--green-2); display: flex; align-items: flex-end; padding: 16px; }
+.style svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.style span { position: relative; font: 900 26px var(--f-display); text-transform: uppercase; line-height: 1; }
+.style span small { display: block; font: 400 11px var(--f-mono); color: var(--brass); text-transform: none; margin-top: 4px; }
+
+/* Info */
+.info { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 0; border: 1px solid var(--line); }
+.info > div { padding: 26px; border-right: 1px solid var(--line); }
+.info > div:last-child { border-right: 0; }
+@media (max-width: 840px) { .info { grid-template-columns: minmax(0,1fr); } .info > div { border-right: 0; border-bottom: 1px solid var(--line); } .info > div:last-child { border-bottom: 0; } }
+.info h3 { font-size: 26px; margin: 8px 0 12px; font-weight: 700; }
+.info table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.info td { padding: 5px 0; }
+.info td:last-child { text-align: right; font-family: var(--f-mono); color: var(--bone-dim); }
+.info tr.today td { color: var(--brass); }
+.quote { font: 700 26px/1.15 var(--f-display); text-transform: uppercase; }
+.quote small { display: block; font: 400 12px var(--f-mono); text-transform: none; color: var(--bone-dim); margin-top: 8px; }
+
+footer { padding-block: 40px 70px; border-top: 1px solid var(--line); font-size: 13px; color: var(--bone-dim); }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 40px; align-items: center; }
+footer nav { display: flex; flex-wrap: wrap; gap: 20px; }
+.wa { position: fixed; right: 18px; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); z-index: 40; width: 56px; height: 56px; border-radius: 50%; background: #25d366; display: grid; place-items: center; box-shadow: 0 8px 24px rgba(0,0,0,.4); }
+.wa svg { width: 28px; height: 28px; }
+</style>
+</head>
+<body>
+
+<div class="demo">Sitio de demostración · negocio ficticio · <a href="../" style="color:inherit;font-weight:600">Diseño web: Jan Oberle ↗</a></div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#inicio"><span class="pole" aria-hidden="true"></span>Navaja Club</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENÚ</button>
+    <nav class="links" id="links">
+      <a href="#servicios">Servicios</a>
+      <a href="#barberos">Barberos</a>
+      <a href="#estilos">Estilos</a>
+      <a href="#local">El local</a>
+      <a class="btn" href="#turnos">Sacar turno</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="inicio">
+  <canvas id="pole" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div>
+      <div class="kicker">Barbería · Villa Crespo · Est. 2019</div>
+      <h1>Corte,<br><span class="o">navaja</span><br><span class="b">y charla.</span></h1>
+      <p>Fades prolijos, barbas con toalla caliente y un café mientras esperás. Sacá turno en 30 segundos, sin llamar.</p>
+      <div class="ctas"><a class="btn" href="#turnos">Sacar turno</a><a class="btn line" href="#servicios">Ver precios</a></div>
+    </div>
+    <div class="ticket">
+      <div class="kicker">Próximo turno libre</div>
+      <b id="nextSlot">Hoy 17:30</b>
+      <small id="nextWho">con Nico · Fade</small>
+      <div class="next">Sin turno, también te atendemos: de martes a jueves hay sillón libre por orden de llegada.</div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="servicios">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Servicios</div><h2>La lista de precios</h2></div><p>Todos los servicios incluyen lavado, perfilado de cejas a pedido y producto para el peinado final.</p></div>
+    <div class="svc" id="svcList"></div>
+  </div>
+</section>
+
+<section class="block turnero" id="turnos">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Turnero online</div><h2>Sacá tu turno</h2></div><p>Elegí servicio, barbero y horario. Te confirmamos por WhatsApp en minutos.</p></div>
+    <div class="booker">
+      <div>
+        <div class="step"><h3><span>01</span>Servicio</h3><div class="chips" id="cSvc"></div></div>
+        <div class="step"><h3><span>02</span>Barbero</h3><div class="chips" id="cBarber"></div></div>
+        <div class="step"><h3><span>03</span>Día</h3><div class="chips" id="cDay"></div></div>
+        <div class="step"><h3><span>04</span>Horario</h3><div class="chips" id="cTime"></div></div>
+        <div class="step"><h3><span>05</span>Tu nombre</h3><input class="name" id="cName" placeholder="Nombre y apellido" autocomplete="name"></div>
+      </div>
+      <aside class="summary" aria-live="polite">
+        <h3>Tu turno</h3>
+        <dl>
+          <dt>Servicio</dt><dd id="sSvc">Elegí un servicio</dd>
+          <dt>Barbero</dt><dd id="sBarber">El que esté libre</dd>
+          <dt>Cuándo</dt><dd id="sWhen">Elegí día y hora</dd>
+          <dt>Duración</dt><dd id="sDur">–</dd>
+        </dl>
+        <div class="total"><span>Total</span><span id="sTotal">$0</span></div>
+        <a class="btn" id="confirm" href="#turnos" aria-disabled="true">Confirmar por WhatsApp</a>
+        <p class="note" id="sNote">Completá los pasos para confirmar. Podés cancelar sin costo hasta 2 horas antes.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="barberos">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">El equipo</div><h2>Los barberos</h2></div></div>
+    <div class="team" id="team"></div>
+  </div>
+</section>
+
+<section class="block" id="estilos" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Lookbook</div><h2>Lo que más sale</h2></div><p>¿No sabés qué pedir? Mostrá esta pantalla en el sillón.</p></div>
+    <div class="styles" id="styles"></div>
+  </div>
+</section>
+
+<section class="block" id="local" style="padding-top:0">
+  <div class="wrap">
+    <div class="info">
+      <div><div class="kicker">Horarios</div><h3>Cuándo venir</h3><table id="hours"></table></div>
+      <div><div class="kicker">Dónde</div><h3>Villa Crespo</h3><p style="margin:0;color:var(--bone-dim)">A tres cuadras de Av. Corrientes, cerca del subte B (Malabia). Hay bicicletero en la puerta.</p></div>
+      <div><div class="kicker">4,9 ★ · 680 reseñas</div><p class="quote">“Salí con el mejor fade de mi vida y encima me cebaron un mate.”<small>Tomás B. · Google</small></p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="#inicio"><span class="pole" aria-hidden="true"></span>Navaja Club</a>
+    <nav><a href="#servicios">Servicios</a><a href="#turnos">Turnos</a><a href="#local">Horarios</a><a href="#inicio">Arriba ↑</a></nav>
+    <p style="flex-basis:100%;margin:0">Sitio de demostración: el negocio, el equipo, las reseñas y el WhatsApp son ficticios.</p>
+  </div>
+</footer>
+
+<a class="wa" href="https://wa.me/5491100000000?text=Hola%20Navaja%20Club%2C%20quiero%20un%20turno" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></svg>
+</a>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+
+  const fmt = (n) => "$" + n.toLocaleString("es-AR");
+  const SVC = [
+    { id: "clasico", n: "Corte clásico", p: 12000, m: 40, d: "Tijera y máquina, terminado a navaja en la nuca." },
+    { id: "fade", n: "Fade", p: 14000, m: 45, d: "Low, mid o high. Degradé limpio, sin escalones." },
+    { id: "barba", n: "Barba", p: 9000, m: 30, d: "Perfilado, toalla caliente y aceite de barba." },
+    { id: "combo", n: "Corte + barba", p: 19000, m: 70, d: "El combo de la casa. El más pedido del viernes." },
+    { id: "afeitado", n: "Afeitado a navaja", p: 11000, m: 35, d: "Ritual completo: vapor, espuma, dos pasadas y bálsamo." },
+    { id: "kids", n: "Corte niños", p: 9000, m: 30, d: "Hasta 12 años. Con paciencia y caramelo." },
+  ];
+  const BARBERS = [
+    { id: "nico", n: "Nico", r: "Fades y texturas", ig: "@nico.fades (demo)", c: "#cfa65a", off: [2] },
+    { id: "tano", n: "Tano", r: "Clásicos y navaja", ig: "@tano.navaja (demo)", c: "#c8372f", off: [4] },
+    { id: "lu", n: "Lu", r: "Diseños y color", ig: "@lu.cuts (demo)", c: "#2f5899", off: [3] },
+  ];
+  $("#svcList").innerHTML = SVC.map((s) => `<div class="svc-item"><h3>${s.n}<span class="min">${s.m} min</span></h3><span class="p">${fmt(s.p)}</span><p>${s.d}</p></div>`).join("");
+  $("#team").innerHTML = BARBERS.map((b) => `<div class="barber"><div class="mono-av" style="background:${b.c}">${b.n[0]}</div><div><h3>${b.n}</h3><p>${b.r}</p><span class="ig">${b.ig}</span></div></div>`).join("");
+
+  /* Lookbook mit gezeichneten Silhouetten */
+  const STY = [["Mid fade", "con textura arriba", 0.55], ["Buzz cut", "al 2, fácil y fresco", 0.15], ["Pompadour", "volumen y raya", 0.9], ["Crop francés", "flequillo recto", 0.4]];
+  $("#styles").innerHTML = STY.map(([n, d, h], i) => {
+    const top = 70 - h * 30;
+    return `<div class="style"><svg viewBox="0 0 100 133" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <rect width="100" height="133" fill="${["#1f3d35", "#24443b", "#1a352e", "#22413a"][i]}"/>
+      <path d="M22 133 C24 108 34 98 50 98 C66 98 76 108 78 133 Z" fill="#0d1714"/>
+      <rect x="44" y="84" width="12" height="16" fill="#0d1714"/>
+      <ellipse cx="50" cy="66" rx="17" ry="21" fill="#0d1714"/>
+      <path d="M33 ${66} C33 ${top} 40 ${top - 8} 50 ${top - 8 - h * 6} C62 ${top - 8} 68 ${top} 67 ${66} C64 ${58} 36 ${58} 33 ${66} Z" fill="#cfa65a" opacity="${0.35 + h * 0.5}"/>
+      <path d="M33 66 L33 76 M67 66 L67 76" stroke="#cfa65a" stroke-width="1" opacity=".4"/>
+    </svg><span>${n}<small>${d}</small></span></div>`;
+  }).join("");
+
+  /* Horarios (Mo zu) */
+  const HRS = [["Lunes", null], ["Martes", "10:00–20:00"], ["Miércoles", "10:00–20:00"], ["Jueves", "10:00–21:00"], ["Viernes", "10:00–21:00"], ["Sábado", "09:00–18:00"], ["Domingo", null]];
+  const dowNow = (new Date().getDay() + 6) % 7;
+  $("#hours").innerHTML = HRS.map(([d, h], i) => `<tr class="${i === dowNow ? "today" : ""}"><td>${d}</td><td>${h || "Cerrado"}</td></tr>`).join("");
+
+  /* Turnero */
+  const state = { svc: null, barber: "any", day: null, time: null };
+  const DAYS_ES = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
+  const days = [];
+  for (let i = 0; days.length < 7 && i < 14; i++) {
+    const d = new Date(); d.setDate(d.getDate() + i); d.setHours(0, 0, 0, 0);
+    const w = (d.getDay() + 6) % 7;
+    if (HRS[w][1]) days.push({ d, w, key: d.toISOString().slice(0, 10) });
+  }
+  const hash = (s) => { let h = 7; for (const c of s) h = (h * 31 + c.charCodeAt(0)) >>> 0; return h; };
+  function slotsFor(day) {
+    const [a, b] = HRS[day.w][1].split("–").map((t) => parseInt(t));
+    const out = [];
+    for (let h = a; h < b; h++) for (const m of [0, 30]) {
+      const t = `${String(h).padStart(2, "0")}:${m ? "30" : "00"}`;
+      const now = new Date();
+      const past = day.d.toDateString() === now.toDateString() && (h < now.getHours() || (h === now.getHours() && m <= now.getMinutes()));
+      const taken = hash(day.key + t + state.barber) % 3 === 0;
+      out.push({ t, ok: !past && !taken });
+    }
+    return out;
+  }
+  function chip(container, items, key) {
+    $(container).innerHTML = items.map((it) => `<button type="button" class="chip ${it.cls || ""}" data-v="${it.v}" aria-pressed="${state[key] === it.v}" ${it.dis ? "disabled" : ""}>${it.html}</button>`).join("");
+    $(container).querySelectorAll(".chip").forEach((b) => b.addEventListener("click", () => {
+      state[key] = b.dataset.v;
+      if (key === "day" || key === "barber") state.time = null;
+      renderBooker();
+    }));
+  }
+  function renderBooker() {
+    chip("#cSvc", SVC.map((s) => ({ v: s.id, html: `${s.n}<small>${fmt(s.p)} · ${s.m} min</small>` })), "svc");
+    const day = days.find((d) => d.key === state.day);
+    chip("#cBarber", [{ v: "any", html: "El que esté libre<small>más horarios</small>" }, ...BARBERS.map((b) => ({ v: b.id, html: `${b.n}<small>${b.r}</small>`, dis: day && b.off.includes(day.w) }))], "barber");
+    chip("#cDay", days.map((d, i) => ({ v: d.key, cls: "day", html: `${i === 0 && d.d.toDateString() === new Date().toDateString() ? "Hoy" : DAYS_ES[d.w]}<b>${d.d.getDate()}</b>` })), "day");
+    if (day) {
+      const sl = slotsFor(day);
+      chip("#cTime", sl.map((s) => ({ v: s.t, html: s.t, dis: !s.ok })), "time");
+      if (!sl.some((s) => s.ok)) $("#cTime").innerHTML = `<span style="color:var(--bone-dim)">No quedan turnos este día. Probá otro.</span>`;
+    } else $("#cTime").innerHTML = `<span style="color:var(--bone-dim)">Primero elegí un día.</span>`;
+
+    const s = SVC.find((x) => x.id === state.svc), b = BARBERS.find((x) => x.id === state.barber);
+    $("#sSvc").textContent = s ? s.n : "Elegí un servicio";
+    $("#sBarber").textContent = b ? b.n : "El que esté libre";
+    $("#sWhen").textContent = day ? `${DAYS_ES[day.w]} ${day.d.getDate()}/${day.d.getMonth() + 1}${state.time ? " · " + state.time + " h" : ""}` : "Elegí día y hora";
+    $("#sDur").textContent = s ? s.m + " min" : "–";
+    $("#sTotal").textContent = fmt(s ? s.p : 0);
+    const name = $("#cName").value.trim();
+    const ready = s && day && state.time && name;
+    const btn = $("#confirm");
+    btn.setAttribute("aria-disabled", String(!ready));
+    btn.style.opacity = ready ? "1" : ".45";
+    if (ready) {
+      const msg = `Hola Navaja Club! Soy ${name}. Quiero turno para ${s.n} con ${b ? b.n : "cualquier barbero"} el ${DAYS_ES[day.w]} ${day.d.getDate()}/${day.d.getMonth() + 1} a las ${state.time}.`;
+      btn.href = "https://wa.me/5491100000000?text=" + encodeURIComponent(msg);
+      btn.target = "_blank"; btn.rel = "noopener";
+      $("#sNote").textContent = "Todo listo. Se abre WhatsApp con tu turno ya escrito.";
+    } else {
+      btn.href = "#turnos"; btn.removeAttribute("target");
+      $("#sNote").textContent = !s ? "Paso 1: elegí un servicio." : !day ? "Paso 3: elegí un día." : !state.time ? "Paso 4: elegí un horario." : "Paso 5: escribí tu nombre.";
+    }
+  }
+  $("#confirm").addEventListener("click", (e) => { if ($("#confirm").getAttribute("aria-disabled") === "true") e.preventDefault(); });
+  $("#cName").addEventListener("input", renderBooker);
+  renderBooker();
+
+  /* Nächster freier Slot im Ticket */
+  for (const d of days) {
+    const free = slotsFor(d).find((s) => s.ok);
+    if (free) {
+      const today = d.d.toDateString() === new Date().toDateString();
+      $("#nextSlot").textContent = `${today ? "Hoy" : DAYS_ES[d.w]} ${free.t}`;
+      const bb = BARBERS.find((b) => !b.off.includes(d.w));
+      $("#nextWho").textContent = `con ${bb.n} · ${bb.r.split(" ")[0]}`;
+      break;
+    }
+  }
+
+  /* Barber-Pole-Canvas: breite diagonale Streifen, die langsam laufen */
+  const cv = $("#pole"), ctx = cv.getContext("2d");
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let W = 0, H = 0, mx = 0.5, my = 0.5;
+  function size() { const dpr = Math.min(devicePixelRatio || 1, 2); W = cv.clientWidth; H = cv.clientHeight; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+  addEventListener("pointermove", (e) => { mx = e.clientX / innerWidth; my = e.clientY / innerHeight; });
+  const COLS = ["#c8372f", "#ece4d4", "#2f5899", "#ece4d4"];
+  function frame(t) {
+    ctx.fillStyle = "#0d1714"; ctx.fillRect(0, 0, W, H);
+    const band = 70, period = band * COLS.length;
+    const off = (t * 0.03) % period;
+    ctx.save();
+    ctx.translate(W * (0.72 + (mx - .5) * .04), H / 2 + (my - .5) * 20);
+    ctx.rotate(-0.62);
+    const span = Math.hypot(W, H);
+    for (let x = -span - period; x < span + period; x += band) {
+      const i = Math.floor((x + span * 4) / band) % COLS.length;
+      ctx.fillStyle = COLS[i];
+      ctx.globalAlpha = COLS[i] === "#ece4d4" ? 0.10 : 0.5;
+      ctx.fillRect(x + off, -span, band, span * 2);
+    }
+    ctx.restore();
+    ctx.globalAlpha = 1;
+    // Glanzlicht wie auf dem Glaszylinder
+    const g = ctx.createLinearGradient(W * .45, 0, W, 0);
+    g.addColorStop(0, "rgba(13,23,20,0)"); g.addColorStop(.55, "rgba(255,255,255,.05)"); g.addColorStop(.62, "rgba(255,255,255,.0)");
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    if (!reduce) requestAnimationFrame(frame);
+  }
+  size(); addEventListener("resize", size); frame(0);
+})();
+</script>
+
+</body>
+</html>

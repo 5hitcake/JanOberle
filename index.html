@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Jan Oberle – Webdesign für Restaurants, Barbershops und Handwerksbetriebe. Schnelle, moderne Websites mit Online-Buchung, fertig in 7 Tagen.">
+<meta property="og:title" content="Jan Oberle Webdesign">
+<meta property="og:description" content="Jan Oberle – Webdesign für Restaurants, Barbershops und Handwerksbetriebe. Schnelle, moderne Websites mit Online-Buchung, fertig in 7 Tagen.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%232847ff%22/%3E%3Ctext x=%2216%22 y=%2223%22 font-size=%2220%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22Georgia%22%3EJ%3C/text%3E%3C/svg%3E">
+<title>Jan Oberle Webdesign</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: Hero mit Punktraster + Bogen Buenos Aires ↔ Berlin (Canvas) und zwei Live-Uhren; Arbeiten als drei große Vorschaukarten; Leistungen; Pakete; Ablauf; FAQ; Kontakt. Kühles Weiß, Tinte, Kobalt, ein Sonnengelb (Sol de Mayo). */
+:root {
+  --bg: #f4f5f7;
+  --surface: #ffffff;
+  --ink: #111318;
+  --ink-2: #3a3f4a;
+  --muted: #6a7080;
+  --line: #dfe2e8;
+  --accent: #2847ff;
+  --accent-soft: #e6eaff;
+  --sun: #ffb400;
+  --f-serif: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body: "Geist", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "Geist Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #0e1014; --surface: #161920; --ink: #f1f2f5; --ink-2: #c9ccd4; --muted: #8d93a1; --line: #262a33; --accent: #7d92ff; --accent-soft: #1d2340; --sun: #ffc23d; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #0e1014; --surface: #161920; --ink: #f1f2f5; --ink-2: #c9ccd4; --muted: #8d93a1; --line: #262a33; --accent: #7d92ff; --accent-soft: #1d2340; --sun: #ffc23d; color-scheme: dark; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-weight: 600; letter-spacing: -.025em; line-height: 1.05; text-wrap: balance; }
+.serif { font-family: var(--f-serif); font-weight: 400; font-style: italic; letter-spacing: -.01em; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: 20px; }
+.label { font: 500 12px var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 84%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding-block: 12px; }
+.brand { text-decoration: none; font-weight: 600; font-size: 17px; display: inline-flex; align-items: center; gap: 10px; }
+.brand i { width: 30px; height: 30px; border-radius: 50%; background: var(--ink); color: var(--bg); display: grid; place-items: center; font: italic 17px var(--f-serif); }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 14px; color: var(--ink-2); }
+nav.links a:hover { color: var(--ink); }
+.lang { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px; background: var(--surface); }
+.lang button { border: 0; background: transparent; font: 500 12px var(--f-mono); color: var(--muted); padding: 5px 9px; border-radius: 999px; cursor: pointer; }
+.lang button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 600 15px var(--f-body); padding: 13px 20px; border-radius: 999px; background: var(--ink); color: var(--bg); border: 1px solid var(--ink); text-decoration: none; cursor: pointer; transition: transform .15s, background .15s; }
+.btn:hover { transform: translateY(-2px); }
+.btn.accent { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn.line { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn.line:hover { border-color: var(--ink); }
+.menu-btn { display: none; }
+@media (max-width: 900px) {
+  .menu-btn { display: inline-flex; padding: 8px 14px; font-size: 13px; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--surface); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links .lang { align-self: flex-start; margin-top: 14px; }
+  nav.links:not(.open) { display: none; }
+}
+
+/* Hero */
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line); }
+.hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; }
+.hero .wrap { padding-block: 92px 84px; }
+.avail { display: inline-flex; align-items: center; gap: 8px; font: 500 13px var(--f-mono); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; }
+.avail i { width: 8px; height: 8px; border-radius: 50%; background: #22b35e; box-shadow: 0 0 0 4px rgba(34,179,94,.18); }
+@media (prefers-reduced-motion: no-preference) { .avail i { animation: pulse 2s ease-in-out infinite; } @keyframes pulse { 50% { box-shadow: 0 0 0 7px rgba(34,179,94,.05); } } }
+.hero h1 { font-size: clamp(48px, 8.6vw, 116px); margin: 22px 0 0; max-width: 13ch; }
+.hero h1 .serif { color: var(--accent); }
+.hero p.lead { font-size: clamp(17px, 1.6vw, 20px); color: var(--ink-2); max-width: 46ch; margin: 24px 0 32px; }
+.hero .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+.clocks { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 46px; }
+.clock { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 12px 16px; min-width: 170px; }
+.clock b { display: block; font: 500 26px var(--f-mono); font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+.clock span { font-size: 13px; color: var(--muted); }
+.clock.link { display: flex; align-items: center; color: var(--muted); font-size: 14px; max-width: 260px; border-style: dashed; }
+
+section.block { padding-block: 96px; }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px 40px; margin-bottom: 40px; }
+.head h2 { font-size: clamp(36px, 5.2vw, 64px); margin-top: 10px; max-width: 16ch; }
+.head p { max-width: 42ch; margin: 0; color: var(--muted); }
+
+/* Arbeiten */
+.works { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; }
+@media (max-width: 920px) { .works { grid-template-columns: minmax(0,1fr); } }
+.work { text-decoration: none; display: flex; flex-direction: column; gap: 14px; }
+.shot { aspect-ratio: 4/3; max-width: 100%; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); position: relative; transition: transform .25s, box-shadow .25s; }
+.work:hover .shot { transform: translateY(-6px) rotate(-.4deg); box-shadow: 0 24px 40px -24px rgba(17,19,24,.45); }
+.shot .bar { height: 26px; display: flex; align-items: center; gap: 5px; padding-inline: 10px; background: rgba(0,0,0,.25); }
+.shot .bar i { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.5); }
+.shot .in { position: absolute; inset: 26px 0 0; padding: 18px; display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; overflow: hidden; }
+.s1 { background: #2a0e15; color: #f4e7d4; }
+.s1 .in::before { content: ""; position: absolute; inset: 0; background: radial-gradient(70% 60% at 50% 110%, rgba(255,123,58,.55), transparent 70%); }
+.s1 .t { font: italic 700 clamp(34px, 4vw, 44px)/.95 "Bodoni Moda", Georgia, serif; position: relative; }
+.s1 .t em { color: #d6a54f; }
+.s2 { background: #0d1714; color: #ece4d4; }
+.s2 .in::before { content: ""; position: absolute; inset: -40%; background: repeating-linear-gradient(135deg, rgba(200,55,47,.45) 0 26px, rgba(236,228,212,.06) 26px 52px, rgba(47,88,153,.45) 52px 78px, rgba(236,228,212,.06) 78px 104px); }
+.s2 .in::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #0d1714 25%, transparent); }
+.s2 .t { font: 900 clamp(36px, 4.4vw, 50px)/.9 "Arial Narrow", Impact, sans-serif; text-transform: uppercase; position: relative; z-index: 1; }
+.s2 .t span { color: #cfa65a; }
+.s3 { background: #ffffff; color: #2b3134; }
+.s3 .in::before { content: ""; position: absolute; left: 45%; right: -10%; top: 22%; height: 26px; background: #f2a900; opacity: .35; border-radius: 4px; transform: rotate(-3deg); box-shadow: 0 50px 0 #5d7266, 0 100px 0 #cac4b0; }
+.s3 .t { font: 800 clamp(30px, 3.6vw, 40px)/1 Arial, sans-serif; letter-spacing: -.03em; position: relative; }
+.s3 .t mark { background: linear-gradient(transparent 58%, #f2a900 58%); color: inherit; }
+.shot .chip { position: relative; z-index: 1; align-self: flex-start; font: 500 11px var(--f-mono); background: rgba(255,255,255,.14); padding: 3px 8px; border-radius: 999px; }
+.s3 .chip { background: #f2f3f1; }
+.work h3 { font-size: 22px; display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+.work h3 small { font: 500 12px var(--f-mono); color: var(--muted); font-weight: 400; }
+.work p { margin: -6px 0 0; color: var(--muted); font-size: 15px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tags span { font-size: 12px; background: var(--accent-soft); color: var(--accent); padding: 3px 9px; border-radius: 999px; font-weight: 500; }
+.open { font-weight: 600; font-size: 14px; color: var(--accent); }
+
+/* Leistungen */
+.feats { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 0; border-top: 1px solid var(--line); }
+@media (max-width: 860px) { .feats { grid-template-columns: minmax(0,1fr); } }
+.feat { padding: 26px 26px 26px 0; border-bottom: 1px solid var(--line); }
+.feat h3 { font-size: 20px; margin-bottom: 6px; display: flex; gap: 10px; align-items: center; }
+.feat h3 i { width: 10px; height: 10px; border-radius: 3px; background: var(--accent); flex: 0 0 auto; }
+.feat p { margin: 0; color: var(--muted); font-size: 15px; }
+
+/* Pakete */
+.plans { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; align-items: stretch; }
+@media (max-width: 920px) { .plans { grid-template-columns: minmax(0,1fr); } }
+.plan { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 28px; display: flex; flex-direction: column; gap: 16px; }
+.plan.hot { border: 2px solid var(--accent); position: relative; }
+.plan.hot .badge { position: absolute; top: -12px; left: 24px; background: var(--accent); color: #fff; font: 500 11px var(--f-mono); padding: 3px 10px; border-radius: 999px; letter-spacing: .06em; text-transform: uppercase; }
+.plan h3 { font-size: 22px; }
+.plan .price { font: 400 54px/1 var(--f-serif); letter-spacing: -.02em; }
+.plan .price small { font: 400 14px var(--f-body); color: var(--muted); margin-left: 4px; }
+.plan ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; font-size: 15px; }
+.plan li { display: flex; gap: 10px; }
+.plan li::before { content: "→"; color: var(--accent); flex: 0 0 auto; }
+.plan .btn { margin-top: auto; }
+.care { margin-top: 18px; color: var(--muted); font-size: 14px; text-align: center; }
+
+/* Ablauf */
+.steps { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 14px; counter-reset: s; }
+@media (max-width: 860px) { .steps { grid-template-columns: minmax(0,1fr); } }
+.step { counter-increment: s; padding: 22px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); }
+.step::before { content: counter(s, decimal-leading-zero); font: 500 13px var(--f-mono); color: var(--accent); }
+.step h3 { font-size: 19px; margin: 10px 0 6px; }
+.step p { margin: 0; font-size: 15px; color: var(--muted); }
+.step .when { display: inline-block; margin-top: 12px; font: 500 12px var(--f-mono); color: var(--ink); background: var(--bg); border-radius: 6px; padding: 2px 8px; }
+
+/* FAQ */
+.faq { max-width: 820px; }
+details { border-bottom: 1px solid var(--line); padding-block: 18px; }
+summary { cursor: pointer; font-weight: 600; font-size: 18px; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; font: 400 24px/1 var(--f-mono); color: var(--accent); transition: transform .2s; }
+details[open] summary::after { transform: rotate(45deg); }
+details p { margin: 10px 0 0; color: var(--ink-2); max-width: 64ch; }
+
+/* Kontakt */
+.contact { background: var(--ink); color: var(--bg); border-radius: 24px; padding: clamp(26px, 5vw, 64px); display: grid; grid-template-columns: minmax(0,1.1fr) minmax(0,.9fr); gap: 40px; }
+@media (max-width: 900px) { .contact { grid-template-columns: minmax(0,1fr); } }
+.contact h2 { font-size: clamp(38px, 5.6vw, 72px); }
+.contact h2 .serif { color: var(--sun); }
+.contact p { color: color-mix(in srgb, var(--bg) 70%, var(--ink)); max-width: 42ch; }
+.contact .label { color: color-mix(in srgb, var(--bg) 60%, var(--ink)); }
+.ways { display: flex; flex-direction: column; gap: 10px; }
+.way { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; border: 1px solid color-mix(in srgb, var(--bg) 22%, var(--ink)); border-radius: 14px; padding: 14px 16px; }
+.way .v { font: 500 15px var(--f-mono); user-select: all; word-break: break-all; }
+.way .k { font-size: 12px; color: color-mix(in srgb, var(--bg) 60%, var(--ink)); display: block; }
+.way button, .way a.mini { font: 600 13px var(--f-body); background: var(--bg); color: var(--ink); border: 0; border-radius: 999px; padding: 8px 14px; cursor: pointer; text-decoration: none; }
+form.brief { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+form.brief input, form.brief select { font: 15px var(--f-body); padding: 12px 14px; border-radius: 12px; border: 1px solid color-mix(in srgb, var(--bg) 22%, var(--ink)); background: transparent; color: var(--bg); width: 100%; min-width: 0; }
+form.brief select option { color: #111318; }
+form.brief .btn { background: var(--sun); border-color: var(--sun); color: #111318; }
+.wa-out { font-size: 14px; }
+.wa-out a { color: var(--sun); font-weight: 600; }
+
+footer { padding-block: 40px 60px; color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px 30px; }
+footer nav { display: flex; flex-wrap: wrap; gap: 18px; }
+footer a { text-decoration: none; }
+footer a:hover { color: var(--ink); }
+.toast { position: fixed; left: 50%; bottom: calc(22px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--accent); color: #fff; padding: 9px 16px; border-radius: 999px; font-size: 14px; z-index: 50; }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top"><i aria-hidden="true">J</i>Jan Oberle</a>
+    <button class="btn line menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links" data-i="menu">Menü</button>
+    <nav class="links" id="links">
+      <a href="#arbeiten" data-i="nWork">Arbeiten</a>
+      <a href="#pakete" data-i="nPlans">Pakete</a>
+      <a href="#ablauf" data-i="nProcess">Ablauf</a>
+      <a href="#faq">FAQ</a>
+      <a href="#kontakt" data-i="nContact">Kontakt</a>
+      <div class="lang" role="group" aria-label="Sprache / Idioma / Language">
+        <button type="button" data-l="es">ES</button><button type="button" data-l="de">DE</button><button type="button" data-l="en">EN</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <canvas id="bg" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <span class="avail"><i></i><span data-i="avail">Neue Projekte ab nächster Woche</span></span>
+    <h1><span data-i="h1a">Websites, die</span> <span class="serif" data-i="h1b">Kunden bringen.</span></h1>
+    <p class="lead" data-i="lead">Ich baue schnelle, moderne Websites für Restaurants, Barbershops und Handwerksbetriebe. Mit Online-Buchung, WhatsApp-Button und gut auffindbar bei Google. Fertig in 7 Tagen.</p>
+    <div class="ctas">
+      <a class="btn accent" href="#kontakt" data-i="cta1">Kostenlosen Entwurf anfragen</a>
+      <a class="btn line" href="#arbeiten" data-i="cta2">Arbeiten ansehen</a>
+    </div>
+    <div class="clocks">
+      <div class="clock"><b id="cBA">--:--</b><span>Buenos Aires</span></div>
+      <div class="clock"><b id="cDE">--:--</b><span>Berlin</span></div>
+      <div class="clock link" data-i="clockNote">Ich arbeite zwischen beiden Zeitzonen. Antwort meist am selben Tag.</div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="arbeiten">
+  <div class="wrap">
+    <div class="head"><div><span class="label" data-i="wLabel">Ausgewählte Arbeiten</span><h2 data-i="wTitle">Drei Branchen, drei Websites.</h2></div><p data-i="wText">Jede Seite ist auf ihr Geschäft zugeschnitten: Reservierung, Terminbuchung oder Angebotsanfrage. Klicken Sie sich durch, alles funktioniert.</p></div>
+    <div class="works">
+      <a class="work" href="fuego-lento/">
+        <div class="shot s1"><div class="bar"><i></i><i></i><i></i></div><div class="in"><span class="chip">Parrilla · Palermo</span><div class="t">Fuego lento,<br><em>mesa larga.</em></div></div></div>
+        <h3>Fuego Lento <small data-i="w1k">Restaurant</small></h3>
+        <p data-i="w1">Speisekarte mit Kategorien, Reservierung per WhatsApp, Öffnungszeiten live.</p>
+        <div class="tags"><span data-i="tRes">Reservierung</span><span data-i="tMenu">Digitale Karte</span><span>WhatsApp</span></div>
+        <span class="open" data-i="open">Live-Demo öffnen ↗</span>
+      </a>
+      <a class="work" href="navaja-club/">
+        <div class="shot s2"><div class="bar"><i></i><i></i><i></i></div><div class="in"><span class="chip">Barbería · Villa Crespo</span><div class="t">Corte,<br>navaja<br><span>y charla.</span></div></div></div>
+        <h3>Navaja Club <small data-i="w2k">Barbershop</small></h3>
+        <p data-i="w2">Online-Terminbuchung nach Service, Barbier und Uhrzeit. Bestätigung per WhatsApp.</p>
+        <div class="tags"><span data-i="tBook">Online-Termine</span><span data-i="tPrices">Preisliste</span><span>Lookbook</span></div>
+        <span class="open" data-i="open">Live-Demo öffnen ↗</span>
+      </a>
+      <a class="work" href="farbwerk/">
+        <div class="shot s3"><div class="bar"><i></i><i></i><i></i></div><div class="in"><span class="chip">Malermeister · Leipzig</span><div class="t">Saubere Wände.<br><mark>Pünktlich</mark> fertig.</div></div></div>
+        <h3>Farbwerk <small data-i="w3k">Handwerk</small></h3>
+        <p data-i="w3">Preisrechner, Vorher/Nachher-Regler mit RAL-Farben und Rückrufformular.</p>
+        <div class="tags"><span data-i="tCalc">Preisrechner</span><span data-i="tBA">Vorher/Nachher</span><span data-i="tLeads">Anfragen</span></div>
+        <span class="open" data-i="open">Live-Demo öffnen ↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><span class="label" data-i="fLabel">In jeder Website enthalten</span><h2 data-i="fTitle">Alles, was ein lokaler Betrieb braucht.</h2></div></div>
+    <div class="feats" id="feats"></div>
+  </div>
+</section>
+
+<section class="block" id="pakete" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><span class="label" data-i="pLabel">Pakete</span><h2 data-i="pTitle">Feste Preise. Keine Überraschungen.</h2></div><p data-i="pText">Einmalzahlung, die Website gehört Ihnen. 50 % zum Start, 50 % wenn Sie zufrieden sind.</p></div>
+    <div class="plans" id="plans"></div>
+    <p class="care" id="care"></p>
+  </div>
+</section>
+
+<section class="block" id="ablauf" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><span class="label" data-i="sLabel">Ablauf</span><h2 data-i="sTitle">In 7 Tagen online.</h2></div></div>
+    <div class="steps" id="steps"></div>
+  </div>
+</section>
+
+<section class="block" id="faq" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><span class="label">FAQ</span><h2 data-i="qTitle">Häufige Fragen</h2></div></div>
+    <div class="faq" id="faqList"></div>
+  </div>
+</section>
+
+<section class="block" id="kontakt" style="padding-top:0">
+  <div class="wrap">
+    <div class="contact">
+      <div>
+        <span class="label" data-i="cLabel">Kontakt</span>
+        <h2 style="margin-top:12px"><span data-i="cH1">Lassen Sie uns</span> <span class="serif" data-i="cH2">reden.</span></h2>
+        <p data-i="cText">Schreiben Sie mir kurz, was Sie machen. Ich schicke Ihnen innerhalb von 48 Stunden einen kostenlosen Entwurf Ihrer Startseite, ganz unverbindlich.</p>
+        <form class="brief" id="brief">
+          <input id="bName" data-ph="phName" placeholder="Ihr Name und Betrieb" autocomplete="organization">
+          <select id="bType">
+            <option data-i="o1">Restaurant / Café</option>
+            <option data-i="o2">Barbershop / Friseur</option>
+            <option data-i="o3">Handwerksbetrieb</option>
+            <option data-i="o4">Anderes</option>
+          </select>
+          <button class="btn" type="submit" data-i="bSend">Nachricht per WhatsApp vorbereiten</button>
+          <div class="wa-out" id="waOut" hidden></div>
+        </form>
+      </div>
+      <div class="ways">
+        <span class="label" data-i="cDirect">Direkt erreichen</span>
+        <div class="way"><div><span class="k">WhatsApp</span><span class="v">+54 9 11 3033-1893</span></div><a class="mini" href="https://wa.me/5491130331893" target="_blank" rel="noopener" data-i="write">Schreiben ↗</a></div>
+        <div class="way"><div><span class="k">E-Mail</span><span class="v" id="mail">oberlejan@web.de</span></div><button type="button" id="copyMail" data-i="copy">Kopieren</button></div>
+        <div class="way"><div><span class="k" data-i="based">Standort</span><span class="v" data-i="basedV">Buenos Aires · Kunden weltweit</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr"></span> Jan Oberle · <span data-i="foot">Webdesign für lokale Betriebe</span></span>
+    <nav><a href="#arbeiten" data-i="nWork">Arbeiten</a><a href="#pakete" data-i="nPlans">Pakete</a><a href="#kontakt" data-i="nContact">Kontakt</a><a href="#top">↑</a></nav>
+  </div>
+</footer>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const T = {
+    de: {
+      menu: "Menü", nWork: "Arbeiten", nPlans: "Pakete", nProcess: "Ablauf", nContact: "Kontakt",
+      avail: "Neue Projekte ab nächster Woche", h1a: "Websites, die", h1b: "Kunden bringen.",
+      lead: "Ich baue schnelle, moderne Websites für Restaurants, Barbershops und Handwerksbetriebe. Mit Online-Buchung, WhatsApp-Button und gut auffindbar bei Google. Fertig in 7 Tagen.",
+      cta1: "Kostenlosen Entwurf anfragen", cta2: "Arbeiten ansehen", clockNote: "Ich arbeite zwischen beiden Zeitzonen. Antwort meist am selben Tag.",
+      wLabel: "Ausgewählte Arbeiten", wTitle: "Drei Branchen, drei Websites.", wText: "Jede Seite ist auf ihr Geschäft zugeschnitten: Reservierung, Terminbuchung oder Angebotsanfrage. Klicken Sie sich durch, alles funktioniert.",
+      w1k: "Restaurant", w2k: "Barbershop", w3k: "Handwerk",
+      w1: "Speisekarte mit Kategorien, Reservierung per WhatsApp, Öffnungszeiten live.", w2: "Online-Terminbuchung nach Service, Barbier und Uhrzeit. Bestätigung per WhatsApp.", w3: "Preisrechner, Vorher/Nachher-Regler mit RAL-Farben und Rückrufformular.",
+      tRes: "Reservierung", tMenu: "Digitale Karte", tBook: "Online-Termine", tPrices: "Preisliste", tCalc: "Preisrechner", tBA: "Vorher/Nachher", tLeads: "Anfragen", open: "Live-Demo öffnen ↗",
+      fLabel: "In jeder Website enthalten", fTitle: "Alles, was ein lokaler Betrieb braucht.",
+      feats: [["Perfekt auf dem Handy", "Über 70 % Ihrer Kunden kommen vom Smartphone. Jede Seite wird zuerst fürs Handy gebaut."], ["Lädt in unter 1 Sekunde", "Keine Baukasten-Bremse. Schnelle Seiten ranken besser und verlieren keine Besucher."], ["Gefunden bei Google", "Saubere Technik, Google-Unternehmensprofil verknüpft, lokale Suchbegriffe eingebaut."], ["Buchung & WhatsApp", "Tisch reservieren, Termin buchen oder Rückruf anfordern, direkt aus der Website."], ["Rechtssicher in DE", "Impressum, Datenschutz und Cookie-Hinweis nach deutschem Recht vorbereitet."], ["Gehört Ihnen", "Domain und Website laufen auf Ihren Namen. Keine Abo-Falle, kein Lock-in."]],
+      pLabel: "Pakete", pTitle: "Feste Preise. Keine Überraschungen.", pText: "Einmalzahlung, die Website gehört Ihnen. 50 % zum Start, 50 % wenn Sie zufrieden sind.",
+      plans: [["Start", "690 €", "einmalig", ["Eine starke Seite (Onepager)", "Handy-optimiert", "WhatsApp- und Anruf-Button", "Google Maps und Öffnungszeiten", "Online in 5 Tagen"]], ["Business", "1.190 €", "einmalig", ["Bis zu 5 Unterseiten", "Terminbuchung oder Anfrageformular", "Google-Unternehmensprofil eingerichtet", "Impressum & Datenschutz", "2 Korrekturrunden"]], ["Pro", "1.890 €", "einmalig", ["Alles aus Business", "Preisrechner oder Speisekarte zum Selbstpflegen", "Mehrsprachig (DE/EN)", "Texte von mir geschrieben", "Online in 7–10 Tagen"]]],
+      hot: "Beliebt", choose: "Dieses Paket anfragen", care: "Optional: Hosting, Updates und kleine Änderungen für 29 € im Monat, jederzeit kündbar.",
+      sLabel: "Ablauf", sTitle: "In 7 Tagen online.",
+      steps: [["Kurzes Gespräch", "15 Minuten per WhatsApp oder Telefon. Was machen Sie, was brauchen Ihre Kunden?", "Tag 1"], ["Kostenloser Entwurf", "Sie sehen Ihre neue Startseite, bevor Sie etwas bezahlen.", "Tag 2–3"], ["Feinschliff", "Ihre Wünsche, Ihre Fotos, Ihre Texte. Zwei Korrekturrunden inklusive.", "Tag 4–6"], ["Live", "Domain verbinden, bei Google anmelden, fertig. Ich zeige Ihnen alles.", "Tag 7"]],
+      qTitle: "Häufige Fragen",
+      faq: [["Ich habe schon Instagram. Brauche ich eine Website?", "Instagram ist super für Bilder, aber bei Google suchen die Kunden, die jetzt kaufen wollen. Eine Website bringt Sie dort nach oben und macht Buchungen einfacher."], ["Welche laufenden Kosten gibt es?", "Nur die Domain, etwa 10–20 € im Jahr. Hosting geht oft kostenlos oder mit dem optionalen Pflegepaket."], ["Kann ich später selbst etwas ändern?", "Ja. Öffnungszeiten, Preise oder Speisekarte zeige ich Ihnen so, dass Sie sie selbst anpassen können."], ["Funktioniert die Zusammenarbeit aus Buenos Aires?", "Ja, alles läuft per WhatsApp, Telefon und Videocall. Durch die Zeitverschiebung arbeite ich oft, während Sie schlafen."]],
+      cLabel: "Kontakt", cH1: "Lassen Sie uns", cH2: "reden.", cText: "Schreiben Sie mir kurz, was Sie machen. Ich schicke Ihnen innerhalb von 48 Stunden einen kostenlosen Entwurf Ihrer Startseite, ganz unverbindlich.",
+      phName: "Ihr Name und Betrieb", o1: "Restaurant / Café", o2: "Barbershop / Friseur", o3: "Handwerksbetrieb", o4: "Anderes", bSend: "Nachricht per WhatsApp vorbereiten",
+      cDirect: "Direkt erreichen", write: "Schreiben ↗", copy: "Kopieren", based: "Standort", basedV: "Buenos Aires · Kunden weltweit", foot: "Webdesign für lokale Betriebe",
+      planMsg: (p) => `Hallo Jan, ich interessiere mich für das Paket „${p}“.`, waMsg: (n, t) => `Hallo Jan, ich bin ${n} (${t}) und interessiere mich für eine Website.`, ready: "Nachricht ist vorbereitet:", openWa: "WhatsApp öffnen →", needName: "Bitte Name und Betrieb eintragen.", copied: "E-Mail kopiert",
+    },
+    es: {
+      menu: "Menú", nWork: "Trabajos", nPlans: "Paquetes", nProcess: "Proceso", nContact: "Contacto",
+      avail: "Tomando proyectos nuevos", h1a: "Webs que te", h1b: "traen clientes.",
+      lead: "Hago páginas web rápidas y modernas para restaurantes, barberías y oficios. Con turnos online, botón de WhatsApp y bien posicionadas en Google. Lista en 7 días.",
+      cta1: "Pedí tu diseño gratis", cta2: "Ver trabajos", clockNote: "Trabajo entre las dos zonas horarias. Respondo casi siempre en el día.",
+      wLabel: "Trabajos seleccionados", wTitle: "Tres rubros, tres webs.", wText: "Cada página está pensada para su negocio: reservas, turnos o pedidos de presupuesto. Probalas, todo funciona.",
+      w1k: "Restaurante", w2k: "Barbería", w3k: "Oficios",
+      w1: "Carta por categorías, reservas por WhatsApp, horario en vivo.", w2: "Turnos online por servicio, barbero y horario. Confirmación por WhatsApp.", w3: "Calculadora de precios, antes/después con colores RAL y formulario de contacto.",
+      tRes: "Reservas", tMenu: "Carta digital", tBook: "Turnos online", tPrices: "Precios", tCalc: "Calculadora", tBA: "Antes/después", tLeads: "Consultas", open: "Ver demo en vivo ↗",
+      fLabel: "Incluido en cada web", fTitle: "Todo lo que un negocio de barrio necesita.",
+      feats: [["Perfecta en el celular", "Más del 70 % de tus clientes entra desde el celu. Cada web se diseña primero para el teléfono."], ["Carga en menos de 1 segundo", "Nada de plantillas lentas. Una web rápida aparece mejor en Google y no pierde visitas."], ["Aparecés en Google", "Bien armada técnicamente, conectada a tu perfil de Google Maps y con las búsquedas de tu zona."], ["Turnos y WhatsApp", "Reservar mesa, sacar turno o pedir presupuesto, directo desde la web."], ["Fácil de actualizar", "Precios, horarios o la carta: te muestro cómo cambiarlos vos mismo."], ["Es tuya", "El dominio y la web quedan a tu nombre. Sin abonos obligatorios."]],
+      pLabel: "Paquetes", pTitle: "Precios fijos. Sin sorpresas.", pText: "Pago único, la web es tuya. 50 % al empezar, 50 % cuando estés conforme.",
+      plans: [["Inicial", "USD 290", "pago único", ["Una página completa (one page)", "Optimizada para celular", "Botón de WhatsApp y llamada", "Google Maps y horarios", "Online en 5 días"]], ["Negocio", "USD 490", "pago único", ["Hasta 5 secciones", "Turnos online o formulario", "Perfil de Google configurado", "Carta o lista de precios", "2 rondas de cambios"]], ["Pro", "USD 790", "pago único", ["Todo lo de Negocio", "Carta o precios autoadministrables", "Bilingüe (ES/EN) para turistas", "Textos escritos por mí", "Online en 7–10 días"]]],
+      hot: "El más elegido", choose: "Quiero este paquete", care: "Opcional: hosting, actualizaciones y cambios chicos por USD 25 al mes. Cancelás cuando quieras.",
+      sLabel: "Proceso", sTitle: "Online en 7 días.",
+      steps: [["Charla corta", "15 minutos por WhatsApp. ¿Qué hacés y qué necesitan tus clientes?", "Día 1"], ["Diseño gratis", "Ves tu nueva página antes de pagar nada.", "Día 2–3"], ["Ajustes", "Tus fotos, tus textos, tus cambios. Dos rondas incluidas.", "Día 4–6"], ["Online", "Conectamos el dominio, la damos de alta en Google y listo.", "Día 7"]],
+      qTitle: "Preguntas frecuentes",
+      faq: [["Ya tengo Instagram. ¿Necesito una web?", "Instagram está bárbaro para fotos, pero los clientes que quieren comprar ya buscan en Google. Una web te pone ahí y hace que reservar sea más fácil."], ["¿Qué costos fijos hay?", "Solo el dominio, unos USD 10–20 por año (.com.ar es aún más barato). El hosting puede ser gratis o con el plan opcional."], ["¿Puedo cambiar cosas yo?", "Sí. Te enseño a cambiar horarios, precios o la carta en minutos."], ["¿Cómo pagamos?", "50 % al empezar y 50 % al final. Transferencia, Mercado Pago o dólares, como te quede mejor."]],
+      cLabel: "Contacto", cH1: "Hablemos", cH2: "hoy.", cText: "Contame en dos líneas qué hacés. En 48 horas te mando un diseño gratis de tu página de inicio, sin compromiso.",
+      phName: "Tu nombre y negocio", o1: "Restaurante / Café", o2: "Barbería / Peluquería", o3: "Oficio / Servicio", o4: "Otro", bSend: "Armar mensaje de WhatsApp",
+      cDirect: "Contacto directo", write: "Escribir ↗", copy: "Copiar", based: "Dónde estoy", basedV: "Buenos Aires · clientes en todo el mundo", foot: "Diseño web para negocios locales",
+      planMsg: (p) => `Hola Jan! Me interesa el paquete ${p}.`, waMsg: (n, t) => `Hola Jan! Soy ${n} (${t}) y me interesa una página web.`, ready: "Tu mensaje está listo:", openWa: "Abrir WhatsApp →", needName: "Poné tu nombre y el de tu negocio.", copied: "Email copiado",
+    },
+    en: {
+      menu: "Menu", nWork: "Work", nPlans: "Pricing", nProcess: "Process", nContact: "Contact",
+      avail: "Booking new projects", h1a: "Websites that", h1b: "bring customers.",
+      lead: "I build fast, modern websites for restaurants, barbershops and trades businesses. Online booking, a WhatsApp button and easy to find on Google. Live in 7 days.",
+      cta1: "Get a free mockup", cta2: "See the work", clockNote: "I work across both time zones. Replies usually the same day.",
+      wLabel: "Selected work", wTitle: "Three industries, three websites.", wText: "Each site is built around how the business makes money: reservations, bookings or quote requests. Click through, everything works.",
+      w1k: "Restaurant", w2k: "Barbershop", w3k: "Trades",
+      w1: "Menu by category, WhatsApp reservations, live opening hours.", w2: "Online booking by service, barber and time slot. Confirmed via WhatsApp.", w3: "Price calculator, before/after slider with paint colors, callback form.",
+      tRes: "Reservations", tMenu: "Digital menu", tBook: "Online booking", tPrices: "Price list", tCalc: "Calculator", tBA: "Before/after", tLeads: "Lead form", open: "Open live demo ↗",
+      fLabel: "Included in every site", fTitle: "Everything a local business needs.",
+      feats: [["Built for phones", "Over 70% of your customers visit on a phone. Every site is designed mobile-first."], ["Loads in under a second", "No sluggish site builders. Fast sites rank higher and keep visitors."], ["Found on Google", "Clean code, linked Google Business Profile and local keywords built in."], ["Bookings & WhatsApp", "Reserve a table, book a slot or request a quote right from the site."], ["Easy to update", "Hours, prices or the menu: I'll show you how to change them yourself."], ["You own it", "Domain and website are in your name. No lock-in subscriptions."]],
+      pLabel: "Pricing", pTitle: "Fixed prices. No surprises.", pText: "One-time payment, you own the site. 50% to start, 50% when you're happy.",
+      plans: [["Starter", "$890", "one-time", ["One strong page (one-pager)", "Mobile-optimized", "WhatsApp and call buttons", "Google Maps and hours", "Live in 5 days"]], ["Business", "$1,490", "one-time", ["Up to 5 pages", "Online booking or quote form", "Google Business Profile set up", "Menu or price list", "2 rounds of revisions"]], ["Pro", "$2,290", "one-time", ["Everything in Business", "Self-editable menu or prices", "Bilingual (EN/ES)", "Copy written by me", "Live in 7–10 days"]]],
+      hot: "Most popular", choose: "Ask about this plan", care: "Optional: hosting, updates and small changes for $39/month. Cancel anytime.",
+      sLabel: "Process", sTitle: "Live in 7 days.",
+      steps: [["Quick call", "15 minutes on WhatsApp or phone. What do you do, what do your customers need?", "Day 1"], ["Free mockup", "You see your new homepage before you pay anything.", "Day 2–3"], ["Polish", "Your photos, your words, your feedback. Two revision rounds included.", "Day 4–6"], ["Launch", "Connect the domain, submit to Google, done. I'll walk you through it.", "Day 7"]],
+      qTitle: "FAQ",
+      faq: [["I already have Instagram. Do I need a website?", "Instagram is great for photos, but customers ready to buy search Google. A website gets you there and makes booking easy."], ["What are the ongoing costs?", "Just the domain, about $10–20 a year. Hosting can be free, or included in the optional care plan."], ["Can I change things myself later?", "Yes. I'll show you how to update hours, prices or your menu in minutes."], ["Does working remotely from Buenos Aires work?", "Yes, everything runs over WhatsApp, email and video calls. The time difference means work often gets done overnight for you."]],
+      cLabel: "Contact", cH1: "Let's", cH2: "talk.", cText: "Tell me in two lines what you do. Within 48 hours I'll send you a free mockup of your homepage, no strings attached.",
+      phName: "Your name and business", o1: "Restaurant / Café", o2: "Barbershop / Salon", o3: "Trades business", o4: "Other", bSend: "Prepare WhatsApp message",
+      cDirect: "Reach me directly", write: "Message ↗", copy: "Copy", based: "Based in", basedV: "Buenos Aires · clients worldwide", foot: "Web design for local businesses",
+      planMsg: (p) => `Hi Jan, I'm interested in the ${p} plan.`, waMsg: (n, t) => `Hi Jan, I'm ${n} (${t}) and I'm interested in a website.`, ready: "Your message is ready:", openWa: "Open WhatsApp →", needName: "Please enter your name and business.", copied: "Email copied",
+    },
+  };
+
+  let L = "de";
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  function apply(lang) {
+    L = lang; const t = T[lang];
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-i]").forEach((el) => { const v = t[el.dataset.i]; if (typeof v === "string") el.textContent = v; });
+    document.querySelectorAll("[data-ph]").forEach((el) => (el.placeholder = t[el.dataset.ph]));
+    document.querySelectorAll(".lang button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.l === lang)));
+    $("#feats").innerHTML = t.feats.map(([h, p]) => `<div class="feat"><h3><i></i>${esc(h)}</h3><p>${esc(p)}</p></div>`).join("");
+    $("#plans").innerHTML = t.plans.map(([n, p, per, items], i) => `<div class="plan ${i === 1 ? "hot" : ""}">${i === 1 ? `<span class="badge">${esc(t.hot)}</span>` : ""}<h3>${esc(n)}</h3><div class="price">${esc(p)}<small>${esc(per)}</small></div><ul>${items.map((x) => `<li>${esc(x)}</li>`).join("")}</ul><a class="btn ${i === 1 ? "accent" : "line"}" href="https://wa.me/5491130331893?text=${encodeURIComponent(t.planMsg(n))}" target="_blank" rel="noopener">${esc(t.choose)}</a></div>`).join("");
+    $("#care").textContent = t.care;
+    $("#steps").innerHTML = t.steps.map(([h, p, w]) => `<div class="step"><h3>${esc(h)}</h3><p>${esc(p)}</p><span class="when">${esc(w)}</span></div>`).join("");
+    $("#faqList").innerHTML = t.faq.map(([q, a], i) => `<details ${i === 0 ? "open" : ""}><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join("");
+    $("#waOut").hidden = true;
+    try { localStorage.setItem("jo-lang", lang); } catch {}
+  }
+  document.querySelectorAll(".lang button").forEach((b) => b.addEventListener("click", () => apply(b.dataset.l)));
+  const hash = location.hash.replace("#", "");
+  let saved = null; try { saved = localStorage.getItem("jo-lang"); } catch {}
+  const nav = (navigator.language || "de").slice(0, 2);
+  apply(["es", "de", "en"].includes(hash) ? hash : saved || (["es", "de", "en"].includes(nav) ? nav : "en"));
+
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+
+  function toast(m) { const t = $("#toast"); t.textContent = m; t.hidden = false; clearTimeout(toast.k); toast.k = setTimeout(() => (t.hidden = true), 2200); }
+  $("#copyMail").addEventListener("click", () => {
+    navigator.clipboard.writeText($("#mail").textContent).then(() => toast(T[L].copied), () => { const r = document.createRange(); r.selectNodeContents($("#mail")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); });
+  });
+  $("#brief").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const n = $("#bName").value.trim(), out = $("#waOut");
+    out.hidden = false; out.textContent = "";
+    if (!n) { out.textContent = T[L].needName; $("#bName").focus(); return; }
+    const a = document.createElement("a");
+    a.href = "https://wa.me/5491130331893?text=" + encodeURIComponent(T[L].waMsg(n, $("#bType").selectedOptions[0].text));
+    a.target = "_blank"; a.rel = "noopener"; a.textContent = T[L].openWa;
+    out.append(T[L].ready + " ", a);
+  });
+
+  /* Uhren */
+  function tick() {
+    const f = (tz) => new Intl.DateTimeFormat("de-DE", { hour: "2-digit", minute: "2-digit", timeZone: tz }).format(new Date());
+    $("#cBA").textContent = f("America/Argentina/Buenos_Aires");
+    $("#cDE").textContent = f("Europe/Berlin");
+  }
+  tick(); setInterval(tick, 15000);
+  $("#yr").textContent = new Date().getFullYear();
+
+  /* Hintergrund: Punktraster, das auf den Cursor reagiert, und ein Bogen Buenos Aires → Berlin mit wandernden Impulsen */
+  const cv = $("#bg"), ctx = cv.getContext("2d");
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let W = 0, H = 0, mx = -999, my = -999;
+  const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+  let C = {};
+  function colors() { C = { dot: css("--line"), ink: css("--muted"), acc: css("--accent"), sun: css("--sun") }; }
+  function size() { const dpr = Math.min(devicePixelRatio || 1, 2); W = cv.clientWidth; H = cv.clientHeight; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); colors(); }
+  cv.parentElement.addEventListener("pointermove", (e) => { const r = cv.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; });
+  cv.parentElement.addEventListener("pointerleave", () => { mx = my = -999; });
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", colors);
+  new MutationObserver(colors).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  function arcPt(k, a, b, lift) { const x = a[0] + (b[0] - a[0]) * k, y = a[1] + (b[1] - a[1]) * k - Math.sin(Math.PI * k) * lift; return [x, y]; }
+  function frame(t) {
+    ctx.clearRect(0, 0, W, H);
+    const gap = W < 700 ? 22 : 28;
+    for (let y = gap / 2; y < H; y += gap) for (let x = gap / 2; x < W; x += gap) {
+      const d = Math.hypot(x - mx, y - my), wave = Math.sin(x / 90 + y / 140 - t / 1400);
+      const near = Math.max(0, 1 - d / 160);
+      ctx.fillStyle = near > 0.05 ? C.acc : C.dot;
+      ctx.globalAlpha = near > 0.05 ? 0.25 + near * 0.6 : 0.7 + wave * 0.3;
+      const r = 1.1 + near * 2.2 + (wave + 1) * 0.25;
+      ctx.beginPath(); ctx.arc(x + (near ? (x - mx) * near * 0.08 : 0), y + (near ? (y - my) * near * 0.08 : 0), r, 0, 6.283); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    const narrow = W < 760;
+    const A = [W * (narrow ? 0.08 : 0.52), H * 0.92], B = [W * 0.94, H * (narrow ? 0.2 : 0.16)], lift = H * 0.35;
+    ctx.strokeStyle = C.acc; ctx.lineWidth = 1.5; ctx.setLineDash([4, 6]); ctx.globalAlpha = narrow ? 0.25 : 0.55;
+    ctx.beginPath(); for (let k = 0; k <= 1.001; k += 0.02) { const p = arcPt(k, A, B, lift); k === 0 ? ctx.moveTo(p[0], p[1]) : ctx.lineTo(p[0], p[1]); } ctx.stroke(); ctx.setLineDash([]);
+    for (let i = 0; i < 3; i++) {
+      const k = ((t / 5200) + i / 3) % 1, p = arcPt(k, A, B, lift);
+      ctx.globalAlpha = (narrow ? 0.4 : 0.9) * Math.sin(Math.PI * k);
+      ctx.fillStyle = i === 1 ? C.sun : C.acc; ctx.beginPath(); ctx.arc(p[0], p[1], 4, 0, 6.283); ctx.fill();
+    }
+    ctx.globalAlpha = narrow ? 0.45 : 1;
+    for (const [p, label] of [[A, "BUENOS AIRES"], [B, "BERLIN"]]) {
+      ctx.fillStyle = C.acc; ctx.beginPath(); ctx.arc(p[0], p[1], 5, 0, 6.283); ctx.fill();
+      ctx.strokeStyle = C.acc; ctx.globalAlpha *= .4; ctx.beginPath(); ctx.arc(p[0], p[1], 10 + (t / 60 % 12), 0, 6.283); ctx.stroke(); ctx.globalAlpha = narrow ? 0.45 : 1;
+      ctx.fillStyle = C.ink; ctx.font = "500 11px 'Geist Mono', monospace";
+      ctx.textAlign = p === B ? "right" : "left"; ctx.fillText(label, p[0] + (p === B ? -14 : 14), p[1] - 10);
+    }
+    ctx.globalAlpha = 1;
+    if (!reduce) requestAnimationFrame(frame);
+  }
+  size(); addEventListener("resize", size); requestAnimationFrame(frame);
+})();
+</script>
+
+</body>
+</html>
