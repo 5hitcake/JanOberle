@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Asador La Esquina · Propuesta de diseño</title>
+<meta name="description" content="Propuesta de sitio web para Asador La Esquina (Morón sur), preparada por Jota Labs. No es el sitio oficial.">
+<meta property="og:title" content="Asador La Esquina · Propuesta de diseño">
+<meta property="og:description" content="Asador de carnes en Morón sur. Propuesta de Jota Labs.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23140e0b'/%3E%3Cpath d='M14 14 50 50M50 14 14 50' stroke='%23e0602a' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Kaushan+Script&family=Manrope:wght@400;600;800&display=swap">
+<style>
+/* Layout: Messer-Intro (X-Schnitt, vier Stücke fallen weg), Al asador, Menú ejecutivo, La casa, Visitanos mit Live-Status.
+   Dunkles Holz/Kohle mit Glut-Orange, ASADOR in Versalien, La Esquina in Schreibschrift wie im Logo. */
+:root {
+  --coal: #140e0b; --coal-2: #1c1410; --coal-3: #261b16; --line: #3a2b23; --fg: #f4ece2; --soft: #ddd2c4; --muted: #ab9d8f;
+  --ember: #e0602a; --ember-ink: #ffffff; --gold: #f2b25c;
+  --f-display: "Oswald", "Arial Narrow", sans-serif;
+  --f-script: "Kaushan Script", "Brush Script MT", cursive;
+  --f-body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--coal); color: var(--fg); font: 16px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-weight: 600; text-wrap: balance; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 800 12px/1.2 var(--f-body); letter-spacing: .18em; text-transform: uppercase; color: var(--ember); }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+.proposal { background: #070504; color: #e9ebee; font: 13px/1.4 var(--f-body); padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; }
+.proposal b { color: #ffd166; }
+.proposal a { color: #fff; font-weight: 800; }
+
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--coal) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo svg { width: 30px; height: 30px; color: var(--ember); }
+.logo span { display: flex; flex-direction: column; line-height: 1; }
+.logo b { font: 700 22px/1 var(--f-display); letter-spacing: .06em; text-transform: uppercase; }
+.logo i { font: 400 16px/1 var(--f-script); font-style: normal; color: var(--ember); margin: 1px 0 0 10px; }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 14px; font-weight: 600; color: var(--muted); }
+nav.links a:hover { color: var(--fg); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 800 15px/1 var(--f-body); padding: 15px 22px; border-radius: 10px; background: var(--ember); color: var(--ember-ink); border: 2px solid var(--ember); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(224,96,42,.35); }
+.btn.ghost { background: transparent; color: var(--fg); border-color: rgba(244,236,226,.4); }
+.btn.ghost:hover { box-shadow: none; border-color: var(--fg); }
+nav.links a.btn { color: var(--ember-ink); padding: 10px 16px; font-size: 14px; }
+.menu-btn { display: none; background: transparent; color: var(--fg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; font: 800 12px var(--f-body); letter-spacing: .08em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--coal-2); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+
+/* ---------- Hero ---------- */
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line);
+  background: radial-gradient(70vw 50vw at 100% 110%, rgba(224,96,42,.28), transparent 70%), radial-gradient(50vw 40vw at -10% -10%, rgba(255,190,120,.07), transparent 70%), var(--coal); }
+.hero::after { content: ""; position: absolute; z-index: -1; right: -8vw; top: 50%; width: min(60vw, 620px); aspect-ratio: 1; transform: translateY(-50%);
+  background: linear-gradient(45deg, transparent 47.5%, rgba(244,236,226,.05) 47.5% 52.5%, transparent 52.5%), linear-gradient(-45deg, transparent 47.5%, rgba(244,236,226,.05) 47.5% 52.5%, transparent 52.5%); }
+.hero .wrap { padding-block: clamp(64px, 11vw, 124px) clamp(56px, 9vw, 104px); display: flex; flex-direction: column; gap: 16px; }
+.hero h1 { font: 700 clamp(84px, 18vw, 210px)/.88 var(--f-display); letter-spacing: .01em; text-transform: uppercase; }
+.hero h1 span { display: block; font: 400 .44em/1.15 var(--f-script); text-transform: none; color: var(--ember); margin-left: .12em; letter-spacing: 0; }
+.hero .lead { margin: 10px 0 0; font-size: clamp(17px, 2.2vw, 21px); color: var(--soft); max-width: 42ch; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.facts span { font: 700 13px var(--f-body); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; background: rgba(20,14,11,.7); }
+.facts span b { color: var(--fg); }
+.status::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); margin-right: 8px; vertical-align: 1px; }
+.status.open::before { background: #5fd38a; box-shadow: 0 0 10px #5fd38a; }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 3; font: 700 13px var(--f-body); color: var(--muted); background: rgba(20,14,11,.85); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.redo:hover { color: var(--fg); }
+.hero.reveal .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero.reveal .wrap > :nth-child(2) { animation-delay: .06s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .12s }
+.hero.reveal .wrap > :nth-child(4) { animation-delay: .18s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .24s }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+.kx { position: absolute; z-index: 5; inset: 0; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+
+/* ---------- Abschnitte ---------- */
+section.block { padding-block: clamp(64px, 10vw, 104px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 40px; margin-bottom: 34px; }
+.head h2 { font: 700 clamp(46px, 7.5vw, 88px)/.92 var(--f-display); text-transform: uppercase; margin-top: 10px; }
+.head h2 em { display: block; font: 400 .5em/1.2 var(--f-script); text-transform: none; color: var(--ember); font-style: normal; }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+.cuts { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 860px) { .cuts { grid-template-columns: minmax(0,1fr); } }
+.cut { position: relative; overflow: hidden; border: 1px solid var(--line); border-radius: 20px; padding: 26px; background: linear-gradient(180deg, var(--coal-2), var(--coal)); display: grid; gap: 8px; min-height: 210px; align-content: end; }
+.cut::before { content: ""; position: absolute; right: -24px; top: -24px; width: 110px; height: 110px; background: linear-gradient(45deg, transparent 46%, rgba(224,96,42,.35) 46% 54%, transparent 54%), linear-gradient(-45deg, transparent 46%, rgba(224,96,42,.35) 46% 54%, transparent 54%); }
+.cut .tag { font: 800 11px var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+.cut h3 { font: 700 34px/1 var(--f-display); text-transform: uppercase; }
+.cut p { margin: 0; color: var(--muted); font-size: 15px; }
+.cut .p { font: 800 16px var(--f-body); color: var(--ember); font-variant-numeric: tabular-nums; }
+.note { margin-top: 20px; font-size: 13px; color: var(--muted); padding: 10px 14px; border-left: 3px solid var(--ember); background: var(--coal-2); border-radius: 0 10px 10px 0; }
+
+.exec { display: grid; grid-template-columns: minmax(0,1.1fr) minmax(0,.9fr); gap: clamp(20px, 4vw, 48px); align-items: center; border-radius: 26px; padding: clamp(28px, 5vw, 56px); background: radial-gradient(120% 120% at 100% 100%, rgba(224,96,42,.35), transparent 60%), var(--coal-3); border: 1px solid var(--line); }
+@media (max-width: 760px) { .exec { grid-template-columns: minmax(0,1fr); } }
+.exec h2 { font: 700 clamp(46px, 7vw, 84px)/.9 var(--f-display); text-transform: uppercase; }
+.exec h2 em { display: block; font: 400 .55em/1.2 var(--f-script); text-transform: none; color: var(--gold); font-style: normal; }
+.exec ul { list-style: none; padding: 0; margin: 22px 0 0; display: grid; gap: 10px; }
+.exec li { display: flex; align-items: center; gap: 12px; font: 600 22px/1.2 var(--f-display); text-transform: uppercase; letter-spacing: .02em; }
+.exec li::before { content: "✓"; flex: none; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--ember); color: #fff; font: 800 15px var(--f-body); }
+.price { text-align: center; }
+.price b { display: block; white-space: nowrap; font: 700 clamp(56px, 8vw, 100px)/1 var(--f-display); color: var(--gold); font-variant-numeric: tabular-nums; }
+.price small { display: block; color: var(--muted); font-size: 13px; margin-top: 8px; }
+.price .btn { margin-top: 18px; }
+
+.casa { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
+@media (max-width: 860px) { .casa { grid-template-columns: minmax(0,1fr); } }
+.casa p { color: var(--soft); max-width: 48ch; }
+.stamp { border: 1px solid var(--line); border-radius: 22px; padding: clamp(24px, 4vw, 40px); background: var(--coal-2); display: grid; gap: 6px; text-align: center; }
+.stamp b { font: 700 clamp(56px, 9vw, 96px)/1 var(--f-display); color: var(--fg); font-variant-numeric: tabular-nums; }
+.stamp span { font: 400 26px/1.2 var(--f-script); color: var(--ember); }
+.stamp small { color: var(--muted); }
+.visit { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 760px) { .visit { grid-template-columns: minmax(0,1fr); } }
+.card { border: 1px solid var(--line); border-radius: 20px; padding: 26px; background: var(--coal-2); display: grid; gap: 12px; align-content: start; }
+.card h3 { font: 700 30px/1 var(--f-display); text-transform: uppercase; }
+.card p { margin: 0; color: var(--soft); }
+.card a.tel { color: var(--fg); font-weight: 800; }
+
+footer { padding-block: 40px 96px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 800 14px var(--f-body); padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.35); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="xk" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 5 L27 27"/><path d="M27 5 L5 27"/></g><g fill="currentColor"><rect x="2" y="2" width="7" height="3" rx="1.5" transform="rotate(45 5.5 3.5)"/><rect x="23" y="2" width="7" height="3" rx="1.5" transform="rotate(-45 26.5 3.5)"/></g></symbol>
+</svg>
+<div class="proposal"><span><b>Propuesta de diseño</b> para Asador La Esquina · no es el sitio oficial</span><span>Hecha por <a href="https://5hitcake.github.io/JanOberle/#es" target="_blank" rel="noopener">Jota Labs</a></span></div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#inicio"><svg aria-hidden="true"><use href="#xk"/></svg><span><b>Asador</b><i>La Esquina</i></span></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENÚ</button>
+    <nav class="links" id="links">
+      <a href="#asador">Al asador</a>
+      <a href="#ejecutivo">Menú ejecutivo</a>
+      <a href="#visitanos">Visitanos</a>
+      <a class="btn" href="tel:+541124914525">Llamar</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div class="kicker">Asador de carnes · Morón sur</div>
+    <h1>Asador<span>La Esquina</span></h1>
+    <p class="lead">Carnes al asador, todos los días de 12 a 23. Y al mediodía, menú ejecutivo: entrada, asado con guarnición, bebida y postre.</p>
+    <div class="ctas"><a class="btn" href="#ejecutivo">Ver el menú ejecutivo</a><a class="btn ghost" href="tel:+541124914525">Llamar · 11 2491-4525</a></div>
+    <div class="facts"><span class="status" id="statusChip">Abierto de 12 a 23</span><span>Baradero 1896</span><span><b>9.723</b> seguidores</span></div>
+  </div>
+  <button class="redo" type="button" id="redo" hidden>↻ Cortar de nuevo</button>
+</section>
+
+<section class="block" id="asador">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">La especialidad</div><h2>Al asador<em>como tiene que ser</em></h2></div><p>Los cortes que más se ven en su Instagram.</p></div>
+    <div class="cuts">
+      <article class="cut"><span class="tag">La casa</span><h3>Asado al asador</h3><p>A la cruz, sobre el fuego.</p><span class="p">$ —</span></article>
+      <article class="cut"><span class="tag">Destacado</span><h3>Vacío</h3><p>La porción que no falla.</p><span class="p">$ —</span></article>
+      <article class="cut"><span class="tag">Destacado</span><h3>Matambre a la pizza</h3><p>Un clásico para compartir.</p><span class="p">$ —</span></article>
+    </div>
+    <p class="note">Platos tomados de sus publicaciones e historias destacadas; descripciones y precios reales se cargan desde la carta actual.</p>
+  </div>
+</section>
+
+<section class="block" id="ejecutivo" style="padding-top:0">
+  <div class="wrap">
+    <div class="exec">
+      <div>
+        <div class="kicker" style="color:var(--gold)">Al mediodía</div>
+        <h2>Menú<em>ejecutivo</em></h2>
+        <ul><li>Entrada</li><li>Asado con guarnición</li><li>Bebida</li><li>Postre</li></ul>
+      </div>
+      <div class="price">
+        <b>$ 18.000</b>
+        <small>Precio publicado en su Instagram. En la web lo actualizan ustedes en un minuto.</small>
+        <a class="btn" href="tel:+541124914525">Consultar por teléfono</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="la-casa" style="padding-top:0">
+  <div class="wrap casa">
+    <div>
+      <div class="kicker">La casa</div>
+      <div class="head" style="margin:0"><h2>Todos los días<em>el fuego prendido</em></h2></div>
+      <p>Un salón para venir en familia o con amigos, el asador encendido de mediodía a la noche y la esquina de siempre en Morón sur.</p>
+    </div>
+    <div class="stamp"><span>abierto</span><b>12 — 23</b><small>todos los días</small></div>
+  </div>
+</section>
+
+<section class="block" id="visitanos" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Visitanos</div><h2>Baradero 1896<em>Morón sur</em></h2></div></div>
+    <div class="visit">
+      <div class="card">
+        <h3>Dónde</h3>
+        <p>Baradero 1896, Morón sur, Buenos Aires.</p>
+        <div class="ctas"><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Asador%20La%20Esquina%20Baradero%201896%20Mor%C3%B3n" target="_blank" rel="noopener">Google Maps ↗</a><a class="btn ghost" href="https://www.instagram.com/asadorlaesquina_/" target="_blank" rel="noopener">Instagram ↗</a></div>
+      </div>
+      <div class="card">
+        <h3>Contacto</h3>
+        <p>Teléfono: <a class="tel" href="tel:+541124914525">11 2491-4525</a></p>
+        <p>Horario: todos los días de 12 a 23.</p>
+        <p><a class="tel" href="https://fb.me/asadorlaesquina" target="_blank" rel="noopener">Facebook ↗</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>Asador La Esquina · Baradero 1896, Morón sur</span><span>Propuesta de diseño de Jota Labs · <a href="https://5hitcake.github.io/JanOberle/#es" target="_blank" rel="noopener">ver más trabajos</a></span></div></footer>
+
+<a class="like" href="https://wa.me/5491130331893?text=Hola%20Jan%21%20Vi%20la%20propuesta%20de%20sitio%20web%20para%20Asador%20La%20Esquina%20y%20me%20gustar%C3%ADa%20saber%20m%C3%A1s." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></svg>¿Te gusta? Hablemos</a>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+
+  /* Live-Status: täglich 12–23 Uhr, Buenos-Aires-Zeit */
+  function status() {
+    const parts = new Intl.DateTimeFormat("en-US", { timeZone: "America/Argentina/Buenos_Aires", hour: "numeric", minute: "numeric", hour12: false }).formatToParts(new Date());
+    const get = (t) => Number(parts.find((p) => p.type === t).value);
+    const mins = (get("hour") % 24) * 60 + get("minute"), open = mins >= 720 && mins < 1380, chip = $("#statusChip");
+    chip.classList.toggle("open", open);
+    chip.textContent = open ? "Abierto ahora · hasta las 23" : mins < 720 ? "Cerrado · abre a las 12" : "Cerrado · mañana desde las 12";
+  }
+  status(); setInterval(status, 60000);
+
+  /* ---------- Intro: zwei Messer schneiden ein X ---------- */
+  const hero = $("#inicio"), redo = $("#redo");
+  let token = { cancelled: true };
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const tween = (ms, fn, tk) => new Promise((res) => {
+    const t0 = performance.now();
+    const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2); k < 1 ? requestAnimationFrame(step) : res(); };
+    requestAnimationFrame(step);
+  });
+  const NS = "http://www.w3.org/2000/svg";
+  const KNIFE = '<svg viewBox="0 0 160 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="kb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f6f8"/><stop offset=".6" stop-color="#b7bec7"/><stop offset="1" stop-color="#7b838d"/></linearGradient></defs><path d="M60 10 L150 14 Q158 18 150 24 L60 28 Z" fill="url(#kb)"/><rect x="4" y="12" width="58" height="16" rx="6" fill="#3a2418"/><circle cx="20" cy="20" r="2.4" fill="#d9c3a0"/><circle cx="44" cy="20" r="2.4" fill="#d9c3a0"/></svg>';
+  async function slice() {
+    token.cancelled = true; const tk = (token = { cancelled: false });
+    hero.querySelectorAll(".kx").forEach((n) => n.remove()); hero.classList.remove("reveal"); redo.hidden = true;
+    const w = hero.clientWidth, h = hero.clientHeight;
+    const add = (tag, css) => { const n = document.createElement(tag); n.className = "kx"; if (css) n.style.cssText += css; hero.append(n); return n; };
+    const tex = "background:#1a120d;background-image:radial-gradient(120% 70% at 50% 110%, rgba(224,96,42,.35), transparent 60%),repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0 2px,transparent 2px 9px)";
+    const pieces = [["0 0", "100% 0", "50% 50%", 0, -1], ["100% 0", "100% 100%", "50% 50%", 1, 0], ["100% 100%", "0 100%", "50% 50%", 0, 1], ["0 100%", "0 0", "50% 50%", -1, 0]]
+      .map(([a, b, c, dx, dy]) => { const n = add("div", `${tex};clip-path:polygon(${a},${b},${c});transition:transform 1.05s cubic-bezier(.5,0,.75,0)`); n.dataset.dx = dx; n.dataset.dy = dy; return n; });
+    const label = add("div", `z-index:6;display:grid;place-items:center;font:400 ${Math.min(w * .14, 150)}px/1 var(--f-script);color:rgba(244,236,226,.92);transition:opacity .3s`); label.textContent = "La Esquina";
+    const s = document.createElementNS(NS, "svg"); s.setAttribute("viewBox", `0 0 ${w} ${h}`); s.setAttribute("class", "kx"); s.style.zIndex = "7"; hero.append(s);
+    const line = (x1, y1, x2, y2) => { const l = document.createElementNS(NS, "line"); Object.entries({ x1, y1, x2, y2, stroke: "#fff6e8", "stroke-width": 2.2, "stroke-linecap": "round" }).forEach(([k, v]) => l.setAttribute(k, v)); const L = Math.hypot(x2 - x1, y2 - y1); l.style.strokeDasharray = L; l.style.strokeDashoffset = L; s.append(l); return [l, L]; };
+    const cuts = [line(0, 0, w, h), line(w, 0, 0, h)];
+    const kw = Math.max(110, Math.min(260, w * .3));
+    const knives = [0, 1].map(() => { const k = add("div", `z-index:8;width:${kw}px;inset:auto;left:0;top:0;opacity:0;filter:drop-shadow(0 8px 10px rgba(0,0,0,.5));transform-origin:${kw * .93}px ${kw * .125}px`); k.innerHTML = KNIFE; return k; });
+    const ang = Math.atan2(h, w) * 180 / Math.PI;
+    await sleep(400);
+    for (let i = 0; i < 2 && !tk.cancelled; i++) {
+      const [l, L] = cuts[i], k = knives[i]; k.style.opacity = "1";
+      await tween(1000, (e) => {
+        l.style.strokeDashoffset = L * (1 - e);
+        const x = i === 0 ? w * e : w * (1 - e), y = h * e;
+        k.style.transform = `translate(${x - kw * .93}px,${y - kw * .125}px) rotate(${i === 0 ? ang : 180 - ang}deg)`;
+      }, tk);
+      k.style.transition = "opacity .25s"; k.style.opacity = "0";
+    }
+    if (tk.cancelled) return;
+    await sleep(300); s.remove(); label.style.opacity = "0";
+    hero.classList.add("reveal");
+    pieces.forEach((p) => { p.style.transform = `translate(${p.dataset.dx * 110}%,${p.dataset.dy * 110}%) rotate(${(p.dataset.dx - p.dataset.dy) * 6}deg)`; });
+    await sleep(1100); if (tk.cancelled) return;
+    hero.querySelectorAll(".kx").forEach((n) => n.remove()); redo.hidden = false;
+  }
+  redo.addEventListener("click", slice);
+  if (!reduce) slice();
+})();
+</script>
+</body>
+</html>
