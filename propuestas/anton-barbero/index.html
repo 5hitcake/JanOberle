@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Antón Barbero · Propuesta de diseño</title>
+<meta name="description" content="Propuesta de sitio web para Antón Barbero, preparada por Jota Labs. No es el sitio oficial.">
+<meta property="og:title" content="Antón Barbero · Propuesta de diseño">
+<meta property="og:description" content="Barbero en Buenos Aires · Барбер в Буэнос-Айресе. Propuesta de Jota Labs.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23f4efe6'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Impact,Arial Narrow,sans-serif' font-size='34' fill='%231a1e25'%3EA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@500;600;700&family=Manrope:wght@400;600;800&display=swap">
+<style>
+/* Layout: Rasur-Intro über dem Hero (Schaum + Rasiermesser, letzter Streifen zum Selbst-Wegwischen), Gründe, Leistungen,
+   Turno-Demo, Galerie, Reseñas, Abschluss. Barber-Look: Schiefer, Creme, Pole-Rot und Pole-Blau. Zweisprachig ES/RU. */
+:root {
+  --slate: #1a1e25; --slate-2: #222731; --slate-3: #2a303b; --line: #353c48; --cream: #f4efe6; --muted: #a3abb8; --soft: #d7d9df;
+  --red: #e0393e; --red-ink: #ffffff; --blue: #2f5bd3; --steel: #c9ced6;
+  --f-display: "Anton", "Oswald", Impact, "Arial Narrow", sans-serif;
+  --f-cyr: "Oswald", "Arial Narrow", sans-serif;
+  --f-body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--slate); color: var(--cream); font: 16px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-weight: 400; text-wrap: balance; }
+:lang(ru) h1, :lang(ru) h2, :lang(ru) .display { font-family: var(--f-cyr); font-weight: 700; letter-spacing: 0; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 600 12px/1.2 var(--f-body); letter-spacing: .18em; text-transform: uppercase; color: var(--steel); display: flex; align-items: center; gap: 10px; }
+.kicker i { flex: none; width: 30px; height: 8px; border-radius: 4px; background: repeating-linear-gradient(-45deg, var(--red) 0 5px, var(--cream) 5px 10px, var(--blue) 10px 15px, var(--cream) 15px 20px); }
+:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+
+.proposal { background: #0e1014; color: #e9ebee; font: 13px/1.4 var(--f-body); padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; }
+.proposal b { color: #ffd166; }
+.proposal a { color: #fff; font-weight: 700; }
+
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--slate) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 12px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 400 22px/1 var(--f-display); letter-spacing: .02em; }
+.logo i { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--cream); color: var(--slate); font: 400 15px/1 var(--f-display); font-style: normal; }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 14px; font-weight: 600; color: var(--muted); }
+nav.links a:hover { color: var(--cream); }
+.lang { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
+.lang button { border: 0; background: transparent; color: var(--muted); font: 800 12px var(--f-body); padding: 6px 11px; border-radius: 999px; cursor: pointer; }
+.lang button[aria-pressed="true"] { background: var(--cream); color: var(--slate); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 800 15px/1 var(--f-body); padding: 15px 22px; border-radius: 12px; background: var(--red); color: var(--red-ink); border: 2px solid var(--red); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(224,57,62,.3); }
+.btn.ghost { background: transparent; color: var(--cream); border-color: rgba(244,239,230,.4); }
+.btn.ghost:hover { box-shadow: none; border-color: var(--cream); }
+nav.links a.btn { color: var(--red-ink); padding: 10px 16px; font-size: 14px; }
+.menu-btn { display: none; background: transparent; color: var(--cream); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; font: 800 12px var(--f-body); letter-spacing: .08em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--slate-2); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links .lang { align-self: flex-start; margin-top: 14px; }
+  nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+
+/* ---------- Hero ---------- */
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line);
+  background: radial-gradient(60vw 50vw at 100% 110%, rgba(224,57,62,.24), transparent 70%), radial-gradient(50vw 45vw at -10% -10%, rgba(47,91,211,.2), transparent 70%), var(--slate); }
+.hero::after { content: "A"; position: absolute; z-index: -1; right: -4vw; bottom: -18vw; font: 400 min(78vw, 820px)/1 var(--f-display); color: transparent; -webkit-text-stroke: 2px rgba(244,239,230,.08); pointer-events: none; }
+.hero .wrap { padding-block: clamp(64px, 11vw, 120px) clamp(56px, 9vw, 104px); display: flex; flex-direction: column; gap: 18px; }
+.hero h1 { font: 400 clamp(78px, 17vw, 196px)/.86 var(--f-display); letter-spacing: .005em; }
+.hero h1 span { display: block; color: transparent; -webkit-text-stroke: 2px var(--cream); }
+:lang(ru) .hero h1 { font-size: clamp(64px, 14vw, 160px); line-height: .92; }
+.hero .ru-line { margin: 0; font: 600 clamp(20px, 3vw, 28px)/1.2 var(--f-cyr); color: var(--steel); }
+.hero .lead { margin: 6px 0 0; font-size: clamp(17px, 2.2vw, 20px); color: var(--soft); max-width: 40ch; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.facts span { font: 600 13px var(--f-body); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; background: rgba(26,30,37,.7); }
+.facts span b { color: var(--cream); }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 3; font: 700 13px var(--f-body); color: var(--muted); background: rgba(26,30,37,.8); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.redo:hover { color: var(--cream); border-color: var(--steel); }
+.hero.reveal .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero.reveal .wrap > :nth-child(2) { animation-delay: .06s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .12s }
+.hero.reveal .wrap > :nth-child(4) { animation-delay: .18s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .24s } .hero.reveal .wrap > :nth-child(6) { animation-delay: .3s }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+/* Rasur-Ebenen */
+.foam { position: absolute; inset: 0; z-index: 5; width: 100%; height: 100%; touch-action: pan-y; cursor: grab; }
+.razor { position: absolute; z-index: 6; left: 0; top: 0; pointer-events: none; filter: drop-shadow(0 8px 12px rgba(0,0,0,.45)); transition: opacity .3s; }
+.razor svg { display: block; width: 100%; height: auto; }
+.hint { position: absolute; z-index: 7; left: 50%; bottom: 7%; transform: translateX(-50%); font: 800 15px var(--f-body); color: var(--slate); background: var(--cream); border-radius: 999px; padding: 11px 20px; white-space: nowrap; box-shadow: 0 6px 18px rgba(0,0,0,.3); transition: opacity .3s; animation: nudge 1.4s ease-in-out infinite; }
+@keyframes nudge { 50% { transform: translateX(calc(-50% + 10px)); } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } .hint { animation: none; } }
+
+/* ---------- Abschnitte ---------- */
+section.block { padding-block: clamp(64px, 10vw, 104px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 40px; margin-bottom: 34px; }
+.head h2 { font: 400 clamp(44px, 7vw, 84px)/.95 var(--f-display); margin-top: 12px; }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+.why { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 860px) { .why { grid-template-columns: minmax(0,1fr); } }
+.why div { border: 1px solid var(--line); border-radius: 18px; padding: 26px; background: var(--slate-2); }
+.why b { display: block; font: 400 40px/1 var(--f-display); color: var(--red); margin-bottom: 14px; }
+:lang(ru) .why b { font-family: var(--f-cyr); font-weight: 700; }
+.why h3 { font: 800 20px/1.25 var(--f-body); margin-bottom: 6px; }
+.why p { margin: 0; color: var(--muted); font-size: 15px; }
+.svc { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 0 56px; }
+@media (max-width: 760px) { .svc { grid-template-columns: minmax(0,1fr); } }
+.svc div { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 2px 14px; padding-block: 18px; border-bottom: 1px solid var(--line); align-items: baseline; }
+.svc h3 { font: 400 30px/1.1 var(--f-display); letter-spacing: .01em; }
+:lang(ru) .svc h3 { font-family: var(--f-cyr); font-weight: 600; }
+.svc .p { font: 800 16px var(--f-body); color: var(--muted); font-variant-numeric: tabular-nums; }
+.svc p { margin: 0; grid-column: 1 / -1; color: var(--muted); font-size: 15px; }
+.note { margin-top: 20px; font-size: 13px; color: var(--muted); padding: 10px 14px; border-left: 3px solid var(--red); background: var(--slate-2); border-radius: 0 10px 10px 0; }
+
+/* Turno-Demo */
+.book { display: grid; grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
+@media (max-width: 860px) { .book { grid-template-columns: minmax(0,1fr); } }
+.book .intro h2 { font: 400 clamp(44px, 7vw, 80px)/.95 var(--f-display); margin-top: 12px; }
+.book .intro p { color: var(--muted); max-width: 40ch; }
+.widget { background: var(--cream); color: var(--slate); border-radius: 22px; padding: clamp(20px, 3vw, 30px); display: grid; gap: 18px; box-shadow: 0 30px 60px rgba(0,0,0,.35); }
+.widget h3 { font: 800 13px var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: #6b6458; margin-bottom: 8px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font: 700 14px var(--f-body); padding: 10px 14px; border-radius: 10px; border: 1.5px solid #d9d1c3; background: #fbf8f2; color: var(--slate); cursor: pointer; font-variant-numeric: tabular-nums; }
+.chip:hover { border-color: var(--slate); }
+.chip[aria-pressed="true"] { background: var(--slate); color: var(--cream); border-color: var(--slate); }
+.chip:disabled { opacity: .4; text-decoration: line-through; cursor: not-allowed; }
+.widget .btn { width: 100%; }
+.widget .btn:disabled { opacity: .45; cursor: not-allowed; transform: none; box-shadow: none; }
+.done { margin: 0; font-weight: 700; padding: 12px 14px; border-radius: 10px; background: #e7f4e3; color: #1f4d1a; }
+.demo-note { margin: 0; font-size: 12px; color: #6b6458; }
+
+/* Galerie */
+.gallery { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 14px; }
+@media (max-width: 860px) { .gallery { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+.tile { position: relative; aspect-ratio: 4 / 5; max-width: 100%; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); display: grid; place-items: center;
+  background: radial-gradient(120% 80% at 30% 0%, rgba(47,91,211,.25), transparent 60%), radial-gradient(100% 70% at 100% 100%, rgba(224,57,62,.22), transparent 60%), var(--slate-2); }
+.tile svg { width: 42%; height: auto; opacity: .85; }
+.tile span { position: absolute; left: 14px; bottom: 12px; font: 400 24px/1 var(--f-display); letter-spacing: .02em; }
+:lang(ru) .tile span { font-family: var(--f-cyr); font-weight: 600; font-size: 20px; }
+
+/* Reseñas */
+.reviews { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 860px) { .reviews { grid-template-columns: minmax(0,1fr); } }
+.rev { border: 1px dashed var(--line); border-radius: 18px; padding: 24px; background: var(--slate-2); display: grid; gap: 10px; }
+.rev .q { font: 400 54px/.6 var(--f-display); color: var(--red); height: 24px; }
+.rev .l { height: 10px; border-radius: 5px; background: var(--slate-3); }
+.rev .l.s { width: 62%; }
+.rev small { color: var(--muted); font-size: 13px; }
+
+/* Abschluss */
+.final { text-align: left; border-radius: 26px; padding: clamp(28px, 6vw, 64px); position: relative; overflow: hidden; isolation: isolate; background: var(--slate-2); border: 1px solid var(--line); }
+.final::before { content: ""; position: absolute; z-index: -1; right: 0; top: 0; bottom: 0; width: 22px; background: repeating-linear-gradient(-45deg, var(--red) 0 10px, var(--cream) 10px 20px, var(--blue) 20px 30px, var(--cream) 30px 40px); opacity: .9; }
+.final h2 { font: 400 clamp(46px, 8vw, 96px)/.92 var(--f-display); max-width: 12ch; }
+.final p { color: var(--muted); margin: 14px 0 24px; max-width: 42ch; }
+
+footer { padding-block: 40px 96px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 700 14px var(--f-body); padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.35); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+</style>
+</head>
+<body>
+<div class="proposal"><span data-ru-html="&lt;b&gt;Дизайн-предложение&lt;/b&gt; для Antón Barbero · это не официальный сайт"><b>Propuesta de diseño</b> para Antón Barbero · no es el sitio oficial</span><span><span data-ru="Сделано">Hecha por</span> <a href="https://5hitcake.github.io/JanOberle/#es" target="_blank" rel="noopener">Jota Labs</a></span></div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#inicio"><i>A</i>Antón Barbero</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links" data-ru="МЕНЮ">MENÚ</button>
+    <nav class="links" id="links">
+      <a href="#servicios" data-ru="Услуги">Servicios</a>
+      <a href="#trabajos" data-ru="Работы">Trabajos</a>
+      <a href="#resenas" data-ru="Отзывы">Reseñas</a>
+      <div class="lang" role="group" aria-label="Idioma / Язык"><button type="button" data-l="es" aria-pressed="true">ES</button><button type="button" data-l="ru" aria-pressed="false">RU</button></div>
+      <a class="btn" href="#turno" data-ru="Записаться">Reservar turno</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div class="kicker"><i></i><span data-ru="Барбер в Буэнос-Айресе">Barbero en Buenos Aires</span></div>
+    <h1>Antón<span>Barbero</span></h1>
+    <p class="ru-line" lang="ru" data-ru="Barbero en Buenos Aires" data-ru-lang="es">Барбер в Буэнос-Айресе</p>
+    <p class="lead" data-ru="Стрижки, фейды и борода. Обслуживаю на испанском и на русском — запись онлайн за одну минуту.">Cortes, fades y barba. Te atiendo en español y en ruso, y sacás turno online en un minuto.</p>
+    <div class="ctas"><a class="btn" href="#turno" data-ru="Записаться">Reservar turno</a><a class="btn ghost" href="https://www.instagram.com/gavrilovtoha/" target="_blank" rel="noopener" data-ru="Instagram ↗">Ver Instagram ↗</a></div>
+    <div class="facts"><span data-ru-html="&lt;b&gt;✓&lt;/b&gt; Подтверждён в Instagram"><b>✓</b> Verificado en Instagram</span><span data-ru-html="&lt;b&gt;9 664&lt;/b&gt; подписчика"><b>9.664</b> seguidores</span><span data-ru-html="&lt;b&gt;ES · RU&lt;/b&gt; два языка"><b>ES · RU</b> dos idiomas</span></div>
+  </div>
+  <button class="redo" type="button" id="redo" hidden data-ru="↻ Побрить ещё раз">↻ Afeitar de nuevo</button>
+</section>
+
+<section class="block" id="por-que">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker"><i></i><span data-ru="Почему Антон">Por qué Antón</span></div><h2 data-ru="Спокойно, точно, без спешки.">Sentate tranquilo.</h2></div></div>
+    <div class="why">
+      <div><b>ES · RU</b><h3 data-ru="Два языка">Dos idiomas</h3><p data-ru="Объясните, какую стрижку хотите, на испанском или на русском — без недопониманий.">Explicá el corte que querés en español o en ruso, sin malentendidos.</p></div>
+      <div><b>1 min</b><h3 data-ru="Запись за минуту">Turno en un minuto</h3><p data-ru="Выберите услугу, день и время онлайн. Без звонков и ожидания ответа.">Elegí servicio, día y horario online. Sin llamar ni esperar respuesta.</p></div>
+      <div><b data-ru="Стиль">Estilo</b><h3 data-ru="Классика и современные стрижки">Clásico y moderno</h3><p data-ru="Фейды, ножницы, борода и детские стрижки.">Fades, tijera, barba y cortes para los más chicos.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="servicios" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker"><i></i><span data-ru="Услуги">Servicios</span></div><h2 data-ru="Прайс">La lista</h2></div><p data-ru="Цены всегда на виду: меньше вопросов в директ, больше записей.">Precios siempre a la vista: menos “¿precio?” por mensaje y más turnos.</p></div>
+    <div class="svc">
+      <div><h3 data-ru="Стрижка">Corte</h3><span class="p">$ —</span><p data-ru="Машинка и ножницы, аккуратное окончание.">Máquina y tijera, con terminación prolija.</p></div>
+      <div><h3 data-ru="Фейд">Fade</h3><span class="p">$ —</span><p data-ru="Плавный переход: low, mid или high.">Degradé a medida: low, mid o high.</p></div>
+      <div><h3 data-ru="Борода">Barba</h3><span class="p">$ —</span><p data-ru="Форма, контур и уход.">Perfilado, contorno y cuidado.</p></div>
+      <div><h3 data-ru="Стрижка + борода">Corte + barba</h3><span class="p">$ —</span><p data-ru="Полный образ за один визит.">El combo completo en una sola visita.</p></div>
+      <div><h3 data-ru="Детская стрижка">Corte infantil</h3><span class="p">$ —</span><p data-ru="Спокойно и с терпением.">Con paciencia y buena onda.</p></div>
+      <div><h3 data-ru="Укладка">Peinado</h3><span class="p">$ —</span><p data-ru="Для особого случая.">Para una ocasión especial.</p></div>
+    </div>
+    <p class="note" data-ru="Услуги и цены указаны для примера: в финальной версии здесь будет ваш настоящий прайс.">Servicios y precios de ejemplo para la propuesta: en la versión final van tus precios reales.</p>
+  </div>
+</section>
+
+<section class="block" id="turno" style="padding-top:0">
+  <div class="wrap book">
+    <div class="intro">
+      <div class="kicker"><i></i><span data-ru="Запись">Turnos</span></div>
+      <h2 data-ru="Запись за 1 минуту.">Tu turno en 1 minuto.</h2>
+      <p data-ru="Клиент выбирает услугу, день и время, а вы получаете запись в WhatsApp или в календарь. Можно подключить и вашу нынешнюю систему записи.">Tu cliente elige servicio, día y horario, y el turno te llega por WhatsApp o a tu agenda. También se puede conectar el sistema de turnos que ya usás.</p>
+    </div>
+    <div class="widget" id="widget">
+      <div><h3 data-ru="1 · Услуга">1 · Servicio</h3><div class="chips" id="wSvc"></div></div>
+      <div><h3 data-ru="2 · День">2 · Día</h3><div class="chips" id="wDay"></div></div>
+      <div><h3 data-ru="3 · Время">3 · Horario</h3><div class="chips" id="wTime"></div></div>
+      <button class="btn" type="button" id="wGo" disabled data-ru="Подтвердить запись">Confirmar turno</button>
+      <p class="done" id="wDone" hidden></p>
+      <p class="demo-note" data-ru="Демо: дни и время указаны для примера.">Demo: días y horarios de ejemplo.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="trabajos" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker"><i></i>In my chair</div><h2 data-ru="В моём кресле">En mi silla</h2></div><p data-ru="Ваши лучшие работы — прямо из Instagram, на одной странице.">Tus mejores cortes, directo desde tu Instagram y en un solo lugar.</p></div>
+    <div class="gallery">
+      <div class="tile"><svg viewBox="0 0 64 64" fill="none" stroke="#f4efe6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="10" width="36" height="12" rx="3"/><path d="M18 10V6M24 10V6M30 10V6M36 10V6M42 10V6M46 10V6"/><rect x="18" y="22" width="28" height="34" rx="10"/><circle cx="32" cy="44" r="3" fill="#e0393e" stroke="none"/></svg><span>Fade</span></div>
+      <div class="tile"><svg viewBox="0 0 64 64" fill="none" stroke="#f4efe6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 8h14v34H20z"/><path d="M34 8l2 34"/><circle cx="27" cy="42" r="2.5"/><path d="M27 44v14"/></svg><span data-ru="Борода">Barba</span></div>
+      <div class="tile"><svg viewBox="0 0 64 64" fill="none" stroke="#f4efe6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="46" r="8"/><circle cx="46" cy="46" r="8"/><path d="M23 40L44 8M41 40L20 8"/></svg><span data-ru="Классика">Clásico</span></div>
+      <div class="tile"><svg viewBox="0 0 64 64" fill="none" stroke="#f4efe6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="26" width="44" height="12" rx="3"/><path d="M14 38v10M20 38v10M26 38v10M32 38v10M38 38v10M44 38v10M50 38v10"/></svg><span data-ru="Детские">Kids</span></div>
+    </div>
+    <p class="note" data-ru="Изображения для примера: здесь будут ваши фото из «In My Chair».">Imágenes de ejemplo: acá van tus fotos de “In My Chair”.</p>
+  </div>
+</section>
+
+<section class="block" id="resenas" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker"><i></i>Reviews</div><h2 data-ru="Отзывы">Reseñas</h2></div><p data-ru="Что говорят клиенты — на испанском и на русском.">Lo que dicen tus clientes, en español y en ruso.</p></div>
+    <div class="reviews">
+      <div class="rev"><span class="q">“</span><span class="l"></span><span class="l"></span><span class="l s"></span><small data-ru="Пример отзыва">Reseña de ejemplo</small></div>
+      <div class="rev"><span class="q">“</span><span class="l"></span><span class="l s"></span><span class="l"></span><small data-ru="Пример отзыва">Reseña de ejemplo</small></div>
+      <div class="rev"><span class="q">“</span><span class="l"></span><span class="l"></span><span class="l s"></span><small data-ru="Пример отзыва">Reseña de ejemplo</small></div>
+    </div>
+    <p class="note" data-ru="Здесь будут отзывы из вашей истории «Reviews».">Acá van las reseñas de tu historia destacada “Reviews”.</p>
+  </div>
+</section>
+
+<section class="block" style="padding-top:0">
+  <div class="wrap">
+    <div class="final">
+      <div class="kicker"><i></i><span data-ru="Буэнос-Айрес">Buenos Aires</span></div>
+      <h2 data-ru="Следующая стрижка — в одно касание.">Tu próximo corte, a un toque.</h2>
+      <p data-ru="Запись онлайн, прайс на виду, два языка. Всё, что нужно клиенту, на одной странице.">Turnos online, precios a la vista y dos idiomas. Todo lo que tu cliente necesita, en una sola página.</p>
+      <div class="ctas"><a class="btn" href="#turno" data-ru="Записаться">Reservar turno</a><a class="btn ghost" href="https://www.instagram.com/gavrilovtoha/" target="_blank" rel="noopener">Instagram ↗</a></div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap"><span data-ru="Antón Barbero · Буэнос-Айрес">Antón Barbero · Buenos Aires</span><span><span data-ru="Дизайн-предложение от">Propuesta de diseño de</span> Jota Labs · <a href="https://5hitcake.github.io/JanOberle/#es" target="_blank" rel="noopener" data-ru="другие работы">ver más trabajos</a></span></div></footer>
+
+<a class="like" id="like" href="https://wa.me/5491130331893?text=Hola%20Jan%21%20Vi%20la%20propuesta%20de%20sitio%20web%20para%20Ant%C3%B3n%20Barbero%20y%20me%20gustar%C3%ADa%20saber%20m%C3%A1s." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></svg><span data-ru="Нравится? Напишите">¿Te gusta? Hablemos</span></a>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* Menü */
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+
+  /* Sprache ES/RU: data-ru (Text) bzw. data-ru-html (mit Markup) */
+  let L = "es";
+  document.querySelectorAll("[data-ru]").forEach((el) => (el.dataset.es = el.textContent));
+  document.querySelectorAll("[data-ru-html]").forEach((el) => (el.dataset.esHtml = el.innerHTML));
+  const like = $("#like"), likeEs = like.href;
+  function lang(l) {
+    L = l; document.documentElement.lang = l;
+    document.querySelectorAll("[data-ru]").forEach((el) => (el.textContent = l === "ru" ? el.dataset.ru : el.dataset.es));
+    document.querySelectorAll("[data-ru-html]").forEach((el) => (el.innerHTML = l === "ru" ? el.dataset.ruHtml : el.dataset.esHtml));
+    document.querySelectorAll("[data-ru-lang]").forEach((el) => (el.lang = l === "ru" ? el.dataset.ruLang : "ru"));
+    document.querySelectorAll(".lang button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.l === l)));
+    like.href = l === "ru" ? "https://wa.me/5491130331893?text=" + encodeURIComponent("Hola Jan! Vi la propuesta para Antón Barbero (versión en ruso) y me gustaría saber más.") : likeEs;
+    if (hintEl) hintEl.textContent = hintText();
+    renderWidget();
+  }
+  document.querySelectorAll(".lang button").forEach((b) => b.addEventListener("click", () => lang(b.dataset.l)));
+
+  /* ---------- Turno-Demo ---------- */
+  const SVC = [["Corte", "Стрижка"], ["Fade", "Фейд"], ["Barba", "Борода"], ["Corte + barba", "Стрижка + борода"]];
+  const TIMES = ["10:00", "11:00", "12:30", "14:00", "15:30", "17:00", "18:30", "19:30"];
+  const pick = { s: null, d: null, t: null };
+  const days = [];
+  for (let i = 1; days.length < 5; i++) { const d = new Date(); d.setDate(d.getDate() + i); if (d.getDay() !== 0) days.push(d); }
+  const busy = (di, ti) => (di * 7 + ti * 3) % 5 === 0;
+  function chip(label, on, dis, fn) { const b = document.createElement("button"); b.type = "button"; b.className = "chip"; b.textContent = label; b.setAttribute("aria-pressed", String(on)); b.disabled = dis; b.addEventListener("click", fn); return b; }
+  function renderWidget() {
+    const loc = L === "ru" ? "ru-RU" : "es-AR";
+    const fmt = new Intl.DateTimeFormat(loc, { weekday: "short", day: "numeric" });
+    $("#wSvc").replaceChildren(...SVC.map((s, i) => chip(s[L === "ru" ? 1 : 0], pick.s === i, false, () => { pick.s = i; $("#wDone").hidden = true; renderWidget(); })));
+    $("#wDay").replaceChildren(...days.map((d, i) => chip(fmt.format(d), pick.d === i, false, () => { pick.d = i; pick.t = null; $("#wDone").hidden = true; renderWidget(); })));
+    $("#wTime").replaceChildren(...TIMES.map((t, i) => chip(t, pick.t === i, pick.d === null || busy(pick.d, i), () => { pick.t = i; $("#wDone").hidden = true; renderWidget(); })));
+    $("#wGo").disabled = pick.s === null || pick.d === null || pick.t === null;
+  }
+  $("#wGo").addEventListener("click", () => {
+    const loc = L === "ru" ? "ru-RU" : "es-AR";
+    const day = new Intl.DateTimeFormat(loc, { weekday: "long", day: "numeric", month: "long" }).format(days[pick.d]);
+    const s = SVC[pick.s][L === "ru" ? 1 : 0], t = TIMES[pick.t];
+    const out = $("#wDone");
+    out.textContent = L === "ru"
+      ? `Готово: ${s}, ${day}, ${t}. На настоящем сайте запись придёт вам в WhatsApp или в календарь.`
+      : `¡Listo! ${s}, ${day}, ${t}. En tu web real, este turno te llega por WhatsApp o a tu agenda.`;
+    out.hidden = false;
+  });
+  renderWidget();
+
+  /* ---------- Rasur-Intro ---------- */
+  const hero = $("#inicio"), redo = $("#redo");
+  const coarse = matchMedia("(pointer: coarse)").matches;
+  const hintText = () => (L === "ru" ? "Проведите, чтобы побрить" : coarse ? "Deslizá para afeitar" : "Arrastrá para afeitar");
+  let hintEl = null, token = { cancelled: true };
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const ease = (t) => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+  const tween = (ms, fn, tk) => new Promise((res) => {
+    const t0 = performance.now();
+    const step = (now) => { if (tk.cancelled) return res(); const k = Math.min(1, (now - t0) / ms); fn(ease(k)); k < 1 ? requestAnimationFrame(step) : res(); };
+    requestAnimationFrame(step);
+  });
+  const RAZOR = '<svg viewBox="0 0 40 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="bl" x1="0" x2="1"><stop offset="0" stop-color="#f6f8fa"/><stop offset=".55" stop-color="#b9c0c9"/><stop offset="1" stop-color="#7d858f"/></linearGradient></defs><rect x="6" y="2" width="22" height="70" rx="3" fill="url(#bl)"/><rect x="26" y="2" width="3" height="70" fill="#fff"/><circle cx="17" cy="70" r="4" fill="#4a5059"/><rect x="11" y="68" width="12" height="50" rx="6" fill="#2b2f36"/><rect x="13" y="74" width="2" height="38" rx="1" fill="#555c66"/></svg>';
+
+  function bubble(r) {
+    const c = document.createElement("canvas"); c.width = c.height = Math.ceil(r * 2 + 2);
+    const x = c.getContext("2d"), g = x.createRadialGradient(r * .7, r * .7, r * .1, r + 1, r + 1, r);
+    g.addColorStop(0, "rgba(255,255,255,.98)"); g.addColorStop(.7, "rgba(246,242,235,.62)"); g.addColorStop(1, "rgba(185,176,164,.4)");
+    x.fillStyle = g; x.beginPath(); x.arc(r + 1, r + 1, r, 0, 7); x.fill(); return c;
+  }
+
+  async function shave() {
+    token.cancelled = true; const tk = (token = { cancelled: false });
+    hero.querySelectorAll(".foam,.razor,.hint").forEach((n) => n.remove());
+    hero.classList.remove("reveal"); redo.hidden = true;
+    const w = hero.clientWidth, h = hero.clientHeight, dpr = Math.min(2, devicePixelRatio || 1);
+    const cv = document.createElement("canvas"); cv.className = "foam"; cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+    cv.setAttribute("aria-hidden", "true");
+    const ctx = cv.getContext("2d"); ctx.scale(dpr, dpr);
+    ctx.fillStyle = "#f1ece3"; ctx.fillRect(0, 0, w, h);
+    const sprites = [1.5, 2.5, 3.5, 5, 7, 10].map((r) => bubble(r));
+    const n = Math.min(16000, (w * h) / 40);
+    for (let i = 0; i < n; i++) { const s = sprites[Math.floor(Math.pow(Math.random(), 1.8) * sprites.length)]; ctx.drawImage(s, Math.random() * w - s.width / 2, Math.random() * h - s.height / 2); }
+    hero.append(cv);
+    const razor = document.createElement("div"); razor.className = "razor"; razor.innerHTML = RAZOR; hero.append(razor);
+    const band = h / 4, rw = Math.max(44, Math.min(120, band * .5)), rh = rw * 3;
+    razor.style.width = rw + "px";
+    ctx.globalCompositeOperation = "destination-out";
+    const cut = (x0, y0, x1, y1, width, cap = "butt") => { ctx.lineCap = cap; ctx.lineWidth = width; ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x1, y1); ctx.stroke(); };
+    const place = (x, y, rot) => { razor.style.transform = `translate(${x - rw / 2}px, ${y - rh * .3}px) rotate(${rot}deg)`; };
+    const stroke = async (i) => {
+      const y = band * i + band / 2, ltr = i % 2 === 0, x0 = ltr ? -band * .6 : w + band * .6, x1 = ltr ? w + band * .6 : -band * .6;
+      place(x0, y - band * .1, ltr ? -12 : 12);
+      await tween(Math.max(1050, Math.min(1500, w * .9)), (e) => {
+        const x = x0 + (x1 - x0) * e, yy = y - band * .1 + band * .2 * e;
+        cut(x0, y - band * .1, x, yy, band * 1.2); place(x, yy, ltr ? -12 : 12);
+      }, tk);
+    };
+    await sleep(600);
+    for (let i = 0; i < 3 && !tk.cancelled; i++) { await stroke(i); await sleep(220); }
+    if (tk.cancelled) return;
+
+    /* Letzter Streifen: selbst wegrasieren, oder das Messer macht es nach 3 s */
+    razor.style.opacity = "0";
+    hintEl = document.createElement("div"); hintEl.className = "hint"; hintEl.textContent = hintText(); hero.append(hintEl);
+    let last = null, lastMove = 0, touched = false;
+    const pt = (ev) => { const r = cv.getBoundingClientRect(); return [ev.clientX - r.left, ev.clientY - r.top]; };
+    cv.addEventListener("pointerdown", (ev) => { last = pt(ev); touched = true; lastMove = performance.now(); if (hintEl) hintEl.style.opacity = "0"; });
+    cv.addEventListener("pointermove", (ev) => { if (!last) return; const p = pt(ev); cut(last[0], last[1], p[0], p[1], band * .85, "round"); last = p; lastMove = performance.now(); });
+    const up = () => { last = null; };
+    cv.addEventListener("pointerup", up); cv.addEventListener("pointercancel", up); cv.addEventListener("pointerleave", up);
+    const t0 = performance.now();
+    while (!tk.cancelled) {
+      await sleep(120);
+      const now = performance.now();
+      if (!touched && now - t0 > 3000) break;
+      if (touched && !last && now - lastMove > 1100) break;
+      if (now - t0 > 12000) break;
+    }
+    if (tk.cancelled) return;
+    if (hintEl) { hintEl.remove(); hintEl = null; }
+    razor.style.opacity = "1";
+    await stroke(3);
+    razor.style.opacity = "0";
+    cv.style.transition = "opacity .8s"; cv.style.opacity = "0";
+    hero.classList.add("reveal");
+    await sleep(850);
+    if (tk.cancelled) return;
+    cv.remove(); razor.remove(); redo.hidden = false;
+  }
+  redo.addEventListener("click", shave);
+  if (location.hash === "#ru") lang("ru");
+  if (!reduce) shave(); else redo.hidden = true;
+})();
+</script>
+</body>
+</html>
