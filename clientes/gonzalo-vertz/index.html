@@ -130,6 +130,14 @@ section.block { padding-block: clamp(64px, 10vw, 104px); }
 
 .project { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 16px; align-items: stretch; }
 @media (max-width: 860px) { .project { grid-template-columns: minmax(0,1fr); } }
+.pic { margin: 0; position: relative; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: var(--bg-2); }
+.pic img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.pic.tall { aspect-ratio: 4/5; }
+.pic figcaption { position: absolute; left: 12px; top: 12px; font: 800 18px/1 var(--f-display); text-transform: uppercase; letter-spacing: .06em; background: rgba(18,22,28,.85); color: var(--fg); padding: 8px 12px; border-radius: 8px; }
+.pic figcaption.new { background: var(--acc); color: var(--acc-ink); }
+.ba { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; }
+.ba .pic { aspect-ratio: 3/4; }
+@media (max-width: 760px) { .ba { grid-template-columns: repeat(2, minmax(0,1fr)); } .ba .pic:nth-child(2) { grid-column: span 2; aspect-ratio: 4/3; order: 3; } }
 .gallery { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
 .gallery .photo { aspect-ratio: 1; font-size: 13px; }
 .card { border: 1px solid var(--line); border-radius: 14px; padding: 26px; background: var(--bg-2); display: grid; gap: 12px; align-content: start; }
@@ -227,7 +235,7 @@ footer a { color: var(--soft); }
 <section class="block" id="como-trabajo" style="padding-top:0">
   <div class="wrap">
     <div class="me">
-      <div class="photo">Acá va una foto de Gonzalo trabajando</div>
+      <figure class="pic tall"><img src="img/gonzalo.jpg" width="900" height="1524" alt="Gonzalo trabajando en la instalación de un equipo en una cocina" loading="lazy"></figure>
       <div>
         <div class="kicker">Quién soy</div>
         <blockquote>“Soy Gonzalo. Trabajo de forma independiente y <b>voy yo a cada trabajo</b>, de principio a fin. Me tomo cada casa como si fuera la mía: cumplo lo que digo y <b>dejo todo limpio y ordenado</b>.”</blockquote>
@@ -256,9 +264,14 @@ footer a { color: var(--soft); }
 
 <section class="block" id="trabajos" style="padding-top:0">
   <div class="wrap">
-    <div class="head"><div><div class="kicker">Trabajos realizados</div><h2>Una casa <span>a nuevo</span></h2></div><p>Un ejemplo de lo que puedo hacer en una sola obra.</p></div>
-    <div class="project">
-      <div class="gallery"><div class="photo">Foto: antes</div><div class="photo">Foto: después</div><div class="photo">Foto: baño</div><div class="photo">Foto: cielorraso PVC</div></div>
+    <div class="head"><div><div class="kicker">Trabajos realizados</div><h2>Antes <span>y después</span></h2></div><p>Recambio de un equipo en una cocina: retiro del viejo, adecuación de la pared y colocación del nuevo. Todo limpio al terminar.</p></div>
+    <div class="ba">
+      <figure class="pic"><img src="img/antes.jpg" width="900" height="1600" alt="Antes: el equipo viejo instalado en la pared de la cocina" loading="lazy"><figcaption>Antes</figcaption></figure>
+      <figure class="pic"><img src="img/obra.jpg" width="900" height="1200" alt="Durante el trabajo: pared abierta y conexiones preparadas" loading="lazy"><figcaption>Durante</figcaption></figure>
+      <figure class="pic"><img src="img/despues.jpg" width="900" height="1600" alt="Después: el equipo nuevo instalado, con la pared prolija" loading="lazy"><figcaption class="new">Después</figcaption></figure>
+    </div>
+    <div class="project" style="margin-top:16px">
+      <div class="gallery"><div class="photo">Foto: reforma (antes)</div><div class="photo">Foto: reforma (después)</div><div class="photo">Foto: baño</div><div class="photo">Foto: cielorraso PVC</div></div>
       <div class="card">
         <h3>Reforma completa</h3>
         <p>En esta casa hice absolutamente todo a nuevo:</p>
@@ -274,7 +287,7 @@ footer a { color: var(--soft); }
         <a class="btn wa" data-wa="Hola Gonzalo! Vi tus trabajos y quería consultar un presupuesto." href="#" target="_blank" rel="noopener" style="justify-self:start"><svg aria-hidden="true"><use href="#wa"/></svg>Consultar presupuesto</a>
       </div>
     </div>
-    <p class="note">Las fotos y los precios se completan con los de Gonzalo antes de publicar la página.</p>
+    <p class="note">Las fotos de la reforma y los precios se completan con los de Gonzalo antes de publicar la página.</p>
   </div>
 </section>
 
@@ -351,7 +364,7 @@ footer a { color: var(--soft); }
     const { c, ctx } = canvas(scr, "obra", 5);
     const bw = Math.max(46, w / 7), bh = bw * .42, rows = Math.ceil(h / bh) + 1, cols = Math.ceil(w / bw) + 2, tones = ["#a24a2c", "#b05533", "#94442a", "#b8613c", "#9c4f30"];
     const B = []; for (let r = 0; r < rows; r++) for (let q = -1; q < cols; q++) B.push({ r, x: q * bw + (r % 2 ? bw / 2 : 0), y: h - (r + 1) * bh, t: tones[(r * 7 + q * 3 + 10) % tones.length] });
-    let lightA = 0, built = 0, drop = 0, cap = 0;
+    let lightA = .28, built = 0, drop = 0, cap = 0;
     const draw = () => {
       ctx.clearRect(0, 0, w, h); ctx.fillStyle = "#14171c"; ctx.globalAlpha = 1 - drop; ctx.fillRect(0, 0, w, h); ctx.globalAlpha = 1;
       for (const b of B) {
@@ -381,17 +394,19 @@ footer a { color: var(--soft); }
     // Birne und Schalter
     const top = el(scr, "div", "obra-top", `position:absolute;inset:0;z-index:7;pointer-events:none;transition:opacity .5s`);
     top.innerHTML = `<svg viewBox="0 0 70 170" style="position:absolute;left:${w / 2 - U * .35}px;top:0;width:${U * .7}px;overflow:visible"><path d="M35 0v86" stroke="#555" stroke-width="2"/><rect x="25" y="86" width="20" height="20" rx="3" fill="#666"/><circle class="gl" cx="35" cy="132" r="28" fill="#2a2d33" stroke="#666" stroke-width="2"/><path d="M27 120q8 14 16 0" stroke="#777" stroke-width="2" fill="none"/></svg>
-      <svg viewBox="0 0 90 130" style="position:absolute;left:${w * .8 - U * .3}px;top:${h * .7}px;width:${U * .6}px"><rect x="2" y="2" width="86" height="126" rx="12" fill="#e9e6df" stroke="#bdb8ad" stroke-width="2"/><rect x="28" y="30" width="34" height="70" rx="6" fill="#cfcac0"/><rect class="tog" x="31" y="33" width="28" height="34" rx="5" fill="#f7f5f0" stroke="#bdb8ad"/></svg>`;
-    const gl = top.querySelector(".gl"), tog = top.querySelector(".tog");
-    const on = (a) => { lightA = a; gl.setAttribute("fill", a > .5 ? "#fff3c4" : "#2a2d33"); gl.style.filter = a > .5 ? "drop-shadow(0 0 18px #ffd27a)" : "none"; draw(); };
+      <svg viewBox="0 0 90 130" style="position:absolute;left:${Math.max(10, w * .09 - U * .3)}px;top:${h * .66}px;width:${U * .6}px;opacity:0;transition:opacity .4s" class="plate"><rect x="2" y="2" width="86" height="126" rx="12" fill="#e9e6df" stroke="#bdb8ad" stroke-width="2"/><rect x="28" y="30" width="34" height="70" rx="6" fill="#cfcac0"/><rect class="tog" x="31" y="33" width="28" height="34" rx="5" fill="#f7f5f0" stroke="#bdb8ad"/></svg>`;
+    const gl = top.querySelector(".gl"), tog = top.querySelector(".tog"), plate = top.querySelector(".plate");
+    const on = (a) => { lightA = a > .5 ? 1 : .28; gl.setAttribute("fill", a > .5 ? "#fff3c4" : "#2a2d33"); gl.style.filter = a > .5 ? "drop-shadow(0 0 18px #ffd27a)" : "none"; draw(); };
     draw();
-    // 1) Licht an
-    await sleep(600); if (tk.cancelled) return [c, s, top].forEach((n) => n.remove());
+    // 1) im Halbdunkel wird die Mauer hochgezogen
+    await sleep(300);
+    await tween(o.build || 1700, (e, k) => { built = k * 1.05; draw(); }, tk, (k) => k);
+    if (tk.cancelled) return [c, s, top].forEach((n) => n.remove());
+    // 2) der Schalter erscheint an der Wand und macht das Licht an
+    plate.style.opacity = 1; await sleep(450);
     tog.setAttribute("y", 63);
     for (const [ms, a] of [[90, 1], [70, 0], [60, 1], [150, .2], [80, 1]]) { if (tk.cancelled) break; on(a); await sleep(ms); }
     on(1);
-    // 2) Mauer hochziehen
-    await tween(o.build || 1700, (e, k) => { built = k * 1.05; draw(); }, tk, (k) => k);
     // 3) Rohre verlegen, Wasser fließt, Hahn tropft
     await tween(1000, (e) => { pipe.style.strokeDashoffset = shine.style.strokeDashoffset = L * (1 - e); joints.forEach((j, i) => j.setAttribute("opacity", e > (i + 1) / (joints.length + 1) ? 1 : 0)); }, tk);
     fau.setAttribute("opacity", 1);
