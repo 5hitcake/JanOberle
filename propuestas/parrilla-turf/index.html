@@ -7,18 +7,19 @@
 <title>Parrilla Turf · Propuesta de diseño</title>
 <meta name="description" content="Propuesta de sitio web para Parrilla Turf (Boedo), preparada por Jota Labs. No es el sitio oficial.">
 <meta property="og:title" content="Parrilla Turf · Propuesta de diseño">
-<meta property="og:description" content="Fútbol, barrio y amigos en Boedo. Propuesta de Jota Labs.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23d9a441'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Rockwell,Georgia,serif' font-weight='900' font-size='36' fill='%230f2a21'%3ET%3C/text%3E%3C/svg%3E">
+<meta property="og:description" content="Clásico de Boedo desde 1995. Propuesta de Jota Labs.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%231f5638'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Rockwell,Georgia,serif' font-weight='900' font-size='36' fill='%23f2ead6'%3ET%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Manrope:wght@400;600;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Rye&family=Manrope:wght@400;600;800&display=swap">
 <style>
 /* Layout: Hero mit glühendem Grillrost als Intro (danach eingebrannte Streifen), Las de la casa, La casa,
-   Sin reservas (Idee: Wartezeit-Anzeige), Visitanos mit Live-Öffnungsstatus. Rasengrün, Creme, Messing, Glut. */
+   ¿Hay lugar? (Idee: Wartezeit-Anzeige), Visitanos mit Live-Öffnungsstatus. Logo-Grün, Creme, Glut. */
 :root {
-  --green: #0f2a21; --green-2: #15362a; --green-3: #1c4234; --line: #2c5243; --cream: #f3ead7; --soft: #dcd5c4; --muted: #a9b8ab;
-  --brass: #d9a441; --brass-ink: #10261d; --ember: #ff8a3d;
+  --green: #123d27; --green-2: #184a30; --green-3: #1f5638; --line: #2f6346; --cream: #f2ead6; --soft: #dfd8c5; --muted: #a9bfae;
+  --brass: #e6d8b4; --brass-ink: #123d27; --ember: #ff8a3d;
   --f-display: "Alfa Slab One", Rockwell, "Roboto Slab", Georgia, serif;
+  --f-logo: "Rye", "Alfa Slab One", Georgia, serif;
   --f-body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
   color-scheme: dark;
 }
@@ -40,7 +41,7 @@ header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; 
 header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 12px; }
 .logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
 .logo i { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--brass); color: var(--brass-ink); font: 400 18px/1 var(--f-display); font-style: normal; }
-.logo span { font: 400 24px/1 var(--f-display); }
+.logo span { font: 400 24px/1 var(--f-logo); }
 .logo small { display: block; font: 800 10px/1.2 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-top: 3px; }
 nav.links { display: flex; align-items: center; gap: 22px; }
 nav.links a { text-decoration: none; font-size: 14px; font-weight: 600; color: var(--muted); }
@@ -61,10 +62,11 @@ nav.links a.btn { color: var(--brass-ink); padding: 10px 16px; font-size: 14px; 
 
 /* ---------- Hero ---------- */
 .hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line);
-  background: radial-gradient(60vw 50vw at 100% 110%, rgba(217,164,65,.2), transparent 70%), radial-gradient(55vw 45vw at -10% -10%, rgba(40,110,80,.35), transparent 70%), var(--green); }
-.hero.seared { background: repeating-linear-gradient(-24deg, transparent 0 46px, rgba(0,0,0,.22) 46px 64px), radial-gradient(60vw 50vw at 100% 110%, rgba(217,164,65,.2), transparent 70%), radial-gradient(55vw 45vw at -10% -10%, rgba(40,110,80,.35), transparent 70%), var(--green); }
+  background: radial-gradient(60vw 50vw at 100% 110%, rgba(230,216,180,.16), transparent 70%), radial-gradient(55vw 45vw at -10% -10%, rgba(60,140,90,.35), transparent 70%), var(--green); }
+.hero.seared { background: repeating-linear-gradient(-24deg, transparent 0 46px, rgba(0,0,0,.22) 46px 64px), radial-gradient(60vw 50vw at 100% 110%, rgba(230,216,180,.16), transparent 70%), radial-gradient(55vw 45vw at -10% -10%, rgba(60,140,90,.35), transparent 70%), var(--green); }
 .hero .wrap { padding-block: clamp(64px, 11vw, 124px) clamp(56px, 9vw, 104px); display: flex; flex-direction: column; gap: 16px; }
-.hero h1 { font: 400 clamp(110px, 26vw, 280px)/.86 var(--f-display); letter-spacing: -.01em; margin-top: 6px; }
+.hero h1 { font: 400 clamp(96px, 24vw, 260px)/.9 var(--f-logo); letter-spacing: .01em; margin-top: 6px; }
+.hero h1 small { display: block; font: 800 clamp(11px, 1.6vw, 14px)/1 var(--f-body); letter-spacing: .32em; text-transform: uppercase; color: var(--brass); margin-top: 14px; padding-left: .3em; }
 .hero .lead { margin: 6px 0 0; font-size: clamp(17px, 2.2vw, 21px); color: var(--soft); max-width: 42ch; }
 .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
 .facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
@@ -141,12 +143,12 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 
 <header class="nav">
   <div class="wrap">
-    <a class="logo" href="#inicio"><i>T</i><span>Turf<small>Parrilla · Boedo</small></span></a>
+    <a class="logo" href="#inicio"><i><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M5 20 L5 11 a7 7 0 0 1 14 0 L19 20" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/><g fill="#e6d8b4"><circle cx="5" cy="13" r=".9"/><circle cx="5" cy="17" r=".9"/><circle cx="19" cy="13" r=".9"/><circle cx="19" cy="17" r=".9"/><circle cx="7.5" cy="7.5" r=".9"/><circle cx="16.5" cy="7.5" r=".9"/></g></svg></i><span>Turf<small>Bodegón y parrilla</small></span></a>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENÚ</button>
     <nav class="links" id="links">
       <a href="#casa-platos">La carta</a>
       <a href="#la-casa">La casa</a>
-      <a href="#espera">Sin reservas</a>
+      <a href="#espera">¿Hay lugar?</a>
       <a class="btn" href="#visitanos">Cómo llegar</a>
     </nav>
   </div>
@@ -154,11 +156,11 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 
 <section class="hero" id="inicio">
   <div class="wrap">
-    <div class="kicker">Parrilla de barrio · Boedo</div>
-    <h1>Turf</h1>
-    <p class="lead">Fútbol, barrio y amigos. La super milanesa napolitana, la cabutia rellena y el bife de chorizo de la casa, en la esquina de Inclán y Castro Barros.</p>
+    <div class="kicker">Bodegón y parrilla · Boedo</div>
+    <h1>Turf<small>Since 1995 · Buenos Aires</small></h1>
+    <p class="lead">Clásico de Boedo desde 1995. Pasión de la familia y los amigos. Simple: acá se morfa muy bien.</p>
     <div class="ctas"><a class="btn" href="#casa-platos">Ver la carta</a><a class="btn ghost" href="#visitanos">Cómo llegar</a></div>
-    <div class="facts"><span class="status" id="statusChip">Mar a dom · 12–16 y 20–24</span><span><b>Sin reservas</b> · vení directo</span><span>Inclán 3802</span></div>
+    <div class="facts"><span class="status" id="statusChip">Mar a dom · 12–16 y 20–24</span><span><b>252 mil</b> seguidores</span><span>Inclán 3802</span></div>
   </div>
   <button class="redo" type="button" id="redo" hidden>↻ Prender la parrilla</button>
 </section>
@@ -180,8 +182,8 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   <div class="wrap casa">
     <div>
       <div class="kicker">La casa</div>
-      <h2>Una parrilla de familia.</h2>
-      <p>Turf abrió en Boedo a mediados de los 90. La empezaron Angelina y Roberto, y hoy la lleva su hijo Luciano. Mesas llenas, fútbol y el ruido lindo de un lugar de barrio.</p>
+      <h2>Pasión de la familia y los amigos.</h2>
+      <p>Turf abrió en Boedo en 1995. La empezaron Angelina y Roberto, y hoy la lleva su hijo Luciano. Mesas llenas, fútbol y el ruido lindo de un lugar de barrio.</p>
     </div>
     <figure class="quote" style="margin:0"><q>Fútbol y barrio, espíritu bohemio, clima de amigos.</q><cite>— Time Out Buenos Aires</cite></figure>
   </div>
@@ -192,8 +194,8 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     <div class="wait">
       <div>
         <span class="idea">Idea para tu web</span>
-        <h2>Sin reservas. ¿Cuánto hay de espera?</h2>
-        <p>Como Turf no toma reservas, la web puede mostrar la espera aproximada de ahora. Lo actualizan ustedes desde el celular con un toque, y la gente decide si viene ya o en un rato.</p>
+        <h2>¿Hay lugar ahora?</h2>
+        <p>Para los días de mucha gente, la web puede mostrar la espera aproximada de ahora. Lo actualizan ustedes desde el celular con un toque, y la gente decide si viene ya o en un rato.</p>
       </div>
       <div class="board" aria-live="polite">
         <div class="row"><small>Espera ahora (demo)</small><small id="waitTime"></small></div>
@@ -229,6 +231,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
       <div class="card">
         <h3>Dónde</h3>
         <p class="addr">Inclán 3802<br>esq. Castro Barros, Boedo</p>
+        <p style="margin:0;color:var(--muted)">Teléfono: <a href="tel:+541152415420" style="color:var(--cream);font-weight:800">11 5241-5420</a></p>
         <div class="ctas"><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Parrilla%20Turf%20Incl%C3%A1n%203802%20Boedo" target="_blank" rel="noopener">Abrir en Google Maps ↗</a><a class="btn ghost" href="https://www.instagram.com/turf.parrilla/" target="_blank" rel="noopener">Instagram ↗</a></div>
       </div>
     </div>
