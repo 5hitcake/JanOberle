@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Josefina Wine House · Propuesta de diseño</title>
+<meta name="description" content="Propuesta de sitio web para Josefina Wine House, preparada por Jota Labs. No es el sitio oficial.">
+<meta property="og:title" content="Josefina Wine House · Propuesta de diseño">
+<meta property="og:description" content="Casa de vinos y restaurante en Palermo. Jazz en vivo todos los viernes. Propuesta de Jota Labs.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%232c6f3c'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-style='italic' font-size='36' fill='%23fffbe6' text-anchor='middle'%3EJ%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Manrope:wght@400;600;800&display=swap">
+<style>
+/* Layout: Intro (Schriftzug „Josefina“ schreibt sich auf Logo-Grün, dann schenkt eine Flasche ins Glas ein),
+   Kerzen-Glimmen im Hero, Jazz los viernes (nächste Freitage), La casa de vinos, Picadas para llevar, Hache en casa,
+   Reservá (WhatsApp-Baukasten), Visitanos. Grün und Creme wie das Logo, Weinrot, Kerzenlicht. */
+:root {
+  --bg: #0f1712; --bg-2: #152019; --bg-3: #1c2a21; --line: #2f3f33; --fg: #fff8e8; --soft: #e5dcc8; --muted: #a8a28f;
+  --green: #2c6f3c; --green-2: #3f8a52; --wine: #6e1426; --wine-2: #8f1f35; --gold: #e2b866;
+  --f-script: "Great Vibes", "Brush Script MT", cursive;
+  --f-serif: "Cormorant Garamond", Georgia, serif;
+  --f-body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-weight: 700; text-wrap: balance; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 800 12px/1.2 var(--f-body); letter-spacing: .18em; text-transform: uppercase; color: var(--gold); }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+.proposal { background: #000; color: #e9ebee; font: 13px/1.4 var(--f-body); padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; }
+.proposal b { color: #ffd166; }
+.proposal a { color: #fff; font-weight: 800; }
+
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo .seal { width: 44px; height: 44px; border-radius: 50%; background: var(--green); display: grid; place-items: center; font: 400 26px/1 var(--f-script); color: var(--fg); padding-top: 4px; }
+.logo span:last-child { display: flex; flex-direction: column; line-height: 1; }
+.logo b { font: 400 28px/1 var(--f-script); font-weight: 400; }
+.logo small { font: 700 9px/1.6 var(--f-serif); letter-spacing: .5em; color: var(--muted); }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 14px; font-weight: 600; color: var(--muted); }
+nav.links a:hover { color: var(--fg); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 800 15px/1 var(--f-body); padding: 15px 22px; border-radius: 999px; background: var(--fg); color: #14211a; border: 2px solid var(--fg); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(255,248,232,.15); }
+.btn.ghost { background: transparent; color: var(--fg); border-color: rgba(255,248,232,.4); }
+.btn.ghost:hover { box-shadow: none; border-color: var(--fg); }
+.btn.wine { background: var(--wine-2); border-color: var(--wine-2); color: #fff; }
+.btn svg { width: 18px; height: 18px; }
+nav.links a.btn { color: #14211a; padding: 10px 16px; font-size: 14px; }
+.menu-btn { display: none; background: transparent; color: var(--fg); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font: 800 12px var(--f-body); letter-spacing: .08em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bg-2); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+
+/* ---------- Hero ---------- */
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line);
+  background: radial-gradient(60vw 45vw at 50% -10%, rgba(226,184,102,.13), transparent 70%), radial-gradient(60vw 50vw at 100% 110%, rgba(44,111,60,.4), transparent 70%), var(--bg); }
+.hero .wrap { position: relative; z-index: 1; padding-block: clamp(90px, 13vw, 150px) clamp(56px, 9vw, 104px); display: flex; flex-direction: column; gap: 16px; }
+.hero h1 { font: 400 clamp(96px, 17vw, 210px)/.95 var(--f-script); font-weight: 400; margin: .18em 0 0 -.04em; width: fit-content; }
+.hero h1 small { display: block; font: 700 clamp(13px, 1.7vw, 18px)/1.6 var(--f-serif); letter-spacing: .6em; color: var(--muted); margin: .4em .2em 0 0; text-align: right; }
+.hero .lead { margin: 4px 0 0; font-size: clamp(17px, 2.2vw, 21px); color: var(--soft); max-width: 42ch; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.facts span { font: 700 13px var(--f-body); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; background: rgba(15,23,18,.75); }
+.facts span b { color: var(--fg); }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 7; font: 700 13px var(--f-body); color: var(--muted); background: rgba(15,23,18,.85); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.redo:hover { color: var(--fg); }
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero.reveal .wrap > :nth-child(2) { animation-delay: .06s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .12s }
+.hero.reveal .wrap > :nth-child(4) { animation-delay: .18s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .24s }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+.glow { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; }
+.intro { position: absolute; inset: 0; z-index: 5; background: var(--green); transition: opacity .9s; pointer-events: none; }
+.intro svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* ---------- Abschnitte ---------- */
+section.block { padding-block: clamp(64px, 10vw, 104px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 40px; margin-bottom: 30px; }
+.head h2 { font: 700 clamp(40px, 6.2vw, 74px)/1 var(--f-serif); margin-top: 10px; }
+.head h2 em { font: 400 1.05em/1 var(--f-script); color: var(--gold); }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+.note { margin-top: 20px; font-size: 13px; color: var(--muted); padding: 10px 14px; border-left: 3px solid var(--gold); background: var(--bg-2); border-radius: 0 10px 10px 0; }
+
+.jazz { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: clamp(24px, 4vw, 56px); align-items: center; border-radius: 28px; padding: clamp(28px, 5vw, 56px); background: radial-gradient(80% 90% at 100% 0%, rgba(226,184,102,.14), transparent 60%), var(--bg-2); border: 1px solid var(--line); }
+@media (max-width: 860px) { .jazz { grid-template-columns: minmax(0,1fr); } }
+.jazz p { color: var(--soft); max-width: 44ch; }
+.fridays { display: grid; gap: 10px; }
+.fri { display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: center; border: 1px solid var(--line); border-radius: 16px; padding: 14px 18px; background: var(--bg); }
+.fri b { font: 700 34px/1 var(--f-serif); color: var(--gold); min-width: 2ch; text-align: center; }
+.fri span { font: 700 15px var(--f-body); }
+.fri span small { display: block; font-weight: 600; color: var(--muted); }
+.fri i { font-style: normal; font: 800 12px var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.fri.next { border-color: var(--gold); }
+.fri.next i { color: var(--gold); }
+
+.wines { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+@media (max-width: 860px) { .wines { grid-template-columns: minmax(0,1fr); } }
+.wcard { border: 1px solid var(--line); border-radius: 22px; padding: 24px; background: var(--bg-2); display: grid; gap: 8px; align-content: start; }
+.wcard svg { width: 44px; height: 60px; }
+.wcard h3 { font: 700 30px/1.05 var(--f-serif); }
+.wcard p { margin: 0; color: var(--soft); }
+.wcard .p { font: 800 15px var(--f-body); color: var(--gold); white-space: nowrap; }
+.quote { margin: clamp(40px, 7vw, 72px) auto 0; max-width: 820px; text-align: center; font: italic 600 clamp(26px, 3.8vw, 42px)/1.25 var(--f-serif); color: var(--fg); }
+.quote small { display: block; margin-top: 12px; font: 800 12px var(--f-body); letter-spacing: .18em; text-transform: uppercase; color: var(--muted); font-style: normal; }
+
+.duo { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 760px) { .duo { grid-template-columns: minmax(0,1fr); } }
+.box { border-radius: 26px; padding: clamp(26px, 4vw, 40px); display: grid; gap: 10px; align-content: start; }
+.box h3 { font: 700 clamp(30px, 3.6vw, 40px)/1.05 var(--f-serif); }
+.box p { margin: 0; }
+.box.cream { background: var(--fg); color: #1d241f; }
+.box.cream p { color: #4d554e; }
+.box.cream .btn { background: var(--green); border-color: var(--green); color: #fff; justify-self: start; }
+.box.green { background: var(--green); }
+.box.green p { color: #e2f0e3; }
+.box .hache { font: 800 13px var(--f-body); letter-spacing: .2em; text-transform: uppercase; color: #fff; border: 1.5px solid rgba(255,255,255,.6); border-radius: 999px; padding: 6px 12px; justify-self: start; }
+
+.res { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 860px) { .res { grid-template-columns: minmax(0,1fr); } }
+.card { border: 1px solid var(--line); border-radius: 22px; padding: 26px; background: var(--bg-2); display: grid; gap: 12px; align-content: start; }
+.card h3 { font: 700 28px/1.05 var(--f-serif); }
+.card p { margin: 0; color: var(--soft); }
+.field { display: grid; gap: 8px; }
+.field > span { font: 800 12px var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.opts button { font: 800 14px var(--f-body); color: var(--soft); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 9px 14px; cursor: pointer; min-width: 46px; }
+.opts button:hover { border-color: var(--muted); color: var(--fg); }
+.opts button[aria-pressed="true"] { background: var(--fg); color: #14211a; border-color: var(--fg); }
+.ticket { background: var(--wine); border-radius: 22px; padding: 26px; display: grid; gap: 12px; align-content: start; }
+.ticket h3 { font: 700 28px/1.05 var(--f-serif); }
+.ticket .msg { font: 600 15px/1.55 var(--f-body); background: #fff; color: #2a1218; border-radius: 14px 14px 14px 4px; padding: 14px 16px; }
+.ticket .btn { justify-self: start; background: #25d366; border-color: #25d366; color: #fff; }
+.ticket small { color: #f3cfd6; }
+.visit { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 760px) { .visit { grid-template-columns: minmax(0,1fr); } }
+.hours { display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; margin: 0; font-variant-numeric: tabular-nums; }
+.hours dt { color: var(--muted); } .hours dd { margin: 0; color: var(--soft); }
+
+footer { padding-block: 40px 96px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 800 14px var(--f-body); padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.35); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></symbol>
+  <symbol id="copa" viewBox="0 0 44 60"><path d="M8 4h28c0 14-4 24-14 26C12 28 8 18 8 4z" fill="none" stroke="#e2b866" stroke-width="2.5"/><path d="M10.5 14h23c-1 8-5 13-11.5 14C16 27 12 22 10.5 14z" fill="#8f1f35"/><path d="M22 30v20M12 54h20" stroke="#e2b866" stroke-width="2.5" stroke-linecap="round"/></symbol>
+</svg>
+<div class="proposal"><span><b>Propuesta de diseño</b> para Josefina Wine House · no es el sitio oficial</span><span>Hecha por <a href="https://5hitcake.github.io/JanOberle/#es" target="_blank" rel="noopener">Jota Labs</a></span></div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#inicio"><span class="seal" aria-hidden="true">J</span><span><b>Josefina</b><small>WINE HOUSE</small></span></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENÚ</button>
+    <nav class="links" id="links">
+      <a href="#jazz">Jazz</a>
+      <a href="#vinos">Vinos</a>
+      <a href="#hache">Hache</a>
+      <a href="#visitanos">Visitanos</a>
+      <a class="btn" href="#reservar">Reservar</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero pre" id="inicio">
+  <canvas class="glow" id="glow" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="kicker">Casa de vinos · restaurante · Palermo</div>
+    <h1>Josefina<small>WINE HOUSE</small></h1>
+    <p class="lead">Vinos por copa y por botella, picadas y jazz en vivo todos los viernes, en Niceto Vega 5191. Con Hache, en casa.</p>
+    <div class="ctas"><a class="btn" href="#reservar">Reservar mesa</a><a class="btn ghost" href="#jazz">Jazz los viernes</a></div>
+    <div class="facts"><span><b>Jazz</b> todos los viernes</span><span>Niceto Vega 5191</span><span>@hachealmacen <b>en casa</b></span></div>
+  </div>
+  <button class="redo" type="button" id="redo" hidden>↻ Servir otra copa</button>
+</section>
+
+<section class="block" id="jazz">
+  <div class="wrap">
+    <div class="jazz">
+      <div>
+        <div class="kicker">Todos los viernes</div>
+        <div class="head" style="margin:0 0 14px"><h2>Jazz <em>en vivo</em></h2></div>
+        <p>Velas, una copa de vino y músicos en vivo a metros de tu mesa. Los viernes en Josefina son así: llegá temprano o reservá.</p>
+        <div class="ctas"><a class="btn wine" href="#reservar">Reservar para el viernes</a></div>
+      </div>
+      <div class="fridays" id="fridays"></div>
+    </div>
+    <p class="note">Las fechas se calculan solas (próximos viernes). En la versión final se suma quién toca y el horario de cada fecha.</p>
+  </div>
+</section>
+
+<section class="block" id="vinos" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Casa de vinos</div><h2>Por copa <em>o por botella</em></h2></div><p>Para probar algo nuevo o volver a tu favorito. Y algo rico para acompañar.</p></div>
+    <div class="wines">
+      <article class="wcard"><svg aria-hidden="true"><use href="#copa"/></svg><h3>Vino por copa</h3><p>Una selección que va rotando, para descubrir bodegas.</p><span class="p">$ —</span></article>
+      <article class="wcard"><svg aria-hidden="true"><use href="#copa"/></svg><h3>Malbec y más</h3><p>Etiquetas de Mendoza y de todo el país, por botella.</p><span class="p">$ —</span></article>
+      <article class="wcard"><svg aria-hidden="true"><use href="#copa"/></svg><h3>Picadas</h3><p>Fiambres, quesos y pan para compartir con el vino.</p><span class="p">$ —</span></article>
+    </div>
+    <p class="note">Descripciones y precios de ejemplo; en la versión final va su carta de vinos, que actualizan ustedes.</p>
+    <p class="quote">“El que vino al mundo y no toma vino, ¿para qué carajos vino?”<small>Josefina Wine House</small></p>
+  </div>
+</section>
+
+<section class="block" id="hache" style="padding-top:0">
+  <div class="wrap duo">
+    <article class="box green"><span class="hache">Hache Almacén</span><h3>Hache, en casa</h3><p>El almacén gourmet de siempre ahora vive dentro de Josefina. La misma esquina, la misma onda, más vino.</p><div class="ctas"><a class="btn ghost" style="border-color:rgba(255,255,255,.6)" href="https://www.instagram.com/hachealmacen/" target="_blank" rel="noopener">@hachealmacen ↗</a></div></article>
+    <article class="box cream"><span class="kicker" style="color:var(--green)">Para llevar</span><h3>Picada y vino a casa</h3><p>La caja con fiambres, quesos, pan y un vino Josefina, lista para regalar o para la noche en casa.</p><a class="btn" href="#reservar">Encargar una caja</a></article>
+  </div>
+</section>
+
+<section class="block" id="reservar" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Reservas</div><h2>Reservá <em>tu mesa</em></h2></div><p>Elegí día, cuántos son y horario: el mensaje se arma solo.</p></div>
+    <div class="res">
+      <div class="card">
+        <div class="field"><span>Día</span><div class="opts" id="optDay"></div></div>
+        <div class="field"><span>Personas</span><div class="opts" id="optPax"></div></div>
+        <div class="field"><span>Horario</span><div class="opts" id="optTime"></div></div>
+      </div>
+      <div class="ticket">
+        <h3>Tu mensaje</h3>
+        <div class="msg" id="msg" aria-live="polite"></div>
+        <a class="btn" id="sendRes" href="#" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Enviar por WhatsApp</a>
+        <small>O escribinos por <a href="https://www.instagram.com/josefinawinehouse/" target="_blank" rel="noopener" style="color:#fff">Instagram</a>.</small>
+      </div>
+    </div>
+    <p class="note">Demo: el número de WhatsApp y los horarios son de ejemplo (de Google, de la época de Hache) y se confirman con ustedes.</p>
+  </div>
+</section>
+
+<section class="block" id="visitanos" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Visitanos</div><h2>Niceto Vega <em>5191</em></h2></div><p>Palermo, Buenos Aires. Buscá la fachada verde.</p></div>
+    <div class="visit">
+      <div class="card">
+        <h3>Dónde</h3>
+        <p>Niceto Vega 5191, Palermo.</p>
+        <div class="ctas"><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Josefina%20Wine%20House%20Niceto%20Vega%205191" target="_blank" rel="noopener">Google Maps ↗</a><a class="btn ghost" href="https://www.instagram.com/josefinawinehouse/" target="_blank" rel="noopener">Instagram ↗</a></div>
+      </div>
+      <div class="card">
+        <h3>Horarios</h3>
+        <dl class="hours"><dt>Lun a mié</dt><dd>desde las 13</dd><dt>Jueves</dt><dd>hasta la 1</dd><dt>Viernes</dt><dd>hasta las 2 · jazz en vivo</dd><dt>Domingo</dt><dd>desde las 17:30</dd></dl>
+        <p style="color:var(--muted);font-size:14px">Horarios de Google (época de Hache), a confirmar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>Josefina Wine House · Niceto Vega 5191, Palermo</span><span>Propuesta de diseño de Jota Labs · <a href="https://5hitcake.github.io/JanOberle/#es" target="_blank" rel="noopener">ver más trabajos</a></span></div></footer>
+
+<a class="like" href="https://wa.me/5491130331893?text=Hola%20Jan%21%20Vi%20la%20propuesta%20de%20sitio%20web%20para%20Josefina%20Wine%20House%20y%20me%20gustar%C3%ADa%20saber%20m%C3%A1s." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>¿Te gusta? Hablemos</a>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const ease = (t) => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+  const tween = (ms, fn, tk, ez = ease) => new Promise((res) => {
+    const t0 = performance.now();
+    const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(ez(k), k); k < 1 ? requestAnimationFrame(step) : res(); };
+    requestAnimationFrame(step);
+  });
+
+  /* ---------- Intro: „Josefina“ schreibt sich, dann schenkt die Flasche ins Glas ein ---------- */
+  const NS = "http://www.w3.org/2000/svg", hero = $("#inicio"), redo = $("#redo");
+  const mk = (tag, a, p) => { const n = document.createElementNS(NS, tag); for (const k in a) n.setAttribute(k, a[k]); if (p) p.append(n); return n; };
+  let token = { cancelled: true };
+  async function serve() {
+    token.cancelled = true; const tk = (token = { cancelled: false });
+    hero.querySelectorAll(".intro").forEach((n) => n.remove());
+    hero.classList.remove("reveal"); hero.classList.add("pre"); redo.hidden = true;
+    const box = document.createElement("div"); box.className = "intro"; hero.append(box);
+    const w = hero.clientWidth, h = hero.clientHeight;
+    const svg = mk("svg", { viewBox: `0 0 ${w} ${h}` }, box);
+    await document.fonts.load('400 40px "Great Vibes"').catch(() => {});
+    // Schriftzug
+    const fs = Math.min(w * .24, h * .19), ty = h * .26;
+    const txt = mk("text", { x: w / 2, y: ty, "text-anchor": "middle", "font-family": '"Great Vibes", cursive', "font-size": fs, fill: "transparent", stroke: "#fffbe6", "stroke-width": Math.max(1.2, fs * .018), "stroke-linejoin": "round" }, svg);
+    txt.textContent = "Josefina";
+    const sub = mk("text", { x: w / 2, y: ty + fs * .38, "text-anchor": "middle", "font-family": '"Cormorant Garamond", serif', "font-weight": 700, "font-size": Math.max(11, fs * .11), "letter-spacing": fs * .05, fill: "#fffbe6", opacity: 0 }, svg);
+    sub.textContent = "WINE HOUSE"; sub.style.transition = "opacity .6s";
+    const DA = fs * 14; txt.style.strokeDasharray = DA; txt.style.strokeDashoffset = DA;
+    // Glas und Flasche
+    const G = Math.min(w * .2, h * .16), gx = w / 2 + G * .35, gTop = h * .6, gBowl = G * .95;
+    const bowl = `M${gx - G * .45} ${gTop} C${gx - G * .48} ${gTop + gBowl * .75} ${gx - G * .2} ${gTop + gBowl} ${gx} ${gTop + gBowl} C${gx + G * .2} ${gTop + gBowl} ${gx + G * .48} ${gTop + gBowl * .75} ${gx + G * .45} ${gTop} Z`;
+    const id = "b" + Math.random().toString(36).slice(2, 6), cp = mk("clipPath", { id }, mk("defs", {}, svg)); mk("path", { d: bowl }, cp);
+    const gGlass = mk("g", { opacity: 0 }, svg); gGlass.style.transition = "opacity .5s";
+    const wine = mk("rect", { x: gx - G, y: gTop + gBowl, width: G * 2, height: 0, fill: "#7a1730", "clip-path": `url(#${id})` }, gGlass);
+    const surf = mk("ellipse", { cx: gx, cy: gTop + gBowl, rx: 0, ry: G * .04, fill: "#9c2541", "clip-path": `url(#${id})` }, gGlass);
+    mk("path", { d: bowl, fill: "rgba(255,255,255,.06)", stroke: "#fffbe6", "stroke-width": Math.max(2, G * .025) }, gGlass);
+    mk("path", { d: `M${gx} ${gTop + gBowl} V${gTop + gBowl + G * .7} M${gx - G * .3} ${gTop + gBowl + G * .7} H${gx + G * .3}`, stroke: "#fffbe6", "stroke-width": Math.max(2, G * .03), "stroke-linecap": "round", fill: "none" }, gGlass);
+    mk("path", { d: `M${gx - G * .3} ${gTop + G * .12} q-${G * .04} ${G * .3} ${G * .06} ${G * .55}`, stroke: "rgba(255,255,255,.35)", "stroke-width": Math.max(2, G * .03), "stroke-linecap": "round", fill: "none" }, gGlass);
+    const L = G * 1.9, BW = L * .26;
+    const bottle = mk("g", { opacity: 0 }, svg); bottle.style.transition = "opacity .5s";
+    // Flasche aufrecht um (0,0) gezeichnet, Mündung oben bei y = -L/2
+    mk("path", { d: `M${-BW / 2} ${L / 2} V${-L * .02} C${-BW / 2} ${-L * .16} ${-BW * .16} ${-L * .2} ${-BW * .16} ${-L * .3} V${-L / 2} H${BW * .16} V${-L * .3} C${BW * .16} ${-L * .2} ${BW / 2} ${-L * .16} ${BW / 2} ${-L * .02} V${L / 2} Z`, fill: "#1d3a26", stroke: "#0b1a10", "stroke-width": 1.5 }, bottle);
+    mk("rect", { x: -BW * .17, y: -L / 2, width: BW * .34, height: L * .1, fill: "#7a1730" }, bottle);
+    mk("rect", { x: -BW / 2 + 1, y: L * .05, width: BW - 2, height: L * .24, fill: "#fff8e8" }, bottle);
+    const lt = mk("text", { x: 0, y: L * .19, "text-anchor": "middle", "font-family": '"Great Vibes", cursive', "font-size": BW * .34, fill: "#2c6f3c" }, bottle); lt.textContent = "Josefina";
+    mk("rect", { x: -BW * .36, y: -L * .02, width: BW * .1, height: L * .4, fill: "rgba(255,255,255,.12)", rx: 2 }, bottle);
+    const mouth = [gx - G * .05, gTop - G * .55], A = 112 * Math.PI / 180;
+    const piv = [mouth[0] - (L / 2) * Math.sin(A), mouth[1] + (L / 2) * Math.cos(A)];
+    const place = (deg, dx, dy) => bottle.setAttribute("transform", `translate(${piv[0] + dx} ${piv[1] + dy}) rotate(${deg})`);
+    const stream = mk("path", { d: "", stroke: "#7a1730", "stroke-width": Math.max(3, G * .05), "stroke-linecap": "round", fill: "none" }, svg);
+    // 1) Schriftzug schreibt sich
+    await sleep(200);
+    await tween(2000, (e, k) => (txt.style.strokeDashoffset = DA * (1 - k)), tk);
+    txt.style.transition = "fill .5s"; txt.setAttribute("fill", "#fffbe6"); sub.setAttribute("opacity", 1);
+    // 2) Glas und Flasche erscheinen, Flasche neigt sich
+    await sleep(350); gGlass.setAttribute("opacity", 1); place(0, -G * .3, G * .1); bottle.setAttribute("opacity", 1);
+    await tween(900, (e) => place(112 * e, -G * .3 * (1 - e), G * .1 * (1 - e)), tk);
+    // 3) einschenken
+    const level0 = gTop + gBowl, levelMax = gTop + gBowl * .45;
+    await tween(1600, (e, k) => {
+      const lv = level0 - (level0 - levelMax) * e, wob = Math.sin(k * 30) * G * .015 * (1 - k);
+      stream.setAttribute("d", `M${mouth[0]} ${mouth[1]} Q${mouth[0] + G * .06} ${mouth[1] + G * .2} ${gx} ${Math.min(lv, mouth[1] + (lv - mouth[1]) * Math.min(1, k * 6))}`);
+      wine.setAttribute("y", lv + wob); wine.setAttribute("height", level0 - lv + G);
+      const t = (lv - gTop) / gBowl, half = G * .45 * (1 - Math.pow(Math.max(0, t), 2.2) * .95);
+      surf.setAttribute("cy", lv + wob); surf.setAttribute("rx", Math.max(0, half));
+    }, tk, (k) => k);
+    // 4) Flasche richtet sich auf, Strahl reißt ab
+    stream.setAttribute("d", ""); 
+    await tween(600, (e) => place(112 * (1 - e * .35), -G * .1 * e, -G * .05 * e), tk);
+    await sleep(600); if (tk.cancelled) return box.remove();
+    hero.classList.remove("pre"); hero.classList.add("reveal"); box.style.opacity = "0";
+    await sleep(900); box.remove();
+    if (!tk.cancelled) redo.hidden = false;
+  }
+  redo.addEventListener("click", serve);
+  if (reduce) hero.classList.remove("pre"); else serve();
+
+  /* ---------- Kerzen-Glimmen im Hero ---------- */
+  const gc = $("#glow"), gx2 = gc.getContext("2d"), flames = [[.08, .9], [.2, .97], [.82, .93], [.93, .86]];
+  function glow(now) {
+    const dpr = Math.min(2, devicePixelRatio || 1), w = hero.clientWidth, h = hero.clientHeight;
+    if (gc.width !== Math.round(w * dpr)) { gc.width = Math.round(w * dpr); gc.height = Math.round(h * dpr); }
+    gx2.setTransform(dpr, 0, 0, dpr, 0, 0); gx2.clearRect(0, 0, w, h);
+    flames.forEach(([fx, fy], i) => {
+      const x = fx * w, y = fy * h, f = reduce ? 1 : 1 + .12 * Math.sin(now / 90 + i * 2) + .06 * Math.sin(now / 37 + i);
+      const r = Math.min(w, h) * .22 * f, g = gx2.createRadialGradient(x, y, 0, x, y, r);
+      g.addColorStop(0, "rgba(255,190,110,.20)"); g.addColorStop(1, "rgba(255,170,80,0)");
+      gx2.fillStyle = g; gx2.beginPath(); gx2.arc(x, y, r, 0, 7); gx2.fill();
+      gx2.fillStyle = "rgba(255,214,140,.75)"; gx2.beginPath(); gx2.ellipse(x, y, 3.2 * f, 8 * f, 0, 0, 7); gx2.fill();
+    });
+    if (!reduce) requestAnimationFrame(glow);
+  }
+  requestAnimationFrame(glow);
+
+  /* ---------- Próximos viernes ---------- */
+  const fmtD = new Intl.DateTimeFormat("es-AR", { timeZone: "America/Argentina/Buenos_Aires", day: "numeric" });
+  const fmtM = new Intl.DateTimeFormat("es-AR", { timeZone: "America/Argentina/Buenos_Aires", month: "long" });
+  const fmtW = new Intl.DateTimeFormat("en-US", { timeZone: "America/Argentina/Buenos_Aires", weekday: "short" });
+  let d = new Date(); for (let i = 0; i < 7 && fmtW.format(d) !== "Fri"; i++) d = new Date(d.getTime() + 864e5);
+  $("#fridays").innerHTML = Array.from({ length: 4 }, (_, i) => { const x = new Date(d.getTime() + i * 7 * 864e5); return `<div class="fri${i === 0 ? " next" : ""}"><b>${fmtD.format(x)}</b><span>Viernes de jazz<small>${fmtM.format(x)} · en vivo</small></span><i>${i === 0 ? "Este viernes" : "Próximo"}</i></div>`; }).join("");
+
+  /* ---------- Reserva per WhatsApp ---------- */
+  const fmt = new Intl.DateTimeFormat("es-AR", { timeZone: "America/Argentina/Buenos_Aires", weekday: "long", day: "numeric", month: "numeric" });
+  const days = Array.from({ length: 5 }, (_, i) => { const x = new Date(Date.now() + i * 864e5); return i === 0 ? "Hoy" : i === 1 ? "Mañana" : fmt.format(x).replace(/^\w/, (c) => c.toUpperCase()); });
+  const state = { day: days[0], pax: "2", time: "21:00" };
+  const group = (id, list, key) => { const bx = $(id); list.forEach((v) => { const b = document.createElement("button"); b.type = "button"; b.textContent = v; b.setAttribute("aria-pressed", String(v === state[key])); b.addEventListener("click", () => { state[key] = v; bx.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", String(x === b))); update(); }); bx.append(b); }); };
+  function update() {
+    const pax = state.pax === "8+" ? "8 o más personas" : state.pax === "1" ? "1 persona" : state.pax + " personas";
+    const txt = `Hola Josefina! Quiero reservar una mesa para ${pax}, ${state.day.toLowerCase()} a las ${state.time}. ¡Gracias!`;
+    $("#msg").textContent = txt; $("#sendRes").href = "https://wa.me/5491126530640?text=" + encodeURIComponent(txt);
+  }
+  group("#optDay", days, "day"); group("#optPax", ["1","2","3","4","5","6","8+"], "pax"); group("#optTime", ["19:00","20:00","21:00","22:00","23:00"], "time");
+  update();
+})();
+</script>
+</body>
+</html>
