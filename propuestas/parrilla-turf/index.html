@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Parrilla Turf · Propuesta de diseño</title>
+<meta name="description" content="Propuesta de sitio web para Parrilla Turf (Boedo), preparada por Jota Labs. No es el sitio oficial.">
+<meta property="og:title" content="Parrilla Turf · Propuesta de diseño">
+<meta property="og:description" content="Fútbol, barrio y amigos en Boedo. Propuesta de Jota Labs.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23d9a441'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Rockwell,Georgia,serif' font-weight='900' font-size='36' fill='%230f2a21'%3ET%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Manrope:wght@400;600;800&display=swap">
+<style>
+/* Layout: Hero mit glühendem Grillrost als Intro (danach eingebrannte Streifen), Las de la casa, La casa,
+   Sin reservas (Idee: Wartezeit-Anzeige), Visitanos mit Live-Öffnungsstatus. Rasengrün, Creme, Messing, Glut. */
+:root {
+  --green: #0f2a21; --green-2: #15362a; --green-3: #1c4234; --line: #2c5243; --cream: #f3ead7; --soft: #dcd5c4; --muted: #a9b8ab;
+  --brass: #d9a441; --brass-ink: #10261d; --ember: #ff8a3d;
+  --f-display: "Alfa Slab One", Rockwell, "Roboto Slab", Georgia, serif;
+  --f-body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--green); color: var(--cream); font: 16px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-weight: 400; text-wrap: balance; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 800 12px/1.2 var(--f-body); letter-spacing: .18em; text-transform: uppercase; color: var(--brass); }
+:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
+
+.proposal { background: #08140f; color: #e9ebee; font: 13px/1.4 var(--f-body); padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; }
+.proposal b { color: #ffd166; }
+.proposal a { color: #fff; font-weight: 800; }
+
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--green) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 12px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo i { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--brass); color: var(--brass-ink); font: 400 18px/1 var(--f-display); font-style: normal; }
+.logo span { font: 400 24px/1 var(--f-display); }
+.logo small { display: block; font: 800 10px/1.2 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-top: 3px; }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 14px; font-weight: 600; color: var(--muted); }
+nav.links a:hover { color: var(--cream); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 800 15px/1 var(--f-body); padding: 15px 22px; border-radius: 10px; background: var(--brass); color: var(--brass-ink); border: 2px solid var(--brass); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(217,164,65,.28); }
+.btn.ghost { background: transparent; color: var(--cream); border-color: rgba(243,234,215,.4); }
+.btn.ghost:hover { box-shadow: none; border-color: var(--cream); }
+nav.links a.btn { color: var(--brass-ink); padding: 10px 16px; font-size: 14px; }
+.menu-btn { display: none; background: transparent; color: var(--cream); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; font: 800 12px var(--f-body); letter-spacing: .08em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--green-2); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+
+/* ---------- Hero ---------- */
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line);
+  background: radial-gradient(60vw 50vw at 100% 110%, rgba(217,164,65,.2), transparent 70%), radial-gradient(55vw 45vw at -10% -10%, rgba(40,110,80,.35), transparent 70%), var(--green); }
+.hero.seared { background: repeating-linear-gradient(-24deg, transparent 0 46px, rgba(0,0,0,.22) 46px 64px), radial-gradient(60vw 50vw at 100% 110%, rgba(217,164,65,.2), transparent 70%), radial-gradient(55vw 45vw at -10% -10%, rgba(40,110,80,.35), transparent 70%), var(--green); }
+.hero .wrap { padding-block: clamp(64px, 11vw, 124px) clamp(56px, 9vw, 104px); display: flex; flex-direction: column; gap: 16px; }
+.hero h1 { font: 400 clamp(110px, 26vw, 280px)/.86 var(--f-display); letter-spacing: -.01em; margin-top: 6px; }
+.hero .lead { margin: 6px 0 0; font-size: clamp(17px, 2.2vw, 21px); color: var(--soft); max-width: 42ch; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.facts span { font: 700 13px var(--f-body); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; background: rgba(8,26,19,.65); }
+.facts span b { color: var(--cream); }
+.status::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); margin-right: 8px; vertical-align: 1px; }
+.status.open::before { background: #5fd38a; box-shadow: 0 0 10px #5fd38a; }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 3; font: 700 13px var(--f-body); color: var(--muted); background: rgba(8,26,19,.8); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.redo:hover { color: var(--cream); border-color: var(--muted); }
+.hero.reveal .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero.reveal .wrap > :nth-child(2) { animation-delay: .06s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .12s }
+.hero.reveal .wrap > :nth-child(4) { animation-delay: .18s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .24s }
+.hero.reveal h1 { animation: rise .8s cubic-bezier(.2,.7,.2,1) .06s both, glow 2.2s ease-out .2s both; }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes glow { 0% { text-shadow: 0 0 34px rgba(255,138,61,.9), 0 0 4px rgba(255,180,90,.9); } 100% { text-shadow: none; } }
+.grillfx { position: absolute; inset: 0; z-index: 5; width: 100%; height: 100%; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > *, .hero.reveal h1 { animation: none; } }
+
+/* ---------- Abschnitte ---------- */
+section.block { padding-block: clamp(64px, 10vw, 104px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 40px; margin-bottom: 34px; }
+.head h2 { font: 400 clamp(42px, 7vw, 80px)/.95 var(--f-display); margin-top: 12px; }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+.dishes { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 760px) { .dishes { grid-template-columns: minmax(0,1fr); } }
+.dish { position: relative; border: 1px solid var(--line); border-radius: 18px; padding: 26px 26px 24px; background: var(--green-2); display: grid; gap: 6px; overflow: hidden; }
+.dish::after { content: ""; position: absolute; right: -30px; top: -30px; width: 120px; height: 120px; background: repeating-linear-gradient(-24deg, transparent 0 14px, rgba(0,0,0,.18) 14px 20px); border-radius: 50%; }
+.dish .tag { font: 800 11px var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: var(--ember); }
+.dish h3 { font: 400 30px/1.05 var(--f-display); }
+.dish p { margin: 0; color: var(--muted); font-size: 15px; max-width: 46ch; }
+.dish .p { font: 800 16px var(--f-body); color: var(--brass); font-variant-numeric: tabular-nums; }
+.note { margin-top: 20px; font-size: 13px; color: var(--muted); padding: 10px 14px; border-left: 3px solid var(--brass); background: var(--green-2); border-radius: 0 10px 10px 0; }
+
+.casa { display: grid; grid-template-columns: minmax(0,1.1fr) minmax(0,.9fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
+@media (max-width: 860px) { .casa { grid-template-columns: minmax(0,1fr); } }
+.casa h2 { font: 400 clamp(42px, 7vw, 80px)/.95 var(--f-display); margin-top: 12px; }
+.casa p { color: var(--soft); max-width: 48ch; }
+.quote { border-radius: 22px; padding: clamp(24px, 4vw, 40px); background: var(--brass); color: var(--brass-ink); }
+.quote q { display: block; font: 400 clamp(26px, 3.6vw, 38px)/1.12 var(--f-display); quotes: "“" "”"; }
+.quote cite { display: block; margin-top: 14px; font: 800 13px var(--f-body); font-style: normal; letter-spacing: .08em; text-transform: uppercase; opacity: .8; }
+
+.wait { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: clamp(20px, 4vw, 48px); align-items: center; background: var(--green-2); border: 1px solid var(--line); border-radius: 24px; padding: clamp(24px, 5vw, 52px); }
+@media (max-width: 860px) { .wait { grid-template-columns: minmax(0,1fr); } }
+.wait h2 { font: 400 clamp(38px, 6vw, 64px)/.95 var(--f-display); margin-top: 12px; }
+.wait p { color: var(--muted); }
+.board { background: #0b1c16; border: 1px solid var(--line); border-radius: 18px; padding: 22px; display: grid; gap: 14px; }
+.board .row { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.board .big { font: 400 46px/1 var(--f-display); color: var(--cream); font-variant-numeric: tabular-nums; }
+.board small { color: var(--muted); font-size: 13px; }
+.seg { display: flex; flex-wrap: wrap; gap: 8px; }
+.seg button { font: 800 13px var(--f-body); color: var(--soft); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 8px 12px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--brass); color: var(--brass-ink); border-color: var(--brass); }
+.idea { display: inline-block; font: 800 11px var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--brass-ink); background: var(--cream); border-radius: 999px; padding: 5px 10px; }
+
+.visit { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 760px) { .visit { grid-template-columns: minmax(0,1fr); } }
+.card { border: 1px solid var(--line); border-radius: 18px; padding: 26px; background: var(--green-2); display: grid; gap: 12px; align-content: start; }
+.card h3 { font: 400 28px/1.05 var(--f-display); }
+.hours { display: grid; gap: 8px; margin: 0; }
+.hours div { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px dashed var(--line); padding-bottom: 8px; font-variant-numeric: tabular-nums; }
+.hours dt { color: var(--muted); }
+.hours dd { margin: 0; font-weight: 700; }
+.hours div.today dt, .hours div.today dd { color: var(--brass); }
+.addr { font: 400 26px/1.15 var(--f-display); }
+
+footer { padding-block: 40px 96px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 800 14px var(--f-body); padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.35); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+</style>
+</head>
+<body>
+<div class="proposal"><span><b>Propuesta de diseño</b> para Parrilla Turf · no es el sitio oficial</span><span>Hecha por <a href="https://5hitcake.github.io/JanOberle/#es" target="_blank" rel="noopener">Jota Labs</a></span></div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#inicio"><i>T</i><span>Turf<small>Parrilla · Boedo</small></span></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENÚ</button>
+    <nav class="links" id="links">
+      <a href="#casa-platos">La carta</a>
+      <a href="#la-casa">La casa</a>
+      <a href="#espera">Sin reservas</a>
+      <a class="btn" href="#visitanos">Cómo llegar</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div class="kicker">Parrilla de barrio · Boedo</div>
+    <h1>Turf</h1>
+    <p class="lead">Fútbol, barrio y amigos. La super milanesa napolitana, la cabutia rellena y el bife de chorizo de la casa, en la esquina de Inclán y Castro Barros.</p>
+    <div class="ctas"><a class="btn" href="#casa-platos">Ver la carta</a><a class="btn ghost" href="#visitanos">Cómo llegar</a></div>
+    <div class="facts"><span class="status" id="statusChip">Mar a dom · 12–16 y 20–24</span><span><b>Sin reservas</b> · vení directo</span><span>Inclán 3802</span></div>
+  </div>
+  <button class="redo" type="button" id="redo" hidden>↻ Prender la parrilla</button>
+</section>
+
+<section class="block" id="casa-platos">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">La carta</div><h2>Las de la casa</h2></div><p>Los platos por los que la gente cruza la ciudad hasta Boedo.</p></div>
+    <div class="dishes">
+      <article class="dish"><span class="tag">La más famosa</span><h3>Super milanesa napolitana</h3><p>Según la prensa, la milanesa más grande de Buenos Aires. Para compartir, o no.</p><span class="p">$ —</span></article>
+      <article class="dish"><span class="tag">Firma de la casa</span><h3>Cabutia rellena</h3><p>Calabaza rellena con crema de queso, chori, mila, matambrito y papas.</p><span class="p">$ —</span></article>
+      <article class="dish"><span class="tag">Parrilla</span><h3>Bife de chorizo “Turf”</h3><p>El bife con el nombre de la casa.</p><span class="p">$ —</span></article>
+      <article class="dish"><span class="tag">Sin apuro</span><h3>Osobuco bajonero</h3><p>Tres horas de cocción lenta.</p><span class="p">$ —</span></article>
+    </div>
+    <p class="note">Platos tomados de notas de prensa; precios y descripciones exactas se cargan desde tu carta actual. En la versión final, la carta completa va acá y la podés actualizar vos.</p>
+  </div>
+</section>
+
+<section class="block" id="la-casa" style="padding-top:0">
+  <div class="wrap casa">
+    <div>
+      <div class="kicker">La casa</div>
+      <h2>Una parrilla de familia.</h2>
+      <p>Turf abrió en Boedo a mediados de los 90. La empezaron Angelina y Roberto, y hoy la lleva su hijo Luciano. Mesas llenas, fútbol y el ruido lindo de un lugar de barrio.</p>
+    </div>
+    <figure class="quote" style="margin:0"><q>Fútbol y barrio, espíritu bohemio, clima de amigos.</q><cite>— Time Out Buenos Aires</cite></figure>
+  </div>
+</section>
+
+<section class="block" id="espera" style="padding-top:0">
+  <div class="wrap">
+    <div class="wait">
+      <div>
+        <span class="idea">Idea para tu web</span>
+        <h2>Sin reservas. ¿Cuánto hay de espera?</h2>
+        <p>Como Turf no toma reservas, la web puede mostrar la espera aproximada de ahora. Lo actualizan ustedes desde el celular con un toque, y la gente decide si viene ya o en un rato.</p>
+      </div>
+      <div class="board" aria-live="polite">
+        <div class="row"><small>Espera ahora (demo)</small><small id="waitTime"></small></div>
+        <div class="big" id="waitBig">~ 20 min</div>
+        <div class="seg" role="group" aria-label="Espera">
+          <button type="button" data-w="0" aria-pressed="false">Sin espera</button>
+          <button type="button" data-w="20" aria-pressed="true">~ 20 min</button>
+          <button type="button" data-w="45" aria-pressed="false">~ 45 min</button>
+          <button type="button" data-w="60" aria-pressed="false">+ 1 hora</button>
+        </div>
+        <small>Demo: así lo verían ustedes al actualizarlo.</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="visitanos" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Visitanos</div><h2>Inclán y Castro Barros</h2></div></div>
+    <div class="visit">
+      <div class="card">
+        <h3>Horarios</h3>
+        <dl class="hours" id="hours">
+          <div data-d="1"><dt>Lunes</dt><dd>Cerrado</dd></div>
+          <div data-d="2"><dt>Martes</dt><dd>12–16 · 20–24</dd></div>
+          <div data-d="3"><dt>Miércoles</dt><dd>12–16 · 20–24</dd></div>
+          <div data-d="4"><dt>Jueves</dt><dd>12–16 · 20–24</dd></div>
+          <div data-d="5"><dt>Viernes</dt><dd>12–16 · 20–24</dd></div>
+          <div data-d="6"><dt>Sábado</dt><dd>12–16 · 20–24</dd></div>
+          <div data-d="0"><dt>Domingo</dt><dd>12–16 · 20–24</dd></div>
+        </dl>
+      </div>
+      <div class="card">
+        <h3>Dónde</h3>
+        <p class="addr">Inclán 3802<br>esq. Castro Barros, Boedo</p>
+        <div class="ctas"><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Parrilla%20Turf%20Incl%C3%A1n%203802%20Boedo" target="_blank" rel="noopener">Abrir en Google Maps ↗</a><a class="btn ghost" href="https://www.instagram.com/turf.parrilla/" target="_blank" rel="noopener">Instagram ↗</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>Parrilla Turf · Inclán 3802, Boedo</span><span>Propuesta de diseño de Jota Labs · <a href="https://5hitcake.github.io/JanOberle/#es" target="_blank" rel="noopener">ver más trabajos</a></span></div></footer>
+
+<a class="like" href="https://wa.me/5491130331893?text=Hola%20Jan%21%20Vi%20la%20propuesta%20de%20sitio%20web%20para%20Parrilla%20Turf%20y%20me%20gustar%C3%ADa%20saber%20m%C3%A1s." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></svg>¿Te gusta? Hablemos</a>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+
+  /* Live-Öffnungsstatus nach Buenos-Aires-Zeit: Di–So 12–16 und 20–24 */
+  function baNow() {
+    const parts = new Intl.DateTimeFormat("en-US", { timeZone: "America/Argentina/Buenos_Aires", weekday: "short", hour: "numeric", minute: "numeric", hour12: false }).formatToParts(new Date());
+    const get = (t) => parts.find((p) => p.type === t).value;
+    const day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].indexOf(get("weekday"));
+    return { day, mins: (Number(get("hour")) % 24) * 60 + Number(get("minute")) };
+  }
+  function status() {
+    const { day, mins } = baNow();
+    const chip = $("#statusChip");
+    const open = day !== 1 && ((mins >= 720 && mins < 960) || mins >= 1200);
+    chip.classList.toggle("open", open);
+    if (open) chip.textContent = mins < 960 ? "Abierto ahora · hasta las 16" : "Abierto ahora · hasta las 24";
+    else if (day === 1) chip.textContent = "Hoy cerrado · mañana desde las 12";
+    else if (mins < 720) chip.textContent = "Cerrado · abre a las 12";
+    else chip.textContent = "Cerrado · abre a las 20";
+    document.querySelectorAll("#hours div").forEach((d) => d.classList.toggle("today", Number(d.dataset.d) === day));
+    $("#waitTime").textContent = new Intl.DateTimeFormat("es-AR", { timeZone: "America/Argentina/Buenos_Aires", hour: "2-digit", minute: "2-digit" }).format(new Date()) + " h";
+  }
+  status(); setInterval(status, 60000);
+
+  /* Wartezeit-Demo */
+  const LBL = { 0: "Sin espera", 20: "~ 20 min", 45: "~ 45 min", 60: "+ 1 hora" };
+  document.querySelectorAll(".seg button").forEach((b) => b.addEventListener("click", () => {
+    document.querySelectorAll(".seg button").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+    $("#waitBig").textContent = LBL[b.dataset.w];
+  }));
+
+  /* ---------- Intro: glühender Grillrost ---------- */
+  const hero = $("#inicio"), redo = $("#redo");
+  let token = { cancelled: true };
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const tween = (ms, fn, tk, ez = (k) => k) => new Promise((res) => {
+    const t0 = performance.now();
+    const step = (now) => { if (tk.cancelled) return res(); const k = Math.min(1, (now - t0) / ms); fn(ez(k)); k < 1 ? requestAnimationFrame(step) : res(); };
+    requestAnimationFrame(step);
+  });
+  async function fire() {
+    token.cancelled = true; const tk = (token = { cancelled: false });
+    hero.querySelectorAll(".grillfx").forEach((n) => n.remove());
+    hero.classList.remove("reveal", "seared"); redo.hidden = true;
+    const w = hero.clientWidth, h = hero.clientHeight, dpr = Math.min(2, devicePixelRatio || 1);
+    const c = document.createElement("canvas"); c.className = "grillfx"; c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); c.setAttribute("aria-hidden", "true");
+    hero.append(c); const ctx = c.getContext("2d"); ctx.scale(dpr, dpr);
+    const sp = Math.max(30, Math.min(84, w * .1)), th = sp * .32, ang = -.42, span = Math.hypot(w, h);
+    const embers = Array.from({ length: 9 }, (_, i) => ({ x: (i * .37 + .08) % 1, y: .7 + .25 * Math.sin(i * 2.1), r: .22 + .12 * Math.sin(i * 1.3) }));
+    const draw = (heat, t) => {
+      ctx.fillStyle = "#0e0907"; ctx.fillRect(0, 0, w, h);
+      for (const [i, e] of embers.entries()) { const x = w * e.x, y = h * e.y, r = Math.max(w, h) * (e.r + .04 * Math.sin(t / 280 + i)); const g = ctx.createRadialGradient(x, y, 0, x, y, r); g.addColorStop(0, `rgba(255,${110 + 40 * Math.sin(t / 190 + i) | 0},30,${.32 + .3 * heat})`); g.addColorStop(1, "rgba(255,80,20,0)"); ctx.fillStyle = g; ctx.fillRect(0, 0, w, h); }
+      ctx.save(); ctx.translate(w / 2, h / 2); ctx.rotate(ang);
+      for (let x = -span; x < span; x += sp) {
+        const local = Math.min(1, Math.max(0, heat * 1.6 - ((x + span) / (2 * span)) * .6));
+        const r = 40 + 215 * local, g = 32 + 120 * local * local, b = 28 + 20 * local;
+        const grd = ctx.createLinearGradient(x, 0, x + th, 0);
+        grd.addColorStop(0, `rgb(${r * .6 | 0},${g * .5 | 0},${b | 0})`); grd.addColorStop(.5, `rgb(${r | 0},${g | 0},${b | 0})`); grd.addColorStop(1, `rgb(${r * .5 | 0},${g * .4 | 0},${b | 0})`);
+        ctx.fillStyle = grd; ctx.fillRect(x, -span, th, span * 2);
+        if (local > .5) { ctx.shadowColor = "rgba(255,120,30,.8)"; ctx.shadowBlur = 18 * local; ctx.fillRect(x, -span, th, span * 2); ctx.shadowBlur = 0; }
+      }
+      ctx.restore();
+    };
+    await tween(2600, (e) => draw(e, performance.now()), tk);
+    if (tk.cancelled) return;
+    await tween(350, () => draw(1, performance.now()), tk);
+    hero.classList.add("seared", "reveal");
+    await tween(1000, (e) => { c.style.opacity = String(1 - e); c.style.transform = `translateY(${-e * 6}%)`; }, tk, (k) => 1 - Math.pow(1 - k, 2));
+    if (tk.cancelled) return;
+    c.remove(); redo.hidden = false;
+  }
+  redo.addEventListener("click", fire);
+  if (!reduce) fire(); else hero.classList.add("seared");
+})();
+</script>
+</body>
+</html>
