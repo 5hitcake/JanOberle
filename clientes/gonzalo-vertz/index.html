@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Gonzalo Vertz · Mantenimiento y reformas en CABA y Zona Norte</title>
+<meta name="description" content="Plomería, electricidad, albañilería, pintura, baños y reformas completas. Trabajo en CABA y Zona Norte. Consultá tu presupuesto por WhatsApp.">
+<meta property="og:title" content="Gonzalo Vertz · Mantenimiento y reformas">
+<meta property="og:description" content="Un solo profesional para todo tu hogar. CABA y Zona Norte. Consultá tu presupuesto por WhatsApp.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23f2a900'/%3E%3Ctext x='32' y='43' font-family='Arial Narrow,Arial,sans-serif' font-weight='900' font-size='28' fill='%23161b22' text-anchor='middle'%3EGV%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap">
+<style>
+/* Gonzalo Vertz – Handwerker für alles, CABA und Zona Norte.
+   Intro „Obra completa“: Licht an, Mauer hochziehen, Rohre mit Wasser, dann fällt alles weg.
+   Graphit + Signalgelb, Barlow Condensed. Texte in der Ich-Form, jeder Knopf führt zu seinem WhatsApp. */
+:root {
+  --bg: #12161c; --bg-2: #1a2028; --bg-3: #222a34; --line: #2e3742; --fg: #f4f2ee; --soft: #d7d9dc; --muted: #9aa1a9;
+  --acc: #f2a900; --acc-ink: #161b22; --ok: #25d366;
+  --f-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --f-body: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 17px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-family: var(--f-display); font-weight: 800; text-transform: uppercase; letter-spacing: .01em; text-wrap: balance; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 700 13px/1.2 var(--f-body); letter-spacing: .18em; text-transform: uppercase; color: var(--acc); }
+:focus-visible { outline: 3px solid var(--acc); outline-offset: 3px; }
+
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo .mark { width: 42px; height: 42px; border-radius: 9px; background: var(--acc); color: var(--acc-ink); display: grid; place-items: center; font: 800 21px/1 var(--f-display); }
+.logo b { font: 800 22px/1 var(--f-display); text-transform: uppercase; }
+.logo small { display: block; font: 600 11px/1.3 var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 15px; font-weight: 600; color: var(--muted); }
+nav.links a:hover { color: var(--fg); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; font: 700 16px/1 var(--f-body); padding: 16px 22px; border-radius: 10px; background: var(--acc); color: var(--acc-ink); border: 2px solid var(--acc); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(242,169,0,.25); }
+.btn.ghost { background: transparent; color: var(--fg); border-color: rgba(244,242,238,.35); }
+.btn.ghost:hover { box-shadow: none; border-color: var(--fg); }
+.btn.wa { background: var(--ok); border-color: var(--ok); color: #fff; }
+.btn svg { width: 20px; height: 20px; flex: none; }
+nav.links a.btn { color: #fff; padding: 11px 16px; font-size: 15px; }
+.menu-btn { display: none; background: transparent; color: var(--fg); border: 1px solid var(--line); border-radius: 10px; padding: 9px 14px; font: 700 13px var(--f-body); letter-spacing: .08em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bg-2); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 17px; }
+  nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+
+/* ---------- Hero ---------- */
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line);
+  background: radial-gradient(60vw 45vw at 100% 0%, rgba(242,169,0,.14), transparent 70%), linear-gradient(180deg, #1b222b, #12161c); }
+.hero::before { content: ""; position: absolute; inset: 0; z-index: 0; opacity: .5; background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px); background-size: 44px 44px; mask-image: linear-gradient(180deg, #000, transparent 85%); -webkit-mask-image: linear-gradient(180deg, #000, transparent 85%); }
+.hero .wrap { position: relative; z-index: 1; padding-block: clamp(70px, 11vw, 130px) clamp(56px, 9vw, 104px); display: flex; flex-direction: column; gap: 16px; }
+.hero h1 { font-size: clamp(66px, 13vw, 150px); line-height: .9; }
+.hero h1 span { color: var(--acc); }
+.hero .lead { margin: 4px 0 0; font-size: clamp(18px, 2.3vw, 22px); color: var(--soft); max-width: 44ch; }
+.hero .lead b { color: var(--fg); }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.facts span { display: inline-flex; align-items: center; gap: 8px; font: 600 14px var(--f-body); color: var(--soft); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; background: rgba(18,22,28,.75); }
+.facts span::before { content: "✓"; color: var(--acc); font-weight: 800; }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 8; font: 600 13px var(--f-body); color: var(--muted); background: rgba(18,22,28,.85); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; cursor: pointer; }
+.redo:hover { color: var(--fg); }
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero.reveal .wrap > :nth-child(2) { animation-delay: .06s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .12s }
+.hero.reveal .wrap > :nth-child(4) { animation-delay: .18s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .24s }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+
+/* ---------- Abschnitte ---------- */
+section.block { padding-block: clamp(64px, 10vw, 104px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 40px; margin-bottom: 30px; }
+.head h2 { font-size: clamp(42px, 6.5vw, 76px); line-height: .95; margin-top: 10px; }
+.head h2 span { color: var(--acc); }
+.head p { max-width: 46ch; margin: 0; color: var(--muted); }
+.note { margin-top: 20px; font-size: 14px; color: var(--muted); padding: 10px 14px; border-left: 3px solid var(--acc); background: var(--bg-2); border-radius: 0 8px 8px 0; }
+
+.services { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+@media (max-width: 960px) { .services { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 560px) { .services { grid-template-columns: minmax(0,1fr); } }
+.svc { border: 1px solid var(--line); border-radius: 14px; padding: 24px 22px; background: var(--bg-2); display: grid; gap: 10px; align-content: start; transition: border-color .2s, transform .2s; }
+.svc:hover { border-color: var(--acc); transform: translateY(-3px); }
+.svc .ic { width: 52px; height: 52px; border-radius: 12px; background: rgba(242,169,0,.12); display: grid; place-items: center; }
+.svc .ic svg { width: 30px; height: 30px; stroke: var(--acc); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.svc h3 { font-size: 30px; line-height: 1; }
+.svc p { margin: 0; color: var(--soft); font-size: 16px; }
+.svc ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; color: var(--muted); font-size: 15px; }
+.svc li::before { content: "— "; color: var(--acc); }
+.svc a.more { justify-self: start; margin-top: 4px; font: 700 15px var(--f-body); color: var(--acc); text-decoration: none; display: inline-flex; gap: 6px; align-items: center; }
+.svc a.more:hover { text-decoration: underline; }
+.svc.wide { grid-column: span 3; display: grid; grid-template-columns: auto minmax(0,1fr) auto; align-items: center; gap: 16px 22px; background: var(--acc); color: var(--acc-ink); border-color: var(--acc); }
+.svc.wide .ic { background: rgba(0,0,0,.12); } .svc.wide .ic svg { stroke: var(--acc-ink); }
+.svc.wide p { color: #3a2f12; }
+.svc.wide .btn { background: var(--acc-ink); color: var(--acc); border-color: var(--acc-ink); }
+@media (max-width: 960px) { .svc.wide { grid-column: span 2; } }
+@media (max-width: 560px) { .svc.wide { grid-column: span 1; grid-template-columns: minmax(0,1fr); } }
+
+.values { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 14px; }
+@media (max-width: 960px) { .values { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 460px) { .values { grid-template-columns: minmax(0,1fr); } }
+.val { border-top: 4px solid var(--acc); background: var(--bg-2); border-radius: 0 0 14px 14px; padding: 22px; display: grid; gap: 8px; align-content: start; }
+.val h3 { font-size: 28px; }
+.val p { margin: 0; color: var(--soft); font-size: 16px; }
+.me { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: clamp(24px, 4vw, 56px); align-items: center; margin-bottom: 40px; }
+@media (max-width: 860px) { .me { grid-template-columns: minmax(0,1fr); } }
+.photo { aspect-ratio: 4/5; border-radius: 16px; border: 2px dashed var(--line); background: repeating-linear-gradient(45deg, var(--bg-2) 0 14px, var(--bg-3) 14px 28px); display: grid; place-items: center; text-align: center; color: var(--muted); font: 600 15px var(--f-body); padding: 20px; }
+.me blockquote { margin: 0; font: 600 clamp(22px, 2.8vw, 30px)/1.35 var(--f-body); color: var(--fg); }
+.me blockquote b { color: var(--acc); }
+.me cite { display: block; margin-top: 14px; font: 800 18px var(--f-display); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-style: normal; }
+
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; counter-reset: s; }
+@media (max-width: 860px) { .steps { grid-template-columns: minmax(0,1fr); } }
+.step { border: 1px solid var(--line); border-radius: 14px; padding: 24px; background: var(--bg-2); display: grid; gap: 8px; align-content: start; }
+.step::before { counter-increment: s; content: counter(s); width: 44px; height: 44px; border-radius: 50%; background: var(--acc); color: var(--acc-ink); display: grid; place-items: center; font: 800 24px var(--f-display); }
+.step h3 { font-size: 26px; }
+.step p { margin: 0; color: var(--soft); font-size: 16px; }
+
+.project { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 16px; align-items: stretch; }
+@media (max-width: 860px) { .project { grid-template-columns: minmax(0,1fr); } }
+.gallery { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
+.gallery .photo { aspect-ratio: 1; font-size: 13px; }
+.card { border: 1px solid var(--line); border-radius: 14px; padding: 26px; background: var(--bg-2); display: grid; gap: 12px; align-content: start; }
+.card h3 { font-size: 30px; }
+.card p { margin: 0; color: var(--soft); }
+.checks { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.checks li { display: flex; gap: 10px; align-items: baseline; color: var(--soft); }
+.checks li::before { content: "✓"; color: var(--acc); font-weight: 800; }
+.prices { width: 100%; border-collapse: collapse; font-size: 16px; }
+.prices th { text-align: left; font: 700 13px var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); padding: 0 0 10px; }
+.prices td { padding: 12px 0; border-top: 1px solid var(--line); color: var(--soft); }
+.prices td:last-child { text-align: right; font-weight: 700; color: var(--fg); white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+.quote { display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 860px) { .quote { grid-template-columns: minmax(0,1fr); } }
+.field { display: grid; gap: 8px; }
+.field > span { font: 700 13px var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.opts button { font: 600 15px var(--f-body); color: var(--soft); background: transparent; border: 1px solid var(--line); border-radius: 8px; padding: 9px 13px; cursor: pointer; }
+.opts button:hover { border-color: var(--muted); color: var(--fg); }
+.opts button[aria-pressed="true"] { background: var(--acc); color: var(--acc-ink); border-color: var(--acc); font-weight: 700; }
+textarea { width: 100%; min-height: 96px; resize: vertical; font: 16px/1.5 var(--f-body); color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+textarea:focus { outline: 2px solid var(--acc); border-color: transparent; }
+.ticket { background: var(--fg); color: #1b1f24; border-radius: 14px; padding: 26px; display: grid; gap: 12px; align-content: start; }
+.ticket h3 { font-size: 30px; }
+.ticket .msg { font: 500 16px/1.55 var(--f-body); background: #fff; border: 1px solid #ddd8cf; border-radius: 14px 14px 14px 4px; padding: 14px 16px; white-space: pre-wrap; }
+.ticket .btn { justify-self: start; }
+.ticket small { color: #5d636b; font-size: 14px; }
+
+.zone { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 760px) { .zone { grid-template-columns: minmax(0,1fr); } }
+.zone .card .big { font: 800 clamp(44px, 6vw, 64px)/1 var(--f-display); text-transform: uppercase; color: var(--acc); }
+.final { border-radius: 18px; padding: clamp(28px, 5vw, 56px); background: var(--acc); color: var(--acc-ink); display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 24px; align-items: center; }
+@media (max-width: 760px) { .final { grid-template-columns: minmax(0,1fr); } }
+.final h2 { font-size: clamp(38px, 5.5vw, 64px); line-height: .95; }
+.final p { margin: 10px 0 0; color: #3a2f12; max-width: 44ch; }
+.final .btn { background: var(--acc-ink); color: #fff; border-color: var(--acc-ink); }
+
+footer { padding-block: 36px 100px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px 30px; }
+footer a { color: var(--soft); }
+.fab { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: var(--ok); color: #fff; font: 700 15px var(--f-body); padding: 13px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.4); display: inline-flex; gap: 9px; align-items: center; }
+.fab svg { width: 22px; height: 22px; }
+.preview { background: #000; color: #e9ebee; font: 13px/1.4 var(--f-body); padding: 8px 16px; text-align: center; }
+.preview b { color: #ffd166; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></symbol>
+</svg>
+<div class="preview"><b>Vista previa</b> · sitio en preparación para Gonzalo Vertz · hecho por Jota Labs</div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#inicio"><span class="mark" aria-hidden="true">GV</span><span><b>Gonzalo Vertz</b><small>Mantenimiento y reformas</small></span></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENÚ</button>
+    <nav class="links" id="links">
+      <a href="#servicios">Servicios</a>
+      <a href="#como-trabajo">Cómo trabajo</a>
+      <a href="#trabajos">Trabajos</a>
+      <a href="#zona">Zona</a>
+      <a class="btn wa" data-wa="Hola Gonzalo! Vi tu página y quería consultar un presupuesto." href="#" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Presupuesto</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero pre" id="inicio">
+  <div class="wrap">
+    <div class="kicker">Mantenimiento y reformas · CABA y Zona Norte</div>
+    <h1>Gonzalo<br><span>Vertz</span></h1>
+    <p class="lead"><b>Un solo profesional para todo tu hogar.</b> Plomería, electricidad, albañilería, pintura, baños y reformas completas. Voy yo, hago el trabajo bien y dejo todo limpio.</p>
+    <div class="ctas"><a class="btn wa" data-wa="Hola Gonzalo! Vi tu página y quería consultar un presupuesto." href="#" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Consultar presupuesto</a><a class="btn ghost" href="#servicios">Ver servicios</a></div>
+    <div class="facts"><span>Compromiso</span><span>Responsabilidad</span><span>Limpieza</span><span>Confianza</span></div>
+  </div>
+  <button class="redo" type="button" id="redo" hidden>↻ Ver de nuevo</button>
+</section>
+
+<section class="block" id="servicios">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Servicios</div><h2>Lo que <span>hago</span></h2></div><p>Arreglos, instalaciones y reformas. Tocá cualquier servicio para consultarme directo por WhatsApp.</p></div>
+    <div class="services">
+      <article class="svc"><div class="ic"><svg viewBox="0 0 32 32"><path d="M6 10h10v6h10v8"/><path d="M4 10h4M14 10v-3h4v3"/><path d="M26 27v2"/></svg></div><h3>Plomería</h3><p>Pérdidas, cañerías nuevas, griferías y desagües.</p><ul><li>Cambio de caños</li><li>Pérdidas y destapes</li><li>Griferías y llaves de paso</li></ul><a class="more" data-wa="Hola Gonzalo! Quería consultar por un trabajo de plomería." href="#" target="_blank" rel="noopener">Consultar →</a></article>
+      <article class="svc"><div class="ic"><svg viewBox="0 0 32 32"><path d="M18 3 8 18h8l-2 11 10-15h-8z"/></svg></div><h3>Electricidad</h3><p>Instalaciones nuevas y arreglos, con cables y caños nuevos.</p><ul><li>Recableado completo</li><li>Tomas, llaves y luces</li><li>Tableros</li></ul><a class="more" data-wa="Hola Gonzalo! Quería consultar por un trabajo de electricidad." href="#" target="_blank" rel="noopener">Consultar →</a></article>
+      <article class="svc"><div class="ic"><svg viewBox="0 0 32 32"><rect x="3" y="7" width="12" height="6"/><rect x="17" y="7" width="12" height="6"/><rect x="9" y="15" width="14" height="6"/><rect x="3" y="23" width="12" height="6"/><rect x="17" y="23" width="12" height="6"/></svg></div><h3>Albañilería</h3><p>Paredes, revoques, contrapisos y arreglos de obra.</p><ul><li>Revoques y reparaciones</li><li>Paredes y tabiques</li><li>Colocación de cerámicos</li></ul><a class="more" data-wa="Hola Gonzalo! Quería consultar por un trabajo de albañilería." href="#" target="_blank" rel="noopener">Consultar →</a></article>
+      <article class="svc"><div class="ic"><svg viewBox="0 0 32 32"><rect x="4" y="4" width="20" height="8" rx="2"/><path d="M24 8h3v7H15v4"/><rect x="13" y="19" width="4" height="9" rx="1"/></svg></div><h3>Pintura</h3><p>Interiores y exteriores, prolijo y sin manchar nada.</p><ul><li>Paredes y techos</li><li>Puertas y aberturas</li><li>Arreglo de humedad</li></ul><a class="more" data-wa="Hola Gonzalo! Quería consultar por un trabajo de pintura." href="#" target="_blank" rel="noopener">Consultar →</a></article>
+      <article class="svc"><div class="ic"><svg viewBox="0 0 32 32"><path d="M8 4h8v10H8z"/><path d="M5 14h22a9 9 0 0 1-9 9h-4a9 9 0 0 1-9-9z"/><path d="M12 23v5h8v-5"/></svg></div><h3>Baños</h3><p>Instalación y cambio de sanitarios, de punta a punta.</p><ul><li>Inodoros y bidets</li><li>Bachas y vanitorys</li><li>Griferías y duchas</li></ul><a class="more" data-wa="Hola Gonzalo! Quería consultar por un trabajo en el baño." href="#" target="_blank" rel="noopener">Consultar →</a></article>
+      <article class="svc"><div class="ic"><svg viewBox="0 0 32 32"><path d="M3 9h26"/><path d="M5 9v4M10 9v4M15 9v4M20 9v4M25 9v4"/><path d="M3 21h26"/><path d="M16 21v8"/></svg></div><h3>Cielorrasos PVC</h3><p>Techos de PVC para que el ambiente quede lindo y nuevo.</p><ul><li>Baños y cocinas</li><li>Galerías y quinchos</li><li>Terminaciones prolijas</li></ul><a class="more" data-wa="Hola Gonzalo! Quería consultar por un cielorraso de PVC." href="#" target="_blank" rel="noopener">Consultar →</a></article>
+      <article class="svc wide"><div class="ic"><svg viewBox="0 0 32 32"><path d="M4 15 16 5l12 10"/><path d="M7 13v14h18V13"/><path d="M13 27v-8h6v8"/></svg></div><div><h3>Reformas completas</h3><p>Desde la instalación eléctrica y las cañerías hasta el baño y los techos: me encargo de todo, sin tener que coordinar a cinco personas distintas.</p></div><a class="btn" data-wa="Hola Gonzalo! Quería consultar por una reforma completa." href="#" target="_blank" rel="noopener">Consultar una reforma</a></article>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="como-trabajo" style="padding-top:0">
+  <div class="wrap">
+    <div class="me">
+      <div class="photo">Acá va una foto de Gonzalo trabajando</div>
+      <div>
+        <div class="kicker">Quién soy</div>
+        <blockquote>“Soy Gonzalo. Trabajo de forma independiente y <b>voy yo a cada trabajo</b>, de principio a fin. Me tomo cada casa como si fuera la mía: cumplo lo que digo y <b>dejo todo limpio y ordenado</b>.”</blockquote>
+        <cite>Gonzalo Luis Vertz</cite>
+      </div>
+    </div>
+    <div class="values">
+      <article class="val"><h3>Compromiso</h3><p>Cumplo con lo que acordamos: el día, el horario y el presupuesto.</p></article>
+      <article class="val"><h3>Responsabilidad</h3><p>Hago cada trabajo bien desde el principio, para que no tengas que llamar de nuevo.</p></article>
+      <article class="val"><h3>Limpieza</h3><p>Cuido tu casa mientras trabajo y al terminar dejo todo limpio y acomodado.</p></article>
+      <article class="val"><h3>Confianza</h3><p>Soy siempre yo el que va. Sabés quién entra a tu casa.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Simple</div><h2>Cómo <span>trabajo</span></h2></div></div>
+    <div class="steps">
+      <article class="step"><h3>Me escribís</h3><p>Por WhatsApp, contándome qué necesitás. Si podés, mandame fotos.</p></article>
+      <article class="step"><h3>Te paso el presupuesto</h3><p>Claro y sin sorpresas. Si hace falta, paso a ver el trabajo.</p></article>
+      <article class="step"><h3>Lo hago y dejo todo limpio</h3><p>Trabajo prolijo, en el día acordado, y te entrego todo ordenado.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="trabajos" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Trabajos realizados</div><h2>Una casa <span>a nuevo</span></h2></div><p>Un ejemplo de lo que puedo hacer en una sola obra.</p></div>
+    <div class="project">
+      <div class="gallery"><div class="photo">Foto: antes</div><div class="photo">Foto: después</div><div class="photo">Foto: baño</div><div class="photo">Foto: cielorraso PVC</div></div>
+      <div class="card">
+        <h3>Reforma completa</h3>
+        <p>En esta casa hice absolutamente todo a nuevo:</p>
+        <ul class="checks"><li>Instalación eléctrica nueva: cables y caños nuevos</li><li>Cañerías nuevas</li><li>Baño completo</li><li>Cielorraso de PVC</li><li>Terminaciones y limpieza final</li></ul>
+        <h3 style="margin-top:12px;font-size:24px">Presupuestos de referencia</h3>
+        <table class="prices"><thead><tr><th>Trabajo</th><th style="text-align:right">Desde</th></tr></thead><tbody>
+          <tr><td>Cambio de inodoro</td><td>$ —</td></tr>
+          <tr><td>Cambio de grifería</td><td>$ —</td></tr>
+          <tr><td>Pintura de ambiente</td><td>$ —</td></tr>
+          <tr><td>Cielorraso de PVC (m²)</td><td>$ —</td></tr>
+        </tbody></table>
+        <p style="font-size:14px;color:var(--muted)">Cada trabajo es distinto: escribime y te paso el presupuesto exacto.</p>
+        <a class="btn wa" data-wa="Hola Gonzalo! Vi tus trabajos y quería consultar un presupuesto." href="#" target="_blank" rel="noopener" style="justify-self:start"><svg aria-hidden="true"><use href="#wa"/></svg>Consultar presupuesto</a>
+      </div>
+    </div>
+    <p class="note">Las fotos y los precios se completan con los de Gonzalo antes de publicar la página.</p>
+  </div>
+</section>
+
+<section class="block" id="presupuesto" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Presupuesto</div><h2>Pedí tu <span>presupuesto</span></h2></div><p>Elegí el trabajo, tu zona y contame un poco. El mensaje se arma solo y me llega por WhatsApp.</p></div>
+    <div class="quote">
+      <div class="card">
+        <div class="field"><span>Trabajo</span><div class="opts" id="optSvc"></div></div>
+        <div class="field"><span>Zona</span><div class="opts" id="optZone"></div></div>
+        <label class="field"><span>Contame qué necesitás</span><textarea id="desc" placeholder="Ej.: pierde la canilla de la cocina y quiero cambiar la grifería."></textarea></label>
+      </div>
+      <div class="ticket">
+        <h3>Tu mensaje</h3>
+        <div class="msg" id="msg" aria-live="polite"></div>
+        <a class="btn wa" id="sendQ" href="#" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Enviar por WhatsApp</a>
+        <small>Si podés, mandá fotos en el chat: así el presupuesto es más preciso.</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="zona" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Dónde trabajo</div><h2>CABA y <span>Zona Norte</span></h2></div></div>
+    <div class="zone">
+      <div class="card"><span class="big">CABA</span><p>Todos los barrios de la Ciudad de Buenos Aires.</p></div>
+      <div class="card"><span class="big">Zona Norte</span><p>Gran Buenos Aires norte. Consultame por tu localidad.</p></div>
+    </div>
+    <div class="final" style="margin-top:16px">
+      <div><h2>¿Tenés algo para arreglar?</h2><p>Escribime por WhatsApp, contame qué necesitás y te paso el presupuesto.</p></div>
+      <a class="btn" data-wa="Hola Gonzalo! Vi tu página y quería consultar un presupuesto." href="#" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>11 6803-4805</a>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>Gonzalo Luis Vertz · Mantenimiento y reformas · CABA y Zona Norte · <a href="https://wa.me/5491168034805" target="_blank" rel="noopener">WhatsApp 11 6803-4805</a></span><span>Sitio hecho por <a href="https://5hitcake.github.io/JanOberle/#es" target="_blank" rel="noopener">Jota Labs</a></span></div></footer>
+
+<a class="fab" data-wa="Hola Gonzalo! Vi tu página y quería consultar un presupuesto." href="#" target="_blank" rel="noopener" aria-label="Escribir a Gonzalo por WhatsApp"><svg aria-hidden="true"><use href="#wa"/></svg>Presupuesto</a>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const WA = "5491168034805";
+  const wa = (t) => `https://wa.me/${WA}?text=${encodeURIComponent(t)}`;
+  document.querySelectorAll("[data-wa]").forEach((a) => (a.href = wa(a.dataset.wa)));
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+
+  /* ---------- Presupuesto per WhatsApp ---------- */
+  const state = { svc: "Plomería", zone: "CABA" };
+  const group = (id, list, key) => { const bx = $(id); list.forEach((v) => { const b = document.createElement("button"); b.type = "button"; b.textContent = v; b.setAttribute("aria-pressed", String(v === state[key])); b.addEventListener("click", () => { state[key] = v; bx.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", String(x === b))); update(); }); bx.append(b); }); };
+  function update() {
+    const d = $("#desc").value.trim();
+    const txt = `Hola Gonzalo! Quería pedirte un presupuesto.\nTrabajo: ${state.svc}\nZona: ${state.zone}${d ? "\n" + d : ""}`;
+    $("#msg").textContent = txt; $("#sendQ").href = wa(txt);
+  }
+  group("#optSvc", ["Plomería", "Electricidad", "Albañilería", "Pintura", "Baño", "Cielorraso PVC", "Reforma completa", "Otro"], "svc");
+  group("#optZone", ["CABA", "Zona Norte"], "zone");
+  $("#desc").addEventListener("input", update); update();
+
+  /* ---------- Intro „Obra completa“ ---------- */
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const ease = (t) => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+  const tween = (ms, fn, tk, ez = ease) => new Promise((res) => { const t0 = performance.now(); const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(ez(k), k); k < 1 ? requestAnimationFrame(step) : res(); }; requestAnimationFrame(step); });
+  const el = (scr, tag, cls, css = "") => { const n = document.createElement(tag); n.className = "fxl " + cls; if (css) n.style.cssText = css; scr.append(n); return n; };
+  const canvas = (parent, cls, z) => { const w = parent.clientWidth, h = parent.clientHeight, dpr = Math.min(2, devicePixelRatio || 1); const c = document.createElement("canvas"); c.className = "fxl " + cls; c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); c.style.cssText = `position:absolute;inset:0;width:100%;height:100%;z-index:${z};pointer-events:none`; c.setAttribute("aria-hidden", "true"); parent.append(c); const ctx = c.getContext("2d"); ctx.scale(dpr, dpr); return { c, ctx, w, h }; };
+  const svgEl = (tag, attrs) => { const n = document.createElementNS("http://www.w3.org/2000/svg", tag); for (const k in attrs) n.setAttribute(k, attrs[k]); return n; };
+  const reveal = (scr) => { scr.classList.remove("pre"); scr.classList.remove("reveal"); void scr.offsetWidth; scr.classList.add("reveal"); };
+  async function obra(scr, tk, o = {}) {
+    const w = scr.clientWidth, h = scr.clientHeight, U = Math.min(w, h) * .18;
+    const { c, ctx } = canvas(scr, "obra", 5);
+    const bw = Math.max(46, w / 7), bh = bw * .42, rows = Math.ceil(h / bh) + 1, cols = Math.ceil(w / bw) + 2, tones = ["#a24a2c", "#b05533", "#94442a", "#b8613c", "#9c4f30"];
+    const B = []; for (let r = 0; r < rows; r++) for (let q = -1; q < cols; q++) B.push({ r, x: q * bw + (r % 2 ? bw / 2 : 0), y: h - (r + 1) * bh, t: tones[(r * 7 + q * 3 + 10) % tones.length] });
+    let lightA = 0, built = 0, drop = 0, cap = 0;
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h); ctx.fillStyle = "#14171c"; ctx.globalAlpha = 1 - drop; ctx.fillRect(0, 0, w, h); ctx.globalAlpha = 1;
+      for (const b of B) {
+        const k = Math.max(0, Math.min(1, built * rows - b.r - (b.x / w) * .6)); if (k <= 0) continue;
+        const y = b.y - (1 - k) * bh * 2 + drop * (h + bh * 2) * (1 + b.r * .02);
+        ctx.fillStyle = "#cfc6b8"; ctx.fillRect(b.x, y, bw, bh); ctx.fillStyle = b.t; ctx.fillRect(b.x + 2, y + 2, bw - 4, bh - 4);
+        ctx.fillStyle = "rgba(255,255,255,.07)"; ctx.fillRect(b.x + 2, y + 2, bw - 4, bh * .25);
+      }
+      // Licht: Dunkelheit mit warmem Kegel unter der Birne
+      const cx = w / 2, cy = U * 1.55, g = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.hypot(w, h) * .75);
+      const dk = 1 - drop;
+      g.addColorStop(0, `rgba(255,210,130,${.22 * lightA * dk})`); g.addColorStop(.35, `rgba(10,10,12,${(.25 + .7 * (1 - lightA)) * dk})`); g.addColorStop(1, `rgba(5,6,8,${(.6 + .38 * (1 - lightA)) * dk})`);
+      ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+      if (cap > 0) { ctx.globalAlpha = cap; ctx.textAlign = "center"; ctx.fillStyle = "#fff"; ctx.shadowColor = "rgba(0,0,0,.6)"; ctx.shadowBlur = 14; ctx.font = `800 ${Math.min(w * .12, h * .09)}px ${o.family || "system-ui"}`; ctx.fillText(o.label || "", w / 2, h * .84); ctx.font = `700 ${Math.min(w * .045, h * .032)}px ${o.family || "system-ui"}`; ctx.fillText(o.sub || "", w / 2, h * .84 + Math.min(w * .07, h * .05)); ctx.shadowBlur = 0; ctx.globalAlpha = 1; }
+    };
+    // Rohre (SVG über der Mauer)
+    const T = Math.max(12, Math.min(w, h) * .04);
+    const s = svgEl("svg", { viewBox: `0 0 ${w} ${h}`, width: w, height: h }); s.style.cssText = "position:absolute;inset:0;z-index:6;pointer-events:none;transition:transform .9s cubic-bezier(.6,0,.9,.6),opacity .6s"; s.setAttribute("aria-hidden", "true"); scr.append(s);
+    const P = [[-T, h * .36], [w * .8, h * .36], [w * .8, h * .5], [w * .18, h * .5], [w * .18, h * .64], [w * .6, h * .64]], d = "M" + P.map((p) => p.join(" ")).join(" L");
+    const mkp = (stroke, sw, extra = {}) => { const p = svgEl("path", Object.assign({ d, fill: "none", stroke, "stroke-width": sw, "stroke-linejoin": "round" }, extra)); s.append(p); return p; };
+    const pipe = mkp("#9aa3ad", T), shine = mkp("rgba(255,255,255,.28)", T * .25, { transform: `translate(0 ${-T * .2})` }), water = mkp("#3fa9f5", T * .55);
+    const joints = P.slice(1, -1).map(([x, y]) => { const r = svgEl("rect", { x: x - T * .75, y: y - T * .75, width: T * 1.5, height: T * 1.5, rx: T * .3, fill: "#c7a052", opacity: 0 }); s.append(r); return r; });
+    const [fx, fy] = P[P.length - 1], fau = svgEl("g", { opacity: 0 });
+    fau.innerHTML = `<rect x="${fx - T * .2}" y="${fy - T * .9}" width="${T * 1.6}" height="${T * 1.8}" rx="${T * .3}" fill="#c3c8ce"/><path d="M${fx + T * 1.3} ${fy - T * .4} h${T * 1.2} q${T * .6} 0 ${T * .6} ${T * .6} v${T * .9}" fill="none" stroke="#c3c8ce" stroke-width="${T * .8}"/><rect x="${fx + T * .2}" y="${fy - T * 1.6}" width="${T * .8}" height="${T * .7}" fill="${o.accent || "#f2a900"}"/>`; s.append(fau);
+    const dr = svgEl("ellipse", { cx: fx + T * 3.1, cy: fy + T * 1.2, rx: T * .28, ry: T * .4, fill: "#3fa9f5", opacity: 0 }); s.append(dr);
+    const L = pipe.getTotalLength(); [pipe, shine, water].forEach((p) => { p.style.strokeDasharray = L; p.style.strokeDashoffset = L; });
+    // Birne und Schalter
+    const top = el(scr, "div", "obra-top", `position:absolute;inset:0;z-index:7;pointer-events:none;transition:opacity .5s`);
+    top.innerHTML = `<svg viewBox="0 0 70 170" style="position:absolute;left:${w / 2 - U * .35}px;top:0;width:${U * .7}px;overflow:visible"><path d="M35 0v86" stroke="#555" stroke-width="2"/><rect x="25" y="86" width="20" height="20" rx="3" fill="#666"/><circle class="gl" cx="35" cy="132" r="28" fill="#2a2d33" stroke="#666" stroke-width="2"/><path d="M27 120q8 14 16 0" stroke="#777" stroke-width="2" fill="none"/></svg>
+      <svg viewBox="0 0 90 130" style="position:absolute;left:${w * .8 - U * .3}px;top:${h * .7}px;width:${U * .6}px"><rect x="2" y="2" width="86" height="126" rx="12" fill="#e9e6df" stroke="#bdb8ad" stroke-width="2"/><rect x="28" y="30" width="34" height="70" rx="6" fill="#cfcac0"/><rect class="tog" x="31" y="33" width="28" height="34" rx="5" fill="#f7f5f0" stroke="#bdb8ad"/></svg>`;
+    const gl = top.querySelector(".gl"), tog = top.querySelector(".tog");
+    const on = (a) => { lightA = a; gl.setAttribute("fill", a > .5 ? "#fff3c4" : "#2a2d33"); gl.style.filter = a > .5 ? "drop-shadow(0 0 18px #ffd27a)" : "none"; draw(); };
+    draw();
+    // 1) Licht an
+    await sleep(600); if (tk.cancelled) return [c, s, top].forEach((n) => n.remove());
+    tog.setAttribute("y", 63);
+    for (const [ms, a] of [[90, 1], [70, 0], [60, 1], [150, .2], [80, 1]]) { if (tk.cancelled) break; on(a); await sleep(ms); }
+    on(1);
+    // 2) Mauer hochziehen
+    await tween(o.build || 1700, (e, k) => { built = k * 1.05; draw(); }, tk, (k) => k);
+    // 3) Rohre verlegen, Wasser fließt, Hahn tropft
+    await tween(1000, (e) => { pipe.style.strokeDashoffset = shine.style.strokeDashoffset = L * (1 - e); joints.forEach((j, i) => j.setAttribute("opacity", e > (i + 1) / (joints.length + 1) ? 1 : 0)); }, tk);
+    fau.setAttribute("opacity", 1);
+    await tween(800, (e) => (water.style.strokeDashoffset = L * (1 - e)), tk, (k) => k);
+    await tween(500, (e, k) => { dr.setAttribute("opacity", 1); dr.setAttribute("cy", fy + T * 1.2 + k * k * h * .1); cap = e; draw(); }, tk, (k) => k);
+    dr.setAttribute("opacity", 0); await sleep(900);
+    if (tk.cancelled) return [c, s, top].forEach((n) => n.remove());
+    // 4) alles fällt weg
+    reveal(scr); top.style.opacity = "0"; s.style.transform = `translateY(${h * 1.1}px)`; s.style.opacity = "0";
+    await tween(950, (e, k) => { drop = k * k; cap = Math.max(0, 1 - k * 2); draw(); }, tk, (k) => k);
+    [c, s, top].forEach((n) => n.remove());
+  }
+
+  const hero = $("#inicio"), redo = $("#redo");
+  let token = { cancelled: true };
+  async function play() {
+    token.cancelled = true; const tk = (token = { cancelled: false });
+    hero.querySelectorAll(".fxl").forEach((n) => n.remove());
+    hero.classList.remove("reveal"); hero.classList.add("pre"); redo.hidden = true;
+    await obra(hero, tk, { label: "GONZALO VERTZ", sub: "ELECTRICIDAD · ALBAÑILERÍA · PLOMERÍA", family: '"Barlow Condensed", sans-serif' });
+    if (!tk.cancelled) redo.hidden = false;
+  }
+  redo.addEventListener("click", play);
+  if (reduce) hero.classList.remove("pre"); else document.fonts.ready.then(play);
+})();
+</script>
+</body>
+</html>
