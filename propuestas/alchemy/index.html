@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Manrope:wght@400;600;800&display=swap">
 <style>
-/* Layout: Logo-Intro (das Alchemie-Dreieck baut sich auf und fliegt an seinen Platz), blasses Periodensystem als
+/* Layout: Logo-Intro (Dreieck zeichnet sich, Balken, füllt sich orange, dreht sich weg), schräges blasses Periodensystem als
    Hintergrund, Tabla de sabores (interaktiv, filterbar), El laboratorio, Cócteles helados, Vegan, 10 años, Visitanos.
    Farben aus dem Logo: Grün, Blau, Oliv, Orange auf Anthrazit. */
 :root {
@@ -80,6 +80,7 @@ nav.links a.btn { color: var(--ink); padding: 10px 16px; font-size: 14px; }
 .redo { position: absolute; right: 16px; top: 16px; z-index: 7; font: 700 13px var(--f-body); color: var(--muted); background: rgba(38,38,38,.85); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
 .redo:hover { color: var(--fg); }
 .hero.pre .copy > *, .hero.pre .hero-mark { opacity: 0; }
+.hero.reveal .hero-mark { animation: rise .8s .2s cubic-bezier(.2,.7,.2,1) both; }
 .hero.reveal .copy > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
 .hero.reveal .copy > :nth-child(2) { animation-delay: .06s } .hero.reveal .copy > :nth-child(3) { animation-delay: .12s }
 .hero.reveal .copy > :nth-child(4) { animation-delay: .18s } .hero.reveal .copy > :nth-child(5) { animation-delay: .24s }
@@ -341,7 +342,8 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     if (pc.width !== Math.round(w * dpr) || pc.height !== Math.round(h * dpr)) { pc.width = Math.round(w * dpr); pc.height = Math.round(h * dpr); }
     px.setTransform(dpr, 0, 0, dpr, 0, 0); px.clearRect(0, 0, w, h);
     const S = w < 600 ? 74 : 96, G = 8, t = reduce ? 0 : now / 1000, ox = (t * 6) % (S + G), oy = (t * 3) % (S + G);
-    const cols = Math.ceil(w / (S + G)) + 2, rows = Math.ceil(h / (S + G)) + 2;
+    const D = Math.hypot(w, h), cols = Math.ceil(D / (S + G)) + 2, rows = cols;
+    px.translate(w / 2, h / 2); px.rotate(-.24); px.translate(-D / 2, -D / 2);
     if (!reduce && Math.random() < .03) glow.set(`${Math.floor(Math.random() * cols)},${Math.floor(Math.random() * rows)}`, now);
     px.textBaseline = "top";
     for (let r = -1; r < rows; r++) for (let q = -1; q < cols; q++) {
@@ -358,48 +360,35 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   }
   requestAnimationFrame(ptable);
 
-  /* ---------- Intro: das Logo baut sich auf (grün, Balken, orange) und fliegt an seinen Platz ---------- */
-  const NS = "http://www.w3.org/2000/svg", redo = $("#redo"), heroMark = $("#heroMark");
+  /* ---------- Intro: das Dreieck zeichnet sich, der Balken schiebt sich durch, es füllt sich orange und dreht sich weg ---------- */
+  const NS = "http://www.w3.org/2000/svg", redo = $("#redo");
   const mk = (tag, a, p) => { const n = document.createElementNS(NS, tag); for (const k in a) n.setAttribute(k, a[k]); if (p) p.append(n); return n; };
-  const RING = "M2 0H462L232 400Z M82 45L232 305L382 45Z";
   let token = { cancelled: true };
   async function transmute() {
     token.cancelled = true; const tk = (token = { cancelled: false });
     hero.querySelectorAll(".intro").forEach((n) => n.remove());
     hero.classList.remove("reveal"); hero.classList.add("pre"); redo.hidden = true;
     const box = document.createElement("div"); box.className = "intro"; hero.append(box);
-    const w = hero.clientWidth, h = hero.clientHeight, SW = Math.min(w * .62, h * .48, 420), SH = SW * 400 / 464;
-    const X = (w - SW) / 2, Y = h * .42 - SH / 2;
-    const svg = mk("svg", { class: "mark", viewBox: "0 0 464 400", width: SW, height: SH }, box);
-    svg.style.transform = `translate(${X}px,${Y}px)`;
-    const id = "i" + Math.random().toString(36).slice(2, 7), defs = mk("defs", {}, svg);
-    const clip = (n, d) => { const c = mk("clipPath", { id: id + n }, defs); mk("path", { d }, c); return `url(#${id + n})`; };
-    const mask = (n) => { const m = mk("mask", { id: id + n, maskUnits: "userSpaceOnUse", x: -50, y: -50, width: 564, height: 520 }, defs); return m; };
-    const mTop = mask("mt"), mBot = mask("mb");
-    const pTop = mk("path", { d: "M130 175 L42 22 L422 22 L334 175", fill: "none", stroke: "#fff", "stroke-width": 80, "stroke-linejoin": "miter", "stroke-miterlimit": 10 }, mTop);
-    const pBotL = mk("path", { d: "M150 217 L250 390", fill: "none", stroke: "#fff", "stroke-width": 95 }, mBot);
-    const pBotR = mk("path", { d: "M314 217 L214 390", fill: "none", stroke: "#fff", "stroke-width": 95 }, mBot);
-    const g1 = mk("g", { "clip-path": clip("ct", "M0 0H464V175H0Z") }, svg); mk("path", { d: RING, "fill-rule": "evenodd", fill: "#7ac68c", mask: `url(#${id}mt)` }, g1);
-    const g2 = mk("g", { "clip-path": clip("cb", "M0 217H464V420H0Z") }, svg); mk("path", { d: RING, "fill-rule": "evenodd", fill: "#ef9a26", mask: `url(#${id}mb)` }, g2);
-    const bar = mk("rect", { x: 232, y: 175, width: 0, height: 42, fill: "#397a98" }, svg);
-    const olive = mk("rect", { x: 0, y: 175, width: 464, height: 42, fill: "#977303", "clip-path": clip("tri", "M2 0H462L232 400Z"), opacity: 0 }, svg);
-    const motto = document.createElement("div"); motto.className = "motto"; motto.textContent = "Ser distintos es la regla"; motto.style.top = (Y + SH + 28) + "px"; box.append(motto);
-    const dash = (p) => { const L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L; return L; };
-    const L1 = dash(pTop), L2 = dash(pBotL); dash(pBotR);
-    await sleep(250);
-    await tween(1400, (e) => (pTop.style.strokeDashoffset = L1 * (1 - e)), tk);
-    await tween(600, (e) => { bar.setAttribute("x", 232 - 232 * e); bar.setAttribute("width", 464 * e); olive.setAttribute("opacity", Math.max(0, e * 1.6 - .6)); }, tk);
-    await tween(900, (e) => { pBotL.style.strokeDashoffset = L2 * (1 - e); pBotR.style.strokeDashoffset = L2 * (1 - e); }, tk);
+    const w = hero.clientWidth, h = hero.clientHeight, S = Math.min(w, h) * .55, cx = w / 2, cy = h * .42;
+    const svg = mk("svg", { viewBox: `0 0 ${w} ${h}`, width: w, height: h }, box);
+    svg.style.cssText = `position:absolute;inset:0;transform-origin:${cx}px ${cy}px;transition:transform .9s cubic-bezier(.6,0,.4,1)`;
+    const A = [cx - S / 2, cy - S * .38], B = [cx + S / 2, cy - S * .38], Cc = [cx, cy + S * .5], tri = `M${A} L${B} L${Cc} Z`;
+    const id = "t" + Math.random().toString(36).slice(2, 7), cp = mk("clipPath", { id }, mk("defs", {}, svg)); mk("path", { d: tri }, cp);
+    const liquid = mk("rect", { x: cx - S / 2, y: Cc[1], width: S, height: 0, fill: "#ef9a26", "clip-path": `url(#${id})` }, svg);
+    const path = mk("path", { d: tri, fill: "none", stroke: "#7ac68c", "stroke-width": S * .07, "stroke-linejoin": "miter" }, svg);
+    const bar = mk("rect", { x: cx, y: cy - S * .02, width: 0, height: S * .07, fill: "#397a98" }, svg);
+    const len = path.getTotalLength(); path.style.strokeDasharray = len; path.style.strokeDashoffset = len;
+    const motto = document.createElement("div"); motto.className = "motto"; motto.textContent = "Ser distintos es la regla"; motto.style.top = (cy + S * .62) + "px"; box.append(motto);
+    await sleep(200);
+    await tween(1300, (e) => (path.style.strokeDashoffset = len * (1 - e)), tk);
+    path.style.strokeDasharray = "none";
+    await tween(500, (e) => { bar.setAttribute("x", cx - S * .55 * e); bar.setAttribute("width", S * 1.1 * e); }, tk);
+    await tween(1100, (e, k) => { const lv = S * .88 * e; liquid.setAttribute("y", Cc[1] - lv + Math.sin(k * 25) * 3 * (1 - k)); liquid.setAttribute("height", lv + 10); }, tk);
     if (tk.cancelled) return box.remove();
-    motto.style.opacity = "1"; await sleep(1100); if (tk.cancelled) return box.remove();
-    motto.style.opacity = "0";
-    // an den Platz des Logos im Hero fliegen
-    const hr = hero.getBoundingClientRect(), mr = heroMark.getBoundingClientRect();
-    const TW = mr.width * .64, TH = TW * 400 / 464, TX = mr.left - hr.left + (mr.width - TW) / 2, TY = mr.top - hr.top + (mr.height - TH) / 2;
-    hero.classList.remove("pre"); hero.classList.add("reveal"); heroMark.style.opacity = "0";
-    box.style.background = "transparent"; box.style.transition = "background .9s";
-    await tween(1000, (e) => { const s = 1 + (TW / SW - 1) * e; svg.style.transform = `translate(${X + (TX - X) * e}px,${Y + (TY - Y) * e}px) scale(${s})`; }, tk);
-    heroMark.style.transition = "none"; heroMark.style.opacity = "1"; box.remove();
+    motto.style.opacity = "1"; await sleep(900); if (tk.cancelled) return box.remove();
+    hero.classList.remove("pre"); hero.classList.add("reveal");
+    svg.style.transform = "scale(.08) rotate(180deg)"; motto.style.opacity = "0"; box.style.opacity = "0";
+    await sleep(900); box.remove();
     if (!tk.cancelled) redo.hidden = false;
   }
   redo.addEventListener("click", () => { hero.scrollIntoView({ behavior: reduce ? "auto" : "smooth" }); transmute(); });
