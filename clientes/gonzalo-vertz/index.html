@@ -63,7 +63,7 @@ nav.links a.btn { color: #fff; padding: 11px 16px; font-size: 15px; }
   background: radial-gradient(60vw 45vw at 100% 0%, rgba(242,169,0,.14), transparent 70%), linear-gradient(180deg, #1b222b, #12161c); }
 .hero::before { content: ""; position: absolute; inset: 0; z-index: 0; opacity: .5; background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px); background-size: 44px 44px; mask-image: linear-gradient(180deg, #000, transparent 85%); -webkit-mask-image: linear-gradient(180deg, #000, transparent 85%); }
 .hero .wrap { position: relative; z-index: 1; padding-block: clamp(70px, 11vw, 130px) clamp(56px, 9vw, 104px); display: flex; flex-direction: column; gap: 16px; }
-.hero h1 { font-size: clamp(66px, 13vw, 150px); line-height: .9; }
+.hero h1 { font-size: clamp(54px, 13vw, 150px); line-height: .9; }
 .hero h1 span { color: var(--acc); }
 .hero .lead { margin: 4px 0 0; font-size: clamp(18px, 2.3vw, 22px); color: var(--soft); max-width: 44ch; }
 .hero .lead b { color: var(--fg); }
@@ -83,6 +83,16 @@ nav.links a.btn { color: #fff; padding: 11px 16px; font-size: 15px; }
 .hero.reveal .wrap > :nth-child(4) { animation-delay: .18s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .24s } .hero.reveal .wrap > :nth-child(6) { animation-delay: .3s }
 @keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .hero .wrap { padding-block: 56px 44px; gap: 12px; }
+  .hero .lead { font-size: 17px; }
+  .hero .ask { font-size: 16px; }
+  .hero .ctas .btn { padding: 14px 18px; font-size: 15px; }
+  .facts { gap: 6px; margin-top: 8px; }
+  .facts span { font-size: 13px; padding: 6px 9px; }
+  .kicker { font-size: 12px; }
+}
 
 /* ---------- Abschnitte ---------- */
 section.block { padding-block: clamp(64px, 10vw, 104px); }
@@ -363,7 +373,7 @@ footer a { color: var(--soft); }
   const el = (scr, tag, cls, css = "") => { const n = document.createElement(tag); n.className = "fxl " + cls; if (css) n.style.cssText = css; scr.append(n); return n; };
   const canvas = (parent, cls, z) => { const w = parent.clientWidth, h = parent.clientHeight, dpr = Math.min(2, devicePixelRatio || 1); const c = document.createElement("canvas"); c.className = "fxl " + cls; c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); c.style.cssText = `position:absolute;inset:0;width:100%;height:100%;z-index:${z};pointer-events:none`; c.setAttribute("aria-hidden", "true"); parent.append(c); const ctx = c.getContext("2d"); ctx.scale(dpr, dpr); return { c, ctx, w, h }; };
   const svgEl = (tag, attrs) => { const n = document.createElementNS("http://www.w3.org/2000/svg", tag); for (const k in attrs) n.setAttribute(k, attrs[k]); return n; };
-  const reveal = (scr) => { scr.classList.remove("pre"); scr.classList.remove("reveal"); void scr.offsetWidth; scr.classList.add("reveal"); };
+  const reveal = () => { const hz = document.getElementById("inicio"); hz.classList.remove("pre"); hz.classList.remove("reveal"); void hz.offsetWidth; hz.classList.add("reveal"); hz.querySelectorAll(".cover").forEach((n) => (n.style.opacity = "0")); };
   async function obra(scr, tk, o = {}) {
     const w = scr.clientWidth, h = scr.clientHeight, U = Math.min(w, h) * .18;
     const { c, ctx } = canvas(scr, "obra", 5);
@@ -383,7 +393,7 @@ footer a { color: var(--soft); }
       const dk = 1 - drop;
       g.addColorStop(0, `rgba(255,210,130,${.22 * lightA * dk})`); g.addColorStop(.35, `rgba(10,10,12,${(.25 + .7 * (1 - lightA)) * dk})`); g.addColorStop(1, `rgba(5,6,8,${(.6 + .38 * (1 - lightA)) * dk})`);
       ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
-      if (cap > 0) { ctx.globalAlpha = cap; ctx.textAlign = "center"; ctx.fillStyle = "#fff"; ctx.shadowColor = "rgba(0,0,0,.6)"; ctx.shadowBlur = 14; ctx.font = `800 ${Math.min(w * .12, h * .09)}px ${o.family || "system-ui"}`; ctx.fillText(o.label || "", w / 2, h * .84); ctx.font = `700 ${Math.min(w * .045, h * .032)}px ${o.family || "system-ui"}`; ctx.fillText(o.sub || "", w / 2, h * .84 + Math.min(w * .07, h * .05)); ctx.shadowBlur = 0; ctx.globalAlpha = 1; }
+      if (cap > 0) { ctx.globalAlpha = cap; ctx.textAlign = "center"; ctx.fillStyle = "#fff"; ctx.shadowColor = "rgba(0,0,0,.6)"; ctx.shadowBlur = 14; ctx.font = `800 ${Math.min(w * .12, h * .09)}px ${o.family || "system-ui"}`; ctx.fillText(o.label || "", w / 2, h * .79); ctx.font = `700 ${Math.min(w * .045, h * .032)}px ${o.family || "system-ui"}`; ctx.fillText(o.sub || "", w / 2, h * .79 + Math.min(w * .07, h * .05)); ctx.shadowBlur = 0; ctx.globalAlpha = 1; }
     };
     // Rohre (SVG über der Mauer)
     const T = Math.max(12, Math.min(w, h) * .04);
@@ -399,7 +409,7 @@ footer a { color: var(--soft); }
     // Birne und Schalter
     const top = el(scr, "div", "obra-top", `position:absolute;inset:0;z-index:7;pointer-events:none;transition:opacity .5s`);
     top.innerHTML = `<svg viewBox="0 0 70 170" style="position:absolute;left:${w / 2 - U * .35}px;top:0;width:${U * .7}px;overflow:visible"><path d="M35 0v86" stroke="#555" stroke-width="2"/><rect x="25" y="86" width="20" height="20" rx="3" fill="#666"/><circle class="gl" cx="35" cy="132" r="28" fill="#2a2d33" stroke="#666" stroke-width="2"/><path d="M27 120q8 14 16 0" stroke="#777" stroke-width="2" fill="none"/></svg>
-      <svg viewBox="0 0 90 130" style="position:absolute;left:${Math.max(10, w * .09 - U * .3)}px;top:${h * .66}px;width:${U * .6}px;opacity:0;transition:opacity .4s" class="plate"><rect x="2" y="2" width="86" height="126" rx="12" fill="#e9e6df" stroke="#bdb8ad" stroke-width="2"/><rect x="28" y="30" width="34" height="70" rx="6" fill="#cfcac0"/><rect class="tog" x="31" y="33" width="28" height="34" rx="5" fill="#f7f5f0" stroke="#bdb8ad"/></svg>`;
+      <svg viewBox="0 0 90 130" style="position:absolute;left:${Math.max(10, w * .09 - U * .3)}px;top:${h * .5}px;width:${U * .6}px;opacity:0;transition:opacity .4s" class="plate"><rect x="2" y="2" width="86" height="126" rx="12" fill="#e9e6df" stroke="#bdb8ad" stroke-width="2"/><rect x="28" y="30" width="34" height="70" rx="6" fill="#cfcac0"/><rect class="tog" x="31" y="33" width="28" height="34" rx="5" fill="#f7f5f0" stroke="#bdb8ad"/></svg>`;
     const gl = top.querySelector(".gl"), tog = top.querySelector(".tog"), plate = top.querySelector(".plate");
     const on = (a) => { lightA = a > .5 ? 1 : .28; gl.setAttribute("fill", a > .5 ? "#fff3c4" : "#2a2d33"); gl.style.filter = a > .5 ? "drop-shadow(0 0 18px #ffd27a)" : "none"; draw(); };
     draw();
@@ -429,9 +439,14 @@ footer a { color: var(--soft); }
   let token = { cancelled: true };
   async function play() {
     token.cancelled = true; const tk = (token = { cancelled: false });
-    hero.querySelectorAll(".fxl").forEach((n) => n.remove());
+    hero.querySelectorAll(".fxl, .stage, .cover").forEach((n) => n.remove());
     hero.classList.remove("reveal"); hero.classList.add("pre"); redo.hidden = true;
-    await obra(hero, tk, { label: "GONZALO VERTZ", sub: "ELECTRICIDAD · ALBAÑILERÍA · PLOMERÍA Y MÁS", family: '"Barlow Condensed", sans-serif' });
+    // Bühne = der sichtbare Teil des Hero, damit auf dem Handy nichts unter den Bildschirmrand rutscht
+    const top = Math.max(0, hero.getBoundingClientRect().top), vis = Math.max(320, Math.min(hero.clientHeight, innerHeight - top));
+    const stage = document.createElement("div"); stage.className = "stage"; stage.style.cssText = `position:absolute;left:0;right:0;top:0;height:${vis}px;z-index:5;overflow:hidden;pointer-events:none`; hero.append(stage);
+    if (vis < hero.clientHeight) { const cv = document.createElement("div"); cv.className = "cover"; cv.style.cssText = `position:absolute;left:0;right:0;top:${vis}px;bottom:0;z-index:5;background:#0d0f12;transition:opacity .8s;pointer-events:none`; hero.append(cv); }
+    await obra(stage, tk, { label: "GONZALO VERTZ", sub: "ELECTRICIDAD · ALBAÑILERÍA · PLOMERÍA Y MÁS", family: '"Barlow Condensed", sans-serif' });
+    stage.remove(); hero.querySelectorAll(".cover").forEach((n) => n.remove());
     if (!tk.cancelled) redo.hidden = false;
   }
   redo.addEventListener("click", play);
