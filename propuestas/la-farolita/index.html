@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>La Farolita de Caballito · Propuesta de diseño</title>
+<meta name="description" content="Propuesta de sitio web para La Farolita de Caballito, preparada por Jota Labs. No es el sitio oficial.">
+<meta property="og:title" content="La Farolita de Caballito · Propuesta de diseño">
+<meta property="og:description" content="Un rincón de Salta en Caballito. Propuesta de Jota Labs.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23111'/%3E%3Cpath d='M24 18h16l3 6H21z' fill='%23f5c518'/%3E%3Crect x='22' y='24' width='20' height='22' rx='3' fill='%23ffd76a'/%3E%3Cpath d='M20 46h24l-3 5H23z' fill='%23f5c518'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Pacifico&family=Manrope:wght@400;600;800&display=swap">
+<style>
+/* Layout: Laternen-Intro (Licht legt den Hero frei, Laterne bleibt oben hängen), Empanadas salteñas, La carta,
+   Pedidos (WhatsApp, Telefon, App, Plattformen), Desde 1992, Visitanos. Schwarz und Gelb wie das Logo. */
+:root {
+  --night: #0f0d0a; --night-2: #18150f; --night-3: #221d14; --line: #3a3221; --fg: #fff8e6; --soft: #e6dcc4; --muted: #b3a88f;
+  --yellow: #f5c518; --yellow-ink: #111111; --flame: #ffd76a;
+  --f-display: "Lilita One", "Arial Rounded MT Bold", sans-serif;
+  --f-script: "Pacifico", "Brush Script MT", cursive;
+  --f-body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--night); color: var(--fg); font: 16px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-weight: 400; text-wrap: balance; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 800 12px/1.2 var(--f-body); letter-spacing: .18em; text-transform: uppercase; color: var(--yellow); }
+:focus-visible { outline: 2px solid var(--yellow); outline-offset: 3px; }
+
+.proposal { background: #000; color: #e9ebee; font: 13px/1.4 var(--f-body); padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; }
+.proposal b { color: #ffd166; }
+.proposal a { color: #fff; font-weight: 800; }
+
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--night) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo svg { width: 26px; height: 40px; }
+.logo span { display: flex; flex-direction: column; line-height: 1; }
+.logo b { font: 400 24px/1 var(--f-display); color: var(--yellow); font-weight: 400; }
+.logo i { font: 400 13px/1.3 var(--f-script); font-style: normal; color: var(--fg); margin-left: 6px; }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 14px; font-weight: 600; color: var(--muted); }
+nav.links a:hover { color: var(--fg); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 800 15px/1 var(--f-body); padding: 15px 22px; border-radius: 999px; background: var(--yellow); color: var(--yellow-ink); border: 2px solid var(--yellow); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(245,197,24,.3); }
+.btn.ghost { background: transparent; color: var(--fg); border-color: rgba(255,248,230,.4); }
+.btn.ghost:hover { box-shadow: none; border-color: var(--fg); }
+.btn svg { width: 18px; height: 18px; }
+nav.links a.btn { color: var(--yellow-ink); padding: 10px 16px; font-size: 14px; }
+.menu-btn { display: none; background: transparent; color: var(--fg); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font: 800 12px var(--f-body); letter-spacing: .08em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--night-2); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+
+/* ---------- Hero ---------- */
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line);
+  background: radial-gradient(60vw 45vw at 50% -10%, rgba(255,215,106,.16), transparent 70%), radial-gradient(60vw 50vw at 100% 110%, rgba(245,197,24,.12), transparent 70%), var(--night); }
+.hero .wrap { padding-block: clamp(110px, 14vw, 160px) clamp(56px, 9vw, 104px); display: flex; flex-direction: column; gap: 16px; }
+.hero h1 { font: 400 clamp(72px, 15vw, 176px)/.9 var(--f-display); color: var(--yellow); -webkit-text-stroke: clamp(2px, .5vw, 5px) #111; paint-order: stroke fill; text-shadow: 0 .06em 0 #000; }
+.hero h1 span { display: block; font: 400 .4em/1.5 var(--f-script); color: var(--fg); -webkit-text-stroke: 0; text-shadow: none; margin-left: .15em; }
+.hero .lead { margin: 4px 0 0; font-size: clamp(17px, 2.2vw, 21px); color: var(--soft); max-width: 42ch; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.facts span { font: 700 13px var(--f-body); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; background: rgba(15,13,10,.72); }
+.facts span b { color: var(--fg); }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 7; font: 700 13px var(--f-body); color: var(--muted); background: rgba(15,13,10,.85); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.redo:hover { color: var(--fg); }
+.hero.reveal .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero.reveal .wrap > :nth-child(2) { animation-delay: .06s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .12s }
+.hero.reveal .wrap > :nth-child(4) { animation-delay: .18s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .24s }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+.fl { position: absolute; pointer-events: none; }
+.fl.dark { inset: 0; z-index: 5; }
+.fl.rope { z-index: 6; left: 50%; top: 0; width: 2px; background: #3a3020; transform-origin: top center; }
+.fl.lamp { z-index: 6; left: 0; top: 0; filter: drop-shadow(0 0 26px rgba(255,190,90,.9)); }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+
+/* ---------- Abschnitte ---------- */
+section.block { padding-block: clamp(64px, 10vw, 104px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 40px; margin-bottom: 34px; }
+.head h2 { font: 400 clamp(44px, 7vw, 84px)/.95 var(--f-display); margin-top: 10px; }
+.head h2 em { display: block; font: 400 .42em/1.6 var(--f-script); font-style: normal; color: var(--yellow); }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+.flavors { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 14px; }
+@media (max-width: 960px) { .flavors { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+.emp { position: relative; border: 1px solid var(--line); border-radius: 20px; padding: 22px 18px 18px; background: var(--night-2); display: grid; gap: 6px; text-align: center; }
+.emp svg { width: 86px; height: 52px; margin: 0 auto 6px; }
+.emp h3 { font: 400 24px/1.05 var(--f-display); }
+.emp p { margin: 0; color: var(--muted); font-size: 14px; }
+.emp .p { font: 800 15px var(--f-body); color: var(--yellow); font-variant-numeric: tabular-nums; }
+.note { margin-top: 20px; font-size: 13px; color: var(--muted); padding: 10px 14px; border-left: 3px solid var(--yellow); background: var(--night-2); border-radius: 0 10px 10px 0; }
+.cats { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 14px; }
+@media (max-width: 860px) { .cats { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+.cat { border-radius: 20px; padding: 24px; background: var(--yellow); color: var(--yellow-ink); display: grid; gap: 6px; min-height: 150px; align-content: end; }
+.cat h3 { font: 400 32px/1 var(--f-display); }
+.cat p { margin: 0; font-size: 14px; opacity: .75; }
+.order { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 760px) { .order { grid-template-columns: minmax(0,1fr); } }
+.card { border: 1px solid var(--line); border-radius: 22px; padding: 26px; background: var(--night-2); display: grid; gap: 12px; align-content: start; }
+.card h3 { font: 400 30px/1 var(--f-display); }
+.card p { margin: 0; color: var(--soft); }
+.card a.tel { color: var(--fg); font-weight: 800; }
+.card.main { background: var(--yellow); color: var(--yellow-ink); border-color: var(--yellow); }
+.card.main p { color: #2a2410; }
+.card.main .btn { background: #111; color: var(--yellow); border-color: #111; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips span { font: 800 13px var(--f-body); border: 1px solid var(--line); border-radius: 999px; padding: 7px 12px; color: var(--soft); }
+.since { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
+@media (max-width: 860px) { .since { grid-template-columns: minmax(0,1fr); } }
+.since p { color: var(--soft); max-width: 46ch; }
+.badge { justify-self: center; width: min(320px, 80vw); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 50% 35%, #2a2414, #0b0a07 70%); border: 3px solid var(--yellow); display: grid; place-items: center; text-align: center; box-shadow: 0 0 60px rgba(245,197,24,.18); }
+.badge b { display: block; font: 400 clamp(64px, 10vw, 96px)/1 var(--f-display); color: var(--yellow); }
+.badge span { font: 400 20px/1.4 var(--f-script); color: var(--fg); }
+.visit { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 760px) { .visit { grid-template-columns: minmax(0,1fr); } }
+
+footer { padding-block: 40px 96px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 800 14px var(--f-body); padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.35); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="lantern" viewBox="0 0 40 70"><path d="M14 8h12l3 6H11z" fill="#2a2018"/><rect x="11" y="14" width="18" height="34" rx="3" fill="#ffd76a" stroke="#2a2018" stroke-width="3"/><path d="M20 14v34M11 31h18" stroke="#2a2018" stroke-width="2"/><path d="M9 48h22l-3 6H12z" fill="#2a2018"/><circle cx="20" cy="4" r="4" fill="none" stroke="#2a2018" stroke-width="2.5"/></symbol>
+  <symbol id="lantern-y" viewBox="0 0 40 70"><path d="M14 8h12l3 6H11z" fill="#f5c518"/><rect x="11" y="14" width="18" height="34" rx="3" fill="#ffd76a" stroke="#f5c518" stroke-width="3"/><path d="M20 14v34M11 31h18" stroke="#b78f0c" stroke-width="2"/><path d="M9 48h22l-3 6H12z" fill="#f5c518"/><circle cx="20" cy="4" r="4" fill="none" stroke="#f5c518" stroke-width="2.5"/></symbol>
+  <symbol id="emp" viewBox="0 0 86 52"><path d="M4 44 A39 39 0 0 1 82 44 Z" fill="#e6a94a"/><path d="M4 44 A39 39 0 0 1 82 44" fill="none" stroke="#b9772a" stroke-width="5" stroke-dasharray="3 4" stroke-linecap="round"/><path d="M4 44 H82" stroke="#c98a37" stroke-width="2"/></symbol>
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></symbol>
+</svg>
+<div class="proposal"><span><b>Propuesta de diseño</b> para La Farolita de Caballito · no es el sitio oficial</span><span>Hecha por <a href="https://5hitcake.github.io/JanOberle/#es" target="_blank" rel="noopener">Jota Labs</a></span></div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#inicio"><svg aria-hidden="true"><use href="#lantern-y"/></svg><span><b>La Farolita</b><i>de Caballito</i></span></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENÚ</button>
+    <nav class="links" id="links">
+      <a href="#empanadas">Empanadas</a>
+      <a href="#carta">La carta</a>
+      <a href="#pedidos">Pedidos</a>
+      <a href="#visitanos">Visitanos</a>
+      <a class="btn" href="https://wa.me/5491144099927" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Pedir</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div class="kicker">Un rincón de Salta en Caballito · desde 1992</div>
+    <h1>La Farolita<span>de Caballito</span></h1>
+    <p class="lead">Empanadas salteñas, pizzas, comidas, spiedo y postres. Pedí por WhatsApp, por teléfono o con delivery.</p>
+    <div class="ctas"><a class="btn" href="https://wa.me/5491144099927" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Pedir por WhatsApp</a><a class="btn ghost" href="#carta">Ver la carta</a></div>
+    <div class="facts"><span>Miró 101 · Caballito</span><span><b>Delivery</b></span><span><b>App</b> propia</span></div>
+  </div>
+  <button class="redo" type="button" id="redo" hidden>↻ Prender la farolita</button>
+</section>
+
+<section class="block" id="empanadas">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">La especialidad</div><h2>Empanadas salteñas<em>al horno o fritas</em></h2></div><p>Las del norte, como en Salta.</p></div>
+    <div class="flavors">
+      <article class="emp"><svg aria-hidden="true"><use href="#emp"/></svg><h3>Carne</h3><p>La salteña de siempre.</p><span class="p">$ —</span></article>
+      <article class="emp"><svg aria-hidden="true"><use href="#emp"/></svg><h3>Humita</h3><p>Choclo cremoso.</p><span class="p">$ —</span></article>
+      <article class="emp"><svg aria-hidden="true"><use href="#emp"/></svg><h3>Pollo</h3><p>Jugosa y bien condimentada.</p><span class="p">$ —</span></article>
+      <article class="emp"><svg aria-hidden="true"><use href="#emp"/></svg><h3>Verdura</h3><p>Para los que no comen carne.</p><span class="p">$ —</span></article>
+      <article class="emp"><svg aria-hidden="true"><use href="#emp"/></svg><h3>Cebolla y queso</h3><p>Un clásico que no falla.</p><span class="p">$ —</span></article>
+    </div>
+    <p class="note">Gustos tomados de su carta en apps de delivery; descripciones y precios reales se cargan desde su carta actual.</p>
+  </div>
+</section>
+
+<section class="block" id="carta" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">La carta</div><h2>Y además…</h2></div><p>Todo lo de su perfil, ordenado para encontrarlo rápido desde el celular.</p></div>
+    <div class="cats">
+      <article class="cat"><h3>Pizzas</h3><p>La pizzería de la casa.</p></article>
+      <article class="cat"><h3>Comidas</h3><p>Minutas, pastas y platos del día.</p></article>
+      <article class="cat"><h3>Spiedo</h3><p>Pollo al spiedo para llevar.</p></article>
+      <article class="cat"><h3>Postres</h3><p>Para cerrar bien.</p></article>
+    </div>
+    <p class="note">Descripciones de ejemplo: en la versión final, cada categoría abre la carta completa con precios, y la actualizan ustedes.</p>
+  </div>
+</section>
+
+<section class="block" id="pedidos" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Pedidos</div><h2>Como te quede más cómodo</h2></div></div>
+    <div class="order">
+      <div class="card main">
+        <h3>WhatsApp</h3>
+        <p>La forma más rápida: escribinos y te tomamos el pedido.</p>
+        <a class="btn" href="https://wa.me/5491144099927" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>11 4409-9927</a>
+      </div>
+      <div class="card">
+        <h3>Teléfono</h3>
+        <p><a class="tel" href="tel:+541144318193">4431-8193</a> · <a class="tel" href="tel:+541144318420">4431-8420</a></p>
+        <h3 style="margin-top:8px">Nuestra app</h3>
+        <p>Pedí desde la app de La Farolita, para Android y iOS.</p>
+        <div class="chips"><span>Android</span><span>iOS</span></div>
+        <h3 style="margin-top:8px">También en</h3>
+        <div class="chips"><span>PedidosYa</span><span>Rappi</span><span>Mercado Delivery</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="historia" style="padding-top:0">
+  <div class="wrap since">
+    <div>
+      <div class="kicker">Desde 1992</div>
+      <div class="head" style="margin:0"><h2>Un rincón de Salta<em>en Buenos Aires</em></h2></div>
+      <p>Más de treinta años en la esquina de Miró y Ramón Falcón, con la farolita prendida y los sabores del norte: empanadas salteñas, spiedo y comida casera para comer acá o pedir a casa.</p>
+    </div>
+    <div class="badge"><div><span>desde</span><b>1992</b><span>Caballito</span></div></div>
+  </div>
+</section>
+
+<section class="block" id="visitanos" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Visitanos</div><h2>Miró 101<em>esquina Ramón Falcón</em></h2></div></div>
+    <div class="visit">
+      <div class="card">
+        <h3>Dónde</h3>
+        <p>Miró 101, esquina Ramón Falcón, Caballito.</p>
+        <div class="ctas"><a class="btn" href="https://www.google.com/maps/search/?api=1&query=La%20Farolita%20de%20Caballito%20Mir%C3%B3%20101" target="_blank" rel="noopener">Google Maps ↗</a><a class="btn ghost" href="https://www.instagram.com/lafarolitadecaballito/" target="_blank" rel="noopener">Instagram ↗</a></div>
+      </div>
+      <div class="card">
+        <h3>Horarios</h3>
+        <p style="color:var(--muted)">Acá van los días y horarios de atención y de delivery.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>La Farolita de Caballito · Miró 101</span><span>Propuesta de diseño de Jota Labs · <a href="https://5hitcake.github.io/JanOberle/#es" target="_blank" rel="noopener">ver más trabajos</a></span></div></footer>
+
+<a class="like" href="https://wa.me/5491130331893?text=Hola%20Jan%21%20Vi%20la%20propuesta%20de%20sitio%20web%20para%20La%20Farolita%20de%20Caballito%20y%20me%20gustar%C3%ADa%20saber%20m%C3%A1s." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>¿Te gusta? Hablemos</a>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+
+  /* ---------- Intro: die Laterne schwingt, ihr Licht legt den Hero frei ---------- */
+  const hero = $("#inicio"), redo = $("#redo");
+  let token = { cancelled: true };
+  const tween = (ms, fn, tk, lin) => new Promise((res) => {
+    const t0 = performance.now();
+    const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(lin ? k : (k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2), k); k < 1 ? requestAnimationFrame(step) : res(); };
+    requestAnimationFrame(step);
+  });
+  async function light() {
+    token.cancelled = true; const tk = (token = { cancelled: false });
+    hero.querySelectorAll(".fl").forEach((n) => n.remove()); hero.classList.remove("reveal"); redo.hidden = true;
+    const w = hero.clientWidth, h = hero.clientHeight, lw = Math.max(30, Math.min(54, w * .05));
+    let len = Math.min(h * .32, 260); const rest = 18;
+    const mk = (cls) => { const n = document.createElement("div"); n.className = "fl " + cls; hero.append(n); return n; };
+    const dark = mk("dark"), rope = mk("rope"), lamp = mk("lamp");
+    lamp.style.width = lw + "px"; lamp.innerHTML = '<svg viewBox="0 0 40 70" width="100%" aria-hidden="true"><use href="#lantern"/></svg>';
+    const place = (ang) => { const x = w / 2 + Math.sin(ang) * len, y = Math.cos(ang) * len; rope.style.height = len + "px"; rope.style.transform = `rotate(${-ang}rad)`; lamp.style.transform = `translate(${x - lw / 2}px,${y - lw * .1}px) rotate(${-ang}rad)`; return [x, y]; };
+    const glow = (x, y, rad, a) => { dark.style.background = `radial-gradient(circle at ${x}px ${y + lw}px, rgba(255,200,120,.18) 0, rgba(255,190,110,.06) ${rad * .5}px, rgba(10,8,5,${a}) ${rad}px)`; };
+    const R0 = Math.max(130, Math.min(w, h) * .4);
+    await tween(3800, (e, k) => { const t = k * 3.8; const [x, y] = place(.9 * Math.exp(-t * .55) * Math.cos(t * 3.1)); glow(x, y, R0 * (1 + .15 * k), .94); }, tk, true);
+    if (tk.cancelled) return;
+    hero.classList.add("reveal");
+    const L0 = len;
+    await tween(1200, (e) => { len = L0 + (rest - L0) * e; const [x, y] = place(0); glow(x, y, R0 + Math.hypot(w, h) * 1.4 * e, .94 * (1 - e)); }, tk);
+    if (tk.cancelled) return;
+    dark.remove(); redo.hidden = false;
+    const sway = (now) => { if (tk.cancelled) return; place(.05 * Math.sin(now / 900)); requestAnimationFrame(sway); };
+    requestAnimationFrame(sway);
+  }
+  redo.addEventListener("click", light);
+  if (!reduce) light();
+})();
+</script>
+</body>
+</html>
