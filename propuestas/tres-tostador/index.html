@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Tres · Propuesta de diseño</title>
+<meta name="description" content="Propuesta de sitio web para Tres, café de especialidad y tostadores en Colegiales, preparada por Jota Labs. No es el sitio oficial.">
+<meta property="og:title" content="Tres · Propuesta de diseño">
+<meta property="og:description" content="Tostado en la ciudad de los Buenos Aires. Propuesta de Jota Labs.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111'/%3E%3Cg fill='%23fff'%3E%3Cpath d='M10 9h30a15 15 0 0 1-30 0z'/%3E%3Cpath d='M10 25h30a15 15 0 0 1-30 0z'/%3E%3Cpath d='M10 41h30a15 15 0 0 1-30 0z'/%3E%3Cpath d='M44 9h10v10z'/%3E%3Cpath d='M44 25h10v10z'/%3E%3Cpath d='M44 41h10v10z'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&family=Manrope:wght@400;600;800&display=swap">
+<style>
+/* Layout: Latte-Art-Intro über dem Hero, Auszeichnung N.º 1, Rösterei hinter Glas, En la barra,
+   Minorista/Mayorista, Visitanos mit Live-Status. Schwarz-Weiß wie das Logo, Crema-Braun nur in der Tasse. */
+:root {
+  --paper: #f6f4f0; --paper-2: #ffffff; --ink: #111111; --ink-2: #3c3a37; --muted: #77726b; --line: #dedad3;
+  --crema: #9a5f31;
+  --f-display: "Outfit", "Avenir Next", system-ui, sans-serif;
+  --f-body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-weight: 500; text-wrap: balance; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 800 12px/1.2 var(--f-body); letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+.proposal { background: var(--ink); color: #eee; font: 13px/1.4 var(--f-body); padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; }
+.proposal b { color: #ffd166; }
+.proposal a { color: #fff; font-weight: 800; }
+
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 12px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 500 24px/1 var(--f-display); letter-spacing: -.01em; }
+.logo svg { width: 30px; height: 30px; }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 14px; font-weight: 600; color: var(--muted); }
+nav.links a:hover { color: var(--ink); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 800 15px/1 var(--f-body); padding: 15px 22px; border-radius: 999px; background: var(--ink); color: var(--paper-2); border: 2px solid var(--ink); text-decoration: none; cursor: pointer; transition: transform .15s; }
+.btn:hover { transform: translateY(-2px); }
+.btn.ghost { background: transparent; color: var(--ink); }
+nav.links a.btn { color: var(--paper-2); padding: 10px 16px; font-size: 14px; }
+.menu-btn { display: none; background: transparent; color: var(--ink); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font: 800 12px var(--f-body); letter-spacing: .08em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--paper-2); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+
+/* ---------- Hero ---------- */
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line); background: var(--paper); }
+.hero .mark { position: absolute; z-index: -1; right: -6vw; top: 50%; transform: translateY(-50%); width: min(56vw, 560px); opacity: .06; }
+.hero .wrap { padding-block: clamp(64px, 11vw, 124px) clamp(56px, 9vw, 104px); display: flex; flex-direction: column; gap: 16px; }
+.hero h1 { font: 500 clamp(110px, 26vw, 280px)/.82 var(--f-display); letter-spacing: -.05em; margin-left: -.04em; }
+.hero .lead { margin: 10px 0 0; font-size: clamp(17px, 2.2vw, 21px); color: var(--ink-2); max-width: 40ch; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.facts span { font: 700 13px var(--f-body); color: var(--ink-2); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; background: var(--paper-2); }
+.status::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #b8b2a8; margin-right: 8px; vertical-align: 1px; }
+.status.open::before { background: #2fa46a; }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 3; font: 700 13px var(--f-body); color: var(--muted); background: var(--paper-2); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.redo:hover { color: var(--ink); }
+.hero.reveal .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero.reveal .wrap > :nth-child(2) { animation-delay: .06s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .12s }
+.hero.reveal .wrap > :nth-child(4) { animation-delay: .18s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .24s }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+.lattefx { position: absolute; inset: 0; z-index: 5; width: 100%; height: 100%; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+
+/* ---------- Abschnitte ---------- */
+section.block { padding-block: clamp(64px, 10vw, 104px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 40px; margin-bottom: 34px; }
+.head h2 { font: 500 clamp(40px, 6.5vw, 76px)/.98 var(--f-display); letter-spacing: -.03em; margin-top: 12px; }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+.award { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(20px, 4vw, 56px); align-items: center; background: var(--ink); color: var(--paper); border-radius: 28px; padding: clamp(28px, 5vw, 60px); }
+@media (max-width: 760px) { .award { grid-template-columns: minmax(0,1fr); } }
+.award .num { font: 500 clamp(110px, 18vw, 210px)/.8 var(--f-display); letter-spacing: -.06em; }
+.award .num small { font-size: .35em; letter-spacing: 0; vertical-align: top; margin-right: .1em; }
+.award h2 { font: 500 clamp(30px, 4.2vw, 48px)/1.05 var(--f-display); letter-spacing: -.02em; }
+.award p { color: #bdb8b0; margin: 12px 0 0; }
+.award ul { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 8px; }
+.award li { border-top: 1px solid #2c2c2c; padding-top: 8px; color: #e6e2db; font-size: 15px; }
+.glass { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
+@media (max-width: 860px) { .glass { grid-template-columns: minmax(0,1fr); } }
+.glass p { color: var(--ink-2); max-width: 48ch; }
+.pane { position: relative; aspect-ratio: 4 / 3; max-width: 100%; border-radius: 24px; overflow: hidden; border: 1px solid var(--line); background: linear-gradient(115deg, rgba(255,255,255,.75) 0 18%, rgba(255,255,255,.15) 18% 22%, rgba(255,255,255,.55) 22% 40%, rgba(255,255,255,.1) 40% 100%), radial-gradient(120% 90% at 70% 80%, #6b4a33, #2a1d15 70%); }
+.pane canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.pane span { position: absolute; left: 16px; bottom: 14px; font: 800 12px var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: #f6f4f0; background: rgba(17,17,17,.6); padding: 6px 10px; border-radius: 999px; }
+.bar { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 860px) { .bar { grid-template-columns: minmax(0,1fr); } }
+.item { background: var(--paper-2); border: 1px solid var(--line); border-radius: 22px; padding: 26px; display: grid; gap: 8px; align-content: start; }
+.item .tag { font: 800 11px var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: var(--crema); }
+.item h3 { font: 500 26px/1.1 var(--f-display); letter-spacing: -.01em; }
+.item p { margin: 0; color: var(--muted); font-size: 15px; }
+.item .p { font: 800 15px var(--f-body); font-variant-numeric: tabular-nums; }
+.note { margin-top: 20px; font-size: 13px; color: var(--muted); padding: 10px 14px; border-left: 3px solid var(--ink); background: var(--paper-2); border-radius: 0 10px 10px 0; }
+.trade { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 760px) { .trade { grid-template-columns: minmax(0,1fr); } }
+.trade .item h3 { font-size: 34px; }
+.visit { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 760px) { .visit { grid-template-columns: minmax(0,1fr); } }
+.hours { display: grid; gap: 8px; margin: 0; }
+.hours div { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px dashed var(--line); padding-bottom: 8px; font-variant-numeric: tabular-nums; }
+.hours dt { color: var(--muted); }
+.hours dd { margin: 0; font-weight: 700; }
+.hours div.today dt, .hours div.today dd { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+.item .addr { color: var(--ink); font: 500 28px/1.15 var(--f-display); letter-spacing: -.01em; margin: 0; }
+
+footer { padding-block: 40px 96px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 800 14px var(--f-body); padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.25); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="tresmark" viewBox="0 0 64 64"><g fill="currentColor"><path d="M4 4h36a18 18 0 0 1-36 0z"/><path d="M4 23h36a18 18 0 0 1-36 0z"/><path d="M4 42h36a18 18 0 0 1-36 0z"/><path d="M44 4h12a2 2 0 0 1 2 2v11z"/><path d="M44 23h12a2 2 0 0 1 2 2v11z"/><path d="M44 42h12a2 2 0 0 1 2 2v11z"/></g></symbol>
+</svg>
+<div class="proposal"><span><b>Propuesta de diseño</b> para Tres · no es el sitio oficial</span><span>Hecha por <a href="https://5hitcake.github.io/JanOberle/#es" target="_blank" rel="noopener">Jota Labs</a></span></div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#inicio"><svg><use href="#tresmark"/></svg>tres</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENÚ</button>
+    <nav class="links" id="links">
+      <a href="#tostaduria">Tostaduría</a>
+      <a href="#barra">La barra</a>
+      <a href="#granos">Café en grano</a>
+      <a href="#visitanos">Visitanos</a>
+      <a class="btn" href="https://linktr.ee/trestostador" target="_blank" rel="noopener">Tienda online ↗</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="inicio">
+  <svg class="mark" aria-hidden="true"><use href="#tresmark"/></svg>
+  <div class="wrap">
+    <div class="kicker">Café de especialidad · Colegiales</div>
+    <h1>tres</h1>
+    <p class="lead">Tostado en la ciudad de los Buenos Aires. N.º&nbsp;1 en The Best Coffee Shops Argentina 2026.</p>
+    <div class="ctas"><a class="btn" href="#barra">Ver la barra</a><a class="btn ghost" href="#visitanos">Cómo llegar</a></div>
+    <div class="facts"><span class="status" id="statusChip">Lunes a sábado · 8 a 20</span><span>4,6 ★ en Google</span><span>23,7 mil seguidores</span></div>
+  </div>
+  <button class="redo" type="button" id="redo" hidden>↻ Servir otro</button>
+</section>
+
+<section class="block" id="premio">
+  <div class="wrap">
+    <div class="award">
+      <div class="num"><small>N.º</small>1</div>
+      <div>
+        <div class="kicker" style="color:#9d978e">2026</div>
+        <h2>El mejor café de Argentina, en Colegiales.</h2>
+        <p>Elegido entre 381 cafeterías de todo el país.</p>
+        <ul><li>N.º 1 · The Best Coffee Shops Argentina 2026</li><li>Puesto 40 · World's 100 Best Coffee Shops, Sudamérica 2026</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="tostaduria" style="padding-top:0">
+  <div class="wrap glass">
+    <div class="pane" aria-hidden="true"><canvas id="smoke"></canvas><span>Tostador · barra</span></div>
+    <div>
+      <div class="kicker">Tostaduría</div>
+      <div class="head" style="margin:0"><h2>Tostamos detrás del vidrio.</h2></div>
+      <p>El tostador y la barra están separados solo por una pared de vidrio: el café que tomás se tostó a metros de tu mesa. Detrás está Agustina Román, catadora certificada Q-Arabica.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="barra" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">La barra</div><h2>Para pedir hoy</h2></div><p>Una carta corta, pensada alrededor del café.</p></div>
+    <div class="bar">
+      <article class="item"><span class="tag">La firma</span><h3>Tiramisú con espresso</h3><p>Con espresso recién hecho, entre affogato y tiramisú.</p><span class="p">$ —</span></article>
+      <article class="item"><span class="tag">Espresso</span><h3>Espresso y con leche</h3><p>Con el blend de la casa, tostado acá.</p><span class="p">$ —</span></article>
+      <article class="item"><span class="tag">Filtrados</span><h3>Cafés de origen</h3><p>Métodos de filtrado con los orígenes del momento.</p><span class="p">$ —</span></article>
+    </div>
+    <p class="note">Carta de ejemplo para la propuesta (el tiramisú figura en notas de prensa). Productos y precios reales se cargan desde su carta y los pueden actualizar ustedes.</p>
+  </div>
+</section>
+
+<section class="block" id="granos" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Minorista · Mayorista</div><h2>Café en grano</h2></div></div>
+    <div class="trade">
+      <article class="item"><span class="tag">Para tu casa</span><h3>Minorista</h3><p>Café recién tostado, en grano o molido para tu método. Directo desde su tienda online.</p><div class="ctas"><a class="btn" href="https://linktr.ee/trestostador" target="_blank" rel="noopener">Ir a la tienda ↗</a></div></article>
+      <article class="item"><span class="tag">Para tu negocio</span><h3>Mayorista</h3><p>Café para cafeterías, restaurantes y oficinas. En la web, un formulario corto para pedir muestras y precios mayoristas.</p><div class="ctas"><a class="btn ghost" href="https://linktr.ee/trestostador" target="_blank" rel="noopener">Pedir información ↗</a></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="visitanos" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Visitanos</div><h2>Teodoro García 2806</h2></div><p>A pasos de la estación Colegiales.</p></div>
+    <div class="visit">
+      <div class="item">
+        <h3>Horarios</h3>
+        <dl class="hours" id="hours">
+          <div data-d="1"><dt>Lunes</dt><dd>8 a 20</dd></div><div data-d="2"><dt>Martes</dt><dd>8 a 20</dd></div><div data-d="3"><dt>Miércoles</dt><dd>8 a 20</dd></div>
+          <div data-d="4"><dt>Jueves</dt><dd>8 a 20</dd></div><div data-d="5"><dt>Viernes</dt><dd>8 a 20</dd></div><div data-d="6"><dt>Sábado</dt><dd>8 a 20</dd></div><div data-d="0"><dt>Domingo</dt><dd>Cerrado</dd></div>
+        </dl>
+      </div>
+      <div class="item">
+        <h3>Dónde</h3>
+        <p class="addr">Teodoro García 2806<br>Colegiales, CABA</p>
+        <div class="ctas"><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Tres%20Teodoro%20Garc%C3%ADa%202806%20Buenos%20Aires" target="_blank" rel="noopener">Google Maps ↗</a><a class="btn ghost" href="https://www.instagram.com/tres.tostador/" target="_blank" rel="noopener">Instagram ↗</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>Tres · Teodoro García 2806, Colegiales</span><span>Propuesta de diseño de Jota Labs · <a href="https://5hitcake.github.io/JanOberle/#es" target="_blank" rel="noopener">ver más trabajos</a></span></div></footer>
+
+<a class="like" href="https://wa.me/5491130331893?text=Hola%20Jan%21%20Vi%20la%20propuesta%20de%20sitio%20web%20para%20Tres%20y%20me%20gustar%C3%ADa%20saber%20m%C3%A1s." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></svg>¿Te gusta? Hablemos</a>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+
+  /* Live-Status: Mo–Sa 8–20 Uhr, Buenos-Aires-Zeit */
+  function status() {
+    const parts = new Intl.DateTimeFormat("en-US", { timeZone: "America/Argentina/Buenos_Aires", weekday: "short", hour: "numeric", minute: "numeric", hour12: false }).formatToParts(new Date());
+    const get = (t) => parts.find((p) => p.type === t).value;
+    const day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].indexOf(get("weekday")), mins = (Number(get("hour")) % 24) * 60 + Number(get("minute"));
+    const open = day !== 0 && mins >= 480 && mins < 1200, chip = $("#statusChip");
+    chip.classList.toggle("open", open);
+    chip.textContent = open ? "Abierto ahora · hasta las 20" : day === 0 ? "Hoy cerrado · mañana desde las 8" : mins < 480 ? "Cerrado · abre a las 8" : (day === 6 ? "Cerrado · abre el lunes a las 8" : "Cerrado · mañana desde las 8");
+    document.querySelectorAll("#hours div").forEach((d) => d.classList.toggle("today", Number(d.dataset.d) === day));
+  }
+  status(); setInterval(status, 60000);
+
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const tween = (ms, fn, tk, ez = (k) => (k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2)) => new Promise((res) => {
+    const t0 = performance.now();
+    const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(ez(k)); k < 1 ? requestAnimationFrame(step) : res(); };
+    requestAnimationFrame(step);
+  });
+
+  /* Dampf hinter der Glasscheibe (dezent, nur wenn sichtbar) */
+  const sm = $("#smoke"), sctx = sm.getContext("2d"); let smOn = false, puffs = [];
+  function smSize() { const d = Math.min(2, devicePixelRatio || 1); sm.width = sm.clientWidth * d; sm.height = sm.clientHeight * d; sctx.setTransform(d, 0, 0, d, 0, 0); }
+  function smFrame(t) {
+    if (!smOn) return; const w = sm.clientWidth, h = sm.clientHeight; sctx.clearRect(0, 0, w, h);
+    if (puffs.length < 18 && Math.random() < .12) puffs.push({ x: w * (.55 + Math.random() * .25), y: h * .9, r: w * .06, life: 1, ph: Math.random() * 6 });
+    for (const p of puffs) { p.y -= .5; p.r += .12; p.x += Math.sin(t / 900 + p.ph) * .3; p.life -= .004; const g = sctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r); g.addColorStop(0, `rgba(255,255,255,${.22 * p.life})`); g.addColorStop(1, "rgba(255,255,255,0)"); sctx.fillStyle = g; sctx.fillRect(p.x - p.r, p.y - p.r, p.r * 2, p.r * 2); }
+    puffs = puffs.filter((p) => p.life > 0); requestAnimationFrame(smFrame);
+  }
+  if (!reduce) new IntersectionObserver((es) => { const on = es[0].isIntersecting; if (on && !smOn) { smOn = true; smSize(); requestAnimationFrame(smFrame); } else if (!on) smOn = false; }).observe(sm);
+
+  /* ---------- Intro: Latte Art ---------- */
+  const hero = $("#inicio"), redo = $("#redo"); let token = { cancelled: true };
+  async function pour() {
+    token.cancelled = true; const tk = (token = { cancelled: false });
+    hero.querySelectorAll(".lattefx").forEach((n) => n.remove()); hero.classList.remove("reveal"); redo.hidden = true;
+    const w = hero.clientWidth, h = hero.clientHeight, dpr = Math.min(2, devicePixelRatio || 1);
+    const c = document.createElement("canvas"); c.className = "lattefx"; c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); c.setAttribute("aria-hidden", "true");
+    hero.append(c); const ctx = c.getContext("2d"); ctx.scale(dpr, dpr);
+    const cx = w / 2, cy = h * .47, R = Math.min(w, h) * .3, S = R * .62, OY = R * .08;
+    const heart = (s) => { ctx.beginPath(); ctx.moveTo(cx, cy + OY + s * .95); ctx.bezierCurveTo(cx - s * 1.45, cy + OY + s * .05, cx - s * .75, cy + OY - s * 1.05, cx, cy + OY - s * .32); ctx.bezierCurveTo(cx + s * .75, cy + OY - s * 1.05, cx + s * 1.45, cy + OY + s * .05, cx, cy + OY + s * .95); ctx.closePath(); };
+    const P0 = cy + OY - S * .28, P1 = cy + OY + S * .84;   // Durchzug: von der Kerbe oben bis knapp vor die Herzspitze, bleibt im Herz
+    const scene = (grow, sTop, sBot, pull, t) => {
+      ctx.fillStyle = "#f6f4f0"; ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = "rgba(0,0,0,.07)"; ctx.beginPath(); ctx.arc(cx + R * .06, cy + R * .1, R * 1.32, 0, 7); ctx.fill();
+      ctx.fillStyle = "#fbfaf8"; ctx.beginPath(); ctx.arc(cx, cy, R * 1.3, 0, 7); ctx.fill();
+      ctx.strokeStyle = "#e7e3dc"; ctx.lineWidth = 1; ctx.stroke();
+      ctx.fillStyle = "#ffffff"; ctx.beginPath(); ctx.arc(cx, cy, R * 1.05, 0, 7); ctx.fill();
+      const g = ctx.createRadialGradient(cx - R * .2, cy - R * .2, R * .1, cx, cy, R);
+      g.addColorStop(0, "#c58a54"); g.addColorStop(.6, "#9a5f31"); g.addColorStop(1, "#5e3519");
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx, cy, R * .92, 0, 7); ctx.fill();
+      if (grow > 0) {
+        const s = S * grow, wob = Math.sin(t / 120) * R * .02 * (1 - grow);
+        ctx.save(); ctx.translate(wob, 0); heart(s);
+        const fg = ctx.createRadialGradient(cx, cy, s * .2, cx, cy, s * 1.2); fg.addColorStop(0, "#fffaf1"); fg.addColorStop(.85, "#f3e4cc"); fg.addColorStop(1, "#d9b88f");
+        ctx.fillStyle = fg; ctx.fill(); ctx.restore();
+      }
+      if (pull > 0) {   // weißer Milchstrich, bleibt im Herz
+        const ye = P0 + (P1 - P0) * pull; ctx.lineCap = "round";
+        ctx.strokeStyle = "rgba(200,164,122,.28)"; ctx.lineWidth = R * .045; ctx.beginPath(); ctx.moveTo(cx, P0); ctx.lineTo(cx, ye); ctx.stroke();
+        ctx.strokeStyle = "#fffaf1"; ctx.lineWidth = R * .028; ctx.beginPath(); ctx.moveTo(cx, P0); ctx.lineTo(cx, ye); ctx.stroke();
+      }
+      if (sBot > sTop) { ctx.strokeStyle = "rgba(255,252,246,.97)"; ctx.lineWidth = R * .06; ctx.lineCap = "round"; ctx.beginPath(); ctx.moveTo(cx + Math.sin(t / 90) * 1.5, sTop); ctx.lineTo(cx, sBot); ctx.stroke(); ctx.strokeStyle = "rgba(0,0,0,.06)"; ctx.lineWidth = 1; ctx.stroke(); }
+    };
+    const tp = cy - R * .2;
+    await sleep(300);
+    await tween(800, (e) => scene(0, 0, tp * e, 0, performance.now()), tk);
+    await tween(2300, (e) => scene(e, 0, tp, 0, performance.now()), tk);
+    await tween(900, (e) => scene(1, P0 * e, tp + (P1 - tp) * e, e, performance.now()), tk);
+    if (tk.cancelled) return;
+    scene(1, 0, 0, 1, 0); await sleep(700); if (tk.cancelled) return;
+    hero.classList.add("reveal");
+    await tween(1000, (e) => { c.style.opacity = String(1 - e); c.style.transform = `scale(${1 + e * .35})`; }, tk);
+    if (tk.cancelled) return;
+    c.remove(); redo.hidden = false;
+  }
+  redo.addEventListener("click", pour);
+  if (!reduce) pour();
+})();
+</script>
+</body>
+</html>
