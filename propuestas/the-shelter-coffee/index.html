@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>The Shelter Coffee · Propuesta de diseño</title>
+<meta name="description" content="Propuesta de sitio web para The Shelter Coffee, preparada por Jota Labs. No es el sitio oficial.">
+<meta property="og:title" content="The Shelter Coffee · Propuesta de diseño">
+<meta property="og:description" content="5 refugios de café en Buenos Aires. Propuesta de Jota Labs.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23000'/%3E%3Cellipse cx='32' cy='32' rx='15' ry='20' fill='%23b97a45' transform='rotate(30 32 32)'/%3E%3Cpath d='M24 18c10 8-2 20 16 28' stroke='%23000' stroke-width='3' fill='none'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Manrope:wght@400;600;800&display=swap">
+<style>
+/* Layout: Filial-Intro (fünf Kaffeebohnen fallen an die Lage der Filialen, eine Linie verbindet sie, alles gleitet weg),
+   treibende Kaffeebohnen als Hintergrund, Encontrá tu Shelter (Filialfinder mit Standort und Live-Status), Lo nuestro,
+   Menú, Granos para casa, Visitanos. Schwarz und Creme wie Logo und Highlights, Kaffeebraun aus den Fotos. */
+:root {
+  --bg: #111; --bg-2: #1a1816; --bg-3: #24211e; --line: #3a3530; --fg: #f3efe6; --soft: #ddd5c8; --muted: #9d968b;
+  --bean: #b97a45; --roast: #3a2416; --cream: #f3efe6;
+  --f-display: "Oswald", "Arial Narrow", sans-serif;
+  --f-body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-weight: 700; text-wrap: balance; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 800 12px/1.2 var(--f-body); letter-spacing: .18em; text-transform: uppercase; color: var(--bean); }
+:focus-visible { outline: 2px solid var(--bean); outline-offset: 3px; }
+
+.proposal { background: #000; color: #e9ebee; font: 13px/1.4 var(--f-body); padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; border-bottom: 1px solid #222; }
+.proposal b { color: #ffd166; }
+.proposal a { color: #fff; font-weight: 800; }
+
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo .seal { width: 44px; height: 44px; border-radius: 50%; background: #000; border: 1px solid #333; display: grid; place-items: center; text-align: center; font: 700 9px/1 var(--f-display); letter-spacing: .01em; }
+.logo .seal small { display: block; font-size: 4.5px; letter-spacing: .35em; font-weight: 500; margin-top: 2px; }
+.logo b { font: 700 20px/1 var(--f-display); text-transform: uppercase; }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 14px; font-weight: 600; color: var(--muted); }
+nav.links a:hover { color: var(--fg); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 800 15px/1 var(--f-body); padding: 15px 22px; border-radius: 999px; background: var(--cream); color: #111; border: 2px solid var(--cream); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(243,239,230,.15); }
+.btn.ghost { background: transparent; color: var(--fg); border-color: rgba(243,239,230,.4); }
+.btn.ghost:hover { box-shadow: none; border-color: var(--fg); }
+.btn.bean { background: var(--bean); border-color: var(--bean); color: #111; }
+.btn svg { width: 18px; height: 18px; }
+nav.links a.btn { color: #111; padding: 10px 16px; font-size: 14px; }
+.menu-btn { display: none; background: transparent; color: var(--fg); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font: 800 12px var(--f-body); letter-spacing: .08em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bg-2); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+
+/* ---------- Hero ---------- */
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line);
+  background: radial-gradient(70vw 55vw at 100% 100%, rgba(185,122,69,.2), transparent 70%), var(--bg); }
+.hero .wrap { position: relative; z-index: 1; padding-block: clamp(90px, 13vw, 150px) clamp(56px, 9vw, 104px); display: flex; flex-direction: column; gap: 16px; }
+.hero h1 { font: 700 clamp(64px, 13vw, 160px)/.9 var(--f-display); text-transform: uppercase; letter-spacing: .005em; }
+.hero h1 small { display: block; font: 500 .26em/1.6 var(--f-display); letter-spacing: .62em; color: var(--muted); margin-top: .1em; }
+.hero .lead { margin: 4px 0 0; font-size: clamp(17px, 2.2vw, 21px); color: var(--soft); max-width: 42ch; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.facts span { font: 700 13px var(--f-body); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; background: rgba(17,17,17,.75); }
+.facts span b { color: var(--fg); }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 7; font: 700 13px var(--f-body); color: var(--muted); background: rgba(17,17,17,.85); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.redo:hover { color: var(--fg); }
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero.reveal .wrap > :nth-child(2) { animation-delay: .06s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .12s }
+.hero.reveal .wrap > :nth-child(4) { animation-delay: .18s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .24s }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+.beans-bg { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; }
+.intro { position: absolute; inset: 0; z-index: 5; background: #111; transition: transform .9s cubic-bezier(.7,0,.3,1); }
+.intro svg { position: absolute; inset: 0; }
+.intro .motto { position: absolute; left: 0; right: 0; text-align: center; font: 700 clamp(24px, 4.4vw, 46px)/1.1 var(--f-display); text-transform: uppercase; color: var(--fg); opacity: 0; transition: opacity .5s; padding-inline: 20px; }
+.intro .motto small { display: block; font: 500 .38em/1.8 var(--f-display); letter-spacing: .5em; color: var(--muted); }
+
+/* ---------- Abschnitte ---------- */
+section.block { padding-block: clamp(64px, 10vw, 104px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 40px; margin-bottom: 30px; }
+.head h2 { font: 700 clamp(40px, 6.4vw, 76px)/.98 var(--f-display); text-transform: uppercase; margin-top: 10px; }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+.note { margin-top: 20px; font-size: 13px; color: var(--muted); padding: 10px 14px; border-left: 3px solid var(--bean); background: var(--bg-2); border-radius: 0 10px 10px 0; }
+
+/* Filialfinder */
+.finder-bar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 18px; }
+.finder-bar small { color: var(--muted); }
+.shops { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 14px; }
+.shop { border: 1px solid var(--line); border-radius: 22px; padding: 22px; background: var(--bg-2); display: grid; gap: 8px; align-content: start; transition: border-color .3s, transform .3s; }
+.shop.near { border-color: var(--bean); }
+.shop .top { display: flex; justify-content: space-between; align-items: start; gap: 10px; }
+.shop h3 { font: 700 30px/1 var(--f-display); text-transform: uppercase; }
+.shop .addr { margin: 0; color: var(--soft); }
+.shop .dist { font: 800 13px var(--f-body); color: var(--bean); white-space: nowrap; }
+.shop .badge { font: 800 11px var(--f-body); letter-spacing: .12em; text-transform: uppercase; background: var(--bean); color: #111; border-radius: 999px; padding: 4px 9px; }
+.st { font: 700 13px var(--f-body); color: var(--muted); }
+.st::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); margin-right: 8px; vertical-align: 1px; }
+.st.open { color: var(--fg); } .st.open::before { background: #5fd38a; box-shadow: 0 0 10px #5fd38a; }
+.shop .links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.shop .links a { font: 800 13px var(--f-body); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 8px 13px; color: var(--soft); }
+.shop .links a:hover { border-color: var(--fg); color: var(--fg); }
+
+.items { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 14px; }
+@media (max-width: 960px) { .items { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 460px) { .items { grid-template-columns: minmax(0,1fr); } }
+.item { border-radius: 22px; padding: 24px 20px; background: var(--cream); color: #1b1612; display: grid; gap: 8px; align-content: start; }
+.item svg { width: 52px; height: 52px; }
+.item h3 { font: 700 26px/1.05 var(--f-display); text-transform: uppercase; }
+.item p { margin: 0; color: #5b5148; font-size: 15px; }
+.menu-cta { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 24px; align-items: center; border-radius: 28px; padding: clamp(28px, 5vw, 56px); background: var(--bean); color: #111; }
+@media (max-width: 760px) { .menu-cta { grid-template-columns: minmax(0,1fr); } }
+.menu-cta h2 { font: 700 clamp(34px, 5vw, 58px)/1 var(--f-display); text-transform: uppercase; }
+.menu-cta p { margin: 10px 0 0; max-width: 46ch; color: #2b1d12; }
+.menu-cta .btn { background: #111; color: var(--cream); border-color: #111; }
+.split { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 760px) { .split { grid-template-columns: minmax(0,1fr); } }
+.card { border: 1px solid var(--line); border-radius: 22px; padding: 26px; background: var(--bg-2); display: grid; gap: 12px; align-content: start; }
+.card h3 { font: 700 28px/1.05 var(--f-display); text-transform: uppercase; }
+.card p { margin: 0; color: var(--soft); }
+.card a.tel { color: var(--fg); font-weight: 800; }
+.card .tag { font: 800 12px var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--bean); }
+
+footer { padding-block: 40px 96px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 800 14px var(--f-body); padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.35); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></symbol>
+  <symbol id="bean" viewBox="-20 -28 40 56"><ellipse rx="17" ry="25" fill="currentColor"/><path d="M-3 -23c9 9 -6 20 4 46" stroke="#1b120c" stroke-width="3.6" fill="none" stroke-linecap="round"/></symbol>
+</svg>
+<div class="proposal"><span><b>Propuesta de diseño</b> para The Shelter Coffee · no es el sitio oficial</span><span>Hecha por <a href="https://5hitcake.github.io/JanOberle/#es" target="_blank" rel="noopener">Jota Labs</a></span></div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#inicio"><span class="seal" aria-hidden="true"><span>THE SHELTER<small>COFFEE</small></span></span><b>The Shelter</b></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENÚ</button>
+    <nav class="links" id="links">
+      <a href="#sucursales">Sucursales</a>
+      <a href="#nuestro">Lo nuestro</a>
+      <a href="#menu">Menú</a>
+      <a href="#visitanos">Contacto</a>
+      <a class="btn" href="#sucursales">Encontrá tu Shelter</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero pre" id="inicio">
+  <canvas class="beans-bg" id="beansBg" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="kicker">Specialty coffee · Buenos Aires</div>
+    <h1>The Shelter<small>Coffee</small></h1>
+    <p class="lead">Tu refugio de café en Belgrano, Villa Crespo, Recoleta, Balvanera y Martínez.</p>
+    <div class="ctas"><a class="btn" href="#sucursales">Encontrá tu Shelter</a><a class="btn ghost" href="https://menu.fu.do/thesheltercoffeeuriburu/qr-menu" target="_blank" rel="noopener">Ver menú</a></div>
+    <div class="facts"><span><b>5</b> sucursales</span><span>Leche de almendras <b>casera</b></span><span><b>54 mil</b> seguidores</span></div>
+  </div>
+  <button class="redo" type="button" id="redo" hidden>↻ Ver los refugios</button>
+</section>
+
+<section class="block" id="sucursales">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">5 refugios</div><h2>Encontrá tu Shelter</h2></div><p>Cuál te queda más cerca, si está abierto ahora y cómo llegar, en un toque.</p></div>
+    <div class="finder-bar"><button class="btn bean" type="button" id="locate">◎ ¿Cuál me queda más cerca?</button><small id="locMsg">Usa tu ubicación solo en tu teléfono, no se guarda.</small></div>
+    <div class="shops" id="shops"></div>
+    <p class="note">Horarios de ejemplo (los de Arroyo según Google): en la versión final cada local muestra los suyos y el estado “abierto ahora” se calcula solo, con la hora de Buenos Aires.</p>
+  </div>
+</section>
+
+<section class="block" id="nuestro" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Lo nuestro</div><h2>Hecho en casa</h2></div><p>Lo que más piden los que vuelven.</p></div>
+    <div class="items">
+      <article class="item"><svg viewBox="0 0 52 52" aria-hidden="true"><path d="M10 18h28v14a12 12 0 0 1-12 12h-4a12 12 0 0 1-12-12z" fill="#3a2416"/><path d="M38 22h3a5 5 0 0 1 0 10h-3" fill="none" stroke="#3a2416" stroke-width="3"/><path d="M18 26c3-4 9-4 12 0-3 4-9 4-12 0z" fill="#f3efe6"/></svg><h3>Flat white</h3><p>Espresso doble y leche sedosa, el clásico de la casa.</p></article>
+      <article class="item"><svg viewBox="0 0 52 52" aria-hidden="true"><path d="M20 8h12v8l6 8v18a4 4 0 0 1-4 4H18a4 4 0 0 1-4-4V24l6-8z" fill="#f3efe6" stroke="#3a2416" stroke-width="3"/><ellipse cx="26" cy="34" rx="5" ry="7" fill="#b97a45"/></svg><h3>Leche de almendras</h3><p>Casera, hecha por nosotros. Pedila en cualquier café.</p></article>
+      <article class="item"><svg viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="27" r="17" fill="#b97a45"/><path d="M26 27m0-3a3 3 0 1 1-3 3 7 7 0 1 1 7 7 11 11 0 1 1-11-11" fill="none" stroke="#3a2416" stroke-width="3"/></svg><h3>Cinnamon rolls</h3><p>Recién horneados, para acompañar el café.</p></article>
+      <article class="item"><svg viewBox="0 0 52 52" aria-hidden="true"><path d="M12 8h28L30 26v4h-8v-4z" fill="#f3efe6" stroke="#3a2416" stroke-width="3" stroke-linejoin="round"/><path d="M14 34h24l-2 12H16z" fill="#3a2416"/><path d="M26 30v4" stroke="#3a2416" stroke-width="3"/></svg><h3>Pour-over</h3><p>Filtrados a mano, para conocer cada origen.</p></article>
+    </div>
+    <p class="note">Productos mencionados en reseñas y notas de prensa; descripciones de ejemplo.</p>
+  </div>
+</section>
+
+<section class="block" id="menu" style="padding-top:0">
+  <div class="wrap">
+    <div class="menu-cta">
+      <div><div class="kicker" style="color:#2b1d12">El menú</div><h2>Mirá la carta antes de llegar</h2><p>Su menú digital, integrado en la página y siempre actualizado, en vez de un link escondido en la bio.</p></div>
+      <a class="btn" href="https://menu.fu.do/thesheltercoffeeuriburu/qr-menu" target="_blank" rel="noopener">Abrir el menú ↗</a>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="visitanos" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Más que café</div><h2>Un refugio en cada barrio</h2></div></div>
+    <div class="split">
+      <div class="card"><span class="tag">Idea</span><h3>Granos para casa</h3><p>Una tienda simple para llevarse el café de The Shelter en grano o molido, con retiro en el local que te quede más cerca.</p></div>
+      <div class="card"><span class="tag">Contacto</span><h3>Escribinos</h3><p>Teléfono <a class="tel" href="tel:+541143263463">11 4326-3463</a></p><div class="ctas"><a class="btn ghost" href="https://www.instagram.com/thesheltercoffee/" target="_blank" rel="noopener">Instagram ↗</a></div></div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>The Shelter Coffee · 5 sucursales en Buenos Aires</span><span>Propuesta de diseño de Jota Labs · <a href="https://5hitcake.github.io/JanOberle/#es" target="_blank" rel="noopener">ver más trabajos</a></span></div></footer>
+
+<a class="like" href="https://wa.me/5491130331893?text=Hola%20Jan%21%20Vi%20la%20propuesta%20de%20sitio%20web%20para%20The%20Shelter%20Coffee%20y%20me%20gustar%C3%ADa%20saber%20m%C3%A1s." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>¿Te gusta? Hablemos</a>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const tween = (ms, fn, tk) => new Promise((res) => {
+    const t0 = performance.now();
+    const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2, k); k < 1 ? requestAnimationFrame(step) : res(); };
+    requestAnimationFrame(step);
+  });
+
+  /* ---------- Filialen ---------- */
+  const SHOPS = [
+    { id: "martinez", barrio: "Martínez", addr: "Av. del Libertador 13131", lat: -34.4935, lon: -58.5005, sx: -2.6, sy: 3 },
+    { id: "loreto", barrio: "Belgrano", addr: "Virrey Loreto 2035", lat: -34.5658, lon: -58.4497, sx: -.6, sy: 1.7 },
+    { id: "fitzroy", barrio: "Villa Crespo", addr: "Fitz Roy 835", lat: -34.5956, lon: -58.443, sx: -2, sy: .2 },
+    { id: "uriburu", barrio: "Balvanera", addr: "Uriburu 353", lat: -34.604, lon: -58.4005, sx: -.4, sy: -1 },
+    { id: "arroyo", barrio: "Recoleta", addr: "Arroyo 940", lat: -34.5928, lon: -58.38, sx: 1.6, sy: .4 },
+  ];
+  const HOURS = { 1: [480, 1200], 2: [480, 1200], 3: [480, 1200], 4: [480, 1200], 5: [480, 1200], 6: [510, 1200] }; // Beispiel: Arroyo laut Google
+  function openNow() {
+    const parts = new Intl.DateTimeFormat("en-US", { timeZone: "America/Argentina/Buenos_Aires", weekday: "short", hour: "numeric", minute: "numeric", hour12: false }).formatToParts(new Date());
+    const get = (t) => parts.find((x) => x.type === t).value, wd = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].indexOf(get("weekday"));
+    const m = (+get("hour") % 24) * 60 + +get("minute"), hh = HOURS[wd];
+    return hh && m >= hh[0] && m < hh[1];
+  }
+  const shopsBox = $("#shops");
+  function render(dist) {
+    const open = openNow(), list = dist ? [...SHOPS].sort((a, b) => dist[a.id] - dist[b.id]) : SHOPS;
+    shopsBox.innerHTML = list.map((s, i) => `<article class="shop${dist && i === 0 ? " near" : ""}">
+      <div class="top"><h3>${s.barrio}</h3>${dist && i === 0 ? '<span class="badge">Más cerca</span>' : dist ? `<span class="dist">${dist[s.id].toFixed(1).replace(".", ",")} km</span>` : ""}</div>
+      <p class="addr">${s.addr}</p>
+      <span class="st${open ? " open" : ""}">${open ? "Abierto ahora" : "Cerrado ahora"} · lun a vie 8–20 · sáb 8:30–20</span>
+      <div class="links"><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("The Shelter Coffee " + s.addr + " Buenos Aires")}" target="_blank" rel="noopener">Cómo llegar ↗</a><a href="https://menu.fu.do/thesheltercoffeeuriburu/qr-menu" target="_blank" rel="noopener">Menú</a></div>
+    </article>`).join("");
+  }
+  render(); setInterval(() => render(lastDist), 60000);
+  let lastDist = null;
+  const hav = (a, b, c, d) => { const R = 6371, r = Math.PI / 180, x = Math.sin((c - a) * r / 2) ** 2 + Math.cos(a * r) * Math.cos(c * r) * Math.sin((d - b) * r / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(x)); };
+  $("#locate").addEventListener("click", () => {
+    const msg = $("#locMsg");
+    if (!navigator.geolocation) { msg.textContent = "Tu navegador no permite ubicación."; return; }
+    msg.textContent = "Buscando tu ubicación…";
+    navigator.geolocation.getCurrentPosition((p) => {
+      lastDist = Object.fromEntries(SHOPS.map((s) => [s.id, hav(p.coords.latitude, p.coords.longitude, s.lat, s.lon)]));
+      render(lastDist); msg.textContent = "Ordenados por distancia.";
+    }, () => { msg.textContent = "No pudimos usar tu ubicación. Elegí tu barrio de la lista."; }, { timeout: 8000 });
+  });
+
+  /* ---------- Bohnen: Zeichnen ---------- */
+  function bean(ctx, x, y, s, rot, col, crease) {
+    ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.fillStyle = col; ctx.beginPath(); ctx.ellipse(0, 0, s * .68, s, 0, 0, 7); ctx.fill();
+    ctx.strokeStyle = crease; ctx.lineWidth = s * .15; ctx.lineCap = "round"; ctx.beginPath(); ctx.moveTo(-s * .1, -s * .9); ctx.bezierCurveTo(s * .45, -s * .3, -s * .4, s * .3, s * .08, s * .9); ctx.stroke(); ctx.restore();
+  }
+
+  /* ---------- Hintergrund: Kaffeebohnen treiben langsam ---------- */
+  const hero = $("#inicio"), bc = $("#beansBg"), bx = bc.getContext("2d");
+  let BEANS = [];
+  function seed(w, h) { const n = Math.round(w * h / 9000); BEANS = Array.from({ length: n }, () => ({ x: Math.random() * w, y: Math.random() * h, s: 7 + Math.random() * 12, r: Math.random() * 6.28, vr: (Math.random() - .5) * .006, vy: .1 + Math.random() * .22, a: .05 + Math.random() * .09 })); }
+  function beansBg() {
+    const dpr = Math.min(2, devicePixelRatio || 1), w = hero.clientWidth, h = hero.clientHeight;
+    if (bc.width !== Math.round(w * dpr) || bc.height !== Math.round(h * dpr)) { bc.width = Math.round(w * dpr); bc.height = Math.round(h * dpr); seed(w, h); }
+    bx.setTransform(dpr, 0, 0, dpr, 0, 0); bx.clearRect(0, 0, w, h);
+    for (const b of BEANS) {
+      if (!reduce) { b.y += b.vy; b.r += b.vr; if (b.y > h + 30) { b.y = -30; b.x = Math.random() * w; } }
+      bx.globalAlpha = b.a; bean(bx, b.x, b.y, b.s, b.r, "#b97a45", "#111");
+    }
+    bx.globalAlpha = 1;
+    if (!reduce) requestAnimationFrame(beansBg);
+  }
+  requestAnimationFrame(beansBg);
+
+  /* ---------- Intro: fünf Bohnen fallen an die Lage der Filialen, eine Linie verbindet sie ---------- */
+  const NS = "http://www.w3.org/2000/svg", redo = $("#redo");
+  const mk = (tag, a, p) => { const n = document.createElementNS(NS, tag); for (const k in a) n.setAttribute(k, a[k]); if (p) p.append(n); return n; };
+  let token = { cancelled: true };
+  async function refugios() {
+    token.cancelled = true; const tk = (token = { cancelled: false });
+    hero.querySelectorAll(".intro").forEach((n) => n.remove());
+    hero.classList.remove("reveal"); hero.classList.add("pre"); redo.hidden = true;
+    const box = document.createElement("div"); box.className = "intro"; hero.append(box);
+    const w = hero.clientWidth, h = hero.clientHeight;
+    const svg = mk("svg", { viewBox: `0 0 ${w} ${h}`, width: w, height: h }, box);
+    const xs = SHOPS.map((s) => s.sx), ys = SHOPS.map((s) => s.sy), pad = Math.max(70, w * .16);
+    const sc = Math.min((w - pad * 2) / (Math.max(...xs) - Math.min(...xs)), (h * .4) / (Math.max(...ys) - Math.min(...ys)));
+    const P = SHOPS.map((s) => [w / 2 + (s.sx - (Math.min(...xs) + Math.max(...xs)) / 2) * sc, h * .37 - (s.sy - (Math.min(...ys) + Math.max(...ys)) / 2) * sc, s.barrio]);
+    const line = mk("path", { d: "M" + P.map((p) => p.join(" ").split(" ").slice(0, 2).join(" ")).join(" L"), fill: "none", stroke: "#b97a45", "stroke-width": 2.5, "stroke-linecap": "round" }, svg);
+    const L = line.getTotalLength(); line.style.strokeDasharray = L; line.style.strokeDashoffset = L;
+    const cum = [0]; for (let i = 1; i < P.length; i++) cum.push(cum[i - 1] + Math.hypot(P[i][0] - P[i - 1][0], P[i][1] - P[i - 1][1]));
+    const S = Math.max(13, Math.min(22, w * .03)), fs = Math.max(14, Math.min(22, w * .034));
+    const marks = P.map(([x, y, n]) => {
+      const g = mk("g", { opacity: 0 }, svg);
+      const u = mk("use", { href: "#bean", x: -S, y: -S * 1.4, width: S * 2, height: S * 2.8, color: "#b97a45" }, g);
+      const right = x < w * .62;
+      const t = mk("text", { x: right ? S + 8 : -S - 8, y: fs * .35, "text-anchor": right ? "start" : "end", fill: "#f3efe6", "font-family": "Oswald, sans-serif", "font-weight": 700, "font-size": fs, "letter-spacing": ".04em" }, g);
+      t.textContent = n.toUpperCase();
+      return { g, u, x, y };
+    });
+    const motto = document.createElement("div"); motto.className = "motto"; motto.innerHTML = "5 refugios<small>en Buenos Aires</small>"; motto.style.bottom = Math.max(30, h * .1) + "px"; box.append(motto);
+    await sleep(250);
+    for (let i = 0; i < marks.length && !tk.cancelled; i++) {
+      const m = marks[i]; m.g.setAttribute("opacity", 1);
+      const rot0 = (Math.random() - .5) * 140;
+      await tween(520, (e, k) => {
+        const b = k < .7 ? (k / .7) ** 2 : 1 - Math.sin((k - .7) / .3 * Math.PI) * .12;
+        const y = m.y - (1 - b) * (h * .35);
+        m.u.setAttribute("transform", `rotate(${rot0 * (1 - k) + 25} 0 0)`);
+        m.g.setAttribute("transform", `translate(${m.x} ${y})`);
+      }, tk);
+      if (i < marks.length - 1) await tween(380, (e) => (line.style.strokeDashoffset = L - (cum[i] + (cum[i + 1] - cum[i]) * e)), tk);
+    }
+    if (tk.cancelled) return box.remove();
+    motto.style.opacity = "1"; await sleep(1200); if (tk.cancelled) return box.remove();
+    hero.classList.remove("pre"); hero.classList.add("reveal");
+    box.style.transform = "translateY(-101%)"; await sleep(950); box.remove();
+    if (!tk.cancelled) redo.hidden = false;
+  }
+  redo.addEventListener("click", refugios);
+  if (reduce) hero.classList.remove("pre"); else refugios();
+})();
+</script>
+</body>
+</html>
