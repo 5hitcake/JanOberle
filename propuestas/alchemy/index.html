@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Alchemy · Propuesta de diseño</title>
+<meta name="description" content="Propuesta de sitio web para Alchemy, The Ice Cream Bar en Palermo, preparada por Jota Labs. No es el sitio oficial.">
+<meta property="og:title" content="Alchemy · Propuesta de diseño">
+<meta property="og:description" content="The ice cream bar. Ser distintos es la regla. Propuesta de Jota Labs.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-68 -132 600 600'%3E%3Ccircle cx='232' cy='168' r='300' fill='%23303030'/%3E%3Cpath d='M2 0H462L232 400Z M82 45L232 305L382 45Z' fill='%237ac68c' fill-rule='evenodd'/%3E%3Crect x='0' y='175' width='464' height='42' fill='%23397a98'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Manrope:wght@400;600;800&display=swap">
+<style>
+/* Layout: Logo-Intro (das Alchemie-Dreieck baut sich auf und fliegt an seinen Platz), blasses Periodensystem als
+   Hintergrund, Tabla de sabores (interaktiv, filterbar), El laboratorio, Cócteles helados, Vegan, 10 años, Visitanos.
+   Farben aus dem Logo: Grün, Blau, Oliv, Orange auf Anthrazit. */
+:root {
+  --bg: #262626; --bg-2: #2e2e2e; --bg-3: #353535; --line: #444; --fg: #f4efe6; --soft: #d9d3c8; --muted: #a3a09a;
+  --green: #7ac68c; --blue: #397a98; --olive: #977303; --orange: #ef9a26; --ink: #13241a;
+  --f-display: "Cinzel", Georgia, "Times New Roman", serif;
+  --f-body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-weight: 700; text-wrap: balance; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 800 12px/1.2 var(--f-body); letter-spacing: .18em; text-transform: uppercase; color: var(--green); }
+:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+
+.proposal { background: #000; color: #e9ebee; font: 13px/1.4 var(--f-body); padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; }
+.proposal b { color: #ffd166; }
+.proposal a { color: #fff; font-weight: 800; }
+
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo .seal { width: 40px; height: 40px; border-radius: 50%; background: #303030; display: grid; place-items: center; border: 1px solid var(--line); }
+.logo .seal svg { width: 62%; }
+.logo b { font: 900 21px/1 var(--f-display); letter-spacing: .03em; }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 14px; font-weight: 600; color: var(--muted); }
+nav.links a:hover { color: var(--fg); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 800 15px/1 var(--f-body); padding: 15px 22px; border-radius: 999px; background: var(--green); color: var(--ink); border: 2px solid var(--green); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(122,198,140,.28); }
+.btn.ghost { background: transparent; color: var(--fg); border-color: rgba(244,239,230,.4); }
+.btn.ghost:hover { box-shadow: none; border-color: var(--fg); }
+.btn svg { width: 18px; height: 18px; }
+nav.links a.btn { color: var(--ink); padding: 10px 16px; font-size: 14px; }
+.menu-btn { display: none; background: transparent; color: var(--fg); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font: 800 12px var(--f-body); letter-spacing: .08em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bg-2); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+
+/* ---------- Hero ---------- */
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line);
+  background: radial-gradient(60vw 45vw at 100% 0%, rgba(122,198,140,.13), transparent 70%), radial-gradient(60vw 45vw at 0% 100%, rgba(239,154,38,.11), transparent 70%), var(--bg); }
+.hero .wrap { position: relative; z-index: 1; padding-block: clamp(56px, 9vw, 110px); display: grid; grid-template-columns: minmax(0,1.25fr) minmax(0,.75fr); gap: 24px clamp(24px, 5vw, 64px); align-items: center; }
+@media (max-width: 860px) { .hero .wrap { grid-template-columns: minmax(0,1fr); } .hero-mark { order: -1; } }
+.hero .copy { display: flex; flex-direction: column; gap: 16px; }
+.hero h1 { font: 900 clamp(56px, 8.6vw, 124px)/.95 var(--f-display); letter-spacing: .01em; }
+.hero h1 small { display: block; font: 800 clamp(13px, 1.6vw, 16px)/1.6 var(--f-body); letter-spacing: .3em; color: var(--orange); margin-bottom: 6px; }
+.hero .lead { margin: 0; font-size: clamp(17px, 2.2vw, 21px); color: var(--soft); max-width: 40ch; }
+.hero .lead b { color: var(--fg); }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 6px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+.facts span { font: 700 13px var(--f-body); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; background: rgba(38,38,38,.75); }
+.facts span b { color: var(--fg); }
+.hero-mark { justify-self: center; width: clamp(150px, 30vw, 360px); aspect-ratio: 1; border-radius: 50%; background: #303030; display: grid; place-items: center; box-shadow: 0 0 0 1px var(--line), 0 30px 80px rgba(0,0,0,.4); }
+.hero-mark svg { width: 64%; display: block; }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 7; font: 700 13px var(--f-body); color: var(--muted); background: rgba(38,38,38,.85); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.redo:hover { color: var(--fg); }
+.hero.pre .copy > *, .hero.pre .hero-mark { opacity: 0; }
+.hero.reveal .copy > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero.reveal .copy > :nth-child(2) { animation-delay: .06s } .hero.reveal .copy > :nth-child(3) { animation-delay: .12s }
+.hero.reveal .copy > :nth-child(4) { animation-delay: .18s } .hero.reveal .copy > :nth-child(5) { animation-delay: .24s }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .copy > * { animation: none; } }
+.ptable { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; }
+.intro { position: absolute; inset: 0; z-index: 5; background: #303030; transition: opacity .8s; pointer-events: none; }
+.intro svg.mark { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+.intro .motto { position: absolute; left: 0; right: 0; text-align: center; font: 700 clamp(18px, 3vw, 30px)/1.3 var(--f-display); letter-spacing: .06em; color: var(--fg); opacity: 0; transition: opacity .5s; padding-inline: 20px; }
+
+/* ---------- Abschnitte ---------- */
+section.block { padding-block: clamp(64px, 10vw, 104px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 40px; margin-bottom: 30px; }
+.head h2 { font: 900 clamp(36px, 5.6vw, 66px)/1 var(--f-display); margin-top: 10px; }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+.note { margin-top: 20px; font-size: 13px; color: var(--muted); padding: 10px 14px; border-left: 3px solid var(--orange); background: var(--bg-2); border-radius: 0 10px 10px 0; }
+
+/* Tabla de sabores */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.filters button { font: 800 14px var(--f-body); color: var(--soft); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 9px 15px; cursor: pointer; }
+.filters button:hover { color: var(--fg); border-color: var(--muted); }
+.filters button[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.table { display: grid; grid-template-columns: minmax(0,1fr) minmax(260px, 340px); gap: 18px; align-items: start; }
+@media (max-width: 860px) { .table { grid-template-columns: minmax(0,1fr); } }
+.tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 10px; }
+.tile { aspect-ratio: 1; border: 2px solid var(--c, var(--green)); border-radius: 12px; background: var(--bg-2); color: var(--fg); padding: 9px 10px; display: grid; grid-template-rows: auto 1fr auto; text-align: left; cursor: pointer; font: inherit; transition: transform .2s, opacity .3s, background .2s; }
+.tile:hover { transform: translateY(-3px); }
+.tile[aria-pressed="true"] { background: var(--c, var(--green)); color: #161616; }
+.tile .n { font: 800 13px/1 var(--f-body); color: var(--c); }
+.tile[aria-pressed="true"] .n { color: #161616; }
+.tile .s { font: 700 40px/1 Georgia, "Times New Roman", serif; align-self: center; }
+.tile .nm { font: 700 12px/1.15 var(--f-body); opacity: .8; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tile.dim { opacity: .18; }
+.detail { position: sticky; top: 90px; border: 1px solid var(--line); border-radius: 22px; background: var(--bg-2); padding: 24px; display: grid; gap: 10px; }
+.detail .big { width: 112px; height: 112px; border: 3px solid var(--c, var(--green)); border-radius: 16px; display: grid; grid-template-rows: auto 1fr; padding: 10px 12px; }
+.detail .big span { font: 800 14px var(--f-body); color: var(--c); }
+.detail .big b { font: 700 54px/1 Georgia, serif; align-self: center; }
+.detail h3 { font: 900 28px/1.1 var(--f-display); }
+.detail p { margin: 0; color: var(--soft); }
+.detail .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.detail .tags span { font: 800 12px var(--f-body); border: 1px solid var(--line); border-radius: 999px; padding: 5px 10px; color: var(--muted); }
+
+.lab { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
+@media (max-width: 860px) { .lab { grid-template-columns: minmax(0,1fr); } }
+.lab p { color: var(--soft); max-width: 46ch; }
+.flask { justify-self: center; width: min(320px, 76vw); }
+.cards { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+@media (max-width: 860px) { .cards { grid-template-columns: minmax(0,1fr); } }
+.card { border: 1px solid var(--line); border-radius: 22px; padding: 24px; background: var(--bg-2); display: grid; gap: 8px; align-content: start; }
+.card h3 { font: 900 24px/1.1 var(--f-display); }
+.card p { margin: 0; color: var(--soft); }
+.card .p { font: 800 15px var(--f-body); color: var(--orange); white-space: nowrap; }
+.card a.tel { color: var(--fg); font-weight: 800; }
+.vegan { border-radius: 28px; padding: clamp(28px, 5vw, 56px); background: var(--green); color: var(--ink); display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 24px; align-items: center; }
+@media (max-width: 760px) { .vegan { grid-template-columns: minmax(0,1fr); } }
+.vegan h2 { font: 900 clamp(34px, 5vw, 58px)/1 var(--f-display); }
+.vegan p { margin: 10px 0 0; max-width: 46ch; color: #24402c; }
+.vegan .btn { background: var(--ink); color: var(--green); border-color: var(--ink); }
+.anniv { display: flex; flex-wrap: wrap; align-items: center; gap: 20px 40px; border: 1px solid var(--line); border-radius: 28px; padding: clamp(24px, 4vw, 44px); background: var(--bg-2); }
+.anniv b { font: 900 clamp(70px, 12vw, 130px)/1 var(--f-display); color: var(--orange); }
+.anniv p { margin: 0; max-width: 46ch; color: var(--soft); }
+.visit { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 760px) { .visit { grid-template-columns: minmax(0,1fr); } }
+
+footer { padding-block: 40px 96px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 800 14px var(--f-body); padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.35); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></symbol>
+  <!-- Logo: Dreiecksring oben grün, unten orange, Balken blau, im Dreieck oliv -->
+  <symbol id="mark" viewBox="0 0 464 400">
+    <defs>
+      <clipPath id="cTop"><rect x="0" y="0" width="464" height="175"/></clipPath>
+      <clipPath id="cBot"><rect x="0" y="217" width="464" height="200"/></clipPath>
+      <clipPath id="cTri"><path d="M2 0H462L232 400Z"/></clipPath>
+    </defs>
+    <path d="M2 0H462L232 400Z M82 45L232 305L382 45Z" fill-rule="evenodd" fill="#7ac68c" clip-path="url(#cTop)"/>
+    <path d="M2 0H462L232 400Z M82 45L232 305L382 45Z" fill-rule="evenodd" fill="#ef9a26" clip-path="url(#cBot)"/>
+    <rect x="0" y="175" width="464" height="42" fill="#397a98"/>
+    <rect x="0" y="175" width="464" height="42" fill="#977303" clip-path="url(#cTri)"/>
+  </symbol>
+</svg>
+<div class="proposal"><span><b>Propuesta de diseño</b> para Alchemy · no es el sitio oficial</span><span>Hecha por <a href="https://5hitcake.github.io/JanOberle/#es" target="_blank" rel="noopener">Jota Labs</a></span></div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#inicio"><span class="seal"><svg viewBox="0 0 464 400" aria-hidden="true"><use href="#mark"/></svg></span><b>AlChEmY</b></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENÚ</button>
+    <nav class="links" id="links">
+      <a href="#sabores">Sabores</a>
+      <a href="#laboratorio">Laboratorio</a>
+      <a href="#vegan">Vegan</a>
+      <a href="#visitanos">Visitanos</a>
+      <a class="btn" href="https://wa.me/5491141953333" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Escribinos</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero pre" id="inicio">
+  <canvas class="ptable" id="ptable" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="copy">
+      <div class="kicker">The ice cream bar · Palermo</div>
+      <h1><small>10 AÑOS · 22/09</small>AlChEmY</h1>
+      <p class="lead"><b>Ser distintos es la regla.</b> Helados de autor, vegan y non-vegan, hechos en nuestro laboratorio de sabores.</p>
+      <div class="ctas"><a class="btn" href="#sabores">Ver sabores</a><a class="btn ghost" href="https://wa.me/5491141953333" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Pedir por WhatsApp</a></div>
+      <div class="facts"><span>Humboldt 1923 · Palermo</span><span><b>Vegan</b> &amp; non-vegan</span><span><b>67,6 mil</b> alquimistas</span></div>
+    </div>
+    <div class="hero-mark" id="heroMark"><svg viewBox="0 0 464 400" aria-hidden="true"><use href="#mark"/></svg></div>
+  </div>
+  <button class="redo" type="button" id="redo" hidden>↻ Transmutar de nuevo</button>
+</section>
+
+<section class="block" id="sabores">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Tabla periódica de sabores</div><h2>Elegí tu elemento</h2></div><p>Como en la vitrina: cada sabor es un elemento. Tocá uno para ver qué lleva.</p></div>
+    <div class="filters" id="filters">
+      <button type="button" data-f="all" aria-pressed="true">Todos</button>
+      <button type="button" data-f="nuevo" aria-pressed="false">Nuevos</button>
+      <button type="button" data-f="vegan" aria-pressed="false">Vegan</button>
+      <button type="button" data-f="raro" aria-pressed="false">Para valientes</button>
+      <button type="button" data-f="clasico" aria-pressed="false">Clásicos</button>
+    </div>
+    <div class="table">
+      <div class="tiles" id="tiles"></div>
+      <aside class="detail" id="detail" aria-live="polite"></aside>
+    </div>
+    <p class="note">Banoffee (28), White Matcha y Sardo con peras caramelizadas son de su vitrina; los demás sabores, números y descripciones son de ejemplo. En la versión final la tabla se carga con su carta real y la actualizan ustedes.</p>
+  </div>
+</section>
+
+<section class="block" id="laboratorio" style="padding-top:0">
+  <div class="wrap lab">
+    <div>
+      <div class="kicker">El laboratorio</div>
+      <div class="head" style="margin:0 0 14px"><h2>Un auténtico laboratorio de sabores</h2></div>
+      <p>Batas blancas, una tabla periódica en la vitrina y combinaciones que no vas a encontrar en otro lado. Probamos, mezclamos y transformamos ingredientes hasta dar con algo distinto, porque acá ser distintos es la regla.</p>
+      <div class="ctas"><a class="btn" href="#sabores">Explorar la tabla</a></div>
+    </div>
+    <svg class="flask" viewBox="0 0 200 220" aria-hidden="true">
+      <defs><clipPath id="fl"><path d="M78 20h44v58l52 96a18 18 0 0 1-16 26H42a18 18 0 0 1-16-26l52-96z"/></clipPath></defs>
+      <g clip-path="url(#fl)"><rect x="0" y="0" width="200" height="220" fill="#303030"/><rect id="liq" x="0" y="120" width="200" height="120" fill="#ef9a26"/><rect x="0" y="112" width="200" height="12" fill="#977303"/></g>
+      <path d="M78 20h44v58l52 96a18 18 0 0 1-16 26H42a18 18 0 0 1-16-26l52-96z" fill="none" stroke="#7ac68c" stroke-width="7" stroke-linejoin="round"/>
+      <rect x="70" y="10" width="60" height="12" rx="4" fill="#397a98"/>
+      <g fill="#f4efe6" id="bubbles"><circle cx="90" cy="170" r="5"/><circle cx="112" cy="185" r="4"/><circle cx="100" cy="150" r="3"/></g>
+    </svg>
+  </div>
+</section>
+
+<section class="block" id="cocteles" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Ice cream bar</div><h2>Cócteles helados</h2></div><p>Porque somos un bar de helados: tragos con helado para la noche de Palermo.</p></div>
+    <div class="cards">
+      <article class="card"><h3>Alchemy Spritz</h3><p>El spritz de la casa, con un toque helado.</p><span class="p">$ —</span></article>
+      <article class="card"><h3>Espresso Martini</h3><p>Café, vodka y helado. Para seguir la noche.</p><span class="p">$ —</span></article>
+      <article class="card"><h3>Cynar Julep</h3><p>Cynar, menta y frescura bien porteña.</p><span class="p">$ —</span></article>
+    </div>
+    <p class="note">Tragos mencionados en reseñas de clientes; descripciones y precios de ejemplo.</p>
+  </div>
+</section>
+
+<section class="block" id="vegan" style="padding-top:0">
+  <div class="wrap">
+    <div class="vegan">
+      <div><div class="kicker" style="color:var(--ink)">🌱 Vegan &amp; non-vegan</div><h2>Todos pueden ser alquimistas</h2><p>Una parte de la tabla es 100 % vegana, sin lácteos, con el mismo nivel de locura en los sabores.</p></div>
+      <a class="btn" href="#sabores" data-jump="vegan">Ver sabores vegan</a>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="aniversario" style="padding-top:0">
+  <div class="wrap">
+    <div class="anniv"><b>10</b><div><div class="kicker">años · 22/09</div><p style="margin-top:8px">Diez años transformando helado en algo distinto. Gracias a los más de 67 mil alquimistas que nos siguen.</p></div></div>
+  </div>
+</section>
+
+<section class="block" id="visitanos" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Visitanos</div><h2>Humboldt 1923</h2></div><p>Palermo, Buenos Aires.</p></div>
+    <div class="visit">
+      <div class="card">
+        <h3>Dónde</h3>
+        <p>Humboldt 1923, Palermo, Buenos Aires.</p>
+        <div class="ctas"><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Alchemy%20Humboldt%201923%20Buenos%20Aires" target="_blank" rel="noopener">Google Maps ↗</a><a class="btn ghost" href="https://www.instagram.com/alchemy.ba/" target="_blank" rel="noopener">Instagram ↗</a></div>
+      </div>
+      <div class="card">
+        <h3>Contacto</h3>
+        <p>WhatsApp <a class="tel" href="https://wa.me/5491141953333" target="_blank" rel="noopener">11 4195-3333</a></p>
+        <p>Teléfono <a class="tel" href="tel:+541152630880">5263-0880</a></p>
+        <p style="color:var(--muted)">Acá van los días y horarios (los de su historia destacada “Horarios”).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>Alchemy · The ice cream bar · Humboldt 1923</span><span>Propuesta de diseño de Jota Labs · <a href="https://5hitcake.github.io/JanOberle/#es" target="_blank" rel="noopener">ver más trabajos</a></span></div></footer>
+
+<a class="like" href="https://wa.me/5491130331893?text=Hola%20Jan%21%20Vi%20la%20propuesta%20de%20sitio%20web%20para%20Alchemy%20y%20me%20gustar%C3%ADa%20saber%20m%C3%A1s." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>¿Te gusta? Hablemos</a>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const ease = (t) => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+  const tween = (ms, fn, tk) => new Promise((res) => {
+    const t0 = performance.now();
+    const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(ease(k), k); k < 1 ? requestAnimationFrame(step) : res(); };
+    requestAnimationFrame(step);
+  });
+
+  /* ---------- Sabores ---------- */
+  const C = { g: "#7ac68c", b: "#5aa0c2", o: "#ef9a26" };
+  const FL = [
+    { s: "Bf", n: 28, nm: "Banoffee", c: C.o, f: ["clasico"], d: "Banana, dulce de leche y galletita crocante." },
+    { s: "Wm", n: 29, nm: "White matcha", c: C.g, f: ["nuevo"], d: "Nuevo sabor: chocolate blanco y matcha." },
+    { s: "Sp", n: 30, nm: "Sardo + peras caramelizadas", c: C.o, f: ["raro"], d: "Queso sardo con peras caramelizadas. Dulce y salado." },
+    { s: "Dl", n: 1, nm: "Dulce de leche", c: C.o, f: ["clasico"], d: "El clásico argentino, bien cremoso." },
+    { s: "Ch", n: 2, nm: "Chocolate amargo", c: C.b, f: ["clasico", "vegan"], d: "Cacao intenso, en versión vegana." },
+    { s: "Pi", n: 3, nm: "Pistacho", c: C.g, f: ["clasico"], d: "Pistacho de verdad, tostado." },
+    { s: "Wp", n: 31, nm: "Wasabi y palta", c: C.g, f: ["raro", "vegan"], d: "Palta cremosa con un picor de wasabi." },
+    { s: "Ca", n: 32, nm: "Calabaza", c: C.o, f: ["raro", "vegan"], d: "Calabaza asada con especias." },
+    { s: "Qa", n: 33, nm: "Queso azul", c: C.b, f: ["raro"], d: "Para valientes: queso azul y miel." },
+    { s: "Tl", n: 34, nm: "Turmeric latte", c: C.o, f: ["raro", "vegan"], d: "Cúrcuma, especias y leche vegetal." },
+    { s: "Fr", n: 4, nm: "Frutilla", c: C.b, f: ["clasico", "vegan"], d: "Frutillas frescas, al agua." },
+    { s: "Li", n: 5, nm: "Limón", c: C.g, f: ["clasico", "vegan"], d: "Limón bien ácido, al agua." },
+  ];
+  const tiles = $("#tiles"), detail = $("#detail");
+  const tagName = { nuevo: "Nuevo", vegan: "Vegan", raro: "Para valientes", clasico: "Clásico" };
+  function show(x) {
+    detail.style.setProperty("--c", x.c);
+    detail.innerHTML = `<div class="big"><span>${x.n}</span><b>${x.s}</b></div><h3>${x.nm}</h3><p>${x.d}</p><div class="tags">${x.f.map((t) => `<span>${tagName[t]}</span>`).join("")}</div>`;
+    tiles.querySelectorAll(".tile").forEach((t) => t.setAttribute("aria-pressed", String(t.dataset.s === x.s)));
+  }
+  FL.forEach((x) => { const b = document.createElement("button"); b.type = "button"; b.className = "tile"; b.dataset.s = x.s; b.style.setProperty("--c", x.c); b.setAttribute("aria-label", x.nm); b.innerHTML = `<span class="n">${x.n}</span><span class="s">${x.s}</span><span class="nm">${x.nm}</span>`; b.addEventListener("click", () => show(x)); tiles.append(b); });
+  show(FL[0]);
+  function filter(f) {
+    $("#filters").querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.f === f)));
+    let first = null;
+    FL.forEach((x) => { const hit = f === "all" || x.f.includes(f); tiles.querySelector(`[data-s="${x.s}"]`).classList.toggle("dim", !hit); if (hit && !first) first = x; });
+    if (first) show(first);
+  }
+  $("#filters").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) filter(b.dataset.f); });
+  document.querySelector("[data-jump=vegan]").addEventListener("click", () => filter("vegan"));
+
+  /* ---------- Hintergrund: blasses Periodensystem, das langsam treibt ---------- */
+  const pc = $("#ptable"), px = pc.getContext("2d"), hero = $("#inicio");
+  const SYM = FL.map((x) => [x.s, x.n, x.c]);
+  const glow = new Map();
+  function ptable(now) {
+    const dpr = Math.min(2, devicePixelRatio || 1), w = hero.clientWidth, h = hero.clientHeight;
+    if (pc.width !== Math.round(w * dpr) || pc.height !== Math.round(h * dpr)) { pc.width = Math.round(w * dpr); pc.height = Math.round(h * dpr); }
+    px.setTransform(dpr, 0, 0, dpr, 0, 0); px.clearRect(0, 0, w, h);
+    const S = w < 600 ? 74 : 96, G = 8, t = reduce ? 0 : now / 1000, ox = (t * 6) % (S + G), oy = (t * 3) % (S + G);
+    const cols = Math.ceil(w / (S + G)) + 2, rows = Math.ceil(h / (S + G)) + 2;
+    if (!reduce && Math.random() < .03) glow.set(`${Math.floor(Math.random() * cols)},${Math.floor(Math.random() * rows)}`, now);
+    px.textBaseline = "top";
+    for (let r = -1; r < rows; r++) for (let q = -1; q < cols; q++) {
+      const x = q * (S + G) + ox - (S + G), y = r * (S + G) + oy - (S + G);
+      const gi = Math.abs((q * 7 + r * 13) % SYM.length), [s, n, c] = SYM[gi], key = `${q},${r}`;
+      let a = .04; const g = glow.get(key);
+      if (g) { const k = (now - g) / 2400; if (k > 1) glow.delete(key); else a += .09 * Math.sin(k * Math.PI); }
+      px.globalAlpha = a; px.strokeStyle = c; px.lineWidth = 1.5; px.beginPath(); px.roundRect(x, y, S, S, 10); px.stroke();
+      px.fillStyle = c; px.font = `800 ${S * .13}px Manrope, sans-serif`; px.fillText(n, x + S * .1, y + S * .1);
+      px.fillStyle = "#f4efe6"; px.font = `700 ${S * .4}px Georgia, serif`; px.fillText(s, x + S * .1, y + S * .34);
+    }
+    px.globalAlpha = 1;
+    if (!reduce) requestAnimationFrame(ptable);
+  }
+  requestAnimationFrame(ptable);
+
+  /* ---------- Intro: das Logo baut sich auf (grün, Balken, orange) und fliegt an seinen Platz ---------- */
+  const NS = "http://www.w3.org/2000/svg", redo = $("#redo"), heroMark = $("#heroMark");
+  const mk = (tag, a, p) => { const n = document.createElementNS(NS, tag); for (const k in a) n.setAttribute(k, a[k]); if (p) p.append(n); return n; };
+  const RING = "M2 0H462L232 400Z M82 45L232 305L382 45Z";
+  let token = { cancelled: true };
+  async function transmute() {
+    token.cancelled = true; const tk = (token = { cancelled: false });
+    hero.querySelectorAll(".intro").forEach((n) => n.remove());
+    hero.classList.remove("reveal"); hero.classList.add("pre"); redo.hidden = true;
+    const box = document.createElement("div"); box.className = "intro"; hero.append(box);
+    const w = hero.clientWidth, h = hero.clientHeight, SW = Math.min(w * .62, h * .48, 420), SH = SW * 400 / 464;
+    const X = (w - SW) / 2, Y = h * .42 - SH / 2;
+    const svg = mk("svg", { class: "mark", viewBox: "0 0 464 400", width: SW, height: SH }, box);
+    svg.style.transform = `translate(${X}px,${Y}px)`;
+    const id = "i" + Math.random().toString(36).slice(2, 7), defs = mk("defs", {}, svg);
+    const clip = (n, d) => { const c = mk("clipPath", { id: id + n }, defs); mk("path", { d }, c); return `url(#${id + n})`; };
+    const mask = (n) => { const m = mk("mask", { id: id + n, maskUnits: "userSpaceOnUse", x: -50, y: -50, width: 564, height: 520 }, defs); return m; };
+    const mTop = mask("mt"), mBot = mask("mb");
+    const pTop = mk("path", { d: "M130 175 L42 22 L422 22 L334 175", fill: "none", stroke: "#fff", "stroke-width": 80, "stroke-linejoin": "miter", "stroke-miterlimit": 10 }, mTop);
+    const pBotL = mk("path", { d: "M150 217 L250 390", fill: "none", stroke: "#fff", "stroke-width": 95 }, mBot);
+    const pBotR = mk("path", { d: "M314 217 L214 390", fill: "none", stroke: "#fff", "stroke-width": 95 }, mBot);
+    const g1 = mk("g", { "clip-path": clip("ct", "M0 0H464V175H0Z") }, svg); mk("path", { d: RING, "fill-rule": "evenodd", fill: "#7ac68c", mask: `url(#${id}mt)` }, g1);
+    const g2 = mk("g", { "clip-path": clip("cb", "M0 217H464V420H0Z") }, svg); mk("path", { d: RING, "fill-rule": "evenodd", fill: "#ef9a26", mask: `url(#${id}mb)` }, g2);
+    const bar = mk("rect", { x: 232, y: 175, width: 0, height: 42, fill: "#397a98" }, svg);
+    const olive = mk("rect", { x: 0, y: 175, width: 464, height: 42, fill: "#977303", "clip-path": clip("tri", "M2 0H462L232 400Z"), opacity: 0 }, svg);
+    const motto = document.createElement("div"); motto.className = "motto"; motto.textContent = "Ser distintos es la regla"; motto.style.top = (Y + SH + 28) + "px"; box.append(motto);
+    const dash = (p) => { const L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L; return L; };
+    const L1 = dash(pTop), L2 = dash(pBotL); dash(pBotR);
+    await sleep(250);
+    await tween(1400, (e) => (pTop.style.strokeDashoffset = L1 * (1 - e)), tk);
+    await tween(600, (e) => { bar.setAttribute("x", 232 - 232 * e); bar.setAttribute("width", 464 * e); olive.setAttribute("opacity", Math.max(0, e * 1.6 - .6)); }, tk);
+    await tween(900, (e) => { pBotL.style.strokeDashoffset = L2 * (1 - e); pBotR.style.strokeDashoffset = L2 * (1 - e); }, tk);
+    if (tk.cancelled) return box.remove();
+    motto.style.opacity = "1"; await sleep(1100); if (tk.cancelled) return box.remove();
+    motto.style.opacity = "0";
+    // an den Platz des Logos im Hero fliegen
+    const hr = hero.getBoundingClientRect(), mr = heroMark.getBoundingClientRect();
+    const TW = mr.width * .64, TH = TW * 400 / 464, TX = mr.left - hr.left + (mr.width - TW) / 2, TY = mr.top - hr.top + (mr.height - TH) / 2;
+    hero.classList.remove("pre"); hero.classList.add("reveal"); heroMark.style.opacity = "0";
+    box.style.background = "transparent"; box.style.transition = "background .9s";
+    await tween(1000, (e) => { const s = 1 + (TW / SW - 1) * e; svg.style.transform = `translate(${X + (TX - X) * e}px,${Y + (TY - Y) * e}px) scale(${s})`; }, tk);
+    heroMark.style.transition = "none"; heroMark.style.opacity = "1"; box.remove();
+    if (!tk.cancelled) redo.hidden = false;
+  }
+  redo.addEventListener("click", () => { hero.scrollIntoView({ behavior: reduce ? "auto" : "smooth" }); transmute(); });
+  if (reduce) { hero.classList.remove("pre"); } else transmute();
+
+  /* ---------- Blasen im Kolben ---------- */
+  if (!reduce) {
+    const bub = [...document.querySelectorAll("#bubbles circle")].map((c, i) => ({ c, y0: +c.getAttribute("cy"), ph: i * 1.7 }));
+    const fizz = (now) => { bub.forEach((b) => { const k = ((now / 2600 + b.ph) % 1); b.c.setAttribute("cy", b.y0 - k * 55); b.c.setAttribute("opacity", 1 - k); }); requestAnimationFrame(fizz); };
+    requestAnimationFrame(fizz);
+  }
+})();
+</script>
+</body>
+</html>
