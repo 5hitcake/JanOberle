@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
 <title>Gonzalo Vertz · Mantenimiento y reformas en CABA y Zona Norte</title>
-<meta name="description" content="Plomería, electricidad, albañilería, pintura, baños, reformas completas y más. Trabajo en CABA y Zona Norte. Consultá tu presupuesto por WhatsApp.">
+<meta name="description" content="Plomería, electricidad, albañilería, pintura, baños, cielorrasos de PVC, reformas completas y más, al mejor presupuesto. Trabajo en CABA y Zona Norte. Consultá tu presupuesto por WhatsApp.">
 <meta property="og:title" content="Gonzalo Vertz · Mantenimiento y reformas">
-<meta property="og:description" content="Un solo profesional para todo tu hogar. CABA y Zona Norte. Consultá tu presupuesto por WhatsApp.">
+<meta property="og:description" content="Todos los trabajos para tu casa, al mejor presupuesto. CABA y Zona Norte. Consultá tu presupuesto por WhatsApp.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23f2a900'/%3E%3Ctext x='32' y='43' font-family='Arial Narrow,Arial,sans-serif' font-weight='900' font-size='28' fill='%23161b22' text-anchor='middle'%3EGV%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -71,12 +71,16 @@ nav.links a.btn { color: #fff; padding: 11px 16px; font-size: 15px; }
 .facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
 .facts span { display: inline-flex; align-items: center; gap: 8px; font: 600 14px var(--f-body); color: var(--soft); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; background: rgba(18,22,28,.75); }
 .facts span::before { content: "✓"; color: var(--acc); font-weight: 800; }
+.facts span.more { background: var(--acc); color: var(--acc-ink); border-color: var(--acc); font-weight: 700; }
+.facts span.more::before { content: "+"; color: var(--acc-ink); }
+.hero .ask { margin: 0; font-size: clamp(17px, 2vw, 20px); color: var(--soft); }
+.hero .ask b { color: var(--acc); }
 .redo { position: absolute; right: 16px; top: 16px; z-index: 8; font: 600 13px var(--f-body); color: var(--muted); background: rgba(18,22,28,.85); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; cursor: pointer; }
 .redo:hover { color: var(--fg); }
 .hero.pre .wrap > * { opacity: 0; }
 .hero.reveal .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
 .hero.reveal .wrap > :nth-child(2) { animation-delay: .06s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .12s }
-.hero.reveal .wrap > :nth-child(4) { animation-delay: .18s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .24s }
+.hero.reveal .wrap > :nth-child(4) { animation-delay: .18s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .24s } .hero.reveal .wrap > :nth-child(6) { animation-delay: .3s }
 @keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
 
@@ -209,9 +213,10 @@ footer a { color: var(--soft); }
   <div class="wrap">
     <div class="kicker">Mantenimiento y reformas · CABA y Zona Norte</div>
     <h1>Gonzalo<br><span>Vertz</span></h1>
-    <p class="lead"><b>Un solo profesional para todo tu hogar.</b> Plomería, electricidad, albañilería, pintura, baños, reformas completas y mucho más. Voy yo, hago el trabajo bien y dejo todo limpio.</p>
+    <p class="lead"><b>Todos los trabajos para tu casa, al mejor presupuesto.</b> Plomería, electricidad, albañilería, pintura, baños, cielorrasos de PVC, reformas completas y muchas cosas más.</p>
+    <p class="ask">¿Necesitás otro tipo de trabajo? <b>No dudes en consultarme.</b></p>
     <div class="ctas"><a class="btn wa" data-wa="Hola Gonzalo! Vi tu página y quería consultar un presupuesto." href="#" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Consultar presupuesto</a><a class="btn ghost" href="#servicios">Ver servicios</a></div>
-    <div class="facts"><span>Compromiso</span><span>Responsabilidad</span><span>Limpieza</span><span>Confianza</span></div>
+    <div class="facts"><span>Plomería</span><span>Electricidad</span><span>Albañilería</span><span>Pintura</span><span>Baños</span><span>Cielorrasos PVC</span><span>Reformas</span><span class="more">¡Y mucho más!</span></div>
   </div>
   <button class="redo" type="button" id="redo" hidden>↻ Ver de nuevo</button>
 </section>
