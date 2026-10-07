@@ -41,7 +41,7 @@ header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; 
 header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
 .logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
 .logo .seal { width: 42px; height: 42px; border-radius: 50%; background: #000; border: 1.5px solid var(--fg); display: grid; place-items: center; text-align: center; line-height: 1; }
-.logo .seal small { display: block; font: 800 4.5px/1 var(--f-body); letter-spacing: .16em; margin-bottom: 2px; }
+.logo .seal small { display: block; font: 800 4.5px/1 var(--f-body); letter-spacing: .1em; margin: 4px 0 2px; }
 .logo .seal b { font: 700 8px/1.05 var(--f-display); }
 .logo > span { display: flex; flex-direction: column; line-height: 1.05; }
 .logo > span b { font: 900 21px/1 var(--f-display); }
@@ -75,6 +75,10 @@ nav.links a.btn { color: var(--red-ink); padding: 10px 16px; font-size: 14px; }
 .facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
 .facts span { font: 700 13px var(--f-body); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; background: rgba(14,11,11,.72); }
 .facts span b { color: var(--fg); }
+.status::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); margin-right: 8px; vertical-align: 1px; }
+.status.open::before { background: #5fd38a; box-shadow: 0 0 10px #5fd38a; }
+.hours { display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; margin: 0; font-variant-numeric: tabular-nums; }
+.hours dt { color: var(--muted); } .hours dd { margin: 0; color: var(--soft); }
 .redo { position: absolute; right: 16px; bottom: 16px; z-index: 7; font: 700 13px var(--f-body); color: var(--muted); background: rgba(14,11,11,.85); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
 .redo:hover { color: var(--fg); }
 .hero.reveal .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
@@ -179,7 +183,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     <h1><span>La esquina roja de Belgrano</span>El Pobre Luis</h1>
     <p class="lead">Parrilla uruguaya desde 1986. Tenemos la mejor pamplona que vas a probar.</p>
     <div class="ctas"><a class="btn" href="#reservas">Reservar mesa</a><a class="btn ghost" href="#takeaway">Take away</a></div>
-    <div class="facts"><span>Arribeños 2393 · Belgrano</span><span><b>Reservas</b> de lunes a domingo</span><span><b>48 mil</b> seguidores</span></div>
+    <div class="facts"><span>Arribeños 2393 · Belgrano</span><span class="status" id="statusChip">Lun a sáb mediodía y noche · dom mediodía</span><span><b>Reservas</b> de lunes a domingo</span><span><b>48 mil</b> seguidores</span></div>
   </div>
   <button class="redo" type="button" id="redo" hidden>↻ Colgar las camisetas</button>
 </section>
@@ -211,11 +215,11 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     <div class="head"><div><div class="kicker">De la parrilla</div><h2>Para compartir<em>entre amigos</em></h2></div><p>La carta, clara y rápida de leer desde el celular, con los precios siempre al día.</p></div>
     <div class="dishes">
       <article class="dish hl"><h3>Pamplona</h3><p>La especialidad de la casa.</p><span class="p">$ —</span></article>
-      <article class="dish"><h3>Asado</h3><p>El corte de siempre, a las brasas.</p><span class="p">$ —</span></article>
-      <article class="dish"><h3>Achuras</h3><p>Chorizo, morcilla, mollejas y chinchulines.</p><span class="p">$ —</span></article>
-      <article class="dish"><h3>Postres</h3><p>Para cerrar la noche.</p><span class="p">$ —</span></article>
+      <article class="dish"><h3>Mollejas</h3><p>Crocantes por fuera, a las brasas.</p><span class="p">$ —</span></article>
+      <article class="dish"><h3>A la tela</h3><p>Hígado y riñón a la tela, a la uruguaya.</p><span class="p">$ —</span></article>
+      <article class="dish"><h3>Asado</h3><p>El corte de siempre, para compartir.</p><span class="p">$ —</span></article>
     </div>
-    <p class="note">Platos y descripciones de ejemplo: en la versión final va su carta real, con precios que actualizan ustedes mismos.</p>
+    <p class="note">Platos tomados de reseñas de sus clientes; descripciones de ejemplo: en la versión final va su carta real, con precios que actualizan ustedes mismos.</p>
   </div>
 </section>
 
@@ -278,7 +282,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
         <h3>Contacto</h3>
         <p>Teléfono <a class="tel" href="tel:+541147805847">4780-5847</a></p>
         <p>WhatsApp <a class="tel" href="https://wa.me/5491122705142" target="_blank" rel="noopener">11 2270-5142</a></p>
-        <p style="color:var(--muted)">Acá van los días y horarios de atención.</p>
+        <dl class="hours"><dt>Lun a vie</dt><dd>12–15:30 · 19:30–24</dd><dt>Sábado</dt><dd>12–16 · 19:30–24</dd><dt>Domingo</dt><dd>12–16</dd></dl><p style="color:var(--muted);font-size:14px">Horarios según Google; se confirman con ustedes.</p>
       </div>
     </div>
   </div>
@@ -376,7 +380,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   /* ---------- Reserva per WhatsApp ---------- */
   const fmt = new Intl.DateTimeFormat("es-AR", { timeZone: "America/Argentina/Buenos_Aires", weekday: "long", day: "numeric", month: "numeric" });
   const days = Array.from({ length: 5 }, (_, i) => { const d = new Date(Date.now() + i * 864e5); return i === 0 ? "Hoy" : i === 1 ? "Mañana" : fmt.format(d).replace(/^\w/, (c) => c.toUpperCase()); });
-  const state = { day: days[0], pax: "2", time: "21:00" };
+  const state = { day: days[0], pax: "2", time: "21:30" };
   const group = (id, list, key) => {
     const box = $(id);
     list.forEach((v) => { const b = document.createElement("button"); b.type = "button"; b.textContent = v; b.setAttribute("aria-pressed", String(v === state[key])); b.addEventListener("click", () => { state[key] = v; box.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", String(x === b))); update(); }); box.append(b); });
@@ -387,8 +391,19 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     $("#msg").textContent = txt;
     $("#sendRes").href = "https://wa.me/5491122705142?text=" + encodeURIComponent(txt);
   }
-  group("#optDay", days, "day"); group("#optPax", ["1","2","3","4","5","6","8+"], "pax"); group("#optTime", ["12:30","13:30","20:30","21:00","21:30","22:30"], "time");
+  group("#optDay", days, "day"); group("#optPax", ["1","2","3","4","5","6","8+"], "pax"); group("#optTime", ["12:30","13:30","14:30","20:30","21:30","22:30"], "time");
   update();
+
+  /* ---------- Abierto ahora (hora de Buenos Aires) ---------- */
+  const SLOTS = { 0: [[720, 960]], 6: [[720, 960], [1170, 1440]] }, WEEK = [[720, 930], [1170, 1440]];
+  function status() {
+    const parts = new Intl.DateTimeFormat("en-US", { timeZone: "America/Argentina/Buenos_Aires", weekday: "short", hour: "numeric", minute: "numeric", hour12: false }).formatToParts(new Date());
+    const get = (t) => parts.find((x) => x.type === t).value, wd = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].indexOf(get("weekday"));
+    const mins = (+get("hour") % 24) * 60 + +get("minute"), open = (SLOTS[wd] || WEEK).some(([a, b]) => mins >= a && mins < b), chip = $("#statusChip");
+    chip.classList.toggle("open", open);
+    chip.innerHTML = open ? "<b>Abierto ahora</b>" : "Cerrado ahora · <b>reservá</b> para después";
+  }
+  status(); setInterval(status, 60000);
 })();
 </script>
 </body>
