@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Peluquería RED · Estudio privado</title>
+<meta name="description" content="Estilista colorista con 16 años de experiencia. Color fantasía, platinos, rojos, nutrición capilar y alisados en un estudio privado. Propuesta de Jota Labs.">
+<meta property="og:title" content="Peluquería RED · Estudio privado">
+<meta property="og:description" content="Color sin miedo. Estilista colorista, 16 años de experiencia.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23ff2a2a'/%3E%3Ctext x='32' y='44' font-family='Impact,sans-serif' font-size='34' fill='%230b0b0d' text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Manrope:wght@400;600;800&display=swap">
+<style>
+/* Layout: Hypno-Intro (Spirale dreht sich lange, dann Zirkusvorhang rot-schwarz), danach langsam drehende blasse Spirale im Hero.
+   Servicios (Color fantasía, Platinos, Rojos, Nutrición, Alisados, Corte/Barbería), Galería (Farbkarten), Luna y cabello,
+   Estudio privado (Turnos, acompañantes), Pedí tu turno (WhatsApp-Baukasten). Schwarz, Rot, Neon, Gold wie die Waben-Regale. */
+:root {
+  --bg: #0b0b0d; --bg-2: #141417; --bg-3: #1c1c21; --line: #2b2b31; --fg: #f4f1ec; --soft: #dcd6cc; --muted: #9a948a;
+  --red: #ff2a2a; --red-d: #c4161c; --green: #39ff6a; --pink: #ff2e88; --blue: #18c8ff; --yellow: #ffe11a; --violet: #a24bff; --gold: #d4a63a;
+  --f-display: "Bungee", Impact, sans-serif;
+  --f-body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-family: var(--f-display); font-weight: 400; text-wrap: balance; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 800 12px/1.2 var(--f-body); letter-spacing: .18em; text-transform: uppercase; color: var(--red); }
+:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+
+.proposal { background: #000; color: #e9ebee; font: 13px/1.4 var(--f-body); padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; border-bottom: 1px solid #222; }
+.proposal b { color: #ffd166; }
+.proposal a { color: #fff; font-weight: 800; }
+
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo .seal { width: 42px; height: 42px; border-radius: 50%; background: conic-gradient(from 0deg, var(--bg) 0 25%, var(--fg) 0 50%, var(--bg) 0 75%, var(--fg) 0); display: grid; place-items: center; }
+.logo .seal i { width: 14px; height: 14px; border-radius: 50%; background: var(--red); }
+.logo b { font: 400 20px/1 var(--f-display); }
+.logo b span { color: var(--red); }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 14px; font-weight: 600; color: var(--muted); }
+nav.links a:hover { color: var(--fg); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 800 15px/1 var(--f-body); padding: 15px 22px; border-radius: 999px; background: var(--red); color: #fff; border: 2px solid var(--red); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-2px) rotate(-1deg); box-shadow: 0 10px 24px rgba(255,42,42,.35); }
+.btn.ghost { background: transparent; color: var(--fg); border-color: rgba(244,241,236,.4); }
+.btn.ghost:hover { box-shadow: none; border-color: var(--fg); }
+.btn svg { width: 18px; height: 18px; }
+nav.links a.btn { color: #fff; padding: 10px 16px; font-size: 14px; }
+.menu-btn { display: none; background: transparent; color: var(--fg); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font: 800 12px var(--f-body); letter-spacing: .08em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bg-2); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+
+/* ---------- Hero ---------- */
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line); background: var(--bg); }
+.swirl { position: absolute; z-index: 0; right: -30vmax; top: 50%; width: 110vmax; height: 110vmax; translate: 0 -50%; opacity: .07; pointer-events: none; background: repeating-conic-gradient(from 0deg, var(--fg) 0 15deg, transparent 15deg 30deg); border-radius: 50%; animation: turn 50s linear infinite; mask-image: radial-gradient(circle, #000 30%, transparent 70%); -webkit-mask-image: radial-gradient(circle, #000 30%, transparent 70%); }
+@keyframes turn { to { rotate: 360deg; } }
+@media (prefers-reduced-motion: reduce) { .swirl { animation: none; } }
+.hero::after { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(60vw 45vw at 0% 0%, rgba(255,42,42,.2), transparent 70%), radial-gradient(60vw 45vw at 100% 100%, rgba(57,255,106,.1), transparent 70%); }
+.hero .wrap { position: relative; z-index: 1; padding-block: clamp(80px, 12vw, 140px) clamp(56px, 9vw, 104px); display: flex; flex-direction: column; gap: 16px; }
+.hero h1 { font-size: clamp(50px, 10.5vw, 132px); line-height: .95; }
+.hero h1 span { display: block; color: var(--red); text-shadow: 4px 4px 0 var(--fg); }
+.hero .lead { margin: 4px 0 0; font-size: clamp(17px, 2.2vw, 21px); color: var(--soft); max-width: 42ch; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.facts span { font: 700 13px var(--f-body); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; background: rgba(11,11,13,.75); }
+.facts span b { color: var(--fg); }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 7; font: 700 13px var(--f-body); color: var(--muted); background: rgba(11,11,13,.85); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.redo:hover { color: var(--fg); }
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero.reveal .wrap > :nth-child(2) { animation-delay: .06s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .12s }
+.hero.reveal .wrap > :nth-child(4) { animation-delay: .18s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .24s }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+
+/* ---------- Abschnitte ---------- */
+section.block { padding-block: clamp(64px, 10vw, 104px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 40px; margin-bottom: 30px; }
+.head h2 { font-size: clamp(32px, 5.4vw, 64px); line-height: 1; margin-top: 10px; }
+.head h2 span { color: var(--red); }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+.note { margin-top: 20px; font-size: 13px; color: var(--muted); padding: 10px 14px; border-left: 3px solid var(--red); background: var(--bg-2); border-radius: 0 10px 10px 0; }
+
+.svc { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+@media (max-width: 960px) { .svc { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 560px) { .svc { grid-template-columns: minmax(0,1fr); } }
+.sv { position: relative; overflow: hidden; border: 1px solid var(--line); border-radius: 20px; padding: 24px; background: var(--bg-2); display: grid; gap: 8px; align-content: start; transition: transform .2s, border-color .2s; }
+.sv:hover { transform: translateY(-4px) rotate(-.6deg); border-color: var(--c, var(--red)); }
+.sv::before { content: ""; position: absolute; left: 0; top: 0; right: 0; height: 6px; background: var(--c, var(--red)); }
+.sv h3 { font-size: 22px; line-height: 1.1; }
+.sv p { margin: 0; color: var(--soft); font-size: 15px; }
+.sv .p { font: 800 14px var(--f-body); color: var(--c, var(--red)); }
+
+/* Galerie: Waben wie seine Regale */
+.hexes { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; }
+@media (max-width: 760px) { .hexes { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+.hx { aspect-ratio: 1/1.1; clip-path: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0 50%); background: var(--g); display: grid; place-items: center; text-align: center; padding: 18%; position: relative; transition: transform .25s; }
+.hx:hover { transform: scale(1.04) rotate(3deg); }
+.hx span { font: 400 clamp(13px, 1.8vw, 18px)/1.1 var(--f-display); color: #0b0b0d; text-shadow: 0 1px 0 rgba(255,255,255,.4); }
+.hx::after { content: ""; position: absolute; inset: 0; clip-path: inherit; border: 0; box-shadow: inset 0 0 0 4px var(--gold); }
+
+.duo { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 760px) { .duo { grid-template-columns: minmax(0,1fr); } }
+.card { border: 1px solid var(--line); border-radius: 20px; padding: 26px; background: var(--bg-2); display: grid; gap: 10px; align-content: start; }
+.card h3 { font-size: 24px; line-height: 1.1; }
+.card p { margin: 0; color: var(--soft); }
+.moon { display: flex; gap: 10px; margin-top: 6px; }
+.moon i { width: 34px; height: 34px; border-radius: 50%; background: #e8e3d6; position: relative; overflow: hidden; }
+.moon i::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--bg-2); transform: translateX(var(--x)); }
+
+.turno { display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 860px) { .turno { grid-template-columns: minmax(0,1fr); } }
+.field { display: grid; gap: 8px; }
+.field > span { font: 800 12px var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.opts button { font: 700 14px var(--f-body); color: var(--soft); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 9px 14px; cursor: pointer; }
+.opts button:hover { border-color: var(--muted); color: var(--fg); }
+.opts button[aria-pressed="true"] { background: var(--red); color: #fff; border-color: var(--red); }
+.ticket { background: var(--fg); color: #0b0b0d; border-radius: 20px; padding: 26px; display: grid; gap: 12px; align-content: start; background-image: repeating-linear-gradient(90deg, transparent 0 calc(100% - 14px), var(--red) calc(100% - 14px) calc(100% - 7px), #0b0b0d calc(100% - 7px)); }
+.ticket h3 { font-size: 24px; }
+.ticket .msg { font: 600 15px/1.55 var(--f-body); background: #fff; border: 1px solid #ddd5c8; border-radius: 14px 14px 14px 4px; padding: 14px 16px; white-space: pre-wrap; margin-right: 14px; }
+.ticket .btn { justify-self: start; background: #25d366; border-color: #25d366; }
+.ticket small { color: #5d574f; margin-right: 14px; }
+
+footer { padding-block: 40px 96px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 800 14px var(--f-body); padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.35); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></symbol>
+</svg>
+<div class="proposal"><span><b>Vista previa</b> · sitio en preparación para Peluquería RED</span><span>Hecho por <a href="https://5hitcake.github.io/JanOberle/#es" target="_blank" rel="noopener">Jota Labs</a></span></div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top"><span class="seal" aria-hidden="true"><i></i></span><b>Peluquería <span>RED</span></b></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENÚ</button>
+    <nav class="links" id="links">
+      <a href="#servicios">Servicios</a>
+      <a href="#trabajos">Trabajos</a>
+      <a href="#estudio">Estudio</a>
+      <a class="btn" href="#turno">Pedir turno</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero pre" id="top">
+  <div class="swirl" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="kicker">Estudio privado · Estilista colorista · 16 años</div>
+    <h1>Peluquería<span>RED</span></h1>
+    <p class="lead">Color sin miedo. Fantasía, platinos, rojos, nutrición capilar y alisados, en un estudio privado y sin apuro.</p>
+    <div class="ctas"><a class="btn" href="#turno"><svg aria-hidden="true"><use href="#wa"/></svg>Pedir turno</a><a class="btn ghost" href="#trabajos">Ver trabajos</a></div>
+    <div class="facts"><span>Turnos <b>al privado</b></span><span>Acompañantes <b>bienvenidos</b></span><span><b>1.500+</b> seguidores</span></div>
+  </div>
+  <button class="redo" type="button" id="redo" hidden>↻ Hipnotizame de nuevo</button>
+</section>
+
+<section class="block" id="servicios">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Servicios</div><h2>Lo que <span>hago</span></h2></div><p>Especialista en color y en cuidar el pelo mientras lo transformamos.</p></div>
+    <div class="svc">
+      <article class="sv" style="--c:var(--green)"><h3>Color fantasía</h3><p>Verdes, azules, rosas, violetas. Si lo imaginás, lo armamos.</p><span class="p">Consultar</span></article>
+      <article class="sv" style="--c:#e8e3d6"><h3>Platinos y blancos</h3><p>Decoloración cuidada para llegar al platino sin romper la fibra.</p><span class="p">Consultar</span></article>
+      <article class="sv" style="--c:var(--red)"><h3>Rojos</h3><p>Rojo intenso, rojo y negro, blanco y rojo. La casa.</p><span class="p">Consultar</span></article>
+      <article class="sv" style="--c:var(--violet)"><h3>Nutrición molecular</h3><p>Restaura la fibra capilar por dentro y por fuera: suavidad, brillo y sellado de puntas.</p><span class="p">Consultar</span></article>
+      <article class="sv" style="--c:var(--yellow)"><h3>Alisados</h3><p>Pelo liso, sano y con movimiento.</p><span class="p">Consultar</span></article>
+      <article class="sv" style="--c:var(--blue)"><h3>Corte y barbería</h3><p>Undercuts, fades y cortes con personalidad.</p><span class="p">Consultar</span></article>
+    </div>
+    <p class="note">Servicios tomados de su perfil; precios y duración se completan con los reales.</p>
+  </div>
+</section>
+
+<section class="block" id="trabajos" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Trabajos</div><h2>Paleta <span>sin límites</span></h2></div><p>Como en los estantes del estudio: cada panal, un color. Acá van sus fotos reales.</p></div>
+    <div class="hexes">
+      <div class="hx" style="--g:linear-gradient(160deg,#7dff9a,#1fbf4a)"><span>Rulos neón</span></div>
+      <div class="hx" style="--g:linear-gradient(160deg,#eef0f2,#9aa3ad)"><span>Platino</span></div>
+      <div class="hx" style="--g:linear-gradient(160deg,#ff8ac0,#ff2e88)"><span>Rosa total</span></div>
+      <div class="hx" style="--g:linear-gradient(160deg,#ff5a5a,#2a0a0a)"><span>Rojo y negro</span></div>
+      <div class="hx" style="--g:linear-gradient(160deg,#c9f4ff,#18c8ff)"><span>Puntas azules</span></div>
+      <div class="hx" style="--g:conic-gradient(#ff2a2a,#ffe11a,#39ff6a,#18c8ff,#a24bff,#ff2a2a)"><span>Arcoíris</span></div>
+      <div class="hx" style="--g:linear-gradient(160deg,#f4f1ec,#ff2a2a)"><span>Blanco y rojo</span></div>
+      <div class="hx" style="--g:linear-gradient(160deg,#ffb3d1,#c4161c)"><span>Degradé</span></div>
+    </div>
+    <p class="note">Cada panal se reemplaza por una foto real de su Instagram.</p>
+  </div>
+</section>
+
+<section class="block" id="estudio" style="padding-top:0">
+  <div class="wrap duo">
+    <article class="card"><div class="kicker">Estudio privado</div><h3>Sin vueltas, sin apuro</h3><p>Atiendo con turno en mi estudio privado, de a una persona por vez. Podés venir acompañado: los acompañantes son bienvenidos.</p></article>
+    <article class="card"><div class="kicker">Luna y cabello</div><h3>¿Cortar con luna nueva?</h3><p>El calendario lunar para tu pelo: cuándo conviene cortar para que crezca más rápido y cuándo es mejor esperar.</p><div class="moon" aria-hidden="true"><i style="--x:0%"></i><i style="--x:40%"></i><i style="--x:100%"></i><i style="--x:-40%"></i></div></article>
+  </div>
+</section>
+
+<section class="block" id="turno" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Turnos</div><h2>Pedí tu <span>turno</span></h2></div><p>Elegí qué querés hacerte y contame tu idea. El mensaje se arma solo.</p></div>
+    <div class="turno">
+      <div class="card">
+        <div class="field"><span>Servicio</span><div class="opts" id="optSvc"></div></div>
+        <div class="field"><span>Cuándo</span><div class="opts" id="optWhen"></div></div>
+      </div>
+      <div class="ticket">
+        <h3>Tu mensaje</h3>
+        <div class="msg" id="msg" aria-live="polite"></div>
+        <a class="btn" id="send" href="https://www.instagram.com/peluqueria.red/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Enviar</a>
+        <small>Mandá también una foto de referencia de lo que te gustaría.</small>
+      </div>
+    </div>
+    <p class="note">Por ahora el botón abre su Instagram; con el número de WhatsApp el mensaje llega listo al chat.</p>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>Peluquería RED · Estudio privado · <a href="https://www.instagram.com/peluqueria.red/" target="_blank" rel="noopener">@peluqueria.red</a></span><span>Sitio hecho por <a href="https://5hitcake.github.io/JanOberle/#es" target="_blank" rel="noopener">Jota Labs</a></span></div></footer>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const WA = ""; // Nummer folgt
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+
+  /* ---------- Turno ---------- */
+  const state = { svc: "Color fantasía", when: "Esta semana" };
+  const group = (id, list, key) => { const bx = $(id); list.forEach((v) => { const b = document.createElement("button"); b.type = "button"; b.textContent = v; b.setAttribute("aria-pressed", String(v === state[key])); b.addEventListener("click", () => { state[key] = v; bx.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", String(x === b))); update(); }); bx.append(b); }); };
+  function update() {
+    const txt = `Hola! Quiero un turno para: ${state.svc}.\nCuándo: ${state.when.toLowerCase()}.\nTe mando una foto de referencia 😉`;
+    $("#msg").textContent = txt;
+    if (WA) $("#send").href = `https://wa.me/${WA}?text=${encodeURIComponent(txt)}`;
+  }
+  group("#optSvc", ["Color fantasía", "Platino", "Rojo", "Nutrición molecular", "Alisado", "Corte / barbería"], "svc");
+  group("#optWhen", ["Esta semana", "La semana que viene", "Cuando tengas lugar"], "when");
+  update();
+
+  /* ---------- Intro: Hypno ---------- */
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const ease = (t) => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+  const tween = (ms, fn, tk, ez = ease) => new Promise((res) => { const t0 = performance.now(); const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(ez(k), k); k < 1 ? requestAnimationFrame(step) : res(); }; requestAnimationFrame(step); });
+  const canvas = (parent, cls, z) => { const w = parent.clientWidth, h = parent.clientHeight, dpr = Math.min(2, devicePixelRatio || 1); const c = document.createElement("canvas"); c.className = "fxl " + cls; c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); c.style.cssText = `position:absolute;left:0;top:0;width:${w}px;height:${h}px;z-index:${z};pointer-events:none`; c.setAttribute("aria-hidden", "true"); parent.append(c); const ctx = c.getContext("2d"); ctx.scale(dpr, dpr); return { c, ctx, w, h }; };
+  const hero = $("#top");
+  const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); hero.querySelectorAll(".cover").forEach((n) => (n.style.opacity = "0")); };
+  async function hypno(scr, tk, o = {}) {
+    const { c, ctx, w, h } = canvas(scr, "hypno", 5), cx = w / 2, cy = h * .45, R = Math.hypot(w, h);
+    let rot = 0, open = 0, txt = 0;
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h);
+      ctx.save(); ctx.beginPath(); ctx.rect(0, 0, w / 2 * (1 - open), h); ctx.rect(w / 2 + w / 2 * open, 0, w, h); ctx.clip();
+      ctx.fillStyle = "#f4f1ec"; ctx.fillRect(0, 0, w, h);
+      ctx.translate(cx, cy); ctx.rotate(rot); ctx.fillStyle = "#0b0b0d";
+      for (let arm = 0; arm < 2; arm++) { ctx.beginPath(); for (let t = 0; t < 14; t += .05) { const r = t * R / 14, a = t + arm * Math.PI; ctx.lineTo(Math.cos(a) * r, Math.sin(a) * r); } for (let t = 14; t > 0; t -= .05) { const r = t * R / 14, a = t + arm * Math.PI + 1.1; ctx.lineTo(Math.cos(a) * r, Math.sin(a) * r); } ctx.fill(); }
+      ctx.setTransform(1, 0, 0, 1, 0, 0); const dpr = c.width / w; ctx.scale(dpr, dpr);
+      ctx.fillStyle = o.accent || "#ff2a2a"; ctx.beginPath(); ctx.arc(cx, cy, Math.min(w, h) * .06, 0, 7); ctx.fill();
+      ctx.restore();
+      // Vorhang-Streifen an den Kanten
+      if (open > 0) for (const side of [-1, 1]) { const x0 = side < 0 ? w / 2 * (1 - open) : w / 2 + w / 2 * open; for (let i = 0; i < 6; i++) { ctx.fillStyle = i % 2 ? "#0b0b0d" : "#c4161c"; ctx.fillRect(x0 + (side < 0 ? -(i + 1) * 14 : i * 14), 0, 14, h); } }
+      if (txt > 0) { ctx.globalAlpha = txt; ctx.textAlign = "center"; ctx.font = `900 ${Math.min(w * .17, h * .12)}px ${o.family || "Impact, sans-serif"}`; ctx.lineWidth = 8; ctx.strokeStyle = "#0b0b0d"; ctx.strokeText(o.label || "", cx, cy + Math.min(w, h) * .3); ctx.fillStyle = o.accent || "#ff2a2a"; ctx.fillText(o.label || "", cx, cy + Math.min(w, h) * .3); ctx.globalAlpha = 1; }
+    };
+    await tween(o.spin || 2200, (e, k) => { rot = k * k * (o.turns || 9); txt = Math.min(1, Math.max(0, (k - .45) * 3)); draw(); }, tk, (x) => x);
+    if (tk.cancelled) return c.remove();
+    reveal(scr);
+    await tween(900, (e) => { rot += .15; open = e; txt = 1 - e * 2; draw(); }, tk);
+    c.remove();
+  }
+
+  const redo = $("#redo");
+  let token = { cancelled: true };
+  async function play() {
+    token.cancelled = true; const tk = (token = { cancelled: false });
+    hero.querySelectorAll(".fxl, .stage").forEach((n) => n.remove());
+    hero.classList.remove("reveal"); hero.classList.add("pre"); redo.hidden = true;
+    const top = Math.max(0, hero.getBoundingClientRect().top), vis = Math.max(320, Math.min(hero.clientHeight, innerHeight - top));
+    const stage = document.createElement("div"); stage.className = "stage"; stage.style.cssText = `position:absolute;left:0;right:0;top:0;height:${hero.clientHeight}px;z-index:5;pointer-events:none;overflow:hidden`; hero.append(stage);
+    const inner = document.createElement("div"); inner.style.cssText = `position:absolute;left:0;right:0;top:0;height:${vis}px`; stage.append(inner);
+    if (vis < hero.clientHeight) { const cv = document.createElement("div"); cv.className = "cover"; cv.style.cssText = `position:absolute;left:0;right:0;top:${vis}px;bottom:0;background:#0b0b0d;transition:opacity .6s`; stage.append(cv); }
+    await hypno(inner, tk, { label: "RED", family: "Bungee, Impact, sans-serif", spin: 4200, turns: 16 });
+    stage.remove();
+    if (!tk.cancelled) redo.hidden = false;
+  }
+  redo.addEventListener("click", play);
+  if (reduce) hero.classList.remove("pre"); else document.fonts.ready.then(play);
+})();
+</script>
+</body>
+</html>
