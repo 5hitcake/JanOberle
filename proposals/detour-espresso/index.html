@@ -202,13 +202,13 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
       <div class="map"><iframe title="Map: Detour Espresso, Argyle Place" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-3.1960%2C55.9350%2C-3.1830%2C55.9405&amp;layer=mapnik&amp;marker=55.93932%2C-3.19169"></iframe></div>
       <div class="card">
         <h3>Opening hours</h3>
-        <dl class="hours"><dt>Mon – Fri</dt><dd>from 8:30am</dd><dt>Sat – Sun</dt><dd>open, times to confirm</dd></dl>
+        <dl class="hours"><dt>Mon – Fri</dt><dd>8:30am – 3pm</dd><dt>Saturday</dt><dd>8:30am – 4pm</dd><dt>Sunday</dt><dd>9am – 4pm</dd></dl>
         <h3 style="margin-top:6px">Address</h3>
         <p>39 Argyle Place, Edinburgh EH9 1JT</p>
         <div class="ctas"><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Detour%20Espresso%2039%20Argyle%20Place%20Edinburgh" target="_blank" rel="noopener">Directions ↗</a><a class="btn ghost" href="https://www.instagram.com/detourespresso/" target="_blank" rel="noopener">Instagram ↗</a></div>
       </div>
     </div>
-    <p class="note">Hours from your Instagram bio (cut off after Mon–Fri 8:30am); the full times go in before launch. This page could live at detourespresso.co.uk, the address already painted on your wall.</p>
+    <p class="note">Hours from your Instagram bio. This page could live at detourespresso.co.uk, the address already painted on your wall.</p>
   </div>
 </section>
 
@@ -224,13 +224,14 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
   links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
 
-  /* ---------- Open now: Mo–Fr ab 8:30 (Ende unbekannt) ---------- */
+  /* ---------- Open now: Mo–Fr 8:30–15, Sa 8:30–16, So 9–16 (Edinburgh) ---------- */
   function status() {
     const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/London", weekday: "short", hour: "numeric", minute: "numeric", hour12: false }).formatToParts(new Date());
-    const get = (t) => parts.find((x) => x.type === t).value, m = (+get("hour") % 24) * 60 + +get("minute");
-    const open = m >= 510 && m < 960, chip = $("#statusChip");
+    const get = (t) => parts.find((x) => x.type === t).value, m = (+get("hour") % 24) * 60 + +get("minute"), wd = get("weekday");
+    const [a, b] = wd === "Sun" ? [540, 960] : wd === "Sat" ? [510, 960] : [510, 900];
+    const open = m >= a && m < b, chip = $("#statusChip"), fmt = (x) => { const h = Math.floor(x / 60), mm = x % 60; return (h > 12 ? h - 12 : h) + (mm ? ":" + String(mm).padStart(2, "0") : "") + (h >= 12 ? "pm" : "am"); };
     chip.classList.toggle("open", open);
-    chip.innerHTML = open ? "<b>Open now</b> · 7 days a week" : "Open <b>7 days</b> a week";
+    chip.innerHTML = open ? `<b>Open now</b> · until ${fmt(b)}` : m < a ? `Closed · opens <b>${fmt(a)}</b>` : "Closed now · <b>open 7 days</b>";
   }
   status(); setInterval(status, 60000);
 
