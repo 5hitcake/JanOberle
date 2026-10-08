@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Detour Espresso · Design proposal</title>
+<meta name="description" content="A website proposal for Detour Espresso, Marchmont, Edinburgh, by Jota Labs. Not the official website.">
+<meta property="og:title" content="Detour Espresso · Design proposal">
+<meta property="og:description" content="Specialty coffee on Argyle Place. Worth the detour. A proposal by Jota Labs.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='20' fill='%239f7545'/%3E%3Cpath d='M6 15h15V8l13 12-13 12v-7H6z' fill='%23f8f4e9'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;600;800&display=swap">
+<style>
+/* Layout: Umleitungs-Intro (Route geradeaus, DETOUR-Schild, Abzweig zur Tasse), blasses Holzparkett als Hintergrund im Hero.
+   On the grinder (Machina), Bakes (Zimtschnecken, Bagels), Ride in (Radfahrer-Café), Our staff, Find us. Holzbraun, Creme, Signalgelb. */
+:root {
+  --bg: #2b2118; --bg-2: #34281d; --bg-3: #3e3023; --line: #4f3f30; --fg: #f8f4e9; --soft: #e8dfcd; --muted: #b3a58f;
+  --wood: #9f7545; --wood-2: #b38a57; --sign: #f2b134; --ink: #2b2118;
+  --f-display: "Archivo Black", Impact, "Arial Black", sans-serif;
+  --f-body: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-family: var(--f-display); font-weight: 400; text-transform: uppercase; text-wrap: balance; letter-spacing: .01em; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 800 12px/1.2 var(--f-body); letter-spacing: .18em; text-transform: uppercase; color: var(--sign); }
+:focus-visible { outline: 2px solid var(--sign); outline-offset: 3px; }
+
+.proposal { background: #000; color: #e9ebee; font: 13px/1.4 var(--f-body); padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; }
+.proposal b { color: #ffd166; }
+.proposal a { color: #fff; font-weight: 800; }
+
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo svg { width: 42px; height: 42px; }
+.logo b { font: 400 19px/1 var(--f-display); text-transform: uppercase; }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 14px; font-weight: 600; color: var(--muted); }
+nav.links a:hover { color: var(--fg); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 800 15px/1 var(--f-body); padding: 15px 22px; border-radius: 10px; background: var(--sign); color: var(--ink); border: 2px solid var(--sign); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(242,177,52,.25); }
+.btn.ghost { background: transparent; color: var(--fg); border-color: rgba(248,244,233,.4); }
+.btn.ghost:hover { box-shadow: none; border-color: var(--fg); }
+nav.links a.btn { color: var(--ink); padding: 10px 16px; font-size: 14px; }
+.menu-btn { display: none; background: transparent; color: var(--fg); border: 1px solid var(--line); border-radius: 10px; padding: 8px 14px; font: 800 12px var(--f-body); letter-spacing: .08em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bg-2); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+
+/* ---------- Hero mit blassem Parkett ---------- */
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line); background: var(--bg); }
+.parquet { position: absolute; inset: -60px; z-index: 0; opacity: .1; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23e8d2ad' stroke-width='1.6'%3E%3Crect x='0' y='0' width='60' height='60'/%3E%3Cpath d='M0 15h60M0 30h60M0 45h60'/%3E%3Crect x='60' y='0' width='60' height='60'/%3E%3Cpath d='M75 0v60M90 0v60M105 0v60'/%3E%3Crect x='0' y='60' width='60' height='60'/%3E%3Cpath d='M15 60v60M30 60v60M45 60v60'/%3E%3Crect x='60' y='60' width='60' height='60'/%3E%3Cpath d='M60 75h60M60 90h60M60 105h60'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 120px 120px; animation: drift 60s linear infinite; }
+@keyframes drift { to { transform: translate(120px, 60px); } }
+@media (prefers-reduced-motion: reduce) { .parquet { animation: none; } }
+.hero::after { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(70vw 50vw at 100% 0%, rgba(242,177,52,.12), transparent 70%), radial-gradient(70vw 60vw at 0% 100%, rgba(159,117,69,.35), transparent 70%), linear-gradient(180deg, transparent 50%, rgba(43,33,24,.85)); }
+.hero .wrap { position: relative; z-index: 1; padding-block: clamp(80px, 12vw, 140px) clamp(56px, 9vw, 104px); display: flex; flex-direction: column; gap: 16px; }
+.hero h1 { font-size: clamp(56px, 12vw, 150px); line-height: .9; }
+.hero h1 span { color: var(--sign); }
+.hero .lead { margin: 4px 0 0; font-size: clamp(17px, 2.2vw, 21px); color: var(--soft); max-width: 40ch; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.facts span { font: 700 13px var(--f-body); color: var(--muted); border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; background: rgba(43,33,24,.75); }
+.facts span b { color: var(--fg); }
+.status::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); margin-right: 8px; vertical-align: 1px; }
+.status.open::before { background: #5fd38a; box-shadow: 0 0 10px #5fd38a; }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 7; font: 700 13px var(--f-body); color: var(--muted); background: rgba(43,33,24,.85); border: 1px solid var(--line); border-radius: 8px; padding: 8px 14px; cursor: pointer; }
+.redo:hover { color: var(--fg); }
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero.reveal .wrap > :nth-child(2) { animation-delay: .06s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .12s }
+.hero.reveal .wrap > :nth-child(4) { animation-delay: .18s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .24s }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+
+/* ---------- Abschnitte ---------- */
+section.block { padding-block: clamp(64px, 10vw, 104px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 40px; margin-bottom: 30px; }
+.head h2 { font-size: clamp(36px, 5.8vw, 68px); line-height: .98; margin-top: 10px; }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+.note { margin-top: 20px; font-size: 13px; color: var(--muted); padding: 10px 14px; border-left: 3px solid var(--sign); background: var(--bg-2); border-radius: 0 10px 10px 0; }
+
+.grid3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+@media (max-width: 860px) { .grid3 { grid-template-columns: minmax(0,1fr); } }
+.card { border: 1px solid var(--line); border-radius: 18px; padding: 24px; background: var(--bg-2); display: grid; gap: 10px; align-content: start; }
+.card h3 { font-size: 24px; line-height: 1.05; }
+.card p { margin: 0; color: var(--soft); }
+.card .ic { width: 52px; height: 52px; border-radius: 12px; background: rgba(242,177,52,.14); display: grid; place-items: center; }
+.card .ic svg { width: 30px; height: 30px; stroke: var(--sign); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.card.wood { background: linear-gradient(160deg, var(--wood-2), var(--wood)); border-color: var(--wood); color: var(--ink); }
+.card.wood p { color: #3b2b1a; }
+.card.wood .ic { background: rgba(43,33,24,.15); } .card.wood .ic svg { stroke: var(--ink); }
+
+.ride { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: clamp(24px, 4vw, 56px); align-items: center; border-radius: 26px; padding: clamp(26px, 5vw, 52px); background: var(--sign); color: var(--ink); overflow: hidden; }
+@media (max-width: 860px) { .ride { grid-template-columns: minmax(0,1fr); } }
+.ride h2 { font-size: clamp(34px, 5vw, 58px); line-height: .98; }
+.ride p { margin: 12px 0 0; max-width: 44ch; color: #3b2b1a; }
+.ride svg { width: 100%; max-width: 380px; justify-self: center; }
+.ride .wheel { transform-box: fill-box; transform-origin: center; animation: spin 2.4s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .ride .wheel { animation: none; } }
+
+.find { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 860px) { .find { grid-template-columns: minmax(0,1fr); } }
+.map { border-radius: 18px; overflow: hidden; border: 1px solid var(--line); min-height: 320px; }
+.map iframe { width: 100%; height: 100%; min-height: 320px; border: 0; display: block; }
+.hours { display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; margin: 0; font-variant-numeric: tabular-nums; }
+.hours dt { color: var(--muted); } .hours dd { margin: 0; color: var(--soft); }
+
+footer { padding-block: 40px 96px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 800 14px var(--f-body); padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.35); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></symbol>
+  <symbol id="logo" viewBox="0 0 40 40"><defs><clipPath id="lc"><circle cx="20" cy="20" r="20"/></clipPath></defs><g clip-path="url(#lc)"><rect width="40" height="40" fill="#9f7545"/><path d="M0 10h20M0 20h20M0 30h20M30 0v20M20 20v20M30 20v20M10 20v20" stroke="#5b4027" stroke-width="1.2"/><path d="M6 15h15V8l13 12-13 12v-7H6z" fill="#f8f4e9"/></g></symbol>
+</svg>
+<div class="proposal"><span><b>Design proposal</b> for Detour Espresso · not the official website</span><span>Made by <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">Jota Labs</a></span></div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top"><svg aria-hidden="true"><use href="#logo"/></svg><b>Detour Espresso</b></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENU</button>
+    <nav class="links" id="links">
+      <a href="#coffee">Coffee</a>
+      <a href="#ride">Ride in</a>
+      <a href="#staff">Our staff</a>
+      <a class="btn" href="#find">Find us</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero pre" id="top">
+  <div class="parquet" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="kicker">Specialty coffee · Argyle Place, Marchmont</div>
+    <h1>Detour<br><span>Espresso</span></h1>
+    <p class="lead">Worth the detour. Specialty coffee, cinnamon buns and bagels on Argyle Place. Sit in or take away, open 7 days a week.</p>
+    <div class="ctas"><a class="btn" href="#find">Find us</a><a class="btn ghost" href="#coffee">What's on</a></div>
+    <div class="facts"><span class="status" id="statusChip">Open 7 days</span><span>Sit in or <b>take away</b></span><span><b>4.6 ★</b> on Google</span></div>
+  </div>
+  <button class="redo" type="button" id="redo" hidden>↻ Take the detour again</button>
+</section>
+
+<section class="block" id="coffee">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">What's on</div><h2>Good coffee, good bakes</h2></div><p>Everything you need for a proper coffee stop, whether you stay for an hour or grab it on the way.</p></div>
+    <div class="grid3">
+      <article class="card wood"><div class="ic"><svg viewBox="0 0 32 32"><path d="M6 12h16v8a8 8 0 0 1-8 8h0a8 8 0 0 1-8-8z"/><path d="M22 14h3a3 3 0 0 1 0 6h-3"/><path d="M11 4c-1 2 1 3 0 5M16 4c-1 2 1 3 0 5"/></svg></div><h3>On the grinder</h3><p>Specialty coffee from Machina, pulled with care. Espresso, flat whites, filter: ask what's on today.</p></article>
+      <article class="card"><div class="ic"><svg viewBox="0 0 32 32"><path d="M16 16m0-3a3 3 0 1 1-3 3 7 7 0 1 1 7 7 11 11 0 1 1-11-11"/></svg></div><h3>Cinnamon buns</h3><p>The ones people come back for. Best with a cortado, best before they sell out.</p></article>
+      <article class="card"><div class="ic"><svg viewBox="0 0 32 32"><ellipse cx="16" cy="13" rx="12" ry="6"/><path d="M4 13v4c0 3.3 5.4 6 12 6s12-2.7 12-6v-4"/><path d="M8 18h16"/></svg></div><h3>Bagels</h3><p>Stacked and toasted, for a proper breakfast or a lunch on the go.</p></article>
+    </div>
+    <p class="note">Menu items from your Instagram and reviews; the final page can show the full menu and today's specials, updated by you.</p>
+  </div>
+</section>
+
+<section class="block" id="ride" style="padding-top:0">
+  <div class="wrap">
+    <div class="ride">
+      <div>
+        <div class="kicker" style="color:var(--ink)">Ride in</div>
+        <h2>Coffee stop for cyclists</h2>
+        <p>Run by a road cyclist, Detour is the natural stop before or after a ride round the Meadows and out of town. Bring the bike, refuel, swap stories.</p>
+      </div>
+      <svg viewBox="0 0 220 130" aria-hidden="true">
+        <g fill="none" stroke="#2b2118" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+          <g class="wheel"><circle cx="50" cy="90" r="34"/><path d="M50 56v68M16 90h68M26 66l48 48M74 66l-48 48" stroke-width="1.6"/></g>
+          <g class="wheel"><circle cx="170" cy="90" r="34"/><path d="M170 56v68M136 90h68M146 66l48 48M194 66l-48 48" stroke-width="1.6"/></g>
+          <path d="M50 90 85 40h62l23 50M85 40l25 50 37-50M110 90 50 90M78 30h18M147 40l-6-14h16"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="staff" style="padding-top:0">
+  <div class="wrap grid3" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+    <article class="card"><div class="kicker">Our staff</div><h3>The people behind the bar</h3><p>A small, friendly team who'll remember your order. Meet them on the page, just like in your “Our Staff” highlight.</p></article>
+    <article class="card"><div class="kicker">Sit in</div><h3>Stay a while</h3><p>Wi-Fi, plants, sunshine through the window and a shelf of books. Or grab it to go on your way to the Meadows.</p></article>
+  </div>
+</section>
+
+<section class="block" id="find" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Find us</div><h2>39 Argyle Place</h2></div><p>Marchmont, Edinburgh EH9 1JT. A short walk from the Meadows.</p></div>
+    <div class="find">
+      <div class="map"><iframe title="Map: Detour Espresso, Argyle Place" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-3.1960%2C55.9350%2C-3.1830%2C55.9405&amp;layer=mapnik&amp;marker=55.93932%2C-3.19169"></iframe></div>
+      <div class="card">
+        <h3>Opening hours</h3>
+        <dl class="hours"><dt>Mon – Fri</dt><dd>from 8:30am</dd><dt>Sat – Sun</dt><dd>open, times to confirm</dd></dl>
+        <h3 style="margin-top:6px">Address</h3>
+        <p>39 Argyle Place, Edinburgh EH9 1JT</p>
+        <div class="ctas"><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Detour%20Espresso%2039%20Argyle%20Place%20Edinburgh" target="_blank" rel="noopener">Directions ↗</a><a class="btn ghost" href="https://www.instagram.com/detourespresso/" target="_blank" rel="noopener">Instagram ↗</a></div>
+      </div>
+    </div>
+    <p class="note">Hours from your Instagram bio (cut off after Mon–Fri 8:30am); the full times go in before launch. This page could live at detourespresso.co.uk, the address already painted on your wall.</p>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>Detour Espresso · 39 Argyle Place, Edinburgh EH9 1JT</span><span>Design proposal by Jota Labs · <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">more work</a></span></div></footer>
+
+<a class="like" href="https://wa.me/5491130331893?text=Hi%20Jan%2C%20I%20saw%20the%20website%20proposal%20for%20Detour%20Espresso%20and%20I%27d%20like%20to%20know%20more." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Like it? Let's talk</a>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+
+  /* ---------- Open now: Mo–Fr ab 8:30 (Ende unbekannt) ---------- */
+  function status() {
+    const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/London", weekday: "short", hour: "numeric", minute: "numeric", hour12: false }).formatToParts(new Date());
+    const get = (t) => parts.find((x) => x.type === t).value, m = (+get("hour") % 24) * 60 + +get("minute");
+    const open = m >= 510 && m < 960, chip = $("#statusChip");
+    chip.classList.toggle("open", open);
+    chip.innerHTML = open ? "<b>Open now</b> · 7 days a week" : "Open <b>7 days</b> a week";
+  }
+  status(); setInterval(status, 60000);
+
+  /* ---------- Intro: Umleitung ---------- */
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const ease = (t) => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+  const tween = (ms, fn, tk, ez = ease) => new Promise((res) => { const t0 = performance.now(); const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(ez(k), k); k < 1 ? requestAnimationFrame(step) : res(); }; requestAnimationFrame(step); });
+  const el = (scr, tag, cls, css = "") => { const n = document.createElement(tag); n.className = "fxl " + cls; if (css) n.style.cssText = css; scr.append(n); return n; };
+  const svgEl = (tag, attrs) => { const n = document.createElementNS("http://www.w3.org/2000/svg", tag); for (const k in attrs) n.setAttribute(k, attrs[k]); return n; };
+  const hero = $("#top");
+  const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); hero.querySelectorAll(".cover").forEach((n) => (n.style.opacity = "0")); };
+  async function detour(scr, tk, o = {}) {
+    const w = scr.clientWidth, h = scr.clientHeight, T = Math.max(10, Math.min(w, h) * .03);
+    const box = el(scr, "div", "dt", `position:absolute;inset:0;z-index:5;pointer-events:none;background:${o.bg || "#2b2118"};transition:transform .9s cubic-bezier(.7,0,.3,1)`);
+    const s = svgEl("svg", { viewBox: `0 0 ${w} ${h}`, width: w, height: h }); box.append(s);
+    // gerade Strasse mit Mittellinie
+    const road = svgEl("path", { d: `M${w * .5} ${h + 20} L${w * .5} ${-20}`, stroke: "#4a3c2e", "stroke-width": T * 4, fill: "none" }); s.append(road);
+    const dash = svgEl("path", { d: `M${w * .5} ${h + 20} L${w * .5} ${-20}`, stroke: "#c9b48f", "stroke-width": T * .3, "stroke-dasharray": `${T * 1.4} ${T * 1.4}`, fill: "none" }); s.append(dash);
+    const cy = h * .42, cx = w * .5;
+    const route = svgEl("path", { d: `M${cx} ${h + 10} L${cx} ${cy + T * 3} Q${cx} ${cy} ${cx + T * 3} ${cy} L${w * .78} ${cy}`, stroke: o.accent || "#f2b134", "stroke-width": T * .9, fill: "none", "stroke-linecap": "round", "stroke-linejoin": "round" }); s.append(route);
+    const L = route.getTotalLength(); route.style.strokeDasharray = L; route.style.strokeDashoffset = L;
+    // Umleitungsschild
+    const sign = svgEl("g", { opacity: 0 }); const sw = Math.min(w * .4, 220), sh = sw * .42, sx = Math.max(12, cx - T * 2.5 - sw), sy = cy - sh * 1.9;
+    sign.innerHTML = `<rect x="${sx}" y="${sy}" width="${sw}" height="${sh}" rx="${sh * .12}" fill="#f2b134" stroke="#2b2118" stroke-width="3"/><text x="${sx + sw * .42}" y="${sy + sh * .66}" text-anchor="middle" font-family="${o.family || "system-ui"}" font-weight="900" font-size="${sh * .4}" fill="#2b2118" textLength="${sw * .62}" lengthAdjust="spacingAndGlyphs">DETOUR</text><path d="M${sx + sw * .8} ${sy + sh * .3} l${sw * .1} ${sh * .2} l${-sw * .1} ${sh * .2} z" fill="#2b2118"/><rect x="${sx + sw * .48}" y="${sy + sh}" width="6" height="${sh * .9}" fill="#8a7a66"/>`;
+    sign.style.transition = "opacity .3s"; s.append(sign);
+    // Tasse am Ziel
+    const cup = svgEl("g", { opacity: 0 }); const U = Math.min(w, h) * .1, ux = w * .78 + U * .9, uy = cy;
+    cup.innerHTML = `<path d="M${ux - U * .7} ${uy - U * .5} h${U * 1.4} v${U * .55} a${U * .7} ${U * .7} 0 0 1 ${-U * 1.4} 0z" fill="#f8f4e9"/><path d="M${ux + U * .7} ${uy - U * .3} a${U * .25} ${U * .25} 0 0 1 0 ${U * .5}" stroke="#f8f4e9" stroke-width="${U * .12}" fill="none"/><ellipse cx="${ux}" cy="${uy - U * .5}" rx="${U * .62}" ry="${U * .12}" fill="#9f7545"/><path d="M${ux - U * .25} ${uy - U * .8} q${U * .12} ${-U * .2} 0 ${-U * .4} M${ux + U * .15} ${uy - U * .8} q${U * .12} ${-U * .2} 0 ${-U * .4}" stroke="rgba(248,244,233,.6)" stroke-width="${U * .06}" fill="none" stroke-linecap="round"/>`;
+    cup.style.transition = "opacity .4s"; s.append(cup);
+    const cap = el(box, "div", "", `position:absolute;left:0;right:0;top:${cy + h * .14}px;text-align:center;color:#f8f4e9;opacity:0;transition:opacity .5s;font:${o.font || "800 8cqw system-ui"};padding-inline:16px`); cap.innerHTML = o.label || "";
+    await sleep(250);
+    // erst geradeaus, dann Schild, dann Abzweig
+    await tween(700, (e, k) => (route.style.strokeDashoffset = L - (h - cy - T * 3 + 10) * k), tk, (k) => k);
+    sign.setAttribute("opacity", 1); await sleep(450);
+    await tween(700, (e) => (route.style.strokeDashoffset = (L - (h - cy - T * 3 + 10)) * (1 - e)), tk);
+    cup.setAttribute("opacity", 1); cap.style.opacity = 1; await sleep(o.hold || 1300); if (tk.cancelled) return box.remove();
+    reveal(scr); box.style.transform = "translateX(-101%)"; await sleep(950); box.remove();
+  }
+
+  const redo = $("#redo");
+  let token = { cancelled: true };
+  async function play() {
+    token.cancelled = true; const tk = (token = { cancelled: false });
+    hero.querySelectorAll(".fxl, .stage").forEach((n) => n.remove());
+    hero.classList.remove("reveal"); hero.classList.add("pre"); redo.hidden = true;
+    const top = Math.max(0, hero.getBoundingClientRect().top), vis = Math.max(320, Math.min(hero.clientHeight, innerHeight - top));
+    const stage = document.createElement("div"); stage.className = "stage"; stage.style.cssText = `position:absolute;left:0;right:0;top:0;height:${hero.clientHeight}px;z-index:5;pointer-events:none;overflow:hidden`; hero.append(stage);
+    const inner = document.createElement("div"); inner.style.cssText = `position:absolute;left:0;right:0;top:0;height:${vis}px;container-type:inline-size`; stage.append(inner);
+    if (vis < hero.clientHeight) { const cv = document.createElement("div"); cv.className = "cover"; cv.style.cssText = `position:absolute;left:0;right:0;top:${vis}px;bottom:0;background:#2b2118;transition:opacity .6s`; stage.append(cv); }
+    await detour(inner, tk, { label: "Worth the detour.", font: '400 clamp(28px, 8.5cqw, 72px) "Archivo Black", sans-serif', family: '"Archivo Black", sans-serif' });
+    stage.remove();
+    if (!tk.cancelled) redo.hidden = false;
+  }
+  redo.addEventListener("click", play);
+  if (reduce) hero.classList.remove("pre"); else document.fonts.ready.then(play);
+})();
+</script>
+</body>
+</html>
