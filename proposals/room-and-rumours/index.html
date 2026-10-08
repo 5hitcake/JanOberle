@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Room &amp; Rumours Coffee · Design proposal</title>
+<meta name="description" content="A website proposal for Room & Rumours Coffee, Edinburgh, by Jota Labs. Not the official website.">
+<meta property="og:title" content="Room & Rumours Coffee · Design proposal">
+<meta property="og:description" content="Specialty coffee & donutterie in the arches on East Market Street. A proposal by Jota Labs.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%230f2f22'/%3E%3Ccircle cx='32' cy='32' r='17' fill='%23e9a3b6'/%3E%3Ccircle cx='32' cy='32' r='6' fill='%230f2f22'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Manrope:wght@400;600;800&display=swap">
+<style>
+/* Layout: Donut-Intro (Donut rollt herein, Streusel, Loch öffnet sich), danach goldener Dampf im Hero und der Name füllt sich mit Gold.
+   Guest roaster of the month, Today's doughnuts, Beans to take home, Ali & Aysel, Gift vouchers, Find us (Karte mit exaktem Punkt + Maps-Hinweis).
+   Tannengrün und Gold wie das Logo, Donut-Rosa als Akzent. */
+:root {
+  --bg: #0f2f22; --bg-2: #143a2a; --bg-3: #1a4533; --line: #2b5541; --fg: #f3ead6; --soft: #e0d6bf; --muted: #a9b3a6;
+  --gold: #c9a45c; --pink: #e9a3b6; --ink: #0f2f22;
+  --f-display: "Cinzel", Georgia, serif;
+  --f-body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-family: var(--f-display); font-weight: 700; text-wrap: balance; letter-spacing: .02em; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 800 12px/1.2 var(--f-body); letter-spacing: .18em; text-transform: uppercase; color: var(--gold); }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+.proposal { background: #000; color: #e9ebee; font: 13px/1.4 var(--f-body); padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; }
+.proposal b { color: #ffd166; }
+.proposal a { color: #fff; font-weight: 800; }
+
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo .seal { width: 44px; height: 44px; border-radius: 50%; background: var(--bg); border: 1.5px solid var(--gold); display: grid; place-items: center; color: var(--gold); font: 700 9px/1.1 var(--f-display); text-align: center; letter-spacing: .04em; }
+.logo b { font: 700 18px/1 var(--f-display); letter-spacing: .06em; text-transform: uppercase; }
+.logo small { display: block; font: 700 10px/1.4 var(--f-body); letter-spacing: .3em; color: var(--muted); }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 14px; font-weight: 600; color: var(--muted); }
+nav.links a:hover { color: var(--fg); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 800 15px/1 var(--f-body); padding: 15px 22px; border-radius: 999px; background: var(--gold); color: var(--ink); border: 2px solid var(--gold); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(201,164,92,.3); }
+.btn.ghost { background: transparent; color: var(--fg); border-color: rgba(243,234,214,.4); }
+.btn.ghost:hover { box-shadow: none; border-color: var(--fg); }
+.btn.pink { background: var(--pink); border-color: var(--pink); }
+nav.links a.btn { color: var(--ink); padding: 10px 16px; font-size: 14px; }
+.menu-btn { display: none; background: transparent; color: var(--fg); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font: 800 12px var(--f-body); letter-spacing: .08em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bg-2); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+
+/* ---------- Hero ---------- */
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line);
+  background: radial-gradient(60vw 45vw at 50% -10%, rgba(255,214,150,.12), transparent 70%), radial-gradient(60vw 50vw at 100% 110%, rgba(201,164,92,.16), transparent 70%), var(--bg); }
+.hero .wrap { position: relative; z-index: 1; padding-block: clamp(80px, 12vw, 140px) clamp(56px, 9vw, 104px); display: flex; flex-direction: column; gap: 16px; }
+.hero h1 { font-size: clamp(54px, 11vw, 132px); line-height: .95; text-transform: uppercase; letter-spacing: .03em;
+  background-image: linear-gradient(to top, var(--gold) 0 var(--lvl, 100%), transparent calc(var(--lvl, 100%) + .5%)); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-stroke: 1.5px var(--gold); }
+.hero .lead { margin: 4px 0 0; font-size: clamp(17px, 2.2vw, 21px); color: var(--soft); max-width: 42ch; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.facts span { font: 700 13px var(--f-body); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; background: rgba(15,47,34,.75); }
+.facts span b { color: var(--fg); }
+.status::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); margin-right: 8px; vertical-align: 1px; }
+.status.open::before { background: #5fd38a; box-shadow: 0 0 10px #5fd38a; }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 7; font: 700 13px var(--f-body); color: var(--muted); background: rgba(15,47,34,.85); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.redo:hover { color: var(--fg); }
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero.reveal .wrap > :nth-child(2) { animation-delay: .06s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .12s }
+.hero.reveal .wrap > :nth-child(4) { animation-delay: .18s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .24s }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+.steam { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; }
+
+/* ---------- Abschnitte ---------- */
+section.block { padding-block: clamp(64px, 10vw, 104px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 40px; margin-bottom: 30px; }
+.head h2 { font-size: clamp(34px, 5.4vw, 62px); line-height: 1.02; margin-top: 10px; }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+.note { margin-top: 20px; font-size: 13px; color: var(--muted); padding: 10px 14px; border-left: 3px solid var(--gold); background: var(--bg-2); border-radius: 0 10px 10px 0; }
+
+.roaster { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: clamp(24px, 4vw, 56px); align-items: center; border: 1px solid var(--line); border-radius: 28px; padding: clamp(26px, 5vw, 52px); background: radial-gradient(80% 90% at 100% 0%, rgba(201,164,92,.16), transparent 60%), var(--bg-2); }
+@media (max-width: 860px) { .roaster { grid-template-columns: minmax(0,1fr); } }
+.roaster p { color: var(--soft); max-width: 44ch; }
+.bag { justify-self: center; width: min(260px, 70vw); aspect-ratio: 3/4; border-radius: 18px 18px 26px 26px; background: linear-gradient(160deg, #f3ead6, #dccfb1); color: var(--ink); padding: 26px 22px; display: grid; align-content: space-between; box-shadow: 0 30px 60px rgba(0,0,0,.35); position: relative; }
+.bag::before { content: ""; position: absolute; left: 12px; right: 12px; top: 10px; height: 10px; border-radius: 6px; background: rgba(0,0,0,.08); }
+.bag .k { font: 800 11px var(--f-body); letter-spacing: .2em; text-transform: uppercase; color: #7a6a43; }
+.bag b { font: 700 30px/1.05 var(--f-display); }
+.bag .meta { display: grid; gap: 4px; font: 600 13px var(--f-body); color: #4b4433; }
+.bag .meta span { display: flex; justify-content: space-between; border-top: 1px solid rgba(0,0,0,.12); padding-top: 4px; }
+
+.donuts { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 14px; }
+@media (max-width: 960px) { .donuts { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+.dn { border: 1px solid var(--line); border-radius: 22px; padding: 22px 18px; background: var(--bg-2); display: grid; gap: 8px; justify-items: center; text-align: center; }
+.dn svg { width: 92px; height: 92px; }
+.dn h3 { font-size: 19px; }
+.dn p { margin: 0; color: var(--muted); font-size: 14px; }
+.tag { font: 800 11px var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: var(--ink); background: #9fd6a6; border-radius: 999px; padding: 4px 9px; }
+.tag.hide { visibility: hidden; }
+
+.duo { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 760px) { .duo { grid-template-columns: minmax(0,1fr); } }
+.card { border: 1px solid var(--line); border-radius: 22px; padding: 26px; background: var(--bg-2); display: grid; gap: 12px; align-content: start; }
+.card h3 { font-size: 26px; }
+.card p { margin: 0; color: var(--soft); }
+.card a.tel { color: var(--fg); font-weight: 800; }
+.card.cream { background: var(--fg); color: var(--ink); border-color: var(--fg); }
+.card.cream p { color: #3f4a40; }
+.voucher { border-radius: 16px; background: linear-gradient(135deg, var(--bg), var(--bg-3)); border: 1.5px dashed var(--gold); color: var(--fg); padding: 18px; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.voucher b { font: 700 28px var(--f-display); color: var(--gold); }
+
+.find { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 860px) { .find { grid-template-columns: minmax(0,1fr); } }
+.map { border-radius: 22px; overflow: hidden; border: 1px solid var(--line); min-height: 340px; background: var(--bg-2); }
+.map iframe { width: 100%; height: 100%; min-height: 340px; border: 0; display: block; filter: saturate(.85); }
+.warn { border-radius: 16px; padding: 16px 18px; background: rgba(233,163,182,.12); border: 1px solid rgba(233,163,182,.45); display: grid; gap: 6px; }
+.warn b { color: var(--pink); font: 800 13px var(--f-body); letter-spacing: .12em; text-transform: uppercase; }
+.hours { display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; margin: 0; font-variant-numeric: tabular-nums; }
+.hours dt { color: var(--muted); } .hours dd { margin: 0; color: var(--soft); }
+
+footer { padding-block: 40px 96px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 800 14px var(--f-body); padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.35); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></symbol>
+</svg>
+<div class="proposal"><span><b>Design proposal</b> for Room &amp; Rumours Coffee · not the official website</span><span>Made by <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">Jota Labs</a></span></div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top"><span class="seal" aria-hidden="true">R&amp;R</span><span><b>Room &amp; Rumours</b><small>COFFEE</small></span></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENU</button>
+    <nav class="links" id="links">
+      <a href="#roaster">Guest roaster</a>
+      <a href="#doughnuts">Doughnuts</a>
+      <a href="#vouchers">Gift vouchers</a>
+      <a class="btn" href="#find">Find us</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero pre" id="top">
+  <canvas class="steam" id="steam" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="kicker">Specialty coffee &amp; donutterie · The Arches, Edinburgh</div>
+    <h1 id="name">Room &amp;<br>Rumours</h1>
+    <p class="lead">A new guest roaster every month and fresh doughnuts every day, in the railway arches on East Market Street.</p>
+    <div class="ctas"><a class="btn" href="#find">Find us</a><a class="btn ghost" href="#vouchers">Gift vouchers</a></div>
+    <div class="facts"><span class="status" id="statusChip">8am – 4:30pm</span><span><b>Dogs</b> welcome</span><span><b>4.8 ★</b> on Google</span></div>
+  </div>
+  <button class="redo" type="button" id="redo" hidden>↻ Another doughnut</button>
+</section>
+
+<section class="block" id="roaster">
+  <div class="wrap">
+    <div class="roaster">
+      <div>
+        <div class="kicker">This month's guest roaster</div>
+        <div class="head" style="margin:0 0 14px"><h2>A new roaster every month</h2></div>
+        <p>We bring in a different roaster from the UK and Europe every month, so there's always something new in your cup. Ask us what's on the grinder today.</p>
+        <div class="ctas"><a class="btn" href="#find">Come and try it</a><a class="btn ghost" href="https://www.instagram.com/roomrumourscoffee/" target="_blank" rel="noopener">Past roasters ↗</a></div>
+      </div>
+      <div class="bag" aria-label="Example coffee of the month">
+        <span class="k">Guest roaster · this month</span>
+        <b>Roaster name</b>
+        <div class="meta"><span>Origin <em>Ethiopia</em></span><span>Process <em>Washed</em></span><span>Notes <em>Peach · jasmine</em></span></div>
+      </div>
+    </div>
+    <p class="note">Example: you'd update the roaster of the month yourselves in a minute, straight from your phone.</p>
+  </div>
+</section>
+
+<section class="block" id="doughnuts" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Donutterie</div><h2>Today's doughnuts</h2></div><p>Made fresh every day, with vegan options. When they're gone, they're gone.</p></div>
+    <div class="donuts" id="donuts"></div>
+    <p class="note">Example flavours: the real line-up changes daily and can be posted here each morning.</p>
+  </div>
+</section>
+
+<section class="block" id="vouchers" style="padding-top:0">
+  <div class="wrap duo">
+    <article class="card cream">
+      <span class="kicker" style="color:#7a6a43">Gift vouchers</span>
+      <h3>Give someone a good morning</h3>
+      <p>Coffee and doughnuts as a gift. Pick up a voucher at the counter, or message us and we'll sort one out for you.</p>
+      <div class="voucher"><span>Room &amp; Rumours<br><small style="opacity:.7">Gift voucher</small></span><b>£20</b></div>
+      <a class="btn" style="justify-self:start;background:var(--ink);color:var(--gold);border-color:var(--ink)" href="https://www.instagram.com/roomrumourscoffee/" target="_blank" rel="noopener">Ask for a voucher</a>
+    </article>
+    <article class="card">
+      <span class="kicker">Team R&amp;R</span>
+      <h3>Ali &amp; Aysel</h3>
+      <p>Room &amp; Rumours is run by husband-and-wife team Ali and Aysel, with a small crew who know your order by your second visit. Dogs are always welcome too.</p>
+      <div class="facts" style="margin-top:4px"><span>Family-run</span><span>Dog friendly</span><span>Since 2020</span></div>
+    </article>
+  </div>
+</section>
+
+<section class="block" id="find" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Find us</div><h2>In the arches on East Market Street</h2></div><p>Two minutes from Waverley Station and the Royal Mile.</p></div>
+    <div class="find">
+      <div class="map"><iframe title="Map: Room &amp; Rumours Coffee, East Market Street" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-3.1905%2C55.9497%2C-3.1810%2C55.9532&amp;layer=mapnik&amp;marker=55.95144%2C-3.18575"></iframe></div>
+      <div class="card">
+        <div class="warn"><b>Heads up</b><span>Google Maps sends people to Jeffrey Street. Ignore it: we're down in the arches on <strong>East Market Street, Arch 13</strong>.</span></div>
+        <h3>Address</h3>
+        <p>25 East Market Street, Arch 13<br>Edinburgh EH8 8FS</p>
+        <div class="ctas"><a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=55.95144,-3.18575" target="_blank" rel="noopener">Directions to the right spot ↗</a></div>
+        <h3 style="margin-top:6px">Opening hours</h3>
+        <dl class="hours"><dt>Every day</dt><dd>8am – 4:30pm</dd></dl>
+        <p><a class="tel" href="https://www.instagram.com/roomrumourscoffee/" target="_blank" rel="noopener">@roomrumourscoffee</a></p>
+      </div>
+    </div>
+    <p class="note">The map pin uses exact coordinates, so it always lands at the arches, whatever Google's listing says. The days still need confirming.</p>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>Room &amp; Rumours Coffee · 25 East Market Street, Arch 13, Edinburgh EH8 8FS</span><span>Design proposal by Jota Labs · <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">more work</a></span></div></footer>
+
+<a class="like" href="https://wa.me/5491130331893?text=Hi%20Jan%2C%20I%20saw%20the%20website%20proposal%20for%20Room%20%26%20Rumours%20Coffee%20and%20I%27d%20like%20to%20know%20more." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Like it? Let's talk</a>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+
+  /* ---------- Donuts ---------- */
+  const DN = [["Raspberry & white choc", "#e9a3b6", "Tart raspberry glaze.", true], ["Salted caramel", "#d9a160", "Our bestseller.", false], ["Pistachio cream", "#a9c98a", "Filled to the edge.", false], ["Chocolate & hazelnut", "#6b4027", "Rich and gooey.", true]];
+  $("#donuts").innerHTML = DN.map(([n, c, d, v]) => `<article class="dn"><svg viewBox="0 0 92 92" aria-hidden="true"><circle cx="46" cy="46" r="40" fill="#d79a5b"/><path d="M46 10a36 36 0 1 0 0.1 0z" fill="${c}"/><circle cx="46" cy="46" r="13" fill="#143a2a"/>${[...Array(10)].map((_, i) => `<rect x="${46 + Math.cos(i * .63) * 26 - 4}" y="${46 + Math.sin(i * .63) * 26 - 1.5}" width="8" height="3" rx="1.5" fill="${["#f7d94c", "#7fd1c6", "#fff", "#ff7a59"][i % 4]}" transform="rotate(${i * 37} ${46 + Math.cos(i * .63) * 26} ${46 + Math.sin(i * .63) * 26})"/>`).join("")}</svg><h3>${n}</h3><p>${d}</p><span class="tag${v ? "" : " hide"}">Vegan</span></article>`).join("");
+
+  /* ---------- Open now (Edinburgh time) ---------- */
+  function status() {
+    const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/London", hour: "numeric", minute: "numeric", hour12: false }).formatToParts(new Date());
+    const get = (t) => +parts.find((x) => x.type === t).value, m = (get("hour") % 24) * 60 + get("minute");
+    const open = m >= 480 && m < 990, chip = $("#statusChip");
+    chip.classList.toggle("open", open);
+    chip.innerHTML = open ? "<b>Open now</b> · until 4:30pm" : "Closed now · <b>8am – 4:30pm</b>";
+  }
+  status(); setInterval(status, 60000);
+
+  /* ---------- Hintergrund: goldener Kaffeedampf ---------- */
+  const hero = $("#top"), sc = $("#steam"), sx = sc.getContext("2d"), puffs = [];
+  function steam(now) {
+    const dpr = Math.min(2, devicePixelRatio || 1), w = hero.clientWidth, h = hero.clientHeight;
+    if (sc.width !== Math.round(w * dpr) || sc.height !== Math.round(h * dpr)) { sc.width = Math.round(w * dpr); sc.height = Math.round(h * dpr); }
+    sx.setTransform(dpr, 0, 0, dpr, 0, 0); sx.clearRect(0, 0, w, h);
+    if (!reduce && puffs.length < 26 && Math.random() < .12) puffs.push({ x: w * (.15 + Math.random() * .8), y: h + 30, r: 30 + Math.random() * 50, vy: .25 + Math.random() * .35, ph: Math.random() * 6, a: 0 });
+    for (let i = puffs.length - 1; i >= 0; i--) {
+      const p = puffs[i]; p.y -= p.vy; p.r += .12; p.a = Math.min(.12, p.a + .002); const x = p.x + Math.sin(now / 1400 + p.ph) * 22;
+      const g = sx.createRadialGradient(x, p.y, 0, x, p.y, p.r); g.addColorStop(0, `rgba(201,164,92,${p.a * Math.min(1, p.y / (h * .5))})`); g.addColorStop(1, "rgba(201,164,92,0)");
+      sx.fillStyle = g; sx.beginPath(); sx.arc(x, p.y, p.r, 0, 7); sx.fill();
+      if (p.y < -p.r) puffs.splice(i, 1);
+    }
+    if (!reduce) requestAnimationFrame(steam);
+  }
+  requestAnimationFrame(steam);
+
+  /* ---------- Intro: Donut, danach füllt sich der Name mit Gold ---------- */
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const ease = (t) => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+  const tween = (ms, fn, tk, ez = ease) => new Promise((res) => { const t0 = performance.now(); const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(ez(k), k); k < 1 ? requestAnimationFrame(step) : res(); }; requestAnimationFrame(step); });
+  const canvas = (parent, cls, z) => { const w = parent.clientWidth, h = parent.clientHeight, dpr = Math.min(2, devicePixelRatio || 1); const c = document.createElement("canvas"); c.className = "fxl " + cls; c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); c.style.cssText = `position:absolute;left:0;top:0;width:${w}px;height:${h}px;z-index:${z};pointer-events:none`; c.setAttribute("aria-hidden", "true"); parent.append(c); const ctx = c.getContext("2d"); ctx.scale(dpr, dpr); return { c, ctx, w, h }; };
+  const nameEl = $("#name");
+  const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); hero.querySelectorAll(".cover").forEach((n) => (n.style.opacity = "0")); fillName(); };
+  let fillTk = { cancelled: true };
+  function fillName() { fillTk.cancelled = true; const tk = (fillTk = { cancelled: false }); nameEl.style.setProperty("--lvl", "0%"); setTimeout(() => tween(2400, (e, k) => nameEl.style.setProperty("--lvl", (e * 100 + Math.sin(k * 30) * 1.5 * (1 - k)).toFixed(2) + "%"), tk), 500); }
+  async function donut(scr, tk, o = {}) {
+    const { c, ctx, w, h } = canvas(scr, "donut", 5), cx = w / 2, cy = h * .46, R = Math.min(w, h) * .26;
+    const glaze = o.glaze || "#e9a3b6", dough = o.dough || "#d79a5b", bg = o.bg || "#0f2f22";
+    const spr = Array.from({ length: 46 }, () => ({ a: Math.random() * 6.28, r: R * (.55 + Math.random() * .38), rot: Math.random() * 6.28, col: ["#f7d94c", "#7fd1c6", "#ffffff", "#ff7a59", "#9b7bff"][Math.floor(Math.random() * 5)], t: Math.random() }));
+    let x = -R * 1.5, rot = 0, hole = R * .34, sp = 0, txt = 0, open = false;
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = bg; ctx.fillRect(0, 0, w, h);
+      if (open) { ctx.save(); ctx.globalCompositeOperation = "destination-out"; ctx.beginPath(); ctx.arc(x, cy, Math.min(hole, Math.hypot(w, h)), 0, 7); ctx.fill(); ctx.restore(); }
+      if (hole < Math.hypot(w, h) * .9) {
+        ctx.save(); ctx.translate(x, cy); ctx.rotate(rot);
+        const hr = Math.max(hole, R * .34), outer = Math.max(R, hr + R * .66);
+        ctx.beginPath(); ctx.arc(0, 0, outer, 0, 7); ctx.moveTo(hr, 0); ctx.arc(0, 0, hr, 0, 7, true); ctx.fillStyle = dough; ctx.fill("evenodd");
+        ctx.beginPath(); for (let i = 0; i <= 40; i++) { const a = i / 40 * 6.283, rr = outer * (.9 + .05 * Math.sin(a * 7)); i ? ctx.lineTo(Math.cos(a) * rr, Math.sin(a) * rr) : ctx.moveTo(Math.cos(a) * rr, Math.sin(a) * rr); } ctx.closePath(); ctx.moveTo(hr * 1.12, 0); ctx.arc(0, 0, hr * 1.12, 0, 7, true); ctx.fillStyle = glaze; ctx.fill("evenodd");
+        ctx.fillStyle = "rgba(255,255,255,.25)"; ctx.beginPath(); ctx.ellipse(-outer * .35, -outer * .45, outer * .25, outer * .08, -.6, 0, 7); ctx.fill();
+        const sc = outer / R;
+        for (const s of spr) { if (s.t > sp) continue; ctx.save(); ctx.rotate(s.a); ctx.translate(s.r * sc, 0); ctx.rotate(s.rot); ctx.fillStyle = s.col; ctx.beginPath(); ctx.roundRect(-R * .045, -R * .014, R * .09, R * .028, R * .014); ctx.fill(); ctx.restore(); }
+        ctx.restore();
+      }
+      if (txt > 0) { ctx.globalAlpha = txt; ctx.fillStyle = o.ink || "#e6d3a3"; ctx.textAlign = "center"; ctx.font = `700 ${Math.min(w * .07, h * .055)}px ${o.family || "Georgia, serif"}`; ctx.fillText(o.label || "", cx, cy + R * 1.55, w * .86); ctx.globalAlpha = 1; }
+    };
+    await tween(900, (e) => { x = -R * 1.5 + (cx + R * 1.5) * e; rot = (x - cx) / R; draw(); }, tk);
+    await tween(900, (e, k) => { sp = k; txt = Math.min(1, k * 1.5); draw(); }, tk, (k) => k);
+    await sleep(o.hold || 700); if (tk.cancelled) return c.remove();
+    reveal(scr); open = true;
+    await tween(1100, (e, k) => { hole = R * .34 + Math.pow(k, 2) * Math.hypot(w, h); txt = 1 - k * 2; draw(); }, tk, (k) => k);
+    c.remove();
+  }
+
+  const redo = $("#redo");
+  let token = { cancelled: true };
+  async function play() {
+    token.cancelled = true; const tk = (token = { cancelled: false });
+    hero.querySelectorAll(".fxl, .stage").forEach((n) => n.remove());
+    hero.classList.remove("reveal"); hero.classList.add("pre"); redo.hidden = true;
+    const top = Math.max(0, hero.getBoundingClientRect().top), vis = Math.max(320, Math.min(hero.clientHeight, innerHeight - top));
+    const stage = document.createElement("div"); stage.className = "stage"; stage.style.cssText = `position:absolute;left:0;right:0;top:0;height:${hero.clientHeight}px;z-index:5;pointer-events:none`; hero.append(stage);
+    const inner = document.createElement("div"); inner.style.cssText = `position:absolute;left:0;right:0;top:0;height:${vis}px`; stage.append(inner);
+    if (vis < hero.clientHeight) { const cv = document.createElement("div"); cv.style.cssText = `position:absolute;left:0;right:0;top:${vis}px;bottom:0;background:#0f2f22;transition:opacity .6s`; cv.className = "cover"; stage.append(cv); }
+    await donut(inner, tk, { label: "Fresh every morning", family: "Cinzel, serif", bg: "#0f2f22" });
+    stage.remove();
+    if (!tk.cancelled) redo.hidden = false;
+  }
+  redo.addEventListener("click", play);
+  if (reduce) { hero.classList.remove("pre"); } else document.fonts.ready.then(play);
+})();
+</script>
+</body>
+</html>
