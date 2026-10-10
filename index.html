@@ -273,6 +273,15 @@ section.block + section.block { border-top: 1px solid transparent; border-image:
 .swatchbar button { width: 34px; height: 34px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; padding: 0; }
 .swatchbar button[aria-pressed="true"] { border-color: #fff; box-shadow: 0 0 0 2px #111215; }
 .swatchbar span { align-self: center; font: 500 12px var(--f-mono); color: #c5c9ce; padding: 0 6px 0 2px; min-width: 64px; }
+
+/* ---------- Intro: Blaupause, goldener Schnitt ---------- */
+.hero.pre .hero-grid { opacity: 0; }
+.hero.reveal .hero-text > *, .hero.reveal .stack { animation: introRise .9s cubic-bezier(.2,.7,.2,1) both; }
+.hero.reveal .hero-text > :nth-child(2) { animation-delay: .07s } .hero.reveal .hero-text > :nth-child(3) { animation-delay: .14s } .hero.reveal .hero-text > :nth-child(4) { animation-delay: .21s } .hero.reveal .hero-text > :nth-child(5) { animation-delay: .28s } .hero.reveal .stack { animation-delay: .3s; }
+@keyframes introRise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+.redo-intro { position: absolute; right: 16px; bottom: 16px; z-index: 7; font: 500 12px var(--f-mono); color: var(--muted); background: rgba(26,28,32,.8); border: 1px solid var(--line); border-radius: 999px; padding: 7px 12px; cursor: pointer; }
+.redo-intro:hover { color: var(--ink); }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .hero-text > *, .hero.reveal .stack { animation: none; } }
 </style>
 </head>
 <body>
@@ -294,7 +303,7 @@ section.block + section.block { border-top: 1px solid transparent; border-image:
   </div>
 </header>
 
-<section class="hero" id="top">
+<section class="hero pre" id="top">
   <div id="vanta" class="vanta" aria-hidden="true"></div>
   <div class="hero-shade" aria-hidden="true"></div>
   <div class="wrap hero-grid">
@@ -318,6 +327,7 @@ section.block + section.block { border-top: 1px solid transparent; border-image:
      <a class="sc sc1" href="fuego-lento/" style="--r:3deg;--x:2%;--y:0%;--d:-4s"><div class="shot s1"><div class="bar"><i></i><i></i><i></i></div><div class="in"><span class="chip">Parrilla</span><div class="t">Fuego lento,<br><em>mesa larga.</em></div></div></div></a>
    </div>
   </div>
+  <button class="redo-intro" type="button" id="redoIntro" hidden>↻ Blueprint</button>
 </section>
 
 <section class="block" id="arbeiten">
@@ -582,6 +592,86 @@ section.block + section.block { border-top: 1px solid transparent; border-image:
         speedLimit: 5, separation: 20, alignment: 20, cohesion: 20, quantity: small ? 4 : 5, backgroundAlpha: 1 });
     } catch (e) { console.error(e); }
   }
+})();
+</script>
+
+<script>
+/* Intro: Blaupause mit goldenem Schnitt, danach erscheint der Hero */
+(() => {
+  const hero = document.getElementById("top"), redo = document.getElementById("redoIntro");
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const tween = (ms, fn, tk, ez = (t) => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2)) => new Promise((res) => { const t0 = performance.now(); const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(ez(k), k); k < 1 ? requestAnimationFrame(step) : res(); }; requestAnimationFrame(step); });
+  const canvas = (parent, cls, z) => { const w = parent.clientWidth, h = parent.clientHeight, dpr = Math.min(2, devicePixelRatio || 1); const c = document.createElement("canvas"); c.className = "fxl " + cls; c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); c.style.cssText = `position:absolute;left:0;top:0;width:${w}px;height:${h}px;z-index:${z};pointer-events:none`; c.setAttribute("aria-hidden", "true"); parent.append(c); const ctx = c.getContext("2d"); ctx.scale(dpr, dpr); return { c, ctx, w, h }; };
+  const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); hero.querySelectorAll(".cover").forEach((n) => (n.style.opacity = "0")); };
+  /* ---------- Jota Labs: Blaupausen-Helfer ---------- */
+  const BP = { bg: "#0d3563", ln: "rgba(214,232,255,.92)", dim: "rgba(214,232,255,.55)", grid: "rgba(214,232,255,.08)", grid2: "rgba(214,232,255,.16)" };
+  function bpGrid(ctx, w, h, a = 1, off = 0) { ctx.save(); ctx.globalAlpha = a; ctx.fillStyle = BP.bg; ctx.fillRect(0, 0, w, h); const s = 20;
+    for (let x = (off % s); x < w; x += s) { ctx.fillStyle = Math.round((x - off % s) / s) % 5 ? BP.grid : BP.grid2; ctx.fillRect(x, 0, 1, h); }
+    for (let y = (off % s); y < h; y += s) { ctx.fillStyle = Math.round((y - off % s) / s) % 5 ? BP.grid : BP.grid2; ctx.fillRect(0, y, w, 1); }
+    ctx.restore(); }
+  function bpLabel(ctx, w, h, a, o) { if (a <= 0) return; ctx.save(); ctx.globalAlpha = Math.min(1, a); const x = w - 16, y = h - 16, bw = Math.min(w * .62, 260), bh = 58;
+    ctx.strokeStyle = BP.ln; ctx.lineWidth = 1.2; ctx.strokeRect(x - bw, y - bh, bw, bh); ctx.beginPath(); ctx.moveTo(x - bw, y - bh * .55); ctx.lineTo(x, y - bh * .55); ctx.moveTo(x - bw * .38, y - bh * .55); ctx.lineTo(x - bw * .38, y); ctx.stroke();
+    ctx.fillStyle = BP.ln; ctx.textBaseline = "middle"; ctx.font = `600 13px ${o.mono || "monospace"}`; ctx.fillText("JOTA LABS · WEBDESIGN", x - bw + 10, y - bh * .78);
+    ctx.font = `400 10px ${o.mono || "monospace"}`; ctx.fillText("DWG NO. JL-001", x - bw + 10, y - bh * .28); ctx.fillText("SCALE 1:1", x - bw * .38 + 10, y - bh * .28); ctx.restore(); }
+  function dimLine(ctx, x1, y1, x2, y2, label, a, mono) { if (a <= 0) return; ctx.save(); ctx.globalAlpha = a; ctx.strokeStyle = BP.dim; ctx.fillStyle = BP.dim; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke(); const an = Math.atan2(y2 - y1, x2 - x1);
+    [[x1, y1, an], [x2, y2, an + Math.PI]].forEach(([x, y, t]) => { ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + Math.cos(t + .4) * 7, y + Math.sin(t + .4) * 7); ctx.lineTo(x + Math.cos(t - .4) * 7, y + Math.sin(t - .4) * 7); ctx.closePath(); ctx.fill(); });
+    ctx.translate((x1 + x2) / 2, (y1 + y2) / 2); ctx.rotate(Math.abs(an) > 1.6 ? an + Math.PI : an); ctx.font = `500 10px ${mono || "monospace"}`; ctx.textAlign = "center"; ctx.fillStyle = BP.ln; ctx.fillText(label, 0, -5); ctx.restore(); }
+  function jlLayout(w, h) { const W = Math.min(w * .84, 520), H = Math.min(h * .62, W * 1.25), x = (w - W) / 2, y = h * .14;
+    const p = 14, cw = (W - p * 4) / 3;
+    return { frame: [x, y, W, H], bar: [x, y, W, 22], nav: [x + p, y + 34, W - p * 2, 14], h1a: [x + p, y + 70, W * .7, 20], h1b: [x + p, y + 98, W * .52, 20], lead: [x + p, y + 132, W * .62, 8], btn: [x + p, y + 156, 92, 26], btn2: [x + p + 102, y + 156, 82, 26],
+      c1: [x + p, y + H - 118 - p, cw, 118], c2: [x + p * 2 + cw, y + H - 118 - p, cw, 118], c3: [x + p * 3 + cw * 2, y + H - 118 - p, cw, 118] }; }
+  const rectPts = (r) => { const [x, y, w, h] = r, C = [[x, y], [x + w, y], [x + w, y + h], [x, y + h]], pts = []; for (let i = 0; i < 4; i++) { const [ax, ay] = C[i], [bx, by] = C[(i + 1) % 4]; for (let j = 0; j < 8; j++) pts.push([ax + (bx - ax) * j / 8, ay + (by - ay) * j / 8]); } return pts; };
+  const polyPts = (cx, cy, r, sides, rot, n = 32) => { const pts = []; for (let i = 0; i < n; i++) { const t = i / n * sides, k = Math.floor(t), f = t - k, a1 = rot + k / sides * 6.283, a2 = rot + (k + 1) / sides * 6.283; pts.push([cx + r * (Math.cos(a1) * (1 - f) + Math.cos(a2) * f), cy + r * (Math.sin(a1) * (1 - f) + Math.sin(a2) * f)]); } return pts; };
+  const circPts = (cx, cy, r, rot, n = 32) => Array.from({ length: n }, (_, i) => [cx + Math.cos(rot + i / n * 6.283) * r, cy + Math.sin(rot + i / n * 6.283) * r]);
+  const strokePts = (ctx, pts) => { ctx.beginPath(); pts.forEach(([x, y], i) => (i ? ctx.lineTo(x, y) : ctx.moveTo(x, y))); ctx.closePath(); ctx.stroke(); };
+
+  /* ---------- Golden: Goldener Schnitt wird konstruiert, Spirale zeichnet sich, Konstruktion dreht sich ---------- */
+  async function golden(scr, tk, o = {}) {
+    const { c, ctx, w, h } = canvas(scr, "golden", 5), phi = 1.618034, GW = Math.min(w * .82, h * .5 * phi), GH = GW / phi, gx = (w - GW) / 2, gy = h * .44 - GH / 2;
+    const steps = []; { let x = gx, y = gy, W = GW, H = GH; for (let d = 0; d < 9; d++) { const m = d % 4; let s, sq, arc;
+      if (m === 0) { s = H; sq = [x, y, s, s]; arc = [x + s, y + s, s, Math.PI, 1.5 * Math.PI]; x += s; W -= s; }
+      else if (m === 1) { s = W; sq = [x, y, s, s]; arc = [x, y + s, s, 1.5 * Math.PI, 2 * Math.PI]; y += s; H -= s; }
+      else if (m === 2) { s = H; sq = [x + W - s, y, s, s]; arc = [x + W - s, y, s, 0, .5 * Math.PI]; W -= s; }
+      else { s = W; sq = [x, y + H - s, s, s]; arc = [x + s, y + H - s, s, .5 * Math.PI, Math.PI]; H -= s; }
+      steps.push({ sq, arc }); } }
+    const ex = steps[8].sq[0] + steps[8].sq[2] / 2, ey = steps[8].sq[1] + steps[8].sq[3] / 2;
+    let grid = 0, frame = 0, prog = 0, rot = 0, sc = 1, rings = 0, title = 0, bgA = 1, t0 = performance.now();
+    const draw = () => { const now = performance.now() - t0; ctx.clearRect(0, 0, w, h); bpGrid(ctx, w, h, bgA * grid, now / 60);
+      ctx.save(); ctx.globalAlpha = bgA; ctx.translate(ex, ey); ctx.rotate(rot); ctx.scale(sc, sc); ctx.translate(-ex, -ey); ctx.strokeStyle = BP.ln; ctx.lineWidth = 1.4 / sc;
+      if (frame > 0) { ctx.save(); ctx.beginPath(); ctx.rect(gx, gy, GW * frame, GH); ctx.clip(); ctx.strokeRect(gx, gy, GW, GH); ctx.restore(); }
+      steps.forEach((st, i) => { const k = Math.max(0, Math.min(1, prog * 9 - i)); if (!k) return; const [x, y, s] = st.sq; ctx.globalAlpha = bgA * .55; ctx.strokeRect(x, y, s, s); ctx.globalAlpha = bgA; ctx.lineWidth = 2.6 / sc; ctx.beginPath(); ctx.arc(st.arc[0], st.arc[1], st.arc[2], st.arc[3], st.arc[3] + (st.arc[4] - st.arc[3]) * k); ctx.stroke(); ctx.lineWidth = 1.4 / sc; });
+      if (prog > .2) { dimLine(ctx, gx, gy + GH + 18, gx + GW, gy + GH + 18, "1.618", Math.min(1, (prog - .2) * 3) * bgA, o.mono); dimLine(ctx, gx - 18, gy, gx - 18, gy + GH, "1", Math.min(1, (prog - .2) * 3) * bgA, o.mono); }
+      ctx.restore();
+      if (rings > 0) { ctx.save(); ctx.globalAlpha = bgA * rings; ctx.strokeStyle = BP.dim; ctx.translate(ex, ey); [GH * .9, GH * .62, GH * 1.2].forEach((r, i) => { ctx.setLineDash(i === 1 ? [] : [6, 6]); ctx.lineDashOffset = -now / (i + 1) / 20; ctx.beginPath(); ctx.arc(0, 0, r * rings, 0, 7); ctx.stroke(); }); ctx.setLineDash([]); ctx.beginPath(); ctx.moveTo(-GH * 1.3, 0); ctx.lineTo(GH * 1.3, 0); ctx.moveTo(0, -GH * 1.3); ctx.lineTo(0, GH * 1.3); ctx.stroke(); ctx.restore(); }
+      if (title > 0) { ctx.save(); ctx.globalAlpha = Math.min(1, title) * bgA; ctx.fillStyle = "#fff"; ctx.textAlign = "center"; ctx.font = `400 ${Math.min(w * .12, h * .075)}px ${o.serif || "Georgia, serif"}`; ctx.fillText("Jota Labs", w / 2, h * .76, w * .9); ctx.font = `500 ${Math.min(w * .032, 13)}px ${o.mono || "monospace"}`; ctx.fillStyle = BP.ln; ctx.fillText("WEBDESIGN · DESIGNED TO PROPORTION", w / 2, h * .76 + Math.min(w * .07, 30), w * .9); ctx.restore(); }
+      bpLabel(ctx, w, h, title * bgA, o);
+    };
+    let live = true; const lp = () => { if (!live || tk.cancelled) return; draw(); requestAnimationFrame(lp); }; requestAnimationFrame(lp);
+    await tween(400, (e) => (grid = e), tk); await tween(500, (e) => (frame = e), tk);
+    await tween(1700, (e, k) => (prog = k), tk, (k) => k);
+    await tween(1100, (e) => { rot = -e * Math.PI / 2; sc = 1 - e * .35; rings = e; }, tk);
+    await tween(450, (e) => (title = e), tk);
+    await sleep(o.hold || 900); if (tk.cancelled) { live = false; return c.remove(); }
+    reveal(); await tween(800, (e) => { bgA = 1 - e; sc = .65 + e * .5; }, tk); live = false; c.remove();
+  }
+
+
+  let token = { cancelled: true };
+  async function play() {
+    token.cancelled = true; const tk = (token = { cancelled: false });
+    hero.querySelectorAll(".fxl, .stage").forEach((n) => n.remove());
+    hero.classList.remove("reveal"); hero.classList.add("pre"); redo.hidden = true;
+    const top = Math.max(0, hero.getBoundingClientRect().top), vis = Math.max(320, Math.min(hero.clientHeight, innerHeight - top));
+    const stage = document.createElement("div"); stage.className = "stage"; stage.style.cssText = `position:absolute;left:0;right:0;top:0;height:${hero.clientHeight}px;z-index:6;pointer-events:none;overflow:hidden`; hero.append(stage);
+    const inner = document.createElement("div"); inner.style.cssText = `position:absolute;left:0;right:0;top:0;height:${vis}px`; stage.append(inner);
+    if (vis < hero.clientHeight) { const cv = document.createElement("div"); cv.className = "cover"; cv.style.cssText = `position:absolute;left:0;right:0;top:${vis}px;bottom:0;background:#0d3563;transition:opacity .6s`; stage.append(cv); }
+    await golden(inner, tk, { serif: '"Instrument Serif", serif', mono: '"Geist Mono", monospace' });
+    stage.remove(); if (!tk.cancelled) redo.hidden = false;
+  }
+  redo.addEventListener("click", play);
+  if (reduce) hero.classList.remove("pre"); else document.fonts.ready.then(play);
 })();
 </script>
 
