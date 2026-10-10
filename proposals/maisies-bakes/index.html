@@ -11,7 +11,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%237a1f3d'/%3E%3Ctext x='32' y='40' text-anchor='middle' font-family='Arial Black,Arial' font-weight='900' font-size='22' fill='%23f6b3c8'%3EMB%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Titan+One&family=Outfit:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Titan+One&family=Outfit:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap">
 <style>
 /* Layout: Cake-Shed-Intro (rosa Hütte öffnet die Türen, Regale voller Cookies, hinein), schwebende Cookies im Hero.
    The menu, Order a box, The Cake Shed (Wochenende, Live-Status), New shop coming soon, Wholesale.
@@ -96,6 +96,11 @@ section.block { padding-block: clamp(64px, 10vw, 104px); }
 .bk p { margin: 0; color: #6a3346; font-size: 15px; }
 .bk .tag { justify-self: start; font: 700 11px var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--blush); background: var(--bg); border-radius: 999px; padding: 4px 10px; }
 
+.board { margin-top: 18px; background: #1f2422; border: 8px solid #f7d3dd; border-radius: 16px; padding: clamp(20px, 4vw, 34px); color: #f2f2ea; font-family: "Caveat", cursive; }
+.board h3 { font: 700 clamp(30px, 4vw, 44px)/1 "Caveat", cursive; text-align: center; margin-bottom: 14px; }
+.flv { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px 24px; font-size: clamp(22px, 2.6vw, 28px); text-align: center; }
+@media (max-width: 760px) { .flv { grid-template-columns: minmax(0,1fr); } }
+.board .price { text-align: center; margin: 16px 0 0; font-size: clamp(22px, 2.6vw, 28px); color: var(--pink); }
 .order { background: var(--shed); color: var(--deep); }
 .order .wrap { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 30px; align-items: center; }
 @media (max-width: 860px) { .order .wrap { grid-template-columns: minmax(0,1fr); } }
@@ -151,7 +156,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     <h1 class="logo-t">MAISIE'S<br>BAKES</h1>
     <p class="lead">Big, gooey New York cookies and fudgy brownies. Find us at East Lothian's first cake shed every weekend.</p>
     <div class="ctas"><a class="btn" href="#order">Order a box</a><a class="btn ghost" href="#shed">Visit the Cake Shed</a></div>
-    <div class="facts"><span class="status" id="statusChip">Cake Shed · Sat &amp; Sun</span><span><b>New shop</b> coming soon</span></div>
+    <div class="facts"><span class="status" id="statusChip">Cake Shed · Sat &amp; Sun</span><span><b>£4</b> each · <b>any 3 for £10</b></span><span><b>New shop</b> coming soon</span></div>
   </div>
   <button class="redo" type="button" id="redo" hidden>↻ Open the shed again</button>
 </section>
@@ -160,28 +165,29 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   <div class="wrap">
     <div class="head"><div><div class="kicker">Fresh this week</div><h2>The bakes</h2></div><p>Thick, chunky cookies, gooey in the middle. Brownies with a crackly top. Specials that sell out fast.</p></div>
     <div class="bakes" id="bakes"></div>
-    <p class="note">Bakes from your Instagram; names and descriptions are examples. On the final site you could post this weekend's flavours from your phone.</p>
+    <div class="board"><h3>In the shed this weekend</h3><div class="flv"><span>Old School Cake + Jam Filled</span><span>Mars Bar Brownie</span><span>Oreo + Nutella</span><span>Crispy M&amp;M's and Nutella</span><span>White Chocolate + Raspberry</span><span>Milky Bar Brownie</span></div><p class="price">Cookies &amp; brownies £4 each · mix and match any 3 for £10</p></div>
+    <p class="note">Flavours and prices from your shed. On the final site you could update this weekend's flavours from your phone in a minute.</p>
   </div>
 </section>
 
 <section class="block order" id="order">
   <div class="wrap">
-    <div><div class="kicker">Order online</div><h2>Pick your box</h2><p>No more lost DMs: choose a box, pick your flavours and a collection day, and we'll have it ready. Wholesale orders welcome too.</p></div>
+    <div><div class="kicker">Order online</div><h2>Pick your box</h2><p>No more lost DMs: choose how many, mix and match your flavours, pick a collection day, and we'll have it ready. Wholesale orders welcome too.</p></div>
     <div>
       <div class="boxes" role="group" aria-label="Box size">
-        <button class="box" type="button" aria-pressed="false"><b>4</b><span>cookies</span></button>
-        <button class="box" type="button" aria-pressed="true"><b>6</b><span>cookies</span></button>
-        <button class="box" type="button" aria-pressed="false"><b>12</b><span>cookies</span></button>
+        <button class="box" type="button" aria-pressed="false"><b>1</b><span>£4</span></button>
+        <button class="box" type="button" aria-pressed="true"><b>3</b><span>£10 · mix &amp; match</span></button>
+        <button class="box" type="button" aria-pressed="false"><b>6</b><span>£20 · mix &amp; match</span></button>
       </div>
       <a class="btn" href="https://ig.me/m/maisiesbakes_" target="_blank" rel="noopener">Order this box ↗</a>
-      <p class="note" style="background:rgba(255,255,255,.5);color:#6a3346;border-color:var(--bg)">Box sizes are examples. On the final site this would be a real order form, so orders arrive in one tidy list instead of your DMs.</p>
+      <p class="note" style="background:rgba(255,255,255,.5);color:#6a3346;border-color:var(--bg)">Prices from your shed (6 = two lots of "any 3 for £10"). On the final site this would be a real order form, so orders arrive in one tidy list instead of your DMs.</p>
     </div>
   </div>
 </section>
 
 <section class="block" id="shed">
   <div class="wrap duo">
-    <article class="card"><span class="kicker">The Cake Shed</span><h3>East Lothian's first cake shed</h3><p>Our pink shed is open every Saturday and Sunday. Pop by, grab a cookie (or six), and check our stories for what's in today.</p>
+    <article class="card"><span class="kicker">The Cake Shed</span><h3>East Lothian's first cake shed</h3><p>Our pink shed is open every Saturday and Sunday. Pop by, pick from the baskets, and pay at the cash box (no change given). Check our stories for what's in today.</p>
       <div class="map"><iframe title="Map: Maisie's Bakes Cake Shed, EH21 6TF" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-3.0820%2C55.9333%2C-3.0560%2C55.9411&amp;layer=mapnik&amp;marker=55.93723%2C-3.06901"></iframe></div>
       <div class="ctas"><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=EH21%206TF" target="_blank" rel="noopener">Directions ↗</a></div></article>
     <article class="card soon" id="shop"><span class="stamp">COMING SOON</span><span class="kicker">New shop</span><h3>Our first shop, Portobello</h3><p>NYC style cookies, brownies and delicious drinks, on Portobello High Street. We're busy renovating; follow along for the opening date.</p><p style="font:400 26px var(--f-display);color:var(--pink);margin-top:6px">Opening soon</p><a class="btn ghost" href="https://www.instagram.com/maisiesbakes_/" target="_blank" rel="noopener" style="justify-self:start">Follow the build ↗</a></article>
@@ -225,32 +231,45 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     ctx.fillStyle = "#fff"; for (let i = 0; i < 10; i++) { const a = seed * 3 + i * 2.3, r = R * (.2 + (i * 37 % 60) / 100); ctx.fillRect(Math.cos(a) * r, Math.sin(a) * r, R * .018, R * .018); }
   }
 
-  /* ---------- Cake shed: die rosa Hütte öffnet ihre Türen, drinnen Cookies, dann hinein ---------- */
+  /* ---------- Cake shed: schmale, hohe rosa Hütte, Tür öffnet nach links, drinnen Körbe mit Kreide-Schildern ---------- */
   async function cakeshed(scr, tk, o = {}) {
-    const { c, ctx, w, h } = canvas(scr, "shed", 5), cx = w / 2, W = Math.min(w * .7, h * .42), H = W * 1.25, by = h * .82;
-    let open = 0, logo = 0, zoom = 1, bgA = 1, sign = 0;
+    const { c, ctx, w, h } = canvas(scr, "shed", 5), cx = w / 2, W = Math.min(w * .5, h * .29), H = W * 2.05, by = h * .86;
+    let open = 0, logo = 0, zoom = 1, bgA = 1;
+    const labels = ["Old School", "Mars Bar", "Oreo +", "M&M's", "White Choc", "Milky Bar", "Chocolate", "Raspberry"];
     const draw = () => {
-      ctx.clearRect(0, 0, w, h); ctx.globalAlpha = bgA; ctx.fillStyle = o.bg || "#cfe3d3"; ctx.fillRect(0, 0, w, h); ctx.fillStyle = "#9fc29a"; ctx.fillRect(0, by, w, h - by); ctx.globalAlpha = 1;
-      ctx.save(); ctx.translate(cx, by - H * .45); ctx.scale(zoom, zoom); ctx.translate(-cx, -(by - H * .45));
-      const x0 = cx - W / 2, top = by - H;
-      ctx.fillStyle = "#f2b8c8"; ctx.beginPath(); ctx.moveTo(x0 - W * .08, top + H * .2); ctx.lineTo(cx, top - H * .05); ctx.lineTo(x0 + W * 1.08, top + H * .2); ctx.closePath(); ctx.fill();
-      ctx.fillStyle = "#f7cdd8"; ctx.fillRect(x0, top + H * .18, W, H * .82);
-      ctx.strokeStyle = "rgba(160,80,100,.25)"; ctx.lineWidth = 1.5; for (let i = 1; i < 14; i++) { const yy = top + H * .18 + i * H * .82 / 14; ctx.beginPath(); ctx.moveTo(x0, yy); ctx.lineTo(x0 + W, yy); ctx.stroke(); }
-      ctx.fillStyle = "#7a1f3d"; ctx.beginPath(); ctx.arc(cx, top + H * .1, W * .07, 0, 7); ctx.fill(); ctx.fillStyle = "#f6b3c8"; ctx.font = `400 ${W * .03}px ${o.family || "Impact"}`; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText("MAISIE’S", cx, top + H * .09); ctx.fillText("BAKES", cx, top + H * .115);
-      const dx0 = x0 + W * .12, dw = W * .76, dy0 = top + H * .3, dh = H * .68;
-      ctx.fillStyle = "#3a2228"; ctx.fillRect(dx0, dy0, dw, dh);
-      if (open > 0) { ctx.fillStyle = "#e9d2b0"; for (let s = 0; s < 3; s++) { const sy = dy0 + dh * (.3 + s * .25); ctx.fillRect(dx0 + 4, sy, dw - 8, 4); for (let k = 0; k < 4; k++) { ctx.save(); ctx.translate(dx0 + dw * (.15 + k * .23), sy - dw * .06); mbCookie(ctx, dw * .075, k + s); ctx.restore(); } }
-        const lg = ctx.createRadialGradient(cx, dy0, 0, cx, dy0, dh); lg.addColorStop(0, `rgba(255,220,170,${.35 * open})`); lg.addColorStop(1, "rgba(255,220,170,0)"); ctx.fillStyle = lg; ctx.fillRect(dx0, dy0, dw, dh); }
-      [-1, 1].forEach((side) => { const hw = dw / 2, sx = side < 0 ? dx0 : dx0 + dw, vis = hw * Math.cos(open * 1.35); const xA = sx, xB = sx - side * vis;
-        ctx.fillStyle = "#fbe1e8"; ctx.beginPath(); ctx.moveTo(xA, dy0); ctx.lineTo(xB, dy0 - side * 0 + open * 6); ctx.lineTo(xB, dy0 + dh - open * 6); ctx.lineTo(xA, dy0 + dh); ctx.closePath(); ctx.fill(); ctx.strokeStyle = "rgba(160,80,100,.3)"; ctx.stroke();
-        for (let i = 1; i < 10; i++) { const yy = dy0 + i * dh / 10; ctx.beginPath(); ctx.moveTo(xA, yy); ctx.lineTo(xB, yy); ctx.stroke(); }
-        ctx.fillStyle = "#2a2a2a"; ctx.fillRect(xB + side * 6 - 2, dy0 + dh * .48, 4, dh * .08); });
-      if (sign > 0 && open < .2) { ctx.globalAlpha = sign; ctx.fillStyle = "#c48a9a"; ctx.font = `600 ${dw * .14}px Georgia, serif`; ctx.textAlign = "center"; ctx.fillText("CAKE", cx, dy0 + dh * .28); ctx.fillText("SHED", cx, dy0 + dh * .42); ctx.globalAlpha = 1; }
+      ctx.clearRect(0, 0, w, h); ctx.globalAlpha = bgA; ctx.fillStyle = o.bg || "#d9e6dc"; ctx.fillRect(0, 0, w, h); ctx.fillStyle = "#8c9a90"; ctx.fillRect(0, by, w, h - by); ctx.fillStyle = "#6f9a5a"; ctx.beginPath(); ctx.ellipse(w * .92, by - H * .25, W * .45, H * .3, 0, 0, 7); ctx.fill(); ctx.globalAlpha = 1;
+      ctx.save(); ctx.translate(cx, by - H * .5); ctx.scale(zoom, zoom); ctx.translate(-cx, -(by - H * .5));
+      const x0 = cx - W / 2, top = by - H, fy = top + H * .12, fh = H * .86;
+      ctx.fillStyle = "rgba(0,0,0,.18)"; ctx.fillRect(x0 + W * .06, top + H * .1, W, H * .9);
+      ctx.fillStyle = "#f0bccb"; ctx.beginPath(); ctx.moveTo(x0 - W * .06, top + H * .1); ctx.lineTo(cx, top); ctx.lineTo(x0 + W * 1.06, top + H * .1); ctx.closePath(); ctx.fill();
+      ctx.fillStyle = "#f7d3dd"; ctx.fillRect(x0, top + H * .1, W, H * .9);
+      ctx.fillStyle = "#7a1f3d"; ctx.beginPath(); ctx.arc(cx, top + H * .06, W * .07, 0, 7); ctx.fill();
+      // Innenraum
+      ctx.fillStyle = "#eab8c6"; ctx.fillRect(x0 + W * .05, fy, W * .9, fh);
+      const rows = 5, rh = fh / rows;
+      for (let r = 0; r < rows; r++) { const sy = fy + (r + 1) * rh - 4; ctx.fillStyle = "#f7d3dd"; ctx.fillRect(x0 + W * .05, sy, W * .9, 5);
+        for (let k = 0; k < 2; k++) { if (r === 0 && k === 1) { ctx.fillStyle = "#e79ab0"; ctx.fillRect(x0 + W * .55, sy - rh * .78, W * .34, rh * .74); ctx.fillStyle = "#7a1f3d"; ctx.font = `600 ${W * .045}px sans-serif`; ctx.textAlign = "center"; ctx.fillText("CASH BOX", x0 + W * .72, sy - rh * .4); continue; }
+          const bx = x0 + W * (.1 + k * .44), bw = W * .38, bh = rh * .62, byy = sy - bh;
+          ctx.save(); ctx.translate(bx + bw * .3, byy + bh * .15); mbCookie(ctx, bw * .2, r + k); ctx.restore(); ctx.save(); ctx.translate(bx + bw * .68, byy + bh * .12); mbCookie(ctx, bw * .18, r * 2 + k); ctx.restore();
+          ctx.fillStyle = "#f4a9bf"; ctx.fillRect(bx, byy + bh * .25, bw, bh * .75); ctx.fillStyle = "rgba(255,255,255,.35)"; ctx.fillRect(bx + bw * .3, byy + bh * .32, bw * .4, bh * .1);
+          ctx.fillStyle = "#1f2422"; ctx.fillRect(bx + bw * .12, byy + bh * .48, bw * .76, bh * .42); ctx.fillStyle = "#f2f2ea"; ctx.font = `600 ${W * .042}px "Caveat", cursive`; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(labels[(r * 2 + k) % labels.length], bx + bw / 2, byy + bh * .69, bw * .7); } }
+      if (open > 0) { const lg = ctx.createRadialGradient(cx, fy, 0, cx, fy, fh); lg.addColorStop(0, `rgba(255,236,210,${.3 * open})`); lg.addColorStop(1, "rgba(255,236,210,0)"); ctx.fillStyle = lg; ctx.fillRect(x0, fy, W, fh); }
+      // Tür: Scharnier links, schwingt nach links auf
+      const th = open * 2.05, hx = x0 + W * .03, dw = W * .94, fx = hx + dw * Math.cos(th), sk = Math.sin(th) * dw * .1, inside = Math.cos(th) < 0;
+      ctx.beginPath(); ctx.moveTo(hx, fy - 2); ctx.lineTo(fx, fy - 2 - sk); ctx.lineTo(fx, fy + fh + sk); ctx.lineTo(hx, fy + fh); ctx.closePath();
+      ctx.fillStyle = inside ? "#f2c3d0" : "#f9dde5"; ctx.fill(); ctx.strokeStyle = "rgba(150,70,95,.35)"; ctx.lineWidth = 1.5; ctx.stroke();
+      const lerp = (t, yy) => [hx + (fx - hx) * t, yy + (t * (yy < fy + fh / 2 ? -sk : sk)) * Math.abs(yy - (fy + fh / 2)) / (fh / 2)];
+      if (!inside) { ctx.save(); ctx.globalAlpha = Math.max(0, Math.cos(th)); ctx.strokeStyle = "rgba(150,70,95,.22)"; for (let i = 1; i < 18; i++) { const yy = fy + i * fh / 18; ctx.beginPath(); ctx.moveTo(hx, yy); ctx.lineTo(fx, yy); ctx.stroke(); }
+        ctx.translate(hx + (fx - hx) / 2, fy + fh * .4); ctx.scale(Math.max(.02, Math.cos(th)), 1); ctx.fillStyle = "#9c9396"; ctx.font = `400 ${W * .16}px Georgia, serif`; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText("CAKE", 0, -W * .1); ctx.fillText("SHED", 0, W * .1); ctx.restore();
+        ctx.fillStyle = "#2a2a2a"; ctx.fillRect(hx + (fx - hx) * .9 - 2, fy + fh * .5, 4, fh * .06); }
+      else { const t = -Math.cos(th); ctx.save(); ctx.globalAlpha = Math.min(1, t * 1.5);
+        [[.1, .08, .3], [.1, .42, .26]].forEach(([a, b, hh]) => { const [x1, y1] = lerp(a, fy + fh * b), [x2] = lerp(a + .8, fy + fh * b); ctx.fillStyle = "#c8203a"; ctx.fillRect(Math.min(x1, x2), y1, Math.abs(x2 - x1), fh * hh); ctx.fillStyle = "#f6d6dc"; for (let i = 0; i < 4; i++) ctx.fillRect(Math.min(x1, x2) + Math.abs(x2 - x1) * .1, y1 + fh * hh * (.25 + i * .17), Math.abs(x2 - x1) * .8, fh * .02); });
+        const [bx1] = lerp(.25, 0), [bx2] = lerp(.75, 0); ctx.fillStyle = "#fbfbf8"; ctx.fillRect(Math.min(bx1, bx2), fy + fh * .74, Math.abs(bx2 - bx1), fh * .2); ctx.restore(); }
       ctx.restore();
-      mbLogo(ctx, w, h, cx, h * .14, logo, { ...o, pink: o.pink || "#f6b3c8" });
+      mbLogo(ctx, w, h, cx, h * .12, logo, o);
     };
-    sign = 1; draw(); await sleep(500);
-    await tween(1100, (e) => { open = e; draw(); }, tk);
+    draw(); await sleep(500);
+    await tween(1300, (e) => { open = e; draw(); }, tk);
     await tween(450, (e) => { logo = e; draw(); }, tk);
     await sleep(o.hold || 1000); if (tk.cancelled) return c.remove();
     reveal();
