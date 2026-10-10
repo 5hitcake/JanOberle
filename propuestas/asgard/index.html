@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Asgard · El legado de Odín · Propuesta</title>
+<meta name="description" content="Propuesta de sitio web para Asgard, espacio temático germano-nórdico en San Telmo. Hecha por Jota Labs. No es el sitio oficial.">
+<meta property="og:title" content="Asgard · El legado de Odín">
+<meta property="og:description" content="Runas, hidromiel, amuletos y la experiencia vikinga en San Telmo.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23c4161c' stroke='%234a3320' stroke-width='4'/%3E%3Cpath d='M32 32V2A30 30 0 0 1 62 32ZM32 32v30A30 30 0 0 1 2 32Z' fill='%23e8b552'/%3E%3Ccircle cx='32' cy='32' r='8' fill='%238f949a'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Noto+Sans+Runic&display=swap">
+<style>
+/* Asgard: Escudos-Intro (Schildwall schließt sich, öffnet sich), Aurora-Himmel als Dauer-Hintergrund im Hero.
+   Experiencias (Runas, Hidromiel, Amuletos …), Celebraciones, Eventos (Völva, Equinoccio, Taller), Artesanos, Visitanos con estado en vivo. */
+:root { --bg: #120c08; --bg-2: #1b130c; --bg-3: #241910; --line: rgba(243,226,181,.15); --fg: #f3e2b5; --soft: #e3d4b4; --muted: #a8987a;
+  --gold: #e8b552; --red: #c4161c; --blue: #1f3b73; --green: #2a5a2e; --aur: #3ce6aa;
+  --f-display: "Cinzel", Georgia, serif; --f-body: "Cormorant Garamond", Georgia, serif; --f-rune: "Noto Sans Runic", serif; color-scheme: dark; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 500 19px/1.55 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-family: var(--f-display); font-weight: 700; text-wrap: balance; letter-spacing: .03em; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 700 12px/1.2 var(--f-display); letter-spacing: .26em; text-transform: uppercase; color: var(--gold); }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.proposal { background: #000; color: #e9ebee; font: 13px/1.4 system-ui, sans-serif; padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; }
+.proposal b { color: #ffd166; } .proposal a { color: #fff; font-weight: 700; }
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 900 22px/1 var(--f-display); letter-spacing: .1em; }
+.logo i { font: 400 26px var(--f-rune); color: var(--gold); font-style: normal; }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font: 600 15px var(--f-display); letter-spacing: .06em; color: var(--muted); }
+nav.links a:hover { color: var(--fg); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 700 14px/1 var(--f-display); letter-spacing: .08em; padding: 15px 22px; border-radius: 4px; background: var(--gold); color: #1a110a; border: 2px solid var(--gold); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 0 26px rgba(232,181,82,.35); }
+.btn.ghost { background: transparent; color: var(--fg); border-color: rgba(243,226,181,.4); }
+.btn.ghost:hover { border-color: var(--fg); }
+nav.links a.btn { color: #1a110a; padding: 10px 14px; font-size: 13px; }
+.menu-btn { display: none; background: transparent; color: var(--fg); border: 1px solid var(--line); border-radius: 4px; padding: 8px 14px; font: 700 12px var(--f-display); letter-spacing: .1em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bg-2); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line); background: linear-gradient(180deg, #050912 0%, #0b1220 45%, #120c08 100%); }
+.aurora { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; }
+.hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 28%; z-index: 0; pointer-events: none; background: linear-gradient(180deg, transparent, rgba(18,12,8,.95)); }
+.ridge { position: absolute; left: 0; right: 0; bottom: 0; z-index: 0; width: 100%; height: 22%; pointer-events: none; }
+.hero .wrap { position: relative; z-index: 1; padding-block: clamp(90px, 13vw, 150px) clamp(70px, 10vw, 120px); display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px; }
+.runes { font: 400 clamp(18px, 2.4vw, 26px) var(--f-rune); letter-spacing: .5em; color: rgba(232,181,82,.7); }
+.hero h1 { font-size: clamp(64px, 13vw, 170px); font-weight: 900; line-height: .9; letter-spacing: .06em; text-shadow: 0 0 40px rgba(232,181,82,.25), 0 4px 30px rgba(0,0,0,.7); }
+.hero .sub { font: 700 clamp(15px, 2vw, 20px) var(--f-display); letter-spacing: .3em; color: var(--gold); }
+.hero .lead { margin: 6px 0 0; font-size: clamp(20px, 2.4vw, 24px); color: var(--soft); max-width: 38ch; font-style: italic; }
+.ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 10px; }
+.facts { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 12px; }
+.facts span { font: 600 15px var(--f-body); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; background: rgba(18,12,8,.7); }
+.facts span b { color: var(--fg); }
+.status::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); margin-right: 8px; vertical-align: 1px; }
+.status.open::before { background: var(--aur); box-shadow: 0 0 10px var(--aur); }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 7; font: 700 12px var(--f-display); letter-spacing: .06em; color: var(--muted); background: rgba(18,12,8,.8); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.redo:hover { color: var(--fg); }
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .9s cubic-bezier(.2,.7,.2,1) both; }
+.hero.reveal .wrap > :nth-child(2) { animation-delay: .07s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .14s } .hero.reveal .wrap > :nth-child(4) { animation-delay: .21s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .28s } .hero.reveal .wrap > :nth-child(6) { animation-delay: .35s }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+section.block { padding-block: clamp(64px, 10vw, 104px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 40px; margin-bottom: 30px; }
+.head h2 { font-size: clamp(34px, 5.4vw, 62px); line-height: 1.02; margin-top: 10px; }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+.note { margin-top: 20px; font: 15px/1.5 system-ui, sans-serif; color: var(--muted); padding: 10px 14px; border-left: 3px solid var(--gold); background: var(--bg-2); border-radius: 0 10px 10px 0; }
+.exp { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 900px) { .exp { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 560px) { .exp { grid-template-columns: minmax(0,1fr); } }
+.ex { position: relative; background: linear-gradient(170deg, var(--bg-3), var(--bg-2)); border: 1px solid var(--line); border-radius: 10px; padding: 26px 22px 22px; display: grid; gap: 8px; align-content: start; overflow: hidden; transition: border-color .3s, transform .3s; }
+.ex:hover { border-color: rgba(232,181,82,.6); transform: translateY(-3px); }
+.ex .r { font: 400 46px/1 var(--f-rune); color: var(--gold); text-shadow: 0 0 18px rgba(232,181,82,.45); }
+.ex .r.big { position: absolute; right: -6px; bottom: -18px; font-size: 120px; opacity: .06; }
+.ex h3 { font-size: 22px; } .ex p { margin: 0; color: var(--soft); }
+.feast { display: grid; grid-template-columns: minmax(0,1.1fr) minmax(0,1fr); gap: 26px; align-items: center; background: linear-gradient(160deg, #3a1d10, #1b130c); border: 1px solid rgba(232,181,82,.3); border-radius: 14px; padding: clamp(24px, 4vw, 48px); }
+@media (max-width: 860px) { .feast { grid-template-columns: minmax(0,1fr); } }
+.feast h2 { font-size: clamp(32px, 4.6vw, 54px); line-height: 1.05; }
+.feast p { color: var(--soft); margin: 12px 0 0; }
+.feast ul { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.feast li { font: 700 13px var(--f-display); letter-spacing: .08em; padding: 8px 14px; border: 1px solid rgba(232,181,82,.4); border-radius: 999px; }
+.feast svg { width: 100%; max-width: 360px; justify-self: center; }
+.events { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 860px) { .events { grid-template-columns: minmax(0,1fr); } }
+.ev { border: 1px solid var(--line); border-radius: 10px; padding: 24px; background: var(--bg-2); display: grid; gap: 8px; }
+.ev .k { font: 700 11px var(--f-display); letter-spacing: .2em; color: var(--aur); }
+.ev h3 { font-size: 22px; } .ev p { margin: 0; color: var(--soft); }
+.thor { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 22px; align-items: center; border: 1px solid rgba(232,181,82,.35); border-radius: 14px; padding: 26px; background: radial-gradient(60% 120% at 0% 50%, rgba(232,181,82,.12), transparent), var(--bg-2); margin-top: 16px; }
+@media (max-width: 560px) { .thor { grid-template-columns: minmax(0,1fr); } }
+.thor svg { width: 90px; height: 90px; }
+.thor h3 { font-size: 26px; } .thor p { margin: 6px 0 0; color: var(--soft); }
+.visit { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 860px) { .visit { grid-template-columns: minmax(0,1fr); } }
+.map { border-radius: 10px; overflow: hidden; border: 1px solid var(--line); min-height: 320px; }
+.map iframe { width: 100%; height: 100%; min-height: 320px; border: 0; display: block; filter: sepia(.35) saturate(.8) brightness(.9); }
+.card { border: 1px solid var(--line); border-radius: 10px; padding: 26px; background: var(--bg-2); display: grid; gap: 10px; align-content: start; }
+.card h3 { font-size: 22px; } .card p { margin: 0; color: var(--soft); }
+.hours { display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; margin: 0; font-variant-numeric: tabular-nums; }
+.hours dt { color: var(--muted); } .hours dd { margin: 0; color: var(--soft); }
+.hours .today { color: var(--fg); font-weight: 700; }
+footer { padding-block: 40px 96px; border-top: 1px solid var(--line); color: var(--muted); font: 14px system-ui, sans-serif; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 700 14px system-ui, sans-serif; padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.35); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></symbol>
+</svg>
+<div class="proposal"><span><b>Propuesta de diseño</b> para Asgard · no es el sitio oficial</span><span>Hecha por <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">Jota Labs</a></span></div>
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top"><i>ᚨ</i>ASGARD</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENÚ</button>
+    <nav class="links" id="links"><a href="#experiencias">Experiencias</a><a href="#celebraciones">Celebraciones</a><a href="#eventos">Eventos</a><a href="#visita">Visitanos</a><a class="btn" href="https://wa.me/5491167093542?text=Hola%20Asgard!%20Quiero%20hacer%20una%20reserva." target="_blank" rel="noopener">Reservar</a></nav>
+  </div>
+</header>
+<section class="hero pre" id="top">
+  <canvas class="aurora" id="aurora" aria-hidden="true"></canvas>
+  <svg class="ridge" viewBox="0 0 1200 200" preserveAspectRatio="none" aria-hidden="true"><path d="M0 200V120l80-40 70 30 90-70 110 60 60-30 120 80 90-50 100 40 80-70 120 60 90-30 100 50 90-20V200z" fill="#0c0906"/><path d="M0 200V160l120-30 90 20 140-40 110 30 150-30 120 40 160-30 140 30 170-20V200z" fill="#120c08"/></svg>
+  <div class="wrap">
+    <div class="runes" aria-hidden="true">ᚠᚢᚦᚨᚱᚲ ᚷᚹᚺᚾᛁᛃ</div>
+    <h1>ASGARD</h1>
+    <div class="sub">EL LEGADO DE ODÍN</div>
+    <p class="lead">Espacio temático germano-nórdico en San Telmo. Runas, hidromiel, amuletos y artesanía: viví la experiencia vikinga.</p>
+    <div class="ctas"><a class="btn" href="https://wa.me/5491167093542?text=Hola%20Asgard!%20Quiero%20hacer%20una%20reserva." target="_blank" rel="noopener">Reservar por WhatsApp</a><a class="btn ghost" href="#visita">Cómo llegar</a></div>
+    <div class="facts"><span class="status" id="statusChip">Vie a Dom desde las 12</span><span><b>Humberto 1° 487</b> · San Telmo</span></div>
+  </div>
+  <button class="redo" type="button" id="redo" hidden>↻ Formar el muro</button>
+</section>
+<section class="block" id="experiencias">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Experiencias</div><h2>El legado de Odín</h2></div><p>Un rincón del norte en el corazón de San Telmo. Entrá, probá y llevate un pedacito de Asgard.</p></div>
+    <div class="exp" id="exp"></div>
+    <p class="note">Experiencias tomadas de tu Instagram; las descripciones son ejemplos. En el sitio final podrías sumar precios y horarios de cada una.</p>
+  </div>
+</section>
+<section class="block" id="celebraciones" style="padding-top:0">
+  <div class="wrap">
+    <div class="feast">
+      <div><div class="kicker">Celebraciones</div><h2>Festejá como en el gran salón de Odín</h2><p>Cumpleaños, despedidas y banquetes con hidromiel, comida y ambiente vikingo. Armamos tu celebración a medida.</p><ul><li>CUMPLEAÑOS</li><li>DESPEDIDAS</li><li>BANQUETES</li></ul><div class="ctas" style="justify-content:flex-start;margin-top:20px"><a class="btn" href="https://wa.me/5491167093542?text=Hola%20Asgard!%20Quiero%20hacer%20una%20reserva." target="_blank" rel="noopener">Consultar fecha</a></div></div>
+      <svg viewBox="0 0 300 240" aria-hidden="true" id="horn"></svg>
+    </div>
+  </div>
+</section>
+<section class="block" id="eventos" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Eventos</div><h2>Bajo las auroras</h2></div><p>Encuentros, ceremonias y talleres. Seguí nuestras redes para las próximas fechas.</p></div>
+    <div class="events">
+      <article class="ev"><span class="k">NOCHES DE VÖLVA</span><h3>La vidente habla</h3><p>Noches de lectura y relatos con la völva, entre velas y runas.</p></article>
+      <article class="ev"><span class="k">CEREMONIAS</span><h3>Equinoccio y solsticio</h3><p>Celebramos los ciclos del año como los antiguos pueblos del norte.</p></article>
+      <article class="ev"><span class="k">TALLERES</span><h3>Taller de runas</h3><p>Aprendé el Futhark antiguo, su significado y cómo leer las runas.</p></article>
+    </div>
+    <div class="thor"><svg viewBox="0 0 100 100" aria-hidden="true"><rect x="20" y="14" width="60" height="34" rx="5" fill="#8f949a" stroke="#4a4f55" stroke-width="3"/><path d="M28 22h44M28 40h44" stroke="#5a6068" stroke-width="2"/><text x="50" y="37" text-anchor="middle" font-family="Noto Sans Runic" font-size="16" fill="#e8b552">ᚦ</text><rect x="45" y="48" width="10" height="40" rx="3" fill="#6b4a2e"/><path d="M45 58h10M45 66h10M45 74h10" stroke="#3a2a1a" stroke-width="2"/><circle cx="50" cy="92" r="4" fill="none" stroke="#e8b552" stroke-width="2"/></svg>
+      <div><div class="kicker">Los domingos</div><h3>¡El mismísimo Thor te está esperando!</h3><p>Vení a conocerlo en persona y sacate una foto con el dios del trueno.</p></div></div>
+  </div>
+</section>
+<section class="block" style="padding-top:0">
+  <div class="wrap"><div class="card" style="grid-template-columns:minmax(0,1fr) auto;align-items:center"><div><div class="kicker">Convocatoria</div><h3 style="margin-top:6px;font-size:26px">Artesanos del norte</h3><p style="margin-top:6px">¿Hacés artesanía nórdica, joyería, cuero o tallado? Sumate a la feria de Asgard.</p></div><a class="btn ghost" href="https://wa.me/5491167093542?text=Hola%20Asgard!%20Quiero%20hacer%20una%20reserva." target="_blank" rel="noopener">Escribinos</a></div></div>
+</section>
+<section class="block" id="visita" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Visitanos</div><h2>Humberto 1° 487</h2></div><p>San Telmo, Ciudad de Buenos Aires.</p></div>
+    <div class="visit">
+      <div class="map"><iframe title="Mapa: Asgard, Humberto 1° 487" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-58.3790%2C-34.6235%2C-58.3660%2C-34.6177&amp;layer=mapnik&amp;marker=-34.62066%2C-58.37261"></iframe></div>
+      <div class="card"><h3>Horarios</h3><dl class="hours" id="hours"></dl><p style="font-size:16px;color:var(--muted)">Feriados: abierto.</p><h3 style="margin-top:6px">Dirección</h3><p>Humberto 1° 487, San Telmo, CABA</p><p>Reservas: <a href="https://wa.me/5491167093542?text=Hola%20Asgard!%20Quiero%20hacer%20una%20reserva." target="_blank" rel="noopener">11 6709-3542</a></p>
+        <div class="ctas" style="justify-content:flex-start"><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Humberto%20Primo%20487%20San%20Telmo%20Buenos%20Aires" target="_blank" rel="noopener">Cómo llegar ↗</a><a class="btn ghost" href="https://wa.me/5491167093542?text=Hola%20Asgard!%20Quiero%20hacer%20una%20reserva." target="_blank" rel="noopener">WhatsApp</a></div></div>
+    </div>
+  </div>
+</section>
+<footer><div class="wrap"><span>Asgard · El legado de Odín · Espacio temático germano-nórdico · Humberto 1° 487, San Telmo</span><span>Propuesta de Jota Labs · <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">más trabajos</a></span></div></footer>
+<a class="like" href="https://wa.me/5491130331893?text=Hola%20Jan%2C%20vi%20la%20propuesta%20web%20para%20Asgard%20y%20quiero%20saber%20m%C3%A1s." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>¿Te gusta? Hablemos</a>
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+
+  const E = [["ᚱ", "Lectura de runas", "Consultá a las runas del Futhark antiguo y descubrí lo que tienen para decirte."], ["ᛗ", "Hidromiel", "La bebida de los dioses, servida como en los salones del norte."], ["ᛉ", "Amuletos rúnicos", "Amuletos y talismanes con runas, para protección y buena fortuna."], ["ᚹ", "Armonización rúnica", "Un ritual de equilibrio y energía guiado por las runas."], ["ᛚ", "Bebidas ancestrales y té", "Degustaciones de té y bebidas inspiradas en las tradiciones nórdicas."], ["ᛋ", "Cristales y cosmética", "Cristales de la Tierra y cosmética natural Zaid."]];
+  $("#exp").innerHTML = E.map(([r, t, d]) => `<article class="ex"><span class="r" aria-hidden="true">${r}</span><span class="r big" aria-hidden="true">${r}</span><h3>${t}</h3><p>${d}</p></article>`).join("");
+  $("#horn").innerHTML = `<defs><linearGradient id="hg" x1="0" x2="1"><stop offset="0" stop-color="#f5e6c4"/><stop offset=".6" stop-color="#c9a46a"/><stop offset="1" stop-color="#6b4a2e"/></linearGradient></defs><ellipse cx="150" cy="222" rx="120" ry="12" fill="rgba(0,0,0,.4)"/><path d="M40 70C90 70 190 120 240 190l22-14C210 100 110 46 46 46z" fill="url(#hg)" stroke="#4a3320" stroke-width="3"/><ellipse cx="44" cy="58" rx="10" ry="13" fill="#2a1a0e" stroke="#e8b552" stroke-width="3"/>${[90, 140, 190].map((x, i) => `<path d="M${x - 8} ${78 + i * 18 + (i ? 10 : 0)}l14 -22" stroke="#e8b552" stroke-width="4"/>`).join("")}<path d="M44 46q-6-20 8-26" fill="none" stroke="#f3e2b5" stroke-width="3" stroke-linecap="round" opacity=".5"/><g fill="#e8b552" opacity=".8">${[...Array(6)].map((_, i) => `<circle cx="${40 + Math.sin(i) * 6}" cy="${36 - i * 6}" r="${2 - i * .2}"/>`).join("")}</g>`;
+
+  /* ---------- Horarios + abierto ahora (Buenos Aires) ---------- */
+  const H = { Mon: null, Tue: null, Wed: null, Thu: null, Fri: [720, 1260], Sat: [720, 1260], Sun: [720, 1200] };
+  const names = { Mon: "Lunes", Tue: "Martes", Wed: "Miércoles", Thu: "Jueves", Fri: "Viernes", Sat: "Sábado", Sun: "Domingo" };
+  const fmt = (m) => `${Math.floor(m / 60)}:${String(m % 60).padStart(2, "0")}`;
+  function status() { const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "America/Argentina/Buenos_Aires", weekday: "short", hour: "numeric", minute: "numeric", hour12: false }).formatToParts(new Date());
+    const get = (t) => parts.find((x) => x.type === t).value, wd = get("weekday"), m = (+get("hour") % 24) * 60 + +get("minute"), t = H[wd];
+    $("#hours").innerHTML = Object.keys(H).map((d) => `<dt class="${d === wd ? "today" : ""}">${names[d]}</dt><dd class="${d === wd ? "today" : ""}">${H[d] ? fmt(H[d][0]) + " – " + fmt(H[d][1]) : "Cerrado"}</dd>`).join("");
+    const open = t && m >= t[0] && m < t[1], chip = $("#statusChip"); chip.classList.toggle("open", !!open);
+    chip.innerHTML = open ? `<b>Abierto ahora</b> · hasta las ${fmt(t[1])}` : t && m < t[0] ? `Hoy abrimos a las <b>${fmt(t[0])}</b>` : "Cerrado ahora · <b>Vie a Dom desde las 12</b>"; }
+  status(); setInterval(status, 60000);
+
+  /* ---------- Fondo: aurora boreal animada ---------- */
+  const hero = $("#top"), ac = $("#aurora"), ax = ac.getContext("2d"); let stars = [];
+  function aur(now) { const dpr = Math.min(2, devicePixelRatio || 1), w = hero.clientWidth, h = hero.clientHeight;
+    if (ac.width !== Math.round(w * dpr) || ac.height !== Math.round(h * dpr)) { ac.width = Math.round(w * dpr); ac.height = Math.round(h * dpr); stars = Array.from({ length: Math.round(w * h / 2600) }, () => [Math.random() * w, Math.random() * h * .75, Math.random() * 1.3 + .3, Math.random() * 6]); }
+    ax.setTransform(dpr, 0, 0, dpr, 0, 0); ax.clearRect(0, 0, w, h); now = now || 0;
+    for (const [x, y, r, p] of stars) { ax.fillStyle = `rgba(255,255,255,${.3 + .35 * Math.sin(now / 900 + p)})`; ax.beginPath(); ax.arc(x, y, r, 0, 7); ax.fill(); }
+    ax.globalCompositeOperation = "lighter";
+    [["60,230,170", .16, .07, .004, .00025, 0], ["70,190,255", .26, .09, .0055, .00035, 2], ["150,110,255", .34, .1, .007, .00045, 4]].forEach(([col, yy, am, f, sp, ph]) => { const by = h * yy, amp = h * am;
+      for (let x = 0; x < w; x += 4) { const y = by + Math.sin(x * f + now * sp + ph) * amp + Math.sin(x * f * 2.3 - now * sp * 1.7) * amp * .35, len = h * (.17 + .09 * Math.sin(x * .01 + now * .0006 + ph)), g = ax.createLinearGradient(0, y - len, 0, y + len * .2);
+        g.addColorStop(0, `rgba(${col},0)`); g.addColorStop(.75, `rgba(${col},.2)`); g.addColorStop(1, `rgba(${col},0)`); ax.fillStyle = g; ax.fillRect(x, y - len, 4, len * 1.2); } });
+    ax.globalCompositeOperation = "source-over";
+    if (!reduce) requestAnimationFrame(aur); }
+  requestAnimationFrame(aur);
+
+  /* ---------- Intro: Escudos ---------- */
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const el = (scr, tag, cls, css = "") => { const n = document.createElement(tag); n.className = "fxl " + cls; if (css) n.style.cssText = css; scr.append(n); return n; };
+  const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); hero.querySelectorAll(".cover").forEach((n) => (n.style.opacity = "0")); };
+  async function shields(scr, tk, o = {}) {
+    const w = scr.clientWidth, h = scr.clientHeight, D = Math.min(w / 2.6, h / 3.4), cols = Math.ceil(w / (D * .78)) + 1, rows = Math.ceil(h / (D * .82)) + 1;
+    const box = el(scr, "div", "sh", `position:absolute;inset:0;z-index:5;pointer-events:none;background:#120c08;transition:background .6s`);
+    const PAL = o.palette || [["#c4161c", "#e8b552"], ["#1f3b73", "#e9e2cf"], ["#2a5a2e", "#e8b552"], ["#e9e2cf", "#7a1a12"], ["#3b2a1c", "#c9a24a"]];
+    const svg = (a, b, i) => `<svg viewBox="0 0 100 100" width="100%" style="display:block;filter:drop-shadow(0 8px 10px rgba(0,0,0,.55))"><circle cx="50" cy="50" r="48" fill="${a}" stroke="#4a3320" stroke-width="4"/>${i % 2 ? `<path d="M50 2 L62 50 L50 98 L38 50Z" fill="${b}"/><path d="M2 50 L50 40 L98 50 L50 60Z" fill="${b}" opacity=".9"/>` : `<path d="M50 50 L50 2 A48 48 0 0 1 98 50Z M50 50 L50 98 A48 48 0 0 1 2 50Z" fill="${b}"/>`}<path d="M10 30h80M8 50h84M10 70h80" stroke="rgba(0,0,0,.18)" stroke-width="1.5"/><circle cx="50" cy="50" r="13" fill="#8f949a" stroke="#4a4f55" stroke-width="3"/><circle cx="46" cy="46" r="4" fill="rgba(255,255,255,.5)"/><circle cx="50" cy="50" r="46" fill="none" stroke="#6b5233" stroke-width="2" stroke-dasharray="3 6"/></svg>`;
+    const items = [];
+    for (let r = 0; r < rows; r++) for (let q = 0; q < cols; q++) { const x = q * D * .78 - D * .3 + (r % 2 ? D * .39 : 0), y = r * D * .82 - D * .3, [a, b] = PAL[(r * 3 + q) % PAL.length], d = document.createElement("div"); const fromLeft = x + D / 2 < w / 2; d.style.cssText = `position:absolute;left:${x}px;top:${y}px;width:${D}px;transform:translateX(${fromLeft ? -w : w}px) rotate(${fromLeft ? -90 : 90}deg);transition:transform .55s cubic-bezier(.2,.9,.3,1.1)`; d.dataset.side = fromLeft ? -1 : 1; d.innerHTML = svg(a, b, r + q); box.append(d); items.push({ d, r, q, x }); }
+    const cap = el(box, "div", "", `position:absolute;left:0;right:0;top:44%;text-align:center;color:#f3e2b5;opacity:0;transition:opacity .5s;font:${o.font || "900 12cqw Georgia, serif"};letter-spacing:.06em;text-shadow:0 4px 20px rgba(0,0,0,.9), 0 0 2px #000;z-index:2`); cap.innerHTML = o.label || "";
+    await sleep(150);
+    items.sort((a, b) => Math.abs(a.x - w / 2) - Math.abs(b.x - w / 2)).reverse().forEach((it, i) => setTimeout(() => (it.d.style.transform = "none"), i * 18));
+    await sleep(items.length * 18 + 700); cap.style.opacity = 1; await sleep(o.hold || 1100); if (tk.cancelled) return box.remove();
+    reveal(); cap.style.opacity = 0; box.style.background = "transparent";
+    items.forEach((it) => { it.d.style.transition = "transform .8s cubic-bezier(.6,0,.4,1)"; it.d.style.transform = `translateX(${it.d.dataset.side * w}px) rotate(${it.d.dataset.side * 120}deg)`; });
+    await sleep(850); box.remove();
+  }
+  const redo = $("#redo");
+  let token = { cancelled: true };
+  async function play() {
+    token.cancelled = true; const tk = (token = { cancelled: false });
+    hero.querySelectorAll(".fxl, .stage").forEach((n) => n.remove());
+    hero.classList.remove("reveal"); hero.classList.add("pre"); redo.hidden = true;
+    const top = Math.max(0, hero.getBoundingClientRect().top), vis = Math.max(320, Math.min(hero.clientHeight, innerHeight - top));
+    const stage = document.createElement("div"); stage.className = "stage"; stage.style.cssText = `position:absolute;left:0;right:0;top:0;height:${hero.clientHeight}px;z-index:5;pointer-events:none;overflow:hidden;container-type:inline-size`; hero.append(stage);
+    const inner = document.createElement("div"); inner.style.cssText = `position:absolute;left:0;right:0;top:0;height:${vis}px;container-type:inline-size`; stage.append(inner);
+    if (vis < hero.clientHeight) { const cv = document.createElement("div"); cv.className = "cover"; cv.style.cssText = `position:absolute;left:0;right:0;top:${vis}px;bottom:0;background:#120c08;transition:opacity .6s`; stage.append(cv); }
+    await shields(inner, tk, { label: "ASGARD", font: "900 15cqw Cinzel, serif" });
+    stage.remove(); if (!tk.cancelled) redo.hidden = false;
+  }
+  redo.addEventListener("click", play);
+  if (reduce) hero.classList.remove("pre"); else document.fonts.ready.then(play);
+})();
+</script>
+</body>
+</html>
