@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Maisie's Bakes · Design proposal</title>
+<meta name="description" content="A website proposal for Maisie's Bakes, NYC style cookies and brownies from the Cake Shed in East Lothian, by Jota Labs. Not the official website.">
+<meta property="og:title" content="Maisie's Bakes · Design proposal">
+<meta property="og:description" content="NYC style cookies & brownies. Cake Shed open weekends, new shop coming soon. A proposal by Jota Labs.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%237a1f3d'/%3E%3Ctext x='32' y='40' text-anchor='middle' font-family='Arial Black,Arial' font-weight='900' font-size='22' fill='%23f6b3c8'%3EMB%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Titan+One&family=Outfit:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: Cake-Shed-Intro (rosa Hütte öffnet die Türen, Regale voller Cookies, hinein), schwebende Cookies im Hero.
+   The menu, Order a box, The Cake Shed (Wochenende, Live-Status), New shop coming soon, Wholesale.
+   Weinrot + Rosa wie das Logo, Cookie-Gold, Shed-Rosa; Titan One + Outfit. */
+:root {
+  --bg: #7a1f3d; --bg-2: #69172f; --deep: #4a0f22; --pink: #f6b3c8; --shed: #f7cdd8; --blush: #fff3f6; --gold: #c98a42;
+  --line: rgba(255,243,246,.2); --fg: #fff3f6; --soft: #f7dbe3; --muted: #e2a9bb;
+  --f-display: "Titan One", system-ui, sans-serif;
+  --f-body: "Outfit", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 17px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-family: var(--f-display); font-weight: 400; text-wrap: balance; letter-spacing: .01em; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 700 12px/1.2 var(--f-body); letter-spacing: .2em; text-transform: uppercase; color: var(--pink); }
+:focus-visible { outline: 2px solid var(--pink); outline-offset: 3px; }
+.logo-t { color: var(--pink); -webkit-text-stroke: .05em var(--deep); paint-order: stroke fill; }
+
+.proposal { background: #000; color: #e9ebee; font: 13px/1.4 var(--f-body); padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; }
+.proposal b { color: #ffd166; } .proposal a { color: #fff; font-weight: 700; }
+
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.logo { text-decoration: none; font: 400 22px/1 var(--f-display); }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 15px; font-weight: 600; color: var(--muted); }
+nav.links a:hover { color: var(--fg); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 700 15px/1 var(--f-body); padding: 15px 22px; border-radius: 999px; background: var(--pink); color: var(--deep); border: 2px solid var(--pink); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,.25); }
+.btn.ghost { background: transparent; color: var(--fg); border-color: rgba(255,243,246,.45); }
+.btn.ghost:hover { box-shadow: none; border-color: var(--fg); }
+nav.links a.btn { color: var(--deep); padding: 10px 16px; font-size: 14px; }
+.menu-btn { display: none; background: transparent; color: var(--fg); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font: 700 12px var(--f-body); letter-spacing: .1em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bg-2); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+
+/* ---------- Hero ---------- */
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line);
+  background: radial-gradient(60vw 45vw at 100% 0%, rgba(246,179,200,.22), transparent 70%), radial-gradient(70vw 55vw at 0% 110%, rgba(201,138,66,.25), transparent 70%), var(--bg); }
+.float { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; opacity: .2; }
+.hero .wrap { position: relative; z-index: 1; padding-block: clamp(80px, 12vw, 140px) clamp(56px, 9vw, 104px); display: flex; flex-direction: column; gap: 16px; }
+.hero h1 { font-size: clamp(60px, 12.5vw, 160px); line-height: .92; }
+.hero .lead { margin: 4px 0 0; font-size: clamp(18px, 2.2vw, 22px); color: var(--soft); max-width: 38ch; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.facts span { font: 600 14px var(--f-body); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; background: rgba(74,15,34,.6); }
+.facts span b { color: var(--fg); }
+.status::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); margin-right: 8px; vertical-align: 1px; }
+.status.open::before { background: #5fd38a; box-shadow: 0 0 10px #5fd38a; }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 7; font: 600 13px var(--f-body); color: var(--muted); background: rgba(74,15,34,.8); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.redo:hover { color: var(--fg); }
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero.reveal .wrap > :nth-child(2) { animation-delay: .06s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .12s }
+.hero.reveal .wrap > :nth-child(4) { animation-delay: .18s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .24s }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+
+/* ---------- Abschnitte ---------- */
+section.block { padding-block: clamp(64px, 10vw, 104px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 40px; margin-bottom: 30px; }
+.head h2 { font-size: clamp(38px, 6vw, 72px); line-height: .95; margin-top: 10px; }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+.note { margin-top: 20px; font-size: 14px; color: var(--muted); padding: 10px 14px; border-left: 3px solid var(--pink); background: var(--bg-2); border-radius: 0 10px 10px 0; }
+
+.bakes { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 1000px) { .bakes { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 520px) { .bakes { grid-template-columns: minmax(0,1fr); } }
+.bk { background: var(--blush); color: var(--deep); border-radius: 24px; padding: 22px; display: grid; gap: 8px; align-content: start; transition: transform .3s; }
+.bk:hover { transform: translateY(-4px) rotate(-.5deg); }
+.bk svg { width: 100%; height: 130px; filter: drop-shadow(0 8px 10px rgba(74,15,34,.18)); }
+.bk h3 { font-size: 22px; }
+.bk p { margin: 0; color: #6a3346; font-size: 15px; }
+.bk .tag { justify-self: start; font: 700 11px var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--blush); background: var(--bg); border-radius: 999px; padding: 4px 10px; }
+
+.order { background: var(--shed); color: var(--deep); }
+.order .wrap { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 30px; align-items: center; }
+@media (max-width: 860px) { .order .wrap { grid-template-columns: minmax(0,1fr); } }
+.order h2 { font-size: clamp(40px, 6vw, 72px); line-height: .95; }
+.order .kicker { color: var(--bg); }
+.order p { color: #6a3346; margin: 14px 0 0; max-width: 44ch; }
+.boxes { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; }
+.box { background: #fff; border-radius: 20px; padding: 18px 12px; text-align: center; border: 2px solid transparent; cursor: pointer; font: inherit; color: inherit; transition: border-color .2s, transform .2s; }
+.box:hover, .box[aria-pressed="true"] { border-color: var(--bg); transform: translateY(-3px); }
+.box b { display: block; font: 400 34px/1 var(--f-display); color: var(--bg); }
+.box span { font-size: 14px; color: #6a3346; }
+.order .btn { background: var(--bg); border-color: var(--bg); color: var(--blush); margin-top: 16px; }
+
+.duo { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 860px) { .duo { grid-template-columns: minmax(0,1fr); } }
+.card { border: 1px solid var(--line); border-radius: 24px; padding: 26px; background: var(--bg-2); display: grid; gap: 12px; align-content: start; }
+.card h3 { font-size: 30px; line-height: 1.05; }
+.card p { margin: 0; color: var(--soft); }
+.card.soon { background: var(--deep); position: relative; overflow: hidden; }
+.card.soon .stamp { position: absolute; right: -10px; top: 18px; transform: rotate(8deg); background: var(--pink); color: var(--deep); font: 400 14px var(--f-display); padding: 6px 18px; letter-spacing: .08em; }
+.map { border-radius: 18px; overflow: hidden; border: 1px solid var(--line); height: 220px; }
+.map iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+footer { padding-block: 40px 96px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 700 14px var(--f-body); padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.3); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></symbol>
+</svg>
+<div class="proposal"><span><b>Design proposal</b> for Maisie's Bakes · not the official website</span><span>Made by <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">Jota Labs</a></span></div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo logo-t" href="#top">MAISIE'S BAKES</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENU</button>
+    <nav class="links" id="links">
+      <a href="#bakes-sec">The bakes</a>
+      <a href="#shed">Cake Shed</a>
+      <a href="#shop">New shop</a>
+      <a class="btn" href="#order">Order a box</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero pre" id="top">
+  <canvas class="float" id="float" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="kicker">NYC style cookies &amp; brownies</div>
+    <h1 class="logo-t">MAISIE'S<br>BAKES</h1>
+    <p class="lead">Big, gooey New York cookies and fudgy brownies. Find us at East Lothian's first cake shed every weekend.</p>
+    <div class="ctas"><a class="btn" href="#order">Order a box</a><a class="btn ghost" href="#shed">Visit the Cake Shed</a></div>
+    <div class="facts"><span class="status" id="statusChip">Cake Shed · Sat &amp; Sun</span><span><b>New shop</b> coming soon</span></div>
+  </div>
+  <button class="redo" type="button" id="redo" hidden>↻ Open the shed again</button>
+</section>
+
+<section class="block" id="bakes-sec">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Fresh this week</div><h2>The bakes</h2></div><p>Thick, chunky cookies, gooey in the middle. Brownies with a crackly top. Specials that sell out fast.</p></div>
+    <div class="bakes" id="bakes"></div>
+    <p class="note">Bakes from your Instagram; names and descriptions are examples. On the final site you could post this weekend's flavours from your phone.</p>
+  </div>
+</section>
+
+<section class="block order" id="order">
+  <div class="wrap">
+    <div><div class="kicker">Order online</div><h2>Pick your box</h2><p>No more lost DMs: choose a box, pick your flavours and a collection day, and we'll have it ready. Wholesale orders welcome too.</p></div>
+    <div>
+      <div class="boxes" role="group" aria-label="Box size">
+        <button class="box" type="button" aria-pressed="false"><b>4</b><span>cookies</span></button>
+        <button class="box" type="button" aria-pressed="true"><b>6</b><span>cookies</span></button>
+        <button class="box" type="button" aria-pressed="false"><b>12</b><span>cookies</span></button>
+      </div>
+      <a class="btn" href="https://ig.me/m/maisiesbakes_" target="_blank" rel="noopener">Order this box ↗</a>
+      <p class="note" style="background:rgba(255,255,255,.5);color:#6a3346;border-color:var(--bg)">Box sizes are examples. On the final site this would be a real order form, so orders arrive in one tidy list instead of your DMs.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="shed">
+  <div class="wrap duo">
+    <article class="card"><span class="kicker">The Cake Shed</span><h3>East Lothian's first cake shed</h3><p>Our pink shed is open every Saturday and Sunday. Pop by, grab a cookie (or six), and check our stories for what's in today.</p>
+      <div class="map"><iframe title="Map: Maisie's Bakes Cake Shed, EH21 6TF" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-3.0820%2C55.9333%2C-3.0560%2C55.9411&amp;layer=mapnik&amp;marker=55.93723%2C-3.06901"></iframe></div>
+      <div class="ctas"><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=EH21%206TF" target="_blank" rel="noopener">Directions ↗</a></div></article>
+    <article class="card soon" id="shop"><span class="stamp">COMING SOON</span><span class="kicker">New shop</span><h3>Our first shop, Portobello</h3><p>NYC style cookies, brownies and delicious drinks, on Portobello High Street. We're busy renovating; follow along for the opening date.</p><p style="font:400 26px var(--f-display);color:var(--pink);margin-top:6px">Opening soon</p><a class="btn ghost" href="https://www.instagram.com/maisiesbakes_/" target="_blank" rel="noopener" style="justify-self:start">Follow the build ↗</a></article>
+  </div>
+  <div class="wrap"><p class="note">Times for the shed weren't in your bio, so it shows weekends only. Once the shop opens, its hours and a live "open now" would sit here, plus a countdown to opening day.</p></div>
+</section>
+
+<footer><div class="wrap"><span>Maisie's Bakes · NYC style cookies &amp; brownies · Cake Shed, East Lothian EH21 6TF · Wholesale via DM</span><span>Design proposal by Jota Labs · <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">more work</a></span></div></footer>
+
+<a class="like" href="https://wa.me/5491130331893?text=Hi%20Jan%2C%20I%20saw%20the%20website%20proposal%20for%20Maisie%27s%20Bakes%20and%20I%27d%20like%20to%20know%20more." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Like it? Let's talk</a>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+  document.querySelectorAll(".box").forEach((b) => b.addEventListener("click", () => document.querySelectorAll(".box").forEach((x) => x.setAttribute("aria-pressed", String(x === b)))));
+
+  /* ---------- Canvas-Helfer + Cookies ---------- */
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const tween = (ms, fn, tk, ez = (t) => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2)) => new Promise((res) => { const t0 = performance.now(); const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(ez(k), k); k < 1 ? requestAnimationFrame(step) : res(); }; requestAnimationFrame(step); });
+  const canvas = (parent, cls, z) => { const w = parent.clientWidth, h = parent.clientHeight, dpr = Math.min(2, devicePixelRatio || 1); const c = document.createElement("canvas"); c.className = "fxl " + cls; c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); c.style.cssText = `position:absolute;left:0;top:0;width:${w}px;height:${h}px;z-index:${z};pointer-events:none`; c.setAttribute("aria-hidden", "true"); parent.append(c); const ctx = c.getContext("2d"); ctx.scale(dpr, dpr); return { c, ctx, w, h }; };
+  const hero = $("#top");
+  const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); hero.querySelectorAll(".cover").forEach((n) => (n.style.opacity = "0")); };
+  /* ---------- Maisie's Bakes: Logo + Cookie ---------- */
+  function mbLogo(ctx, w, h, x, y, a, o, sc = 1) {
+    if (a <= 0) return; ctx.save(); ctx.globalAlpha = Math.min(1, a); ctx.translate(x, y); ctx.scale(sc, sc); ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    const fs = Math.min(w * .14, h * .085); ctx.font = `400 ${fs}px ${o.family || "Impact, sans-serif"}`; ctx.lineJoin = "round"; ctx.lineWidth = fs * .12; ctx.strokeStyle = o.ink || "#4a0f22"; ctx.fillStyle = o.pink || "#f6b3c8";
+    ["MAISIE’S", "BAKES"].forEach((t, i) => { ctx.strokeText(t, 0, (i - .5) * fs * .95, w * .9); ctx.fillText(t, 0, (i - .5) * fs * .95, w * .9); });
+    if (o.sub) { ctx.font = `700 ${fs * .22}px ${o.ufamily || "system-ui"}`; ctx.fillStyle = "#fff3f6"; ctx.fillText(o.sub, 0, fs * 1.25, w * .9); }
+    ctx.restore();
+  }
+  function mbCookieShape(R, seed) { const pts = []; for (let i = 0; i < 40; i++) { const a = i / 40 * 6.283; pts.push([Math.cos(a) * R * (1 + .045 * Math.sin(a * 7 + seed) + .02 * Math.sin(a * 13)), Math.sin(a) * R * (1 + .045 * Math.sin(a * 7 + seed) + .02 * Math.sin(a * 13))]); } return pts; }
+  function mbCookie(ctx, R, seed = 1, chunks = null) {
+    const pts = mbCookieShape(R, seed); ctx.beginPath(); pts.forEach(([x, y], i) => (i ? ctx.lineTo(x, y) : ctx.moveTo(x, y))); ctx.closePath();
+    const g = ctx.createRadialGradient(-R * .3, -R * .3, R * .1, 0, 0, R); g.addColorStop(0, "#e8b56a"); g.addColorStop(.7, "#c98a42"); g.addColorStop(1, "#9a5e26"); ctx.fillStyle = g; ctx.fill();
+    ctx.strokeStyle = "rgba(120,70,25,.35)"; ctx.lineWidth = R * .015; for (let i = 0; i < 7; i++) { const a = seed + i * .9; ctx.beginPath(); ctx.moveTo(Math.cos(a) * R * .2, Math.sin(a) * R * .2); ctx.quadraticCurveTo(Math.cos(a + .4) * R * .5, Math.sin(a + .4) * R * .5, Math.cos(a + .2) * R * .75, Math.sin(a + .2) * R * .75); ctx.stroke(); }
+    (chunks || [[-.35, -.25, .16], [.3, -.35, .14], [.05, .1, .18], [-.4, .3, .13], [.38, .28, .15], [.1, -.6, .1], [-.1, .55, .11]]).forEach(([x, y, s], i) => { ctx.fillStyle = i % 3 ? "#3a1c0c" : "#5a2c12"; ctx.beginPath(); for (let k = 0; k < 6; k++) { const a = k / 6 * 6.283 + i, r = R * s * (.8 + .3 * Math.sin(k * 2 + i)); k ? ctx.lineTo(x * R + Math.cos(a) * r, y * R + Math.sin(a) * r) : ctx.moveTo(x * R + Math.cos(a) * r, y * R + Math.sin(a) * r); } ctx.closePath(); ctx.fill(); ctx.fillStyle = "rgba(255,230,200,.25)"; ctx.beginPath(); ctx.arc(x * R - R * s * .3, y * R - R * s * .3, R * s * .25, 0, 7); ctx.fill(); });
+    ctx.fillStyle = "#fff"; for (let i = 0; i < 10; i++) { const a = seed * 3 + i * 2.3, r = R * (.2 + (i * 37 % 60) / 100); ctx.fillRect(Math.cos(a) * r, Math.sin(a) * r, R * .018, R * .018); }
+  }
+
+  /* ---------- Cake shed: die rosa Hütte öffnet ihre Türen, drinnen Cookies, dann hinein ---------- */
+  async function cakeshed(scr, tk, o = {}) {
+    const { c, ctx, w, h } = canvas(scr, "shed", 5), cx = w / 2, W = Math.min(w * .7, h * .42), H = W * 1.25, by = h * .82;
+    let open = 0, logo = 0, zoom = 1, bgA = 1, sign = 0;
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h); ctx.globalAlpha = bgA; ctx.fillStyle = o.bg || "#cfe3d3"; ctx.fillRect(0, 0, w, h); ctx.fillStyle = "#9fc29a"; ctx.fillRect(0, by, w, h - by); ctx.globalAlpha = 1;
+      ctx.save(); ctx.translate(cx, by - H * .45); ctx.scale(zoom, zoom); ctx.translate(-cx, -(by - H * .45));
+      const x0 = cx - W / 2, top = by - H;
+      ctx.fillStyle = "#f2b8c8"; ctx.beginPath(); ctx.moveTo(x0 - W * .08, top + H * .2); ctx.lineTo(cx, top - H * .05); ctx.lineTo(x0 + W * 1.08, top + H * .2); ctx.closePath(); ctx.fill();
+      ctx.fillStyle = "#f7cdd8"; ctx.fillRect(x0, top + H * .18, W, H * .82);
+      ctx.strokeStyle = "rgba(160,80,100,.25)"; ctx.lineWidth = 1.5; for (let i = 1; i < 14; i++) { const yy = top + H * .18 + i * H * .82 / 14; ctx.beginPath(); ctx.moveTo(x0, yy); ctx.lineTo(x0 + W, yy); ctx.stroke(); }
+      ctx.fillStyle = "#7a1f3d"; ctx.beginPath(); ctx.arc(cx, top + H * .1, W * .07, 0, 7); ctx.fill(); ctx.fillStyle = "#f6b3c8"; ctx.font = `400 ${W * .03}px ${o.family || "Impact"}`; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText("MAISIE’S", cx, top + H * .09); ctx.fillText("BAKES", cx, top + H * .115);
+      const dx0 = x0 + W * .12, dw = W * .76, dy0 = top + H * .3, dh = H * .68;
+      ctx.fillStyle = "#3a2228"; ctx.fillRect(dx0, dy0, dw, dh);
+      if (open > 0) { ctx.fillStyle = "#e9d2b0"; for (let s = 0; s < 3; s++) { const sy = dy0 + dh * (.3 + s * .25); ctx.fillRect(dx0 + 4, sy, dw - 8, 4); for (let k = 0; k < 4; k++) { ctx.save(); ctx.translate(dx0 + dw * (.15 + k * .23), sy - dw * .06); mbCookie(ctx, dw * .075, k + s); ctx.restore(); } }
+        const lg = ctx.createRadialGradient(cx, dy0, 0, cx, dy0, dh); lg.addColorStop(0, `rgba(255,220,170,${.35 * open})`); lg.addColorStop(1, "rgba(255,220,170,0)"); ctx.fillStyle = lg; ctx.fillRect(dx0, dy0, dw, dh); }
+      [-1, 1].forEach((side) => { const hw = dw / 2, sx = side < 0 ? dx0 : dx0 + dw, vis = hw * Math.cos(open * 1.35); const xA = sx, xB = sx - side * vis;
+        ctx.fillStyle = "#fbe1e8"; ctx.beginPath(); ctx.moveTo(xA, dy0); ctx.lineTo(xB, dy0 - side * 0 + open * 6); ctx.lineTo(xB, dy0 + dh - open * 6); ctx.lineTo(xA, dy0 + dh); ctx.closePath(); ctx.fill(); ctx.strokeStyle = "rgba(160,80,100,.3)"; ctx.stroke();
+        for (let i = 1; i < 10; i++) { const yy = dy0 + i * dh / 10; ctx.beginPath(); ctx.moveTo(xA, yy); ctx.lineTo(xB, yy); ctx.stroke(); }
+        ctx.fillStyle = "#2a2a2a"; ctx.fillRect(xB + side * 6 - 2, dy0 + dh * .48, 4, dh * .08); });
+      if (sign > 0 && open < .2) { ctx.globalAlpha = sign; ctx.fillStyle = "#c48a9a"; ctx.font = `600 ${dw * .14}px Georgia, serif`; ctx.textAlign = "center"; ctx.fillText("CAKE", cx, dy0 + dh * .28); ctx.fillText("SHED", cx, dy0 + dh * .42); ctx.globalAlpha = 1; }
+      ctx.restore();
+      mbLogo(ctx, w, h, cx, h * .14, logo, { ...o, pink: o.pink || "#f6b3c8" });
+    };
+    sign = 1; draw(); await sleep(500);
+    await tween(1100, (e) => { open = e; draw(); }, tk);
+    await tween(450, (e) => { logo = e; draw(); }, tk);
+    await sleep(o.hold || 1000); if (tk.cancelled) return c.remove();
+    reveal();
+    await tween(900, (e, k) => { zoom = 1 + k * k * 4; bgA = 1 - k; logo = 1 - k * 2; c.style.opacity = 1 - Math.max(0, k - .5) * 2; draw(); }, tk, (k) => k);
+    c.remove();
+  }
+
+
+
+  /* ---------- Bakes als kleine Canvas-Bilder ---------- */
+  const art = (draw) => { const c = document.createElement("canvas"); c.width = 400; c.height = 260; const x = c.getContext("2d"); x.translate(200, 130); draw(x); return `<img src="${c.toDataURL()}" alt="" style="width:100%;height:130px;object-fit:contain;filter:drop-shadow(0 8px 10px rgba(74,15,34,.18))">`; };
+  const brownie = (x, dx, dy, s, top) => { x.save(); x.translate(dx, dy); x.fillStyle = "#2e170c"; x.beginPath(); x.roundRect(-60 * s, -30 * s, 120 * s, 60 * s, 8 * s); x.fill(); x.fillStyle = top; x.beginPath(); x.roundRect(-60 * s, -30 * s, 120 * s, 18 * s, 8 * s); x.fill(); x.strokeStyle = "rgba(255,230,200,.25)"; x.lineWidth = 2; x.beginPath(); x.moveTo(-45 * s, -24 * s); x.lineTo(-10 * s, -20 * s); x.lineTo(20 * s, -26 * s); x.lineTo(48 * s, -21 * s); x.stroke(); x.restore(); };
+  const B = [
+    ["NYC cookies", "Thick, chunky and gooey in the middle, loaded with chocolate.", art((x) => { x.save(); x.translate(-70, 20); mbCookie(x, 70, 1); x.restore(); x.save(); x.translate(70, -10); mbCookie(x, 78, 3); x.restore(); }), ""],
+    ["Brownies", "Fudgy, rich, with that crackly top.", art((x) => { brownie(x, -40, 30, 1, "#4a2a18"); brownie(x, 45, -10, 1, "#4a2a18"); }), ""],
+    ["Tiramisu brownie", "Brownie base, mascarpone cream, coffee-soaked layers and cocoa dust.", art((x) => { x.fillStyle = "#2e170c"; x.beginPath(); x.roundRect(-90, 30, 180, 40, 6); x.fill(); x.fillStyle = "#f3e6cf"; x.fillRect(-90, -5, 180, 36); x.fillStyle = "#b07a44"; x.fillRect(-90, 8, 180, 10); x.fillStyle = "#7a4626"; x.beginPath(); x.roundRect(-90, -30, 180, 26, 6); x.fill(); x.fillStyle = "rgba(60,30,15,.5)"; for (let i = 0; i < 60; i++) x.fillRect(-88 + (i * 53 % 176), -28 + (i * 17 % 22), 2, 2); }), "Back in the shed"],
+    ["Cookie pies", "A giant cookie in a tin, piled with chocolate bars. Built for sharing.", art((x) => { x.fillStyle = "#3a1c0c"; x.beginPath(); x.ellipse(0, 20, 150, 70, 0, 0, 7); x.fill(); x.save(); x.scale(1.3, .62); x.translate(0, 20); mbCookie(x, 105, 5, [[-.5, -.2, .12], [.5, .1, .12], [0, .5, .1]]); x.restore(); for (let i = 0; i < 10; i++) { const a = i / 10 * 6.283; x.save(); x.translate(Math.cos(a) * 80, 8 + Math.sin(a) * 34); x.rotate(a + 1.57); x.fillStyle = "#f2efe8"; x.fillRect(-14, -6, 28, 12); x.fillStyle = "#5a2c12"; x.fillRect(-14, -6, 28, 4); x.restore(); } }), ""],
+  ];
+  $("#bakes").innerHTML = B.map(([n, d, img, t]) => `<article class="bk">${img}<h3>${n}</h3><p>${d}</p>${t ? `<span class="tag">${t}</span>` : ""}</article>`).join("");
+
+  /* ---------- Status: Cake Shed am Wochenende ---------- */
+  const wd = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/London", weekday: "short" }).format(new Date()), chip = $("#statusChip");
+  const we = wd === "Sat" || wd === "Sun"; chip.classList.toggle("open", we); chip.innerHTML = we ? "<b>Cake Shed open today</b>" : "Cake Shed · <b>Sat &amp; Sun</b>";
+
+  /* ---------- Hintergrund: Mini-Cookies schweben ---------- */
+  const fc = $("#float"), fx = fc.getContext("2d"); let P = [];
+  function seedF(w, h) { P = Array.from({ length: Math.round(w * h / 40000) + 5 }, () => ({ x: Math.random() * w, y: Math.random() * h, r: 14 + Math.random() * 16, v: .12 + Math.random() * .22, a: Math.random() * 6.28, s: (Math.random() - .5) * .004, seed: Math.random() * 9 })); }
+  function floatF() {
+    const dpr = Math.min(2, devicePixelRatio || 1), w = hero.clientWidth, h = hero.clientHeight;
+    if (fc.width !== Math.round(w * dpr) || fc.height !== Math.round(h * dpr)) { fc.width = Math.round(w * dpr); fc.height = Math.round(h * dpr); seedF(w, h); }
+    fx.setTransform(dpr, 0, 0, dpr, 0, 0); fx.clearRect(0, 0, w, h);
+    for (const p of P) { if (!reduce) { p.y -= p.v; p.a += p.s; if (p.y < -40) { p.y = h + 40; p.x = Math.random() * w; } } fx.save(); fx.translate(p.x, p.y); fx.rotate(p.a); mbCookie(fx, p.r, p.seed); fx.restore(); }
+    if (!reduce) requestAnimationFrame(floatF);
+  }
+  requestAnimationFrame(floatF);
+
+  const redo = $("#redo");
+  let token = { cancelled: true };
+  async function play() {
+    token.cancelled = true; const tk = (token = { cancelled: false });
+    hero.querySelectorAll(".fxl, .stage").forEach((n) => n.remove());
+    hero.classList.remove("reveal"); hero.classList.add("pre"); redo.hidden = true;
+    const top = Math.max(0, hero.getBoundingClientRect().top), vis = Math.max(320, Math.min(hero.clientHeight, innerHeight - top));
+    const stage = document.createElement("div"); stage.className = "stage"; stage.style.cssText = `position:absolute;left:0;right:0;top:0;height:${hero.clientHeight}px;z-index:5;pointer-events:none;overflow:hidden`; hero.append(stage);
+    const inner = document.createElement("div"); inner.style.cssText = `position:absolute;left:0;right:0;top:0;height:${vis}px`; stage.append(inner);
+    if (vis < hero.clientHeight) { const cv = document.createElement("div"); cv.className = "cover"; cv.style.cssText = `position:absolute;left:0;right:0;top:${vis}px;bottom:0;background:#9fc29a;transition:opacity .6s`; stage.append(cv); }
+    await cakeshed(inner, tk, { family: '"Titan One", sans-serif', sub: "NYC STYLE COOKIES & BROWNIES", ufamily: "Outfit, sans-serif" });
+    stage.remove();
+    if (!tk.cancelled) redo.hidden = false;
+  }
+  redo.addEventListener("click", play);
+  if (reduce) hero.classList.remove("pre"); else document.fonts.ready.then(play);
+})();
+</script>
+</body>
+</html>
