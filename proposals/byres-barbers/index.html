@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Byres Barbers · Design proposal</title>
+<meta name="description" content="A website proposal for Byres Barbers, 19 Byres Road, West End, Glasgow, by Jota Labs. Not the official website.">
+<meta property="og:title" content="Byres Barbers · Design proposal">
+<meta property="og:description" content="Fades, cuts and beard trims on Byres Road. Bookings and walk-ins welcome. A proposal by Jota Labs.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2316120e'/%3E%3Cpath d='M32 8l18 10v20L32 48 14 38V18z' fill='none' stroke='%23fffcef' stroke-width='3'/%3E%3Ctext x='32' y='37' text-anchor='middle' font-family='Georgia' font-weight='700' font-size='16' fill='%23c9a24a'%3EBB%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Manrope:wght@400;500;700;800&display=swap">
+<style>
+/* Layout: Hex-Lights-Intro (Waben-LED-Decke schaltet sich ein, Ladenschild in Gold mit Barber-Stange), leise glimmende Waben im Hero.
+   Services & prices (Booksy), Reviews, Walk-ins & loyalty, Find us mit Live-Status.
+   Gold auf dunklem Holz, LED-Weiß, Barber-Rot/Blau; Cinzel + Manrope. */
+:root {
+  --bg: #0f0d0b; --bg-2: #18140f; --bg-3: #221c15; --line: rgba(244,239,230,.14); --fg: #f4efe6; --soft: #e2d9c8; --muted: #a89c86;
+  --gold: #c9a24a; --led: #fffcef; --red: #e0393e; --blue: #2f5bd3;
+  --f-display: "Cinzel", Georgia, serif;
+  --f-body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 17px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-family: var(--f-display); font-weight: 700; text-wrap: balance; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 800 12px/1.2 var(--f-body); letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+.proposal { background: #000; color: #e9ebee; font: 13px/1.4 var(--f-body); padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; }
+.proposal b { color: #ffd166; } .proposal a { color: #fff; font-weight: 800; }
+
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 700 20px/1 var(--f-display); color: var(--gold); }
+.pole { width: 10px; height: 30px; border-radius: 6px; background: repeating-linear-gradient(-45deg, var(--red) 0 5px, #fff 5px 10px, var(--blue) 10px 15px, #fff 15px 20px); background-size: 100% 28px; animation: spin 1.2s linear infinite; }
+@keyframes spin { to { background-position: 0 -28px; } }
+@media (prefers-reduced-motion: reduce) { .pole { animation: none; } }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 15px; font-weight: 700; color: var(--muted); }
+nav.links a:hover { color: var(--fg); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 800 15px/1 var(--f-body); padding: 15px 22px; border-radius: 6px; background: var(--gold); color: #0f0d0b; border: 2px solid var(--gold); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 0 24px rgba(255,252,239,.18); }
+.btn.ghost { background: transparent; color: var(--fg); border-color: rgba(244,239,230,.4); }
+.btn.ghost:hover { border-color: var(--fg); }
+nav.links a.btn { color: #0f0d0b; padding: 10px 16px; font-size: 14px; }
+.menu-btn { display: none; background: transparent; color: var(--fg); border: 1px solid var(--line); border-radius: 6px; padding: 8px 14px; font: 800 12px var(--f-body); letter-spacing: .08em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bg-2); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+
+/* ---------- Hero ---------- */
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line); background: linear-gradient(180deg, #0f0d0b 55%, #1c1712); }
+.hexbg { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; }
+.hero .wrap { position: relative; z-index: 1; padding-block: clamp(80px, 12vw, 140px) clamp(56px, 9vw, 104px); display: flex; flex-direction: column; gap: 16px; }
+.hero h1 { font-size: clamp(54px, 10vw, 128px); line-height: .95; color: var(--gold); text-shadow: 0 2px 30px rgba(0,0,0,.6); }
+.hero .lead { margin: 4px 0 0; font-size: clamp(18px, 2.2vw, 22px); color: var(--soft); max-width: 38ch; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.facts span { font: 700 14px var(--f-body); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; background: rgba(15,13,11,.85); }
+.facts span b { color: var(--fg); }
+.status::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); margin-right: 8px; vertical-align: 1px; }
+.status.open::before { background: #5fd38a; box-shadow: 0 0 10px #5fd38a; }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 7; font: 700 13px var(--f-body); color: var(--muted); background: rgba(15,13,11,.85); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.redo:hover { color: var(--fg); }
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero.reveal .wrap > :nth-child(2) { animation-delay: .06s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .12s }
+.hero.reveal .wrap > :nth-child(4) { animation-delay: .18s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .24s }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+
+/* ---------- Abschnitte ---------- */
+section.block { padding-block: clamp(64px, 10vw, 104px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 40px; margin-bottom: 30px; }
+.head h2 { font-size: clamp(34px, 5.4vw, 62px); line-height: 1; margin-top: 10px; }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+.note { margin-top: 20px; font-size: 14px; color: var(--muted); padding: 10px 14px; border-left: 3px solid var(--gold); background: var(--bg-2); border-radius: 0 10px 10px 0; }
+
+.price { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 860px) { .price { grid-template-columns: minmax(0,1fr); } }
+.pcard { background: var(--bg-2); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
+.pcard h3 { font-size: 22px; color: var(--gold); margin-bottom: 8px; }
+.pl { list-style: none; margin: 0; padding: 0; }
+.pl li { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: baseline; padding: 11px 0; border-top: 1px solid var(--line); }
+.pl li::after { content: ""; grid-column: 2; grid-row: 1; border-bottom: 1px dotted rgba(244,239,230,.25); transform: translateY(-4px); }
+.pl b { font-weight: 700; } .pl em { font-style: normal; font-weight: 800; color: var(--led); grid-column: 3; }
+.pl .hot { font: 800 10px var(--f-body); letter-spacing: .12em; color: #0f0d0b; background: var(--gold); border-radius: 4px; padding: 2px 6px; margin-left: 8px; vertical-align: 2px; }
+
+.rev { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: 16px; }
+@media (max-width: 860px) { .rev { grid-template-columns: minmax(0,1fr); } }
+.score { background: linear-gradient(160deg, #2a2118, #16120e); border: 1px solid rgba(201,162,74,.35); border-radius: 14px; padding: 28px; display: grid; gap: 6px; align-content: center; }
+.score b { font: 700 clamp(64px, 9vw, 96px)/1 var(--f-display); color: var(--gold); }
+.score span { color: var(--gold); font-size: 24px; letter-spacing: 4px; }
+.score p { margin: 0; color: var(--muted); }
+.quote { background: var(--bg-2); border: 1px solid var(--line); border-radius: 14px; padding: 28px; display: grid; gap: 14px; align-content: center; }
+.quote p { margin: 0; font: 600 clamp(20px, 2.6vw, 28px)/1.35 var(--f-body); }
+.quote small { color: var(--muted); }
+
+.perks { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 860px) { .perks { grid-template-columns: minmax(0,1fr); } }
+.perk { border: 1px solid var(--line); border-radius: 14px; padding: 24px; background: var(--bg-2); display: grid; gap: 8px; }
+.perk svg { width: 40px; height: 40px; }
+.perk h3 { font-size: 20px; }
+.perk p { margin: 0; color: var(--soft); font-size: 15px; }
+
+.visit { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 860px) { .visit { grid-template-columns: minmax(0,1fr); } }
+.map { border-radius: 14px; overflow: hidden; border: 1px solid var(--line); min-height: 320px; }
+.map iframe { width: 100%; height: 100%; min-height: 320px; border: 0; display: block; }
+.card { border: 1px solid var(--line); border-radius: 14px; padding: 26px; background: var(--bg-2); display: grid; gap: 10px; align-content: start; }
+.card h3 { font-size: 22px; } .card p { margin: 0; color: var(--soft); }
+.hours { display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; margin: 0; font-variant-numeric: tabular-nums; }
+.hours dt { color: var(--muted); } .hours dd { margin: 0; color: var(--soft); }
+.hours .today { color: var(--fg); font-weight: 800; }
+
+footer { padding-block: 40px 96px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 800 14px var(--f-body); padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.35); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></symbol>
+</svg>
+<div class="proposal"><span><b>Design proposal</b> for Byres Barbers · not the official website</span><span>Made by <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">Jota Labs</a></span></div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top"><span class="pole" aria-hidden="true"></span>BYRES BARBERS</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENU</button>
+    <nav class="links" id="links">
+      <a href="#prices">Prices</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#visit">Find us</a>
+      <a class="btn" href="https://booksy.com/en-gb/191800_byres-barbers_barber_1630701_glasgow" target="_blank" rel="noopener">Book now</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero pre" id="top">
+  <canvas class="hexbg" id="hexbg" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="kicker">Barbers · Byres Road · West End</div>
+    <h1>BYRES<br>BARBERS</h1>
+    <p class="lead">Sharp fades, clean cuts and proper beard work. Bookings and walk-ins welcome, seven days a week.</p>
+    <div class="ctas"><a class="btn" href="https://booksy.com/en-gb/191800_byres-barbers_barber_1630701_glasgow" target="_blank" rel="noopener">Book now</a><a class="btn ghost" href="#prices">See prices</a></div>
+    <div class="facts"><span class="status" id="statusChip">Open 7 days</span><span><b>★ 5.0</b> · 48 reviews on Booksy</span><span><b>Walk-ins</b> welcome</span></div>
+  </div>
+  <button class="redo" type="button" id="redo" hidden>↻ Lights on again</button>
+</section>
+
+<section class="block" id="prices">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Services</div><h2>Prices</h2></div><p>No surprises. Book online in seconds, or just walk in.</p></div>
+    <div class="price">
+      <div class="pcard"><h3>Cuts</h3><ul class="pl">
+        <li><b>Haircut</b><em>£17</em></li><li><b>Skin fade</b><em>£20</em></li><li><b>Buzz cut</b><em>£20</em></li><li><b>Cut &amp; wash</b><em>£25</em></li><li><b>Kid's haircut</b><em>£13</em></li><li><b>Hair styling</b><em>£10</em></li><li><b>Hair wash</b><em>£10</em></li></ul></div>
+      <div class="pcard"><h3>Beard &amp; combos</h3><ul class="pl">
+        <li><b>Haircut &amp; beard</b><em>£27</em></li><li><b>Skin fade + beard</b><em>£30</em></li><li><b>Beard shaping + trim</b><em>£15</em></li><li><b>Hot towel shave</b><em>£15</em></li><li><b>Nose waxing</b><em>£5</em></li><li><b>Full service</b><em>£35</em></li></ul></div>
+    </div>
+    <p class="note">Prices from your Booksy page. On the final site each service could get its own "Book" button straight into your Booksy calendar.</p>
+  </div>
+</section>
+
+<section class="block" id="reviews" style="padding-top:0">
+  <div class="wrap rev">
+    <div class="score"><div class="kicker">Reviews</div><b>5.0</b><span aria-label="5 out of 5 stars">★★★★★</span><p>48 reviews on Booksy, every one five stars.</p></div>
+    <figure class="quote" style="margin:0"><p>"Bawam is excellent, a very nice person, very friendly, amazing, absolutely fantastic!"</p><small>Jim · Booksy, September 2026</small></figure>
+  </div>
+</section>
+
+<section class="block" style="padding-top:0">
+  <div class="wrap perks">
+    <article class="perk"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 4l14 8v16l-14 8-14-8V12z" fill="none" stroke="#fffcef" stroke-width="2.5"/><path d="M14 20h12M20 14v12" stroke="#c9a24a" stroke-width="2.5"/></svg><h3>Book or walk in</h3><p>Grab a slot on Booksy, or just drop by. We'll fit you in.</p></article>
+    <article class="perk"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="5" y="10" width="30" height="20" rx="3" fill="none" stroke="#fffcef" stroke-width="2.5"/><circle cx="13" cy="20" r="2.5" fill="#c9a24a"/><circle cx="20" cy="20" r="2.5" fill="#c9a24a"/><circle cx="27" cy="20" r="2.5" fill="none" stroke="#c9a24a" stroke-width="1.5"/></svg><h3>Loyalty cards</h3><p>Ask for your loyalty card. Come back, get rewarded.</p></article>
+    <article class="perk"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="14" fill="none" stroke="#fffcef" stroke-width="2.5"/><path d="M20 11v9l6 4" stroke="#c9a24a" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg><h3>Open 7 days</h3><p>Mon–Sat 9am–6:30pm, Sunday 10am–4:30pm.</p></article>
+  </div>
+</section>
+
+<section class="block" id="visit" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Visit us</div><h2>19 Byres Road</h2></div><p>West End, Glasgow G11 5RD.</p></div>
+    <div class="visit">
+      <div class="map"><iframe title="Map: Byres Barbers, 19 Byres Road" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-4.3056%2C55.8680%2C-4.2926%2C55.8738&amp;layer=mapnik&amp;marker=55.87091%2C-4.29912"></iframe></div>
+      <div class="card">
+        <h3>Opening hours</h3>
+        <dl class="hours" id="hours"></dl>
+        <h3 style="margin-top:6px">Address</h3>
+        <p>19 Byres Road, Glasgow G11 5RD</p>
+        <div class="ctas"><a class="btn" href="https://booksy.com/en-gb/191800_byres-barbers_barber_1630701_glasgow" target="_blank" rel="noopener">Book now</a><a class="btn ghost" href="https://www.google.com/maps/search/?api=1&amp;query=Byres%20Barbers%2019%20Byres%20Road%20Glasgow" target="_blank" rel="noopener">Directions ↗</a></div>
+      </div>
+    </div>
+    <p class="note">Hours from your Instagram bio. Holiday hours would show here and on the front page automatically.</p>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>Byres Barbers · 19 Byres Road, Glasgow G11 5RD · Bookings &amp; walk-ins welcome</span><span>Design proposal by Jota Labs · <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">more work</a></span></div></footer>
+
+<a class="like" href="https://wa.me/5491130331893?text=Hi%20Jan%2C%20I%20saw%20the%20website%20proposal%20for%20Byres%20Barbers%20and%20I%27d%20like%20to%20know%20more." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Like it? Let's talk</a>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+
+  /* ---------- Hours + open now (Glasgow) ---------- */
+  const H = { Mon: [540, 1110], Tue: [540, 1110], Wed: [540, 1110], Thu: [540, 1110], Fri: [540, 1110], Sat: [540, 1110], Sun: [600, 990] };
+  const names = { Mon: "Monday", Tue: "Tuesday", Wed: "Wednesday", Thu: "Thursday", Fri: "Friday", Sat: "Saturday", Sun: "Sunday" };
+  const fmt = (m) => { const h = Math.floor(m / 60), mm = m % 60; return (h > 12 ? h - 12 : h) + (mm ? ":" + String(mm).padStart(2, "0") : "") + (h >= 12 ? "pm" : "am"); };
+  function status() {
+    const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/London", weekday: "short", hour: "numeric", minute: "numeric", hour12: false }).formatToParts(new Date());
+    const get = (t) => parts.find((x) => x.type === t).value, wd = get("weekday"), m = (+get("hour") % 24) * 60 + +get("minute"), t = H[wd];
+    $("#hours").innerHTML = Object.keys(H).map((d) => `<dt class="${d === wd ? "today" : ""}">${names[d]}</dt><dd class="${d === wd ? "today" : ""}">${fmt(H[d][0])} – ${fmt(H[d][1])}</dd>`).join("");
+    const open = m >= t[0] && m < t[1], chip = $("#statusChip");
+    chip.classList.toggle("open", open);
+    chip.innerHTML = open ? `<b>Open now</b> · until ${fmt(t[1])}` : m < t[0] ? `Opens today at <b>${fmt(t[0])}</b>` : "Closed now · <b>open 7 days</b>";
+  }
+  status(); setInterval(status, 60000);
+
+  /* ---------- Hintergrund: Waben-LEDs glimmen leise ---------- */
+  const hero = $("#top"), hc = $("#hexbg"), hx = hc.getContext("2d");
+  function hexbg(now) {
+    const dpr = Math.min(2, devicePixelRatio || 1), w = hero.clientWidth, h = hero.clientHeight;
+    if (hc.width !== Math.round(w * dpr) || hc.height !== Math.round(h * dpr)) { hc.width = Math.round(w * dpr); hc.height = Math.round(h * dpr); }
+    hx.setTransform(dpr, 0, 0, dpr, 0, 0); hx.clearRect(0, 0, w, h);
+    const S = Math.max(34, Math.min(w, 900) * .07); hx.lineWidth = 2.5; hx.lineJoin = "round";
+    for (let q = -1; q < w / (S * 1.5) + 1; q++) for (let r = -1; r < h * .55 / (S * 1.732) + 1; r++) { const x = q * S * 1.5, y = r * S * 1.732 + (q % 2 ? S * .866 : 0);
+      const a = .06 + .05 * Math.max(0, Math.sin((now || 0) / 1600 + q * .7 + r * 1.1)) - y / h * .08; if (a <= 0) continue;
+      hx.strokeStyle = `rgba(255,252,239,${a})`; hx.beginPath(); for (let i = 0; i < 6; i++) { const t = i * Math.PI / 3; hx.lineTo(x + Math.cos(t) * S * .9, y + Math.sin(t) * S * .9); } hx.closePath(); hx.stroke(); }
+    if (!reduce) requestAnimationFrame(hexbg);
+  }
+  requestAnimationFrame(hexbg);
+
+  /* ---------- Intro: Hex lights ---------- */
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const tween = (ms, fn, tk, ez = (t) => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2)) => new Promise((res) => { const t0 = performance.now(); const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(ez(k), k); k < 1 ? requestAnimationFrame(step) : res(); }; requestAnimationFrame(step); });
+  const canvas = (parent, cls, z) => { const w = parent.clientWidth, h = parent.clientHeight, dpr = Math.min(2, devicePixelRatio || 1); const c = document.createElement("canvas"); c.className = "fxl " + cls; c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); c.style.cssText = `position:absolute;left:0;top:0;width:${w}px;height:${h}px;z-index:${z};pointer-events:none`; c.setAttribute("aria-hidden", "true"); parent.append(c); const ctx = c.getContext("2d"); ctx.scale(dpr, dpr); return { c, ctx, w, h }; };
+  const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); hero.querySelectorAll(".cover").forEach((n) => (n.style.opacity = "0")); };
+  /* ---------- Hex lights: Waben-LED-Decke schaltet sich Feld für Feld ein, darunter das Ladenschild ---------- */
+  async function hexlights(scr, tk, o = {}) {
+    const { c, ctx, w, h } = canvas(scr, "hex", 5), S = Math.max(30, Math.min(w, h) * .1), lw = Math.max(3, S * .1);
+    const cols = Math.ceil(w / (S * 1.5)) + 2, rows = Math.ceil(h * .62 / (S * 1.732)) + 1, cells = [];
+    for (let q = -1; q < cols; q++) for (let r = -1; r < rows; r++) { const x = q * S * 1.5, y = r * S * 1.732 + (q % 2 ? S * .866 : 0); cells.push({ x, y, d: Math.hypot(x - w / 2, y - h * .05) + Math.random() * S * 2, on: 0 }); }
+    const maxD = Math.max(...cells.map((p) => p.d)); let k0 = 0, sign = 0, flash = 0, bgA = 1;
+    const hexPath = (x, y, s) => { ctx.beginPath(); for (let i = 0; i < 6; i++) { const a = i * Math.PI / 3; ctx.lineTo(x + Math.cos(a) * s, y + Math.sin(a) * s); } ctx.closePath(); };
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h); ctx.globalAlpha = bgA; ctx.fillStyle = o.bg || "#0f0d0b"; ctx.fillRect(0, 0, w, h);
+      const g = ctx.createLinearGradient(0, h * .55, 0, h); g.addColorStop(0, "#1c1712"); g.addColorStop(1, "#2a2118"); ctx.fillStyle = g; ctx.fillRect(0, h * .62, w, h * .38);
+      ctx.strokeStyle = "rgba(90,70,45,.5)"; ctx.lineWidth = 2; for (let i = 0; i < 24; i++) { const x = i * w / 24; ctx.beginPath(); ctx.moveTo(x, h * .62); ctx.lineTo(x, h); ctx.stroke(); }
+      ctx.lineJoin = "round";
+      for (const p of cells) { const on = Math.max(0, Math.min(1, (k0 * maxD * 1.15 - p.d) / (S * 1.5))); const fl = on > 0 && on < 1 ? (Math.sin(p.d + k0 * 80) > 0 ? 1 : .3) : 1; hexPath(p.x, p.y, S * .92);
+        ctx.strokeStyle = on ? `rgba(255,252,240,${on * fl})` : "rgba(80,80,80,.35)"; ctx.lineWidth = lw; ctx.shadowColor = "rgba(255,250,230,.9)"; ctx.shadowBlur = on ? 14 * on : 0; ctx.stroke(); }
+      ctx.shadowBlur = 0;
+      if (sign > 0) { ctx.save(); ctx.globalAlpha = Math.min(1, sign); const sw = Math.min(w * .76, h * .55), sh = sw * .28, sx = w / 2 - sw / 2, sy = h * .68;
+        ctx.fillStyle = "#16120e"; ctx.fillRect(sx, sy, sw, sh); ctx.strokeStyle = o.gold || "#c9a24a"; ctx.lineWidth = 2; ctx.strokeRect(sx + 5, sy + 5, sw - 10, sh - 10);
+        ctx.fillStyle = o.gold || "#c9a24a"; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.font = `700 ${sh * .42}px ${o.family || "Georgia, serif"}`; ctx.fillText(o.label || "BYRES BARBERS", w / 2, sy + sh * .46, sw * .86);
+        if (o.sub) { ctx.font = `600 ${sh * .14}px ${o.ufamily || "system-ui"}`; ctx.fillStyle = "#e9dcc0"; ctx.fillText(o.sub, w / 2, sy + sh * .8, sw * .9); }
+        const px = sx - 16; ctx.save(); ctx.beginPath(); ctx.roundRect(px - 7, sy - 4, 14, sh + 8, 7); ctx.clip(); for (let i = -6; i < 12; i++) { ctx.fillStyle = ["#e0393e", "#f4efe6", "#2f5bd3", "#f4efe6"][((i % 4) + 4) % 4]; ctx.beginPath(); const yy = sy + i * 9 - (performance.now() / 40 % 36); ctx.moveTo(px - 8, yy); ctx.lineTo(px + 8, yy - 8); ctx.lineTo(px + 8, yy + 1); ctx.lineTo(px - 8, yy + 9); ctx.fill(); } ctx.restore();
+        ctx.restore(); }
+      if (flash > 0) { ctx.fillStyle = `rgba(255,252,240,${flash})`; ctx.fillRect(0, 0, w, h); }
+    };
+    let live = true; const loopD = () => { if (!live || tk.cancelled) return; draw(); requestAnimationFrame(loopD); }; requestAnimationFrame(loopD);
+    await sleep(300);
+    await tween(1600, (e, k) => { k0 = k; }, tk, (k) => k);
+    await tween(500, (e) => { sign = e; }, tk);
+    await sleep(o.hold || 1100); if (tk.cancelled) { live = false; return c.remove(); }
+    reveal();
+    await tween(250, (e) => { flash = e * .9; }, tk);
+    await tween(550, (e) => { flash = .9 * (1 - e); bgA = 1 - e; c.style.opacity = 1 - e; }, tk);
+    live = false; c.remove();
+  }
+
+
+
+  const redo = $("#redo");
+  let token = { cancelled: true };
+  async function play() {
+    token.cancelled = true; const tk = (token = { cancelled: false });
+    hero.querySelectorAll(".fxl, .stage").forEach((n) => n.remove());
+    hero.classList.remove("reveal"); hero.classList.add("pre"); redo.hidden = true;
+    const top = Math.max(0, hero.getBoundingClientRect().top), vis = Math.max(320, Math.min(hero.clientHeight, innerHeight - top));
+    const stage = document.createElement("div"); stage.className = "stage"; stage.style.cssText = `position:absolute;left:0;right:0;top:0;height:${hero.clientHeight}px;z-index:5;pointer-events:none;overflow:hidden`; hero.append(stage);
+    const inner = document.createElement("div"); inner.style.cssText = `position:absolute;left:0;right:0;top:0;height:${vis}px`; stage.append(inner);
+    if (vis < hero.clientHeight) { const cv = document.createElement("div"); cv.className = "cover"; cv.style.cssText = `position:absolute;left:0;right:0;top:${vis}px;bottom:0;background:#1c1712;transition:opacity .6s`; stage.append(cv); }
+    await hexlights(inner, tk, { label: "BYRES BARBERS", sub: "BOOKINGS & WALK-INS WELCOME", family: "Cinzel, serif", ufamily: "Manrope, sans-serif" });
+    stage.remove();
+    if (!tk.cancelled) redo.hidden = false;
+  }
+  redo.addEventListener("click", play);
+  if (reduce) hero.classList.remove("pre"); else document.fonts.ready.then(play);
+})();
+</script>
+</body>
+</html>
