@@ -90,8 +90,15 @@ section.block { padding-block: clamp(64px, 10vw, 104px); }
 .head p { max-width: 44ch; margin: 0; color: var(--muted); }
 .note { margin-top: 20px; font-size: 14px; color: var(--muted); padding: 10px 14px; border-left: 3px solid var(--pink); background: var(--bg-2); border-radius: 0 10px 10px 0; }
 
-.svc { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
-@media (max-width: 860px) { .svc { grid-template-columns: minmax(0,1fr); } }
+.svc { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 18px; }
+@media (max-width: 760px) { .svc { grid-template-columns: minmax(0,1fr); } }
+.pl { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 0; }
+.pl li { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 2px 14px; padding: 10px 0; border-top: 1px dashed var(--line); }
+.pl b { font-weight: 700; } .pl small { grid-column: 1; color: var(--muted); font-size: 13px; } .pl em { font-style: normal; font-weight: 700; grid-row: 1; grid-column: 2; }
+.quotes { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; margin-top: 16px; }
+@media (max-width: 860px) { .quotes { grid-template-columns: minmax(0,1fr); } }
+.q { background: var(--bg-2); border: 1px solid var(--line); border-radius: 22px; padding: 22px; display: grid; gap: 10px; align-content: start; }
+.q .st { color: #c9a800; letter-spacing: 3px; } .q p { margin: 0; color: var(--soft); } .q span { font: 700 11px var(--f-pixel); text-transform: uppercase; }
 .card { border: 2px solid var(--fg); border-radius: 22px; padding: 24px; background: var(--bg-2); display: grid; gap: 10px; align-content: start; box-shadow: 6px 6px 0 var(--c, var(--pink)); }
 .card svg { width: 100%; height: 120px; }
 .card h3 { font-size: 22px; }
@@ -150,7 +157,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
       <a href="#team">Team</a>
       <a href="#reviews">Reviews</a>
       <a href="#visit">Find us</a>
-      <a class="btn" href="https://www.instagram.com/chanceandtommys/" target="_blank" rel="noopener">Book now</a>
+      <a class="btn" href="https://www.fresha.com/a/chance-and-tommys-edinburgh-107-brunswick-street-j8l0favh" target="_blank" rel="noopener">Book now</a>
     </nav>
   </div>
 </header>
@@ -161,8 +168,8 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     <div class="kicker">Unisex manicures &amp; waxing · Leith</div>
     <h1><span>chance and</span><span>tommy's</span></h1>
     <p class="lead">An Edinburgh salon that centres around self-care services without gendered expectations. Nails and waxing, ten til eight.</p>
-    <div class="ctas"><a class="btn" href="https://www.instagram.com/chanceandtommys/" target="_blank" rel="noopener">Book now</a><a class="btn ghost" href="#services">Services</a></div>
-    <div class="facts"><span class="status" id="statusChip">Mon–Sat · 10am–8pm</span><span><b>★ 5.0</b> · 87 reviews on Fresha</span></div>
+    <div class="ctas"><a class="btn" href="https://www.fresha.com/a/chance-and-tommys-edinburgh-107-brunswick-street-j8l0favh" target="_blank" rel="noopener">Book now</a><a class="btn ghost" href="#services">Services</a></div>
+    <div class="facts"><span class="status" id="statusChip">Mon–Sat · 10am–8pm</span><span><b>★ 5.0</b> · 147 reviews on Fresha</span></div>
   </div>
   <button class="redo" type="button" id="redo" hidden>↻ Another coat</button>
 </section>
@@ -171,11 +178,12 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   <div class="wrap">
     <div class="head"><div><div class="kicker">What we do</div><h2>Services</h2></div><p>For every hand and every body. Book online in a few taps.</p></div>
     <div class="svc">
-      <article class="card" style="--c:var(--pink)"><svg viewBox="0 0 200 120" aria-hidden="true" id="sv1"></svg><h3>Manicures</h3><p>Tidy, shape and polish, from a clean natural look to long-lasting gel.</p></article>
-      <article class="card" style="--c:var(--mint)"><svg viewBox="0 0 200 120" aria-hidden="true" id="sv2"></svg><h3>Nail art</h3><p>Ombré, chrome, animal print, freehand lines: bring a reference or let us play.</p></article>
-      <article class="card" style="--c:var(--lemon)"><svg viewBox="0 0 200 120" aria-hidden="true" id="sv3"></svg><h3>Waxing</h3><p>Unisex waxing services, quick, clean and judgement-free.</p></article>
+      <article class="card" style="--c:var(--pink)"><svg viewBox="0 0 200 120" aria-hidden="true" id="sv1"></svg><h3>Manicures</h3><p>Thorough cuticle work and shaping, from a bare natural finish to high-shine gel.</p><ul class="pl"><li><b>Bare Manicure</b><em>from £17</em><small>1h – 1h 20 · no colour, optional matte top-coat</small></li><li><b>Gel Polish</b><em>from £29</em><small>1h – 1h 55 · shaping, cuticle care, gel colour</small></li><li><b>Gel Polish with Removal</b><em>from £34</em><small>1h 10 – 2h 10</small></li></ul></article>
+      <article class="card" style="--c:var(--lemon)"><svg viewBox="0 0 200 120" aria-hidden="true" id="sv4"></svg><h3>BIAB</h3><p>Strengthens the natural nail so it can grow longer without breaking.</p><ul class="pl"><li><b>1st Application</b><em>£41 / £46</em><small>clear top-coat / with gel polish</small></li><li><b>Infill</b><em>£43 / £48</em><small>maintenance, clear / with gel polish</small></li><li><b>Removal &amp; Reapplication</b><em>£46 / £51</em><small>clear / with gel polish</small></li></ul></article>
+      <article class="card" style="--c:var(--mint)"><svg viewBox="0 0 200 120" aria-hidden="true" id="sv2"></svg><h3>Nail art</h3><p>Add it to any set: ombré, chrome, animal print, freehand lines.</p><ul class="pl"><li><b>Level One</b><em>£6</em><small>10 – 25 mins</small></li><li><b>Level Two</b><em>£12</em><small>20 – 35 mins</small></li><li><b>Level Three</b><em>£18</em><small>30 mins</small></li></ul></article>
+      <article class="card" style="--c:var(--pink)"><svg viewBox="0 0 200 120" aria-hidden="true" id="sv3"></svg><h3>Waxing</h3><p>Unisex waxing, quick, clean and judgement-free.</p><ul class="pl"><li><b>Male Waxing</b><em>free</em><small>10 mins</small></li><li><b>Female Waxing</b><em>free</em><small>10 mins</small></li></ul></article>
     </div>
-    <p class="note">On the final site, services and prices would come straight from your Fresha menu, with a "Book" button next to each one.</p>
+    <p class="note">Services and prices from your Fresha menu. On the final site each one would get its own "Book" button.</p>
   </div>
 </section>
 
@@ -200,9 +208,10 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 
 <section class="block" id="reviews" style="padding-top:0">
   <div class="wrap rev">
-    <div class="big"><div class="kicker" style="color:#fff">Reviews</div><div class="score">5.0</div><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p>87 reviews on Fresha. Your latest reviews would appear here automatically.</p></div>
+    <div class="big"><div class="kicker" style="color:#fff">Reviews</div><div class="score">5.0</div><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p>147 reviews on Fresha, every one of them five stars. Your latest reviews would appear here automatically.</p></div>
     <div class="collab"><div class="kicker">Collabs</div><h3>Let's make something</h3><p>Brands, shoots, events: get in touch.</p><a class="btn" href="mailto:hello@chanceandtommys.com" style="justify-self:start">hello@chanceandtommys.com</a></div>
   </div>
+  <div class="wrap quotes"><figure class="q" style="margin:0"><div class="st" aria-label="5 stars">★★★★★</div><p>“I absolutely love this salon, always such a relaxed and welcoming vibe. Febae and Gillian always do a 10/10 job with my nails.”</p><span>Louise H · Fresha</span></figure><figure class="q" style="margin:0"><div class="st" aria-label="5 stars">★★★★★</div><p>“Gillian is exceptional! She always takes the time to prep the nails to perfection and her designs and creativity are unbelievable.”</p><span>Rebecca H · Fresha</span></figure><figure class="q" style="margin:0"><div class="st" aria-label="5 stars">★★★★★</div><p>“Freya made me feel so welcome and comfortable, the space is a relaxing spa-like vibe. Highly recommend.”</p><span>Joyce O · Fresha</span></figure></div>
 </section>
 
 <section class="block" id="visit" style="padding-top:0">
@@ -215,10 +224,10 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
         <dl class="hours" id="hours"></dl>
         <h3 style="margin-top:6px">Address</h3>
         <p>107 Brunswick Street, Leith, Edinburgh EH7 5HR</p>
-        <div class="ctas"><a class="btn" href="https://www.instagram.com/chanceandtommys/" target="_blank" rel="noopener">Book now</a><a class="btn ghost" href="https://www.google.com/maps/search/?api=1&amp;query=107%20Brunswick%20Street%20Edinburgh%20EH7%205HR" target="_blank" rel="noopener">Directions ↗</a></div>
+        <div class="ctas"><a class="btn" href="https://www.fresha.com/a/chance-and-tommys-edinburgh-107-brunswick-street-j8l0favh" target="_blank" rel="noopener">Book now</a><a class="btn ghost" href="https://www.google.com/maps/search/?api=1&amp;query=107%20Brunswick%20Street%20Edinburgh%20EH7%205HR" target="_blank" rel="noopener">Directions ↗</a></div>
       </div>
     </div>
-    <p class="note">Hours from your Instagram bio. The "Book now" buttons would go straight to your Fresha booking.</p>
+    <p class="note">Hours from your Instagram bio. Every "Book now" button goes straight to your Fresha booking.</p>
   </div>
 </section>
 
@@ -239,6 +248,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   const shine = (x, y, w, h) => `<ellipse cx="${x - w * .2}" cy="${y - h * .1}" rx="${w * .08}" ry="${h * .28}" fill="#fff" opacity=".55"/>`;
   $("#sv1").innerHTML = `<defs><linearGradient id="bt" x1="0" x2="1"><stop offset="0" stop-color="#d45fae"/><stop offset=".35" stop-color="#ffb3e6"/><stop offset="1" stop-color="#c94fa0"/></linearGradient></defs><ellipse cx="100" cy="110" rx="60" ry="6" fill="rgba(0,0,0,.12)"/><rect x="88" y="6" width="24" height="44" rx="4" fill="#111"/><rect x="92" y="48" width="16" height="8" fill="#333"/><path d="M70 60q0-6 6-6h48q6 0 6 6v42q0 8-8 8H78q-8 0-8-8z" fill="url(#bt)" stroke="#111" stroke-width="2"/><rect x="78" y="64" width="6" height="36" rx="3" fill="#fff" opacity=".5"/><text x="100" y="92" text-anchor="middle" font-family="Silkscreen,monospace" font-size="11" fill="#111">C&amp;T</text>`;
   $("#sv2").innerHTML = `<ellipse cx="100" cy="112" rx="70" ry="6" fill="rgba(0,0,0,.1)"/>` + [[52, 70, "#f7f7f2", "zebra"], [100, 62, "#cfd4da", "chrome"], [148, 70, "#e9e86a", "zig"]].map(([x, y, c, k]) => `<path d="M${x - 22} 112V${y + 6}a22 22 0 0 1 44 0V112z" fill="#e8bda3"/><path d="${nailD(x, y + 14, 26, 34)}" fill="${c}" stroke="#111" stroke-width="1.5"/>${k === "zebra" ? `<path d="M${x - 13} ${y + 4}q8 3 12 0M${x - 13} ${y + 14}q10 3 14 0M${x - 13} ${y + 24}q8 3 11 0M${x + 13} ${y + 9}q-7 2-10 0M${x + 13} ${y + 20}q-8 3-11 0" stroke="#111" stroke-width="3" fill="none" stroke-linecap="round"/>` : k === "zig" ? `<path d="M${x - 7} ${y + 2}l12 5-12 5 12 5-12 5 12 5" stroke="#f08ad0" stroke-width="2.4" fill="none"/>` : `<path d="M${x - 4} ${y}v26" stroke="#fff" stroke-width="4" opacity=".8"/>`}${shine(x, y + 14, 26, 34)}`).join("");
+  $("#sv4").innerHTML = `<defs><linearGradient id="bb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff6c9"/><stop offset="1" stop-color="#e9e86a"/></linearGradient></defs><ellipse cx="100" cy="112" rx="56" ry="6" fill="rgba(0,0,0,.1)"/><rect x="80" y="40" width="40" height="66" rx="8" fill="url(#bb)" stroke="#111" stroke-width="2"/><rect x="86" y="10" width="28" height="32" rx="5" fill="#111"/><rect x="86" y="48" width="6" height="50" rx="3" fill="#fff" opacity=".6"/><text x="100" y="80" text-anchor="middle" font-family="Silkscreen,monospace" font-size="11" fill="#111">BIAB</text>`;
   $("#sv3").innerHTML = `<ellipse cx="100" cy="112" rx="64" ry="6" fill="rgba(0,0,0,.1)"/><g transform="rotate(-8 100 60)"><rect x="34" y="38" width="132" height="46" rx="6" fill="#fbf1e6" stroke="#111" stroke-width="2"/><rect x="34" y="38" width="132" height="46" rx="6" fill="url(#wx)" opacity=".35"/><text x="100" y="66" text-anchor="middle" font-family="Silkscreen,monospace" font-size="12" fill="#111">SMOOTH!</text><path d="M150 38l16 0v16z" fill="#e9e86a" stroke="#111" stroke-width="2" stroke-linejoin="round"/></g><defs><pattern id="wx" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="2" height="6" fill="#e0c8ad"/></pattern></defs>`;
   const S = [["Ombré", (x, y) => `<defs><linearGradient id="om" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6e1630"/><stop offset=".6" stop-color="#e8a0b4"/><stop offset="1" stop-color="#f6d8df"/></linearGradient></defs><path d="${nailD(x, y, 40, 60)}" fill="url(#om)"/>`],
     ["Zebra", (x, y) => `<path d="${nailD(x, y, 40, 60)}" fill="#f7f7f2"/><g clip-path="url(#zc)">${[0, 1, 2, 3, 4].map((i) => `<path d="M${x - 24} ${y - 26 + i * 13}q14 6 20 0" stroke="#111" stroke-width="5" fill="none" stroke-linecap="round"/>`).join("")}</g><clipPath id="zc"><path d="${nailD(x, y, 40, 60)}"/></clipPath>`],
