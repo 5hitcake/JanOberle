@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Fatt Spudz · Design proposal</title>
+<meta name="description" content="A website proposal for Fatt Spudz, fully loaded jacket potatoes on Morningside Road, Edinburgh, by Jota Labs. Not the official website.">
+<meta property="og:title" content="Fatt Spudz · Design proposal">
+<meta property="og:description" content="Fully loaded spudz, 213 Morningside Road. A proposal by Jota Labs.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23121212'/%3E%3Cellipse cx='32' cy='34' rx='22' ry='15' fill='%239a6634'/%3E%3Cellipse cx='32' cy='33' rx='15' ry='8' fill='%23f6dc8c'/%3E%3Cpath d='M20 33l4-4 4 4 4-4 4 4 4-4 4 4' stroke='%23e3201b' stroke-width='2.5' fill='none'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;0,800;1,900&display=swap">
+<style>
+/* Layout: Spud-Rain-Intro (Kartoffeln füllen den Bildschirm, Logo stempelt, alles purzelt weg), treibende Spuds im Hero.
+   Load it up (3 Spuds + Toppings), The viral spud spot (Reels), Find us mit Live-Status.
+   Rot mit weißem Rand auf Schwarz, Orange der Bänke, weiße Fliesen; Rubik. */
+:root {
+  --bg: #121212; --bg-2: #1c1c1c; --line: rgba(255,255,255,.14); --fg: #fff; --soft: #e6e1dc; --muted: #a39d97;
+  --red: #e3201b; --orange: #e8782a; --cheese: #f6c21a; --tile: #f4f2ee;
+  --f: "Rubik", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 17px/1.6 var(--f); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-family: var(--f); font-weight: 900; font-style: italic; text-wrap: balance; text-transform: uppercase; letter-spacing: -.01em; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 800 12px/1.2 var(--f); letter-spacing: .18em; text-transform: uppercase; color: var(--orange); }
+:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+.logo-t { color: var(--red); -webkit-text-stroke: .045em #fff; paint-order: stroke fill; }
+
+.proposal { background: #000; color: #e9ebee; font: 13px/1.4 var(--f); padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; }
+.proposal b { color: #ffd166; } .proposal a { color: #fff; font-weight: 800; }
+
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.logo { text-decoration: none; font: italic 900 26px/1 var(--f); }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 15px; font-weight: 700; color: var(--muted); }
+nav.links a:hover { color: var(--fg); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 800 15px/1 var(--f); padding: 15px 22px; border-radius: 12px; background: var(--red); color: #fff; border: 2px solid var(--red); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(227,32,27,.35); }
+.btn.ghost { background: transparent; border-color: rgba(255,255,255,.4); }
+.btn.ghost:hover { box-shadow: none; border-color: #fff; }
+nav.links a.btn { color: #fff; padding: 10px 16px; font-size: 14px; }
+.menu-btn { display: none; background: transparent; color: var(--fg); border: 1px solid var(--line); border-radius: 10px; padding: 8px 14px; font: 800 12px var(--f); letter-spacing: .08em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bg-2); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+
+/* ---------- Hero ---------- */
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line);
+  background: radial-gradient(60vw 45vw at 100% 0%, rgba(227,32,27,.25), transparent 70%), radial-gradient(70vw 55vw at 0% 110%, rgba(232,120,40,.2), transparent 70%), var(--bg); }
+.drift { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; opacity: .18; }
+.hero .wrap { position: relative; z-index: 1; padding-block: clamp(80px, 12vw, 140px) clamp(56px, 9vw, 104px); display: flex; flex-direction: column; gap: 16px; }
+.hero h1 { font-size: clamp(64px, 14vw, 180px); line-height: .9; }
+.hero .lead { margin: 4px 0 0; font-size: clamp(18px, 2.2vw, 22px); color: var(--soft); max-width: 38ch; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.facts span { font: 700 14px var(--f); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; background: rgba(18,18,18,.8); }
+.facts span b { color: var(--fg); }
+.status::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); margin-right: 8px; vertical-align: 1px; }
+.status.open::before { background: #5fd38a; box-shadow: 0 0 10px #5fd38a; }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 7; font: 700 13px var(--f); color: var(--muted); background: rgba(18,18,18,.85); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.redo:hover { color: var(--fg); }
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero.reveal .wrap > :nth-child(2) { animation-delay: .06s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .12s }
+.hero.reveal .wrap > :nth-child(4) { animation-delay: .18s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .24s }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+
+/* ---------- Abschnitte ---------- */
+section.block { padding-block: clamp(64px, 10vw, 104px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 40px; margin-bottom: 30px; }
+.head h2 { font-size: clamp(38px, 6vw, 72px); line-height: .95; margin-top: 10px; }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+.note { margin-top: 20px; font-size: 14px; color: var(--muted); padding: 10px 14px; border-left: 3px solid var(--red); background: var(--bg-2); border-radius: 0 10px 10px 0; }
+
+.spuds { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 860px) { .spuds { grid-template-columns: minmax(0,1fr); } }
+.sp { background: var(--bg-2); border: 1px solid var(--line); border-radius: 22px; padding: 22px; display: grid; gap: 8px; align-content: start; transition: transform .3s, border-color .3s; }
+.sp:hover { transform: translateY(-3px); border-color: var(--red); }
+.sp svg { width: 100%; height: 170px; }
+.sp h3 { font-size: 26px; }
+.sp p { margin: 0; color: var(--soft); font-size: 15px; }
+.tops { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.tops b { font: italic 900 18px var(--f); text-transform: uppercase; margin-right: 6px; }
+.tops span { font: 700 14px var(--f); padding: 9px 15px; border-radius: 999px; background: var(--bg-2); border: 1px solid var(--line); }
+
+.viral { background: var(--tile); color: #121212; background-image: linear-gradient(rgba(0,0,0,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.06) 1px, transparent 1px); background-size: 48px 24px; }
+.viral .wrap { display: grid; grid-template-columns: minmax(0,1.1fr) minmax(0,1fr); gap: 34px; align-items: center; }
+@media (max-width: 860px) { .viral .wrap { grid-template-columns: minmax(0,1fr); } }
+.viral h2 { font-size: clamp(40px, 6vw, 76px); line-height: .95; }
+.viral p { color: #3a3a3a; margin: 14px 0 0; max-width: 46ch; }
+.viral .kicker { color: var(--red); }
+.phone { justify-self: center; width: min(280px, 80%); aspect-ratio: 9/16; border-radius: 28px; background: #121212; border: 8px solid #121212; box-shadow: 0 24px 50px rgba(0,0,0,.3); position: relative; overflow: hidden; display: grid; place-items: center; }
+.phone svg { width: 100%; height: 100%; }
+.phone .cap { position: absolute; left: 12px; right: 12px; bottom: 16px; color: #fff; font: 800 14px/1.3 var(--f); text-shadow: 0 2px 6px rgba(0,0,0,.6); }
+.phone .play { position: absolute; top: 12px; right: 12px; width: 26px; height: 26px; border-radius: 6px; background: rgba(255,255,255,.9); display: grid; place-items: center; }
+
+.visit { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 860px) { .visit { grid-template-columns: minmax(0,1fr); } }
+.map { border-radius: 22px; overflow: hidden; border: 1px solid var(--line); min-height: 320px; }
+.map iframe { width: 100%; height: 100%; min-height: 320px; border: 0; display: block; }
+.card { border: 1px solid var(--line); border-radius: 22px; padding: 26px; background: var(--bg-2); display: grid; gap: 10px; align-content: start; }
+.card h3 { font-size: 26px; } .card p { margin: 0; color: var(--soft); }
+.hours { display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; margin: 0; font-variant-numeric: tabular-nums; }
+.hours dt { color: var(--muted); } .hours dd { margin: 0; color: var(--soft); }
+.hours .today { color: var(--fg); font-weight: 800; }
+
+footer { padding-block: 40px 96px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 800 14px var(--f); padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.35); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></symbol>
+</svg>
+<div class="proposal"><span><b>Design proposal</b> for Fatt Spudz · not the official website</span><span>Made by <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">Jota Labs</a></span></div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo logo-t" href="#top">FATT SPUDZ</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENU</button>
+    <nav class="links" id="links">
+      <a href="#menu">Menu</a>
+      <a href="#viral">On Instagram</a>
+      <a class="btn" href="#visit">Find us</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero pre" id="top">
+  <canvas class="drift" id="drift" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="kicker">Fully loaded spudz · Morningside</div>
+    <h1 class="logo-t">FATT<br>SPUDZ</h1>
+    <p class="lead">Jacket potatoes, loaded to the max. The viral spud spot in Edinburgh, on Morningside Road.</p>
+    <div class="ctas"><a class="btn" href="#menu">See the menu</a><a class="btn ghost" href="#visit">Find us</a></div>
+    <div class="facts"><span class="status" id="statusChip">Open 7 days</span><span><b>Eat in</b> or take away</span></div>
+  </div>
+  <button class="redo" type="button" id="redo" hidden>↻ More spudz</button>
+</section>
+
+<section class="block" id="menu">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Load it up</div><h2>Pick your spud</h2></div><p>Fluffy jacket potatoes, baked till the skin crackles, then piled high with whatever you fancy.</p></div>
+    <div class="spuds" id="spuds"></div>
+    <div class="spuds" style="margin-top:16px"><article class="sp" style="--x:1"><h3>Build your own</h3><p>Pick your spud, pile on your favourites. We never go light on toppings.</p></article><article class="sp"><h3>Loaded wraps</h3><p>All the good stuff, wrapped up to go. Some say the best wraps in Edinburgh.</p></article><article class="sp"><h3>Milkshakes</h3><p>Thick, cold and topped high. The perfect sidekick to a hot spud.</p></article></div>
+    <div class="tops"><b>Toppings</b><span>Cheese</span><span>Beans</span><span>Chilli chicken</span><span>Curry</span><span>Jalapeños</span><span>Peppers &amp; onions</span><span>Chilli con carne</span><span>Tortilla chips</span><span>Coleslaw</span><span>Spring onion</span><span>Sauces</span></div>
+    <p class="note">Spuds and toppings from your Reels; names and descriptions are examples. On the final site your real menu and prices would go here, easy to update from your phone.</p>
+  </div>
+</section>
+
+<section class="block viral" id="viral">
+  <div class="wrap">
+    <div><div class="kicker">As seen on your feed</div><h2>The viral spud spot in Edinburgh</h2><p>"Get down to Fatt Spudz!" Watch the spuds get loaded, meet the man behind the counter, and see what's new this week.</p><div class="ctas" style="margin-top:20px"><a class="btn" href="https://www.instagram.com/fattspudz/" target="_blank" rel="noopener">Follow on Instagram ↗</a></div></div>
+    <div class="phone" aria-hidden="true"><svg viewBox="0 0 180 320" id="reel"></svg><div class="play"><svg viewBox="0 0 10 10" width="10" height="10"><path d="M2 1l7 4-7 4z" fill="#121212"/></svg></div><div class="cap">POV: you finally visit the viral spud spot in Edinburgh</div></div>
+  </div>
+</section>
+
+<section class="block" id="visit">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Visit us</div><h2>213 Morningside Road</h2></div><p>Edinburgh EH10 4QU.</p></div>
+    <div class="visit">
+      <div class="map"><iframe title="Map: Fatt Spudz, 213 Morningside Road" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-3.2157%2C55.9252%2C-3.2027%2C55.9310&amp;layer=mapnik&amp;marker=55.92812%2C-3.20921"></iframe></div>
+      <div class="card">
+        <h3>Opening hours</h3>
+        <dl class="hours" id="hours"></dl>
+        <h3 style="margin-top:6px">Address</h3>
+        <p>213 Morningside Road, Edinburgh EH10 4QU</p>
+        <div class="ctas"><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Fatt%20Spudz%20213%20Morningside%20Road%20Edinburgh" target="_blank" rel="noopener">Directions ↗</a><a class="btn ghost" href="https://www.instagram.com/fattspudz/" target="_blank" rel="noopener">Instagram ↗</a></div>
+      </div>
+    </div>
+    <p class="note">Hours from your Instagram bio. Holiday hours would show here and on the front page automatically.</p>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>Fatt Spudz · Fully loaded spudz · 213 Morningside Road, Edinburgh</span><span>Design proposal by Jota Labs · <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">more work</a></span></div></footer>
+
+<a class="like" href="https://wa.me/5491130331893?text=Hi%20Jan%2C%20I%20saw%20the%20website%20proposal%20for%20Fatt%20Spudz%20and%20I%27d%20like%20to%20know%20more." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Like it? Let's talk</a>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+
+  /* ---------- Spud-Illustrationen (Draufsicht, Kraftpapier-Schale) ---------- */
+  const rnd = ((s) => () => (s = (s * 9301 + 49297) % 233280) / 233280)(3);
+  const scatter = (n, f) => [...Array(n)].map(() => { const a = rnd() * 6.283, r = Math.sqrt(rnd()); return f(100 + Math.cos(a) * r * 46, 85 + Math.sin(a) * r * 24, (rnd() * 180) | 0); }).join("");
+  const bowl = (top) => `<defs><radialGradient id="skin" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#c8955a"/><stop offset=".7" stop-color="#9a6634"/><stop offset="1" stop-color="#6e4420"/></radialGradient></defs><circle cx="104" cy="90" r="80" fill="rgba(0,0,0,.4)"/><circle cx="100" cy="85" r="80" fill="#c9a27a"/><circle cx="100" cy="85" r="72" fill="#a9835c"/><ellipse cx="100" cy="85" rx="62" ry="40" fill="url(#skin)"/><ellipse cx="100" cy="85" rx="52" ry="28" fill="#f6dc8c"/>${top}`;
+  const cheese = (n) => scatter(n, (x, y, r) => `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="13" height="2" fill="${r % 2 ? "#f6c21a" : "#ffd84a"}" transform="rotate(${r} ${x.toFixed(1)} ${y.toFixed(1)})"/>`);
+  const beans = (n) => scatter(n, (x, y, r) => `<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="4" ry="2.8" fill="#c8481e" transform="rotate(${r} ${x.toFixed(1)} ${y.toFixed(1)})"/>`);
+  const sauceB = scatter(1, () => "") + `<circle cx="100" cy="85" r="0"/>`;
+  const chicken = (n) => scatter(n, (x, y, r) => `<rect x="${(x - 6).toFixed(1)}" y="${(y - 4).toFixed(1)}" width="12" height="8" rx="3" fill="#e07a2a" transform="rotate(${r} ${x.toFixed(1)} ${y.toFixed(1)})"/>`);
+  const jal = (n) => scatter(n, (x, y) => `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4" fill="#c8e6a0" stroke="#3f8f2a" stroke-width="2"/>`);
+  const onion = (n) => scatter(n, (x, y, r) => `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="4" height="2.4" fill="#5fb83a" transform="rotate(${r} ${x.toFixed(1)} ${y.toFixed(1)})"/>`);
+  const zig = (c, a, off = 0) => { let d = ""; for (let i = 0; i <= 12; i++) d += `${i ? "L" : "M"}${52 + i * 8} ${85 + off + (i % 2 ? a : -a)}`; return `<path d="${d}" stroke="${c}" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`; };
+  const curry = `<ellipse cx="100" cy="85" rx="44" ry="22" fill="#d9a03a"/>${scatter(10, (x, y, r) => `<rect x="${(x - 5).toFixed(1)}" y="${(y - 4).toFixed(1)}" width="10" height="8" rx="3" fill="#c87a2a" transform="rotate(${r} ${x.toFixed(1)} ${y.toFixed(1)})"/>`)}`;
+  const S = [
+    ["The Classic", "Cheese and beans, the way it should be. Simple, fat and fully loaded.", `<svg viewBox="0 0 200 175" aria-hidden="true">${bowl(beans(26) + cheese(50))}</svg>`],
+    ["Chilli Chicken", "Crispy chilli chicken, melted cheese, jalapeños and a zig-zag of sauce.", `<svg viewBox="0 0 200 175" aria-hidden="true">${bowl(cheese(30) + chicken(12) + jal(9) + zig("#fff4e0", 9) + zig("#e3201b", 6, 3))}</svg>`],
+    ["Curry Spud", "Chicken curry ladled over a fluffy spud, finished with spring onion.", `<svg viewBox="0 0 200 175" aria-hidden="true">${bowl(curry + onion(30))}</svg>`],
+  ];
+  $("#spuds").innerHTML = S.map(([n, d, svg]) => `<article class="sp">${svg}<h3>${n}</h3><p>${d}</p></article>`).join("");
+  $("#reel").innerHTML = `<rect width="180" height="320" fill="#2a1f1a"/><rect y="0" width="180" height="60" fill="#e3201b" opacity=".85"/><text x="90" y="40" text-anchor="middle" font-family="Rubik" font-style="italic" font-weight="900" font-size="26" fill="#fff">FATT SPUDZ</text><rect y="200" width="180" height="120" fill="#e8782a"/><g transform="translate(-10 70) scale(1)">${bowl(cheese(40) + chicken(10) + jal(7) + zig("#fff4e0", 8))}</g>`;
+
+  /* ---------- Hours + open now (Edinburgh) ---------- */
+  const H = { Mon: [660, 1200], Tue: [660, 1200], Wed: [660, 1200], Thu: [660, 1200], Fri: [660, 1200], Sat: [660, 1200], Sun: [660, 1140] };
+  const names = { Mon: "Monday", Tue: "Tuesday", Wed: "Wednesday", Thu: "Thursday", Fri: "Friday", Sat: "Saturday", Sun: "Sunday" };
+  const fmt = (m) => { const h = Math.floor(m / 60); return (h > 12 ? h - 12 : h) + (h >= 12 ? "pm" : "am"); };
+  function status() {
+    const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/London", weekday: "short", hour: "numeric", minute: "numeric", hour12: false }).formatToParts(new Date());
+    const get = (t) => parts.find((x) => x.type === t).value, wd = get("weekday"), m = (+get("hour") % 24) * 60 + +get("minute"), t = H[wd];
+    $("#hours").innerHTML = Object.keys(H).map((d) => `<dt class="${d === wd ? "today" : ""}">${names[d]}</dt><dd class="${d === wd ? "today" : ""}">${fmt(H[d][0])} – ${fmt(H[d][1])}</dd>`).join("");
+    const open = m >= t[0] && m < t[1], chip = $("#statusChip");
+    chip.classList.toggle("open", open);
+    chip.innerHTML = open ? `<b>Open now</b> · until ${fmt(t[1])}` : m < t[0] ? `Opens today at <b>${fmt(t[0])}</b>` : "Closed now · <b>opens 11am</b>";
+  }
+  status(); setInterval(status, 60000);
+
+  /* ---------- Intro + Hintergrund (Spud Rain) ---------- */
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const tween = (ms, fn, tk, ez = (t) => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2)) => new Promise((res) => { const t0 = performance.now(); const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(ez(k), k); k < 1 ? requestAnimationFrame(step) : res(); }; requestAnimationFrame(step); });
+  const canvas = (parent, cls, z) => { const w = parent.clientWidth, h = parent.clientHeight, dpr = Math.min(2, devicePixelRatio || 1); const c = document.createElement("canvas"); c.className = "fxl " + cls; c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); c.style.cssText = `position:absolute;left:0;top:0;width:${w}px;height:${h}px;z-index:${z};pointer-events:none`; c.setAttribute("aria-hidden", "true"); parent.append(c); const ctx = c.getContext("2d"); ctx.scale(dpr, dpr); return { c, ctx, w, h }; };
+  const hero = $("#top");
+  const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); hero.querySelectorAll(".cover").forEach((n) => (n.style.opacity = "0")); };
+  /* ---------- Fatt Spudz: Logo-Text + Kartoffel ---------- */
+  function fsLogo(ctx, w, h, x, y, a, o, sc = 1) {
+    if (a <= 0) return; ctx.save(); ctx.globalAlpha = Math.min(1, a); ctx.translate(x, y); ctx.scale(sc, sc); ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    const fs = Math.min(w * .15, h * .1); ctx.font = `italic 900 ${fs}px ${o.family || "Impact, sans-serif"}`; ctx.lineJoin = "round";
+    ctx.lineWidth = fs * .14; ctx.strokeStyle = "#fff"; ctx.strokeText("FATT SPUDZ", 0, 0, w * .92); ctx.fillStyle = o.red || "#e3201b"; ctx.fillText("FATT SPUDZ", 0, 0, w * .92);
+    if (o.sub) { ctx.font = `800 ${fs * .24}px ${o.ufamily || "system-ui"}`; ctx.fillStyle = "#fff"; ctx.fillText(o.sub, 0, fs * .82, w * .9); }
+    ctx.restore();
+  }
+  function spud(ctx, x, y, rx, ry, rot, seed = 1) {
+    ctx.save(); ctx.translate(x, y); ctx.rotate(rot);
+    const g = ctx.createRadialGradient(-rx * .3, -ry * .4, 0, 0, 0, rx); g.addColorStop(0, "#c8955a"); g.addColorStop(.7, "#9a6634"); g.addColorStop(1, "#6e4420");
+    ctx.fillStyle = g; ctx.beginPath(); for (let i = 0; i <= 24; i++) { const a = i / 24 * 6.283, q = 1 + .05 * Math.sin(a * 3 + seed); i ? ctx.lineTo(Math.cos(a) * rx * q, Math.sin(a) * ry * q) : ctx.moveTo(Math.cos(a) * rx * q, Math.sin(a) * ry * q); } ctx.fill();
+    ctx.fillStyle = "rgba(70,40,15,.5)"; for (let i = 0; i < 5; i++) { const a = seed * 7 + i * 1.9; ctx.beginPath(); ctx.ellipse(Math.cos(a) * rx * .55, Math.sin(a) * ry * .5, rx * .05, ry * .04, 0, 0, 7); ctx.fill(); }
+    ctx.restore();
+  }
+
+  /* ---------- Spud rain: Kartoffeln regnen und füllen den Bildschirm, Logo, dann rollen sie weg ---------- */
+  async function spudrain(scr, tk, o = {}) {
+    const { c, ctx, w, h } = canvas(scr, "spudrain", 5), S = Math.max(26, Math.min(w, h) * .085);
+    const cols = Math.ceil(w / (S * 1.7)) + 1, rows = Math.ceil(h / (S * 1.15)) + 1, P = [];
+    for (let r = 0; r < rows; r++) for (let q = 0; q < cols; q++) P.push({ tx: q * S * 1.7 + (r % 2) * S * .85 + (Math.random() - .5) * S * .3, ty: h - r * S * 1.15 - S * .5 + (Math.random() - .5) * S * .2, rot: (Math.random() - .5) * 1.2, d: r * cols + Math.random() * cols * .8, seed: Math.random() * 9, vx: (Math.random() - .5) * 8, vy: 0, y: 0 });
+    const N = rows * cols; let fill = 0, logo = 0, out = 0, bgA = 1;
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h); ctx.globalAlpha = bgA; ctx.fillStyle = o.bg || "#121212"; ctx.fillRect(0, 0, w, h); ctx.globalAlpha = 1;
+      for (const p of P) { const k = Math.max(0, Math.min(1, (fill * N * 1.15 - p.d) / (cols * 1.2))); if (!k) continue; const bounce = k < 1 ? 1 - Math.abs(Math.cos(k * Math.PI * 1.5)) * (1 - k) : 1;
+        const y = out ? p.ty + out * out * h * 1.4 * (1 + p.seed / 9) : p.ty - (1 - k) * h * 1.1 + (1 - bounce) * -S * .4; const x = p.tx + out * p.vx * S * .3;
+        spud(ctx, x, y, S, S * .68, p.rot + out * p.vx * .3, p.seed); }
+      if (logo > 0) { ctx.fillStyle = `rgba(0,0,0,${.55 * Math.min(1, logo)})`; ctx.fillRect(0, h * .36, w, h * .24); }
+      fsLogo(ctx, w, h, w / 2, h * .46, logo, o, 1 + (1 - Math.min(1, logo)) * .6);
+    };
+    await tween(1700, (e, k) => { fill = k; draw(); }, tk, (k) => k);
+    await tween(380, (e, k) => { logo = k * 1.5; draw(); }, tk, (k) => k);
+    await sleep(o.hold || 1000); if (tk.cancelled) return c.remove();
+    reveal();
+    await tween(900, (e, k) => { out = k; bgA = 1 - k; logo = 1 - k * 2; draw(); }, tk, (k) => k);
+    c.remove();
+  }
+
+
+
+  const dc = $("#drift"), dx = dc.getContext("2d"); let D = [];
+  function seedD(w, h) { D = Array.from({ length: Math.round(w * h / 45000) + 5 }, () => ({ x: Math.random() * w, y: Math.random() * h, s: 14 + Math.random() * 18, v: .15 + Math.random() * .25, r: Math.random() * 6.28, vr: (Math.random() - .5) * .006, seed: Math.random() * 9 })); }
+  function drift() {
+    const dpr = Math.min(2, devicePixelRatio || 1), w = hero.clientWidth, h = hero.clientHeight;
+    if (dc.width !== Math.round(w * dpr) || dc.height !== Math.round(h * dpr)) { dc.width = Math.round(w * dpr); dc.height = Math.round(h * dpr); seedD(w, h); }
+    dx.setTransform(dpr, 0, 0, dpr, 0, 0); dx.clearRect(0, 0, w, h);
+    for (const p of D) { if (!reduce) { p.y -= p.v; p.r += p.vr; if (p.y < -40) { p.y = h + 40; p.x = Math.random() * w; } } spud(dx, p.x, p.y, p.s, p.s * .68, p.r, p.seed); }
+    if (!reduce) requestAnimationFrame(drift);
+  }
+  requestAnimationFrame(drift);
+
+  const redo = $("#redo");
+  let token = { cancelled: true };
+  async function play() {
+    token.cancelled = true; const tk = (token = { cancelled: false });
+    hero.querySelectorAll(".fxl, .stage").forEach((n) => n.remove());
+    hero.classList.remove("reveal"); hero.classList.add("pre"); redo.hidden = true;
+    const top = Math.max(0, hero.getBoundingClientRect().top), vis = Math.max(320, Math.min(hero.clientHeight, innerHeight - top));
+    const stage = document.createElement("div"); stage.className = "stage"; stage.style.cssText = `position:absolute;left:0;right:0;top:0;height:${hero.clientHeight}px;z-index:5;pointer-events:none;overflow:hidden`; hero.append(stage);
+    const inner = document.createElement("div"); inner.style.cssText = `position:absolute;left:0;right:0;top:0;height:${vis}px`; stage.append(inner);
+    if (vis < hero.clientHeight) { const cv = document.createElement("div"); cv.className = "cover"; cv.style.cssText = `position:absolute;left:0;right:0;top:${vis}px;bottom:0;background:#121212;transition:opacity .6s`; stage.append(cv); }
+    await spudrain(inner, tk, { family: "Rubik, sans-serif", sub: "FULLY LOADED SPUDZ · MORNINGSIDE", ufamily: "Rubik, sans-serif" });
+    stage.remove();
+    if (!tk.cancelled) redo.hidden = false;
+  }
+  redo.addEventListener("click", play);
+  if (reduce) hero.classList.remove("pre"); else document.fonts.ready.then(play);
+})();
+</script>
+</body>
+</html>
