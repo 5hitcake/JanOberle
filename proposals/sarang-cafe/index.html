@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="robots" content="noindex,nofollow">
+<title>Sarang Korean Cafe · Design proposal</title>
+<meta name="description" content="A website proposal for Sarang Korean Cafe, 183 Hope Street, Glasgow, by Jota Labs. Not the official website.">
+<meta property="og:title" content="Sarang Korean Cafe · Design proposal">
+<meta property="og:description" content="Homemade cakes, K-toasts, drinks and kimbap, made with love. A proposal by Jota Labs.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='31' fill='%23fff' stroke='%231f1f1f' stroke-width='2'/%3E%3Cpath d='M32 46s-14-8-14-17a7 7 0 0 1 14-2 7 7 0 0 1 14 2c0 9-14 17-14 17z' fill='%23e0263a'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Brush+Script&family=Nunito:wght@500;700;800&display=swap">
+<style>
+/* Layout: Strawberry-cake-Intro (Torte von oben, Erdbeeren, "사랑" aufgespritzt), schwebende Herzen und Erdbeeren im Hero.
+   Pause-Hinweis (Reopening 6 Nov), Cake ordering (echte Preise + Sorten), Menu, Roasted Grain Latte, Dog friendly, Find us.
+   Rosa wie die Ladenfront, Erdbeer-Rot, Teddy-Braun; Jua + Nanum Brush Script + Nunito. */
+:root {
+  --bg: #fff6f7; --bg-2: #ffffff; --pink: #f9d9df; --pink-2: #f4bfc9; --red: #e0263a; --bear: #b07a4a; --line: rgba(43,34,36,.12);
+  --fg: #2b2224; --soft: #4a3d40; --muted: #8a7378;
+  --f-display: "Jua", system-ui, sans-serif; --f-brush: "Nanum Brush Script", cursive;
+  --f-body: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 17px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-family: var(--f-display); font-weight: 400; text-wrap: balance; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 800 12px/1.2 var(--f-body); letter-spacing: .18em; text-transform: uppercase; color: var(--red); }
+:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+
+.proposal { background: #000; color: #e9ebee; font: 13px/1.4 var(--f-body); padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; }
+.proposal b { color: #ffd166; } .proposal a { color: #fff; font-weight: 800; }
+.notice { background: var(--red); color: #fff; text-align: center; font: 700 15px/1.4 var(--f-body); padding: 10px 16px; }
+.notice b { font-family: var(--f-display); font-weight: 400; font-size: 17px; }
+
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo .mk { width: 44px; height: 44px; border-radius: 50%; border: 2px solid #1f1f1f; background: #fff; display: grid; place-items: center; font: 400 17px/1 var(--f-brush); }
+.logo b { font: 400 21px/1 var(--f-display); }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 15px; font-weight: 700; color: var(--muted); }
+nav.links a:hover { color: var(--fg); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 800 15px/1 var(--f-body); padding: 15px 22px; border-radius: 999px; background: var(--red); color: #fff; border: 2px solid var(--red); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(224,38,58,.25); }
+.btn.ghost { background: #fff; color: var(--fg); border-color: var(--line); }
+.btn.ghost:hover { box-shadow: none; border-color: var(--fg); }
+nav.links a.btn { color: #fff; padding: 10px 16px; font-size: 14px; }
+.menu-btn { display: none; background: #fff; color: var(--fg); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font: 800 12px var(--f-body); letter-spacing: .08em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bg-2); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+
+/* ---------- Hero ---------- */
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line); background: radial-gradient(60vw 45vw at 100% 0%, rgba(224,38,58,.12), transparent 70%), radial-gradient(70vw 55vw at 0% 110%, rgba(176,122,74,.14), transparent 70%), var(--bg); }
+.float { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; opacity: .5; }
+.hero .wrap { position: relative; z-index: 1; padding-block: clamp(80px, 12vw, 140px) clamp(56px, 9vw, 104px); display: flex; flex-direction: column; gap: 14px; }
+.hero .ko { font: 400 clamp(46px, 7vw, 84px)/1 var(--f-brush); color: #1f1f1f; }
+.hero h1 { font-size: clamp(56px, 11vw, 140px); line-height: .95; }
+.hero h1 em { font-style: normal; color: var(--red); }
+.hero .lead { margin: 4px 0 0; font-size: clamp(18px, 2.2vw, 21px); color: var(--soft); max-width: 38ch; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.facts span { font: 700 14px var(--f-body); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; background: rgba(255,255,255,.85); }
+.facts span b { color: var(--fg); }
+.status::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); margin-right: 8px; vertical-align: 1px; }
+.status.open::before { background: #34b05a; box-shadow: 0 0 8px #34b05a; }
+.status.pause::before { background: var(--red); }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 7; font: 700 13px var(--f-body); color: var(--muted); background: rgba(255,255,255,.9); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.redo:hover { color: var(--fg); }
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero.reveal .wrap > :nth-child(2) { animation-delay: .06s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .12s }
+.hero.reveal .wrap > :nth-child(4) { animation-delay: .18s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .24s } .hero.reveal .wrap > :nth-child(6) { animation-delay: .3s }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+
+/* ---------- Abschnitte ---------- */
+section.block { padding-block: clamp(64px, 10vw, 104px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 40px; margin-bottom: 30px; }
+.head h2 { font-size: clamp(40px, 6vw, 70px); line-height: 1; margin-top: 10px; }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+.note { margin-top: 20px; font-size: 14px; color: var(--muted); padding: 10px 14px; border-left: 3px solid var(--red); background: var(--bg-2); border-radius: 0 10px 10px 0; }
+
+.cakes { background: var(--pink); }
+.cakegrid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 18px; align-items: start; }
+@media (max-width: 860px) { .cakegrid { grid-template-columns: minmax(0,1fr); } }
+.card { background: #fff; border-radius: 26px; padding: 26px; display: grid; gap: 12px; align-content: start; box-shadow: 0 10px 30px rgba(180,90,110,.12); }
+.card h3 { font-size: 28px; }
+.card p { margin: 0; color: var(--soft); }
+.sizes { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+.size { border: 2px solid var(--line); border-radius: 20px; padding: 16px; text-align: center; cursor: pointer; background: #fff; font: inherit; color: inherit; }
+.size[aria-pressed="true"] { border-color: var(--red); background: #fff1f3; }
+.size b { display: block; font: 400 34px/1 var(--f-display); color: var(--red); }
+.size span { font-weight: 700; color: var(--muted); }
+.flv { display: flex; flex-wrap: wrap; gap: 8px; }
+.flv button { font: 700 14px var(--f-body); padding: 9px 14px; border-radius: 999px; border: 1px solid var(--line); background: #fff; color: var(--soft); cursor: pointer; }
+.flv button[aria-pressed="true"] { background: var(--red); border-color: var(--red); color: #fff; }
+.summary { background: #fff1f3; border-radius: 16px; padding: 14px 16px; font-weight: 700; }
+.cakeimg { width: 100%; height: auto; display: block; }
+
+.menu { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 960px) { .menu { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 520px) { .menu { grid-template-columns: minmax(0,1fr); } }
+.mi { background: #fff; border: 1px solid var(--line); border-radius: 24px; padding: 22px; display: grid; gap: 8px; align-content: start; }
+.mi svg { width: 100%; height: 110px; }
+.mi h3 { font-size: 24px; } .mi p { margin: 0; color: var(--soft); font-size: 15px; }
+
+.latte { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: 26px; align-items: center; background: #c98f55; color: #2a1a0c; border-radius: 30px; padding: clamp(24px, 4vw, 48px); }
+@media (max-width: 860px) { .latte { grid-template-columns: minmax(0,1fr); } }
+.latte h2 { font-size: clamp(36px, 5vw, 58px); line-height: 1; }
+.latte .kicker { color: #fff4e0; }
+.grains { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.grains span { background: rgba(255,244,224,.6); border-radius: 999px; padding: 6px 12px; font: 700 13px var(--f-body); }
+
+.duo { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 860px) { .duo { grid-template-columns: minmax(0,1fr); } }
+
+.visit { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 860px) { .visit { grid-template-columns: minmax(0,1fr); } }
+.map { border-radius: 26px; overflow: hidden; border: 1px solid var(--line); min-height: 320px; }
+.map iframe { width: 100%; height: 100%; min-height: 320px; border: 0; display: block; }
+.hours { display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; margin: 0; font-variant-numeric: tabular-nums; }
+.hours dt { color: var(--muted); } .hours dd { margin: 0; color: var(--soft); }
+.hours .today { color: var(--fg); font-weight: 800; }
+
+footer { padding-block: 40px 96px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 800 14px var(--f-body); padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.25); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></symbol>
+</svg>
+<div class="proposal"><span><b>Design proposal</b> for Sarang Korean Cafe · not the official website</span><span>Made by <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">Jota Labs</a></span></div>
+<div class="notice" id="notice"><b>Short break</b> · closed 27 September – 5 November · see you again on <b>6 November</b> ♥</div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top"><span class="mk" aria-hidden="true">사랑</span><b>Sarang Cafe</b></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENU</button>
+    <nav class="links" id="links">
+      <a href="#cakes">Cake orders</a>
+      <a href="#menu-sec">Menu</a>
+      <a href="#visit">Find us</a>
+      <a class="btn" href="#cakes">Order a cake</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero pre" id="top">
+  <canvas class="float" id="float" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="kicker">Korean cafe · Hope Street, Glasgow</div>
+    <div class="ko">사랑 카페</div>
+    <h1>Sarang <em>Cafe</em></h1>
+    <p class="lead">Homemade cakes, K-toasts, drinks and kimbap, made with love. Dogs very welcome.</p>
+    <div class="ctas"><a class="btn" href="#cakes">Order a cake</a><a class="btn ghost" href="#visit">Find us</a></div>
+    <div class="facts"><span class="status" id="statusChip">183 Hope Street</span><span><b>Dog friendly</b> 🐾</span></div>
+  </div>
+  <button class="redo" type="button" id="redo" hidden>↻ Another cake</button>
+</section>
+
+<section class="block cakes" id="cakes">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Celebration cakes</div><h2>Order a cake</h2></div><p>Birthdays, anniversaries, or just because. Please order at least 7–10 days in advance.</p></div>
+    <div class="cakegrid">
+      <div class="card">
+        <h3>1 · Pick a size</h3>
+        <div class="sizes" id="sizes"><button class="size" type="button" aria-pressed="true" data-v="15cm · £32"><b>15cm</b><span>£32</span></button><button class="size" type="button" aria-pressed="false" data-v="20cm · £52"><b>20cm</b><span>£52</span></button></div>
+        <h3 style="margin-top:8px">2 · Pick a flavour</h3>
+        <div class="flv" id="flv"></div>
+        <p style="font-size:15px">Or our <b>Basque Burnt Cheesecake</b>, 20cm only, £42.</p>
+        <div class="summary" id="summary"></div>
+        <a class="btn" id="orderBtn" href="https://ig.me/m/sarang_kcafe" target="_blank" rel="noopener" style="justify-self:start">Send my order ↗</a>
+      </div>
+      <div class="card" style="padding:18px"><svg viewBox="0 0 300 260" class="cakeimg" id="cakeArt" aria-hidden="true"></svg><p style="text-align:center;font-family:var(--f-display);font-size:22px;color:var(--red)">Your message, piped by hand</p></div>
+    </div>
+    <p class="note">Sizes, prices and flavours from your "Cake Ordering" post. On the final site this would be a real order form with date picker, so orders don't get lost in DMs.</p>
+  </div>
+</section>
+
+<section class="block" id="menu-sec">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">On the counter</div><h2>Made with love</h2></div><p>Korean comfort food and sweet treats, fresh every day.</p></div>
+    <div class="menu" id="menuGrid"></div>
+    <p class="note">From your bio; descriptions are examples. Your full menu with prices would go here.</p>
+  </div>
+</section>
+
+<section class="block" style="padding-top:0">
+  <div class="wrap">
+    <div class="latte">
+      <svg viewBox="0 0 200 220" aria-hidden="true" style="width:100%;max-width:260px;justify-self:center"><path d="M50 40h100l-10 160H60z" fill="rgba(255,255,255,.35)" stroke="#fff4e0" stroke-width="3"/><path d="M56 90h88l-7 108H63z" fill="#d9b48a"/><path d="M56 90h88l-2 26H58z" fill="#efe0c8"/><rect x="104" y="4" width="8" height="120" rx="3" fill="#2a1a0c" transform="rotate(12 108 64)"/><circle cx="80" cy="150" r="3" fill="#8a5a2c"/><circle cx="110" cy="170" r="3" fill="#8a5a2c"/><circle cx="96" cy="130" r="2.5" fill="#8a5a2c"/></svg>
+      <div><div class="kicker">Special</div><h2>Roasted Grain Latte</h2><p style="margin:12px 0 0;font-weight:700">Nutty &amp; toasty, made with 13 roasted grains:</p><div class="grains"><span>rice</span><span>soy bean</span><span>corn</span><span>barley</span><span>black bean</span><span>black rice</span><span>sesame</span><span>sticky rice</span><span>brown rice</span><span>millet</span><span>millet seed</span><span>adlay</span><span>peanuts</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="visit" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Visit us</div><h2>183 Hope Street</h2></div><p>City centre, Glasgow G2 2UL. Look for the pink corner.</p></div>
+    <div class="visit">
+      <div class="map"><iframe title="Map: Sarang Korean Cafe, 183 Hope Street" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-4.2645%2C55.8600%2C-4.2515%2C55.8658&amp;layer=mapnik&amp;marker=55.86293%2C-4.25804"></iframe></div>
+      <div class="card">
+        <h3>Opening hours</h3>
+        <dl class="hours" id="hours"></dl>
+        <h3 style="margin-top:6px">Address</h3>
+        <p>183 Hope Street, Glasgow G2 2UL</p>
+        <div class="ctas"><a class="btn" href="https://maps.app.goo.gl/wSkDbej5GnCAjc926" target="_blank" rel="noopener">Directions ↗</a><a class="btn ghost" href="https://www.instagram.com/sarang_kcafe/" target="_blank" rel="noopener">Instagram ↗</a></div>
+      </div>
+    </div>
+    <p class="note">Hours from your "opening hours" highlight. Breaks like the one until 5 November would show automatically on the front page and in the hours.</p>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>사랑 카페 Sarang Korean Cafe · 183 Hope Street, Glasgow G2 2UL · made with love</span><span>Design proposal by Jota Labs · <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">more work</a></span></div></footer>
+
+<a class="like" href="https://wa.me/5491130331893?text=Hi%20Jan%2C%20I%20saw%20the%20website%20proposal%20for%20Sarang%20Korean%20Cafe%20and%20I%27d%20like%20to%20know%20more." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Like it? Let's talk</a>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+
+  /* ---------- Kuchenbestellung ---------- */
+  const F = ["Earl Grey Strawberry", "Green Tea Cream", "Black Sesame Cream", "Tiramisu", "Peanut Cream", "Blueberry Cream Cheese", "Lemon Cream Cheese", "Chocolate Oreo", "Red Velvet"];
+  let size = "15cm · £32", flv = F[0];
+  $("#flv").innerHTML = F.map((f, i) => `<button type="button" aria-pressed="${i === 0}">${f}</button>`).join("");
+  const sum = () => { $("#summary").textContent = `${flv} cake · ${size}`; };
+  $("#flv").querySelectorAll("button").forEach((b) => b.addEventListener("click", () => { $("#flv").querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", String(x === b))); flv = b.textContent; sum(); }));
+  $("#sizes").querySelectorAll("button").forEach((b) => b.addEventListener("click", () => { $("#sizes").querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", String(x === b))); size = b.dataset.v; sum(); }));
+  sum();
+
+  /* ---------- Illustrationen ---------- */
+  const berry = (x, y, s, r = 0) => `<g transform="translate(${x} ${y}) rotate(${r}) scale(${s})"><path d="M0 13C12 6 10-10 0-10S-12 6 0 13z" fill="#e0263a"/><ellipse cx="0" cy="-11" rx="7" ry="3" fill="#3f8f3a"/><circle cx="-3" cy="-2" r="1" fill="#ffe08a"/><circle cx="3" cy="2" r="1" fill="#ffe08a"/><circle cx="0" cy="6" r="1" fill="#ffe08a"/></g>`;
+  $("#cakeArt").innerHTML = `<ellipse cx="150" cy="222" rx="120" ry="20" fill="#e8c9a0"/><path d="M50 120v80c0 14 45 24 100 24s100-10 100-24v-80z" fill="#fffaf6"/><path d="M50 160c0 14 45 24 100 24s100-10 100-24" fill="none" stroke="#f4bfc9" stroke-width="10"/><ellipse cx="150" cy="120" rx="100" ry="26" fill="#ffffff"/>${[...Array(16)].map((_, i) => { const a = i / 16 * 6.283; return `<circle cx="${150 + Math.cos(a) * 92}" cy="${120 + Math.sin(a) * 22}" r="7" fill="#fff" stroke="#f3e6e8"/>`; }).join("")}${[...Array(12)].map((_, i) => { const a = (i / 12) * 6.283 + .3; return berry(150 + Math.cos(a) * 90, 117 + Math.sin(a) * 21, .75, Math.cos(a) * 15); }).join("")}<text x="150" y="128" text-anchor="middle" font-family="Nanum Brush Script, cursive" font-size="26" fill="#e0263a">Happy Day ♥</text>`;
+  const sv = (b) => `<svg viewBox="0 0 200 110" aria-hidden="true">${b}</svg>`;
+  const M = [
+    ["Homemade cakes", "Fresh cream, fruit and soft sponge, by the slice or whole.", sv(`<ellipse cx="100" cy="100" rx="70" ry="8" fill="rgba(0,0,0,.08)"/><path d="M50 60L150 40v50H50z" fill="#fffaf6"/><path d="M50 60L150 40l20 10L70 72z" fill="#ffffff" stroke="#f3e6e8"/><path d="M50 72h100" stroke="#f4bfc9" stroke-width="6"/>${berry(110, 42, 1.2)}<path d="M50 60v30h100V40" fill="none" stroke="#f3e6e8"/>`)],
+    ["K-Toasts", "Golden Korean street toast with egg, cabbage and a sweet-savoury sauce.", sv(`<ellipse cx="100" cy="100" rx="70" ry="8" fill="rgba(0,0,0,.08)"/><path d="M40 40q0-16 30-16h60q30 0 30 16v8H40z" fill="#e0a85a"/><rect x="40" y="48" width="120" height="10" fill="#f6c94a"/><rect x="40" y="58" width="120" height="8" fill="#9bcf6a"/><rect x="40" y="66" width="120" height="8" fill="#e85a4a"/><path d="M40 74h120v10q0 10-30 10H70q-30 0-30-10z" fill="#e0a85a"/>`)],
+    ["Kimbap", "Rice and fillings rolled in seaweed, sliced and ready to share.", sv(`<ellipse cx="100" cy="100" rx="70" ry="8" fill="rgba(0,0,0,.08)"/>${[50, 100, 150].map((x) => `<circle cx="${x}" cy="62" r="24" fill="#1f2a22"/><circle cx="${x}" cy="62" r="19" fill="#fbfaf5"/><rect x="${x - 4}" y="50" width="8" height="8" fill="#f6c94a"/><rect x="${x - 11}" y="60" width="7" height="7" fill="#e8792a"/><rect x="${x + 3}" y="61" width="7" height="7" fill="#5aa83a"/><rect x="${x - 3}" y="68" width="7" height="6" fill="#b85a3a"/>`).join("")}`)],
+    ["Drinks", "Lattes, roasted grain lattes and sweet Korean favourites.", sv(`<ellipse cx="100" cy="100" rx="70" ry="8" fill="rgba(0,0,0,.08)"/><path d="M72 22h56l-6 74H78z" fill="rgba(255,255,255,.7)" stroke="#e0c9cf" stroke-width="2"/><path d="M75 50h50l-4 46H79z" fill="#d9b48a"/><path d="M75 50h50l-1 12H76z" fill="#efe0c8"/><rect x="104" y="6" width="6" height="70" rx="2" fill="#e0263a" transform="rotate(10 107 40)"/>`)],
+  ];
+  $("#menuGrid").innerHTML = M.map(([n, d, s]) => `<article class="mi">${s}<h3>${n}</h3><p>${d}</p></article>`).join("");
+
+  /* ---------- Hours + Pause + open now ---------- */
+  const H = { Mon: null, Tue: [630, 1050], Wed: [630, 1050], Thu: [630, 1050], Fri: [630, 1050], Sat: [630, 1080], Sun: [630, 1080] };
+  const names = { Mon: "Monday", Tue: "Tuesday", Wed: "Wednesday", Thu: "Thursday", Fri: "Friday", Sat: "Saturday", Sun: "Sunday" };
+  const fmt = (m) => { const h = Math.floor(m / 60), mm = m % 60; return (h > 12 ? h - 12 : h) + (mm ? ":" + String(mm).padStart(2, "0") : "") + (h >= 12 ? "pm" : "am"); };
+  const REOPEN = "2026-11-06";
+  function status() {
+    const now = new Date(), parts = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/London", weekday: "short", hour: "numeric", minute: "numeric", hour12: false, year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(now);
+    const get = (t) => parts.find((x) => x.type === t).value, wd = get("weekday"), m = (+get("hour") % 24) * 60 + +get("minute"), t = H[wd], iso = `${get("year")}-${get("month")}-${get("day")}`;
+    $("#hours").innerHTML = Object.keys(H).map((d) => `<dt class="${d === wd ? "today" : ""}">${names[d]}</dt><dd class="${d === wd ? "today" : ""}">${H[d] ? fmt(H[d][0]) + " – " + fmt(H[d][1]) : "Closed"}</dd>`).join("");
+    const chip = $("#statusChip"), paused = iso < REOPEN;
+    $("#notice").hidden = !paused;
+    if (paused) { chip.className = "status pause"; chip.innerHTML = "<b>Short break</b> · back on 6 November"; return; }
+    const open = t && m >= t[0] && m < t[1]; chip.className = "status" + (open ? " open" : "");
+    chip.innerHTML = open ? `<b>Open now</b> · until ${fmt(t[1])}` : t && m < t[0] ? `Opens today at <b>${fmt(t[0])}</b>` : "Closed now";
+  }
+  status(); setInterval(status, 60000);
+
+  /* ---------- Hintergrund: Herzen und Erdbeeren schweben ---------- */
+  const hero = $("#top"), fc = $("#float"), fx = fc.getContext("2d"); let P = [];
+  function seedF(w, h) { P = Array.from({ length: Math.round(w * h / 38000) + 6 }, (_, i) => ({ x: Math.random() * w, y: Math.random() * h, s: 8 + Math.random() * 10, v: .15 + Math.random() * .25, a: (Math.random() - .5) * .6, k: i % 3 })); }
+  function floatF(now) {
+    const dpr = Math.min(2, devicePixelRatio || 1), w = hero.clientWidth, h = hero.clientHeight;
+    if (fc.width !== Math.round(w * dpr) || fc.height !== Math.round(h * dpr)) { fc.width = Math.round(w * dpr); fc.height = Math.round(h * dpr); seedF(w, h); }
+    fx.setTransform(dpr, 0, 0, dpr, 0, 0); fx.clearRect(0, 0, w, h);
+    for (const p of P) { if (!reduce) { p.y -= p.v; if (p.y < -20) { p.y = h + 20; p.x = Math.random() * w; } } const x = p.x + Math.sin(((now || 0) / 1500) + p.y / 60) * 8, s = p.s;
+      fx.save(); fx.translate(x, p.y); fx.rotate(p.a);
+      if (p.k === 0) { fx.fillStyle = "rgba(224,38,58,.5)"; fx.beginPath(); fx.moveTo(0, s * .9); fx.bezierCurveTo(-s * 1.2, 0, -s * .6, -s, 0, -s * .3); fx.bezierCurveTo(s * .6, -s, s * 1.2, 0, 0, s * .9); fx.fill(); }
+      else if (p.k === 1) { fx.fillStyle = "rgba(224,38,58,.45)"; fx.beginPath(); fx.moveTo(0, s); fx.bezierCurveTo(s, s * .4, s * .8, -s * .8, 0, -s * .8); fx.bezierCurveTo(-s * .8, -s * .8, -s, s * .4, 0, s); fx.fill(); fx.fillStyle = "rgba(63,143,58,.5)"; fx.beginPath(); fx.ellipse(0, -s * .85, s * .5, s * .2, 0, 0, 7); fx.fill(); }
+      else { fx.fillStyle = "rgba(255,255,255,.9)"; fx.beginPath(); fx.arc(0, 0, s * .4, 0, 7); fx.fill(); }
+      fx.restore(); }
+    if (!reduce) requestAnimationFrame(floatF);
+  }
+  requestAnimationFrame(floatF);
+
+  /* ---------- Intro: Strawberry cake ---------- */
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const tween = (ms, fn, tk, ez = (t) => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2)) => new Promise((res) => { const t0 = performance.now(); const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(ez(k), k); k < 1 ? requestAnimationFrame(step) : res(); }; requestAnimationFrame(step); });
+  const canvas = (parent, cls, z) => { const w = parent.clientWidth, h = parent.clientHeight, dpr = Math.min(2, devicePixelRatio || 1); const c = document.createElement("canvas"); c.className = "fxl " + cls; c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); c.style.cssText = `position:absolute;left:0;top:0;width:${w}px;height:${h}px;z-index:${z};pointer-events:none`; c.setAttribute("aria-hidden", "true"); parent.append(c); const ctx = c.getContext("2d"); ctx.scale(dpr, dpr); return { c, ctx, w, h }; };
+  const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); hero.querySelectorAll(".cover").forEach((n) => (n.style.opacity = "0")); };
+  /* ---------- Strawberry cake: Torte von oben, Erdbeeren rundherum, Schrift wird aufgespritzt ---------- */
+  async function berrycake(scr, tk, o = {}) {
+    const { c, ctx, w, h } = canvas(scr, "berry", 5), cx = w / 2, cy = h * .5, R = Math.min(w * .38, h * .23);
+    const N = 14; let berries = 0, pipe = 0, logo = 0, zoom = 1, bgA = 1, plate = 0;
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h); ctx.globalAlpha = bgA; ctx.fillStyle = o.bg || "#f9d9df"; ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = "rgba(255,255,255,.35)"; for (let i = 0; i < 18; i++) { ctx.beginPath(); ctx.arc((i * 97) % w, (i * 151) % h, 3 + (i % 3), 0, 7); ctx.fill(); } ctx.globalAlpha = 1;
+      ctx.save(); ctx.translate(cx, cy); ctx.scale(zoom * plate, zoom * plate);
+      ctx.fillStyle = "rgba(120,60,70,.15)"; ctx.beginPath(); ctx.arc(R * .05, R * .08, R * 1.18, 0, 7); ctx.fill();
+      ctx.fillStyle = "#d9b98a"; ctx.beginPath(); ctx.arc(0, 0, R * 1.16, 0, 7); ctx.fill();
+      const g = ctx.createRadialGradient(-R * .3, -R * .3, 0, 0, 0, R); g.addColorStop(0, "#ffffff"); g.addColorStop(1, "#f6efe6"); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(0, 0, R, 0, 7); ctx.fill();
+      ctx.strokeStyle = "#fff"; ctx.lineWidth = R * .07; for (let i = 0; i < 36; i++) { const a = i / 36 * 6.283; ctx.beginPath(); ctx.arc(Math.cos(a) * R * .97, Math.sin(a) * R * .97, R * .045, 0, 7); ctx.fillStyle = "#fffaf6"; ctx.fill(); }
+      for (let i = 0; i < N; i++) { const k = Math.max(0, Math.min(1, (berries * (N + 2) - i) / 2)); if (!k) continue; const a = i / N * 6.283 - 1.57, r = R * .8, x = Math.cos(a) * r, y = Math.sin(a) * r - (1 - k) * R * .8;
+        ctx.save(); ctx.translate(x, y); ctx.rotate(a + 1.57); ctx.globalAlpha = k; ctx.fillStyle = "#e0263a"; ctx.beginPath(); ctx.moveTo(0, R * .13); ctx.bezierCurveTo(R * .12, R * .06, R * .1, -R * .1, 0, -R * .1); ctx.bezierCurveTo(-R * .1, -R * .1, -R * .12, R * .06, 0, R * .13); ctx.fill();
+        ctx.fillStyle = "#ffe08a"; for (let s = 0; s < 5; s++) ctx.fillRect(-R * .05 + (s % 3) * R * .04, -R * .03 + Math.floor(s / 3) * R * .06, R * .012, R * .02);
+        ctx.fillStyle = "#3f8f3a"; ctx.beginPath(); ctx.ellipse(0, -R * .11, R * .07, R * .03, 0, 0, 7); ctx.fill(); ctx.restore(); }
+      ctx.globalAlpha = 1;
+      if (pipe > 0) { ctx.save(); ctx.beginPath(); ctx.rect(-R, -R, R * 2 * pipe, R * 2); ctx.clip(); ctx.fillStyle = "#e0263a"; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.font = `700 ${R * .42}px ${o.script || "cursive"}`; ctx.fillText("사랑", 0, -R * .12); ctx.font = `400 ${R * .2}px ${o.family || "system-ui"}`; ctx.fillStyle = "#c25a6a"; ctx.fillText("Sarang", 0, R * .25); ctx.restore(); }
+      ctx.restore();
+      if (logo > 0) { ctx.globalAlpha = Math.min(1, logo); ctx.fillStyle = "#3a2a2c"; ctx.textAlign = "center"; ctx.font = `400 ${Math.min(w * .08, h * .05)}px ${o.family || "system-ui"}`; ctx.fillText("SARANG KOREAN CAFE", cx, h * .14, w * .9); ctx.font = `600 ${Math.min(w * .035, h * .022)}px ${o.ufamily || "system-ui"}`; ctx.fillStyle = "#8a5560"; ctx.fillText("HOMEMADE CAKES · K-TOASTS · KIMBAP", cx, h * .19, w * .9); ctx.globalAlpha = 1; }
+    };
+    await tween(500, (e) => { plate = e; draw(); }, tk, (k) => 1 + 2.5 * Math.pow(k - 1, 3) + 1.5 * Math.pow(k - 1, 2));
+    await tween(1300, (e, k) => { berries = k; draw(); }, tk, (k) => k);
+    await tween(900, (e, k) => { pipe = k; draw(); }, tk, (k) => k);
+    await tween(450, (e) => { logo = e; draw(); }, tk);
+    await sleep(o.hold || 1000); if (tk.cancelled) return c.remove();
+    reveal();
+    await tween(800, (e) => { zoom = 1 + e * 2; bgA = 1 - e; logo = 1 - e * 2; c.style.opacity = 1 - e; draw(); }, tk);
+    c.remove();
+  }
+
+
+
+  const redo = $("#redo");
+  let token = { cancelled: true };
+  async function play() {
+    token.cancelled = true; const tk = (token = { cancelled: false });
+    hero.querySelectorAll(".fxl, .stage").forEach((n) => n.remove());
+    hero.classList.remove("reveal"); hero.classList.add("pre"); redo.hidden = true;
+    const top = Math.max(0, hero.getBoundingClientRect().top), vis = Math.max(320, Math.min(hero.clientHeight, innerHeight - top));
+    const stage = document.createElement("div"); stage.className = "stage"; stage.style.cssText = `position:absolute;left:0;right:0;top:0;height:${hero.clientHeight}px;z-index:5;pointer-events:none;overflow:hidden`; hero.append(stage);
+    const inner = document.createElement("div"); inner.style.cssText = `position:absolute;left:0;right:0;top:0;height:${vis}px`; stage.append(inner);
+    if (vis < hero.clientHeight) { const cv = document.createElement("div"); cv.className = "cover"; cv.style.cssText = `position:absolute;left:0;right:0;top:${vis}px;bottom:0;background:#f9d9df;transition:opacity .6s`; stage.append(cv); }
+    await berrycake(inner, tk, { family: "Jua, sans-serif", script: '"Nanum Brush Script", cursive', ufamily: "Nunito, sans-serif" });
+    stage.remove();
+    if (!tk.cancelled) redo.hidden = false;
+  }
+  redo.addEventListener("click", play);
+  if (reduce) hero.classList.remove("pre"); else document.fonts.ready.then(play);
+})();
+</script>
+</body>
+</html>
