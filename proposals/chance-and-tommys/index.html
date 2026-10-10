@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Chance and Tommy's · Design proposal</title>
+<meta name="description" content="A website proposal for Chance and Tommy's, unisex manicures and waxing on Brunswick Street, Leith, by Jota Labs. Not the official website.">
+<meta property="og:title" content="Chance and Tommy's · Design proposal">
+<meta property="og:description" content="Unisex manicures & waxing, 107 Brunswick Street, Leith. A proposal by Jota Labs.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='31' fill='%23fff' stroke='%23111' stroke-width='2'/%3E%3Cpath d='M24 46V26q0-10 8-12 8 2 8 12v20z' fill='%23f08ad0'/%3E%3Cellipse cx='29' cy='26' rx='2' ry='6' fill='%23fff' opacity='.7'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Space+Grotesk:wght@400;500;700&display=swap">
+<style>
+/* Layout: Polish-Intro (Pinsel streicht Pink/Mint/Gelb, Logo, Bahnen ziehen ab), schwebende Nägel im Hero.
+   Services, Recent sets, Team (gilly, febae, jen), Reviews, Collabs, Find us mit Live-Status.
+   Schwarz-Weiß + Highlight-Farben; Silkscreen (Pixel) + Space Grotesk. */
+:root {
+  --bg: #f7f5f2; --bg-2: #ffffff; --line: rgba(17,17,17,.14); --fg: #111; --soft: #333; --muted: #6b6b6b;
+  --pink: #f08ad0; --mint: #63d3c4; --lemon: #e9e86a;
+  --f-pixel: "Silkscreen", ui-monospace, monospace;
+  --f-body: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 17px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-family: var(--f-pixel); font-weight: 700; text-wrap: balance; text-transform: uppercase; letter-spacing: .02em; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 700 12px/1.2 var(--f-body); letter-spacing: .18em; text-transform: uppercase; color: var(--fg); }
+.kicker::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--pink); margin-right: 8px; vertical-align: -1px; }
+:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+
+.proposal { background: #000; color: #e9ebee; font: 13px/1.4 var(--f-body); padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; }
+.proposal b { color: #ffd166; }
+.proposal a { color: #fff; font-weight: 700; }
+
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo .mk { width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--fg); background: #fff; display: grid; place-items: center; font: 700 8px/1.05 var(--f-pixel); text-align: center; }
+.logo b { font: 700 16px/1 var(--f-pixel); text-transform: uppercase; }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 15px; font-weight: 500; color: var(--muted); }
+nav.links a:hover { color: var(--fg); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 700 15px/1 var(--f-body); padding: 15px 22px; border-radius: 999px; background: var(--fg); color: #fff; border: 2px solid var(--fg); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 4px 4px 0 var(--pink); }
+.btn.ghost { background: transparent; color: var(--fg); }
+.btn.ghost:hover { box-shadow: 4px 4px 0 var(--mint); }
+nav.links a.btn { color: #fff; padding: 10px 16px; font-size: 14px; }
+.menu-btn { display: none; background: transparent; color: var(--fg); border: 2px solid var(--fg); border-radius: 999px; padding: 8px 14px; font: 700 11px var(--f-pixel); }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bg-2); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+
+/* ---------- Hero ---------- */
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line);
+  background: radial-gradient(55vw 40vw at 100% 0%, rgba(240,138,208,.22), transparent 70%), radial-gradient(60vw 45vw at 0% 110%, rgba(99,211,196,.22), transparent 70%), var(--bg); }
+.nails { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; opacity: .3; }
+.hero .wrap { position: relative; z-index: 1; padding-block: clamp(80px, 12vw, 140px) clamp(56px, 9vw, 104px); display: flex; flex-direction: column; gap: 16px; }
+.hero h1 { font-size: clamp(44px, 9vw, 120px); line-height: .95; letter-spacing: 0; }
+.hero h1 span { display: block; }
+.hero .lead { margin: 4px 0 0; font-size: clamp(18px, 2.2vw, 22px); color: var(--soft); max-width: 38ch; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.facts span { font: 500 14px var(--f-body); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; background: rgba(255,255,255,.85); }
+.facts span b { color: var(--fg); }
+.status::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); margin-right: 8px; vertical-align: 1px; }
+.status.open::before { background: #22b35e; box-shadow: 0 0 8px #22b35e; }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 7; font: 500 13px var(--f-body); color: var(--muted); background: rgba(255,255,255,.9); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.redo:hover { color: var(--fg); }
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero.reveal .wrap > :nth-child(2) { animation-delay: .06s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .12s }
+.hero.reveal .wrap > :nth-child(4) { animation-delay: .18s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .24s }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+
+/* ---------- Abschnitte ---------- */
+section.block { padding-block: clamp(64px, 10vw, 104px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 40px; margin-bottom: 30px; }
+.head h2 { font-size: clamp(30px, 5vw, 58px); line-height: 1.05; margin-top: 12px; }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+.note { margin-top: 20px; font-size: 14px; color: var(--muted); padding: 10px 14px; border-left: 3px solid var(--pink); background: var(--bg-2); border-radius: 0 10px 10px 0; }
+
+.svc { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 860px) { .svc { grid-template-columns: minmax(0,1fr); } }
+.card { border: 2px solid var(--fg); border-radius: 22px; padding: 24px; background: var(--bg-2); display: grid; gap: 10px; align-content: start; box-shadow: 6px 6px 0 var(--c, var(--pink)); }
+.card svg { width: 100%; height: 120px; }
+.card h3 { font-size: 22px; }
+.card p { margin: 0; color: var(--soft); }
+.card ul { margin: 0; padding-left: 18px; color: var(--soft); }
+
+.sets { display: grid; grid-template-columns: repeat(6, minmax(0,1fr)); gap: 12px; }
+@media (max-width: 860px) { .sets { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+.set { background: var(--bg-2); border: 1px solid var(--line); border-radius: 18px; padding: 14px 10px 12px; text-align: center; }
+.set svg { width: 100%; height: 110px; }
+.set span { display: block; font: 700 11px var(--f-pixel); text-transform: uppercase; margin-top: 6px; }
+
+.team { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 760px) { .team { grid-template-columns: minmax(0,1fr); } }
+.tm { border: 1px solid var(--line); border-radius: 22px; background: var(--bg-2); padding: 24px; display: grid; justify-items: center; gap: 12px; text-align: center; }
+.tm .ring { width: 130px; height: 130px; border-radius: 50%; border: 2px solid var(--fg); background: #fff; display: grid; place-items: center; font: 700 13px/1.15 var(--f-pixel); text-transform: uppercase; }
+.tm h3 { font-size: 22px; }
+.tm p { margin: 0; color: var(--muted); font-size: 15px; }
+
+.rev { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 760px) { .rev { grid-template-columns: minmax(0,1fr); } }
+.big { background: var(--fg); color: #fff; border-radius: 22px; padding: clamp(26px, 4vw, 40px); display: grid; gap: 8px; align-content: center; }
+.big .score { font: 700 clamp(56px, 9vw, 96px)/1 var(--f-pixel); color: var(--lemon); }
+.big .stars { color: var(--lemon); font-size: 26px; letter-spacing: 4px; }
+.big p { margin: 0; color: #d6d6d6; }
+.collab { background: var(--mint); border-radius: 22px; padding: clamp(26px, 4vw, 40px); display: grid; gap: 10px; align-content: center; border: 2px solid var(--fg); }
+.collab h3 { font-size: clamp(22px, 3vw, 30px); }
+.collab p { margin: 0; color: #12322e; }
+
+.visit { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 860px) { .visit { grid-template-columns: minmax(0,1fr); } }
+.map { border-radius: 22px; overflow: hidden; border: 2px solid var(--fg); min-height: 320px; }
+.map iframe { width: 100%; height: 100%; min-height: 320px; border: 0; display: block; }
+.hours { display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; margin: 0; font-variant-numeric: tabular-nums; }
+.hours dt { color: var(--muted); } .hours dd { margin: 0; color: var(--soft); }
+.hours .today { color: var(--fg); font-weight: 700; }
+
+footer { padding-block: 40px 96px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 700 14px var(--f-body); padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.3); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></symbol>
+</svg>
+<div class="proposal"><span><b>Design proposal</b> for Chance and Tommy's · not the official website</span><span>Made by <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">Jota Labs</a></span></div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top"><span class="mk" aria-hidden="true">C&amp;T</span><b>chance and tommy's</b></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENU</button>
+    <nav class="links" id="links">
+      <a href="#services">Services</a>
+      <a href="#team">Team</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#visit">Find us</a>
+      <a class="btn" href="https://www.instagram.com/chanceandtommys/" target="_blank" rel="noopener">Book now</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero pre" id="top">
+  <canvas class="nails" id="nails" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="kicker">Unisex manicures &amp; waxing · Leith</div>
+    <h1><span>chance and</span><span>tommy's</span></h1>
+    <p class="lead">Nail art and waxing for everyone, without gendered expectations. On Brunswick Street, ten til eight.</p>
+    <div class="ctas"><a class="btn" href="https://www.instagram.com/chanceandtommys/" target="_blank" rel="noopener">Book now</a><a class="btn ghost" href="#services">Services</a></div>
+    <div class="facts"><span class="status" id="statusChip">Mon–Sat · 10am–8pm</span><span><b>★ 5.0</b> · 87 reviews on Fresha</span></div>
+  </div>
+  <button class="redo" type="button" id="redo" hidden>↻ Another coat</button>
+</section>
+
+<section class="block" id="services">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">What we do</div><h2>Services</h2></div><p>For every hand and every body. Book online in a few taps.</p></div>
+    <div class="svc">
+      <article class="card" style="--c:var(--pink)"><svg viewBox="0 0 200 120" aria-hidden="true" id="sv1"></svg><h3>Manicures</h3><p>Tidy, shape and polish, from a clean natural look to long-lasting gel.</p></article>
+      <article class="card" style="--c:var(--mint)"><svg viewBox="0 0 200 120" aria-hidden="true" id="sv2"></svg><h3>Nail art</h3><p>Ombré, chrome, animal print, freehand lines: bring a reference or let us play.</p></article>
+      <article class="card" style="--c:var(--lemon)"><svg viewBox="0 0 200 120" aria-hidden="true" id="sv3"></svg><h3>Waxing</h3><p>Unisex waxing services, quick, clean and judgement-free.</p></article>
+    </div>
+    <p class="note">On the final site, services and prices would come straight from your Fresha menu, with a "Book" button next to each one.</p>
+  </div>
+</section>
+
+<section class="block" id="sets" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Fresh off the table</div><h2>Recent sets</h2></div><p>A few looks from the feed. The final site would show your own photos.</p></div>
+    <div class="sets" id="setsGrid"></div>
+  </div>
+</section>
+
+<section class="block" id="team" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Who's who</div><h2>The team</h2></div><p>Pick your favourite and book straight into their chair.</p></div>
+    <div class="team">
+      <article class="tm"><div class="ring" style="color:#2bb3a2">chance<br>and<br>tommy's<br>gilly</div><h3>Gilly</h3><p>Book with Gilly</p></article>
+      <article class="tm"><div class="ring" style="color:#b9b82c">chance<br>and<br>tommy's<br>febae</div><h3>Febae</h3><p>Book with Febae</p></article>
+      <article class="tm"><div class="ring" style="color:#e05cb8">chance<br>and<br>tommy's<br>jen</div><h3>Jen</h3><p>Book with Jen</p></article>
+    </div>
+    <p class="note">Names from your highlights. Each card could have a photo, a short intro and a link to that person's Fresha calendar.</p>
+  </div>
+</section>
+
+<section class="block" id="reviews" style="padding-top:0">
+  <div class="wrap rev">
+    <div class="big"><div class="kicker" style="color:#fff">Reviews</div><div class="score">5.0</div><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p>87 reviews on Fresha. Your latest reviews would appear here automatically.</p></div>
+    <div class="collab"><div class="kicker">Collabs</div><h3>Let's make something</h3><p>Brands, shoots, events: get in touch.</p><a class="btn" href="mailto:hello@chanceandtommys.com" style="justify-self:start">hello@chanceandtommys.com</a></div>
+  </div>
+</section>
+
+<section class="block" id="visit" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Visit us</div><h2>107 Brunswick St</h2></div><p>Leith, Edinburgh EH7 5HR.</p></div>
+    <div class="visit">
+      <div class="map"><iframe title="Map: Chance and Tommy's, 107 Brunswick Street" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-3.1872%2C55.9580%2C-3.1742%2C55.9638&amp;layer=mapnik&amp;marker=55.96095%2C-3.18067"></iframe></div>
+      <div class="card" style="--c:var(--mint)">
+        <h3>Opening hours</h3>
+        <dl class="hours" id="hours"></dl>
+        <h3 style="margin-top:6px">Address</h3>
+        <p>107 Brunswick Street, Leith, Edinburgh EH7 5HR</p>
+        <div class="ctas"><a class="btn" href="https://www.instagram.com/chanceandtommys/" target="_blank" rel="noopener">Book now</a><a class="btn ghost" href="https://www.google.com/maps/search/?api=1&amp;query=107%20Brunswick%20Street%20Edinburgh%20EH7%205HR" target="_blank" rel="noopener">Directions ↗</a></div>
+      </div>
+    </div>
+    <p class="note">Hours from your Instagram bio. The "Book now" buttons would go straight to your Fresha booking.</p>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>Chance and Tommy's · Unisex manicures &amp; waxing · 107 Brunswick Street, Leith</span><span>Design proposal by Jota Labs · <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">more work</a></span></div></footer>
+
+<a class="like" href="https://wa.me/5491130331893?text=Hi%20Jan%2C%20I%20saw%20the%20website%20proposal%20for%20Chance%20and%20Tommy%27s%20and%20I%27d%20like%20to%20know%20more." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Like it? Let's talk</a>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+
+  /* ---------- Illustrationen ---------- */
+  const nailD = (x, y, w, h) => `M${x - w / 2} ${y + h / 2}V${y - h * .1}C${x - w / 2} ${y - h * .55} ${x - w * .2} ${y - h / 2 - w * .25} ${x} ${y - h / 2 - w * .3}C${x + w * .2} ${y - h / 2 - w * .25} ${x + w / 2} ${y - h * .55} ${x + w / 2} ${y - h * .1}V${y + h / 2}Z`;
+  const shine = (x, y, w, h) => `<ellipse cx="${x - w * .2}" cy="${y - h * .1}" rx="${w * .08}" ry="${h * .28}" fill="#fff" opacity=".55"/>`;
+  $("#sv1").innerHTML = `<defs><linearGradient id="bt" x1="0" x2="1"><stop offset="0" stop-color="#d45fae"/><stop offset=".35" stop-color="#ffb3e6"/><stop offset="1" stop-color="#c94fa0"/></linearGradient></defs><ellipse cx="100" cy="110" rx="60" ry="6" fill="rgba(0,0,0,.12)"/><rect x="88" y="6" width="24" height="44" rx="4" fill="#111"/><rect x="92" y="48" width="16" height="8" fill="#333"/><path d="M70 60q0-6 6-6h48q6 0 6 6v42q0 8-8 8H78q-8 0-8-8z" fill="url(#bt)" stroke="#111" stroke-width="2"/><rect x="78" y="64" width="6" height="36" rx="3" fill="#fff" opacity=".5"/><text x="100" y="92" text-anchor="middle" font-family="Silkscreen,monospace" font-size="11" fill="#111">C&amp;T</text>`;
+  $("#sv2").innerHTML = `<ellipse cx="100" cy="112" rx="70" ry="6" fill="rgba(0,0,0,.1)"/>` + [[52, 70, "#f7f7f2", "zebra"], [100, 62, "#cfd4da", "chrome"], [148, 70, "#e9e86a", "zig"]].map(([x, y, c, k]) => `<path d="M${x - 22} 112V${y + 6}a22 22 0 0 1 44 0V112z" fill="#e8bda3"/><path d="${nailD(x, y + 14, 26, 34)}" fill="${c}" stroke="#111" stroke-width="1.5"/>${k === "zebra" ? `<path d="M${x - 13} ${y + 4}q8 3 12 0M${x - 13} ${y + 14}q10 3 14 0M${x - 13} ${y + 24}q8 3 11 0M${x + 13} ${y + 9}q-7 2-10 0M${x + 13} ${y + 20}q-8 3-11 0" stroke="#111" stroke-width="3" fill="none" stroke-linecap="round"/>` : k === "zig" ? `<path d="M${x - 7} ${y + 2}l12 5-12 5 12 5-12 5 12 5" stroke="#f08ad0" stroke-width="2.4" fill="none"/>` : `<path d="M${x - 4} ${y}v26" stroke="#fff" stroke-width="4" opacity=".8"/>`}${shine(x, y + 14, 26, 34)}`).join("");
+  $("#sv3").innerHTML = `<ellipse cx="100" cy="112" rx="64" ry="6" fill="rgba(0,0,0,.1)"/><g transform="rotate(-8 100 60)"><rect x="34" y="38" width="132" height="46" rx="6" fill="#fbf1e6" stroke="#111" stroke-width="2"/><rect x="34" y="38" width="132" height="46" rx="6" fill="url(#wx)" opacity=".35"/><text x="100" y="66" text-anchor="middle" font-family="Silkscreen,monospace" font-size="12" fill="#111">SMOOTH!</text><path d="M150 38l16 0v16z" fill="#e9e86a" stroke="#111" stroke-width="2" stroke-linejoin="round"/></g><defs><pattern id="wx" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="2" height="6" fill="#e0c8ad"/></pattern></defs>`;
+  const S = [["Ombré", (x, y) => `<defs><linearGradient id="om" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6e1630"/><stop offset=".6" stop-color="#e8a0b4"/><stop offset="1" stop-color="#f6d8df"/></linearGradient></defs><path d="${nailD(x, y, 40, 60)}" fill="url(#om)"/>`],
+    ["Zebra", (x, y) => `<path d="${nailD(x, y, 40, 60)}" fill="#f7f7f2"/><g clip-path="url(#zc)">${[0, 1, 2, 3, 4].map((i) => `<path d="M${x - 24} ${y - 26 + i * 13}q14 6 20 0" stroke="#111" stroke-width="5" fill="none" stroke-linecap="round"/>`).join("")}</g><clipPath id="zc"><path d="${nailD(x, y, 40, 60)}"/></clipPath>`],
+    ["Chrome", (x, y) => `<defs><linearGradient id="cr" x1="0" x2="1"><stop offset="0" stop-color="#6c727a"/><stop offset=".35" stop-color="#f4f6f8"/><stop offset=".6" stop-color="#9aa1aa"/><stop offset="1" stop-color="#e4e7ea"/></linearGradient></defs><path d="${nailD(x, y, 40, 60)}" fill="url(#cr)"/>`],
+    ["Lemon zig", (x, y) => `<path d="${nailD(x, y, 40, 60)}" fill="#e9e86a"/><path d="M${x - 10} ${y - 22}l20 8-20 8 20 8-20 8 20 8" stroke="#f08ad0" stroke-width="3.5" fill="none"/>`],
+    ["Mint tip", (x, y) => `<path d="${nailD(x, y, 40, 60)}" fill="#f3e6dc"/><clipPath id="mc"><path d="${nailD(x, y, 40, 60)}"/></clipPath><ellipse cx="${x}" cy="${y - 32}" rx="26" ry="16" fill="#63d3c4" clip-path="url(#mc)"/>`],
+    ["Dots", (x, y) => `<path d="${nailD(x, y, 40, 60)}" fill="#111"/>${[[-8, -18, "#f08ad0"], [7, -8, "#63d3c4"], [-6, 4, "#e9e86a"], [8, 16, "#fff"], [-7, 22, "#f08ad0"]].map(([dx, dy, c]) => `<circle cx="${x + dx}" cy="${y + dy}" r="4.5" fill="${c}"/>`).join("")}`]];
+  $("#setsGrid").innerHTML = S.map(([n, f]) => `<div class="set"><svg viewBox="0 0 100 110" aria-hidden="true"><path d="M26 110V44a24 24 0 0 1 48 0v66z" fill="#e8bda3"/>${f(50, 58)}<path d="${nailD(50, 58, 40, 60)}" fill="none" stroke="rgba(0,0,0,.25)" stroke-width="1"/>${shine(50, 58, 40, 60)}</svg><span>${n}</span></div>`).join("");
+
+  /* ---------- Hours + open now (Edinburgh) ---------- */
+  const H = { Mon: [600, 1200], Tue: [600, 1200], Wed: [600, 1200], Thu: [600, 1200], Fri: [600, 1200], Sat: [600, 1200], Sun: null };
+  const names = { Mon: "Monday", Tue: "Tuesday", Wed: "Wednesday", Thu: "Thursday", Fri: "Friday", Sat: "Saturday", Sun: "Sunday" };
+  const fmt = (m) => { const h = Math.floor(m / 60); return (h > 12 ? h - 12 : h) + (h >= 12 ? "pm" : "am"); };
+  function status() {
+    const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/London", weekday: "short", hour: "numeric", minute: "numeric", hour12: false }).formatToParts(new Date());
+    const get = (t) => parts.find((x) => x.type === t).value, wd = get("weekday"), m = (+get("hour") % 24) * 60 + +get("minute"), t = H[wd];
+    $("#hours").innerHTML = Object.keys(H).map((d) => `<dt class="${d === wd ? "today" : ""}">${names[d]}</dt><dd class="${d === wd ? "today" : ""}">${H[d] ? fmt(H[d][0]) + " – " + fmt(H[d][1]) : "Closed"}</dd>`).join("");
+    const open = t && m >= t[0] && m < t[1], chip = $("#statusChip");
+    chip.classList.toggle("open", !!open);
+    chip.innerHTML = open ? `<b>Open now</b> · until ${fmt(t[1])}` : t && m < t[0] ? `Opens today at <b>${fmt(t[0])}</b>` : "Closed now · <b>Mon–Sat 10–8</b>";
+  }
+  status(); setInterval(status, 60000);
+
+  /* ---------- Hintergrund: Nägel in den Highlight-Farben schweben ---------- */
+  const hero = $("#top"), nc = $("#nails"), nx = nc.getContext("2d"); let P = [];
+  const cols = ["#f08ad0", "#63d3c4", "#e9e86a"];
+  function seedN(w, h) { P = Array.from({ length: Math.round(w * h / 32000) + 6 }, () => ({ x: Math.random() * w, y: Math.random() * h, s: 10 + Math.random() * 16, v: .1 + Math.random() * .25, a: (Math.random() - .5) * 1.2, r: (Math.random() - .5) * .003, c: cols[(Math.random() * 3) | 0] })); }
+  function nails() {
+    const dpr = Math.min(2, devicePixelRatio || 1), w = hero.clientWidth, h = hero.clientHeight;
+    if (nc.width !== Math.round(w * dpr) || nc.height !== Math.round(h * dpr)) { nc.width = Math.round(w * dpr); nc.height = Math.round(h * dpr); seedN(w, h); }
+    nx.setTransform(dpr, 0, 0, dpr, 0, 0); nx.clearRect(0, 0, w, h);
+    for (const p of P) { if (!reduce) { p.y -= p.v; p.a += p.r; if (p.y < -40) { p.y = h + 40; p.x = Math.random() * w; } }
+      nx.save(); nx.translate(p.x, p.y); nx.rotate(p.a); const W = p.s, Hh = p.s * 1.5; nx.fillStyle = p.c; nx.fill(new Path2D(nailD(0, 0, W, Hh))); nx.fillStyle = "rgba(255,255,255,.6)"; nx.beginPath(); nx.ellipse(-W * .2, -Hh * .1, W * .08, Hh * .28, 0, 0, 7); nx.fill(); nx.restore(); }
+    if (!reduce) requestAnimationFrame(nails);
+  }
+  requestAnimationFrame(nails);
+
+  /* ---------- Intro: Polish ---------- */
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const tween = (ms, fn, tk, ez = (t) => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2)) => new Promise((res) => { const t0 = performance.now(); const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(ez(k), k); k < 1 ? requestAnimationFrame(step) : res(); }; requestAnimationFrame(step); });
+  const el = (scr, tag, cls, css = "") => { const n = document.createElement(tag); n.className = "fxl " + cls; if (css) n.style.cssText = css; scr.append(n); return n; };
+  const canvas = (parent, cls, z) => { const w = parent.clientWidth, h = parent.clientHeight, dpr = Math.min(2, devicePixelRatio || 1); const c = document.createElement("canvas"); c.className = "fxl " + cls; c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); c.style.cssText = `position:absolute;left:0;top:0;width:${w}px;height:${h}px;z-index:${z};pointer-events:none`; c.setAttribute("aria-hidden", "true"); parent.append(c); const ctx = c.getContext("2d"); ctx.scale(dpr, dpr); return { c, ctx, w, h }; };
+  const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); hero.querySelectorAll(".cover").forEach((n) => (n.style.opacity = "0")); };
+  /* ---------- Polish: ein Nagellack-Pinsel streicht glänzende Bahnen, dann ziehen sie seitlich ab ---------- */
+  async function polish(scr, tk, o = {}) {
+    const { c, ctx, w, h } = canvas(scr, "polish", 5), cols = o.colors || ["#f08ad0", "#63d3c4", "#e9e86a"];
+    const n = cols.length, band = h / n; let prog = Array(n).fill(0), off = Array(n).fill(0), txt = 0;
+    const bw = Math.max(26, Math.min(56, w * .1));
+    const brush = el(scr, "div", "pb", `position:absolute;left:0;top:0;z-index:6;width:${bw}px;pointer-events:none;filter:drop-shadow(0 8px 10px rgba(0,0,0,.35));opacity:0`);
+    brush.innerHTML = `<svg viewBox="0 0 40 140" width="100%"><rect x="8" y="0" width="24" height="70" rx="4" fill="#111"/><rect x="8" y="10" width="24" height="3" fill="#444"/><rect x="16" y="68" width="8" height="20" fill="#bbb"/><path class="tip" d="M12 88h16l-3 44q-5 8-10 0z" fill="${cols[0]}"/></svg>`;
+    const tip = brush.querySelector(".tip");
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h); ctx.fillStyle = o.bg || "#f7f5f2"; ctx.fillRect(0, 0, w, h);
+      for (let i = 0; i < n; i++) { if (!prog[i]) continue; const y0 = i * band, dir = i % 2 ? -1 : 1, x = off[i] * w * dir;
+        ctx.save(); ctx.translate(x, 0); ctx.fillStyle = cols[i]; ctx.beginPath();
+        const L = (w + band) * prog[i]; if (dir > 0) ctx.roundRect(-band / 2, y0 - 2, L, band + 4, band / 2); else ctx.roundRect(w + band / 2 - L, y0 - 2, L, band + 4, band / 2); ctx.fill();
+        const g = ctx.createLinearGradient(0, y0, 0, y0 + band); g.addColorStop(0, "rgba(255,255,255,0)"); g.addColorStop(.22, "rgba(255,255,255,.45)"); g.addColorStop(.3, "rgba(255,255,255,0)"); g.addColorStop(1, "rgba(0,0,0,.08)");
+        ctx.fillStyle = g; ctx.fill(); ctx.restore(); }
+      if (txt > 0) { ctx.globalAlpha = txt; const fs = Math.min(w * .085, h * .06); ctx.font = `700 ${fs}px ${o.family || "monospace"}`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+        const lines = o.lines || [o.label || ""]; const bh = fs * 1.25 * lines.length + fs * 1.2, bwid = Math.min(w * .9, Math.max(...lines.map((l) => ctx.measureText(l).width)) + fs * 2);
+        ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.roundRect(w / 2 - bwid / 2, h / 2 - bh / 2, bwid, bh, bh / 2); ctx.fill(); ctx.strokeStyle = "#111"; ctx.lineWidth = 3; ctx.stroke();
+        ctx.fillStyle = "#111"; lines.forEach((l, j) => ctx.fillText(l, w / 2, h / 2 + (j - (lines.length - 1) / 2) * fs * 1.25, bwid - fs)); ctx.globalAlpha = 1; }
+    };
+    draw(); brush.style.opacity = 1;
+    for (let i = 0; i < n && !tk.cancelled; i++) { const dir = i % 2 ? -1 : 1; tip.setAttribute("fill", cols[i]);
+      await tween(560, (e, k) => { prog[i] = k; const bx = dir > 0 ? -band / 2 + (w + band) * k : w + band / 2 - (w + band) * k; brush.style.transform = `translate(${bx - bw / 2}px,${i * band + band / 2 - bw * 3.3}px) rotate(${dir * 28}deg)`; draw(); }, tk, (k) => k); }
+    brush.style.transition = "opacity .25s"; brush.style.opacity = 0;
+    await tween(400, (e) => { txt = e; draw(); }, tk);
+    await sleep(o.hold || 1000); if (tk.cancelled) { brush.remove(); return c.remove(); }
+    reveal(); brush.remove();
+    await tween(850, (e, k) => { off = off.map((_, i) => Math.max(0, Math.min(1, (k - i * .12) / .7)) ** 2); txt = 1 - k * 2.5; ctx.globalAlpha = 1; draw(); ctx.globalCompositeOperation = "destination-out"; ctx.globalAlpha = Math.min(1, k * 1.6); ctx.fillRect(0, 0, w, h); ctx.globalCompositeOperation = "source-over"; ctx.globalAlpha = 1; }, tk, (k) => k);
+    c.remove();
+  }
+
+
+
+  const redo = $("#redo");
+  let token = { cancelled: true };
+  async function play() {
+    token.cancelled = true; const tk = (token = { cancelled: false });
+    hero.querySelectorAll(".fxl, .stage").forEach((n) => n.remove());
+    hero.classList.remove("reveal"); hero.classList.add("pre"); redo.hidden = true;
+    const top = Math.max(0, hero.getBoundingClientRect().top), vis = Math.max(320, Math.min(hero.clientHeight, innerHeight - top));
+    const stage = document.createElement("div"); stage.className = "stage"; stage.style.cssText = `position:absolute;left:0;right:0;top:0;height:${hero.clientHeight}px;z-index:5;pointer-events:none;overflow:hidden`; hero.append(stage);
+    const inner = document.createElement("div"); inner.style.cssText = `position:absolute;left:0;right:0;top:0;height:${vis}px`; stage.append(inner);
+    if (vis < hero.clientHeight) { const cv = document.createElement("div"); cv.className = "cover"; cv.style.cssText = `position:absolute;left:0;right:0;top:${vis}px;bottom:0;background:#e9e86a;transition:opacity .6s`; stage.append(cv); }
+    await polish(inner, tk, { lines: ["CHANCE AND", "TOMMY’S"], family: "Silkscreen, monospace" });
+    stage.remove();
+    if (!tk.cancelled) redo.hidden = false;
+  }
+  redo.addEventListener("click", play);
+  if (reduce) hero.classList.remove("pre"); else document.fonts.ready.then(play);
+})();
+</script>
+</body>
+</html>
