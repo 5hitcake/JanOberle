@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Rusea Nail Art · Design proposal</title>
+<meta name="description" content="A website proposal for Rusea Nail Art, premium nail salon on Cathcart Road, Glasgow, by Jota Labs. Not the official website.">
+<meta property="og:title" content="Rusea Nail Art · Design proposal">
+<meta property="og:description" content="Premium nail salon in Glasgow: BIAB, gel extensions, nail art, brows and waxing. A proposal by Jota Labs.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23f4f1ec'/%3E%3Cpath d='M34 22 C48 14 70 16 70 32 C70 46 52 50 42 50 C56 52 66 60 66 76 C66 84 70 88 76 88' fill='none' stroke='%238a9f7a' stroke-width='8' stroke-linecap='round'/%3E%3Ccircle cx='36' cy='80' r='7.5' fill='%238a9f7a'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&display=swap">
+<style>
+/* Layout: Polish+Signature-Intro (Pinsel streicht Nude/Salbei/Creme, R zeichnet sich im Logo-Badge), weiche Farbblasen im Hero.
+   Services mit Tabs (echte Booksy-Preise), Reviews, Gents welcome, Join the team, Find us mit Live-Status.
+   Warmes Weiß, Salbeigrün, Nude; Cormorant Garamond + Jost. */
+:root {
+  --bg: #f7f4ef; --bg-2: #ffffff; --bg-3: #efeae2; --line: rgba(59,58,54,.13); --fg: #3b3a36; --soft: #55524c; --muted: #8f8a82;
+  --sage: #8a9f7a; --sage-d: #6f8561; --nude: #e8c3b6; --cream: #f4efe7;
+  --f-display: "Cormorant Garamond", Georgia, serif;
+  --f-body: "Jost", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 17px/1.65 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-family: var(--f-display); font-weight: 600; text-wrap: balance; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 600 12px/1.2 var(--f-body); letter-spacing: .24em; text-transform: uppercase; color: var(--sage-d); }
+:focus-visible { outline: 2px solid var(--sage); outline-offset: 3px; }
+
+.proposal { background: #000; color: #e9ebee; font: 13px/1.4 var(--f-body); padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; }
+.proposal b { color: #ffd166; } .proposal a { color: #fff; font-weight: 600; }
+
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
+.logo .mk { width: 42px; height: 42px; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #fff, #ece8e1); display: grid; place-items: center; box-shadow: 0 4px 12px rgba(60,50,40,.12); }
+.logo .mk svg { width: 26px; height: 26px; }
+.logo b { font: 500 20px/1 var(--f-display); letter-spacing: .38em; }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 15px; font-weight: 500; color: var(--muted); }
+nav.links a:hover { color: var(--fg); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 500 15px/1 var(--f-body); letter-spacing: .04em; padding: 15px 24px; border-radius: 999px; background: var(--sage); color: #fff; border: 2px solid var(--sage); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s, background .15s; }
+.btn:hover { transform: translateY(-2px); background: var(--sage-d); border-color: var(--sage-d); box-shadow: 0 10px 24px rgba(111,133,97,.25); }
+.btn.ghost { background: transparent; color: var(--fg); border-color: rgba(59,58,54,.25); }
+.btn.ghost:hover { background: transparent; border-color: var(--fg); box-shadow: none; }
+nav.links a.btn { color: #fff; padding: 10px 18px; font-size: 14px; }
+.menu-btn { display: none; background: transparent; color: var(--fg); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font: 600 12px var(--f-body); letter-spacing: .12em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bg-2); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+
+/* ---------- Hero ---------- */
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line); background: var(--bg); }
+.blobs { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; }
+.hero .wrap { position: relative; z-index: 1; padding-block: clamp(80px, 12vw, 140px) clamp(56px, 9vw, 104px); display: flex; flex-direction: column; gap: 16px; }
+.hero h1 { font-size: clamp(64px, 12vw, 150px); line-height: .9; font-weight: 500; letter-spacing: .12em; }
+.hero h1 span { display: block; font: 600 clamp(13px, 1.6vw, 16px)/1 var(--f-body); letter-spacing: .5em; color: var(--muted); margin-top: 14px; }
+.hero .lead { margin: 4px 0 0; font-size: clamp(18px, 2.2vw, 21px); color: var(--soft); max-width: 40ch; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.facts span { font: 500 14px var(--f-body); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; background: rgba(255,255,255,.75); }
+.facts span b { color: var(--fg); font-weight: 600; }
+.status::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); margin-right: 8px; vertical-align: 1px; }
+.status.open::before { background: #4fae6e; box-shadow: 0 0 8px #4fae6e; }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 7; font: 500 13px var(--f-body); color: var(--muted); background: rgba(255,255,255,.85); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.redo:hover { color: var(--fg); }
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .9s cubic-bezier(.2,.7,.2,1) both; }
+.hero.reveal .wrap > :nth-child(2) { animation-delay: .07s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .14s }
+.hero.reveal .wrap > :nth-child(4) { animation-delay: .21s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .28s }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+
+/* ---------- Abschnitte ---------- */
+section.block { padding-block: clamp(64px, 10vw, 110px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 40px; margin-bottom: 30px; }
+.head h2 { font-size: clamp(40px, 6vw, 72px); line-height: 1; margin-top: 12px; font-weight: 500; }
+.head h2 em { color: var(--sage-d); }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+.note { margin-top: 20px; font-size: 14px; color: var(--muted); padding: 10px 14px; border-left: 3px solid var(--sage); background: var(--bg-2); border-radius: 0 10px 10px 0; }
+
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.tab { font: 500 15px var(--f-body); padding: 10px 18px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg-2); color: var(--soft); cursor: pointer; }
+.tab[aria-selected="true"] { background: var(--sage); border-color: var(--sage); color: #fff; }
+.menu { background: var(--bg-2); border: 1px solid var(--line); border-radius: 24px; padding: clamp(18px, 3vw, 32px); display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 0 40px; }
+@media (max-width: 760px) { .menu { grid-template-columns: minmax(0,1fr); } }
+.menu li { list-style: none; display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--line); }
+.menu ul { margin: 0; padding: 0; }
+.menu b { font-weight: 500; } .menu em { font-style: normal; font-family: var(--f-display); font-variant-numeric: lining-nums; font-size: 21px; font-weight: 600; color: var(--sage-d); }
+
+.rev { display: grid; grid-template-columns: minmax(0,.8fr) repeat(2, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 960px) { .rev { grid-template-columns: minmax(0,1fr); } }
+.score { background: var(--sage); color: #fff; border-radius: 24px; padding: 30px; display: grid; gap: 6px; align-content: center; }
+.score b { font: 500 clamp(64px, 8vw, 92px)/1 var(--f-display); }
+.score span { letter-spacing: 4px; font-size: 22px; }
+.score p { margin: 0; color: #eef2ea; }
+.q { background: var(--bg-2); border: 1px solid var(--line); border-radius: 24px; padding: 28px; display: grid; gap: 12px; align-content: start; margin: 0; }
+.q p { margin: 0; font: italic 500 22px/1.4 var(--f-display); color: var(--fg); }
+.q small { color: var(--muted); letter-spacing: .08em; }
+
+.duo { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 860px) { .duo { grid-template-columns: minmax(0,1fr); } }
+.card { border: 1px solid var(--line); border-radius: 24px; padding: 30px; background: var(--bg-2); display: grid; gap: 12px; align-content: start; }
+.card h3 { font-size: 34px; line-height: 1.05; font-weight: 500; }
+.card p { margin: 0; color: var(--soft); }
+.card.nude { background: linear-gradient(160deg, #f3dcd3, #e8c3b6); border-color: transparent; }
+.card.dark { background: #3b3a36; color: #f4efe7; border-color: transparent; }
+.card.dark p { color: #d8d3ca; } .card.dark .kicker { color: #b9c8ad; }
+
+.visit { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 860px) { .visit { grid-template-columns: minmax(0,1fr); } }
+.map { border-radius: 24px; overflow: hidden; border: 1px solid var(--line); min-height: 320px; }
+.map iframe { width: 100%; height: 100%; min-height: 320px; border: 0; display: block; }
+.hours { display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; margin: 0; font-variant-numeric: tabular-nums; }
+.hours dt { color: var(--muted); } .hours dd { margin: 0; color: var(--soft); }
+.hours .today { color: var(--fg); font-weight: 600; }
+
+footer { padding-block: 40px 96px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 600 14px var(--f-body); padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.25); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></symbol>
+  <symbol id="rk" viewBox="0 0 100 100"><path d="M34 22 C48 14 70 16 70 32 C70 46 52 50 42 50 C56 52 66 60 66 76 C66 84 70 88 76 88" fill="none" stroke="#8a9f7a" stroke-width="9" stroke-linecap="round"/><circle cx="36" cy="80" r="8" fill="#8a9f7a"/></symbol>
+</svg>
+<div class="proposal"><span><b>Design proposal</b> for Rusea Nail Art · not the official website</span><span>Made by <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">Jota Labs</a></span></div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top"><span class="mk"><svg aria-hidden="true"><use href="#rk"/></svg></span><b>RUSEA</b></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENU</button>
+    <nav class="links" id="links">
+      <a href="#services">Services</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#team">Join us</a>
+      <a href="#visit">Find us</a>
+      <a class="btn" href="https://booksy.com/en-gb/114819_rusea-nail-art_nail-salon_1630701_glasgow" target="_blank" rel="noopener">Book now</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero pre" id="top">
+  <canvas class="blobs" id="blobs" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="kicker">Premium nail salon · Glasgow</div>
+    <h1>RUSEA<span>NAIL ART</span></h1>
+    <p class="lead">BIAB, gel extensions and nail art, plus pedicures, brows, lashes and waxing. Expertise, care and the highest standard of hygiene.</p>
+    <div class="ctas"><a class="btn" href="https://booksy.com/en-gb/114819_rusea-nail-art_nail-salon_1630701_glasgow" target="_blank" rel="noopener">Book now</a><a class="btn ghost" href="#services">Services &amp; prices</a></div>
+    <div class="facts"><span class="status" id="statusChip">Mon–Sat · 10am–6pm</span><span><b>★ 4.95</b> · 325 reviews</span><span>Gellifique ambassador</span></div>
+  </div>
+  <button class="redo" type="button" id="redo" hidden>↻ Replay</button>
+</section>
+
+<section class="block" id="services">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Treatments</div><h2>Services &amp; <em>prices</em></h2></div><p>From a classic manicure to a full eye package. Book online in a few taps.</p></div>
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div class="menu" id="menuList"></div>
+    <p class="note">All services and prices from your Booksy page (a selection per category). On the final site every treatment could get its own "Book" button.</p>
+  </div>
+</section>
+
+<section class="block" id="reviews" style="padding-top:0">
+  <div class="wrap rev">
+    <div class="score"><div class="kicker" style="color:#eef2ea">Reviews</div><b>4.95</b><span aria-label="5 stars">★★★★★</span><p>325 reviews on Booksy.</p></div>
+    <figure class="q"><p>"The loveliest team who are the best at what they do! Have been a client for well over a year now and would never go anywhere else."</p><small>ASHLEIGH C. · BOOKSY, OCT 2026</small></figure>
+    <figure class="q"><p>"I've been visiting Rusea regularly since 2020. All of the nail techs are brilliant… a very high standard of hygiene, expertise, skill and also care."</p><small>CASSANDRA M. · BOOKSY, OCT 2026</small></figure>
+  </div>
+</section>
+
+<section class="block" id="team" style="padding-top:0">
+  <div class="wrap duo">
+    <article class="card nude"><span class="kicker">For everyone</span><h3>Gents manicure</h3><p>Clean, tidy hands without the fuss. Gents manicure from £45, or with pedicure from £85.</p><a class="btn" href="https://booksy.com/en-gb/114819_rusea-nail-art_nail-salon_1630701_glasgow" target="_blank" rel="noopener" style="justify-self:start">Book a gents manicure</a></article>
+    <article class="card dark"><span class="kicker">We're hiring</span><h3>Nail technician wanted</h3><p>Join the team at Rusea. Send us a message with your work and experience.</p><a class="btn" href="https://ig.me/m/ruseanailart" target="_blank" rel="noopener" style="justify-self:start;background:#f4efe7;border-color:#f4efe7;color:#3b3a36">Apply via DM ↗</a></article>
+  </div>
+</section>
+
+<section class="block" id="visit" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Visit us</div><h2>1119 Cathcart Road</h2></div><p>Glasgow G42 9BD.</p></div>
+    <div class="visit">
+      <div class="map"><iframe title="Map: Rusea Nail Art, 1119 Cathcart Road" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-4.2632%2C55.8228%2C-4.2502%2C55.8286&amp;layer=mapnik&amp;marker=55.82565%2C-4.25665"></iframe></div>
+      <div class="card">
+        <h3 style="font-size:28px">Opening hours</h3>
+        <dl class="hours" id="hours"></dl>
+        <h3 style="font-size:28px;margin-top:6px">Address</h3>
+        <p>1119 Cathcart Road, Glasgow G42 9BD</p>
+        <div class="ctas"><a class="btn" href="https://booksy.com/en-gb/114819_rusea-nail-art_nail-salon_1630701_glasgow" target="_blank" rel="noopener">Book now</a><a class="btn ghost" href="https://www.google.com/maps/search/?api=1&amp;query=Rusea%20Nail%20Art%201119%20Cathcart%20Road%20Glasgow" target="_blank" rel="noopener">Directions ↗</a></div>
+      </div>
+    </div>
+    <p class="note">Hours from your Booksy page. Holiday closures would show here and on the front page automatically.</p>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>Rusea Nail Art · Premium nail salon · 1119 Cathcart Road, Glasgow G42 9BD · <a href="https://www.tiktok.com/@rusea.nail.art" target="_blank" rel="noopener">TikTok</a> · <a href="https://www.instagram.com/ruseanailart/" target="_blank" rel="noopener">Instagram</a></span><span>Design proposal by Jota Labs · <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">more work</a></span></div></footer>
+
+<a class="like" href="https://wa.me/5491130331893?text=Hi%20Jan%2C%20I%20saw%20the%20website%20proposal%20for%20Rusea%20Nail%20Art%20and%20I%27d%20like%20to%20know%20more." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Like it? Let's talk</a>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+
+  /* ---------- Services (Booksy) ---------- */
+  const M = {
+    "Nails": [["Classic Manicure", 35], ["Gents Manicure", 45], ["Gel on Natural Nails (short)", 45], ["Gel on Natural Nails (medium)", 50], ["Gel Nail Infill (medium)", 55], ["Gel Nail Infill (long)", 60], ["Gel Nail Extension (short)", 60], ["Gel Nail Extension (medium)", 65], ["Gel Nail Extension (long)", 70], ["Gel Polish Removal", 15], ["Extension / Acrylic Removal", 20], ["Nail Repair", 5]],
+    "Nail art": [["French Nail Art", 2], ["Chrome Nail Art", 2], ["Ombre Nail Art", 2], ["Basic Nail Art", 5], ["Detailed Nail Art", 7], ["Deluxe Nail Art", 20]],
+    "Pedicure": [["Classic Pedicure", 40], ["Express Gel Pedicure", 45], ["Spa Pedicure", 60], ["KART Pedicure (no gel polish)", 65]],
+    "Mani + pedi": [["Classic Manicure & Pedicure", 70], ["Gents Manicure & Pedicure", 85], ["Gel Manicure & Express Pedicure", 85], ["Gel Manicure & Spa Pedicure", 90], ["Gel Nail Infill & Express Pedicure", 100], ["Gel Nail Extension & Express Pedicure", 105], ["Gel Nail Infill & Spa Pedicure", 105], ["Gel Nail Extension & Spa Pedicure", 110]],
+    "Waxing & sugaring": [["Lip or Nasal", 7], ["Chin", 10], ["Lip & Chin", 15], ["Under Arm", 15], ["Half Arm", 15], ["Full Arm", 18], ["Full Face", 20], ["Half Leg", 20], ["Brazilian Bikini", 25], ["Full Leg", 30], ["Hollywood Bikini", 35], ["Full Leg & Brazilian", 45], ["Full Leg & Hollywood", 55], ["Full Body", 95]],
+    "Brows & lashes": [["Eyelash Tint", 10], ["Eyebrow Tint", 15], ["Eyebrow Shaping (wax & tweezing)", 17], ["Eyebrow Shaping & Tinting", 30], ["Eyebrow Lamination, Shaping & Tinting", 40], ["Eyelash Lamination (lift, tint, botox cream)", 40], ["Eye Package (brow & lash lamination)", 70]],
+  };
+  const tabs = $("#tabs"), list = $("#menuList");
+  const show = (k) => { tabs.querySelectorAll(".tab").forEach((t) => t.setAttribute("aria-selected", String(t.dataset.k === k))); const items = M[k], half = Math.ceil(items.length / 2); const col = (arr) => `<ul>${arr.map(([n, p]) => `<li><b>${n}</b><em>£${p}</em></li>`).join("")}</ul>`; list.innerHTML = col(items.slice(0, half)) + col(items.slice(half)); };
+  tabs.innerHTML = Object.keys(M).map((k) => `<button class="tab" role="tab" type="button" data-k="${k}">${k}</button>`).join("");
+  tabs.querySelectorAll(".tab").forEach((t) => t.addEventListener("click", () => show(t.dataset.k)));
+  show("Nails");
+
+  /* ---------- Hours + open now (Glasgow) ---------- */
+  const H = { Mon: [600, 1080], Tue: [600, 1080], Wed: [600, 1080], Thu: [600, 1080], Fri: [600, 1080], Sat: [600, 1080], Sun: null };
+  const names = { Mon: "Monday", Tue: "Tuesday", Wed: "Wednesday", Thu: "Thursday", Fri: "Friday", Sat: "Saturday", Sun: "Sunday" };
+  const fmt = (m) => { const h = Math.floor(m / 60); return (h > 12 ? h - 12 : h) + (h >= 12 ? "pm" : "am"); };
+  function status() {
+    const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/London", weekday: "short", hour: "numeric", minute: "numeric", hour12: false }).formatToParts(new Date());
+    const get = (t) => parts.find((x) => x.type === t).value, wd = get("weekday"), m = (+get("hour") % 24) * 60 + +get("minute"), t = H[wd];
+    $("#hours").innerHTML = Object.keys(H).map((d) => `<dt class="${d === wd ? "today" : ""}">${names[d]}</dt><dd class="${d === wd ? "today" : ""}">${H[d] ? fmt(H[d][0]) + " – " + fmt(H[d][1]) : "Closed"}</dd>`).join("");
+    const open = t && m >= t[0] && m < t[1], chip = $("#statusChip");
+    chip.classList.toggle("open", !!open);
+    chip.innerHTML = open ? `<b>Open now</b> · until ${fmt(t[1])}` : t && m < t[0] ? `Opens today at <b>${fmt(t[0])}</b>` : "Closed now · <b>Mon–Sat 10–6</b>";
+  }
+  status(); setInterval(status, 60000);
+
+  /* ---------- Hintergrund: weiche Farbblasen in Nude und Salbei ---------- */
+  const hero = $("#top"), bc = $("#blobs"), bx = bc.getContext("2d");
+  const B = [[.85, .2, .32, "232,195,182"], [.1, .85, .36, "138,159,122"], [.6, .9, .22, "232,195,182"], [.95, .75, .2, "138,159,122"]];
+  function blobs(now) {
+    const dpr = Math.min(2, devicePixelRatio || 1), w = hero.clientWidth, h = hero.clientHeight;
+    if (bc.width !== Math.round(w * dpr) || bc.height !== Math.round(h * dpr)) { bc.width = Math.round(w * dpr); bc.height = Math.round(h * dpr); }
+    bx.setTransform(dpr, 0, 0, dpr, 0, 0); bx.clearRect(0, 0, w, h);
+    B.forEach(([x, y, r, c], i) => { const t = (now || 0) / 4000 + i * 1.7, X = (x + Math.sin(t) * .04) * w, Y = (y + Math.cos(t * .8) * .05) * h, R = r * Math.max(w, h); const g = bx.createRadialGradient(X, Y, 0, X, Y, R); g.addColorStop(0, `rgba(${c},.32)`); g.addColorStop(1, `rgba(${c},0)`); bx.fillStyle = g; bx.fillRect(0, 0, w, h); });
+    if (!reduce) requestAnimationFrame(blobs);
+  }
+  requestAnimationFrame(blobs);
+
+  /* ---------- Intro: Polish + Signature ---------- */
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const tween = (ms, fn, tk, ez = (t) => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2)) => new Promise((res) => { const t0 = performance.now(); const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(ez(k), k); k < 1 ? requestAnimationFrame(step) : res(); }; requestAnimationFrame(step); });
+  const el = (scr, tag, cls, css = "") => { const n = document.createElement(tag); n.className = "fxl " + cls; if (css) n.style.cssText = css; scr.append(n); return n; };
+  const canvas = (parent, cls, z) => { const w = parent.clientWidth, h = parent.clientHeight, dpr = Math.min(2, devicePixelRatio || 1); const c = document.createElement("canvas"); c.className = "fxl " + cls; c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); c.style.cssText = `position:absolute;left:0;top:0;width:${w}px;height:${h}px;z-index:${z};pointer-events:none`; c.setAttribute("aria-hidden", "true"); parent.append(c); const ctx = c.getContext("2d"); ctx.scale(dpr, dpr); return { c, ctx, w, h }; };
+  const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); hero.querySelectorAll(".cover").forEach((n) => (n.style.opacity = "0")); };
+  /* ---------- Polish + Signature: Pinsel streicht Bahnen, dann zeichnet sich das R im runden Logo-Badge ---------- */
+  async function polishsig(scr, tk, o = {}) {
+    const { c, ctx, w, h } = canvas(scr, "polishsig", 5), cols = o.colors || ["#e8c3b6", "#a8b89a", "#f4efe7"];
+    const n = cols.length, band = h / n; let prog = Array(n).fill(0), off = Array(n).fill(0);
+    const bw = Math.max(26, Math.min(56, w * .1)), col = o.color || "#8a9f7a";
+    const brush = el(scr, "div", "pb", `position:absolute;left:0;top:0;z-index:6;width:${bw}px;pointer-events:none;filter:drop-shadow(0 8px 10px rgba(0,0,0,.25));opacity:0`);
+    brush.innerHTML = `<svg viewBox="0 0 40 140" width="100%"><rect x="8" y="0" width="24" height="70" rx="4" fill="#2b2a28"/><rect x="8" y="10" width="24" height="3" fill="#8a9f7a"/><rect x="16" y="68" width="8" height="20" fill="#cfcac2"/><path class="tip" d="M12 88h16l-3 44q-5 8-10 0z" fill="${cols[0]}"/></svg>`;
+    const tip = brush.querySelector(".tip");
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h); ctx.fillStyle = o.bg || "#f7f4ef"; ctx.fillRect(0, 0, w, h);
+      for (let i = 0; i < n; i++) { if (!prog[i]) continue; const y0 = i * band, dir = i % 2 ? -1 : 1, x = off[i] * w * dir;
+        ctx.save(); ctx.translate(x, 0); ctx.fillStyle = cols[i]; ctx.beginPath(); const L = (w + band) * prog[i];
+        if (dir > 0) ctx.roundRect(-band / 2, y0 - 2, L, band + 4, band / 2); else ctx.roundRect(w + band / 2 - L, y0 - 2, L, band + 4, band / 2); ctx.fill();
+        const g = ctx.createLinearGradient(0, y0, 0, y0 + band); g.addColorStop(0, "rgba(255,255,255,0)"); g.addColorStop(.22, "rgba(255,255,255,.45)"); g.addColorStop(.3, "rgba(255,255,255,0)"); g.addColorStop(1, "rgba(0,0,0,.05)"); ctx.fillStyle = g; ctx.fill(); ctx.restore(); }
+    };
+    draw(); brush.style.opacity = 1;
+    for (let i = 0; i < n && !tk.cancelled; i++) { const dir = i % 2 ? -1 : 1; tip.setAttribute("fill", cols[i]);
+      await tween(520, (e, k) => { prog[i] = k; const bx = dir > 0 ? -band / 2 + (w + band) * k : w + band / 2 - (w + band) * k; brush.style.transform = `translate(${bx - bw / 2}px,${i * band + band / 2 - bw * 3.3}px) rotate(${dir * 28}deg)`; draw(); }, tk, (k) => k); }
+    brush.style.transition = "opacity .25s"; brush.style.opacity = 0;
+    const D = Math.min(w * .66, h * .42), fs = D * .1, fam = (o.family || "Georgia, serif").replace(/"/g, "'"), ufam = (o.ufamily || "system-ui").replace(/"/g, "'");
+    const badge = el(scr, "div", "badge", `position:absolute;z-index:7;left:${w / 2 - D / 2}px;top:${h / 2 - D / 2}px;width:${D}px;height:${D}px;border-radius:50%;background:radial-gradient(circle at 40% 35%, #ffffff, #ece8e1);box-shadow:0 18px 40px rgba(60,50,40,.22);pointer-events:none;transform:scale(0);transition:transform .5s cubic-bezier(.3,1.5,.5,1),opacity .6s`);
+    badge.innerHTML = `<svg viewBox="0 0 100 100" style="position:absolute;left:20%;top:6%;width:60%;height:60%;overflow:visible"><path class="r1" d="M34 22 C48 14 70 16 70 32 C70 46 52 50 42 50 C56 52 66 60 66 76 C66 84 70 88 76 88" fill="none" stroke="${col}" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><circle class="dot" cx="36" cy="80" r="7.5" fill="${col}" style="transform-box:fill-box;transform-origin:center;transform:translateY(-50px) scale(0)"/></svg>
+      <div style="position:absolute;left:0;right:0;top:66%;text-align:center;color:#6d6a64;font:500 ${fs}px/1 ${fam};letter-spacing:.42em;padding-left:.42em">RUSEA</div><div style="position:absolute;left:0;right:0;top:77%;text-align:center;color:#8f8a82;font:600 ${fs * .34}px/1 ${ufam};letter-spacing:.4em;padding-left:.4em">NAIL ART</div>`;
+    const r1 = badge.querySelector(".r1"), dot = badge.querySelector(".dot"), L = r1.getTotalLength(); r1.style.strokeDasharray = L; r1.style.strokeDashoffset = L;
+    await sleep(80); badge.style.transform = "scale(1)"; await sleep(450);
+    await tween(1100, (e) => (r1.style.strokeDashoffset = L * (1 - e)), tk);
+    await tween(500, (e, k) => { const b = 1 - Math.abs(Math.cos(k * Math.PI * 1.5)) * (1 - k); dot.style.transform = `translateY(${-50 * (1 - b)}px) scale(${Math.min(1, k * 2)})`; }, tk, (k) => k);
+    await sleep(o.hold || 1100); if (tk.cancelled) { brush.remove(); badge.remove(); return c.remove(); }
+    reveal(); brush.remove(); badge.style.opacity = 0; badge.style.transform = "scale(.9)";
+    await tween(850, (e, k) => { off = off.map((_, i) => Math.max(0, Math.min(1, (k - i * .12) / .7)) ** 2); draw(); ctx.globalCompositeOperation = "destination-out"; ctx.globalAlpha = Math.min(1, k * 1.6); ctx.fillRect(0, 0, w, h); ctx.globalCompositeOperation = "source-over"; ctx.globalAlpha = 1; }, tk, (k) => k);
+    badge.remove(); c.remove();
+  }
+
+
+
+  const redo = $("#redo");
+  let token = { cancelled: true };
+  async function play() {
+    token.cancelled = true; const tk = (token = { cancelled: false });
+    hero.querySelectorAll(".fxl, .stage").forEach((n) => n.remove());
+    hero.classList.remove("reveal"); hero.classList.add("pre"); redo.hidden = true;
+    const top = Math.max(0, hero.getBoundingClientRect().top), vis = Math.max(320, Math.min(hero.clientHeight, innerHeight - top));
+    const stage = document.createElement("div"); stage.className = "stage"; stage.style.cssText = `position:absolute;left:0;right:0;top:0;height:${hero.clientHeight}px;z-index:5;pointer-events:none;overflow:hidden`; hero.append(stage);
+    const inner = document.createElement("div"); inner.style.cssText = `position:absolute;left:0;right:0;top:0;height:${vis}px`; stage.append(inner);
+    if (vis < hero.clientHeight) { const cv = document.createElement("div"); cv.className = "cover"; cv.style.cssText = `position:absolute;left:0;right:0;top:${vis}px;bottom:0;background:#f4efe7;transition:opacity .6s`; stage.append(cv); }
+    await polishsig(inner, tk, { family: '"Cormorant Garamond", serif', ufamily: "Jost, sans-serif" });
+    stage.remove();
+    if (!tk.cancelled) redo.hidden = false;
+  }
+  redo.addEventListener("click", play);
+  if (reduce) hero.classList.remove("pre"); else document.fonts.ready.then(play);
+})();
+</script>
+</body>
+</html>
