@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Kitchen Glasgow · Design proposal</title>
+<meta name="description" content="A website proposal for Kitchen Glasgow, brunch and restaurant at 11 North Gower Street, Glasgow, by Jota Labs. Not the official website.">
+<meta property="og:title" content="Kitchen Glasgow · Design proposal">
+<meta property="og:description" content="Breakfast, brunch and comfort food, open 7 days. A proposal by Jota Labs.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%230f1f30'/%3E%3Cpath d='M22 14v36M18 14v8q0 4 4 4t4-4v-8M30 32l16-16M30 32l16 16' stroke='%239fb0c8' stroke-width='4' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+/* Layout: Benedict-Intro (Teller, Toast, Lachs, Ei, Hollandaise), schwebendes Besteck im Hero.
+   Menu (Brunch, Mains, Coffee & sweet), Offer, Events & parties, Testimonials, Hiring, Find us.
+   Navy wie das Logo, Silberblau, Hollandaise-Gelb; DM Serif Display + DM Sans. */
+:root { --bg: #0f1f30; --bg-2: #152a40; --bg-3: #1b334d; --line: rgba(238,242,248,.13); --fg: #eef2f8; --soft: #cfd8e6; --muted: #8fa0b8;
+  --silver: #9fb0c8; --yolk: #f3c94a; --cream: #f7f2e7; --salmon: #ef8a64; --green: #6fae55;
+  --f-display: "DM Serif Display", Georgia, serif; --f-body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif; color-scheme: dark; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 17px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-family: var(--f-display); font-weight: 400; text-wrap: balance; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 700 12px/1.2 var(--f-body); letter-spacing: .2em; text-transform: uppercase; color: var(--yolk); }
+:focus-visible { outline: 2px solid var(--yolk); outline-offset: 3px; }
+.proposal { background: #000; color: #e9ebee; font: 13px/1.4 var(--f-body); padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; }
+.proposal b { color: #ffd166; } .proposal a { color: #fff; font-weight: 700; }
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo .mk { width: 40px; height: 40px; border-radius: 50%; background: var(--bg-3); display: grid; place-items: center; }
+.logo .mk svg { width: 24px; height: 24px; }
+.logo b { font: 400 24px/1 var(--f-display); } .logo small { font: 700 10px var(--f-body); letter-spacing: .3em; color: var(--silver); }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 15px; font-weight: 500; color: var(--muted); }
+nav.links a:hover { color: var(--fg); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 700 15px/1 var(--f-body); padding: 15px 22px; border-radius: 999px; background: var(--yolk); color: var(--bg); border: 2px solid var(--yolk); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(243,201,74,.25); }
+.btn.ghost { background: transparent; color: var(--fg); border-color: rgba(238,242,248,.35); }
+.btn.ghost:hover { box-shadow: none; border-color: var(--fg); }
+nav.links a.btn { color: var(--bg); padding: 10px 16px; font-size: 14px; }
+.menu-btn { display: none; background: transparent; color: var(--fg); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font: 700 12px var(--f-body); letter-spacing: .1em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bg-2); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line); background: radial-gradient(60vw 45vw at 100% 0%, rgba(159,176,200,.16), transparent 70%), radial-gradient(70vw 55vw at 0% 110%, rgba(243,201,74,.12), transparent 70%), var(--bg); }
+.flt { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; opacity: .14; }
+.hero .wrap { position: relative; z-index: 1; padding-block: clamp(80px, 12vw, 140px) clamp(56px, 9vw, 104px); display: flex; flex-direction: column; gap: 16px; }
+.hero h1 { font-size: clamp(72px, 14vw, 180px); line-height: .9; }
+.hero h1 span { display: block; font: 700 clamp(13px, 1.6vw, 16px)/1 var(--f-body); letter-spacing: .5em; color: var(--silver); margin-top: 14px; }
+.hero .lead { margin: 4px 0 0; font-size: clamp(18px, 2.2vw, 21px); color: var(--soft); max-width: 40ch; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.facts span { font: 500 14px var(--f-body); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; background: rgba(15,31,48,.8); }
+.facts span b { color: var(--fg); }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 7; font: 500 13px var(--f-body); color: var(--muted); background: rgba(15,31,48,.85); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.redo:hover { color: var(--fg); }
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero.reveal .wrap > :nth-child(2) { animation-delay: .06s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .12s } .hero.reveal .wrap > :nth-child(4) { animation-delay: .18s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .24s }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+section.block { padding-block: clamp(64px, 10vw, 104px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 40px; margin-bottom: 30px; }
+.head h2 { font-size: clamp(40px, 6vw, 70px); line-height: 1; margin-top: 10px; }
+.head h2 em { color: var(--yolk); }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+.note { margin-top: 20px; font-size: 14px; color: var(--muted); padding: 10px 14px; border-left: 3px solid var(--yolk); background: var(--bg-2); border-radius: 0 10px 10px 0; }
+.mgrid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 900px) { .mgrid { grid-template-columns: minmax(0,1fr); } }
+.mc { background: var(--bg-2); border: 1px solid var(--line); border-radius: 22px; padding: 24px; display: grid; gap: 10px; align-content: start; }
+.mc svg { width: 100%; height: 130px; }
+.mc h3 { font-size: 30px; }
+.mc ul { list-style: none; margin: 0; padding: 0; }
+.mc li { padding: 9px 0; border-top: 1px dashed var(--line); color: var(--soft); }
+.offer { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 26px; align-items: center; background: var(--cream); color: var(--bg); border-radius: 28px; padding: clamp(24px, 4vw, 48px); }
+@media (max-width: 860px) { .offer { grid-template-columns: minmax(0,1fr); } }
+.offer h2 { font-size: clamp(36px, 5vw, 60px); line-height: 1; }
+.offer .kicker { color: #b07a10; }
+.offer p { color: #3a4a5c; margin: 12px 0 0; }
+.offer .price { font: 400 clamp(56px, 8vw, 88px)/1 var(--f-display); color: var(--salmon); margin-top: 10px; }
+.offer svg { width: 100%; max-width: 380px; justify-self: center; }
+.duo { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 860px) { .duo { grid-template-columns: minmax(0,1fr); } }
+.card { border: 1px solid var(--line); border-radius: 22px; padding: 28px; background: var(--bg-2); display: grid; gap: 12px; align-content: start; }
+.card h3 { font-size: 32px; line-height: 1.05; } .card p { margin: 0; color: var(--soft); }
+.card.gold { background: linear-gradient(160deg, #2a3f58, #1b334d); }
+.score { font: 400 64px/1 var(--f-display); color: var(--yolk); }
+.visit { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 860px) { .visit { grid-template-columns: minmax(0,1fr); } }
+.map { border-radius: 22px; overflow: hidden; border: 1px solid var(--line); min-height: 320px; }
+.map iframe { width: 100%; height: 100%; min-height: 320px; border: 0; display: block; }
+footer { padding-block: 40px 96px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 700 14px var(--f-body); padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.35); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></symbol>
+  <symbol id="kk" viewBox="0 0 64 64"><path d="M22 10v44M17 10v9q0 5 5 5t5-5v-9M30 32l18-18M30 32l18 18" stroke="#9fb0c8" stroke-width="4.5" stroke-linecap="round" fill="none"/></symbol>
+</svg>
+<div class="proposal"><span><b>Design proposal</b> for Kitchen Glasgow · not the official website</span><span>Made by <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">Jota Labs</a></span></div>
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top"><span class="mk"><svg aria-hidden="true"><use href="#kk"/></svg></span><span><b>Kitchen</b><br><small>GLASGOW</small></span></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENU</button>
+    <nav class="links" id="links"><a href="#menu">Menu</a><a href="#events">Events</a><a href="#reviews">Reviews</a><a class="btn" href="#visit">Find us</a></nav>
+  </div>
+</header>
+<section class="hero pre" id="top">
+  <canvas class="flt" id="flt" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="kicker">Brunch · coffee · comfort food</div>
+    <h1>Kitchen<span>GLASGOW</span></h1>
+    <p class="lead">Eggs Benedict, proper coffee, pizza, pasta and cake. Your neighbourhood kitchen on North Gower Street, open 7 days.</p>
+    <div class="ctas"><a class="btn" href="#menu">See the menu</a><a class="btn ghost" href="tel:+441414273860">Call 0141 427 3860</a></div>
+    <div class="facts"><span><b>Open</b> 7 days</span><span><b>★ 4.9</b> · ~400 Google reviews</span><span>Events &amp; parties</span></div>
+  </div>
+  <button class="redo" type="button" id="redo" hidden>↻ Another plate</button>
+</section>
+<section class="block" id="menu">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">From the kitchen</div><h2>What we <em>cook</em></h2></div><p>From the first coffee of the morning to dinner with friends.</p></div>
+    <div class="mgrid" id="mgrid"></div>
+    <p class="note">Dishes from your Instagram; your full menu with prices would go here, easy to update from your phone.</p>
+  </div>
+</section>
+<section class="block" style="padding-top:0">
+  <div class="wrap">
+    <div class="offer">
+      <div><div class="kicker">Offer</div><h2>Sourdough, salmon &amp; hollandaise</h2><p>Toasted sourdough topped with smoked salmon, fresh salad, a poached egg and hollandaise.</p><div class="price">£9.99</div><p style="font-size:14px">Limited time only. Offers like this would sit right on the front page.</p></div>
+      <svg viewBox="0 0 300 220" aria-hidden="true" id="offerArt"></svg>
+    </div>
+  </div>
+</section>
+<section class="block" id="events" style="padding-top:0">
+  <div class="wrap duo">
+    <article class="card gold"><span class="kicker">Events &amp; parties</span><h3>Book the place for your celebration</h3><p>Birthdays, team lunches and family gatherings, with a buffet made in our kitchen. Get in touch to plan yours.</p><a class="btn" href="tel:+441414273860" style="justify-self:start">Call to book</a></article>
+    <article class="card" id="reviews"><span class="kicker">Testimonials</span><div class="score">4.9 ★</div><p>Around 400 reviews on Google. Happy guests and full plates, straight from Google.</p><p style="font-size:14px;color:var(--muted)">Your best Google reviews would be shown here.</p></article>
+  </div>
+</section>
+<section class="block" style="padding-top:0">
+  <div class="wrap"><div class="card" style="grid-template-columns:minmax(0,1fr) auto;align-items:center"><div><span class="kicker">We're hiring</span><h3 style="margin-top:6px">Barista &amp; kitchen staff</h3><p style="margin-top:6px">Full-time positions. Call us or send a message.</p></div><a class="btn ghost" href="tel:+441414273860">0141 427 3860</a></div></div>
+</section>
+<section class="block" id="visit" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Visit us</div><h2>11 North Gower Street</h2></div><p>Kinning Park, Glasgow G51 1PW.</p></div>
+    <div class="visit">
+      <div class="map"><iframe title="Map: Kitchen Glasgow, 11 North Gower Street" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-4.3040%2C55.8482%2C-4.2910%2C55.8540&amp;layer=mapnik&amp;marker=55.85104%2C-4.29750"></iframe></div>
+      <div class="card"><h3>Open 7 days</h3><p>Breakfast, brunch, lunch and dinner. Your exact opening hours would show here with a live "open now".</p><h3 style="margin-top:6px">Address</h3><p>11 North Gower Street, Glasgow G51 1PW</p><p>Phone: <a href="tel:+441414273860">0141 427 3860</a></p>
+        <div class="ctas"><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Kitchen%2011%20North%20Gower%20Street%20Glasgow" target="_blank" rel="noopener">Directions ↗</a><a class="btn ghost" href="https://www.instagram.com/kitchen.glasgow/" target="_blank" rel="noopener">Instagram ↗</a></div></div>
+    </div>
+  </div>
+</section>
+<footer><div class="wrap"><span>Kitchen Glasgow · 11 North Gower Street, Glasgow G51 1PW · 0141 427 3860</span><span>Design proposal by Jota Labs · <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">more work</a></span></div></footer>
+<a class="like" href="https://wa.me/5491130331893?text=Hi%20Jan%2C%20I%20saw%20the%20website%20proposal%20for%20Kitchen%20Glasgow%20and%20I%27d%20like%20to%20know%20more." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Like it? Let's talk</a>
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+
+  /* ---------- Menü-Illustrationen ---------- */
+  const plate = (inner) => `<ellipse cx="100" cy="70" rx="72" ry="52" fill="#4d5961"/><ellipse cx="100" cy="66" rx="72" ry="50" fill="#7e8a92"/><ellipse cx="100" cy="66" rx="56" ry="38" fill="#6a767e"/>${inner}`;
+  const brunch = plate(`<g transform="rotate(-8 100 66)"><rect x="66" y="44" width="62" height="44" rx="10" fill="#8a5428"/><rect x="70" y="48" width="54" height="36" rx="8" fill="#d9a865"/><ellipse cx="92" cy="64" rx="20" ry="10" fill="#ef8a64"/><ellipse cx="100" cy="62" rx="16" ry="13" fill="#fbf8f0"/><path d="M84 60q16-14 32 0q4 12-16 14t-16-14z" fill="#f3c94a"/><circle cx="102" cy="66" r="5" fill="#f28c12"/></g><ellipse cx="146" cy="76" rx="10" ry="5" fill="#6fae55"/><circle cx="148" cy="54" r="6" fill="#d8322a"/>`);
+  const mains = plate(`<circle cx="100" cy="66" r="34" fill="#e8b46a"/><circle cx="100" cy="66" r="28" fill="#d9442e"/>${[[88, 56], [110, 60], [96, 76], [114, 78], [84, 72]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="5" fill="#f6efe0"/>`).join("")}${[[100, 50], [80, 64], [118, 70]].map(([x, y]) => `<ellipse cx="${x}" cy="${y}" rx="4" ry="2" fill="#4f9a2e"/>`).join("")}<path d="M100 66L100 32M100 66L130 50" stroke="#c98a42" stroke-width="1.5" opacity=".6"/>`);
+  const sweet = `<ellipse cx="70" cy="100" rx="40" ry="8" fill="rgba(0,0,0,.25)"/><path d="M48 40h44l-6 58H54z" fill="rgba(255,255,255,.18)" stroke="#cfd8e6" stroke-width="2"/><path d="M51 60h38l-4 38H55z" fill="#ef6a4a"/><circle cx="82" cy="38" r="7" fill="#d8322a"/><rect x="74" y="10" width="4" height="50" fill="#1b1b1b" transform="rotate(14 76 35)"/><ellipse cx="140" cy="100" rx="34" ry="7" fill="rgba(0,0,0,.25)"/><ellipse cx="140" cy="72" rx="26" ry="9" fill="#cfd8e6"/><path d="M118 70q0 26 22 26t22-26z" fill="#f7f2e7"/><ellipse cx="140" cy="70" rx="20" ry="7" fill="#8a5a2c"/><path d="M134 70q6-5 12 0q-6 4-12 0z" fill="#f7f2e7"/><path d="M162 72q10 0 8 8t-10 6" fill="none" stroke="#f7f2e7" stroke-width="3"/>`;
+  const M = [["Breakfast &amp; brunch", brunch, ["Eggs Benedict", "Sourdough with smoked salmon &amp; hollandaise", "Avocado toast with poached egg", "Omelette with toast &amp; salad", "Waffles with strawberries"]],
+    ["Lunch &amp; dinner", mains, ["Pizza", "Pasta", "Tacos", "Fresh salads", "Buffets for groups"]],
+    ["Coffee &amp; sweet", sweet, ["Barista coffee &amp; latte art", "Fresh smoothies", "Homemade cakes", "Celebration cakes", "Something sweet for the road"]]];
+  $("#mgrid").innerHTML = M.map(([n, s, l]) => `<article class="mc"><svg viewBox="0 0 200 120" aria-hidden="true">${s}</svg><h3>${n}</h3><ul>${l.map((x) => `<li>${x}</li>`).join("")}</ul></article>`).join("");
+  $("#offerArt").innerHTML = `<ellipse cx="150" cy="120" rx="130" ry="92" fill="#c9cfd6"/><ellipse cx="150" cy="114" rx="130" ry="90" fill="#e6e9ec"/><ellipse cx="150" cy="114" rx="104" ry="70" fill="#d6dbe0"/>${[...Array(9)].map((_, i) => { const a = 2.3 + i * .25; return `<ellipse cx="${150 + Math.cos(a) * 82}" cy="${114 + Math.sin(a) * 52}" rx="20" ry="10" fill="${i % 2 ? "#5fa24a" : "#8cc66a"}" transform="rotate(${a * 57} ${150 + Math.cos(a) * 82} ${114 + Math.sin(a) * 52})"/>`; }).join("")}<circle cx="226" cy="80" r="11" fill="#d8322a"/><circle cx="238" cy="110" r="11" fill="#d8322a"/><g transform="rotate(-10 140 112)"><rect x="80" y="70" width="130" height="90" rx="20" fill="#8a5428"/><rect x="88" y="78" width="114" height="74" rx="16" fill="#d9a865"/><ellipse cx="128" cy="112" rx="36" ry="20" fill="#ef8a64"/><ellipse cx="160" cy="120" rx="30" ry="16" fill="#e9764e"/><ellipse cx="146" cy="108" rx="34" ry="27" fill="#fbf8f0"/><path d="M114 100q34-30 66 0q8 24-33 28t-33-28z" fill="#f3c94a"/><circle cx="150" cy="112" r="10" fill="#f28c12"/></g>`;
+
+  /* ---------- Hintergrund: Besteck schwebt ---------- */
+  const hero = $("#top"), fc = $("#flt"), fx = fc.getContext("2d"); let P = [];
+  function seedF(w, h) { P = Array.from({ length: Math.round(w * h / 50000) + 5 }, (_, i) => ({ x: Math.random() * w, y: Math.random() * h, s: 18 + Math.random() * 16, v: .15 + Math.random() * .2, a: Math.random() * 6.28, vr: (Math.random() - .5) * .004, k: i % 2 })); }
+  function floatF() { const dpr = Math.min(2, devicePixelRatio || 1), w = hero.clientWidth, h = hero.clientHeight;
+    if (fc.width !== Math.round(w * dpr) || fc.height !== Math.round(h * dpr)) { fc.width = Math.round(w * dpr); fc.height = Math.round(h * dpr); seedF(w, h); }
+    fx.setTransform(dpr, 0, 0, dpr, 0, 0); fx.clearRect(0, 0, w, h); fx.strokeStyle = "#9fb0c8"; fx.lineCap = "round";
+    for (const p of P) { if (!reduce) { p.y -= p.v; p.a += p.vr; if (p.y < -40) { p.y = h + 40; p.x = Math.random() * w; } } fx.save(); fx.translate(p.x, p.y); fx.rotate(p.a); fx.lineWidth = p.s * .12;
+      fx.beginPath(); fx.moveTo(0, -p.s); fx.lineTo(0, p.s); if (p.k) { [-.25, 0, .25].forEach((o) => { fx.moveTo(o * p.s, -p.s); fx.lineTo(o * p.s, -p.s * .6); }); } fx.stroke(); fx.restore(); }
+    if (!reduce) requestAnimationFrame(floatF); }
+  requestAnimationFrame(floatF);
+
+  /* ---------- Intro: Benedict ---------- */
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const tween = (ms, fn, tk, ez = (t) => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2)) => new Promise((res) => { const t0 = performance.now(); const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(ez(k), k); k < 1 ? requestAnimationFrame(step) : res(); }; requestAnimationFrame(step); });
+  const canvas = (parent, cls, z) => { const w = parent.clientWidth, h = parent.clientHeight, dpr = Math.min(2, devicePixelRatio || 1); const c = document.createElement("canvas"); c.className = "fxl " + cls; c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); c.style.cssText = `position:absolute;left:0;top:0;width:${w}px;height:${h}px;z-index:${z};pointer-events:none`; c.setAttribute("aria-hidden", "true"); parent.append(c); const ctx = c.getContext("2d"); ctx.scale(dpr, dpr); return { c, ctx, w, h }; };
+  const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); hero.querySelectorAll(".cover").forEach((n) => (n.style.opacity = "0")); };
+  /* ---------- Kitchen Glasgow: Logo-Helfer ---------- */
+  function kgWord(ctx, w, h, x, y, a, o) { if (a <= 0) return; ctx.save(); ctx.globalAlpha = Math.min(1, a); ctx.textAlign = "center"; ctx.fillStyle = o.ink || "#eef2f8";
+    ctx.font = `400 ${Math.min(w * .13, h * .075)}px ${o.serif || "Georgia, serif"}`; ctx.fillText("Kitchen", x, y, w * .9); ctx.font = `600 ${Math.min(w * .036, h * .022)}px ${o.ufamily || "system-ui"}`; ctx.fillStyle = o.silver || "#9fb0c8"; ctx.fillText("G L A S G O W", x, y + Math.min(w * .065, h * .04)); ctx.restore(); }
+
+  /* ---------- Benedict: Sauerteig, Lachs, pochiertes Ei, Hollandaise fließt darüber, Ei bricht auf ---------- */
+  async function benedict(scr, tk, o = {}) {
+    const { c, ctx, w, h } = canvas(scr, "bene", 5), cx = w / 2, cy = h * .5, R = Math.min(w * .4, h * .25);
+    let plate = 0, toast = 0, salmon = 0, egg = 0, sauce = 0, yolk = 0, leaf = 0, word = 0, bgA = 1, zoom = 1;
+    const draw = () => { ctx.clearRect(0, 0, w, h); ctx.globalAlpha = bgA; ctx.fillStyle = o.bg || "#0f1f30"; ctx.fillRect(0, 0, w, h); ctx.globalAlpha = 1;
+      ctx.save(); ctx.translate(cx, cy); ctx.scale(zoom * plate, zoom * plate);
+      ctx.fillStyle = "rgba(0,0,0,.35)"; ctx.beginPath(); ctx.arc(R * .05, R * .07, R * 1.12, 0, 7); ctx.fill();
+      const pg = ctx.createRadialGradient(-R * .3, -R * .3, 0, 0, 0, R * 1.1); pg.addColorStop(0, "#7e8a92"); pg.addColorStop(1, "#4d5961"); ctx.fillStyle = pg; ctx.beginPath(); ctx.arc(0, 0, R * 1.1, 0, 7); ctx.fill(); ctx.fillStyle = "#6a767e"; ctx.beginPath(); ctx.arc(0, 0, R * .88, 0, 7); ctx.fill();
+      if (leaf > 0) { for (let i = 0; i < 10; i++) { const a = 2.2 + i * .22, r = R * (.62 + (i % 3) * .07); ctx.save(); ctx.translate(Math.cos(a) * r, Math.sin(a) * r); ctx.rotate(a); ctx.globalAlpha = leaf; ctx.fillStyle = i % 2 ? "#5fa24a" : "#8cc66a"; ctx.beginPath(); ctx.ellipse(0, 0, R * .14, R * .07, 0, 0, 7); ctx.fill(); ctx.restore(); }
+        [[.55, -.45], [.7, -.15], [.45, -.7]].forEach(([x, y]) => { ctx.globalAlpha = leaf; ctx.fillStyle = "#d8322a"; ctx.beginPath(); ctx.arc(x * R, y * R, R * .09, 0, 7); ctx.fill(); ctx.fillStyle = "rgba(255,255,255,.35)"; ctx.beginPath(); ctx.arc(x * R - R * .03, y * R - R * .03, R * .025, 0, 7); ctx.fill(); }); ctx.globalAlpha = 1; }
+      if (toast > 0) { ctx.save(); ctx.globalAlpha = toast; ctx.rotate(-.15); ctx.fillStyle = "#8a5428"; ctx.beginPath(); ctx.roundRect(-R * .6, -R * .42, R * 1.05, R * .8, R * .2); ctx.fill(); ctx.fillStyle = "#d9a865"; ctx.beginPath(); ctx.roundRect(-R * .55, -R * .37, R * .95, R * .7, R * .16); ctx.fill(); ctx.fillStyle = "rgba(120,70,30,.35)"; for (let i = 0; i < 18; i++) { ctx.beginPath(); ctx.arc(-R * .5 + (i * 37 % 85) / 100 * R, -R * .3 + (i * 53 % 60) / 100 * R, R * .02, 0, 7); ctx.fill(); } ctx.restore(); }
+      if (salmon > 0) { ctx.save(); ctx.globalAlpha = salmon; ctx.rotate(-.15); for (let i = 0; i < 3; i++) { ctx.fillStyle = i % 2 ? "#f08a64" : "#e9764e"; ctx.beginPath(); ctx.ellipse(-R * .1 + (i - 1) * R * .18, (i - 1) * R * .05, R * .26, R * .15, .4 * (i - 1), 0, 7); ctx.fill(); ctx.strokeStyle = "rgba(255,230,210,.6)"; ctx.lineWidth = R * .015; ctx.beginPath(); ctx.ellipse(-R * .1 + (i - 1) * R * .18, (i - 1) * R * .05, R * .18, R * .09, .4 * (i - 1), .3, 2.5); ctx.stroke(); } ctx.restore(); }
+      if (egg > 0) { const s = .4 + .6 * egg; ctx.save(); ctx.translate(-R * .08, -R * .04); ctx.scale(s, s); ctx.fillStyle = "#fbf8f0"; ctx.beginPath(); for (let i = 0; i <= 24; i++) { const a = i / 24 * 6.283, r = R * .3 * (1 + .1 * Math.sin(a * 5)); i ? ctx.lineTo(Math.cos(a) * r, Math.sin(a) * r * .9) : ctx.moveTo(Math.cos(a) * r, Math.sin(a) * r * .9); } ctx.fill(); ctx.restore(); }
+      if (sauce > 0) { ctx.save(); ctx.translate(-R * .08, -R * .04); ctx.fillStyle = "#f3c94a"; ctx.beginPath(); for (let i = 0; i <= 32; i++) { const a = i / 32 * 6.283, r = R * (.12 + .26 * sauce) * (1 + .18 * Math.sin(a * 4 + 1) * sauce); i ? ctx.lineTo(Math.cos(a) * r, Math.sin(a) * r) : ctx.moveTo(Math.cos(a) * r, Math.sin(a) * r); } ctx.fill(); ctx.fillStyle = "rgba(255,255,255,.4)"; ctx.beginPath(); ctx.ellipse(-R * .08, -R * .08, R * .07 * sauce, R * .03 * sauce, -.4, 0, 7); ctx.fill();
+        if (yolk > 0) { ctx.fillStyle = "#f28c12"; ctx.beginPath(); ctx.moveTo(R * .05, R * .05); ctx.quadraticCurveTo(R * (.15 + .2 * yolk), R * (.1 + .15 * yolk), R * (.08 + .3 * yolk), R * (.3 + .2 * yolk)); ctx.quadraticCurveTo(R * .05, R * (.2 + .1 * yolk), -R * .02, R * .08); ctx.fill(); ctx.beginPath(); ctx.arc(R * .02, R * .04, R * .06, 0, 7); ctx.fill(); }
+        ctx.fillStyle = "#3f7a2e"; for (let i = 0; i < 9; i++) { ctx.beginPath(); ctx.arc(Math.cos(i * 2.3) * R * .2 * sauce, Math.sin(i * 1.7) * R * .18 * sauce, R * .012, 0, 7); ctx.fill(); } ctx.restore(); }
+      ctx.restore(); kgWord(ctx, w, h, cx, h * .13, word * bgA, o); };
+    await tween(500, (e) => { plate = e; draw(); }, tk, (k) => 1 + 2.5 * Math.pow(k - 1, 3) + 1.5 * Math.pow(k - 1, 2));
+    await tween(400, (e) => { leaf = e; toast = e; draw(); }, tk);
+    await tween(400, (e) => { salmon = e; draw(); }, tk);
+    await tween(400, (e) => { egg = e; draw(); }, tk, (k) => 1 + 2.5 * Math.pow(k - 1, 3) + 1.5 * Math.pow(k - 1, 2));
+    await tween(800, (e) => { sauce = e; draw(); }, tk);
+    await tween(600, (e) => { yolk = e; draw(); }, tk);
+    await tween(450, (e) => { word = e; draw(); }, tk);
+    await sleep(o.hold || 1000); if (tk.cancelled) return c.remove();
+    reveal(); await tween(800, (e) => { bgA = 1 - e; zoom = 1 + e * 1.5; word = 1 - e * 2; c.style.opacity = 1 - e; draw(); }, tk); c.remove();
+  }
+
+
+  const redo = $("#redo");
+  let token = { cancelled: true };
+  async function play() {
+    token.cancelled = true; const tk = (token = { cancelled: false });
+    hero.querySelectorAll(".fxl, .stage").forEach((n) => n.remove());
+    hero.classList.remove("reveal"); hero.classList.add("pre"); redo.hidden = true;
+    const top = Math.max(0, hero.getBoundingClientRect().top), vis = Math.max(320, Math.min(hero.clientHeight, innerHeight - top));
+    const stage = document.createElement("div"); stage.className = "stage"; stage.style.cssText = `position:absolute;left:0;right:0;top:0;height:${hero.clientHeight}px;z-index:5;pointer-events:none;overflow:hidden`; hero.append(stage);
+    const inner = document.createElement("div"); inner.style.cssText = `position:absolute;left:0;right:0;top:0;height:${vis}px`; stage.append(inner);
+    if (vis < hero.clientHeight) { const cv = document.createElement("div"); cv.className = "cover"; cv.style.cssText = `position:absolute;left:0;right:0;top:${vis}px;bottom:0;background:#0f1f30;transition:opacity .6s`; stage.append(cv); }
+    await benedict(inner, tk, { serif: '"DM Serif Display", serif', ufamily: '"DM Sans", sans-serif', bg: "#0f1f30", silver: "#9fb0c8" });
+    stage.remove(); if (!tk.cancelled) redo.hidden = false;
+  }
+  redo.addEventListener("click", play);
+  if (reduce) hero.classList.remove("pre"); else document.fonts.ready.then(play);
+})();
+</script>
+</body>
+</html>
