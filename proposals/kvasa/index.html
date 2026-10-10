@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Kvasa · Design proposal</title>
+<meta name="description" content="A website proposal for Kvasa, organic sourdough microbakery on Leith Walk, Edinburgh, by Jota Labs. Not the official website.">
+<meta property="og:title" content="Kvasa · Design proposal">
+<meta property="og:description" content="Organic sourdough microbakery, 101 Leith Walk. A proposal by Jota Labs.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%232a2119'/%3E%3Cellipse cx='32' cy='34' rx='20' ry='15' fill='%23a8692f'/%3E%3Cpath d='M18 32q14-8 28-4' stroke='%23f1dfb8' stroke-width='3' fill='none'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,900&family=Manrope:wght@400;600;800&display=swap">
+<style>
+/* Layout: Score-Intro (Klinge schneidet, Laib geht auf, Ohr bricht auf), Mehlstaub im Hero.
+   What's baking, Seasonal (Christmas, foraged treasures), Ordering, We're hiring, Find us mit Live-Status.
+   Brotkruste-Braun, Mehlweiß, Gold; Fraunces + Manrope. */
+:root {
+  --bg: #2a2119; --bg-2: #33281e; --bg-3: #3d3024; --line: #4d3d2d; --fg: #f3ead6; --soft: #e0d4bd; --muted: #a8987f;
+  --gold: #c9a45c; --crust: #a8692f; --flour: #f5eee0; --ink: #2a2119;
+  --f-display: "Fraunces", Georgia, serif;
+  --f-body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-family: var(--f-display); font-weight: 700; text-wrap: balance; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 800 12px/1.2 var(--f-body); letter-spacing: .18em; text-transform: uppercase; color: var(--gold); }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+.proposal { background: #000; color: #e9ebee; font: 13px/1.4 var(--f-body); padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; }
+.proposal b { color: #ffd166; }
+.proposal a { color: #fff; font-weight: 800; }
+
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.logo { display: inline-flex; align-items: baseline; gap: 10px; text-decoration: none; }
+.logo b { font: 900 28px/1 var(--f-display); letter-spacing: -.02em; }
+.logo small { font: 700 11px var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 14px; font-weight: 600; color: var(--muted); }
+nav.links a:hover { color: var(--fg); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 800 15px/1 var(--f-body); padding: 15px 22px; border-radius: 999px; background: var(--gold); color: var(--ink); border: 2px solid var(--gold); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(201,164,92,.25); }
+.btn.ghost { background: transparent; color: var(--fg); border-color: rgba(243,234,214,.4); }
+.btn.ghost:hover { box-shadow: none; border-color: var(--fg); }
+nav.links a.btn { color: var(--ink); padding: 10px 16px; font-size: 14px; }
+.menu-btn { display: none; background: transparent; color: var(--fg); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font: 800 12px var(--f-body); letter-spacing: .08em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bg-2); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+
+/* ---------- Hero ---------- */
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line);
+  background: radial-gradient(60vw 45vw at 100% 0%, rgba(201,164,92,.16), transparent 70%), radial-gradient(70vw 55vw at 0% 110%, rgba(168,105,47,.32), transparent 70%), var(--bg); }
+.dust { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; }
+.hero .wrap { position: relative; z-index: 1; padding-block: clamp(80px, 12vw, 140px) clamp(56px, 9vw, 104px); display: flex; flex-direction: column; gap: 16px; }
+.hero h1 { font: 900 clamp(84px, 17vw, 210px)/.9 var(--f-display); letter-spacing: -.03em; }
+.hero .lead { margin: 4px 0 0; font-size: clamp(17px, 2.2vw, 21px); color: var(--soft); max-width: 42ch; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.facts span { font: 700 13px var(--f-body); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; background: rgba(42,33,25,.75); }
+.facts span b { color: var(--fg); }
+.status::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); margin-right: 8px; vertical-align: 1px; }
+.status.open::before { background: #5fd38a; box-shadow: 0 0 10px #5fd38a; }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 7; font: 700 13px var(--f-body); color: var(--muted); background: rgba(42,33,25,.85); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.redo:hover { color: var(--fg); }
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero.reveal .wrap > :nth-child(2) { animation-delay: .06s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .12s }
+.hero.reveal .wrap > :nth-child(4) { animation-delay: .18s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .24s }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+
+/* ---------- Abschnitte ---------- */
+section.block { padding-block: clamp(64px, 10vw, 104px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 40px; margin-bottom: 30px; }
+.head h2 { font-size: clamp(36px, 5.6vw, 66px); line-height: 1; margin-top: 10px; }
+.head h2 em { font-style: italic; color: var(--gold); }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+.note { margin-top: 20px; font-size: 13px; color: var(--muted); padding: 10px 14px; border-left: 3px solid var(--gold); background: var(--bg-2); border-radius: 0 10px 10px 0; }
+
+.bakes { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+@media (max-width: 860px) { .bakes { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 480px) { .bakes { grid-template-columns: minmax(0,1fr); } }
+.bk { border: 1px solid var(--line); border-radius: 20px; padding: 22px; background: var(--bg-2); display: grid; gap: 8px; align-content: start; }
+.bk svg { width: 100%; height: 90px; }
+.bk h3 { font-size: 24px; }
+.bk p { margin: 0; color: var(--soft); font-size: 15px; }
+.bk .tag { justify-self: start; font: 800 11px var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--ink); background: var(--gold); border-radius: 999px; padding: 4px 10px; }
+
+.season { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 760px) { .season { grid-template-columns: minmax(0,1fr); } }
+.card { border: 1px solid var(--line); border-radius: 20px; padding: 26px; background: var(--bg-2); display: grid; gap: 10px; align-content: start; }
+.card h3 { font-size: 28px; }
+.card p { margin: 0; color: var(--soft); }
+.card.flour { background: var(--flour); color: var(--ink); border-color: var(--flour); }
+.card.flour p { color: #5a4a38; }
+.card.flour .kicker { color: #8a6a2a; }
+.card.crust { background: linear-gradient(160deg, #b9783a, #8a4f22); border-color: #8a4f22; }
+.card.crust p { color: #f6e6cc; }
+.card.crust .kicker { color: #ffe0a8; }
+.card ul { margin: 0; padding-left: 18px; color: var(--soft); }
+.card.flour ul { color: #5a4a38; }
+
+.visit { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 860px) { .visit { grid-template-columns: minmax(0,1fr); } }
+.map { border-radius: 20px; overflow: hidden; border: 1px solid var(--line); min-height: 320px; }
+.map iframe { width: 100%; height: 100%; min-height: 320px; border: 0; display: block; }
+.hours { display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; margin: 0; font-variant-numeric: tabular-nums; }
+.hours dt { color: var(--muted); } .hours dd { margin: 0; color: var(--soft); }
+.hours .today { color: var(--fg); font-weight: 800; }
+
+footer { padding-block: 40px 96px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 800 14px var(--f-body); padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.35); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></symbol>
+</svg>
+<div class="proposal"><span><b>Design proposal</b> for Kvasa · not the official website</span><span>Made by <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">Jota Labs</a></span></div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top"><b>kvasa</b><small>Leith Walk</small></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENU</button>
+    <nav class="links" id="links">
+      <a href="#baking">What's baking</a>
+      <a href="#seasonal">Seasonal</a>
+      <a href="#hiring">We're hiring</a>
+      <a class="btn" href="#visit">Find us</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero pre" id="top">
+  <canvas class="dust" id="dust" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="kicker">Organic sourdough microbakery · Leith</div>
+    <h1>kvasa</h1>
+    <p class="lead">Slow-fermented organic sourdough, pastries and seasonal bakes, baked fresh at 101 Leith Walk.</p>
+    <div class="ctas"><a class="btn" href="#baking">What's baking</a><a class="btn ghost" href="#visit">Find us</a></div>
+    <div class="facts"><span class="status" id="statusChip">Wed–Sat</span><span><b>Organic</b> sourdough</span><span><b>Zero waste</b>, delivered by bike</span></div>
+  </div>
+  <button class="redo" type="button" id="redo" hidden>↻ Bake another</button>
+</section>
+
+<section class="block" id="baking">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">From the oven</div><h2>What's <em>baking</em></h2></div><p>Long, slow fermentation and organic flour. Come early: when it's gone, it's gone.</p></div>
+    <div class="bakes" id="bakes"></div>
+    <p class="note">Bakes from your Instagram; descriptions are examples. On the final site you could update today's bakes from your phone.</p>
+  </div>
+</section>
+
+<section class="block" id="seasonal" style="padding-top:0">
+  <div class="wrap season">
+    <article class="card crust"><span class="kicker">Seasonal</span><h3>Christmas menu</h3><p>Festive bakes to pre-order, with your holiday opening hours in one place instead of an image post.</p><a class="btn" href="https://www.instagram.com/kvasa.bakery/" target="_blank" rel="noopener" style="justify-self:start;background:var(--flour);border-color:var(--flour)">Ask about pre-orders</a></article>
+    <article class="card flour"><span class="kicker">Foraged treasures</span><h3>Wild and local</h3><p>Chanterelles and other foraged finds when the season brings them. Follow along for what's in this week.</p></article>
+  </div>
+</section>
+
+<section class="block" id="hiring" style="padding-top:0">
+  <div class="wrap">
+    <div class="card" style="grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:20px">
+      <div><span class="kicker">We're hiring</span><h3 style="margin-top:6px">Baker wanted</h3><ul style="margin-top:8px"><li>Minimum 2 years' experience</li><li>Artisan sourdough baking</li><li>Comfortable with early mornings</li><li>Enjoy good food and coffee</li></ul></div>
+      <a class="btn ghost" href="https://www.instagram.com/kvasa.bakery/" target="_blank" rel="noopener">Get in touch</a>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="visit" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Visit us</div><h2>101 Leith Walk</h2></div><p>Edinburgh EH6 8NP.</p></div>
+    <div class="visit">
+      <div class="map"><iframe title="Map: Kvasa, 101 Leith Walk" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-3.1795%2C55.9660%2C-3.1665%2C55.9718&amp;layer=mapnik&amp;marker=55.96891%2C-3.17302"></iframe></div>
+      <div class="card">
+        <h3>Opening hours</h3>
+        <dl class="hours" id="hours"></dl>
+        <h3 style="margin-top:6px">Address</h3>
+        <p>101 Leith Walk, Edinburgh EH6 8NP</p>
+        <div class="ctas"><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Kvasa%20101%20Leith%20Walk%20Edinburgh" target="_blank" rel="noopener">Directions ↗</a><a class="btn ghost" href="https://www.instagram.com/kvasa.bakery/" target="_blank" rel="noopener">Instagram ↗</a></div>
+      </div>
+    </div>
+    <p class="note">Hours from your Instagram bio. Holiday closures would show here and on the front page automatically.</p>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>Kvasa · Organic sourdough microbakery · 101 Leith Walk, Edinburgh EH6 8NP</span><span>Design proposal by Jota Labs · <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">more work</a></span></div></footer>
+
+<a class="like" href="https://wa.me/5491130331893?text=Hi%20Jan%2C%20I%20saw%20the%20website%20proposal%20for%20Kvasa%20and%20I%27d%20like%20to%20know%20more." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Like it? Let's talk</a>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+
+  /* ---------- Bakes ---------- */
+  const loaf = (c, ear) => `<svg viewBox="0 0 200 90" aria-hidden="true"><ellipse cx="100" cy="80" rx="80" ry="7" fill="rgba(0,0,0,.25)"/><ellipse cx="100" cy="50" rx="72" ry="32" fill="${c}"/>${ear}</svg>`;
+  const B = [
+    ["Sourdough loaf", "Our organic country loaf, long-fermented with a crackling crust.", loaf("#a8692f", '<path d="M50 44q50-22 100-6" stroke="#f1dfb8" stroke-width="6" fill="none" stroke-linecap="round"/>'), ""],
+    ["Focaccia", "Olive oil, sea salt and whatever's in season on top.", `<svg viewBox="0 0 200 90" aria-hidden="true"><rect x="28" y="22" width="144" height="56" rx="10" fill="#d9a65a"/>${[...Array(12)].map((_, i) => `<circle cx="${44 + (i % 6) * 22}" cy="${38 + Math.floor(i / 6) * 22}" r="4" fill="#8a5a22"/>`).join("")}<circle cx="70" cy="50" r="5" fill="#4a7a2a"/><circle cx="130" cy="44" r="5" fill="#4a7a2a"/></svg>`, ""],
+    ["Challah", "Braided, glossy and soft inside.", `<svg viewBox="0 0 200 90" aria-hidden="true"><g fill="#b8682a">${[0,1,2,3,4].map((i) => `<ellipse cx="${46 + i * 27}" cy="${50 + (i % 2 ? -6 : 6)}" rx="20" ry="16" transform="rotate(${i % 2 ? 20 : -20} ${46 + i * 27} 50)"/>`).join("")}</g><path d="M30 50q70-30 140 0" stroke="rgba(255,255,255,.18)" stroke-width="4" fill="none"/></svg>`, "Fri"],
+    ["Cinnamon buns", "Swirled, glazed and best still warm.", `<svg viewBox="0 0 200 90" aria-hidden="true">${[70, 130].map((x) => `<circle cx="${x}" cy="48" r="30" fill="#c27a3a"/><path d="M${x} 48m0-4a4 4 0 1 1-4 4 10 10 0 1 1 10 10 16 16 0 1 1-16-16 22 22 0 1 1 22 22" stroke="#7a3f18" stroke-width="3" fill="none"/>`).join("")}</svg>`, ""],
+    ["Croissants", "Laminated by hand, including a vegan sourdough croissant.", `<svg viewBox="0 0 200 90" aria-hidden="true"><path d="M40 60q60-60 120 0l-14 6q-46-40-92 0z" fill="#d79a4a"/><path d="M70 40l6 20M100 30v26M130 40l-6 20" stroke="#9a5a22" stroke-width="3"/></svg>`, "Vegan option"],
+    ["Pecan brownies", "Fudgy, rich, with a crunchy pecan on top.", `<svg viewBox="0 0 200 90" aria-hidden="true">${[60, 140].map((x) => `<rect x="${x - 34}" y="24" width="68" height="52" rx="8" fill="#4a2a18"/><ellipse cx="${x}" cy="44" rx="14" ry="8" fill="#a8692f"/>`).join("")}</svg>`, ""],
+  ];
+  $("#bakes").innerHTML = B.map(([n, d, svg, t]) => `<article class="bk">${svg}<h3>${n}</h3><p>${d}</p>${t ? `<span class="tag">${t}</span>` : ""}</article>`).join("");
+
+  /* ---------- Hours + open now (Edinburgh) ---------- */
+  const H = { Mon: null, Tue: null, Wed: [480, 960], Thu: [480, 960], Fri: [480, 960], Sat: [540, 960], Sun: null };
+  const names = { Mon: "Monday", Tue: "Tuesday", Wed: "Wednesday", Thu: "Thursday", Fri: "Friday", Sat: "Saturday", Sun: "Sunday" };
+  const fmt = (m) => { const h = Math.floor(m / 60); return (h > 12 ? h - 12 : h) + (h >= 12 ? "pm" : "am"); };
+  function status() {
+    const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/London", weekday: "short", hour: "numeric", minute: "numeric", hour12: false }).formatToParts(new Date());
+    const get = (t) => parts.find((x) => x.type === t).value, wd = get("weekday"), m = (+get("hour") % 24) * 60 + +get("minute"), t = H[wd];
+    $("#hours").innerHTML = Object.keys(H).map((d) => `<dt class="${d === wd ? "today" : ""}">${names[d]}</dt><dd class="${d === wd ? "today" : ""}">${H[d] ? fmt(H[d][0]) + " – " + fmt(H[d][1]) : "Closed"}</dd>`).join("");
+    const open = t && m >= t[0] && m < t[1], chip = $("#statusChip");
+    chip.classList.toggle("open", !!open);
+    chip.innerHTML = open ? `<b>Open now</b> · until ${fmt(t[1])}` : t && m < t[0] ? `Opens today at <b>${fmt(t[0])}</b>` : "Closed now · <b>Wed–Sat</b>";
+  }
+  status(); setInterval(status, 60000);
+
+  /* ---------- Hintergrund: Mehlstaub schwebt ---------- */
+  const hero = $("#top"), dc = $("#dust"), dx = dc.getContext("2d"); let D = [];
+  function seed(w, h) { D = Array.from({ length: Math.round(w * h / 2600) }, () => ({ x: Math.random() * w, y: Math.random() * h, r: Math.random() * 1.8 + .3, vx: (Math.random() - .5) * .15, vy: -.05 - Math.random() * .15, a: .08 + Math.random() * .22 })); }
+  function dust() {
+    const dpr = Math.min(2, devicePixelRatio || 1), w = hero.clientWidth, h = hero.clientHeight;
+    if (dc.width !== Math.round(w * dpr) || dc.height !== Math.round(h * dpr)) { dc.width = Math.round(w * dpr); dc.height = Math.round(h * dpr); seed(w, h); }
+    dx.setTransform(dpr, 0, 0, dpr, 0, 0); dx.clearRect(0, 0, w, h);
+    for (const p of D) { if (!reduce) { p.x += p.vx; p.y += p.vy; if (p.y < -5) { p.y = h + 5; p.x = Math.random() * w; } } dx.fillStyle = `rgba(245,238,224,${p.a})`; dx.beginPath(); dx.arc(p.x, p.y, p.r, 0, 7); dx.fill(); }
+    if (!reduce) requestAnimationFrame(dust);
+  }
+  requestAnimationFrame(dust);
+
+  /* ---------- Intro: Score ---------- */
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const ease = (t) => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+  const tween = (ms, fn, tk, ez = ease) => new Promise((res) => { const t0 = performance.now(); const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(ez(k), k); k < 1 ? requestAnimationFrame(step) : res(); }; requestAnimationFrame(step); });
+  const el = (scr, tag, cls, css = "") => { const n = document.createElement(tag); n.className = "fxl " + cls; if (css) n.style.cssText = css; scr.append(n); return n; };
+  const canvas = (parent, cls, z) => { const w = parent.clientWidth, h = parent.clientHeight, dpr = Math.min(2, devicePixelRatio || 1); const c = document.createElement("canvas"); c.className = "fxl " + cls; c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); c.style.cssText = `position:absolute;left:0;top:0;width:${w}px;height:${h}px;z-index:${z};pointer-events:none`; c.setAttribute("aria-hidden", "true"); parent.append(c); const ctx = c.getContext("2d"); ctx.scale(dpr, dpr); return { c, ctx, w, h }; };
+  const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); hero.querySelectorAll(".cover").forEach((n) => (n.style.opacity = "0")); };
+  async function score(scr, tk, o = {}) {
+    const { c, ctx, w, h } = canvas(scr, "score", 5), cx = w / 2, cy = h * .45, R = Math.min(w * .36, h * .24);
+    let cut = 0, rise = 0, bake = 0, open = 0, bgA = 1, txt = 0;
+    const flour = Array.from({ length: 140 }, () => ({ a: Math.random() * 6.28, r: Math.sqrt(Math.random()) * .9, s: Math.random() * 1.6 + .4 }));
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h); ctx.globalAlpha = bgA; ctx.fillStyle = o.bg || "#2a2119"; ctx.fillRect(0, 0, w, h);
+      // Holzbrett
+      ctx.fillStyle = "#5a3f28"; ctx.beginPath(); ctx.ellipse(cx, cy + R * .78, R * 1.5, R * .32, 0, 0, 7); ctx.fill(); ctx.globalAlpha = 1;
+      const sx = 1 + rise * .12, sy = 1 + rise * .22, rx = R * sx, ry = R * .72 * sy;
+      ctx.save(); ctx.translate(cx, cy);
+      // Teig -> Kruste
+      const col = (k) => { const a = [232, 220, 196], b = [146, 86, 40]; return `rgb(${a.map((v, i) => Math.round(v + (b[i] - v) * k)).join(",")})`; };
+      const g = ctx.createRadialGradient(-rx * .3, -ry * .4, 0, 0, 0, rx * 1.1); g.addColorStop(0, col(bake * .8)); g.addColorStop(1, col(Math.min(1, bake * 1.15)));
+      ctx.fillStyle = g; ctx.beginPath(); ctx.ellipse(0, 0, rx, ry, 0, 0, 7); ctx.fill();
+      ctx.fillStyle = `rgba(255,255,255,${.75 * (1 - bake * .6)})`; for (const f of flour) { ctx.beginPath(); ctx.arc(Math.cos(f.a) * f.r * rx, Math.sin(f.a) * f.r * ry, f.s, 0, 7); ctx.fill(); }
+      // Schnitt / Ohr
+      if (cut > 0) {
+        const L = rx * 1.3 * cut, x0 = -rx * .65, y0 = -ry * .15;
+        ctx.save(); ctx.rotate(-.28);
+        if (open > 0) { ctx.fillStyle = `rgb(${Math.round(240 - 70 * bake)},${Math.round(222 - 90 * bake)},${Math.round(186 - 110 * bake)})`; ctx.beginPath(); ctx.moveTo(x0, y0); ctx.quadraticCurveTo(x0 + L / 2, y0 - ry * .32 * open, x0 + L, y0); ctx.quadraticCurveTo(x0 + L / 2, y0 + ry * .12 * open, x0, y0); ctx.fill(); ctx.strokeStyle = "rgba(90,45,15,.9)"; ctx.lineWidth = R * .05 * open; ctx.beginPath(); ctx.moveTo(x0, y0); ctx.quadraticCurveTo(x0 + L / 2, y0 - ry * .32 * open, x0 + L, y0); ctx.stroke(); }
+        else { ctx.strokeStyle = "rgba(90,60,40,.8)"; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x0 + L, y0); ctx.stroke(); }
+        ctx.restore();
+      }
+      ctx.restore();
+      if (txt > 0) { ctx.globalAlpha = txt; ctx.fillStyle = o.ink || "#f3ead6"; ctx.textAlign = "center"; ctx.font = `700 ${Math.min(w * .13, h * .09)}px ${o.family || "Georgia, serif"}`; ctx.fillText(o.label || "", cx, cy + R * 1.55, w * .9); if (o.sub) { ctx.font = `600 ${Math.min(w * .04, h * .03)}px ${o.ufamily || "system-ui"}`; ctx.fillText(o.sub, cx, cy + R * 1.55 + Math.min(w * .07, h * .05), w * .9); } ctx.globalAlpha = 1; }
+    };
+    // Klinge: Spitze liegt im SVG bei (30,118), wird exakt auf die Schnittlinie gesetzt
+    const BW = R * .42, BH = BW * 2;
+    const blade = el(scr, "div", "lame", `position:absolute;left:0;top:0;z-index:6;width:${BW}px;height:${BH}px;pointer-events:none;opacity:0;transition:opacity .2s;transform-origin:${BW / 2}px ${BH * 118 / 120}px;filter:drop-shadow(0 6px 8px rgba(0,0,0,.5))`);
+    blade.innerHTML = `<svg viewBox="0 0 60 120" width="100%" height="100%"><rect x="22" y="0" width="16" height="66" rx="6" fill="#6b4a2e"/><rect x="20" y="58" width="20" height="10" rx="2" fill="#3a2a1a"/><path d="M16 68h28v26L30 118 16 94z" fill="#d6dbe0" stroke="#8c939b" stroke-width="2"/><path d="M30 118 16 94" stroke="#fff" stroke-width="2"/></svg>`;
+    const ang = -.28, ca = Math.cos(ang), sa = Math.sin(ang);
+    const onCut = (e) => { const x0 = -R * .65, y0 = -R * .72 * .15, px = x0 + R * 1.3 * e, py = y0; return [cx + px * ca - py * sa, cy + px * sa + py * ca]; };
+    draw(); await sleep(300);
+    const [sx0, sy0] = onCut(0); blade.style.transform = `translate(${sx0 - BW / 2}px,${sy0 - BH * 118 / 120 - R * .25}px) rotate(18deg)`;
+    blade.style.opacity = 1; await sleep(160);
+    await tween(160, (e) => { const [x, y] = onCut(0); blade.style.transform = `translate(${x - BW / 2}px,${y - BH * 118 / 120 - R * .25 * (1 - e)}px) rotate(18deg)`; }, tk);
+    await tween(700, (e) => { cut = e; const [x, y] = onCut(e); blade.style.transform = `translate(${x - BW / 2}px,${y - BH * 118 / 120}px) rotate(${18 - 4 * e}deg)`; draw(); }, tk);
+    await tween(160, (e) => { const [x, y] = onCut(1); blade.style.transform = `translate(${x - BW / 2 + R * .1 * e}px,${y - BH * 118 / 120 - R * .25 * e}px) rotate(14deg)`; }, tk);
+    blade.style.opacity = 0; await sleep(200);
+    await tween(1600, (e, k) => { rise = e; bake = k; open = Math.max(0, Math.min(1, (k - .25) / .55)); txt = Math.min(1, Math.max(0, (k - .5) * 2.5)); draw(); }, tk, (k) => k);
+    await sleep(o.hold || 800); if (tk.cancelled) { blade.remove(); return c.remove(); }
+    blade.remove(); reveal(scr);
+    await tween(800, (e) => { bgA = 1 - e; txt = 1 - e * 2; ctx.globalAlpha = 1; draw(); c.style.opacity = 1 - e; }, tk);
+    c.remove();
+  }
+
+  const redo = $("#redo");
+  let token = { cancelled: true };
+  async function play() {
+    token.cancelled = true; const tk = (token = { cancelled: false });
+    hero.querySelectorAll(".fxl, .stage").forEach((n) => n.remove());
+    hero.classList.remove("reveal"); hero.classList.add("pre"); redo.hidden = true;
+    const top = Math.max(0, hero.getBoundingClientRect().top), vis = Math.max(320, Math.min(hero.clientHeight, innerHeight - top));
+    const stage = document.createElement("div"); stage.className = "stage"; stage.style.cssText = `position:absolute;left:0;right:0;top:0;height:${hero.clientHeight}px;z-index:5;pointer-events:none;overflow:hidden`; hero.append(stage);
+    const inner = document.createElement("div"); inner.style.cssText = `position:absolute;left:0;right:0;top:0;height:${vis}px`; stage.append(inner);
+    if (vis < hero.clientHeight) { const cv = document.createElement("div"); cv.className = "cover"; cv.style.cssText = `position:absolute;left:0;right:0;top:${vis}px;bottom:0;background:#2a2119;transition:opacity .6s`; stage.append(cv); }
+    await score(inner, tk, { label: "kvasa", sub: "ORGANIC SOURDOUGH · LEITH WALK", family: "Fraunces, serif", ufamily: "Manrope, sans-serif" });
+    stage.remove();
+    if (!tk.cancelled) redo.hidden = false;
+  }
+  redo.addEventListener("click", play);
+  if (reduce) hero.classList.remove("pre"); else document.fonts.ready.then(play);
+})();
+</script>
+</body>
+</html>
