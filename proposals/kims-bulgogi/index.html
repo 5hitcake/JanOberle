@@ -100,7 +100,7 @@ section.block { padding-block: clamp(64px, 10vw, 104px); }
 .step { background: #1d1d1f; color: var(--fg); border-radius: 24px; padding: 24px; display: grid; gap: 12px; align-content: start; box-shadow: 0 16px 30px rgba(80,30,0,.25); }
 .step .num { font: 800 12px var(--f-body); letter-spacing: .2em; color: var(--lime); }
 .step h3 { font-size: 28px; }
-.step svg { width: 100%; height: 110px; }
+.step svg { width: 100%; height: 150px; }
 .opt { list-style: none; margin: 0; padding: 0; display: grid; }
 .opt li { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 2px 12px; padding: 10px 0; border-top: 1px dashed var(--line); }
 .opt b { font-weight: 800; } .opt em { font-style: normal; font-weight: 800; color: var(--orange); grid-row: 1; grid-column: 2; }
@@ -172,11 +172,11 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   <div class="wrap">
     <div class="head"><div><div class="kicker">How to order</div><h2>Build your bowl</h2></div><p>Pick a base, add your meat, finish with extras. Ready in minutes.</p></div>
     <div class="steps">
-      <article class="step"><div class="num">STEP 1</div><h3>Choose your base</h3><svg viewBox="0 0 200 110" aria-hidden="true" id="st1"></svg>
+      <article class="step"><div class="num">STEP 1</div><h3>Choose your base</h3><svg viewBox="0 0 200 145" aria-hidden="true" id="st1"></svg>
         <ul class="opt"><li><b>Rice Bulgogi</b><small>marinated meat served with rice</small></li><li><b>Noodle Bulgogi</b><small>stir-fried glass noodles with vegetables</small></li><li><b>Bibimbap</b><small>rice mixed with bulgogi and vegetables, chilli or soy sauce</small></li></ul></article>
-      <article class="step"><div class="num">STEP 2</div><h3>Add your meat</h3><svg viewBox="0 0 200 110" aria-hidden="true" id="st2"></svg>
+      <article class="step"><div class="num">STEP 2</div><h3>Add your meat</h3><svg viewBox="0 0 200 145" aria-hidden="true" id="st2"></svg>
         <ul class="opt"><li><b>Beef Bulgogi</b><em>£13.00</em><small>beef and vegetables in soy sauce</small></li><li><b>Spicy Pork <span class="chili">🌶</span></b><em>£11.50</em><small>pork with vegetables in red chilli sauce</small></li><li><b>Spicy Chicken <span class="chili">🌶</span></b><em>£11.50</em><small>chicken with vegetables in red chilli sauce</small></li><li><b>Crispy Soy Chicken</b><em>£11.50</em><small>fried chicken in sweet soy sauce</small></li><li><b>Crispy Chilli Chicken <span class="chili">🌶</span></b><em>£11.50</em><small>fried chicken in sweet chilli sauce</small></li><li><b>Fire Chicken <span class="chili">🌶🌶🌶</span></b><em>£13.00</em><small>chicken and vegetables in extra spicy chilli sauce</small></li></ul></article>
-      <article class="step"><div class="num">EXTRAS</div><h3>Make it yours</h3><svg viewBox="0 0 200 110" aria-hidden="true" id="st3"></svg>
+      <article class="step"><div class="num">EXTRAS</div><h3>Make it yours</h3><svg viewBox="0 0 200 145" aria-hidden="true" id="st3"></svg>
         <ul class="opt"><li><b>Add egg</b><small>a fried egg on top</small></li><li><b>Make it spicy</b><small>extra chilli</small></li><li><b>Extra rice</b></li><li><b>Vegetarian?</b><small>veg noodles, spicy tofu or veg bibimbap</small></li></ul></article>
     </div>
     <p class="note">Prices from your "Main Dishes" post. On the final site you could change prices and dishes yourself in a minute.</p>
@@ -242,12 +242,13 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 
   /* ---------- Schritt-Illustrationen ---------- */
   const rnd = ((s) => () => (s = (s * 9301 + 49297) % 233280) / 233280)(5);
-  const bowl = (inner) => `<defs><linearGradient id="bw" x1="0" x2="1"><stop offset="0" stop-color="#141417"/><stop offset=".3" stop-color="#4a4a52"/><stop offset="1" stop-color="#141417"/></linearGradient></defs><ellipse cx="100" cy="104" rx="64" ry="5" fill="rgba(0,0,0,.35)"/>${inner}<path d="M36 60h128c0 26-26 42-64 42S36 86 36 60z" fill="url(#bw)"/><rect x="36" y="58" width="128" height="4" rx="2" fill="#e0338a"/>`;
-  const rice = `<path d="M40 60c0-22 26-34 60-34s60 12 60 34z" fill="#f6f2ea"/>${[...Array(40)].map(() => { const x = 50 + rnd() * 100, y = 34 + rnd() * 24; return `<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="3" ry="1.2" fill="#e2dacb" transform="rotate(${(rnd() * 180) | 0} ${x.toFixed(1)} ${y.toFixed(1)})"/>`; }).join("")}`;
-  const meat = [...Array(11)].map(() => { const x = 58 + rnd() * 84, y = 32 + rnd() * 20; return `<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="12" ry="4.5" fill="#7e3816" transform="rotate(${(rnd() * 180) | 0} ${x.toFixed(1)} ${y.toFixed(1)})"/>`; }).join("");
-  const green = [...Array(8)].map(() => { const x = 60 + rnd() * 80, y = 30 + rnd() * 20; return `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="7" height="3" rx="1" fill="${rnd() > .5 ? "#5aa83a" : "#e8792a"}"/>`; }).join("");
-  const egg = `<path d="M84 30c-12-2-16 8-10 12 4 4 14 6 26 4 14-2 18-10 10-14-6-4-18-4-26-2z" fill="#fffdf6"/><ellipse cx="94" cy="34" rx="7" ry="5" fill="#f6b21a"/><ellipse cx="92" cy="32" rx="2" ry="1" fill="#fff" opacity=".7"/>`;
-  const seeds = [...Array(16)].map(() => `<ellipse cx="${(60 + rnd() * 80).toFixed(1)}" cy="${(30 + rnd() * 24).toFixed(1)}" rx="1.4" ry=".8" fill="#fbf3dc"/>`).join("");
+  const PT = (n, f) => [...Array(n)].map(() => { const a = rnd() * 6.283, r = Math.sqrt(rnd()) * 38; return f(100 + Math.cos(a) * r, 70 + Math.sin(a) * r); }).join("");
+  const bowl = (inner) => `<defs><radialGradient id="bwt" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#4a4a52"/><stop offset="1" stop-color="#141417"/></radialGradient></defs><circle cx="104" cy="76" r="64" fill="rgba(0,0,0,.35)"/><circle cx="100" cy="70" r="64" fill="url(#bwt)"/><circle cx="100" cy="70" r="56" fill="none" stroke="#e0338a" stroke-width="3"/><circle cx="100" cy="70" r="50" fill="#f6f2ea"/>${inner}<path d="M58 40a52 52 0 0 1 30-16" stroke="#fff" stroke-width="3" fill="none" opacity=".25" stroke-linecap="round"/>`;
+  const rice = PT(70, (x, y) => `<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="3.2" ry="1.3" fill="#e2dacb" transform="rotate(${(rnd() * 180) | 0} ${x.toFixed(1)} ${y.toFixed(1)})"/>`);
+  const meat = PT(16, (x, y) => `<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="11" ry="4.5" fill="#7e3816" transform="rotate(${(rnd() * 180) | 0} ${x.toFixed(1)} ${y.toFixed(1)})"/><ellipse cx="${(x - 2).toFixed(1)}" cy="${(y - 1).toFixed(1)}" rx="4" ry="1" fill="#d08a50" opacity=".5"/>`);
+  const green = PT(12, (x, y) => `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="8" height="3" rx="1" fill="${rnd() > .5 ? "#5aa83a" : "#e8792a"}" transform="rotate(${(rnd() * 180) | 0} ${x.toFixed(1)} ${y.toFixed(1)})"/>`);
+  const egg = `<g transform="translate(100 66) scale(1.35) translate(-100 -66)"><path d="M100 48c14 0 22 8 21 18-1 12-10 18-22 17-12-1-20-8-19-19 1-10 8-16 20-16z" fill="#fffdf6"/><circle cx="101" cy="65" r="8.5" fill="#f6b21a"/><ellipse cx="98" cy="62" rx="2.5" ry="1.4" fill="#fff" opacity=".7"/></g>`;
+  const seeds = PT(24, (x, y) => `<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="1.5" ry=".8" fill="#fbf3dc"/>`);
   $("#st1").innerHTML = bowl(rice);
   $("#st2").innerHTML = bowl(rice + meat + green);
   $("#st3").innerHTML = bowl(rice + meat + green + egg + seeds);
