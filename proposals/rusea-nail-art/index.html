@@ -274,7 +274,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     const tip = brush.querySelector(".tip");
     const draw = () => {
       ctx.clearRect(0, 0, w, h); ctx.fillStyle = o.bg || "#f7f4ef"; ctx.fillRect(0, 0, w, h);
-      for (let i = 0; i < n; i++) { if (!prog[i]) continue; const y0 = i * band, dir = i % 2 ? -1 : 1, x = off[i] * w * dir;
+      for (let i = 0; i < n; i++) { if (!prog[i]) continue; const y0 = i * band, dir = i % 2 ? -1 : 1, x = off[i] * (w + band) * 1.1 * dir;
         ctx.save(); ctx.translate(x, 0); ctx.fillStyle = cols[i]; ctx.beginPath(); const L = (w + band) * prog[i];
         if (dir > 0) ctx.roundRect(-band / 2, y0 - 2, L, band + 4, band / 2); else ctx.roundRect(w + band / 2 - L, y0 - 2, L, band + 4, band / 2); ctx.fill();
         const g = ctx.createLinearGradient(0, y0, 0, y0 + band); g.addColorStop(0, "rgba(255,255,255,0)"); g.addColorStop(.22, "rgba(255,255,255,.45)"); g.addColorStop(.3, "rgba(255,255,255,0)"); g.addColorStop(1, "rgba(0,0,0,.05)"); ctx.fillStyle = g; ctx.fill(); ctx.restore(); }
@@ -284,16 +284,17 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
       await tween(520, (e, k) => { prog[i] = k; const bx = dir > 0 ? -band / 2 + (w + band) * k : w + band / 2 - (w + band) * k; brush.style.transform = `translate(${bx - bw / 2}px,${i * band + band / 2 - bw * 3.3}px) rotate(${dir * 28}deg)`; draw(); }, tk, (k) => k); }
     brush.style.transition = "opacity .25s"; brush.style.opacity = 0;
     const D = Math.min(w * .66, h * .42), fs = D * .1, fam = (o.family || "Georgia, serif").replace(/"/g, "'"), ufam = (o.ufamily || "system-ui").replace(/"/g, "'");
-    const badge = el(scr, "div", "badge", `position:absolute;z-index:7;left:${w / 2 - D / 2}px;top:${h / 2 - D / 2}px;width:${D}px;height:${D}px;border-radius:50%;background:radial-gradient(circle at 40% 35%, #ffffff, #ece8e1);box-shadow:0 18px 40px rgba(60,50,40,.22);pointer-events:none;transform:scale(0);transition:transform .5s cubic-bezier(.3,1.5,.5,1),opacity .6s`);
-    badge.innerHTML = `<svg viewBox="0 0 100 100" style="position:absolute;left:20%;top:6%;width:60%;height:60%;overflow:visible"><path class="r1" d="M34 22 C48 14 70 16 70 32 C70 46 52 50 42 50 C56 52 66 60 66 76 C66 84 70 88 76 88" fill="none" stroke="${col}" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><circle class="dot" cx="36" cy="80" r="7.5" fill="${col}" style="transform-box:fill-box;transform-origin:center;transform:translateY(-50px) scale(0)"/></svg>
+    const badge = el(scr, "div", "badge", `position:absolute;z-index:7;left:${w / 2 - D / 2}px;top:${h / 2 - D / 2}px;width:${D}px;height:${D}px;pointer-events:none;opacity:0;transition:opacity .5s`);
+    badge.innerHTML = `<svg viewBox="0 0 100 100" style="position:absolute;left:20%;top:6%;width:60%;height:60%;overflow:visible"><path class="r1" d="M34 22 C48 14 70 16 70 32 C70 46 52 50 42 50 C56 52 66 60 66 76 C66 84 70 88 76 88" fill="none" stroke="${col}" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><circle class="dot" cx="36" cy="80" r="7.5" fill="${col}" style="opacity:0;transform-box:fill-box;transform-origin:center;transform:translateY(-50px) scale(0)"/></svg>
       <div style="position:absolute;left:0;right:0;top:66%;text-align:center;color:#6d6a64;font:500 ${fs}px/1 ${fam};letter-spacing:.42em;padding-left:.42em">RUSEA</div><div style="position:absolute;left:0;right:0;top:77%;text-align:center;color:#8f8a82;font:600 ${fs * .34}px/1 ${ufam};letter-spacing:.4em;padding-left:.4em">NAIL ART</div>`;
     const r1 = badge.querySelector(".r1"), dot = badge.querySelector(".dot"), L = r1.getTotalLength(); r1.style.strokeDasharray = L; r1.style.strokeDashoffset = L;
-    await sleep(80); badge.style.transform = "scale(1)"; await sleep(450);
+    await tween(700, (e, k) => { off = off.map((_, i) => Math.max(0, Math.min(1, (k - i * .1) / .7)) ** 2); draw(); }, tk, (k) => k);
+    badge.style.opacity = 1; await sleep(200);
     await tween(1100, (e) => (r1.style.strokeDashoffset = L * (1 - e)), tk);
-    await tween(500, (e, k) => { const b = 1 - Math.abs(Math.cos(k * Math.PI * 1.5)) * (1 - k); dot.style.transform = `translateY(${-50 * (1 - b)}px) scale(${Math.min(1, k * 2)})`; }, tk, (k) => k);
+    await tween(500, (e, k) => { const b = 1 - Math.abs(Math.cos(k * Math.PI * 1.5)) * (1 - k); dot.style.opacity = 1; dot.style.transform = `translateY(${-50 * (1 - b)}px) scale(${Math.min(1, k * 2)})`; }, tk, (k) => k);
     await sleep(o.hold || 1100); if (tk.cancelled) { brush.remove(); badge.remove(); return c.remove(); }
-    reveal(); brush.remove(); badge.style.opacity = 0; badge.style.transform = "scale(.9)";
-    await tween(850, (e, k) => { off = off.map((_, i) => Math.max(0, Math.min(1, (k - i * .12) / .7)) ** 2); draw(); ctx.globalCompositeOperation = "destination-out"; ctx.globalAlpha = Math.min(1, k * 1.6); ctx.fillRect(0, 0, w, h); ctx.globalCompositeOperation = "source-over"; ctx.globalAlpha = 1; }, tk, (k) => k);
+    reveal(); brush.remove(); badge.style.opacity = 0;
+    await tween(800, (e) => { c.style.opacity = 1 - e; }, tk);
     badge.remove(); c.remove();
   }
 
