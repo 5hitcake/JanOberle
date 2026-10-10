@@ -93,7 +93,9 @@ section.block { padding-block: clamp(64px, 10vw, 104px); }
 @media (max-width: 860px) { .bakes { grid-template-columns: repeat(2, minmax(0,1fr)); } }
 @media (max-width: 480px) { .bakes { grid-template-columns: minmax(0,1fr); } }
 .bk { border: 1px solid var(--line); border-radius: 20px; padding: 22px; background: var(--bg-2); display: grid; gap: 8px; align-content: start; }
-.bk svg { width: 100%; height: 90px; }
+.bk svg { width: 100%; height: 130px; margin-bottom: 4px; filter: drop-shadow(0 6px 10px rgba(0,0,0,.25)); }
+.bk { transition: transform .3s, border-color .3s; }
+.bk:hover { transform: translateY(-3px); border-color: var(--gold); }
 .bk h3 { font-size: 24px; }
 .bk p { margin: 0; color: var(--soft); font-size: 15px; }
 .bk .tag { justify-self: start; font: 800 11px var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--ink); background: var(--gold); border-radius: 999px; padding: 4px 10px; }
@@ -211,14 +213,49 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
 
   /* ---------- Bakes ---------- */
-  const loaf = (c, ear) => `<svg viewBox="0 0 200 90" aria-hidden="true"><ellipse cx="100" cy="80" rx="80" ry="7" fill="rgba(0,0,0,.25)"/><ellipse cx="100" cy="50" rx="72" ry="32" fill="${c}"/>${ear}</svg>`;
+  const sv = (body, defs = "") => `<svg viewBox="0 0 200 120" aria-hidden="true"><defs>${defs}</defs><ellipse cx="100" cy="106" rx="78" ry="8" fill="rgba(0,0,0,.32)"/>${body}</svg>`;
+  const rnd = ((s) => () => (s = (s * 9301 + 49297) % 233280) / 233280)(7);
+  const dots = (n, x0, x1, y0, y1, f) => [...Array(n)].map(() => f(x0 + rnd() * (x1 - x0), y0 + rnd() * (y1 - y0))).join("");
+  const sourdough = sv(
+    `<path d="M28 98C24 52 60 24 100 24s76 28 72 74c-2 8-142 8-144 0z" fill="url(#sdA)"/>
+     <path d="M28 98C24 52 60 24 100 24s76 28 72 74c-2 8-142 8-144 0z" fill="url(#sdF)"/>
+     <path d="M48 66Q96 30 156 50Q100 46 48 66z" fill="#efcf93"/>
+     <path d="M48 64Q96 26 156 48" stroke="#5a2c0e" stroke-width="5" fill="none" stroke-linecap="round"/>
+     <path d="M52 60Q96 30 150 47" stroke="#c98a45" stroke-width="1.6" fill="none" opacity=".8"/>
+     ${dots(40, 50, 150, 30, 60, (x, y) => `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(0.6 + rnd() * 1.2).toFixed(1)}" fill="#fbf4e6" opacity=".7"/>`)}`,
+    `<radialGradient id="sdA" cx=".4" cy=".3" r=".8"><stop offset="0" stop-color="#dba15a"/><stop offset=".55" stop-color="#a8692f"/><stop offset="1" stop-color="#5e3112"/></radialGradient>
+     <radialGradient id="sdF" cx=".5" cy=".15" r=".5"><stop offset="0" stop-color="#fbf4e6" stop-opacity=".55"/><stop offset="1" stop-color="#fbf4e6" stop-opacity="0"/></radialGradient>`);
+  const focaccia = sv(
+    `<g transform="translate(0 26)"><path d="M24 60l8 16h136l8-16z" fill="#9a5a22"/>
+     <path d="M38 34h124q14 0 14 14v14q0 8-14 8H38q-14 0-14-8V48q0-14 14-14z" fill="url(#foA)"/>
+     ${[...Array(15)].map((_, i) => { const x = 44 + (i % 5) * 28 + (i % 2) * 4, y = 44 + Math.floor(i / 5) * 9; return `<ellipse cx="${x}" cy="${y}" rx="5" ry="2.6" fill="#8e5520" opacity=".75"/><ellipse cx="${x - 1}" cy="${y - 1}" rx="2" ry="1" fill="#fff6d8" opacity=".55"/>`; }).join("")}
+     ${[[62, 46], [120, 54], [150, 42]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="6" fill="#c8361e"/><circle cx="${x}" cy="${y}" r="3" fill="#ec7a52"/>`).join("")}
+     ${[[84, 42, -20], [100, 58, 15], [138, 50, -35], [52, 58, 25]].map(([x, y, r]) => `<g transform="translate(${x} ${y}) rotate(${r})" stroke="#3f6b26" stroke-width="2" stroke-linecap="round"><path d="M-10 0h20"/>${[-7, -2, 3, 8].map((t) => `<path d="M${t} 0l-3-4M${t} 0l-3 4"/>`).join("")}</g>`).join("")}
+     ${dots(26, 36, 166, 38, 64, (x, y) => `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="1.8" height="1.8" fill="#fff" opacity=".85"/>`)}</g>`,
+    `<linearGradient id="foA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0c26e"/><stop offset="1" stop-color="#c98a3e"/></linearGradient>`);
+  const challahLobes = [...Array(7)].map((_, i) => { const t = i / 6, x = 34 + i * 22, s = 1 - Math.abs(t - .5) * .6, up = i % 2; return [x, up ? 66 : 80, 26 * s, 19 * s, up ? -30 : 30]; });
+  const challah = sv(
+    challahLobes.map(([x, y, rx, ry, r]) => `<g transform="rotate(${r} ${x} ${y})"><ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" fill="url(#chA)" stroke="#5e2a0c" stroke-width="1.2"/><ellipse cx="${x - rx * .25}" cy="${y - ry * .45}" rx="${rx * .45}" ry="${ry * .2}" fill="#fff" opacity=".35"/></g>`).join("")
+    + dots(30, 40, 160, 56, 84, (x, y) => `<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="1.6" ry=".9" fill="#f6e6c0" transform="rotate(${(rnd() * 180) | 0} ${x.toFixed(1)} ${y.toFixed(1)})"/>`),
+    `<radialGradient id="chA" cx=".4" cy=".3" r=".75"><stop offset="0" stop-color="#e09a48"/><stop offset=".6" stop-color="#a8521c"/><stop offset="1" stop-color="#6a2c0c"/></radialGradient>`);
+  const spiral = (cx, cy, r) => { let d = ""; for (let a = 0; a < Math.PI * 7; a += .2) { const rr = 2 + (r - 4) * a / (Math.PI * 7); d += `${d ? "L" : "M"}${(cx + rr * Math.cos(a)).toFixed(1)} ${(cy + rr * Math.sin(a) * .62).toFixed(1)}`; } return d; };
+  const buns = sv(
+    [[64, 64, 34], [138, 70, 30]].map(([x, y, r]) => `<ellipse cx="${x}" cy="${y + 8}" rx="${r}" ry="${r * .62}" fill="#7a3a14"/><ellipse cx="${x}" cy="${y}" rx="${r}" ry="${r * .62}" fill="url(#cbA)"/><path d="${spiral(x, y, r)}" stroke="#6b2e0e" stroke-width="3.2" fill="none" stroke-linecap="round"/><path d="M${x - r * .8} ${y - 6}q${r * .2} ${r * .3} ${r * .4} 0t${r * .4} 0t${r * .4} 0t${r * .4} 0M${x - r * .6} ${y + 8}q${r * .2} ${r * .25} ${r * .4} 0t${r * .4} 0t${r * .4} 0" stroke="#fffaf0" stroke-width="2.4" fill="none" stroke-linecap="round" opacity=".92" transform="rotate(-18 ${x} ${y})"/>`).join(""),
+    `<radialGradient id="cbA" cx=".45" cy=".35" r=".7"><stop offset="0" stop-color="#e6a560"/><stop offset=".7" stop-color="#b8692c"/><stop offset="1" stop-color="#8a4518"/></radialGradient>`);
+  const segs = [-66, 66, -44, 44, -22, 22, 0].map((a) => { const k = Math.abs(a) / 66, R = 58, rad = a * Math.PI / 180; return [100 + R * Math.sin(rad), 108 - R * Math.cos(rad) + k * k * 6, 22 - k * 9, 31 - k * 13, a]; });
+  const croissant = sv(
+    segs.map(([x, y, rx, ry, a]) => `<g transform="rotate(${a} ${x.toFixed(1)} ${y.toFixed(1)})"><ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="${rx.toFixed(1)}" ry="${ry.toFixed(1)}" fill="url(#crA)" stroke="#7a3c10" stroke-width="1.4"/><path d="M${(x - rx * .7).toFixed(1)} ${(y - ry * .1).toFixed(1)}q${(rx * .7).toFixed(1)} ${(-ry * .5).toFixed(1)} ${(rx * 1.4).toFixed(1)} 0" stroke="#fde3a6" stroke-width="1.6" fill="none" opacity=".7"/><ellipse cx="${(x - rx * .2).toFixed(1)}" cy="${(y - ry * .5).toFixed(1)}" rx="${(rx * .4).toFixed(1)}" ry="${(ry * .14).toFixed(1)}" fill="#fff" opacity=".35"/></g>`).join(""),
+    `<radialGradient id="crA" cx=".45" cy=".3" r=".8"><stop offset="0" stop-color="#f6c56c"/><stop offset=".6" stop-color="#cf8636"/><stop offset="1" stop-color="#8a4414"/></radialGradient>`);
+  const brownie = (x, y) => `<path d="M${x} ${y + 12}l14-12h56l-14 12z" fill="url(#brT)"/><path d="M${x} ${y + 12}h56v34H${x}z" fill="#2c170c"/><path d="M${x + 56} ${y + 12}l14-12v34l-14 12z" fill="#1f1008"/><path d="M${x + 8} ${y + 8}l10-3 8 4 12-5 9 3M${x + 20} ${y + 4}l6 3" stroke="#8a5a3a" stroke-width="1" fill="none" opacity=".7"/><g transform="translate(${x + 35} ${y + 6}) rotate(-12)"><ellipse rx="13" ry="6" fill="#9a5424"/><path d="M-10 0q10-6 20 0M-9 0q9 5 18 0" stroke="#5a2a0e" stroke-width="1.4" fill="none"/><ellipse cx="-3" cy="-2.5" rx="5" ry="1.2" fill="#e0a070" opacity=".6"/></g>`;
+  const brownies = sv(`<g transform="translate(100 104) scale(1.2) translate(-100 -104)">${brownie(28, 56) + brownie(102, 52)}</g>`,
+    `<linearGradient id="brT" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#94603e"/><stop offset="1" stop-color="#55301c"/></linearGradient>`);
   const B = [
-    ["Sourdough loaf", "Our organic country loaf, long-fermented with a crackling crust.", loaf("#a8692f", '<path d="M50 44q50-22 100-6" stroke="#f1dfb8" stroke-width="6" fill="none" stroke-linecap="round"/>'), ""],
-    ["Focaccia", "Olive oil, sea salt and whatever's in season on top.", `<svg viewBox="0 0 200 90" aria-hidden="true"><rect x="28" y="22" width="144" height="56" rx="10" fill="#d9a65a"/>${[...Array(12)].map((_, i) => `<circle cx="${44 + (i % 6) * 22}" cy="${38 + Math.floor(i / 6) * 22}" r="4" fill="#8a5a22"/>`).join("")}<circle cx="70" cy="50" r="5" fill="#4a7a2a"/><circle cx="130" cy="44" r="5" fill="#4a7a2a"/></svg>`, ""],
-    ["Challah", "Braided, glossy and soft inside.", `<svg viewBox="0 0 200 90" aria-hidden="true"><g fill="#b8682a">${[0,1,2,3,4].map((i) => `<ellipse cx="${46 + i * 27}" cy="${50 + (i % 2 ? -6 : 6)}" rx="20" ry="16" transform="rotate(${i % 2 ? 20 : -20} ${46 + i * 27} 50)"/>`).join("")}</g><path d="M30 50q70-30 140 0" stroke="rgba(255,255,255,.18)" stroke-width="4" fill="none"/></svg>`, ""],
-    ["Cinnamon buns", "Swirled, glazed and best still warm.", `<svg viewBox="0 0 200 90" aria-hidden="true">${[70, 130].map((x) => `<circle cx="${x}" cy="48" r="30" fill="#c27a3a"/><path d="M${x} 48m0-4a4 4 0 1 1-4 4 10 10 0 1 1 10 10 16 16 0 1 1-16-16 22 22 0 1 1 22 22" stroke="#7a3f18" stroke-width="3" fill="none"/>`).join("")}</svg>`, ""],
-    ["Croissants", "Laminated by hand, including a vegan sourdough croissant.", `<svg viewBox="0 0 200 90" aria-hidden="true"><path d="M40 60q60-60 120 0l-14 6q-46-40-92 0z" fill="#d79a4a"/><path d="M70 40l6 20M100 30v26M130 40l-6 20" stroke="#9a5a22" stroke-width="3"/></svg>`, "Vegan option"],
-    ["Pecan brownies", "Fudgy, rich, with a crunchy pecan on top.", `<svg viewBox="0 0 200 90" aria-hidden="true">${[60, 140].map((x) => `<rect x="${x - 34}" y="24" width="68" height="52" rx="8" fill="#4a2a18"/><ellipse cx="${x}" cy="44" rx="14" ry="8" fill="#a8692f"/>`).join("")}</svg>`, ""],
+    ["Sourdough loaf", "Our organic country loaf, long-fermented with a crackling crust.", sourdough, ""],
+    ["Focaccia", "Olive oil, sea salt and whatever's in season on top.", focaccia, ""],
+    ["Challah", "Braided, glossy and soft inside.", challah, ""],
+    ["Cinnamon buns", "Swirled, glazed and best still warm.", buns, ""],
+    ["Croissants", "Laminated by hand, including a vegan sourdough croissant.", croissant, "Vegan option"],
+    ["Pecan brownies", "Fudgy, rich, with a crunchy pecan on top.", brownies, ""],
   ];
   $("#bakes").innerHTML = B.map(([n, d, svg, t]) => `<article class="bk">${svg}<h3>${n}</h3><p>${d}</p>${t ? `<span class="tag">${t}</span>` : ""}</article>`).join("");
 
