@@ -119,6 +119,9 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 .game h3 { font: 700 clamp(28px, 4vw, 40px)/1.05 var(--f-display); }
 .game p { color: var(--soft); }
 .game .btn { justify-self: start; }
+.game .keys { display: none; font: 600 14px var(--f-body); color: var(--muted); }
+.game kbd { font: 700 12px var(--f-body); border: 1px solid var(--line); border-radius: 4px; padding: 2px 7px; background: rgba(18,12,8,.7); color: var(--fg); }
+@media (pointer: fine) { .game .keys { display: block; } }
 .game:hover .btn { transform: translateY(-2px); }
 </style>
 </head>
@@ -175,7 +178,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   </div>
 </section>
 <section class="block" id="juego" style="padding-top:0">
-  <div class="wrap"><a class="game" href="juego/"><div><div class="kicker">Minijuego</div><h3>Mjölnir Lost</h3><p>Loki robó el martillo de Thor. Saltá por once mundos, juntá monedas y recuperá a Mjölnir. Se juega en el celular o en la compu.</p><span class="btn">⚡ Jugar ahora</span></div></a></div>
+  <div class="wrap"><a class="game" href="juego/"><div><div class="kicker">Minijuego</div><h3>Mjölnir Lost</h3><p>Loki robó el martillo de Thor. Saltá por once mundos, juntá monedas y recuperá a Mjölnir. Se juega en el celular o en la compu.</p><span class="btn">⚡ Jugar ahora</span><span class="keys"><kbd>←</kbd> <kbd>→</kbd> para moverte · <kbd>Espacio</kbd> para saltar</span></div></a></div>
 </section>
 <section class="block" style="padding-top:0">
   <div class="wrap"><div class="card" style="grid-template-columns:minmax(0,1fr) auto;align-items:center"><div><div class="kicker">Convocatoria</div><h3 style="margin-top:6px;font-size:26px">Artesanos del norte</h3><p style="margin-top:6px">¿Hacés artesanía nórdica, joyería, cuero o tallado? Sumate a la feria de Asgard.</p></div><a class="btn ghost" href="https://wa.me/5491167093542?text=Hola%20Asgard!%20Quiero%20hacer%20una%20reserva." target="_blank" rel="noopener">Escribinos</a></div></div>
