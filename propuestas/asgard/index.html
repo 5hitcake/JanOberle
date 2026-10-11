@@ -113,6 +113,13 @@ footer { padding-block: 40px 96px; border-top: 1px solid var(--line); color: var
 footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 30px; }
 .like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 700 14px system-ui, sans-serif; padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.35); display: inline-flex; gap: 8px; align-items: center; }
 .like svg { width: 18px; height: 18px; }
+.game { position: relative; overflow: hidden; border: 1px solid var(--line); border-radius: 12px; min-height: 340px; display: grid; align-items: end; background: #1b130c url(juego/cover.webp) center/cover no-repeat; text-decoration: none; color: var(--fg); }
+.game::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(18,12,8,.15) 0%, rgba(18,12,8,.92) 62%); }
+.game > div { position: relative; padding: 28px 26px; display: grid; gap: 10px; max-width: 560px; }
+.game h3 { font: 700 clamp(28px, 4vw, 40px)/1.05 var(--f-display); }
+.game p { color: var(--soft); }
+.game .btn { justify-self: start; }
+.game:hover .btn { transform: translateY(-2px); }
 </style>
 </head>
 <body>
@@ -124,7 +131,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   <div class="wrap">
     <a class="logo" href="#top"><i>ᚨ</i>ASGARD</a>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENÚ</button>
-    <nav class="links" id="links"><a href="#experiencias">Experiencias</a><a href="#celebraciones">Celebraciones</a><a href="#eventos">Eventos</a><a href="#visita">Visitanos</a><a class="btn" href="https://wa.me/5491167093542?text=Hola%20Asgard!%20Quiero%20hacer%20una%20reserva." target="_blank" rel="noopener">Reservar</a></nav>
+    <nav class="links" id="links"><a href="#experiencias">Experiencias</a><a href="#celebraciones">Celebraciones</a><a href="#eventos">Eventos</a><a href="#juego">Juego</a><a href="#visita">Visitanos</a><a class="btn" href="https://wa.me/5491167093542?text=Hola%20Asgard!%20Quiero%20hacer%20una%20reserva." target="_blank" rel="noopener">Reservar</a></nav>
   </div>
 </header>
 <section class="hero pre" id="top">
@@ -166,6 +173,9 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     <div class="thor"><svg viewBox="0 0 100 100" aria-hidden="true"><rect x="20" y="14" width="60" height="34" rx="5" fill="#8f949a" stroke="#4a4f55" stroke-width="3"/><path d="M28 22h44M28 40h44" stroke="#5a6068" stroke-width="2"/><text x="50" y="37" text-anchor="middle" font-family="Noto Sans Runic" font-size="16" fill="#e8b552">ᚦ</text><rect x="45" y="48" width="10" height="40" rx="3" fill="#6b4a2e"/><path d="M45 58h10M45 66h10M45 74h10" stroke="#3a2a1a" stroke-width="2"/><circle cx="50" cy="92" r="4" fill="none" stroke="#e8b552" stroke-width="2"/></svg>
       <div><div class="kicker">Los domingos</div><h3>¡El mismísimo Thor te está esperando!</h3><p>Vení a conocerlo en persona y sacate una foto con el dios del trueno.</p></div></div>
   </div>
+</section>
+<section class="block" id="juego" style="padding-top:0">
+  <div class="wrap"><a class="game" href="juego/"><div><div class="kicker">Minijuego</div><h3>Mjölnir Lost</h3><p>Loki robó el martillo de Thor. Saltá por once mundos, juntá monedas y recuperá a Mjölnir. Se juega en el celular o en la compu.</p><span class="btn">⚡ Jugar ahora</span></div></a></div>
 </section>
 <section class="block" style="padding-top:0">
   <div class="wrap"><div class="card" style="grid-template-columns:minmax(0,1fr) auto;align-items:center"><div><div class="kicker">Convocatoria</div><h3 style="margin-top:6px;font-size:26px">Artesanos del norte</h3><p style="margin-top:6px">¿Hacés artesanía nórdica, joyería, cuero o tallado? Sumate a la feria de Asgard.</p></div><a class="btn ghost" href="https://wa.me/5491167093542?text=Hola%20Asgard!%20Quiero%20hacer%20una%20reserva." target="_blank" rel="noopener">Escribinos</a></div></div>
