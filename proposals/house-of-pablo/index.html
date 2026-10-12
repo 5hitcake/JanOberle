@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>House of Pablo · Design proposal</title>
+<meta name="description" content="A website proposal for House of Pablo, modern barbershop at 83 St George's Road, Glasgow city centre, by Jota Labs. Not the official website.">
+<meta property="og:title" content="House of Pablo · Design proposal">
+<meta property="og:description" content="Cuts, fades, beards and restyles on St George's Road, Glasgow. A proposal by Jota Labs.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='31' fill='%23123526'/%3E%3Cpath d='M18 48V28L32 15l14 13v20' fill='none' stroke='%23d4a63c' stroke-width='5'/%3E%3Cpath d='M26 48V34h12v14' fill='none' stroke='%23d4a63c' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=DM+Sans:wght@400;500;700;800&family=Great+Vibes&display=swap">
+<style>
+/* Layout: Neon-Intro (gelbe Röhren formen das Haus aus dem Logo, dann HOUSE OF PABLO), Hero mit leise glimmendem Neon-Haus.
+   Prices aus Booksy (Cuts, Beard, Students & kids), Team, Reviews, Find us.
+   Dunkelgrün wie die Ladenwände, Gold vom Logo, Neon-Gelb; Oswald + DM Sans + Great Vibes. */
+:root {
+  --bg: #0b1f17; --bg-2: #10291f; --bg-3: #153326; --line: rgba(244,236,216,.14); --fg: #f4ecd8; --soft: #ddd3bb; --muted: #9fb0a2;
+  --gold: #d4a63c; --led: #fff6cf; --neon: #ffd43b;
+  --f-display: "Oswald", Impact, sans-serif;
+  --f-body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif; --f-script: "Great Vibes", cursive;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 17px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-family: var(--f-display); font-weight: 700; text-wrap: balance; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 800 12px/1.2 var(--f-body); letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+.proposal { background: #000; color: #e9ebee; font: 13px/1.4 var(--f-body); padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; }
+.proposal b { color: #ffd166; } .proposal a { color: #fff; font-weight: 800; }
+
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 700 20px/1 var(--f-display); color: var(--gold); }
+.xpole { width: 10px; height: 30px; border-radius: 6px; background: repeating-linear-gradient(-45deg, var(--red) 0 5px, #fff 5px 10px, var(--blue) 10px 15px, #fff 15px 20px); background-size: 100% 28px; animation: spin 1.2s linear infinite; }
+@keyframes spin { to { background-position: 0 -28px; } }
+@media (prefers-reduced-motion: reduce) { .xpole { animation: none; } }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 15px; font-weight: 700; color: var(--muted); }
+nav.links a:hover { color: var(--fg); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 800 15px/1 var(--f-body); padding: 15px 22px; border-radius: 6px; background: var(--gold); color: #0b1f17; border: 2px solid var(--gold); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 0 24px rgba(255,252,239,.18); }
+.btn.ghost { background: transparent; color: var(--fg); border-color: rgba(244,239,230,.4); }
+.btn.ghost:hover { border-color: var(--fg); }
+nav.links a.btn { color: #0b1f17; padding: 10px 16px; font-size: 14px; }
+.menu-btn { display: none; background: transparent; color: var(--fg); border: 1px solid var(--line); border-radius: 6px; padding: 8px 14px; font: 800 12px var(--f-body); letter-spacing: .08em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bg-2); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+
+/* ---------- Hero ---------- */
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line); background: radial-gradient(60% 70% at 80% 30%, rgba(255,212,59,.08), transparent 70%), linear-gradient(180deg, #08160f 0%, #0b1f17 60%, #10291f); }
+.neonbg { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; }
+.hero .wrap { position: relative; z-index: 1; padding-block: clamp(80px, 12vw, 140px) clamp(56px, 9vw, 104px); display: flex; flex-direction: column; gap: 16px; }
+.hero h1 { font-size: clamp(60px, 11vw, 140px); line-height: .92; color: var(--fg); letter-spacing: .01em; text-shadow: 0 2px 30px rgba(0,0,0,.6); }
+.hero .lead { margin: 4px 0 0; font-size: clamp(18px, 2.2vw, 22px); color: var(--soft); max-width: 38ch; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.facts span { font: 700 14px var(--f-body); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; background: rgba(11,31,23,.85); }
+.facts span b { color: var(--fg); }
+.status::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); margin-right: 8px; vertical-align: 1px; }
+.status.open::before { background: #5fd38a; box-shadow: 0 0 10px #5fd38a; }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 7; font: 700 13px var(--f-body); color: var(--muted); background: rgba(11,31,23,.85); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.redo:hover { color: var(--fg); }
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero.reveal .wrap > :nth-child(2) { animation-delay: .06s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .12s }
+.hero.reveal .wrap > :nth-child(4) { animation-delay: .18s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .24s }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+
+/* ---------- Abschnitte ---------- */
+section.block { padding-block: clamp(64px, 10vw, 104px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 40px; margin-bottom: 30px; }
+.head h2 { font-size: clamp(34px, 5.4vw, 62px); line-height: 1; margin-top: 10px; }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+.note { margin-top: 20px; font-size: 14px; color: var(--muted); padding: 10px 14px; border-left: 3px solid var(--gold); background: var(--bg-2); border-radius: 0 10px 10px 0; }
+
+.price { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 860px) { .price { grid-template-columns: minmax(0,1fr); } }
+.pcard { background: var(--bg-2); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
+.pcard h3 { font-size: 22px; color: var(--gold); margin-bottom: 8px; }
+.pl { list-style: none; margin: 0; padding: 0; }
+.pl li { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: baseline; padding: 11px 0; border-top: 1px solid var(--line); }
+.pl li::after { content: ""; grid-column: 2; grid-row: 1; border-bottom: 1px dotted rgba(244,239,230,.25); transform: translateY(-4px); }
+.pl b { font-weight: 700; } .pl em { font-style: normal; font-weight: 800; color: var(--led); grid-column: 3; }
+.pl .hot { font: 800 10px var(--f-body); letter-spacing: .12em; color: #0b1f17; background: var(--gold); border-radius: 4px; padding: 2px 6px; margin-left: 8px; vertical-align: 2px; }
+
+.rev { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: 16px; }
+@media (max-width: 860px) { .rev { grid-template-columns: minmax(0,1fr); } }
+.score { background: linear-gradient(160deg, #153326, #0b1f17); border: 1px solid rgba(212,166,60,.35); border-radius: 14px; padding: 28px; display: grid; gap: 6px; align-content: center; }
+.score b { font: 700 clamp(64px, 9vw, 96px)/1 var(--f-display); color: var(--gold); }
+.score span { color: var(--gold); font-size: 24px; letter-spacing: 4px; }
+.score p { margin: 0; color: var(--muted); }
+.quote { background: var(--bg-2); border: 1px solid var(--line); border-radius: 14px; padding: 28px; display: grid; gap: 14px; align-content: center; }
+.quote p { margin: 0; font: 600 clamp(20px, 2.6vw, 28px)/1.35 var(--f-body); }
+.quote small { color: var(--muted); }
+
+.perks { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 860px) { .perks { grid-template-columns: minmax(0,1fr); } }
+.perk { border: 1px solid var(--line); border-radius: 14px; padding: 24px; background: var(--bg-2); display: grid; gap: 8px; }
+.perk svg { width: 40px; height: 40px; }
+.perk h3 { font-size: 20px; }
+.perk p { margin: 0; color: var(--soft); font-size: 15px; }
+
+.visit { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 860px) { .visit { grid-template-columns: minmax(0,1fr); } }
+.map { border-radius: 14px; overflow: hidden; border: 1px solid var(--line); min-height: 320px; }
+.map iframe { width: 100%; height: 100%; min-height: 320px; border: 0; display: block; }
+.card { border: 1px solid var(--line); border-radius: 14px; padding: 26px; background: var(--bg-2); display: grid; gap: 10px; align-content: start; }
+.card h3 { font-size: 22px; } .card p { margin: 0; color: var(--soft); }
+.hours { display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; margin: 0; font-variant-numeric: tabular-nums; }
+.hours dt { color: var(--muted); } .hours dd { margin: 0; color: var(--soft); }
+.hours .today { color: var(--fg); font-weight: 800; }
+
+footer { padding-block: 40px 96px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 800 14px var(--f-body); padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.35); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+
+.logo { color: var(--fg); letter-spacing: .04em; font-size: 22px; }
+.logo .mk { width: 34px; height: 34px; border-radius: 50%; background: #123526; border: 1.5px solid var(--gold); display: grid; place-items: center; }
+.logo .mk svg { width: 22px; height: 22px; }
+.hero h1 small { display: block; font-family: var(--f-script); font-weight: 400; font-size: clamp(34px, 5.5vw, 70px); line-height: .8; color: var(--gold); margin: -.05em 0 -.12em .9em; letter-spacing: 0; }
+@media (max-width: 860px) { .neonbg { opacity: .55; } }
+.hero h1 .nn { color: var(--led); text-shadow: 0 0 18px rgba(255,212,59,.55), 0 0 42px rgba(255,212,59,.25); }
+.pl li small { grid-column: 1 / -1; grid-row: 2; color: var(--muted); font-size: 13px; margin-top: -6px; }
+.team { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 860px) { .team { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+.mate { border: 1px solid var(--line); border-radius: 14px; padding: 22px; background: var(--bg-2); display: grid; gap: 6px; justify-items: start; }
+.mate .av { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; font: 700 24px var(--f-display); color: #0b1f17; background: var(--gold); }
+.mate h3 { font-size: 24px; letter-spacing: .02em; } .mate p { margin: 0; color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></symbol>
+</svg>
+<div class="proposal"><span><b>Design proposal</b> for House of Pablo · not the official website</span><span>Made by <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">Jota Labs</a></span></div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top"><span class="mk"><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M24 88V46L50 20l26 26v42" fill="none" stroke="#d4a63c" stroke-width="9"/><path d="M38 88V58h24v30" fill="none" stroke="#d4a63c" stroke-width="6"/></svg></span>HOUSE OF PABLO</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENU</button>
+    <nav class="links" id="links">
+      <a href="#prices">Prices</a>
+      <a href="#team">Team</a>
+      <a href="#visit">Find us</a>
+      <a class="btn" href="#prices">Book now</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero pre" id="top">
+  <svg class="neonbg" id="neonbg" viewBox="0 0 1000 600" preserveAspectRatio="xMaxYMid slice" aria-hidden="true"><g fill="none" stroke="#ffd43b" stroke-linecap="round" stroke-linejoin="round" opacity=".16" style="filter:drop-shadow(0 0 10px #ffd43b)"><path id="nh" d="M700 520V300L830 170l130 130v220" stroke-width="10"/><path d="M770 520V370h120v150" stroke-width="7"/></g></svg>
+  <div class="wrap">
+    <div class="kicker">Barbers · Glasgow city centre</div>
+    <h1>HOUSE<small>of</small><span class="nn">PABLO</span></h1>
+    <p class="lead">Modern barbershop on St George's Road. Cuts, fades, beards and restyles, booked in a few taps.</p>
+    <div class="ctas"><a class="btn" href="#prices">Book now</a><a class="btn ghost" href="#prices">See prices</a></div>
+    <div class="facts"><span><b>★ 5.0</b> on Booksy</span><span><b>Students</b> from £28</span><span>83 St George's Road</span></div>
+  </div>
+  <button class="redo" type="button" id="redo" hidden>↻ Neon on again</button>
+</section>
+
+<section class="block" id="prices">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Services</div><h2>PRICES</h2></div><p>Pick your service and your barber, then book in seconds.</p></div>
+    <div class="price">
+      <div class="pcard"><h3>CUTS</h3><ul class="pl">
+        <li><b>Cut &amp; style</b><em>£35</em><small>40 min · with Paul, Ryan or Nicole</small></li>
+        <li><b>Long hair cut</b><em>£39+</em><small>40 min</small></li>
+        <li><b>Restyle</b><em>£45</em><small>1 h · with Nicole, if not been cut in 3 months</small></li>
+        <li><b>Junior stylist cut</b><em>£15</em><small>1 h · with Gav</small></li></ul></div>
+      <div class="pcard"><h3>BEARD</h3><ul class="pl">
+        <li><b>Cut &amp; beard</b><em>£42</em><small>40 min to 1 h · with Paul, Ryan or Nicole</small></li>
+        <li><b>Beard trim</b><em>£16</em><small>20 min</small></li></ul></div>
+      <div class="pcard"><h3>STUDENTS &amp; KIDS</h3><ul class="pl">
+        <li><b>Student cut &amp; style</b><em>£28</em><small>40 min · student ID must be shown</small></li>
+        <li><b>Student cut &amp; beard</b><em>£32+</em><small>50 min to 1 h</small></li>
+        <li><b>Student restyle</b><em>£35</em><small>1 h · with Nicole</small></li>
+        <li><b>Kids cut (0–16)</b><em>£25</em><small>40 min</small></li></ul></div>
+    </div>
+    <p class="note">Prices from your Booksy page. On the final site every service gets its own "Book" button straight into your Booksy calendar.</p>
+  </div>
+</section>
+
+<section class="block" id="team" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">The house</div><h2>YOUR BARBERS</h2></div><p>Choose who cuts your hair. Everyone's on Booksy.</p></div>
+    <div class="team">
+      <article class="mate"><span class="av">P</span><h3>PAUL</h3><p>Cut &amp; style · Cut &amp; beard</p></article>
+      <article class="mate"><span class="av">R</span><h3>RYAN</h3><p>Cut &amp; style · Cut &amp; beard · Students · Kids</p></article>
+      <article class="mate"><span class="av">N</span><h3>NICOLE</h3><p>Cut &amp; style · Restyles · Students · Kids</p></article>
+      <article class="mate"><span class="av">G</span><h3>GAV</h3><p>Junior stylist · £15 cuts</p></article>
+    </div>
+    <p class="note">Names from your Booksy services. With photos of the team and their work, each card could show their best cuts.</p>
+  </div>
+</section>
+
+<section class="block" id="reviews" style="padding-top:0">
+  <div class="wrap rev">
+    <div class="score"><div class="kicker">Reviews</div><b>5.0</b><span aria-label="5 out of 5 stars">★★★★★</span><p>Rated 5 out of 5 on Booksy.</p></div>
+    <div class="quote"><p>Your best reviews could rotate here, straight from Booksy and Google.</p><small>Space for customer quotes</small></div>
+  </div>
+</section>
+
+<section class="block" id="visit" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Visit us</div><h2>83 ST GEORGE'S ROAD</h2></div><p>Glasgow city centre, G3 6JA.</p></div>
+    <div class="visit">
+      <div class="map"><iframe title="Map: House of Pablo, 83 St George's Road" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-4.2771%2C55.8656%2C-4.2641%2C55.8714&amp;layer=mapnik&amp;marker=55.86854%2C-4.27059"></iframe></div>
+      <div class="card">
+        <h3>Address</h3>
+        <p>House of Pablo<br>83 St George's Road<br>Glasgow G3 6JA</p>
+        <h3 style="margin-top:6px">Booking</h3>
+        <p>Book online through Booksy. Pick your service, your barber and a time that suits you.</p>
+        <div class="ctas"><a class="btn" href="#prices">Book now</a><a class="btn ghost" href="https://www.google.com/maps/search/?api=1&amp;query=House%20of%20Pablo%2083%20St%20George%27s%20Road%20Glasgow" target="_blank" rel="noopener">Directions ↗</a></div>
+      </div>
+    </div>
+    <p class="note">With your opening hours, this card would show them and a live "open now" status.</p>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>House of Pablo · 83 St George's Road, Glasgow G3 6JA · Modern barbershop</span><span>Design proposal by Jota Labs · <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">more work</a></span></div></footer>
+
+<a class="like" href="https://wa.me/5491130331893?text=Hi%20Jan%2C%20I%20saw%20the%20website%20proposal%20for%20House%20of%20Pablo%20and%20I%27d%20like%20to%20know%20more." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Like it? Let's talk</a>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+  const hero = $("#top");
+
+  /* ---------- Hintergrund: Neon-Haus flackert ab und zu leise ---------- */
+  const ng = $("#neonbg g");
+  if (!reduce) (function flick() { setTimeout(() => { ng.style.opacity = ".05"; setTimeout(() => { ng.style.opacity = ".16"; setTimeout(() => { ng.style.opacity = ".07"; setTimeout(() => { ng.style.opacity = ".16"; flick(); }, 70); }, 90); }, 80); }, 3500 + Math.random() * 4000); })();
+
+  /* ---------- Intro: Neon ---------- */
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const tween = (ms, fn, tk, ez = (t) => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2)) => new Promise((res) => { const t0 = performance.now(); const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(ez(k), k); k < 1 ? requestAnimationFrame(step) : res(); }; requestAnimationFrame(step); });
+  const canvas = (parent, cls, z) => { const w = parent.clientWidth, h = parent.clientHeight, dpr = Math.min(2, devicePixelRatio || 1); const c = document.createElement("canvas"); c.className = "fxl " + cls; c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); c.style.cssText = `position:absolute;left:0;top:0;width:${w}px;height:${h}px;z-index:${z};pointer-events:none`; c.setAttribute("aria-hidden", "true"); parent.append(c); const ctx = c.getContext("2d"); ctx.scale(dpr, dpr); return { c, ctx, w, h }; };
+  const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); hero.querySelectorAll(".cover").forEach((n) => (n.style.opacity = "0")); };
+  /* ---------- Pablo neon: gelbe Neonröhren flackern einzeln an und bilden das Haus, dann der Name ---------- */
+  async function pabloneon(scr, tk, o = {}) {
+    const { c, ctx, w, h } = canvas(scr, "pneon", 5), S = Math.min(w * .62, h * .36), cx = w / 2, cy = h * .4, col = o.neon || "#ffd43b";
+    const P = (x, y) => [cx + (x - 50) / 100 * S, cy + (y - 50) / 100 * S];
+    const segs = [[[24, 88], [24, 46]], [[24, 46], [50, 20]], [[50, 20], [76, 46]], [[76, 46], [76, 88]], [[38, 88], [38, 60]], [[38, 60], [62, 60]], [[62, 60], [62, 88]]].map((s, i) => ({ a: P(...s[0]), b: P(...s[1]), on: 0, t: 0 }));
+    const words = [{ s: "HOUSE OF", on: 0 }, { s: "PABLO", on: 0 }]; let bgA = 1, flash = 0, buzz = 0;
+    const tube = (a, b, k) => { if (k <= 0) return; ctx.save(); ctx.globalAlpha = k; ctx.lineCap = "round"; ctx.strokeStyle = col; ctx.shadowColor = col; ctx.shadowBlur = S * .09; ctx.lineWidth = S * .045; ctx.beginPath(); ctx.moveTo(...a); ctx.lineTo(...b); ctx.stroke(); ctx.shadowBlur = 0; ctx.strokeStyle = "#fff8d6"; ctx.lineWidth = S * .015; ctx.stroke(); ctx.restore(); };
+    const draw = (now) => {
+      ctx.clearRect(0, 0, w, h); ctx.globalAlpha = bgA; ctx.fillStyle = o.bg || "#07090a"; ctx.fillRect(0, 0, w, h);
+      const lit = segs.reduce((n, s) => n + s.on, 0) / segs.length; const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(w, h) * .6); g.addColorStop(0, `rgba(255,212,59,${.16 * lit})`); g.addColorStop(1, "rgba(255,212,59,0)"); ctx.fillStyle = g; ctx.fillRect(0, 0, w, h); ctx.globalAlpha = 1;
+      for (const s of segs) { ctx.save(); ctx.globalAlpha = .18 * bgA; ctx.strokeStyle = "#556"; ctx.lineWidth = S * .03; ctx.lineCap = "round"; ctx.beginPath(); ctx.moveTo(...s.a); ctx.lineTo(...s.b); ctx.stroke(); ctx.restore();
+        const fl = s.on > 0 && s.on < 1 ? (Math.sin(now / 23 + s.t) > .2 ? 1 : .15) : (s.on >= 1 && buzz && Math.sin(now / 37 + s.t * 9) > .985 ? .4 : 1); tube(s.a, s.b, s.on * fl); }
+      ctx.textAlign = "center"; ctx.textBaseline = "middle";
+      words.forEach((wd, i) => { if (!wd.on) return; const fl = wd.on < 1 ? (Math.sin(now / 19 + i) > 0 ? 1 : .2) : 1; ctx.save(); ctx.globalAlpha = wd.on * fl; ctx.fillStyle = "#fff6cf"; ctx.shadowColor = col; ctx.shadowBlur = S * .08;
+        ctx.font = i ? `700 ${S * .3}px ${o.family || "Oswald, Impact, sans-serif"}` : `600 ${S * .1}px ${o.ufamily || "system-ui"}`; if (!i) ctx.letterSpacing = `${S * .04}px`;
+        ctx.fillText(wd.s, cx, i ? cy + S * .78 : cy + S * .54); ctx.restore(); });
+      if (flash > 0) { ctx.fillStyle = `rgba(255,246,207,${flash})`; ctx.fillRect(0, 0, w, h); }
+    };
+    let live = true; const lp = (now) => { if (!live || tk.cancelled) return; draw(now); requestAnimationFrame(lp); }; requestAnimationFrame(lp);
+    await sleep(400);
+    for (const s of segs) { s.t = Math.random() * 9; s.on = .5; await sleep(110); s.on = 1; await sleep(60); if (tk.cancelled) break; }
+    buzz = 1; await sleep(250); words[0].on = .5; await sleep(220); words[0].on = 1; await sleep(160); words[1].on = .5; await sleep(300); words[1].on = 1;
+    await sleep(o.hold || 1200); if (tk.cancelled) { live = false; return c.remove(); }
+    reveal(); await tween(200, (e) => { flash = e * .85; }, tk);
+    await tween(600, (e) => { flash = .85 * (1 - e); bgA = 1 - e; c.style.opacity = 1 - e; }, tk); live = false; c.remove();
+  }
+
+  const redo = $("#redo");
+  let token = { cancelled: true };
+  async function play() {
+    token.cancelled = true; const tk = (token = { cancelled: false });
+    hero.querySelectorAll(".fxl, .stage").forEach((n) => n.remove());
+    hero.classList.remove("reveal"); hero.classList.add("pre"); redo.hidden = true;
+    const top = Math.max(0, hero.getBoundingClientRect().top), vis = Math.max(320, Math.min(hero.clientHeight, innerHeight - top));
+    const stage = document.createElement("div"); stage.className = "stage"; stage.style.cssText = `position:absolute;left:0;right:0;top:0;height:${hero.clientHeight}px;z-index:5;pointer-events:none;overflow:hidden`; hero.append(stage);
+    const inner = document.createElement("div"); inner.style.cssText = `position:absolute;left:0;right:0;top:0;height:${vis}px`; stage.append(inner);
+    if (vis < hero.clientHeight) { const cv = document.createElement("div"); cv.className = "cover"; cv.style.cssText = `position:absolute;left:0;right:0;top:${vis}px;bottom:0;background:#10291f;transition:opacity .6s`; stage.append(cv); }
+    await pabloneon(inner, tk, { family: "Oswald, Impact, sans-serif", ufamily: "\"DM Sans\", sans-serif" });
+    stage.remove();
+    if (!tk.cancelled) redo.hidden = false;
+  }
+  redo.addEventListener("click", play);
+  if (reduce) hero.classList.remove("pre"); else document.fonts.ready.then(play);
+})();
+</script>
+</body>
+</html>
