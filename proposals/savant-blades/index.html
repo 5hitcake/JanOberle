@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Savant Blades · Design proposal</title>
+<meta name="description" content="A website proposal for Savant Blades, barber at 12 Washington Street, Glasgow, by Jota Labs. Not the official website.">
+<meta property="og:title" content="Savant Blades · Design proposal">
+<meta property="og:description" content="Razor-sharp detailing from a North American barber in Glasgow. A proposal by Jota Labs.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230c0c0d'/%3E%3Crect x='8' y='22' width='48' height='20' rx='3' fill='%23f5f6f8'/%3E%3Crect x='17' y='30' width='30' height='4' fill='%230c0c0d'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: Intro = Leuchtschild (A) + Klingen-Schnitt (B): Klingen-Schild flackert an, Name schreibt sich, Klinge schneidet das Bild diagonal auf.
+   Hero mit glimmendem Klingen-Schild, Services (Savant / Junior & Students), About Savant, Team, Reviews, Find us mit Live-Status.
+   Schwarz/Weiß wie Laden und Logo; Permanent Marker + Inter. */
+:root {
+  --bg: #0c0c0d; --bg-2: #151517; --bg-3: #1d1d20; --line: rgba(245,246,248,.13); --fg: #f5f6f8; --soft: #d4d6da; --muted: #8d9096;
+  --gold: #f5f6f8; --led: #ffffff; --neon: #ffffff;
+  --f-display: "Permanent Marker", cursive;
+  --f-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; --f-script: "Permanent Marker", cursive;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 17px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-family: var(--f-display); font-weight: 700; text-wrap: balance; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 800 12px/1.2 var(--f-body); letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+.proposal { background: #000; color: #e9ebee; font: 13px/1.4 var(--f-body); padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; }
+.proposal b { color: #ffd166; } .proposal a { color: #fff; font-weight: 800; }
+
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 700 20px/1 var(--f-display); color: var(--gold); }
+.xpole { width: 10px; height: 30px; border-radius: 6px; background: repeating-linear-gradient(-45deg, var(--red) 0 5px, #fff 5px 10px, var(--blue) 10px 15px, #fff 15px 20px); background-size: 100% 28px; animation: spin 1.2s linear infinite; }
+@keyframes spin { to { background-position: 0 -28px; } }
+@media (prefers-reduced-motion: reduce) { .xpole { animation: none; } }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 15px; font-weight: 700; color: var(--muted); }
+nav.links a:hover { color: var(--fg); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 800 15px/1 var(--f-body); padding: 15px 22px; border-radius: 6px; background: var(--gold); color: #0c0c0d; border: 2px solid var(--gold); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 0 24px rgba(255,252,239,.18); }
+.btn.ghost { background: transparent; color: var(--fg); border-color: rgba(244,239,230,.4); }
+.btn.ghost:hover { border-color: var(--fg); }
+nav.links a.btn { color: #0c0c0d; padding: 10px 16px; font-size: 14px; }
+.menu-btn { display: none; background: transparent; color: var(--fg); border: 1px solid var(--line); border-radius: 6px; padding: 8px 14px; font: 800 12px var(--f-body); letter-spacing: .08em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bg-2); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+
+/* ---------- Hero ---------- */
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line); background: radial-gradient(50% 60% at 78% 40%, rgba(255,255,255,.07), transparent 70%), linear-gradient(180deg, #0c0c0d 0%, #0c0c0d 72%, #232326); }
+
+.hero .wrap { position: relative; z-index: 1; padding-block: clamp(80px, 12vw, 140px) clamp(56px, 9vw, 104px); display: flex; flex-direction: column; gap: 16px; }
+.hero h1 { font-size: clamp(60px, 11vw, 140px); line-height: .92; color: var(--fg); letter-spacing: .01em; text-shadow: 0 2px 30px rgba(0,0,0,.6); }
+.hero .lead { margin: 4px 0 0; font-size: clamp(18px, 2.2vw, 22px); color: var(--soft); max-width: 38ch; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.facts span { font: 700 14px var(--f-body); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; background: rgba(12,12,13,.85); }
+.facts span b { color: var(--fg); }
+.status::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); margin-right: 8px; vertical-align: 1px; }
+.status.open::before { background: #5fd38a; box-shadow: 0 0 10px #5fd38a; }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 7; font: 700 13px var(--f-body); color: var(--muted); background: rgba(12,12,13,.85); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.redo:hover { color: var(--fg); }
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero.reveal .wrap > :nth-child(2) { animation-delay: .06s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .12s }
+.hero.reveal .wrap > :nth-child(4) { animation-delay: .18s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .24s }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+
+/* ---------- Abschnitte ---------- */
+section.block { padding-block: clamp(64px, 10vw, 104px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 40px; margin-bottom: 30px; }
+.head h2 { font-size: clamp(34px, 5.4vw, 62px); line-height: 1; margin-top: 10px; }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+.note { margin-top: 20px; font-size: 14px; color: var(--muted); padding: 10px 14px; border-left: 3px solid var(--gold); background: var(--bg-2); border-radius: 0 10px 10px 0; }
+
+.price { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 860px) { .price { grid-template-columns: minmax(0,1fr); } }
+.pcard { background: var(--bg-2); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
+.pcard h3 { font-size: 22px; color: var(--gold); margin-bottom: 8px; }
+.pl { list-style: none; margin: 0; padding: 0; }
+.pl li { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: baseline; padding: 11px 0; border-top: 1px solid var(--line); }
+.pl li::after { content: ""; grid-column: 2; grid-row: 1; border-bottom: 1px dotted rgba(244,239,230,.25); transform: translateY(-4px); }
+.pl b { font-weight: 700; } .pl em { font-style: normal; font-weight: 800; color: var(--led); grid-column: 3; }
+.pl .hot { font: 800 10px var(--f-body); letter-spacing: .12em; color: #0c0c0d; background: var(--gold); border-radius: 4px; padding: 2px 6px; margin-left: 8px; vertical-align: 2px; }
+
+.rev { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: 16px; }
+@media (max-width: 860px) { .rev { grid-template-columns: minmax(0,1fr); } }
+.score { background: linear-gradient(160deg, #1d1d20, #0c0c0d); border: 1px solid rgba(255,255,255,.25); border-radius: 14px; padding: 28px; display: grid; gap: 6px; align-content: center; }
+.score b { font: 700 clamp(64px, 9vw, 96px)/1 var(--f-display); color: var(--gold); }
+.score span { color: var(--gold); font-size: 24px; letter-spacing: 4px; }
+.score p { margin: 0; color: var(--muted); }
+.quote { background: var(--bg-2); border: 1px solid var(--line); border-radius: 14px; padding: 28px; display: grid; gap: 14px; align-content: center; }
+.quote p { margin: 0; font: 600 clamp(20px, 2.6vw, 28px)/1.35 var(--f-body); }
+.quote small { color: var(--muted); }
+
+.perks { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 860px) { .perks { grid-template-columns: minmax(0,1fr); } }
+.perk { border: 1px solid var(--line); border-radius: 14px; padding: 24px; background: var(--bg-2); display: grid; gap: 8px; }
+.perk svg { width: 40px; height: 40px; }
+.perk h3 { font-size: 20px; }
+.perk p { margin: 0; color: var(--soft); font-size: 15px; }
+
+.visit { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 860px) { .visit { grid-template-columns: minmax(0,1fr); } }
+.map { border-radius: 14px; overflow: hidden; border: 1px solid var(--line); min-height: 320px; }
+.map iframe { width: 100%; height: 100%; min-height: 320px; border: 0; display: block; }
+.card { border: 1px solid var(--line); border-radius: 14px; padding: 26px; background: var(--bg-2); display: grid; gap: 10px; align-content: start; }
+.card h3 { font-size: 22px; } .card p { margin: 0; color: var(--soft); }
+.hours { display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; margin: 0; font-variant-numeric: tabular-nums; }
+.hours dt { color: var(--muted); } .hours dd { margin: 0; color: var(--soft); }
+.hours .today { color: var(--fg); font-weight: 800; }
+
+footer { padding-block: 40px 96px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 800 14px var(--f-body); padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.35); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+
+.logo { color: var(--fg); letter-spacing: .04em; font-size: 22px; }
+.logo .mk { width: 44px; height: 22px; display: grid; place-items: center; }
+.logo .mk svg { width: 44px; height: 22px; }
+
+.hero h1 .nn { color: var(--led); text-shadow: 0 0 18px rgba(255,212,59,.55), 0 0 42px rgba(255,212,59,.25); }
+.pl li small { grid-column: 1 / -1; grid-row: 2; color: var(--muted); font-size: 13px; margin-top: -6px; }
+.team { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 860px) { .team { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+.mate { border: 1px solid var(--line); border-radius: 14px; padding: 22px; background: var(--bg-2); display: grid; gap: 6px; justify-items: start; }
+.mate .av { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; font: 24px var(--f-display); color: #0c0c0d; background: var(--fg); }
+.mate h3 { font-size: 24px; letter-spacing: .02em; } .mate p { margin: 0; color: var(--muted); font-size: 14px; }
+
+.hero h1 { font-family: var(--f-display); font-weight: 400; font-size: clamp(56px, 10vw, 124px); line-height: 1; transform: rotate(-2deg); transform-origin: left; text-shadow: 0 0 30px rgba(255,255,255,.18); }
+.signbg { position: absolute; right: 5%; top: 58%; width: min(36vw, 440px); transform: translateY(-50%); z-index: 0; opacity: .16; filter: drop-shadow(0 0 30px rgba(255,255,255,.6)); pointer-events: none; }
+.signbg svg { width: 100%; height: auto; display: block; }
+@media (max-width: 860px) { .signbg { opacity: .08; right: -30%; } }
+.head h2, .pcard h3, .mate h3, .card h3 { font-weight: 400; }
+.about { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 16px; align-items: stretch; }
+@media (max-width: 860px) { .about { grid-template-columns: minmax(0,1fr); } }
+.about .big { border: 1px solid var(--line); border-radius: 14px; padding: 28px; background: var(--bg-2); display: grid; gap: 12px; align-content: center; }
+.about .big p { margin: 0; color: var(--soft); font-size: 18px; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tags span { font: 700 13px var(--f-body); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; color: var(--soft); }
+.quotes { display: grid; gap: 12px; }
+.quote p { font-weight: 600; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></symbol>
+</svg>
+<div class="proposal"><span><b>Design proposal</b> for Savant Blades · not the official website</span><span>Made by <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">Jota Labs</a></span></div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top"><span class="mk"><svg viewBox="-50 -21 100 42" aria-hidden="true"><path fill="#f5f6f8" fill-rule="evenodd" d="M-46-21h92a4 4 0 0 1 4 4v12a5 5 0 0 0 0 10v12a4 4 0 0 1-4 4h-92a4 4 0 0 1-4-4V5a5 5 0 0 0 0-10v-12a4 4 0 0 1 4-4zM-31-2h62v4h-62zM-14 0a4 4 0 1 0 8 0a4 4 0 1 0-8 0zM-4 0a4 4 0 1 0 8 0a4 4 0 1 0-8 0zM6 0a4 4 0 1 0 8 0a4 4 0 1 0-8 0z"/></svg></span>SAVANT BLADES</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENU</button>
+    <nav class="links" id="links">
+      <a href="#prices">Prices</a>
+      <a href="#about">About</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#visit">Find us</a>
+      <a class="btn" href="https://www.fresha.com/a/savant-blades-glasgow-12-washington-street-sf4rw526" target="_blank" rel="noopener">Book now</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero pre" id="top">
+  <div class="signbg"><svg viewBox="-50 -21 100 42" aria-hidden="true"><path fill="#f5f6f8" fill-rule="evenodd" d="M-46-21h92a4 4 0 0 1 4 4v12a5 5 0 0 0 0 10v12a4 4 0 0 1-4 4h-92a4 4 0 0 1-4-4V5a5 5 0 0 0 0-10v-12a4 4 0 0 1 4-4zM-31-2h62v4h-62zM-14 0a4 4 0 1 0 8 0a4 4 0 1 0-8 0zM-4 0a4 4 0 1 0 8 0a4 4 0 1 0-8 0zM6 0a4 4 0 1 0 8 0a4 4 0 1 0-8 0z"/></svg></div>
+  <div class="wrap">
+    <div class="kicker">Glasgow barber · Washington Street</div>
+    <h1>Savant Blades</h1>
+    <p class="lead">Luxury grooming with razor-sharp detailing, from a North American barber and hair educator.</p>
+    <div class="ctas"><a class="btn" href="https://www.fresha.com/a/savant-blades-glasgow-12-washington-street-sf4rw526" target="_blank" rel="noopener">Book on Fresha</a><a class="btn ghost" href="#prices">See prices</a></div>
+    <div class="facts"><span class="status" id="statusChip">Wed–Sat 10am–7pm</span><span><b>★ 5.0</b> · 491 reviews on Fresha</span></div>
+  </div>
+  <button class="redo" type="button" id="redo" hidden>↻ Lights on again</button>
+</section>
+
+<section class="block" id="prices">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Services</div><h2>Prices</h2></div><p>Book your chair in a few taps. Instant confirmation, pay in the app.</p></div>
+    <div class="price">
+      <div class="pcard"><h3>With Savant</h3><ul class="pl"><li><b>Haircut</b><em>£38</em><small>1 h</small></li><li><b>Line up &amp; beard trim</b><em>£23</em><small>30 min</small></li><li><b>Haircut &amp; beard trim</b><em>£45</em><small>1 h 15 min</small></li></ul></div>
+      <div class="pcard"><h3>Junior barber &amp; students</h3><ul class="pl"><li><b>Junior barber haircut</b><em>£25.50</em><small>1 h 15 min</small></li><li><b>Junior barber line up &amp; beard trim</b><em>£16</em><small>40 min</small></li><li><b>Junior barber haircut &amp; beard trim</b><em>£29</em><small>1 h 30 min</small></li><li><b>Student haircut</b><em>£22</em><small>1 h 15 min</small></li><li><b>Student haircut &amp; beard trim</b><em>£25.50</em><small>1 h 30 min</small></li></ul></div>
+    </div>
+    <p class="note">Prices from your Fresha page. Every "Book" button goes straight into your Fresha calendar.</p>
+  </div>
+</section>
+
+<section class="block" id="about" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">The barber</div><h2>Meet Savant</h2></div><p>North American barber and hair educator, now in Glasgow Central.</p></div>
+    <div class="about">
+      <div class="big"><p>Savant brings over five years of experience from North America, focused on the precision art of cutting and styling Afro-textured hair.</p><p>American-style barbering: fades, beard grooming, enhancements and precise line-ups.</p><div class="tags"><span>Fades</span><span>Afro-textured hair</span><span>Line-ups</span><span>Beard grooming</span><span>Enhancements</span></div></div>
+      <div class="team" style="grid-template-columns:minmax(0,1fr)">
+        <article class="mate"><span class="av">S</span><h3>Savant</h3><p>North American barber &amp; hair educator</p></article>
+        <article class="mate"><span class="av">J</span><h3>Junior barber</h3><p>@angelicblendz · haircuts, line-ups &amp; student cuts</p></article>
+        <article class="mate"><span class="av">D</span><h3>Drew</h3><p>@dfcuts_ · precision barbering</p></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="reviews" style="padding-top:0">
+  <div class="wrap rev">
+    <div class="score"><div class="kicker">Reviews</div><b style="font-family:var(--f-body);font-weight:800">5.0</b><span aria-label="5 out of 5 stars">★★★★★</span><p>491 reviews on Fresha. Highly recommended.</p></div>
+    <div class="quotes">
+      <figure class="quote" style="margin:0"><p>"Best Barber in Glasgow!!"</p><small>William F · Fresha</small></figure>
+      <figure class="quote" style="margin:0"><p>"Came all the way up from Dumfries. Had the best hair barbing service in a while."</p><small>Abiola K · Fresha</small></figure>
+      <figure class="quote" style="margin:0"><p>"They did a great job shaving me. The service was excellent, and I was really happy with the result."</p><small>Yeboah K · Fresha</small></figure>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="visit" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Find us</div><h2>12 Washington St</h2></div><p>Floor 1, look for the black door. Glasgow G3 8AZ.</p></div>
+    <div class="visit">
+      <div class="map"><iframe title="Map: Savant Blades, 12 Washington Street" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-4.2751%2C55.8551%2C-4.2621%2C55.8609&amp;layer=mapnik&amp;marker=55.85798%2C-4.26859"></iframe></div>
+      <div class="card">
+        <h3>Opening hours</h3>
+        <dl class="hours" id="hours"></dl>
+        <h3 style="margin-top:6px">Address</h3>
+        <p>Savant Blades<br>12 Washington Street, Floor 1 (black door)<br>Glasgow G3 8AZ</p>
+        <div class="ctas"><a class="btn" href="https://www.fresha.com/a/savant-blades-glasgow-12-washington-street-sf4rw526" target="_blank" rel="noopener">Book now</a><a class="btn ghost" href="https://www.google.com/maps/search/?api=1&amp;query=12%20Washington%20Street%20Glasgow%20G3%208AZ" target="_blank" rel="noopener">Directions ↗</a></div>
+      </div>
+    </div>
+    <p class="note">Hours from your Fresha page. Holiday hours would show here and at the top automatically.</p>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>Savant Blades · 12 Washington Street, Floor 1, Glasgow G3 8AZ · Luxury grooming</span><span>Design proposal by Jota Labs · <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">more work</a></span></div></footer>
+
+<a class="like" href="https://wa.me/5491130331893?text=Hi%20Jan%2C%20I%20saw%20the%20website%20proposal%20for%20Savant%20Blades%20and%20I%27d%20like%20to%20know%20more." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Like it? Let's talk</a>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+  const hero = $("#top");
+
+  /* ---------- Hours + open now (Glasgow) ---------- */
+  const H = { Mon: null, Tue: null, Wed: [600, 1140], Thu: [600, 1140], Fri: [600, 1140], Sat: [600, 1140], Sun: null };
+  const names = { Mon: "Monday", Tue: "Tuesday", Wed: "Wednesday", Thu: "Thursday", Fri: "Friday", Sat: "Saturday", Sun: "Sunday" };
+  const order = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  const fmt = (m) => { const h = Math.floor(m / 60), mm = m % 60; return (h > 12 ? h - 12 : h) + (mm ? ":" + String(mm).padStart(2, "0") : "") + (h >= 12 ? "pm" : "am"); };
+  function status() {
+    const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/London", weekday: "short", hour: "numeric", minute: "numeric", hour12: false }).formatToParts(new Date());
+    const get = (t) => parts.find((x) => x.type === t).value, wd = get("weekday"), m = (+get("hour") % 24) * 60 + +get("minute"), t = H[wd];
+    $("#hours").innerHTML = order.map((d) => `<dt class="${d === wd ? "today" : ""}">${names[d]}</dt><dd class="${d === wd ? "today" : ""}">${H[d] ? fmt(H[d][0]) + " – " + fmt(H[d][1]) : "Closed"}</dd>`).join("");
+    const chip = $("#statusChip"), open = !!t && m >= t[0] && m < t[1];
+    chip.classList.toggle("open", open);
+    if (open) chip.innerHTML = `<b>Open now</b> · until ${fmt(t[1])}`;
+    else if (t && m < t[0]) chip.innerHTML = `Opens today at <b>${fmt(t[0])}</b>`;
+    else { const i = order.indexOf(wd); for (let n = 1; n <= 7; n++) { const d = order[(i + n) % 7]; if (H[d]) { chip.innerHTML = `Closed now · opens <b>${names[d]} ${fmt(H[d][0])}</b>`; break; } } }
+  }
+  status(); setInterval(status, 60000);
+
+  /* ---------- Hintergrund: Klingen-Schild flackert ab und zu ---------- */
+  const sg = $(".signbg");
+  if (!reduce) (function flick() { setTimeout(() => { sg.style.opacity = ".05"; setTimeout(() => { sg.style.opacity = ""; setTimeout(() => { sg.style.opacity = ".06"; setTimeout(() => { sg.style.opacity = ""; flick(); }, 70); }, 90); }, 80); }, 4000 + Math.random() * 4000); })();
+
+  /* ---------- Intro: Leuchtschild + Klingen-Schnitt ---------- */
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const tween = (ms, fn, tk, ez = (t) => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2)) => new Promise((res) => { const t0 = performance.now(); const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(ez(k), k); k < 1 ? requestAnimationFrame(step) : res(); }; requestAnimationFrame(step); });
+  const canvas = (parent, cls, z) => { const w = parent.clientWidth, h = parent.clientHeight, dpr = Math.min(2, devicePixelRatio || 1); const c = document.createElement("canvas"); c.className = "fxl " + cls; c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); c.style.cssText = `position:absolute;left:0;top:0;width:${w}px;height:${h}px;z-index:${z};pointer-events:none`; c.setAttribute("aria-hidden", "true"); parent.append(c); const ctx = c.getContext("2d"); ctx.scale(dpr, dpr); return { c, ctx, w, h }; };
+  const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); hero.querySelectorAll(".cover").forEach((n) => (n.style.opacity = "0")); };
+  /* Rasierklinge (Double Edge) als Pfad, Mittelpunkt 0/0, Breite W */
+  function dblade(ctx, W) {
+    const H = W * .42, r = H * .16;
+    ctx.beginPath();
+    ctx.moveTo(-W / 2 + r, -H / 2); ctx.lineTo(W / 2 - r, -H / 2); ctx.quadraticCurveTo(W / 2, -H / 2, W / 2, -H / 2 + r);
+    ctx.lineTo(W / 2, -H * .12); ctx.arc(W / 2, 0, H * .12, -Math.PI / 2, Math.PI / 2, true); ctx.lineTo(W / 2, H / 2 - r); ctx.quadraticCurveTo(W / 2, H / 2, W / 2 - r, H / 2);
+    ctx.lineTo(-W / 2 + r, H / 2); ctx.quadraticCurveTo(-W / 2, H / 2, -W / 2, H / 2 - r); ctx.lineTo(-W / 2, H * .12); ctx.arc(-W / 2, 0, H * .12, Math.PI / 2, -Math.PI / 2, true); ctx.lineTo(-W / 2, -H / 2 + r); ctx.quadraticCurveTo(-W / 2, -H / 2, -W / 2 + r, -H / 2); ctx.closePath();
+    const sw = W * .62, sh = H * .1; ctx.moveTo(-sw / 2, -sh / 2); ctx.lineTo(sw / 2, -sh / 2); ctx.lineTo(sw / 2, sh / 2); ctx.lineTo(-sw / 2, sh / 2); ctx.closePath();
+    for (const x of [-W * .2, 0, W * .2]) { ctx.moveTo(x + H * .11, 0); ctx.arc(x, 0, H * .11, 0, 7); }
+  }
+
+  /* ---------- Savant mix: Leuchtschild flackert an, Name schreibt sich, dann schneidet eine Klinge das Bild diagonal auf ---------- */
+  async function savantmix(scr, tk, o = {}) {
+    const { c, ctx, w, h } = canvas(scr, "savmix", 5), W = Math.min(w * .8, h * .5), cx = w / 2, cy = h * .42, ang = -Math.atan2(h, w);
+    let on = 0, glow = 0, write = 0, sub = 0, bx = -1, rot = 0, cut = 0, split = 0;
+    const words = [o.top || "SAVANT", o.bottom || "BLADES"];
+    const scene = () => {
+      ctx.fillStyle = "#0c0c0d"; ctx.fillRect(0, 0, w, h);
+      const fl = ctx.createLinearGradient(0, h * .72, 0, h); fl.addColorStop(0, "#2a2a2c"); fl.addColorStop(1, "#4a4a4d"); ctx.fillStyle = fl; ctx.fillRect(0, h * .72, w, h * .28);
+      ctx.strokeStyle = "rgba(255,255,255,.06)"; ctx.lineWidth = 1; for (let i = 0; i < 14; i++) { ctx.beginPath(); ctx.moveTo(i * w / 13, h * .72); ctx.lineTo(i * w / 13 + (i - 6.5) * 30, h); ctx.stroke(); }
+      if (glow > 0) { const g = ctx.createRadialGradient(cx, cy, W * .1, cx, cy, W * .9); g.addColorStop(0, `rgba(255,255,255,${.22 * glow})`); g.addColorStop(1, "rgba(255,255,255,0)"); ctx.fillStyle = g; ctx.fillRect(0, 0, w, h); }
+      ctx.save(); ctx.translate(cx, cy); dblade(ctx, W); ctx.fillStyle = on ? `rgba(245,247,250,${on})` : "#1a1a1c"; ctx.shadowColor = "#fff"; ctx.shadowBlur = 40 * glow; ctx.fill("evenodd"); ctx.shadowBlur = 0; ctx.restore();
+      if (write > 0) { ctx.save(); ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.font = `${W * .15}px ${o.family || "\"Permanent Marker\", cursive"}`; ctx.fillStyle = "#0c0c0d";
+        words.forEach((wd, i) => { const k = Math.max(0, Math.min(1, write * 2 - i)); if (!k) return; const tw = ctx.measureText(wd).width, y = cy + (i ? W * .14 : -W * .14);
+          ctx.save(); ctx.beginPath(); ctx.rect(cx - tw / 2 - 4, y - W * .12, (tw + 8) * k, W * .24); ctx.clip(); ctx.translate(cx, y); ctx.rotate(-.04); ctx.fillText(wd, 0, 0); ctx.restore(); }); ctx.restore(); }
+      if (sub > 0) { ctx.save(); ctx.globalAlpha = sub; ctx.textAlign = "center"; ctx.fillStyle = "rgba(255,255,255,.75)"; ctx.font = `600 ${Math.min(w * .032, h * .02)}px ${o.ufamily || "system-ui"}`; ctx.letterSpacing = `${Math.min(5, w * .008)}px`; ctx.fillText(o.sub || "GLASGOW BARBER", cx, cy + W * .42, w * .9); ctx.restore(); }
+    };
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h);
+      for (const side of [-1, 1]) { ctx.save(); const off = split * Math.max(w, h) * .75 * side; ctx.translate(Math.cos(ang + Math.PI / 2) * off, Math.sin(ang + Math.PI / 2) * off);
+        ctx.beginPath(); if (side < 0) { ctx.moveTo(0, h); ctx.lineTo(w, 0); ctx.lineTo(0, 0); } else { ctx.moveTo(0, h); ctx.lineTo(w, 0); ctx.lineTo(w, h); } ctx.closePath(); ctx.clip(); scene(); ctx.restore(); }
+      if (cut > 0 && split === 0) { ctx.save(); ctx.strokeStyle = "rgba(255,255,255,.95)"; ctx.shadowColor = "#fff"; ctx.shadowBlur = 14; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(0, h); ctx.lineTo(Math.min(1, cut) * w, h - Math.min(1, cut) * h); ctx.stroke(); ctx.restore(); }
+      if (bx >= 0 && bx <= 1) { const Wb = W * .45, x = -Wb + bx * (w + Wb * 2), y = h + Wb * .3 - bx * (h + Wb * .6); ctx.save(); ctx.translate(x, y); ctx.rotate(rot); dblade(ctx, Wb); const g = ctx.createLinearGradient(-Wb / 2, -Wb * .2, Wb / 2, Wb * .2); g.addColorStop(0, "#9aa3ad"); g.addColorStop(.5, "#ffffff"); g.addColorStop(1, "#7d858f"); ctx.fillStyle = g; ctx.shadowColor = "rgba(255,255,255,.7)"; ctx.shadowBlur = 18; ctx.fill("evenodd"); ctx.restore(); }
+    };
+    let live = true; const lp = () => { if (!live || tk.cancelled) return; draw(); requestAnimationFrame(lp); }; requestAnimationFrame(lp);
+    await sleep(400);
+    for (const v of [.6, 0, .9, .1, 1]) { on = v; glow = v; await sleep(v ? 90 : 120); if (tk.cancelled) break; }
+    await sleep(250);
+    await tween(1100, (e) => { write = e; }, tk, (k) => k);
+    await tween(350, (e) => { sub = e; }, tk);
+    await sleep(o.hold || 700); if (tk.cancelled) { live = false; return c.remove(); }
+    await tween(750, (e, k) => { bx = k; rot = k * 14; cut = k * 1.05; }, tk, (k) => k);
+    bx = -1; await sleep(120);
+    reveal(); await tween(800, (e) => { split = Math.max(.0001, e); }, tk, (k) => k * k); live = false; c.remove();
+  }
+
+  const redo = $("#redo");
+  let token = { cancelled: true };
+  async function play() {
+    token.cancelled = true; const tk = (token = { cancelled: false });
+    hero.querySelectorAll(".fxl, .stage").forEach((n) => n.remove());
+    hero.classList.remove("reveal"); hero.classList.add("pre"); redo.hidden = true;
+    const top = Math.max(0, hero.getBoundingClientRect().top), vis = Math.max(320, Math.min(hero.clientHeight, innerHeight - top));
+    const stage = document.createElement("div"); stage.className = "stage"; stage.style.cssText = `position:absolute;left:0;right:0;top:0;height:${hero.clientHeight}px;z-index:5;pointer-events:none;overflow:hidden`; hero.append(stage);
+    const inner = document.createElement("div"); inner.style.cssText = `position:absolute;left:0;right:0;top:0;height:${vis}px`; stage.append(inner);
+    if (vis < hero.clientHeight) { const cv = document.createElement("div"); cv.className = "cover"; cv.style.cssText = `position:absolute;left:0;right:0;top:${vis}px;bottom:0;background:#0c0c0d;transition:opacity .6s`; stage.append(cv); }
+    await savantmix(inner, tk, { family: "\"Permanent Marker\", cursive", ufamily: "Inter, sans-serif", sub: "GLASGOW BARBER" });
+    stage.remove();
+    if (!tk.cancelled) redo.hidden = false;
+  }
+  redo.addEventListener("click", play);
+  if (reduce) hero.classList.remove("pre"); else document.fonts.ready.then(play);
+})();
+</script>
+</body>
+</html>
