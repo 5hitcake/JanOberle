@@ -58,6 +58,7 @@ nav.links a.btn { color: #f6f0e2; padding: 10px 16px; font-size: 14px; }
 .frieze.f1 { top: 22px; } .frieze.f2 { bottom: 22px; animation-direction: reverse; }
 @keyframes slide { to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .frieze { animation: none; } }
+@media (max-width: 860px) { .hero .seal { opacity: .07 !important; right: -30% !important; } }
 .hero .seal { position: absolute; right: -6%; top: 50%; width: min(52vw, 560px); transform: translateY(-50%); opacity: .14; z-index: 0; }
 .hero .wrap { position: relative; z-index: 1; padding-block: clamp(84px, 12vw, 140px) clamp(64px, 9vw, 110px); display: flex; flex-direction: column; gap: 16px; }
 .hero h1 { font-size: clamp(72px, 13vw, 168px); line-height: .9; letter-spacing: .04em; }
@@ -159,11 +160,11 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 
 <section class="block" id="signature">
   <div class="wrap">
-    <div class="head"><div><div class="kicker">The house specials</div><h2>Tea and coffee, the old way</h2></div><p>Brewed in the pot, poured at your table. For one, or for two.</p></div>
+    <div class="head"><div><div class="kicker">The house specials</div><h2>Tea and coffee, the old way</h2></div><p>Our house specials, from Iraqi chai to Arabic coffee.</p></div>
     <div class="sig">
-      <article class="sc"><svg viewBox="0 0 70 70" aria-hidden="true"><ellipse cx="35" cy="60" rx="24" ry="5" fill="#b8892f"/><ellipse cx="35" cy="59" rx="18" ry="3.5" fill="#1f6b3a"/><path d="M24 14c0 12 7 14 6 24-1 8-5 12-4 20h18c1-8-3-12-4-20-1-10 6-12 6-24z" fill="#b8441a" opacity=".85"/><path d="M24 14c0 12 7 14 6 24-1 8-5 12-4 20h18c1-8-3-12-4-20-1-10 6-12 6-24z" fill="none" stroke="#1a1714" stroke-width="1.5"/></svg><h3>Sumerian chai</h3><div class="pr">£3.5 one · £5 two</div><p>Iraqi tea style. Strong, amber and served in the glass.</p></article>
-      <article class="sc"><svg viewBox="0 0 70 70" aria-hidden="true"><path d="M30 10h10l-2 6h-6z" fill="#b8892f"/><path d="M28 18c-8 8-14 16-12 28 1 8 8 12 19 12s18-4 19-12c2-12-4-20-12-28z" fill="#d6a542" stroke="#1a1714" stroke-width="1.5"/><path d="M18 34C10 30 6 22 4 16" stroke="#b8892f" stroke-width="3" fill="none"/><path d="M52 26c8 0 10 14 2 18" stroke="#b8892f" stroke-width="3" fill="none"/></svg><h3>Qahwa</h3><div class="pr">£4 one · £6 two</div><p>Arabic coffee from the dallah, light, fragrant and generous.</p></article>
-      <article class="sc"><svg viewBox="0 0 70 70" aria-hidden="true"><path d="M18 22h34l-4 34H22z" fill="#efe6d2" stroke="#1a1714" stroke-width="1.5"/><path d="M20 30h30l-2 24H22z" fill="#e3a63a"/><path d="M28 36l3 5M38 34l-2 6M42 44l3 3M30 48l4-2" stroke="#b8441a" stroke-width="2"/><path d="M52 28c7 0 7 12 0 12" stroke="#1a1714" stroke-width="2" fill="none"/></svg><h3>Saffron latte</h3><div class="pr">£4.5 · iced £5</div><p>Espresso, milk and real saffron. Also as karak chai with saffron.</p></article>
+      <article class="sc"><svg viewBox="0 0 70 70" aria-hidden="true"><ellipse cx="35" cy="60" rx="24" ry="5" fill="#b8892f"/><ellipse cx="35" cy="59" rx="18" ry="3.5" fill="#1f6b3a"/><path d="M24 14c0 12 7 14 6 24-1 8-5 12-4 20h18c1-8-3-12-4-20-1-10 6-12 6-24z" fill="#b8441a" opacity=".85"/><path d="M24 14c0 12 7 14 6 24-1 8-5 12-4 20h18c1-8-3-12-4-20-1-10 6-12 6-24z" fill="none" stroke="#1a1714" stroke-width="1.5"/></svg><h3>Sumerian chai</h3><div class="pr">£3.5 one · £5 two</div><p>Iraqi tea style, as a pot for one or for two.</p></article>
+      <article class="sc"><svg viewBox="0 0 70 70" aria-hidden="true"><path d="M30 10h10l-2 6h-6z" fill="#b8892f"/><path d="M28 18c-8 8-14 16-12 28 1 8 8 12 19 12s18-4 19-12c2-12-4-20-12-28z" fill="#d6a542" stroke="#1a1714" stroke-width="1.5"/><path d="M18 34C10 30 6 22 4 16" stroke="#b8892f" stroke-width="3" fill="none"/><path d="M52 26c8 0 10 14 2 18" stroke="#b8892f" stroke-width="3" fill="none"/></svg><h3>Qahwa</h3><div class="pr">£4 one · £6 two</div><p>Arabic coffee, as a pot for one or for two.</p></article>
+      <article class="sc"><svg viewBox="0 0 70 70" aria-hidden="true"><path d="M18 22h34l-4 34H22z" fill="#efe6d2" stroke="#1a1714" stroke-width="1.5"/><path d="M20 30h30l-2 24H22z" fill="#e3a63a"/><path d="M28 36l3 5M38 34l-2 6M42 44l3 3M30 48l4-2" stroke="#b8441a" stroke-width="2"/><path d="M52 28c7 0 7 12 0 12" stroke="#1a1714" stroke-width="2" fill="none"/></svg><h3>Saffron latte</h3><div class="pr">£4.5 · iced £5</div><p>Hot or iced. Or try karak chai with saffron.</p></article>
     </div>
   </div>
 </section>
