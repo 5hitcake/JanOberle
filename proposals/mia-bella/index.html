@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Mia Bella · Design proposal</title>
+<meta name="description" content="A website proposal for Mia Bella Beauty Salon / Clinic, 377 Great Western Road, Glasgow, by Jota Labs. Not the official website.">
+<meta property="og:title" content="Mia Bella · Design proposal">
+<meta property="og:description" content="Lymphatic drainage, aesthetics, facials and nails in Glasgow's West End. A proposal by Jota Labs.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23fffdf8' stroke='%23b8a253' stroke-width='3'/%3E%3Ctext x='32' y='38' text-anchor='middle' font-family='Georgia' font-size='18' fill='%23b8a253'%3EMB%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: Intro = Holzrolle (B) + Mäander-Logo (A): Rolle zieht weiche Wellen, dann zeichnet sich der goldene Ring mit Lorbeer.
+   Treatments, Lymphdrainage-Abschnitt, Reviews, Join our team, Visit (ohne Öffnungszeiten).
+   Gold auf Creme, warme Hauttöne; Cinzel + Montserrat. */
+:root {
+  --bg: #fbf8f2; --bg-2: #f3e6dc; --bg-3: #fffdf8; --ink: #2f2a22; --line: rgba(47,42,34,.13); --soft: #4f473a; --muted: #8a7a62;
+  --green: #9c8740; --leaf: #9c8740; --brass: #b8a253; --pink: #f3e6dc; --fuji: #b8a253;
+  --f-display: "Cinzel", Georgia, serif; --f-body: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif; --f-mono: "Montserrat", system-ui, sans-serif; --f-script: "Great Vibes", cursive;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-family: var(--f-display); font-weight: 400; text-wrap: balance; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 800 13px/1.2 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--leaf); }
+:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+.proposal { background: #000; color: #e9ebee; font: 13px/1.4 var(--f-body); padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; }
+.proposal b { color: #ffd166; } .proposal a { color: #fff; font-weight: 800; }
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 22px/1 var(--f-display); letter-spacing: .06em; }
+.logo svg { width: 38px; height: 38px; }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 15px; font-weight: 700; color: var(--muted); }
+nav.links a:hover { color: var(--ink); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 800 15px/1 var(--f-body); padding: 15px 22px; border-radius: 6px; background: var(--green); color: #f6f0e2; border: 2px solid var(--green); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(156,135,64,.25); }
+.btn.ghost { background: transparent; color: var(--ink); border-color: rgba(26,23,20,.35); }
+.btn.ghost:hover { border-color: var(--ink); }
+nav.links a.btn { color: #f6f0e2; padding: 10px 16px; font-size: 14px; }
+.menu-btn { display: none; background: transparent; color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 8px 14px; font: 800 12px var(--f-body); letter-spacing: .08em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bg-3); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line); background: radial-gradient(60% 70% at 85% 30%, rgba(201,160,122,.35), transparent 70%), var(--bg); }
+@media (max-width: 860px) { .hero .seal { opacity: .07 !important; right: -30% !important; } }
+.hero .seal { position: absolute; right: -6%; top: 50%; width: min(52vw, 560px); transform: translateY(-50%); opacity: .14; z-index: 0; }
+.hero .wrap { position: relative; z-index: 1; padding-block: clamp(84px, 12vw, 140px) clamp(64px, 9vw, 110px); display: flex; flex-direction: column; gap: 16px; }
+.hero h1 { font-weight: 400; color: var(--green); text-shadow: 3px 3px 0 #fff; font-size: clamp(72px, 13vw, 168px); line-height: .9; letter-spacing: .04em; }
+.hero h1 small { color: var(--leaf); text-shadow: none; display: block; font: 700 clamp(14px, 2vw, 20px)/1 var(--f-mono); letter-spacing: .5em; color: var(--muted); margin-top: 14px; }
+.hero .lead { margin: 4px 0 0; font-size: clamp(18px, 2.2vw, 22px); color: var(--soft); max-width: 36ch; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.facts span { font: 700 14px var(--f-body); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; background: rgba(246,240,226,.85); }
+.facts span b { color: var(--ink); }
+.status::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); margin-right: 8px; vertical-align: 1px; }
+.status.open::before { background: #3aa35a; box-shadow: 0 0 10px #3aa35a; }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 7; font: 700 13px var(--f-body); color: var(--muted); background: rgba(246,240,226,.9); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.redo:hover { color: var(--ink); }
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero.reveal .wrap > :nth-child(2) { animation-delay: .06s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .12s }
+.hero.reveal .wrap > :nth-child(4) { animation-delay: .18s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .24s }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+section.block { padding-block: clamp(64px, 10vw, 104px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 40px; margin-bottom: 30px; }
+.head h2 { font-size: clamp(36px, 5.6vw, 64px); line-height: 1; margin-top: 10px; }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+.note { margin-top: 20px; font-size: 14px; color: var(--muted); padding: 10px 14px; border-left: 3px solid var(--green); background: var(--bg-2); border-radius: 0 10px 10px 0; }
+.sig { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 860px) { .sig { grid-template-columns: minmax(0,1fr); } }
+.sc { background: var(--bg-3); border: 1px solid var(--line); border-radius: 14px; padding: 24px; display: grid; gap: 8px; align-content: start; }
+.sc svg { width: 70px; height: 70px; }
+.sc h3 { font-size: 28px; } .sc .pr { font: 700 15px var(--f-mono); color: var(--green); } .sc p { margin: 0; color: var(--soft); font-size: 15px; }
+.menu { background: var(--bg-3); border: 1px solid var(--line); border-radius: 14px; padding: clamp(18px, 3vw, 32px); }
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.tabs button { font: 700 14px var(--f-mono); letter-spacing: .06em; text-transform: uppercase; padding: 10px 14px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; }
+.tabs button[aria-selected="true"] { background: var(--green); border-color: var(--green); color: #f6f0e2; }
+.pl { list-style: none; margin: 0; padding: 0; columns: 2; column-gap: 40px; }
+@media (max-width: 760px) { .pl { columns: 1; } }
+.pl li { break-inside: avoid; display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: baseline; padding: 10px 0; border-top: 1px dashed var(--line); font-family: var(--f-mono); }
+.pl li::after { content: ""; grid-column: 2; grid-row: 1; border-bottom: 1px dotted rgba(26,23,20,.25); transform: translateY(-4px); }
+.pl b { font-weight: 700; text-transform: uppercase; font-size: 15px; letter-spacing: .03em; } .pl em { font-style: normal; font-weight: 700; color: var(--green); grid-column: 3; }
+.pl i { font-style: normal; font-size: 11px; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 1px 5px; margin-left: 6px; vertical-align: 2px; }
+.pl small { grid-column: 1 / -1; grid-row: 2; color: var(--muted); font-size: 13px; margin-top: -4px; }
+.mnote { margin: 18px 0 0; font: 13px/1.5 var(--f-mono); color: var(--muted); text-align: center; }
+.story { background: var(--leaf) !important; color: #fffdf7 !important; } .story-x { background: var(--ink); color: #efe6d2; }
+.story .wrap { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: clamp(28px, 6vw, 80px); align-items: center; }
+@media (max-width: 860px) { .story .wrap { grid-template-columns: minmax(0,1fr); } }
+.story svg { width: min(100%, 380px); justify-self: center; }
+.story .kicker { color: #d9b37a; } .story h2 { font-size: clamp(36px, 5.6vw, 64px); line-height: 1; margin: 10px 0 18px; }
+.story p { margin: 0 0 14px; color: #d9cfbb; }
+.rev { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: 16px; }
+@media (max-width: 860px) { .rev { grid-template-columns: minmax(0,1fr); } }
+.score { background: var(--green); color: #f6f0e2; border-radius: 14px; padding: 28px; display: grid; gap: 6px; align-content: center; }
+.score .kicker { color: #cfe6d6; } .score b { font: clamp(48px, 7vw, 72px)/1 var(--f-display); } .score p { margin: 0; color: #cfe6d6; }
+.quote { background: var(--bg-3); border: 1px solid var(--line); border-radius: 14px; padding: 28px; display: grid; gap: 14px; align-content: center; }
+.quote p { margin: 0; font: clamp(20px, 2.6vw, 28px)/1.35 var(--f-display); } .quote small { color: var(--muted); }
+.visit { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 860px) { .visit { grid-template-columns: minmax(0,1fr); } }
+.map { border-radius: 14px; overflow: hidden; border: 1px solid var(--line); min-height: 320px; }
+.map iframe { width: 100%; height: 100%; min-height: 320px; border: 0; display: block; }
+.card { border: 1px solid var(--line); border-radius: 14px; padding: 26px; background: var(--bg-3); display: grid; gap: 10px; align-content: start; }
+.card h3 { font-size: 24px; } .card p { margin: 0; color: var(--soft); }
+.hours { display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; margin: 0; font-variant-numeric: tabular-nums; }
+.hours dt { color: var(--muted); } .hours dd { margin: 0; color: var(--soft); } .hours .today { color: var(--ink); font-weight: 800; }
+footer { padding-block: 40px 96px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 800 14px var(--f-body); padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.25); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+
+.hero.reveal .logo { font-family: var(--f-display); letter-spacing: 0; font-size: 26px; color: var(--green); }
+.pl b { text-transform: none; font-family: var(--f-body); font-weight: 800; letter-spacing: 0; } .pl li { font-family: var(--f-body); }
+.story { color: #fffdf7; } .story p { color: #eaf5ec; } .story .kicker { color: #fff3c4; } .story h2 { color: #fffdf7; }
+.story .btn { background: #fffdf7; color: var(--leaf); border-color: #fffdf7; }
+.sc h3, .head h2, .card h3 { font-weight: 400; } .sc .pr { color: var(--green); }
+.score { background: var(--green); }
+.tabs button { font-family: var(--f-body); font-weight: 800; }
+
+.hero { background: radial-gradient(55% 70% at 80% 35%, rgba(184,162,83,.14), transparent 70%), linear-gradient(160deg, #fffdf8, #f3e6dc) !important; }
+.hero h1 { color: #9c8740 !important; text-shadow: none !important; font-weight: 600 !important; letter-spacing: .08em; font-size: clamp(52px, 10vw, 128px) !important; }
+.hero h1 small { font: 600 clamp(13px, 1.6vw, 17px)/1 var(--f-body) !important; color: var(--muted) !important; letter-spacing: .4em !important; margin: 16px 0 0 !important; text-transform: uppercase; }
+.hero .seal { opacity: .22 !important; }
+.logo { font: 600 20px var(--f-display) !important; color: #9c8740 !important; letter-spacing: .12em !important; }
+.logo i { font: 400 22px var(--f-script); color: var(--green); letter-spacing: 0; }
+.logo svg { width: 38px !important; height: 38px !important; }
+.tgrid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 960px) { .tgrid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 560px) { .tgrid { grid-template-columns: minmax(0,1fr); } }
+.tc { background: var(--bg-3); border: 1px solid var(--line); border-radius: 18px; padding: 24px; display: grid; gap: 8px; align-content: start; }
+.tc .ic { font-size: 28px; } .tc h3 { font-size: 28px; font-weight: 600; } .tc ul { margin: 0; padding-left: 18px; color: var(--soft); }
+.skinx { background: var(--ink); color: #fbebe3; } .skinx .kicker { color: #f2c1aa; } .skinx .head p { color: #e8cbbd; } .skinx h2 { color: #fff; }
+.skinx .pl { columns: 1; max-width: 760px; } .skinx .pl li { border-top-color: rgba(251,235,227,.15); } .skinx .pl b { color: #fff; } .skinx .pl em { color: #f2c1aa; } .skinx .pl small { color: #c9a596; }
+.skinx .pl li::after { border-bottom-color: rgba(251,235,227,.25); }
+.skinx .btn { background: #fbebe3; color: var(--ink); border-color: #fbebe3; }
+.score { background: var(--green) !important; } .score b { font-family: var(--f-display) !important; font-weight: 600; } .score .stars { color: #ffd88a; letter-spacing: 4px; font-size: 22px; }
+.head h2 { font-weight: 600 !important; }
+
+.tc p { margin: 0; color: var(--soft); font-size: 15px; } .tc h3 { font-size: 22px !important; }
+.lymph { background: #f3e6dc; }
+.lw { display: grid; grid-template-columns: minmax(0,1.4fr) minmax(0,.6fr); gap: 40px; align-items: center; }
+@media (max-width: 760px) { .lw { grid-template-columns: minmax(0,1fr); } .roller { display: none; } }
+.lw h2 { font-size: clamp(32px, 5vw, 56px); line-height: 1.05; margin: 10px 0 16px; font-weight: 600; } .lw p { color: var(--soft); max-width: 50ch; }
+.roller { width: min(100%, 180px); justify-self: center; transform: rotate(-18deg); filter: drop-shadow(0 18px 24px rgba(90,55,25,.25)); }
+.join { border: 1px solid var(--line); border-radius: 16px; padding: 26px; background: var(--bg-3); display: flex; flex-wrap: wrap; gap: 16px 30px; align-items: center; justify-content: space-between; }
+.join h3 { font-size: 26px; font-weight: 600; margin: 6px 0; } .join p { margin: 0; color: var(--soft); max-width: 60ch; }
+.score .stars { color: #ffe9a8 !important; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></symbol>
+</svg>
+
+
+
+<div class="proposal"><span><b>Design proposal</b> for Mia Bella Beauty Salon / Clinic · not the official website</span><span>Made by <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">Jota Labs</a></span></div>
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top"><svg viewBox="-100 -100 200 200" aria-hidden="true"><circle r="98" fill="#fffdf8"/><circle r="94" fill="none" stroke="#b8a253" stroke-width="4"/><circle r="74" fill="none" stroke="#b8a253" stroke-width="3"/><circle r="84" fill="none" stroke="#b8a253" stroke-width="10" stroke-dasharray="6 4"/><text y="-12" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-weight="600" font-size="24" fill="#b8a253">MIA</text><text y="16" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-weight="600" font-size="24" fill="#b8a253">BELLA</text><path d="M-6 52C-30 48-44 36-48 20M6 52C30 48 44 36 48 20" fill="none" stroke="#b8a253" stroke-width="3"/><circle cy="58" r="3" fill="#b8a253"/></svg><span>MIA BELLA</span></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENU</button>
+    <nav class="links" id="links">
+      <a href="#treatments">Treatments</a>
+      <a href="#lymphatic">Lymphatic drainage</a>
+      <a href="#visit">Visit</a>
+      <a class="btn" href="https://www.treatwell.co.uk/place/mia-bella-beauty-salon/" target="_blank" rel="noopener">Book now</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero pre" id="top">
+  <div class="seal"><svg viewBox="-100 -100 200 200" aria-hidden="true"><circle r="98" fill="#fffdf8"/><circle r="94" fill="none" stroke="#b8a253" stroke-width="4"/><circle r="74" fill="none" stroke="#b8a253" stroke-width="3"/><circle r="84" fill="none" stroke="#b8a253" stroke-width="10" stroke-dasharray="6 4"/><text y="-12" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-weight="600" font-size="24" fill="#b8a253">MIA</text><text y="16" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-weight="600" font-size="24" fill="#b8a253">BELLA</text><path d="M-6 52C-30 48-44 36-48 20M6 52C30 48 44 36 48 20" fill="none" stroke="#b8a253" stroke-width="3"/><circle cy="58" r="3" fill="#b8a253"/></svg></div>
+  <div class="wrap">
+    <div class="kicker">Beauty salon · Clinic · West End</div>
+    <h1>MIA BELLA<small>Beauty Salon / Clinic</small></h1>
+    <p class="lead">Lymphatic drainage &amp; sculpting, aesthetics, facials and nails. Soft, elevated beauty results.</p>
+    <div class="ctas"><a class="btn" href="https://www.treatwell.co.uk/place/mia-bella-beauty-salon/" target="_blank" rel="noopener">Book now</a><a class="btn ghost" href="tel:+441412823979">Call 0141 282 3979</a></div>
+    <div class="facts"><span><b>★ 4.9</b> · 1,212 reviews on Treatwell</span><span>Fresha <b>Highly Recommended</b> 2025</span></div>
+  </div>
+  <button class="redo" type="button" id="redo" hidden>↻ Play intro again</button>
+</section>
+
+<section class="block" id="treatments">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Treatments</div><h2>Soft, elevated beauty</h2></div><p>From body sculpting to nail art, all under one roof on Great Western Road.</p></div>
+    <div class="tgrid">
+      <article class="tc"><div class="ic">🌿</div><h3>Lymphatic drainage</h3><p>Lymphatic drainage massage and body sculpting.</p></article>
+      <article class="tc"><div class="ic">💋</div><h3>Aesthetics</h3><p>Aesthetic treatments including lip filler (1 ml).</p></article>
+      <article class="tc"><div class="ic">✨</div><h3>Facials</h3><p>Facial treatments, booked online in seconds.</p></article>
+      <article class="tc"><div class="ic">💅</div><h3>Nails</h3><p>Nails and nail art.</p></article>
+    </div>
+    <p class="note">Treatments from your Instagram. On the final site each one gets its prices, before &amp; after photos and a "Book" button.</p>
+  </div>
+</section>
+
+<section class="block lymph" id="lymphatic">
+  <div class="wrap">
+    <div class="lw">
+      <div>
+        <div class="kicker">Did you know?</div>
+        <h2>Lymphatic drainage massage</h2>
+        <p>The reason you always feel bloated could be that your lymphatic system is stagnant, and it needs manual stimulation.</p>
+        <p>A gentle touch with powerful results.</p>
+        <div class="ctas"><a class="btn" href="https://www.treatwell.co.uk/place/mia-bella-beauty-salon/" target="_blank" rel="noopener">Book a session</a></div>
+      </div>
+      <svg class="roller" viewBox="0 0 120 220" aria-hidden="true"><defs><linearGradient id="wd" x1="0" x2="1"><stop offset="0" stop-color="#9b6a3c"/><stop offset=".45" stop-color="#e2b47c"/><stop offset="1" stop-color="#7a4f2a"/></linearGradient></defs><rect x="56" y="0" width="8" height="24" fill="#8a5a32"/><rect x="56" y="196" width="8" height="24" fill="#8a5a32"/><g fill="url(#wd)"><rect x="30" y="24" width="60" height="16" rx="8"/><rect x="30" y="44" width="60" height="16" rx="8"/><rect x="30" y="64" width="60" height="16" rx="8"/><rect x="30" y="84" width="60" height="16" rx="8"/><rect x="30" y="104" width="60" height="16" rx="8"/><rect x="30" y="124" width="60" height="16" rx="8"/><rect x="30" y="144" width="60" height="16" rx="8"/><rect x="30" y="164" width="60" height="16" rx="8"/><rect x="30" y="180" width="60" height="16" rx="8"/></g></svg>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="reviews">
+  <div class="wrap rev">
+    <div class="score"><div class="kicker">Reviews</div><b>4.9</b><span class="stars" aria-label="4.9 out of 5 stars">★★★★★</span><p>1,212 reviews on Treatwell. Fresha "Highly Recommended 2025".</p></div>
+    <div class="quote"><p>Your favourite client reviews could rotate here, straight from Treatwell and Fresha.</p><small>Space for client quotes</small></div>
+  </div>
+</section>
+
+<section class="block" id="team" style="padding-top:0">
+  <div class="wrap">
+    <div class="join">
+      <div><div class="kicker">Join our team</div><h3>Nail technicians wanted</h3><p>We're looking for a self-employed nail tech to join our friendly team in the heart of Glasgow. Full time, part time or self-employed.</p></div>
+      <a class="btn ghost" href="https://www.instagram.com/mia_bella_beauty_salon_/" target="_blank" rel="noopener">DM us on Instagram</a>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="visit" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Visit us</div><h2>377 Great Western Road</h2></div><p>Kelvinbridge, Glasgow G4 9HY.</p></div>
+    <div class="visit">
+      <div class="map"><iframe title="Map: Mia Bella, 377 Great Western Road" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-4.2862%2C55.8718%2C-4.2732%2C55.8776&amp;layer=mapnik&amp;marker=55.87472%2C-4.27967"></iframe></div>
+      <div class="card">
+        <h3>Book &amp; contact</h3>
+        <p>Book online, or call us on <a href="tel:+441412823979">0141 282 3979</a>. Gift vouchers available.</p>
+        <h3 style="margin-top:6px">Address</h3>
+        <p>Mia Bella Beauty Salon / Clinic<br>377 Great Western Road<br>Glasgow G4 9HY</p>
+        <div class="ctas"><a class="btn" href="https://www.treatwell.co.uk/place/mia-bella-beauty-salon/" target="_blank" rel="noopener">Book now</a><a class="btn ghost" href="https://www.google.com/maps/search/?api=1&amp;query=Mia%20Bella%20Beauty%20Salon%20377%20Great%20Western%20Road%20Glasgow" target="_blank" rel="noopener">Directions ↗</a></div>
+      </div>
+    </div>
+    <p class="note">With your opening hours, this card would show them and a live "open now" status.</p>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>Mia Bella Beauty Salon / Clinic · 377 Great Western Road, Glasgow G4 9HY · 0141 282 3979</span><span>Design proposal by Jota Labs · <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">more work</a></span></div></footer>
+
+<a class="like" href="https://wa.me/5491130331893?text=Hi%20Jan%2C%20I%20saw%20the%20website%20proposal%20for%20Mia%20Bella%20and%20I%27d%20like%20to%20know%20more." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Like it? Let's talk</a>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+  const hero = $("#top");
+
+  /* ---------- Intro: Holzrolle + Mäander ---------- */
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const tween = (ms, fn, tk, ez = (t) => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2)) => new Promise((res) => { const t0 = performance.now(); const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(ez(k), k); k < 1 ? requestAnimationFrame(step) : res(); }; requestAnimationFrame(step); });
+  const canvas = (parent, cls, z) => { const w = parent.clientWidth, h = parent.clientHeight, dpr = Math.min(2, devicePixelRatio || 1); const c = document.createElement("canvas"); c.className = "fxl " + cls; c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); c.style.cssText = `position:absolute;left:0;top:0;width:${w}px;height:${h}px;z-index:${z};pointer-events:none`; c.setAttribute("aria-hidden", "true"); parent.append(c); const ctx = c.getContext("2d"); ctx.scale(dpr, dpr); return { c, ctx, w, h }; };
+  const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); hero.querySelectorAll(".cover").forEach((n) => (n.style.opacity = "0")); };
+  /* Mia-Bella-Logo: Mäander-Ring, Lorbeer, Name. k: 0..1 Zeichnen, leaves: 0..1, txt: 0..1 */
+  function miaLogo(ctx, cx, cy, R, k, leaves, txt, o, gold = "#b8a253") {
+    ctx.save(); ctx.translate(cx, cy); ctx.strokeStyle = gold; ctx.fillStyle = gold;
+    ctx.lineWidth = R * .025; ctx.beginPath(); ctx.arc(0, 0, R, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * Math.min(1, k * 1.2)); ctx.stroke();
+    ctx.beginPath(); ctx.arc(0, 0, R * .78, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * Math.min(1, k * 1.2)); ctx.stroke();
+    const n = 30, a1 = R * .8, a2 = R * .98; ctx.lineWidth = R * .022; ctx.lineJoin = "miter";
+    for (let i = 0; i < n * Math.min(1, k); i++) { const a = -Math.PI / 2 + i / n * Math.PI * 2, da = Math.PI * 2 / n;
+      const P = (r, t) => [Math.cos(a + da * t) * r, Math.sin(a + da * t) * r]; const m = (a1 + a2) / 2, q = (a2 - a1) / 4;
+      ctx.beginPath(); ctx.moveTo(...P(a1 + q * .5, 0)); ctx.lineTo(...P(a2 - q * .5, 0)); ctx.lineTo(...P(a2 - q * .5, .7)); ctx.lineTo(...P(m, .7)); ctx.lineTo(...P(m, .35)); ctx.lineTo(...P(a2 - q * 1.6, .35)); ctx.stroke(); }
+    if (leaves > 0) { const sr = R * .5, oy = -R * .02; ctx.lineWidth = R * .018;
+      for (const s of [-1, 1]) { const a0 = Math.PI / 2 - s * .12, a1 = Math.PI / 2 - s * (.12 + 1.1 * leaves);
+        ctx.beginPath(); ctx.arc(0, oy, sr, a0, a1, s > 0); ctx.stroke();
+        for (let i = 0; i < 7; i++) { const t = (i + .5) / 7; if (t > leaves) break; const ang = Math.PI / 2 - s * (.12 + 1.1 * t), x = Math.cos(ang) * sr, y = oy + Math.sin(ang) * sr, tan = ang + (s > 0 ? -Math.PI / 2 : Math.PI / 2);
+          for (const side of [-1, 1]) { ctx.save(); ctx.translate(x, y); ctx.rotate(tan + side * .65 * s); ctx.translate(R * .055, 0); ctx.beginPath(); ctx.ellipse(0, 0, R * .06, R * .022, 0, 0, 7); ctx.fill(); ctx.restore(); } } }
+      ctx.beginPath(); ctx.arc(0, oy + sr + R * .03, R * .025, 0, 7); ctx.fill(); }
+    if (txt > 0) { ctx.globalAlpha *= Math.min(1, txt); ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.font = `600 ${R * .22}px ${o.family || "\"Cinzel\", Georgia, serif"}`; ctx.letterSpacing = `${R * .03}px`; ctx.fillText("MIA", 0, -R * .3); ctx.fillText("BELLA", 0, -R * .02); ctx.letterSpacing = "0px"; }
+    ctx.restore();
+  }
+  const MIA_BG = (ctx, w, h) => { const g = ctx.createRadialGradient(w / 2, h * .4, 0, w / 2, h * .4, Math.max(w, h) * .8); g.addColorStop(0, "#fffdf8"); g.addColorStop(1, "#efe7da"); ctx.fillStyle = g; ctx.fillRect(-w, -h, w * 3, h * 3); };
+  const miaSub = (ctx, w, h, y, a, o, s) => { if (a <= 0) return; ctx.save(); ctx.globalAlpha *= Math.min(1, a); ctx.textAlign = "center"; ctx.fillStyle = "#8a7a62"; ctx.font = `600 ${Math.min(w * .03, h * .018)}px ${o.ufamily || "system-ui"}`; ctx.letterSpacing = `${Math.min(5, w * .008)}px`; ctx.fillText(s || o.sub || "BEAUTY SALON · CLINIC · GLASGOW", w / 2, y, w * .9); ctx.restore(); };
+
+  /* ---------- Mia mix: Holzrolle zieht weiche Wellen, dann zeichnet sich das goldene Mäander-Logo ---------- */
+  async function miamix(scr, tk, o = {}) {
+    const { c, ctx, w, h } = canvas(scr, "miamix", 5), RH = Math.min(h * .5, w * 1.1), rw = Math.min(w * .16, 70), cx = w / 2, cy = h * .42, R = Math.min(w * .34, h * .2);
+    let x = -rw, waves = 0, k = 0, lv = 0, tx = 0, sub = 0, shine = -1, bgA = 1, zoom = 1;
+    const draw = (now) => {
+      ctx.clearRect(0, 0, w, h); ctx.save(); ctx.globalAlpha = bgA; ctx.translate(cx, cy); ctx.scale(zoom, zoom); ctx.translate(-cx, -cy); MIA_BG(ctx, w, h);
+      ctx.save(); ctx.beginPath(); ctx.rect(-w, -h, Math.max(0, x) + w, h * 3); ctx.clip(); ctx.fillStyle = "#f3e6dc"; ctx.fillRect(-w, -h, w * 3, h * 3);
+      ctx.strokeStyle = "rgba(184,162,83,.3)"; ctx.lineWidth = 2; for (let j = 0; j < 9; j++) { ctx.beginPath(); for (let xx = 0; xx <= w; xx += 8) { const y = h * (.06 + j * .11) + Math.sin(xx / 60 + now / 700 + j) * 10 * waves; xx ? ctx.lineTo(xx, y) : ctx.moveTo(xx, y); } ctx.stroke(); }
+      ctx.restore();
+      if (x > -rw && x < w + rw) { const y0 = h / 2 - RH / 2; ctx.save(); ctx.translate(x, 0); ctx.fillStyle = "#8a5a32"; ctx.fillRect(-4, y0 - 30, 8, 30); ctx.fillRect(-4, y0 + RH, 8, 30);
+        for (let i = 0; i < 9; i++) { const sy = y0 + i * RH / 9, sh = RH / 9 * .82; const g = ctx.createLinearGradient(-rw / 2, 0, rw / 2, 0); g.addColorStop(0, "#9b6a3c"); g.addColorStop(.45, "#e2b47c"); g.addColorStop(1, "#7a4f2a"); ctx.fillStyle = g; ctx.beginPath(); ctx.roundRect(-rw / 2, sy, rw, sh, rw * .4); ctx.fill();
+          ctx.strokeStyle = "rgba(90,55,25,.35)"; ctx.lineWidth = 1; const rot = (x / 12 + i) % 4; for (let r = 0; r < 3; r++) { const yy = sy + sh * ((rot / 4 + r / 3) % 1); ctx.beginPath(); ctx.moveTo(-rw / 2 + 3, yy); ctx.lineTo(rw / 2 - 3, yy); ctx.stroke(); } } ctx.restore(); }
+      if (k > 0) { ctx.save(); ctx.fillStyle = "rgba(255,253,248,.85)"; ctx.globalAlpha *= Math.min(1, k * 2); ctx.beginPath(); ctx.arc(cx, cy, R * 1.04, 0, 7); ctx.fill(); ctx.restore(); miaLogo(ctx, cx, cy, R, k, lv, tx, o); }
+      if (shine > -1 && shine < 2) { ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, R * 1.02, 0, 7); ctx.clip(); const sx = cx - R + shine * R * 2; const g = ctx.createLinearGradient(sx - R * .3, 0, sx + R * .3, 0); g.addColorStop(0, "rgba(255,255,255,0)"); g.addColorStop(.5, "rgba(255,250,220,.75)"); g.addColorStop(1, "rgba(255,255,255,0)"); ctx.fillStyle = g; ctx.fillRect(cx - R, cy - R, R * 2, R * 2); ctx.restore(); }
+      miaSub(ctx, w, h, cy + R * 1.35, sub, o); ctx.restore();
+    };
+    let live = true; const lp = (now) => { if (!live || tk.cancelled) return; draw(now); requestAnimationFrame(lp); }; requestAnimationFrame(lp);
+    await sleep(300);
+    await tween(1500, (e) => { x = -rw + e * (w + rw * 2); waves = e; }, tk);
+    await tween(1200, (e) => { k = e; }, tk);
+    await tween(600, (e) => { lv = e; }, tk);
+    await tween(400, (e) => { tx = e; }, tk);
+    await tween(700, (e) => { shine = e * 2; sub = e; }, tk);
+    await sleep(o.hold || 800); if (tk.cancelled) { live = false; return c.remove(); }
+    reveal(); await tween(800, (e) => { zoom = 1 + e * .6; bgA = 1 - e; c.style.opacity = 1 - e; }, tk); live = false; c.remove();
+  }
+
+  const redo = $("#redo");
+  let token = { cancelled: true };
+  async function play() {
+    token.cancelled = true; const tk = (token = { cancelled: false });
+    hero.querySelectorAll(".fxl, .stage").forEach((n) => n.remove());
+    hero.classList.remove("reveal"); hero.classList.add("pre"); redo.hidden = true;
+    const top = Math.max(0, hero.getBoundingClientRect().top), vis = Math.max(320, Math.min(hero.clientHeight, innerHeight - top));
+    const stage = document.createElement("div"); stage.className = "stage"; stage.style.cssText = `position:absolute;left:0;right:0;top:0;height:${hero.clientHeight}px;z-index:5;pointer-events:none;overflow:hidden`; hero.append(stage);
+    const inner = document.createElement("div"); inner.style.cssText = `position:absolute;left:0;right:0;top:0;height:${vis}px`; stage.append(inner);
+    if (vis < hero.clientHeight) { const cv = document.createElement("div"); cv.className = "cover"; cv.style.cssText = `position:absolute;left:0;right:0;top:${vis}px;bottom:0;background:#f3e6dc;transition:opacity .6s`; stage.append(cv); }
+    await miamix(inner, tk, { family: "Cinzel, Georgia, serif", ufamily: "Montserrat, sans-serif" });
+    stage.remove();
+    if (!tk.cancelled) redo.hidden = false;
+  }
+  redo.addEventListener("click", play);
+  if (reduce) hero.classList.remove("pre"); else document.fonts.ready.then(play);
+})();
+</script>
+</body>
+</html>
