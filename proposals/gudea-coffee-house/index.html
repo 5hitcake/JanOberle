@@ -294,7 +294,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
         ctx.save(); ctx.shadowColor = "rgba(40,25,10,.45)"; ctx.shadowBlur = 24; ctx.shadowOffsetX = 10; ctx.fillStyle = gx; ctx.beginPath(); ctx.roundRect(x0 - cw, cy - R * 1.12, cw * 2, R * 2.24, cw * .25); ctx.fill(); ctx.restore();
         ctx.strokeStyle = "rgba(255,255,255,.12)"; ctx.lineWidth = 2; const rot = px / (cw * .9); for (let i = 0; i < 9; i++) { const a = rot + i * .7, xx = x0 + Math.sin(a) * cw * .85; if (Math.cos(a) < 0) continue; ctx.beginPath(); ctx.moveTo(xx, cy - R); ctx.lineTo(xx, cy + R); ctx.stroke(); }
         ctx.fillStyle = "#14110f"; ctx.beginPath(); ctx.ellipse(x0, cy - R * 1.12, cw * .3, cw * .1, 0, 0, 7); ctx.fill(); }
-      if (word > 0) { ctx.globalAlpha = bgA * Math.min(1, word); ctx.textAlign = "center"; ctx.fillStyle = "#3b2716"; ctx.font = `600 ${Math.min(w * .045, h * .028)}px ${o.ufamily || "system-ui"}`; ctx.letterSpacing = "6px"; ctx.fillText(o.sub || "GUDEA COFFEE HOUSE · GLASGOW", w / 2, cy + R * 1.45); ctx.letterSpacing = "0px"; }
+      if (word > 0) { ctx.globalAlpha = bgA * Math.min(1, word); ctx.textAlign = "center"; ctx.fillStyle = "#3b2716"; ctx.font = `600 ${Math.min(w * .034, h * .024)}px ${o.ufamily || "system-ui"}`; ctx.letterSpacing = `${Math.min(6, w * .008)}px`; ctx.fillText(o.sub || "GUDEA COFFEE HOUSE · GLASGOW", w / 2, cy + R * 1.45, w * .86); ctx.letterSpacing = "0px"; }
       ctx.restore();
     };
     draw(); await sleep(300);
