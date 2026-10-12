@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Gudea Coffee House · Design proposal</title>
+<meta name="description" content="A website proposal for Gudea Coffee House, Iraqi café at 121 St George's Road, Glasgow, by Jota Labs. Not the official website.">
+<meta property="og:title" content="Gudea Coffee House · Design proposal">
+<meta property="og:description" content="Sumerian chai, qahwa and homemade desserts on St George's Road, Glasgow. A proposal by Jota Labs.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='31' fill='%23efe6d2' stroke='%231a1714' stroke-width='3'/%3E%3Cellipse cx='32' cy='34' rx='8' ry='11' fill='%231a1714'/%3E%3Crect x='22' y='17' width='20' height='8' rx='2' fill='%231a1714'/%3E%3Cpath d='M8 40h48M14 46h36M20 52h24' stroke='%231a1714' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=DM+Sans:wght@400;500;700;800&family=Courier+Prime:wght@400;700&display=swap">
+<style>
+/* Layout: Rollsiegel-Intro (Siegel rollt über Ton, drückt Logo + GUDEA + Keilschrift ein), Hero in Creme mit Keilschrift-Fries.
+   Signature (Sumerian chai, Qahwa, Saffron latte), Menü mit Tabs (echte Preise von der Menükarte), Who is Gudea, Reviews, Visit mit Live-Status.
+   Creme, Schwarz vom Logo, Grün der Menü-Überschriften, Messing; Marcellus + DM Sans + Courier Prime. */
+:root {
+  --bg: #efe6d2; --bg-2: #e6dbc2; --bg-3: #f6f0e2; --ink: #1a1714; --line: rgba(26,23,20,.15); --soft: #3d352c; --muted: #6b5a44;
+  --green: #1f6b3a; --brass: #b8892f; --clay: #c9a07a;
+  --f-display: "Marcellus", Georgia, serif; --f-body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif; --f-mono: "Courier Prime", ui-monospace, monospace;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-family: var(--f-display); font-weight: 400; text-wrap: balance; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 700 13px/1.2 var(--f-mono); letter-spacing: .18em; text-transform: uppercase; color: var(--green); }
+:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+.proposal { background: #000; color: #e9ebee; font: 13px/1.4 var(--f-body); padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; }
+.proposal b { color: #ffd166; } .proposal a { color: #fff; font-weight: 800; }
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 22px/1 var(--f-display); letter-spacing: .06em; }
+.logo svg { width: 38px; height: 38px; }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 15px; font-weight: 700; color: var(--muted); }
+nav.links a:hover { color: var(--ink); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 800 15px/1 var(--f-body); padding: 15px 22px; border-radius: 6px; background: var(--green); color: #f6f0e2; border: 2px solid var(--green); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(31,107,58,.25); }
+.btn.ghost { background: transparent; color: var(--ink); border-color: rgba(26,23,20,.35); }
+.btn.ghost:hover { border-color: var(--ink); }
+nav.links a.btn { color: #f6f0e2; padding: 10px 16px; font-size: 14px; }
+.menu-btn { display: none; background: transparent; color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 8px 14px; font: 800 12px var(--f-body); letter-spacing: .08em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bg-3); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line); background: radial-gradient(60% 70% at 85% 30%, rgba(201,160,122,.35), transparent 70%), var(--bg); }
+.frieze { position: absolute; left: 0; width: 200%; height: 40px; opacity: .1; z-index: 0; animation: slide 60s linear infinite; }
+.frieze.f1 { top: 22px; } .frieze.f2 { bottom: 22px; animation-direction: reverse; }
+@keyframes slide { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .frieze { animation: none; } }
+.hero .seal { position: absolute; right: -6%; top: 50%; width: min(52vw, 560px); transform: translateY(-50%); opacity: .14; z-index: 0; }
+.hero .wrap { position: relative; z-index: 1; padding-block: clamp(84px, 12vw, 140px) clamp(64px, 9vw, 110px); display: flex; flex-direction: column; gap: 16px; }
+.hero h1 { font-size: clamp(72px, 13vw, 168px); line-height: .9; letter-spacing: .04em; }
+.hero h1 small { display: block; font: 700 clamp(14px, 2vw, 20px)/1 var(--f-mono); letter-spacing: .5em; color: var(--muted); margin-top: 14px; }
+.hero .lead { margin: 4px 0 0; font-size: clamp(18px, 2.2vw, 22px); color: var(--soft); max-width: 36ch; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.facts span { font: 700 14px var(--f-body); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; background: rgba(246,240,226,.85); }
+.facts span b { color: var(--ink); }
+.status::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); margin-right: 8px; vertical-align: 1px; }
+.status.open::before { background: #2e9b55; box-shadow: 0 0 10px #2e9b55; }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 7; font: 700 13px var(--f-body); color: var(--muted); background: rgba(246,240,226,.9); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.redo:hover { color: var(--ink); }
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero.reveal .wrap > :nth-child(2) { animation-delay: .06s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .12s }
+.hero.reveal .wrap > :nth-child(4) { animation-delay: .18s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .24s }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+section.block { padding-block: clamp(64px, 10vw, 104px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 40px; margin-bottom: 30px; }
+.head h2 { font-size: clamp(36px, 5.6vw, 64px); line-height: 1; margin-top: 10px; }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+.note { margin-top: 20px; font-size: 14px; color: var(--muted); padding: 10px 14px; border-left: 3px solid var(--green); background: var(--bg-2); border-radius: 0 10px 10px 0; }
+.sig { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 860px) { .sig { grid-template-columns: minmax(0,1fr); } }
+.sc { background: var(--bg-3); border: 1px solid var(--line); border-radius: 14px; padding: 24px; display: grid; gap: 8px; align-content: start; }
+.sc svg { width: 70px; height: 70px; }
+.sc h3 { font-size: 28px; } .sc .pr { font: 700 15px var(--f-mono); color: var(--green); } .sc p { margin: 0; color: var(--soft); font-size: 15px; }
+.menu { background: var(--bg-3); border: 1px solid var(--line); border-radius: 14px; padding: clamp(18px, 3vw, 32px); }
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.tabs button { font: 700 14px var(--f-mono); letter-spacing: .06em; text-transform: uppercase; padding: 10px 14px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; }
+.tabs button[aria-selected="true"] { background: var(--green); border-color: var(--green); color: #f6f0e2; }
+.pl { list-style: none; margin: 0; padding: 0; columns: 2; column-gap: 40px; }
+@media (max-width: 760px) { .pl { columns: 1; } }
+.pl li { break-inside: avoid; display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: baseline; padding: 10px 0; border-top: 1px dashed var(--line); font-family: var(--f-mono); }
+.pl li::after { content: ""; grid-column: 2; grid-row: 1; border-bottom: 1px dotted rgba(26,23,20,.25); transform: translateY(-4px); }
+.pl b { font-weight: 700; text-transform: uppercase; font-size: 15px; letter-spacing: .03em; } .pl em { font-style: normal; font-weight: 700; color: var(--green); grid-column: 3; }
+.pl i { font-style: normal; font-size: 11px; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 1px 5px; margin-left: 6px; vertical-align: 2px; }
+.pl small { grid-column: 1 / -1; grid-row: 2; color: var(--muted); font-size: 13px; margin-top: -4px; }
+.mnote { margin: 18px 0 0; font: 13px/1.5 var(--f-mono); color: var(--muted); text-align: center; }
+.story { background: var(--ink); color: #efe6d2; }
+.story .wrap { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: clamp(28px, 6vw, 80px); align-items: center; }
+@media (max-width: 860px) { .story .wrap { grid-template-columns: minmax(0,1fr); } }
+.story svg { width: min(100%, 380px); justify-self: center; }
+.story .kicker { color: #d9b37a; } .story h2 { font-size: clamp(36px, 5.6vw, 64px); line-height: 1; margin: 10px 0 18px; }
+.story p { margin: 0 0 14px; color: #d9cfbb; }
+.rev { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: 16px; }
+@media (max-width: 860px) { .rev { grid-template-columns: minmax(0,1fr); } }
+.score { background: var(--green); color: #f6f0e2; border-radius: 14px; padding: 28px; display: grid; gap: 6px; align-content: center; }
+.score .kicker { color: #cfe6d6; } .score b { font: clamp(48px, 7vw, 72px)/1 var(--f-display); } .score p { margin: 0; color: #cfe6d6; }
+.quote { background: var(--bg-3); border: 1px solid var(--line); border-radius: 14px; padding: 28px; display: grid; gap: 14px; align-content: center; }
+.quote p { margin: 0; font: clamp(20px, 2.6vw, 28px)/1.35 var(--f-display); } .quote small { color: var(--muted); }
+.visit { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 860px) { .visit { grid-template-columns: minmax(0,1fr); } }
+.map { border-radius: 14px; overflow: hidden; border: 1px solid var(--line); min-height: 320px; }
+.map iframe { width: 100%; height: 100%; min-height: 320px; border: 0; display: block; }
+.card { border: 1px solid var(--line); border-radius: 14px; padding: 26px; background: var(--bg-3); display: grid; gap: 10px; align-content: start; }
+.card h3 { font-size: 24px; } .card p { margin: 0; color: var(--soft); }
+.hours { display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; margin: 0; font-variant-numeric: tabular-nums; }
+.hours dt { color: var(--muted); } .hours dd { margin: 0; color: var(--soft); } .hours .today { color: var(--ink); font-weight: 800; }
+footer { padding-block: 40px 96px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 800 14px var(--f-body); padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.25); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></symbol>
+</svg>
+<div class="proposal"><span><b>Design proposal</b> for Gudea Coffee House · not the official website</span><span>Made by <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">Jota Labs</a></span></div>
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top"><svg viewBox="-100 -100 200 200" aria-hidden="true"><circle r="98" fill="#efe6d2"/><circle r="94" fill="none" stroke="#1a1714" stroke-width="6"/><circle r="84" fill="none" stroke="#1a1714" stroke-width="2"/><clipPath id="c1"><circle r="83"/></clipPath><g clip-path="url(#c1)" fill="#1a1714"><path d="M-100 15L-55-25-20 10M20 10L55-25 100 15" fill="none" stroke="#1a1714" stroke-width="6"/><rect x="-75" y="38" width="150" height="6"/><rect x="-61" y="50" width="122" height="6"/><rect x="-47" y="62" width="94" height="6"/><rect x="-33" y="74" width="66" height="6"/></g><ellipse cy="5" rx="22" ry="30" fill="#1a1714"/><ellipse cx="-9" cy="0" rx="6" ry="3" fill="#efe6d2"/><ellipse cx="9" cy="0" rx="6" ry="3" fill="#efe6d2"/><rect x="-1.5" y="2" width="3" height="12" fill="#efe6d2"/><rect x="-8" y="20" width="16" height="2.5" fill="#efe6d2"/><rect x="-28" y="-42" width="56" height="20" rx="4" fill="#1a1714"/><g fill="#efe6d2"><circle cx="-21" cy="-37.0" r="1.5"/><circle cx="-15" cy="-37.0" r="1.5"/><circle cx="-9" cy="-37.0" r="1.5"/><circle cx="-3" cy="-37.0" r="1.5"/><circle cx="3" cy="-37.0" r="1.5"/><circle cx="9" cy="-37.0" r="1.5"/><circle cx="15" cy="-37.0" r="1.5"/><circle cx="21" cy="-37.0" r="1.5"/><circle cx="-21" cy="-31.5" r="1.5"/><circle cx="-15" cy="-31.5" r="1.5"/><circle cx="-9" cy="-31.5" r="1.5"/><circle cx="-3" cy="-31.5" r="1.5"/><circle cx="3" cy="-31.5" r="1.5"/><circle cx="9" cy="-31.5" r="1.5"/><circle cx="15" cy="-31.5" r="1.5"/><circle cx="21" cy="-31.5" r="1.5"/><circle cx="-21" cy="-26.0" r="1.5"/><circle cx="-15" cy="-26.0" r="1.5"/><circle cx="-9" cy="-26.0" r="1.5"/><circle cx="-3" cy="-26.0" r="1.5"/><circle cx="3" cy="-26.0" r="1.5"/><circle cx="9" cy="-26.0" r="1.5"/><circle cx="15" cy="-26.0" r="1.5"/><circle cx="21" cy="-26.0" r="1.5"/></g><g fill="#1a1714"><rect x="-23" y="-51" width="4" height="7"/><rect x="-16" y="-56" width="4" height="12"/><rect x="-9" y="-61" width="4" height="17"/><rect x="-2" y="-66" width="4" height="22"/><rect x="5" y="-61" width="4" height="17"/><rect x="12" y="-56" width="4" height="12"/><rect x="19" y="-51" width="4" height="7"/></g></svg>GUDEA</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENU</button>
+    <nav class="links" id="links">
+      <a href="#menu">Menu</a>
+      <a href="#story">Who is Gudea</a>
+      <a href="#visit">Visit</a>
+      <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Gudea%20Coffee%20House%20121%20St%20George%27s%20Road%20Glasgow" target="_blank" rel="noopener">Directions</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero pre" id="top">
+  <svg class="frieze f1" aria-hidden="true"><defs><pattern id="cu" width="120" height="40" patternUnits="userSpaceOnUse"><g fill="#1a1714"><path d="M6 12l12-4v8z"/><rect x="14" y="11" width="16" height="2"/><path d="M38 26l12-4v8z"/><rect x="46" y="25" width="16" height="2"/><path d="M70 10l4 12h-8z"/><rect x="69" y="18" width="2" height="14"/><path d="M90 20l12-4v8z"/><rect x="98" y="19" width="14" height="2"/></g></pattern></defs><rect width="100%" height="100%" fill="url(#cu)"/></svg>
+  <svg class="frieze f2" aria-hidden="true"><defs><pattern id="cu2" width="120" height="40" patternUnits="userSpaceOnUse"><g fill="#1a1714"><path d="M6 12l12-4v8z"/><rect x="14" y="11" width="16" height="2"/><path d="M38 26l12-4v8z"/><rect x="46" y="25" width="16" height="2"/><path d="M70 10l4 12h-8z"/><rect x="69" y="18" width="2" height="14"/><path d="M90 20l12-4v8z"/><rect x="98" y="19" width="14" height="2"/></g></pattern></defs><rect width="100%" height="100%" fill="url(#cu2)"/></svg>
+  <div class="seal"><svg viewBox="-100 -100 200 200" aria-hidden="true"><circle r="98" fill="#efe6d2"/><circle r="94" fill="none" stroke="#1a1714" stroke-width="6"/><circle r="84" fill="none" stroke="#1a1714" stroke-width="2"/><clipPath id="c2"><circle r="83"/></clipPath><g clip-path="url(#c2)" fill="#1a1714"><path d="M-100 15L-55-25-20 10M20 10L55-25 100 15" fill="none" stroke="#1a1714" stroke-width="6"/><rect x="-75" y="38" width="150" height="6"/><rect x="-61" y="50" width="122" height="6"/><rect x="-47" y="62" width="94" height="6"/><rect x="-33" y="74" width="66" height="6"/></g><ellipse cy="5" rx="22" ry="30" fill="#1a1714"/><ellipse cx="-9" cy="0" rx="6" ry="3" fill="#efe6d2"/><ellipse cx="9" cy="0" rx="6" ry="3" fill="#efe6d2"/><rect x="-1.5" y="2" width="3" height="12" fill="#efe6d2"/><rect x="-8" y="20" width="16" height="2.5" fill="#efe6d2"/><rect x="-28" y="-42" width="56" height="20" rx="4" fill="#1a1714"/><g fill="#efe6d2"><circle cx="-21" cy="-37.0" r="1.5"/><circle cx="-15" cy="-37.0" r="1.5"/><circle cx="-9" cy="-37.0" r="1.5"/><circle cx="-3" cy="-37.0" r="1.5"/><circle cx="3" cy="-37.0" r="1.5"/><circle cx="9" cy="-37.0" r="1.5"/><circle cx="15" cy="-37.0" r="1.5"/><circle cx="21" cy="-37.0" r="1.5"/><circle cx="-21" cy="-31.5" r="1.5"/><circle cx="-15" cy="-31.5" r="1.5"/><circle cx="-9" cy="-31.5" r="1.5"/><circle cx="-3" cy="-31.5" r="1.5"/><circle cx="3" cy="-31.5" r="1.5"/><circle cx="9" cy="-31.5" r="1.5"/><circle cx="15" cy="-31.5" r="1.5"/><circle cx="21" cy="-31.5" r="1.5"/><circle cx="-21" cy="-26.0" r="1.5"/><circle cx="-15" cy="-26.0" r="1.5"/><circle cx="-9" cy="-26.0" r="1.5"/><circle cx="-3" cy="-26.0" r="1.5"/><circle cx="3" cy="-26.0" r="1.5"/><circle cx="9" cy="-26.0" r="1.5"/><circle cx="15" cy="-26.0" r="1.5"/><circle cx="21" cy="-26.0" r="1.5"/></g><g fill="#1a1714"><rect x="-23" y="-51" width="4" height="7"/><rect x="-16" y="-56" width="4" height="12"/><rect x="-9" y="-61" width="4" height="17"/><rect x="-2" y="-66" width="4" height="22"/><rect x="5" y="-61" width="4" height="17"/><rect x="12" y="-56" width="4" height="12"/><rect x="19" y="-51" width="4" height="7"/></g></svg></div>
+  <div class="wrap">
+    <div class="kicker">Iraqi café · Halal · St George's Road</div>
+    <h1>GUDEA<small>COFFEE HOUSE</small></h1>
+    <p class="lead">Sumerian chai, Arabic qahwa and homemade desserts in the heart of Glasgow.</p>
+    <div class="ctas"><a class="btn" href="#menu">See the menu</a><a class="btn ghost" href="#visit">Find us</a></div>
+    <div class="facts"><span class="status" id="statusChip">Open daily 9am–10pm</span><span><b>Halal</b></span><span><b>Homemade</b> desserts</span></div>
+  </div>
+  <button class="redo" type="button" id="redo" hidden>↻ Roll the seal again</button>
+</section>
+
+<section class="block" id="signature">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">The house specials</div><h2>Tea and coffee, the old way</h2></div><p>Brewed in the pot, poured at your table. For one, or for two.</p></div>
+    <div class="sig">
+      <article class="sc"><svg viewBox="0 0 70 70" aria-hidden="true"><ellipse cx="35" cy="60" rx="24" ry="5" fill="#b8892f"/><ellipse cx="35" cy="59" rx="18" ry="3.5" fill="#1f6b3a"/><path d="M24 14c0 12 7 14 6 24-1 8-5 12-4 20h18c1-8-3-12-4-20-1-10 6-12 6-24z" fill="#b8441a" opacity=".85"/><path d="M24 14c0 12 7 14 6 24-1 8-5 12-4 20h18c1-8-3-12-4-20-1-10 6-12 6-24z" fill="none" stroke="#1a1714" stroke-width="1.5"/></svg><h3>Sumerian chai</h3><div class="pr">£3.5 one · £5 two</div><p>Iraqi tea style. Strong, amber and served in the glass.</p></article>
+      <article class="sc"><svg viewBox="0 0 70 70" aria-hidden="true"><path d="M30 10h10l-2 6h-6z" fill="#b8892f"/><path d="M28 18c-8 8-14 16-12 28 1 8 8 12 19 12s18-4 19-12c2-12-4-20-12-28z" fill="#d6a542" stroke="#1a1714" stroke-width="1.5"/><path d="M18 34C10 30 6 22 4 16" stroke="#b8892f" stroke-width="3" fill="none"/><path d="M52 26c8 0 10 14 2 18" stroke="#b8892f" stroke-width="3" fill="none"/></svg><h3>Qahwa</h3><div class="pr">£4 one · £6 two</div><p>Arabic coffee from the dallah, light, fragrant and generous.</p></article>
+      <article class="sc"><svg viewBox="0 0 70 70" aria-hidden="true"><path d="M18 22h34l-4 34H22z" fill="#efe6d2" stroke="#1a1714" stroke-width="1.5"/><path d="M20 30h30l-2 24H22z" fill="#e3a63a"/><path d="M28 36l3 5M38 34l-2 6M42 44l3 3M30 48l4-2" stroke="#b8441a" stroke-width="2"/><path d="M52 28c7 0 7 12 0 12" stroke="#1a1714" stroke-width="2" fill="none"/></svg><h3>Saffron latte</h3><div class="pr">£4.5 · iced £5</div><p>Espresso, milk and real saffron. Also as karak chai with saffron.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="menu" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Middle Eastern café</div><h2>The menu</h2></div><p>Every price from our menu card. Vegan and vegetarian options, just ask.</p></div>
+    <div class="menu">
+      <div class="tabs" role="tablist" aria-label="Menu sections"><button role="tab" aria-selected="true" data-t="0">Specialty</button><button role="tab" aria-selected="false" data-t="1">Hot drinks</button><button role="tab" aria-selected="false" data-t="2">Cold drinks</button><button role="tab" aria-selected="false" data-t="3">Desserts</button><button role="tab" aria-selected="false" data-t="4">Food</button></div>
+      <ul class="pl pane" data-p="0"><li><b>Sumerian chai</b><em>£3.5 / £5</em><small>Iraqi tea style · pot for one / two</small></li><li><b>Saffron chai</b><em>£3.5</em></li><li><b>Chai noomi</b><em>£3</em></li><li><b>The Turk</b><em>£3.5</em><small>Turkish coffee</small></li><li><b>Qahwa</b><em>£4 / £6</em><small>Arabic coffee · pot for one / two</small></li><li><b>Saffron latte</b><em>£4.5</em></li><li><b>Matcha latte</b><em>£4</em></li><li><b>Chai latte</b><em>£4</em></li><li><b>Moroccan tea</b><em>£3.5 / £5</em><small>pot for one / two</small></li><li><b>Karak chai</b><em>£3.5</em></li><li><b>Karak chai &amp; saffron</b><em>£4</em></li><li><b>Salep</b><em>£4</em></li></ul><ul class="pl pane" data-p="1" hidden><li><b>Espresso</b><em>£2</em></li><li><b>Double espresso</b><em>£2.5</em></li><li><b>Americano</b><em>£2.5</em></li><li><b>Cortado</b><em>£3.25</em></li><li><b>Flat white</b><em>£3.25</em></li><li><b>Cappuccino</b><em>£3.5</em></li><li><b>Latte</b><em>£3.5</em></li><li><b>Caramel latte</b><em>£3.75</em></li><li><b>Mochaccino</b><em>£3.75</em></li><li><b>Hot chocolate</b><em>£3.75</em></li><li><b>English tea</b><em>£2.5</em></li><li><b>Earl Grey tea</b><em>£2.5</em></li><li><b>Lemon &amp; ginger</b><em>£2.5</em></li></ul><ul class="pl pane" data-p="2" hidden><li><b>Iced americano</b><em>£2.5</em></li><li><b>Iced latte</b><em>£3.75</em></li><li><b>Iced saffron latte</b><em>£5</em></li><li><b>Iced Spanish latte</b><em>£4.5</em></li><li><b>Iced mocha latte</b><em>£4.25</em></li><li><b>Iced caramel latte</b><em>£4.25</em></li><li><b>Iced matcha latte</b><em>£4.5</em></li><li><b>Iced saffron</b><em>£4.5</em></li><li><b>Freshly squeezed orange</b><em>£4.5</em></li><li><b>Orange &amp; espresso</b><em>£5.5</em></li><li><b>Soft drink</b><em>£2.5</em></li><li><b>Still / spring water</b><em>£2</em></li></ul><ul class="pl pane" data-p="3" hidden><li><b>Baklawa <i>V</i></b><em>£5</em></li><li><b>Tiramisu <i>V</i></b><em>£4.9</em></li><li><b>Lemon tiramisu <i>V</i></b><em>£5.5</em></li><li><b>Basbousa <i>V</i></b><em>£5</em></li><li><b>Coconut basbousa <i>V</i></b><em>£5</em></li><li><b>Mixed chocolate balls <i>V</i></b><em>£3.5</em></li><li><b>Dubai chocolate balls <i>V</i></b><em>£4.5</em></li><li><b>Date balls <i>VG</i></b><em>£3</em></li><li><b>Klicha <i>V</i></b><em>£4</em></li></ul><ul class="pl pane" data-p="4" hidden><li><b>Lamb dolma</b><em>£10</em></li><li><b>Chicken dolma</b><em>£8</em></li><li><b>Veg dolma <i>VE</i></b><em>£8</em></li><li><b>Any panini</b><em>£5</em></li><li><b>Mixed nuts <i>VG</i></b><em>£4.5</em></li><li><b>Pistachio <i>VG</i></b><em>£4.5</em></li></ul>
+      <p class="mnote">Milk: whole, semi-skimmed, skim or oat. V vegetarian · VG / VE vegan. Food allergy or dietary requirement? Please tell a member of staff.</p>
+    </div>
+    <p class="note">Prices from your menu highlight. On the final site you change prices yourself in a minute, no designer needed.</p>
+  </div>
+</section>
+
+<section class="block story" id="story">
+  <div class="wrap">
+    <svg viewBox="-100 -100 200 200" aria-hidden="true"><circle r="98" fill="#efe6d2"/><circle r="94" fill="none" stroke="#1a1714" stroke-width="6"/><circle r="84" fill="none" stroke="#1a1714" stroke-width="2"/><clipPath id="c3"><circle r="83"/></clipPath><g clip-path="url(#c3)" fill="#1a1714"><path d="M-100 15L-55-25-20 10M20 10L55-25 100 15" fill="none" stroke="#1a1714" stroke-width="6"/><rect x="-75" y="38" width="150" height="6"/><rect x="-61" y="50" width="122" height="6"/><rect x="-47" y="62" width="94" height="6"/><rect x="-33" y="74" width="66" height="6"/></g><ellipse cy="5" rx="22" ry="30" fill="#1a1714"/><ellipse cx="-9" cy="0" rx="6" ry="3" fill="#efe6d2"/><ellipse cx="9" cy="0" rx="6" ry="3" fill="#efe6d2"/><rect x="-1.5" y="2" width="3" height="12" fill="#efe6d2"/><rect x="-8" y="20" width="16" height="2.5" fill="#efe6d2"/><rect x="-28" y="-42" width="56" height="20" rx="4" fill="#1a1714"/><g fill="#efe6d2"><circle cx="-21" cy="-37.0" r="1.5"/><circle cx="-15" cy="-37.0" r="1.5"/><circle cx="-9" cy="-37.0" r="1.5"/><circle cx="-3" cy="-37.0" r="1.5"/><circle cx="3" cy="-37.0" r="1.5"/><circle cx="9" cy="-37.0" r="1.5"/><circle cx="15" cy="-37.0" r="1.5"/><circle cx="21" cy="-37.0" r="1.5"/><circle cx="-21" cy="-31.5" r="1.5"/><circle cx="-15" cy="-31.5" r="1.5"/><circle cx="-9" cy="-31.5" r="1.5"/><circle cx="-3" cy="-31.5" r="1.5"/><circle cx="3" cy="-31.5" r="1.5"/><circle cx="9" cy="-31.5" r="1.5"/><circle cx="15" cy="-31.5" r="1.5"/><circle cx="21" cy="-31.5" r="1.5"/><circle cx="-21" cy="-26.0" r="1.5"/><circle cx="-15" cy="-26.0" r="1.5"/><circle cx="-9" cy="-26.0" r="1.5"/><circle cx="-3" cy="-26.0" r="1.5"/><circle cx="3" cy="-26.0" r="1.5"/><circle cx="9" cy="-26.0" r="1.5"/><circle cx="15" cy="-26.0" r="1.5"/><circle cx="21" cy="-26.0" r="1.5"/></g><g fill="#1a1714"><rect x="-23" y="-51" width="4" height="7"/><rect x="-16" y="-56" width="4" height="12"/><rect x="-9" y="-61" width="4" height="17"/><rect x="-2" y="-66" width="4" height="22"/><rect x="5" y="-61" width="4" height="17"/><rect x="12" y="-56" width="4" height="12"/><rect x="19" y="-51" width="4" height="7"/></g></svg>
+    <div>
+      <div class="kicker">Who is Gudea</div>
+      <h2>A ruler who built temples</h2>
+      <p>Gudea was a ruler of Lagash, a Sumerian city-state in southern Mesopotamia, in the late 22nd century BCE. He is remembered for his great building projects, above all the temple of Ningirsu, the city's patron god.</p>
+      <p>His statues and inscriptions speak of piety, justice and prosperity for his people, and his time is known for its art and its peace. His face is our logo, and his name is on our door at 121 St George's Road.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="reviews">
+  <div class="wrap rev">
+    <div class="score"><div class="kicker">Reviews</div><b>Loved by guests</b><p>See what people say on Google and Instagram.</p></div>
+    <div class="quote"><p>Your favourite customer reviews could rotate here.</p><small>Space for guest quotes</small></div>
+  </div>
+</section>
+
+<section class="block" id="visit" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Visit us</div><h2>121 St George's Road</h2></div><p>Glasgow G3 6JA. Open every day of the week.</p></div>
+    <div class="visit">
+      <div class="map"><iframe title="Map: Gudea Coffee House, 121 St George's Road" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-4.2771%2C55.8656%2C-4.2641%2C55.8714&amp;layer=mapnik&amp;marker=55.86854%2C-4.27059"></iframe></div>
+      <div class="card">
+        <h3>Opening hours</h3>
+        <dl class="hours" id="hours"></dl>
+        <h3 style="margin-top:6px">Address</h3>
+        <p>Gudea Coffee House<br>121 St George's Road<br>Glasgow G3 6JA</p>
+        <p>@gudea.gla on Instagram, Facebook and TikTok</p>
+        <div class="ctas"><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Gudea%20Coffee%20House%20121%20St%20George%27s%20Road%20Glasgow" target="_blank" rel="noopener">Directions ↗</a><a class="btn ghost" href="https://www.instagram.com/gudea.gla/" target="_blank" rel="noopener">Instagram</a></div>
+      </div>
+    </div>
+    <p class="note">Hours from your Instagram bio. Holiday hours, like at Eid, would show here and at the top automatically.</p>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>Gudea Coffee House · 121 St George's Road, Glasgow G3 6JA · Iraqi café · Halal</span><span>Design proposal by Jota Labs · <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">more work</a></span></div></footer>
+
+<a class="like" href="https://wa.me/5491130331893?text=Hi%20Jan%2C%20I%20saw%20the%20website%20proposal%20for%20Gudea%20Coffee%20House%20and%20I%27d%20like%20to%20know%20more." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Like it? Let's talk</a>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+  const hero = $("#top");
+
+  /* ---------- Menü-Tabs ---------- */
+  const tabs = [...document.querySelectorAll(".tabs button")], panes = [...document.querySelectorAll(".pane")];
+  tabs.forEach((b) => b.addEventListener("click", () => { tabs.forEach((x) => x.setAttribute("aria-selected", String(x === b))); panes.forEach((p) => (p.hidden = p.dataset.p !== b.dataset.t)); }));
+
+  /* ---------- Hours + open now (Glasgow) ---------- */
+  const H = { Mon: [540, 1320], Tue: [540, 1320], Wed: [540, 1320], Thu: [540, 1320], Fri: [540, 1320], Sat: [540, 1320], Sun: [540, 1320] };
+  const names = { Mon: "Monday", Tue: "Tuesday", Wed: "Wednesday", Thu: "Thursday", Fri: "Friday", Sat: "Saturday", Sun: "Sunday" };
+  const fmt = (m) => { const h = Math.floor(m / 60), mm = m % 60; return (h > 12 ? h - 12 : h) + (mm ? ":" + String(mm).padStart(2, "0") : "") + (h >= 12 ? "pm" : "am"); };
+  function status() {
+    const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/London", weekday: "short", hour: "numeric", minute: "numeric", hour12: false }).formatToParts(new Date());
+    const get = (t) => parts.find((x) => x.type === t).value, wd = get("weekday"), m = (+get("hour") % 24) * 60 + +get("minute"), t = H[wd];
+    $("#hours").innerHTML = Object.keys(H).map((d) => `<dt class="${d === wd ? "today" : ""}">${names[d]}</dt><dd class="${d === wd ? "today" : ""}">${fmt(H[d][0])} – ${fmt(H[d][1])}</dd>`).join("");
+    const open = m >= t[0] && m < t[1], chip = $("#statusChip");
+    chip.classList.toggle("open", open);
+    chip.innerHTML = open ? `<b>Open now</b> · until ${fmt(t[1])}` : m < t[0] ? `Opens today at <b>${fmt(t[0])}</b>` : "Closed now · <b>opens 9am</b>";
+  }
+  status(); setInterval(status, 60000);
+
+  /* ---------- Intro: Rollsiegel ---------- */
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const tween = (ms, fn, tk, ez = (t) => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2)) => new Promise((res) => { const t0 = performance.now(); const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(ez(k), k); k < 1 ? requestAnimationFrame(step) : res(); }; requestAnimationFrame(step); });
+  const canvas = (parent, cls, z) => { const w = parent.clientWidth, h = parent.clientHeight, dpr = Math.min(2, devicePixelRatio || 1); const c = document.createElement("canvas"); c.className = "fxl " + cls; c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); c.style.cssText = `position:absolute;left:0;top:0;width:${w}px;height:${h}px;z-index:${z};pointer-events:none`; c.setAttribute("aria-hidden", "true"); parent.append(c); const ctx = c.getContext("2d"); ctx.scale(dpr, dpr); return { c, ctx, w, h }; };
+  const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); hero.querySelectorAll(".cover").forEach((n) => (n.style.opacity = "0")); };
+  /* Gudea-Logo vereinfacht: Ring, Berge, Wasserlinien, Kopf mit Krone */
+  function gdLogo(ctx, cx, cy, R, ink = "#1a1714", bg = "#efe6d2") {
+    ctx.save(); ctx.translate(cx, cy);
+    ctx.fillStyle = bg; ctx.beginPath(); ctx.arc(0, 0, R, 0, 7); ctx.fill();
+    ctx.strokeStyle = ink; ctx.lineWidth = R * .05; ctx.beginPath(); ctx.arc(0, 0, R * .96, 0, 7); ctx.stroke(); ctx.lineWidth = R * .02; ctx.beginPath(); ctx.arc(0, 0, R * .86, 0, 7); ctx.stroke();
+    ctx.save(); ctx.beginPath(); ctx.arc(0, 0, R * .85, 0, 7); ctx.clip();
+    ctx.lineWidth = R * .05; ctx.beginPath(); ctx.moveTo(-R, R * .15); ctx.lineTo(-R * .55, -R * .25); ctx.lineTo(-R * .2, R * .1); ctx.moveTo(R * .2, R * .1); ctx.lineTo(R * .55, -R * .25); ctx.lineTo(R, R * .15); ctx.stroke();
+    ctx.fillStyle = ink; for (let i = 0; i < 4; i++) { const y = R * (.38 + i * .12), hw = R * (.75 - i * .14); ctx.fillRect(-hw, y, hw * 2, R * .055); }
+    ctx.beginPath(); ctx.moveTo(-R * .03, R * .82); ctx.lineTo(R * .03, R * .82); ctx.lineTo(0, R * .9); ctx.fill(); ctx.restore();
+    ctx.fillStyle = ink; ctx.beginPath(); ctx.ellipse(0, R * .05, R * .22, R * .3, 0, 0, 7); ctx.fill();
+    ctx.fillStyle = bg; ctx.beginPath(); ctx.ellipse(-R * .09, R * .0, R * .06, R * .03, 0, 0, 7); ctx.ellipse(R * .09, R * .0, R * .06, R * .03, 0, 0, 7); ctx.fill();
+    ctx.fillRect(-R * .015, R * .02, R * .03, R * .12); ctx.fillRect(-R * .08, R * .2, R * .16, R * .025);
+    ctx.fillStyle = ink; ctx.beginPath(); ctx.roundRect(-R * .28, -R * .42, R * .56, R * .2, R * .04); ctx.fill();
+    ctx.fillStyle = bg; for (let r = 0; r < 3; r++) for (let q = 0; q < 8; q++) { ctx.beginPath(); ctx.arc(-R * .21 + q * R * .06, -R * .37 + r * R * .055, R * .015, 0, 7); ctx.fill(); }
+    ctx.fillStyle = ink; for (let i = -3; i <= 3; i++) ctx.fillRect(i * R * .07 - R * .02, -R * .66 + Math.abs(i) * R * .05, R * .04, R * .22 - Math.abs(i) * R * .05);
+    ctx.restore();
+  }
+
+  /* ---------- Cylinder seal: ein mesopotamisches Rollsiegel rollt über Ton und hinterlässt Logo + Name ---------- */
+  async function cylseal(scr, tk, o = {}) {
+    const { c, ctx, w, h } = canvas(scr, "cseal", 5), cy = h * .44, band = Math.min(h * .34, w * .62), R = band / 2, cw = R * .62;
+    const off = document.createElement("canvas"), dpr = Math.min(2, devicePixelRatio || 1); off.width = w * dpr; off.height = h * dpr; const ox = off.getContext("2d"); ox.scale(dpr, dpr);
+    const motif = (g, dx, dy, col) => { g.save(); g.translate(dx, dy);
+      const step = Math.max(R * 2.6, 200); for (let x = -step; x < w + step; x += step) { gdLogo(g, x + step * .25, cy, R * .62, col, "rgba(0,0,0,0)");
+        g.fillStyle = col; g.textAlign = "center"; g.textBaseline = "middle"; g.font = `${R * .32}px ${o.family || "Marcellus, Georgia, serif"}`; g.fillText("GUDEA", x + step * .72, cy - R * .2);
+        for (let k = 0; k < 7; k++) { const wx = x + step * .52 + k * R * .14, wy = cy + R * .22 + (k % 2) * R * .14; g.beginPath(); g.moveTo(wx, wy); g.lineTo(wx + R * .1, wy - R * .035); g.lineTo(wx + R * .1, wy + R * .035); g.fill(); g.fillRect(wx + R * .06, wy, R * .14, R * .018); } }
+      g.fillRect(-10, cy - R * .92, w + 20, R * .03); g.fillRect(-10, cy + R * .89, w + 20, R * .03); g.restore(); };
+    motif(ox, 2, 2, "rgba(255,248,232,.55)"); motif(ox, -1.5, -1.5, "rgba(70,45,25,.55)"); motif(ox, 0, 0, "rgba(120,85,55,.55)");
+    const noise = []; for (let i = 0; i < 500; i++) noise.push([Math.random() * w, Math.random() * h, Math.random() * 1.6 + .4, Math.random() > .5]);
+    let px = -cw, bgA = 1, word = 0, zoom = 1;
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h); ctx.save(); ctx.globalAlpha = bgA; ctx.translate(w / 2, cy); ctx.scale(zoom, zoom); ctx.translate(-w / 2, -cy);
+      const g = ctx.createRadialGradient(w / 2, cy, 0, w / 2, cy, Math.max(w, h) * .8); g.addColorStop(0, o.clay || "#d9b48a"); g.addColorStop(1, "#a97d55"); ctx.fillStyle = g; ctx.fillRect(-w, -h, w * 3, h * 3);
+      for (const [x, y, r, l] of noise) { ctx.fillStyle = l ? "rgba(255,240,215,.25)" : "rgba(90,60,35,.2)"; ctx.fillRect(x, y, r, r); }
+      ctx.fillStyle = "rgba(90,60,35,.18)"; ctx.fillRect(0, cy - R * 1.02, w, R * 2.04);
+      ctx.save(); ctx.beginPath(); ctx.rect(0, 0, Math.max(0, px), h); ctx.clip(); ctx.drawImage(off, 0, 0, w, h); ctx.restore();
+      if (px > -cw && px < w + cw) { const x0 = px, gx = ctx.createLinearGradient(x0 - cw, 0, x0 + cw, 0); gx.addColorStop(0, "#2b2622"); gx.addColorStop(.35, "#6e655c"); gx.addColorStop(.55, "#4a423b"); gx.addColorStop(1, "#1f1b18");
+        ctx.save(); ctx.shadowColor = "rgba(40,25,10,.45)"; ctx.shadowBlur = 24; ctx.shadowOffsetX = 10; ctx.fillStyle = gx; ctx.beginPath(); ctx.roundRect(x0 - cw, cy - R * 1.12, cw * 2, R * 2.24, cw * .25); ctx.fill(); ctx.restore();
+        ctx.strokeStyle = "rgba(255,255,255,.12)"; ctx.lineWidth = 2; const rot = px / (cw * .9); for (let i = 0; i < 9; i++) { const a = rot + i * .7, xx = x0 + Math.sin(a) * cw * .85; if (Math.cos(a) < 0) continue; ctx.beginPath(); ctx.moveTo(xx, cy - R); ctx.lineTo(xx, cy + R); ctx.stroke(); }
+        ctx.fillStyle = "#14110f"; ctx.beginPath(); ctx.ellipse(x0, cy - R * 1.12, cw * .3, cw * .1, 0, 0, 7); ctx.fill(); }
+      if (word > 0) { ctx.globalAlpha = bgA * Math.min(1, word); ctx.textAlign = "center"; ctx.fillStyle = "#3b2716"; ctx.font = `600 ${Math.min(w * .045, h * .028)}px ${o.ufamily || "system-ui"}`; ctx.letterSpacing = "6px"; ctx.fillText(o.sub || "GUDEA COFFEE HOUSE · GLASGOW", w / 2, cy + R * 1.45); ctx.letterSpacing = "0px"; }
+      ctx.restore();
+    };
+    draw(); await sleep(300);
+    await tween(2300, (e) => { px = -cw + e * (w + cw * 2); draw(); }, tk, (k) => k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2);
+    await tween(450, (e) => { word = e; draw(); }, tk);
+    await sleep(o.hold || 1100); if (tk.cancelled) return c.remove();
+    reveal(); await tween(750, (e) => { zoom = 1 + e * .5; bgA = 1 - e; c.style.opacity = 1 - e; draw(); }, tk); c.remove();
+  }
+
+
+  const redo = $("#redo");
+  let token = { cancelled: true };
+  async function play() {
+    token.cancelled = true; const tk = (token = { cancelled: false });
+    hero.querySelectorAll(".fxl, .stage").forEach((n) => n.remove());
+    hero.classList.remove("reveal"); hero.classList.add("pre"); redo.hidden = true;
+    const top = Math.max(0, hero.getBoundingClientRect().top), vis = Math.max(320, Math.min(hero.clientHeight, innerHeight - top));
+    const stage = document.createElement("div"); stage.className = "stage"; stage.style.cssText = `position:absolute;left:0;right:0;top:0;height:${hero.clientHeight}px;z-index:5;pointer-events:none;overflow:hidden`; hero.append(stage);
+    const inner = document.createElement("div"); inner.style.cssText = `position:absolute;left:0;right:0;top:0;height:${vis}px`; stage.append(inner);
+    if (vis < hero.clientHeight) { const cv = document.createElement("div"); cv.className = "cover"; cv.style.cssText = `position:absolute;left:0;right:0;top:${vis}px;bottom:0;background:#e9dfc8;transition:opacity .6s`; stage.append(cv); }
+    await cylseal(inner, tk, { family: "Marcellus, Georgia, serif", ufamily: "\"DM Sans\", sans-serif" });
+    stage.remove();
+    if (!tk.cancelled) redo.hidden = false;
+  }
+  redo.addEventListener("click", play);
+  if (reduce) hero.classList.remove("pre"); else document.fonts.ready.then(play);
+})();
+</script>
+</body>
+</html>
