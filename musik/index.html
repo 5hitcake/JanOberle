@@ -203,13 +203,17 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---------- Player (SoundCloud Widget API) ---------- */
-  const T = [["Dope D.O.D. & Benny Holiday feat. Onys", "noturninbac REMIX", 274414, "Hip-Hop"], ["Paul Young", "Come Back and Stay REMIX", 210502, "Electronic"], ["The Hives", "Won´t be long REMIX", 194854, "Drum & Bass"], ["Ay Vamos", "REMIX by 5hitcake", 277486, "Drum & Bass"]];
+  let T = [["Dope D.O.D. & Benny Holiday feat. Onys", "noturninbac REMIX", 274414, "Hip-Hop"], ["Paul Young", "Come Back and Stay REMIX", 210502, "Electronic"], ["The Hives", "Won´t be long REMIX", 194854, "Drum & Bass"], ["Ay Vamos", "REMIX by 5hitcake", 277486, "Drum & Bass"]];
   const mmss = (ms) => { const s = Math.round(ms / 1000); return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0"); };
-  $("#tracks").innerHTML = T.map(([a, t, d, g], i) => `<li><button type="button" data-i="${i}" aria-current="${i === 0}"><span class="n">${String(i + 1).padStart(2, "0")}</span><span class="t"><b>${a} – ${t}</b><small>${g}</small></span><span class="d">${mmss(d)}</span></button></li>`).join("");
+  const render = () => { $("#tracks").innerHTML = T.map(([a, t, d, g], i) => `<li><button type="button" data-i="${i}" aria-current="${i === cur}"><span class="n">${String(i + 1).padStart(2, "0")}</span><span class="t"><b>${a}${t ? " – " + t : ""}</b><small>${g || ""}</small></span><span class="d">${d ? mmss(d) : ""}</span></button></li>`).join(""); document.querySelectorAll("#tracks button").forEach((b) => b.addEventListener("click", () => play(+b.dataset.i))); };
   let W = null, cur = 0, playing = false, dur = T[0][2];
+  /* Trackliste live aus der SoundCloud-Playlist laden: neue Songs erscheinen automatisch */
+  const fromSC = (snd) => { const ti = (snd.title || "").split(/\s[–-]\s/); return ti.length > 1 ? [ti[0], ti.slice(1).join(" – "), snd.duration || 0, snd.genre || ""] : [snd.title || "Untitled", "", snd.duration || 0, snd.genre || ""]; };
+  let tries = 0; const syncList = () => W.getSounds((list) => { if (!list || !list.length) return; const ok = list.filter((x) => x && x.title); if (ok.length < list.length && tries++ < 8) { setTimeout(syncList, 1500); } if (!ok.length) return; T = list.map((x, i) => (x && x.title ? fromSC(x) : T[i] || ["Loading…", "", 0, ""])); render(); setNow(cur); });
   const setNow = (i) => { cur = i; $("#nowT").textContent = `${T[i][0]} – ${T[i][1]}`; dur = T[i][2]; $("#dur").textContent = mmss(dur); document.querySelectorAll("#tracks button").forEach((b) => b.setAttribute("aria-current", String(+b.dataset.i === i))); };
   const setPP = (p) => { playing = p; $("#navPlay").innerHTML = `<svg><use href="#${p ? "pause" : "play"}"/></svg><span>${p ? "Pause" : "Play"}</span>`; $("#pp").innerHTML = `<svg><use href="#${p ? "pause" : "play"}"/></svg>`; $("#pp").setAttribute("aria-label", p ? "Pause" : "Play"); };
   if (window.SC) { W = SC.Widget($("#sc"));
+    W.bind(SC.Widget.Events.READY, syncList);
     W.bind(SC.Widget.Events.PLAY, () => { setPP(true); W.getCurrentSoundIndex((i) => setNow(i)); });
     W.bind(SC.Widget.Events.PAUSE, () => setPP(false));
     W.bind(SC.Widget.Events.FINISH, () => setPP(false));
@@ -217,7 +221,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   const play = (i) => { if (!W) { window.open("https://soundcloud.com/jan-oberle-958011305/sets/tasty-remixes-by-5hitcake", "_blank"); return; } if (i !== undefined && i !== cur) { setNow(i); W.skip(i); W.play(); } else W.toggle(); };
   $("#pp").addEventListener("click", () => play());
   $("#navPlay").addEventListener("click", () => { if (!playing) $("#listen").scrollIntoView({ behavior: reduce ? "auto" : "smooth" }); play(); });
-  document.querySelectorAll("#tracks button").forEach((b) => b.addEventListener("click", () => play(+b.dataset.i)));
+  render();
   $("#bar").addEventListener("click", (e) => { if (!W) return; const r = e.currentTarget.getBoundingClientRect(); W.seekTo(((e.clientX - r.left) / r.width) * dur); });
   $("#heroPlay").addEventListener("click", () => { setTimeout(() => { if (W && !playing) W.play(); }, 600); });
 
