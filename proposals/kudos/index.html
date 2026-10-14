@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Kudos · Design proposal</title>
+<meta name="description" content="A website proposal for Kudos, family-run brunch and coffee at 1122 Argyle Street, Finnieston, Glasgow, by Jota Labs. Not the official website.">
+<meta property="og:title" content="Kudos · Design proposal">
+<meta property="og:description" content="Family-run brunch and coffee in Finnieston. A proposal by Jota Labs.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%238fae84'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Georgia' font-weight='700' font-size='34' fill='%23f6f1e6'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shrikhand&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+/* Layout: Ladenfront-Intro (grüne Front baut sich auf, Schild KUDOS, Lichter, Tür öffnet sich), Hero mit Ladenfront-Grafik.
+   Brunch favourites, Monats-Specials, Catering (@covacatering), Kudos coffee, Visit mit Live-Status (Di zu).
+   Salbeigrün, Creme, Pfirsich; Shrikhand + DM Sans. */
+:root {
+  --bg: #f3efe6; --bg-2: #e9e3d6; --bg-3: #fbf9f4; --ink: #2e3b2a; --line: rgba(46,59,42,.14); --soft: #4a5645; --muted: #7a8572;
+  --green: #5f7d57; --leaf: #5f7d57; --brass: #e57a2a; --pink: #e9e3d6; --fuji: #8fae84;
+  --f-display: "Shrikhand", cursive; --f-body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif; --f-mono: "DM Sans", system-ui, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-family: var(--f-display); font-weight: 400; text-wrap: balance; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 800 13px/1.2 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--leaf); }
+:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+.proposal { background: #000; color: #e9ebee; font: 13px/1.4 var(--f-body); padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; }
+.proposal b { color: #ffd166; } .proposal a { color: #fff; font-weight: 800; }
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 22px/1 var(--f-display); letter-spacing: .06em; }
+.logo svg { width: 38px; height: 38px; }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 15px; font-weight: 700; color: var(--muted); }
+nav.links a:hover { color: var(--ink); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 800 15px/1 var(--f-body); padding: 15px 22px; border-radius: 6px; background: var(--green); color: #f6f0e2; border: 2px solid var(--green); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(95,125,87,.3); }
+.btn.ghost { background: transparent; color: var(--ink); border-color: rgba(26,23,20,.35); }
+.btn.ghost:hover { border-color: var(--ink); }
+nav.links a.btn { color: #f6f0e2; padding: 10px 16px; font-size: 14px; }
+.menu-btn { display: none; background: transparent; color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 8px 14px; font: 800 12px var(--f-body); letter-spacing: .08em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bg-3); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line); background: radial-gradient(60% 70% at 85% 30%, rgba(201,160,122,.35), transparent 70%), var(--bg); }
+@media (max-width: 860px) { .hero .seal { opacity: .07 !important; right: -30% !important; } }
+.hero .seal { position: absolute; right: -6%; top: 50%; width: min(52vw, 560px); transform: translateY(-50%); opacity: .14; z-index: 0; }
+.hero .wrap { position: relative; z-index: 1; padding-block: clamp(84px, 12vw, 140px) clamp(64px, 9vw, 110px); display: flex; flex-direction: column; gap: 16px; }
+.hero h1 { font-weight: 400; color: var(--green); text-shadow: 3px 3px 0 #fff; font-size: clamp(72px, 13vw, 168px); line-height: .9; letter-spacing: .04em; }
+.hero h1 small { color: var(--leaf); text-shadow: none; display: block; font: 700 clamp(14px, 2vw, 20px)/1 var(--f-mono); letter-spacing: .5em; color: var(--muted); margin-top: 14px; }
+.hero .lead { margin: 4px 0 0; font-size: clamp(18px, 2.2vw, 22px); color: var(--soft); max-width: 36ch; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.facts span { font: 700 14px var(--f-body); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; background: rgba(246,240,226,.85); }
+.facts span b { color: var(--ink); }
+.status::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); margin-right: 8px; vertical-align: 1px; }
+.status.open::before { background: #3aa35a; box-shadow: 0 0 10px #3aa35a; }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 7; font: 700 13px var(--f-body); color: var(--muted); background: rgba(246,240,226,.9); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.redo:hover { color: var(--ink); }
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero.reveal .wrap > :nth-child(2) { animation-delay: .06s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .12s }
+.hero.reveal .wrap > :nth-child(4) { animation-delay: .18s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .24s }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+section.block { padding-block: clamp(64px, 10vw, 104px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 40px; margin-bottom: 30px; }
+.head h2 { font-size: clamp(36px, 5.6vw, 64px); line-height: 1; margin-top: 10px; }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+.note { margin-top: 20px; font-size: 14px; color: var(--muted); padding: 10px 14px; border-left: 3px solid var(--green); background: var(--bg-2); border-radius: 0 10px 10px 0; }
+.sig { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 860px) { .sig { grid-template-columns: minmax(0,1fr); } }
+.sc { background: var(--bg-3); border: 1px solid var(--line); border-radius: 14px; padding: 24px; display: grid; gap: 8px; align-content: start; }
+.sc svg { width: 70px; height: 70px; }
+.sc h3 { font-size: 28px; } .sc .pr { font: 700 15px var(--f-mono); color: var(--green); } .sc p { margin: 0; color: var(--soft); font-size: 15px; }
+.menu { background: var(--bg-3); border: 1px solid var(--line); border-radius: 14px; padding: clamp(18px, 3vw, 32px); }
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.tabs button { font: 700 14px var(--f-mono); letter-spacing: .06em; text-transform: uppercase; padding: 10px 14px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; }
+.tabs button[aria-selected="true"] { background: var(--green); border-color: var(--green); color: #f6f0e2; }
+.pl { list-style: none; margin: 0; padding: 0; columns: 2; column-gap: 40px; }
+@media (max-width: 760px) { .pl { columns: 1; } }
+.pl li { break-inside: avoid; display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: baseline; padding: 10px 0; border-top: 1px dashed var(--line); font-family: var(--f-mono); }
+.pl li::after { content: ""; grid-column: 2; grid-row: 1; border-bottom: 1px dotted rgba(26,23,20,.25); transform: translateY(-4px); }
+.pl b { font-weight: 700; text-transform: uppercase; font-size: 15px; letter-spacing: .03em; } .pl em { font-style: normal; font-weight: 700; color: var(--green); grid-column: 3; }
+.pl i { font-style: normal; font-size: 11px; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 1px 5px; margin-left: 6px; vertical-align: 2px; }
+.pl small { grid-column: 1 / -1; grid-row: 2; color: var(--muted); font-size: 13px; margin-top: -4px; }
+.mnote { margin: 18px 0 0; font: 13px/1.5 var(--f-mono); color: var(--muted); text-align: center; }
+.story { background: var(--leaf) !important; color: #fffdf7 !important; } .story-x { background: var(--ink); color: #efe6d2; }
+.story .wrap { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: clamp(28px, 6vw, 80px); align-items: center; }
+@media (max-width: 860px) { .story .wrap { grid-template-columns: minmax(0,1fr); } }
+.story svg { width: min(100%, 380px); justify-self: center; }
+.story .kicker { color: #d9b37a; } .story h2 { font-size: clamp(36px, 5.6vw, 64px); line-height: 1; margin: 10px 0 18px; }
+.story p { margin: 0 0 14px; color: #d9cfbb; }
+.rev { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: 16px; }
+@media (max-width: 860px) { .rev { grid-template-columns: minmax(0,1fr); } }
+.score { background: var(--green); color: #f6f0e2; border-radius: 14px; padding: 28px; display: grid; gap: 6px; align-content: center; }
+.score .kicker { color: #cfe6d6; } .score b { font: clamp(48px, 7vw, 72px)/1 var(--f-display); } .score p { margin: 0; color: #cfe6d6; }
+.quote { background: var(--bg-3); border: 1px solid var(--line); border-radius: 14px; padding: 28px; display: grid; gap: 14px; align-content: center; }
+.quote p { margin: 0; font: clamp(20px, 2.6vw, 28px)/1.35 var(--f-display); } .quote small { color: var(--muted); }
+.visit { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 860px) { .visit { grid-template-columns: minmax(0,1fr); } }
+.map { border-radius: 14px; overflow: hidden; border: 1px solid var(--line); min-height: 320px; }
+.map iframe { width: 100%; height: 100%; min-height: 320px; border: 0; display: block; }
+.card { border: 1px solid var(--line); border-radius: 14px; padding: 26px; background: var(--bg-3); display: grid; gap: 10px; align-content: start; }
+.card h3 { font-size: 24px; } .card p { margin: 0; color: var(--soft); }
+.hours { display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; margin: 0; font-variant-numeric: tabular-nums; }
+.hours dt { color: var(--muted); } .hours dd { margin: 0; color: var(--soft); } .hours .today { color: var(--ink); font-weight: 800; }
+footer { padding-block: 40px 96px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 800 14px var(--f-body); padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.25); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+
+.stripes { position: absolute; left: 0; right: 0; display: grid; gap: 6px; z-index: 0; pointer-events: none; }
+.stripes i { display: block; height: 10px; } .stripes i:nth-child(1) { background: #7fbf8e; } .stripes i:nth-child(2) { background: var(--brass); } .stripes i:nth-child(3) { background: var(--pink); }
+.stripes.s1 { top: 26px; } .stripes.s2 { bottom: 26px; }
+.hero.reveal .stripes i { animation: sweep 1s cubic-bezier(.2,.7,.2,1) both; } .hero.reveal .stripes i:nth-child(2) { animation-delay: .08s; } .hero.reveal .stripes i:nth-child(3) { animation-delay: .16s; }
+@keyframes sweep { from { transform: scaleX(0); transform-origin: left; } to { transform: scaleX(1); transform-origin: left; } }
+.logo { font-family: var(--f-display); letter-spacing: 0; font-size: 26px; color: var(--green); }
+.pl b { text-transform: none; font-family: var(--f-body); font-weight: 800; letter-spacing: 0; } .pl li { font-family: var(--f-body); }
+.story { color: #fffdf7; } .story p { color: #eaf5ec; } .story .kicker { color: #fff3c4; } .story h2 { color: #fffdf7; }
+.story .btn { background: #fffdf7; color: var(--leaf); border-color: #fffdf7; }
+.sc h3, .head h2, .card h3 { font-weight: 400; } .sc .pr { color: var(--green); }
+.score { background: var(--green); }
+.tabs button { font-family: var(--f-body); font-weight: 800; }
+
+.hero { background: radial-gradient(60% 70% at 85% 40%, rgba(143,174,132,.3), transparent 70%), var(--bg) !important; }
+.hero h1 { font-family: var(--f-display) !important; font-weight: 400 !important; color: var(--ink) !important; text-shadow: none !important; font-size: clamp(80px, 14vw, 170px) !important; }
+.front { position: absolute; right: 4%; bottom: 0; width: min(40vw, 460px); z-index: 0; pointer-events: none; }
+.front svg { width: 100%; height: auto; display: block; }
+@media (max-width: 860px) { .front { opacity: .18; width: 80vw; right: -15%; } }
+.logo { font: 400 28px var(--f-display) !important; color: var(--ink) !important; }
+.head h2, .story h2 { font-family: var(--f-display); font-weight: 400 !important; font-style: normal !important; }
+.dishes { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 960px) { .dishes { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 520px) { .dishes { grid-template-columns: minmax(0,1fr); } }
+.dish { background: var(--bg-3); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; display: grid; }
+.dish .ph { aspect-ratio: 4/3; display: grid; place-items: center; font-size: 56px; }
+.dish .p1 { background: linear-gradient(140deg,#f6c08a,#e57a2a); } .dish .p2 { background: linear-gradient(140deg,#e9d4a6,#c99a52); } .dish .p3 { background: linear-gradient(140deg,#f3e5b0,#d9b45a); } .dish .p4 { background: linear-gradient(140deg,#8a5a3c,#4a2c1a); }
+.dish h3 { font: 700 19px var(--f-body); margin: 16px 18px 4px; } .dish p { margin: 0 18px 18px; color: var(--soft); font-size: 15px; }
+.specials { margin-top: 18px; border: 2px dashed rgba(95,125,87,.45); border-radius: 18px; padding: 22px 24px; display: flex; flex-wrap: wrap; gap: 14px 30px; align-items: center; justify-content: space-between; background: rgba(143,174,132,.12); }
+.specials h3 { font: 700 22px var(--f-body); margin: 4px 0; } .specials p { margin: 0; color: var(--soft); max-width: 60ch; }
+.story { background: var(--green) !important; } .story .kicker { color: #e6f0dd !important; } .story p { color: #f1f6ec !important; } .story h2 { color: #fff; font-size: clamp(40px, 6vw, 72px); }
+.story .btn { background: #fbf9f4; color: var(--green); border-color: #fbf9f4; }
+.cat { font-size: clamp(90px, 14vw, 160px); text-align: center; }
+.join { border: 1px solid var(--line); border-radius: 18px; padding: 26px; background: var(--bg-3); display: flex; flex-wrap: wrap; gap: 16px 30px; align-items: center; justify-content: space-between; }
+.join h3 { font: 400 32px var(--f-display); margin: 6px 0; } .join p { margin: 0; color: var(--soft); max-width: 60ch; }
+.card h3 { font: 700 20px var(--f-body) !important; font-style: normal !important; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></symbol>
+</svg>
+
+
+<div class="proposal"><span><b>Design proposal</b> for Kudos · not the official website</span><span>Made by <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">Jota Labs</a></span></div>
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top">Kudos</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENU</button>
+    <nav class="links" id="links">
+      <a href="#menu">Food</a>
+      <a href="#catering">Catering</a>
+      <a href="#visit">Visit</a>
+      <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Kudos%201122%20Argyle%20Street%20Glasgow" target="_blank" rel="noopener">Directions</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero pre" id="top">
+  <div class="front" aria-hidden="true"><svg viewBox="0 0 400 420"><rect x="0" y="0" width="400" height="420" fill="#8fae84"/><rect x="-6" y="-6" width="412" height="86" fill="#5f7d57"/><rect x="0" y="0" width="400" height="74" fill="#9cba90"/><text x="200" y="54" text-anchor="middle" font-family="Shrikhand, cursive" font-size="48" fill="#f6f1e6">KUDOS</text><rect x="-5" y="0" width="10" height="420" fill="#5f7d57"/><rect x="95" y="0" width="10" height="420" fill="#5f7d57"/><rect x="195" y="0" width="10" height="420" fill="#5f7d57"/><rect x="295" y="0" width="10" height="420" fill="#5f7d57"/><rect x="395" y="0" width="10" height="420" fill="#5f7d57"/><rect x="12" y="104" width="76" height="200" fill="#f0c873" stroke="#5f7d57" stroke-width="5"/><path d="M50 104V304M12 204H88" stroke="#5f7d57" stroke-width="3"/><rect x="112" y="104" width="76" height="200" fill="#f0c873" stroke="#5f7d57" stroke-width="5"/><path d="M150 104V304M112 204H188" stroke="#5f7d57" stroke-width="3"/><rect x="312" y="104" width="76" height="200" fill="#f0c873" stroke="#5f7d57" stroke-width="5"/><path d="M350 104V304M312 204H388" stroke="#5f7d57" stroke-width="3"/><rect x="212" y="104" width="76" height="316" fill="#5f7d57"/><rect x="224" y="118" width="52" height="130" fill="#2c3a28"/><circle cx="276" cy="270" r="4" fill="#d9c27a"/><text x="50" y="340" text-anchor="middle" font-family="DM Sans, sans-serif" font-weight="700" font-size="15" fill="#3d4f38">COFFEE</text><text x="350" y="340" text-anchor="middle" font-family="DM Sans, sans-serif" font-weight="700" font-size="15" fill="#3d4f38">BRUNCH</text></svg></div>
+  <div class="wrap">
+    <div class="kicker">Family-run brunch &amp; coffee · Finnieston</div>
+    <h1>Kudos</h1>
+    <p class="lead">Brunch, coffee and takeaway on Argyle Street. Walk-ins only, so just come by.</p>
+    <div class="ctas"><a class="btn" href="#menu">What's cooking</a><a class="btn ghost" href="#visit">Find us</a></div>
+    <div class="facts"><span class="status" id="statusChip">Wed–Mon 9am–4pm</span><span><b>Walk-ins</b> only</span><span>Take away <b>food &amp; coffee</b></span></div>
+  </div>
+  <button class="redo" type="button" id="redo" hidden>↻ Open the door again</button>
+</section>
+
+<section class="block" id="menu">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">From the kitchen</div><h2>Brunch favourites</h2></div><p>Follow us on Instagram for this month's specials.</p></div>
+    <div class="dishes">
+      <article class="dish"><div class="ph p1" aria-hidden="true">🍑</div><h3>Peaches &amp; cream French toast</h3><p>Brioche, peaches, cream, raspberries and coulis.</p></article>
+      <article class="dish"><div class="ph p2" aria-hidden="true">🌯</div><h3>Breakfast burrito</h3><p>Eat in or take away.</p></article>
+      <article class="dish"><div class="ph p3" aria-hidden="true">🥪</div><h3>Toasties</h3><p>Stacked high, with a mountain of cheese. "wtf is a calorie deficit?"</p></article>
+      <article class="dish"><div class="ph p4" aria-hidden="true">🍫</div><h3>Brownies &amp; bakes</h3><p>Sweet treats for the road.</p></article>
+    </div>
+    <div class="specials">
+      <div><div class="kicker">Monthly specials</div><h3>New specials every month</h3><p>Like our August specials. On the final site you post them here yourself and they show up on the front page.</p></div>
+      <a class="btn ghost" href="https://www.instagram.com/kudos.gla/" target="_blank" rel="noopener">See this month on Instagram</a>
+    </div>
+  </div>
+</section>
+
+<section class="block story" id="catering">
+  <div class="wrap">
+    <div class="cat">🥂</div>
+    <div>
+      <div class="kicker">Catering &amp; parties</div>
+      <h2>Kudos at your event</h2>
+      <p>Birthday parties and celebrations: our catering is run by @covacatering, with grazing tables, sandwiches and sweet treats.</p>
+      <div class="ctas"><a class="btn" href="https://www.instagram.com/covacatering/" target="_blank" rel="noopener">Ask about catering</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="coffee">
+  <div class="wrap">
+    <div class="join">
+      <div><div class="kicker">Coffee</div><h3>Kudos coffee</h3><p>Kudos coffee with Grain and Grind. Grab one to go with your brunch.</p></div>
+      <a class="btn ghost" href="#visit">Come by</a>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="visit" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Visit us</div><h2>1122 Argyle Street</h2></div><p>Finnieston, Glasgow G3 8TD. Walk-ins only.</p></div>
+    <div class="visit">
+      <div class="map"><iframe title="Map: Kudos, 1122 Argyle Street" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-4.2914%2C55.8622%2C-4.2784%2C55.8680&amp;layer=mapnik&amp;marker=55.865106%2C-4.28487"></iframe></div>
+      <div class="card">
+        <h3>Opening hours</h3>
+        <dl class="hours" id="hours"></dl>
+        <h3 style="margin-top:6px">Address</h3>
+        <p>Kudos<br>1122 Argyle Street, Finnieston<br>Glasgow G3 8TD</p>
+        <div class="ctas"><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Kudos%201122%20Argyle%20Street%20Glasgow" target="_blank" rel="noopener">Directions ↗</a><a class="btn ghost" href="https://www.instagram.com/kudos.gla/" target="_blank" rel="noopener">Instagram</a></div>
+      </div>
+    </div>
+    <p class="note">Hours from your Instagram bio. Holiday hours would show here and at the top automatically.</p>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>Kudos · 1122 Argyle Street, Finnieston, Glasgow G3 8TD · Family run</span><span>Design proposal by Jota Labs · <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">more work</a></span></div></footer>
+
+<a class="like" href="https://wa.me/5491130331893?text=Hi%20Jan%2C%20I%20saw%20the%20website%20proposal%20for%20Kudos%20and%20I%27d%20like%20to%20know%20more." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Like it? Let's talk</a>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+  const hero = $("#top");
+
+  /* ---------- Hours + open now (Glasgow) ---------- */
+  const H = { Mon: [540, 960], Tue: null, Wed: [540, 960], Thu: [540, 960], Fri: [540, 960], Sat: [540, 960], Sun: [540, 960] };
+  const names = { Mon: "Monday", Tue: "Tuesday", Wed: "Wednesday", Thu: "Thursday", Fri: "Friday", Sat: "Saturday", Sun: "Sunday" };
+  const order = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  const fmt = (m) => { const h = Math.floor(m / 60), mm = m % 60; return (h > 12 ? h - 12 : h) + (mm ? ":" + String(mm).padStart(2, "0") : "") + (h >= 12 ? "pm" : "am"); };
+  function status() {
+    const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/London", weekday: "short", hour: "numeric", minute: "numeric", hour12: false }).formatToParts(new Date());
+    const get = (t) => parts.find((x) => x.type === t).value, wd = get("weekday"), m = (+get("hour") % 24) * 60 + +get("minute"), t = H[wd];
+    $("#hours").innerHTML = order.map((d) => `<dt class="${d === wd ? "today" : ""}">${names[d]}</dt><dd class="${d === wd ? "today" : ""}">${H[d] ? fmt(H[d][0]) + " – " + fmt(H[d][1]) : "Closed"}</dd>`).join("");
+    const chip = $("#statusChip"), open = !!t && m >= t[0] && m < t[1];
+    chip.classList.toggle("open", open);
+    if (open) chip.innerHTML = `<b>Open now</b> · until ${fmt(t[1])}`;
+    else if (t && m < t[0]) chip.innerHTML = `Opens today at <b>${fmt(t[0])}</b>`;
+    else { const i = order.indexOf(wd); for (let n = 1; n <= 7; n++) { const d = order[(i + n) % 7]; if (H[d]) { chip.innerHTML = `Closed now · opens <b>${names[d]} ${fmt(H[d][0])}</b>`; break; } } }
+  }
+  status(); setInterval(status, 60000);
+
+  /* ---------- Intro: Ladenfront ---------- */
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const tween = (ms, fn, tk, ez = (t) => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2)) => new Promise((res) => { const t0 = performance.now(); const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(ez(k), k); k < 1 ? requestAnimationFrame(step) : res(); }; requestAnimationFrame(step); });
+  const canvas = (parent, cls, z) => { const w = parent.clientWidth, h = parent.clientHeight, dpr = Math.min(2, devicePixelRatio || 1); const c = document.createElement("canvas"); c.className = "fxl " + cls; c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); c.style.cssText = `position:absolute;left:0;top:0;width:${w}px;height:${h}px;z-index:${z};pointer-events:none`; c.setAttribute("aria-hidden", "true"); parent.append(c); const ctx = c.getContext("2d"); ctx.scale(dpr, dpr); return { c, ctx, w, h }; };
+  const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); hero.querySelectorAll(".cover").forEach((n) => (n.style.opacity = "0")); };
+  const KD_GREEN = "#8fae84", KD_DARK = "#5f7d57";
+  function kdWord(ctx, w, h, y, a, o, sub) { if (a <= 0) return; ctx.save(); ctx.globalAlpha *= Math.min(1, a); ctx.textAlign = "center"; ctx.textBaseline = "middle"; const F = Math.min(w * .2, h * .11);
+    ctx.font = `${F}px ${o.family || "\"Shrikhand\", cursive"}`; ctx.fillStyle = o.ink || "#2e3b2a"; ctx.fillText("Kudos", w / 2, y, w * .9);
+    ctx.font = `700 ${Math.min(w * .032, h * .019)}px ${o.ufamily || "system-ui"}`; ctx.fillStyle = o.sub2 || "#5f7d57"; ctx.letterSpacing = `${Math.min(5, w * .008)}px`; ctx.fillText(sub || o.sub || "COFFEE · BRUNCH · FINNIESTON", w / 2, y + F * .72, w * .9); ctx.restore(); }
+
+  /* ---------- Shopfront: die grüne Ladenfront baut sich auf, Schild KUDOS, Fenster leuchten, Tür öffnet sich ---------- */
+  async function kdshop(scr, tk, o = {}) {
+    const { c, ctx, w, h } = canvas(scr, "kdshop", 5), SW = Math.min(w * .86, h * .5), SH = SW * 1.05, sx = w / 2 - SW / 2, sy = h * .2;
+    let build = 0, sign = 0, lights = 0, door = 0, bgA = 1, zoom = 1;
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h); ctx.save(); ctx.globalAlpha = bgA; const zx = w / 2, zy = sy + SH * .7; ctx.translate(zx, zy); ctx.scale(zoom, zoom); ctx.translate(-zx, -zy);
+      ctx.fillStyle = "#e9e3d8"; ctx.fillRect(-w, -h, w * 3, h * 3); ctx.fillStyle = "#b9b2a6"; ctx.fillRect(-w, sy + SH, w * 3, h);
+      ctx.fillStyle = "#cfc6b8"; for (let y = sy - SH * .3; y < sy; y += 18) ctx.fillRect(-w, y, w * 3, 1);
+      const k = (a, b) => Math.max(0, Math.min(1, (build - a) / (b - a)));
+      ctx.save(); ctx.globalAlpha *= k(0, .25); ctx.fillStyle = KD_GREEN; ctx.fillRect(sx, sy + SH * (1 - k(0, .3)), SW, SH * k(0, .3)); ctx.restore();
+      if (build > .3) { ctx.fillStyle = KD_DARK; for (let i = 0; i <= 4; i++) { const x = sx + i * SW / 4 - 5; ctx.globalAlpha = bgA * k(.3, .5); ctx.fillRect(x, sy, 10, SH); } ctx.globalAlpha = bgA;
+        ctx.fillStyle = KD_DARK; ctx.fillRect(sx - 8, sy - 8, SW + 16, SH * .2 + 8); ctx.fillStyle = "#9cba90"; ctx.fillRect(sx, sy, SW, SH * .2 - 4); }
+      if (build > .5) { const ww = SW / 4 - 22, wy = sy + SH * .26, wh = SH * .48; for (let i = 0; i < 4; i++) { if (i === 2) continue; const wx = sx + i * SW / 4 + 11; ctx.globalAlpha = bgA * k(.5, .75);
+          const g = ctx.createLinearGradient(wx, wy, wx, wy + wh); g.addColorStop(0, `rgba(${40 + lights * 200},${40 + lights * 170},${30 + lights * 90},1)`); g.addColorStop(1, `rgba(${30 + lights * 150},${30 + lights * 110},${20 + lights * 60},1)`); ctx.fillStyle = g; ctx.fillRect(wx, wy, ww, wh);
+          ctx.strokeStyle = KD_DARK; ctx.lineWidth = 4; ctx.strokeRect(wx, wy, ww, wh); ctx.beginPath(); ctx.moveTo(wx + ww / 2, wy); ctx.lineTo(wx + ww / 2, wy + wh); ctx.moveTo(wx, wy + wh * .5); ctx.lineTo(wx + ww, wy + wh * .5); ctx.lineWidth = 2; ctx.stroke(); }
+        ctx.globalAlpha = bgA; ctx.fillStyle = "#3d4f38"; ctx.font = `700 ${SW * .035}px ${o.ufamily || "system-ui"}`; ctx.textAlign = "center"; if (build > .75) { ctx.fillText("COFFEE", sx + SW / 8, sy + SH * .82); ctx.fillText("BRUNCH", sx + SW * 7 / 8, sy + SH * .82); }
+        const dx = sx + 2 * SW / 4 + 8, dw = SW / 4 - 16, dy = sy + SH * .26, dh = SH * .74; ctx.fillStyle = `rgba(${255 * lights},${220 * lights},${150 * lights},1)`; ctx.fillRect(dx, dy, dw, dh);
+        ctx.save(); ctx.translate(dx, dy); ctx.scale(1 - door * .85, 1); ctx.fillStyle = KD_DARK; ctx.fillRect(0, 0, dw, dh); ctx.fillStyle = "#2c3a28"; ctx.fillRect(dw * .15, dh * .08, dw * .7, dh * .45); ctx.fillStyle = "#d9c27a"; ctx.beginPath(); ctx.arc(dw * .85, dh * .58, 4, 0, 7); ctx.fill(); ctx.restore(); }
+      if (sign > 0) { ctx.save(); ctx.globalAlpha *= Math.min(1, sign); ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillStyle = "#f6f1e6"; ctx.font = `${SH * .13}px ${o.family || "\"Shrikhand\", cursive"}`; ctx.fillText("KUDOS", w / 2, sy + SH * .1 + (1 - Math.min(1, sign)) * -10); ctx.restore(); }
+      kdWord(ctx, w, h, sy + SH + Math.min(w * .14, h * .09), Math.max(0, sign - .5) * 2, o, "COFFEE · BRUNCH · FAMILY RUN"); ctx.restore();
+    };
+    let live = true; const lp = () => { if (!live || tk.cancelled) return; draw(); requestAnimationFrame(lp); }; requestAnimationFrame(lp);
+    await sleep(250);
+    await tween(1500, (e, kk) => { build = kk; }, tk, (q) => q);
+    await tween(500, (e) => { sign = e; }, tk);
+    await tween(500, (e) => { lights = e; sign = 1 + e; }, tk);
+    await sleep(o.hold || 800); if (tk.cancelled) { live = false; return c.remove(); }
+    await tween(500, (e) => { door = e; }, tk);
+    reveal(); await tween(800, (e) => { zoom = 1 + e * 3.5; bgA = 1 - e; c.style.opacity = 1 - e; }, tk, (q) => q * q); live = false; c.remove();
+  }
+
+  const redo = $("#redo");
+  let token = { cancelled: true };
+  async function play() {
+    token.cancelled = true; const tk = (token = { cancelled: false });
+    hero.querySelectorAll(".fxl, .stage").forEach((n) => n.remove());
+    hero.classList.remove("reveal"); hero.classList.add("pre"); redo.hidden = true;
+    const top = Math.max(0, hero.getBoundingClientRect().top), vis = Math.max(320, Math.min(hero.clientHeight, innerHeight - top));
+    const stage = document.createElement("div"); stage.className = "stage"; stage.style.cssText = `position:absolute;left:0;right:0;top:0;height:${hero.clientHeight}px;z-index:5;pointer-events:none;overflow:hidden`; hero.append(stage);
+    const inner = document.createElement("div"); inner.style.cssText = `position:absolute;left:0;right:0;top:0;height:${vis}px`; stage.append(inner);
+    if (vis < hero.clientHeight) { const cv = document.createElement("div"); cv.className = "cover"; cv.style.cssText = `position:absolute;left:0;right:0;top:${vis}px;bottom:0;background:#b9b2a6;transition:opacity .6s`; stage.append(cv); }
+    await kdshop(inner, tk, { family: "Shrikhand, cursive", ufamily: "\"DM Sans\", sans-serif" });
+    stage.remove();
+    if (!tk.cancelled) redo.hidden = false;
+  }
+  redo.addEventListener("click", play);
+  if (reduce) hero.classList.remove("pre"); else document.fonts.ready.then(play);
+})();
+</script>
+</body>
+</html>
