@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Cafe Peachy · Design proposal</title>
+<meta name="description" content="A website proposal for Cafe Peachy, 452 Victoria Road, Glasgow Southside, by Jota Labs. Not the official website.">
+<meta property="og:title" content="Cafe Peachy · Design proposal">
+<meta property="og:description" content="Cakes, brunch, coffee and lemonade on Victoria Road. A proposal by Jota Labs.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext x='32' y='48' text-anchor='middle' font-size='44'%3E%F0%9F%8D%91%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Karla:wght@400;500;700&display=swap">
+<style>
+/* Layout: Limonaden-Intro (Strawberry & Basil + Lavender füllen sich), Hero in Creme mit Pfirsich.
+   Food & drinks (Kreidetafel-Angebot), What's on (Stitch & B*tch, Pre-loved Sale, Ausstellungen), Visit mit Live-Status (Mi/Do zu).
+   Dunkelgrün, Pfirsich, Creme; Yeseva One + Karla. */
+:root {
+  --bg: #f4e9d8; --bg-2: #ecdcc4; --bg-3: #fbf5ec; --ink: #1f3d2e; --line: rgba(31,61,46,.15); --soft: #36543f; --muted: #7a7a62;
+  --green: #1f3d2e; --leaf: #c4643a; --brass: #f59a5a; --pink: #ecdcc4; --fuji: #f59a5a;
+  --f-display: "Yeseva One", Georgia, serif; --f-body: "Karla", system-ui, -apple-system, "Segoe UI", sans-serif; --f-mono: "Karla", system-ui, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-family: var(--f-display); font-weight: 400; text-wrap: balance; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 800 13px/1.2 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--leaf); }
+:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+.proposal { background: #000; color: #e9ebee; font: 13px/1.4 var(--f-body); padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; }
+.proposal b { color: #ffd166; } .proposal a { color: #fff; font-weight: 800; }
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 22px/1 var(--f-display); letter-spacing: .06em; }
+.logo svg { width: 38px; height: 38px; }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 15px; font-weight: 700; color: var(--muted); }
+nav.links a:hover { color: var(--ink); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 800 15px/1 var(--f-body); padding: 15px 22px; border-radius: 6px; background: var(--green); color: #f6f0e2; border: 2px solid var(--green); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(95,125,87,.3); }
+.btn.ghost { background: transparent; color: var(--ink); border-color: rgba(26,23,20,.35); }
+.btn.ghost:hover { border-color: var(--ink); }
+nav.links a.btn { color: #f6f0e2; padding: 10px 16px; font-size: 14px; }
+.menu-btn { display: none; background: transparent; color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 8px 14px; font: 800 12px var(--f-body); letter-spacing: .08em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bg-3); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line); background: radial-gradient(60% 70% at 85% 30%, rgba(201,160,122,.35), transparent 70%), var(--bg); }
+@media (max-width: 860px) { .hero .seal { opacity: .07 !important; right: -30% !important; } }
+.hero .seal { position: absolute; right: -6%; top: 50%; width: min(52vw, 560px); transform: translateY(-50%); opacity: .14; z-index: 0; }
+.hero .wrap { position: relative; z-index: 1; padding-block: clamp(84px, 12vw, 140px) clamp(64px, 9vw, 110px); display: flex; flex-direction: column; gap: 16px; }
+.hero h1 { font-weight: 400; color: var(--green); text-shadow: 3px 3px 0 #fff; font-size: clamp(72px, 13vw, 168px); line-height: .9; letter-spacing: .04em; }
+.hero h1 small { color: var(--leaf); text-shadow: none; display: block; font: 700 clamp(14px, 2vw, 20px)/1 var(--f-mono); letter-spacing: .5em; color: var(--muted); margin-top: 14px; }
+.hero .lead { margin: 4px 0 0; font-size: clamp(18px, 2.2vw, 22px); color: var(--soft); max-width: 36ch; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.facts span { font: 700 14px var(--f-body); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; background: rgba(246,240,226,.85); }
+.facts span b { color: var(--ink); }
+.status::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); margin-right: 8px; vertical-align: 1px; }
+.status.open::before { background: #3aa35a; box-shadow: 0 0 10px #3aa35a; }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 7; font: 700 13px var(--f-body); color: var(--muted); background: rgba(246,240,226,.9); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.redo:hover { color: var(--ink); }
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero.reveal .wrap > :nth-child(2) { animation-delay: .06s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .12s }
+.hero.reveal .wrap > :nth-child(4) { animation-delay: .18s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .24s }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+section.block { padding-block: clamp(64px, 10vw, 104px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 40px; margin-bottom: 30px; }
+.head h2 { font-size: clamp(36px, 5.6vw, 64px); line-height: 1; margin-top: 10px; }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+.note { margin-top: 20px; font-size: 14px; color: var(--muted); padding: 10px 14px; border-left: 3px solid var(--green); background: var(--bg-2); border-radius: 0 10px 10px 0; }
+.sig { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 860px) { .sig { grid-template-columns: minmax(0,1fr); } }
+.sc { background: var(--bg-3); border: 1px solid var(--line); border-radius: 14px; padding: 24px; display: grid; gap: 8px; align-content: start; }
+.sc svg { width: 70px; height: 70px; }
+.sc h3 { font-size: 28px; } .sc .pr { font: 700 15px var(--f-mono); color: var(--green); } .sc p { margin: 0; color: var(--soft); font-size: 15px; }
+.menu { background: var(--bg-3); border: 1px solid var(--line); border-radius: 14px; padding: clamp(18px, 3vw, 32px); }
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.tabs button { font: 700 14px var(--f-mono); letter-spacing: .06em; text-transform: uppercase; padding: 10px 14px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; }
+.tabs button[aria-selected="true"] { background: var(--green); border-color: var(--green); color: #f6f0e2; }
+.pl { list-style: none; margin: 0; padding: 0; columns: 2; column-gap: 40px; }
+@media (max-width: 760px) { .pl { columns: 1; } }
+.pl li { break-inside: avoid; display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: baseline; padding: 10px 0; border-top: 1px dashed var(--line); font-family: var(--f-mono); }
+.pl li::after { content: ""; grid-column: 2; grid-row: 1; border-bottom: 1px dotted rgba(26,23,20,.25); transform: translateY(-4px); }
+.pl b { font-weight: 700; text-transform: uppercase; font-size: 15px; letter-spacing: .03em; } .pl em { font-style: normal; font-weight: 700; color: var(--green); grid-column: 3; }
+.pl i { font-style: normal; font-size: 11px; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 1px 5px; margin-left: 6px; vertical-align: 2px; }
+.pl small { grid-column: 1 / -1; grid-row: 2; color: var(--muted); font-size: 13px; margin-top: -4px; }
+.mnote { margin: 18px 0 0; font: 13px/1.5 var(--f-mono); color: var(--muted); text-align: center; }
+.story { background: var(--leaf) !important; color: #fffdf7 !important; } .story-x { background: var(--ink); color: #efe6d2; }
+.story .wrap { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: clamp(28px, 6vw, 80px); align-items: center; }
+@media (max-width: 860px) { .story .wrap { grid-template-columns: minmax(0,1fr); } }
+.story svg { width: min(100%, 380px); justify-self: center; }
+.story .kicker { color: #d9b37a; } .story h2 { font-size: clamp(36px, 5.6vw, 64px); line-height: 1; margin: 10px 0 18px; }
+.story p { margin: 0 0 14px; color: #d9cfbb; }
+.rev { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: 16px; }
+@media (max-width: 860px) { .rev { grid-template-columns: minmax(0,1fr); } }
+.score { background: var(--green); color: #f6f0e2; border-radius: 14px; padding: 28px; display: grid; gap: 6px; align-content: center; }
+.score .kicker { color: #cfe6d6; } .score b { font: clamp(48px, 7vw, 72px)/1 var(--f-display); } .score p { margin: 0; color: #cfe6d6; }
+.quote { background: var(--bg-3); border: 1px solid var(--line); border-radius: 14px; padding: 28px; display: grid; gap: 14px; align-content: center; }
+.quote p { margin: 0; font: clamp(20px, 2.6vw, 28px)/1.35 var(--f-display); } .quote small { color: var(--muted); }
+.visit { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 860px) { .visit { grid-template-columns: minmax(0,1fr); } }
+.map { border-radius: 14px; overflow: hidden; border: 1px solid var(--line); min-height: 320px; }
+.map iframe { width: 100%; height: 100%; min-height: 320px; border: 0; display: block; }
+.card { border: 1px solid var(--line); border-radius: 14px; padding: 26px; background: var(--bg-3); display: grid; gap: 10px; align-content: start; }
+.card h3 { font-size: 24px; } .card p { margin: 0; color: var(--soft); }
+.hours { display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; margin: 0; font-variant-numeric: tabular-nums; }
+.hours dt { color: var(--muted); } .hours dd { margin: 0; color: var(--soft); } .hours .today { color: var(--ink); font-weight: 800; }
+footer { padding-block: 40px 96px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 800 14px var(--f-body); padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.25); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+
+.stripes { position: absolute; left: 0; right: 0; display: grid; gap: 6px; z-index: 0; pointer-events: none; }
+.stripes i { display: block; height: 10px; } .stripes i:nth-child(1) { background: #7fbf8e; } .stripes i:nth-child(2) { background: var(--brass); } .stripes i:nth-child(3) { background: var(--pink); }
+.stripes.s1 { top: 26px; } .stripes.s2 { bottom: 26px; }
+.hero.reveal .stripes i { animation: sweep 1s cubic-bezier(.2,.7,.2,1) both; } .hero.reveal .stripes i:nth-child(2) { animation-delay: .08s; } .hero.reveal .stripes i:nth-child(3) { animation-delay: .16s; }
+@keyframes sweep { from { transform: scaleX(0); transform-origin: left; } to { transform: scaleX(1); transform-origin: left; } }
+.logo { font-family: var(--f-display); letter-spacing: 0; font-size: 26px; color: var(--green); }
+.pl b { text-transform: none; font-family: var(--f-body); font-weight: 800; letter-spacing: 0; } .pl li { font-family: var(--f-body); }
+.story { color: #fffdf7; } .story p { color: #eaf5ec; } .story .kicker { color: #fff3c4; } .story h2 { color: #fffdf7; }
+.story .btn { background: #fffdf7; color: var(--leaf); border-color: #fffdf7; }
+.sc h3, .head h2, .card h3 { font-weight: 400; } .sc .pr { color: var(--green); }
+.score { background: var(--green); }
+.tabs button { font-family: var(--f-body); font-weight: 800; }
+
+.hero { background: radial-gradient(60% 70% at 85% 40%, rgba(143,174,132,.3), transparent 70%), var(--bg) !important; }
+.hero h1 { font-family: var(--f-display) !important; font-weight: 400 !important; color: var(--ink) !important; text-shadow: none !important; font-size: clamp(80px, 14vw, 170px) !important; }
+.logo { font: 400 28px var(--f-display) !important; color: var(--ink) !important; }
+.head h2, .story h2 { font-family: var(--f-display); font-weight: 400 !important; font-style: normal !important; }
+.dishes { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 960px) { .dishes { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 520px) { .dishes { grid-template-columns: minmax(0,1fr); } }
+.dish { background: var(--bg-3); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; display: grid; }
+.dish .ph { aspect-ratio: 4/3; display: grid; place-items: center; font-size: 56px; }
+.dish .p1 { background: linear-gradient(140deg,#f6c08a,#e57a2a); } .dish .p2 { background: linear-gradient(140deg,#e9d4a6,#c99a52); } .dish .p3 { background: linear-gradient(140deg,#f3e5b0,#d9b45a); } .dish .p4 { background: linear-gradient(140deg,#8a5a3c,#4a2c1a); }
+.dish h3 { font: 700 19px var(--f-body); margin: 16px 18px 4px; } .dish p { margin: 0 18px 18px; color: var(--soft); font-size: 15px; }
+.specials { margin-top: 18px; border: 2px dashed rgba(95,125,87,.45); border-radius: 18px; padding: 22px 24px; display: flex; flex-wrap: wrap; gap: 14px 30px; align-items: center; justify-content: space-between; background: rgba(143,174,132,.12); }
+.specials h3 { font: 700 22px var(--f-body); margin: 4px 0; } .specials p { margin: 0; color: var(--soft); max-width: 60ch; }
+.story { background: var(--green) !important; } .story .kicker { color: #e6f0dd !important; } .story p { color: #f1f6ec !important; } .story h2 { color: #fff; font-size: clamp(40px, 6vw, 72px); }
+.story .btn { background: #fbf9f4; color: var(--green); border-color: #fbf9f4; }
+.cat { font-size: clamp(90px, 14vw, 160px); text-align: center; }
+.join { border: 1px solid var(--line); border-radius: 18px; padding: 26px; background: var(--bg-3); display: flex; flex-wrap: wrap; gap: 16px 30px; align-items: center; justify-content: space-between; }
+.join h3 { font: 400 32px var(--f-display); margin: 6px 0; } .join p { margin: 0; color: var(--soft); max-width: 60ch; }
+.card h3 { font: 700 20px var(--f-body) !important; font-style: normal !important; }
+
+.hero { background: radial-gradient(55% 70% at 82% 40%, rgba(245,154,90,.35), transparent 70%), var(--bg) !important; }
+.peach { position: absolute; right: 8%; top: 50%; transform: translateY(-50%) rotate(-12deg); font-size: min(34vw, 380px); line-height: 1; opacity: .9; z-index: 0; filter: drop-shadow(0 30px 40px rgba(196,100,58,.3)); }
+@media (max-width: 860px) { .peach { opacity: .18; right: -10%; } }
+.kicker { color: var(--leaf) !important; }
+.tiles { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 960px) { .tiles { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 520px) { .tiles { grid-template-columns: minmax(0,1fr); } }
+.tile { border-radius: 20px; padding: 24px; display: grid; gap: 6px; align-content: start; border: 1px solid var(--line); }
+.tile .em { font-size: 40px; } .tile h3 { font: 400 22px var(--f-display); } .tile p { margin: 0; color: var(--soft); }
+.t1 { background: #fde3cf; } .t2 { background: #f1ead5; } .t3 { background: #e3ebe0; } .t4 { background: linear-gradient(140deg,#ffd6dc,#e9dcf7); }
+.story .wrap { grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important; }
+@media (max-width: 860px) { .story .wrap { grid-template-columns: minmax(0,1fr) !important; } }
+.story { background: var(--green) !important; } .story .kicker { color: #f5b38a !important; } .story .btn { color: var(--green) !important; }
+.evlist { display: grid; gap: 12px; }
+.ev { display: grid; grid-template-columns: 110px minmax(0,1fr); gap: 16px; align-items: center; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.15); border-radius: 16px; padding: 16px; }
+.ev .d { color: #f5b38a; font-size: 14px; } .ev .d b { color: #fff; } .ev h3 { color: #fff; font: 400 22px var(--f-display); margin: 0 0 4px; } .ev p { margin: 0; color: #e6efe8; font-size: 15px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></symbol>
+</svg>
+
+
+
+<div class="proposal"><span><b>Design proposal</b> for Cafe Peachy · not the official website</span><span>Made by <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">Jota Labs</a></span></div>
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top">Peachy</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENU</button>
+    <nav class="links" id="links">
+      <a href="#food">Food &amp; drinks</a>
+      <a href="#events">What's on</a>
+      <a href="#visit">Visit</a>
+      <a class="btn" href="mailto:cafepeachyglasgow@gmail.com">Get in touch</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero pre" id="top">
+  <div class="peach" aria-hidden="true">🍑</div>
+  <div class="wrap">
+    <div class="kicker">Café · Glasgow Southside · all welcome</div>
+    <h1>Peachy</h1>
+    <p class="lead">Fresh cakes, soup, brunch and speciality coffee on Victoria Road. Veggie, vegan &amp; GF options.</p>
+    <div class="ctas"><a class="btn" href="#food">Food &amp; drinks</a><a class="btn ghost" href="#visit">Find us</a></div>
+    <div class="facts"><span class="status" id="statusChip">Fri–Tue 10am–5pm</span><span><b>Veggie</b>, vegan &amp; GF</span><span>🍑 <b>All welcome</b></span></div>
+  </div>
+  <button class="redo" type="button" id="redo" hidden>↻ Pour another lemonade</button>
+</section>
+
+<section class="block" id="food">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">On the board</div><h2>Food &amp; drinks</h2></div><p>A range of food and drinks, including veggie, vegan and gluten-free options.</p></div>
+    <div class="tiles">
+      <article class="tile t1"><div class="em">🍰</div><h3>Fresh cakes &amp; bakes</h3><p>Cakes and bakes on the counter.</p></article>
+      <article class="tile t2"><div class="em">🥣</div><h3>Soup &amp; brunch</h3><p>Soup, brunch bowls and light bites.</p></article>
+      <article class="tile t3"><div class="em">☕</div><h3>Speciality coffee</h3><p>Coffee, matcha and iced drinks.</p></article>
+      <article class="tile t4"><div class="em">🍋</div><h3>Lemonade</h3><p>Strawberry &amp; basil, and lavender lemonade.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="block story" id="events">
+  <div class="wrap">
+    <div class="evlist">
+      <article class="ev"><div class="d">Thursdays<br><b>6:30–8:30pm</b></div><div><h3>Stitch &amp; B*tch</h3><p>Coffee, tea &amp; cakes from £3, entry £2. Bring your own craft.</p></div></article>
+      <article class="ev"><div class="d">Pop-up</div><div><h3>Pre-loved clothing sale</h3><p>Pop-up pre-loved clothing sales.</p></div></article>
+      <article class="ev"><div class="d">On the walls</div><div><h3>Art exhibitions</h3><p>Exhibitions in the café.</p></div></article>
+    </div>
+    <div>
+      <div class="kicker">What's on</div>
+      <h2>More than a café</h2>
+      <p>Craft nights, pop-up sales and art on the walls. All welcome.</p>
+      <div class="ctas"><a class="btn" href="https://www.instagram.com/cafepeachyglasgow/" target="_blank" rel="noopener">See what's next</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="visit">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Visit us</div><h2>452 Victoria Road</h2></div><p>Glasgow Southside, G42 8YU.</p></div>
+    <div class="visit">
+      <div class="map"><iframe title="Map: Cafe Peachy, 452 Victoria Road" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-4.2718%2C55.8331%2C-4.2588%2C55.8389&amp;layer=mapnik&amp;marker=55.835963%2C-4.265289"></iframe></div>
+      <div class="card">
+        <h3>Opening hours</h3>
+        <dl class="hours" id="hours"></dl>
+        <h3 style="margin-top:6px">Address</h3>
+        <p>Cafe Peachy<br>452 Victoria Road<br>Glasgow G42 8YU</p>
+        <p><a href="mailto:cafepeachyglasgow@gmail.com">cafepeachyglasgow@gmail.com</a></p>
+        <div class="ctas"><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Cafe%20Peachy%20452%20Victoria%20Road%20Glasgow" target="_blank" rel="noopener">Directions ↗</a><a class="btn ghost" href="https://www.instagram.com/cafepeachyglasgow/" target="_blank" rel="noopener">Instagram</a></div>
+      </div>
+    </div>
+    <p class="note">One source for your hours: Instagram, Google and SumUp all point here, and closures (like on very hot days) show up automatically.</p>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>Cafe Peachy · 452 Victoria Road, Glasgow G42 8YU · All welcome</span><span>Design proposal by Jota Labs · <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">more work</a></span></div></footer>
+
+<a class="like" href="https://wa.me/5491130331893?text=Hi%20Jan%2C%20I%20saw%20the%20website%20proposal%20for%20Cafe%20Peachy%20and%20I%27d%20like%20to%20know%20more." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Like it? Let's talk</a>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+  const hero = $("#top");
+
+  /* ---------- Hours + open now (Glasgow) ---------- */
+  const H = { Mon: [600, 1020], Tue: [600, 1020], Wed: null, Thu: null, Fri: [600, 1020], Sat: [600, 1020], Sun: [600, 1020] };
+  const names = { Mon: "Monday", Tue: "Tuesday", Wed: "Wednesday", Thu: "Thursday", Fri: "Friday", Sat: "Saturday", Sun: "Sunday" };
+  const order = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  const fmt = (m) => { const h = Math.floor(m / 60), mm = m % 60; return (h > 12 ? h - 12 : h) + (mm ? ":" + String(mm).padStart(2, "0") : "") + (h >= 12 ? "pm" : "am"); };
+  function status() {
+    const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/London", weekday: "short", hour: "numeric", minute: "numeric", hour12: false }).formatToParts(new Date());
+    const get = (t) => parts.find((x) => x.type === t).value, wd = get("weekday"), m = (+get("hour") % 24) * 60 + +get("minute"), t = H[wd];
+    $("#hours").innerHTML = order.map((d) => `<dt class="${d === wd ? "today" : ""}">${names[d]}</dt><dd class="${d === wd ? "today" : ""}">${H[d] ? fmt(H[d][0]) + " – " + fmt(H[d][1]) : "Closed"}</dd>`).join("");
+    const chip = $("#statusChip"), open = !!t && m >= t[0] && m < t[1];
+    chip.classList.toggle("open", open);
+    if (open) chip.innerHTML = `<b>Open now</b> · until ${fmt(t[1])}`;
+    else if (t && m < t[0]) chip.innerHTML = `Opens today at <b>${fmt(t[0])}</b>`;
+    else { const i = order.indexOf(wd); for (let n = 1; n <= 7; n++) { const d = order[(i + n) % 7]; if (H[d]) { chip.innerHTML = `Closed now · opens <b>${names[d]} ${fmt(H[d][0])}</b>`; break; } } }
+  }
+  status(); setInterval(status, 60000);
+
+  /* ---------- Intro: Limonade ---------- */
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const tween = (ms, fn, tk, ez = (t) => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2)) => new Promise((res) => { const t0 = performance.now(); const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(ez(k), k); k < 1 ? requestAnimationFrame(step) : res(); }; requestAnimationFrame(step); });
+  const canvas = (parent, cls, z) => { const w = parent.clientWidth, h = parent.clientHeight, dpr = Math.min(2, devicePixelRatio || 1); const c = document.createElement("canvas"); c.className = "fxl " + cls; c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); c.style.cssText = `position:absolute;left:0;top:0;width:${w}px;height:${h}px;z-index:${z};pointer-events:none`; c.setAttribute("aria-hidden", "true"); parent.append(c); const ctx = c.getContext("2d"); ctx.scale(dpr, dpr); return { c, ctx, w, h }; };
+  const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); hero.querySelectorAll(".cover").forEach((n) => (n.style.opacity = "0")); };
+  function pkWord(ctx, w, h, y, a, o, sub, ink) { if (a <= 0) return; ctx.save(); ctx.globalAlpha *= Math.min(1, a); ctx.textAlign = "center"; ctx.textBaseline = "middle"; const F = Math.min(w * .2, h * .11);
+    ctx.font = `${F}px ${o.family || "\"Yeseva One\", Georgia, serif"}`; ctx.fillStyle = ink || "#1f3d2e"; ctx.fillText("Peachy", w / 2, y, w * .9);
+    ctx.font = `700 ${Math.min(w * .032, h * .019)}px ${o.ufamily || "system-ui"}`; ctx.fillStyle = ink ? ink : "#c4643a"; ctx.globalAlpha *= .85; ctx.letterSpacing = `${Math.min(5, w * .008)}px`; ctx.fillText(sub || o.sub || "CAFE · GLASGOW SOUTHSIDE", w / 2, y + F * .72, w * .9); ctx.restore(); }
+  /* ---------- Lemonade: illustrierte Gläser Strawberry & Basil und Lavender füllen sich, Früchte plumpsen rein ---------- */
+  async function pklemon(scr, tk, o = {}) {
+    const { c, ctx, w, h } = canvas(scr, "pklem", 5), S = Math.min(w * .3, h * .2), by = h * .66;
+    let fill = 0, fruit = 0, word = 0, bgA = 1, zoom = 1; const bub = [...Array(30)].map(() => ({ x: Math.random(), y: Math.random(), s: .5 + Math.random() }));
+    const glass = (gx, col, top, leaf) => { const gw = S * .7, gh = S * 1.4; ctx.save(); ctx.translate(gx, by);
+      ctx.beginPath(); ctx.moveTo(-gw / 2, -gh); ctx.lineTo(gw / 2, -gh); ctx.lineTo(gw * .42, 0); ctx.lineTo(-gw * .42, 0); ctx.closePath(); ctx.save(); ctx.clip();
+      if (fill > 0) { const t = -gh * .92 * fill; const g = ctx.createLinearGradient(0, t, 0, 0); g.addColorStop(0, top); g.addColorStop(1, col); ctx.fillStyle = g; ctx.fillRect(-gw, t, gw * 2, -t);
+        ctx.fillStyle = "rgba(255,255,255,.55)"; for (const b of bub) { const yy = -((b.y + performance.now() / 5000 * b.s) % 1) * gh * .9; if (yy < t) continue; ctx.beginPath(); ctx.arc((b.x - .5) * gw * .8, yy, 2 * b.s, 0, 7); ctx.fill(); } }
+      ctx.fillStyle = "rgba(255,255,255,.25)"; ctx.fillRect(-gw * .38, -gh * .9, gw * .1, gh * .8); ctx.restore();
+      ctx.strokeStyle = "#1f3d2e"; ctx.lineWidth = 2.5; ctx.stroke();
+      if (fruit > 0) { const fy = -gh * .8 - (1 - Math.min(1, fruit)) * h * .4; ctx.fillStyle = leaf; ctx.beginPath(); ctx.ellipse(-gw * .12, fy, gw * .1, gw * .05, -.6, 0, 7); ctx.fill(); ctx.fillStyle = top === "#ff8fa0" ? "#e8304a" : "#9b7fd4"; ctx.beginPath(); ctx.arc(gw * .1, fy + gw * .08, gw * .1, 0, 7); ctx.fill(); }
+      ctx.strokeStyle = "#e8304a"; ctx.lineWidth = 5; ctx.lineCap = "round"; ctx.beginPath(); ctx.moveTo(gw * .15, -gh * .3); ctx.lineTo(gw * .4, -gh * 1.25); ctx.stroke(); ctx.restore(); };
+    const draw = () => { ctx.clearRect(0, 0, w, h); ctx.save(); ctx.globalAlpha = bgA; ctx.translate(w / 2, by - S); ctx.scale(zoom, zoom); ctx.translate(-w / 2, -(by - S));
+      ctx.fillStyle = "#f4e9d8"; ctx.fillRect(-w, -h, w * 3, h * 3); ctx.fillStyle = "#c98a4a"; ctx.fillRect(-w, by, w * 3, h); ctx.fillStyle = "rgba(0,0,0,.08)"; for (let x = -w; x < w * 2; x += 40) ctx.fillRect(x, by, 2, h);
+      glass(w / 2 - S * .5, "#e8304a", "#ff8fa0", "#3f8a3a"); glass(w / 2 + S * .5, "#f3d36a", "#d9c8f3", "#7a9a5a");
+      pkWord(ctx, w, h, h * .16, word, o, "STRAWBERRY & BASIL · LAVENDER LEMONADE"); ctx.restore(); };
+    let live = true; const lp = () => { if (!live || tk.cancelled) return; draw(); requestAnimationFrame(lp); }; requestAnimationFrame(lp);
+    await sleep(300);
+    await tween(1300, (e) => { fill = e; }, tk);
+    await tween(500, (e) => { fruit = e; }, tk, (q) => 1 - Math.abs(Math.cos(q * Math.PI * 1.5)) * (1 - q));
+    await tween(450, (e) => { word = e; }, tk);
+    await sleep(o.hold || 1100); if (tk.cancelled) { live = false; return c.remove(); }
+    reveal(); await tween(800, (e) => { zoom = 1 + e * 1.4; bgA = 1 - e; c.style.opacity = 1 - e; }, tk); live = false; c.remove();
+  }
+
+  const redo = $("#redo");
+  let token = { cancelled: true };
+  async function play() {
+    token.cancelled = true; const tk = (token = { cancelled: false });
+    hero.querySelectorAll(".fxl, .stage").forEach((n) => n.remove());
+    hero.classList.remove("reveal"); hero.classList.add("pre"); redo.hidden = true;
+    const top = Math.max(0, hero.getBoundingClientRect().top), vis = Math.max(320, Math.min(hero.clientHeight, innerHeight - top));
+    const stage = document.createElement("div"); stage.className = "stage"; stage.style.cssText = `position:absolute;left:0;right:0;top:0;height:${hero.clientHeight}px;z-index:5;pointer-events:none;overflow:hidden`; hero.append(stage);
+    const inner = document.createElement("div"); inner.style.cssText = `position:absolute;left:0;right:0;top:0;height:${vis}px`; stage.append(inner);
+    if (vis < hero.clientHeight) { const cv = document.createElement("div"); cv.className = "cover"; cv.style.cssText = `position:absolute;left:0;right:0;top:${vis}px;bottom:0;background:#c98a4a;transition:opacity .6s`; stage.append(cv); }
+    await pklemon(inner, tk, { family: "\"Yeseva One\", Georgia, serif", ufamily: "Karla, sans-serif" });
+    stage.remove();
+    if (!tk.cancelled) redo.hidden = false;
+  }
+  redo.addEventListener("click", play);
+  if (reduce) hero.classList.remove("pre"); else document.fonts.ready.then(play);
+})();
+</script>
+</body>
+</html>
