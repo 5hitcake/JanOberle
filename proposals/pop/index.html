@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>POP · Design proposal</title>
+<meta name="description" content="A website proposal for POP, gourmet and topped popcorn, drinks, bakes and sundaes at 713 Great Western Road, Glasgow, by Jota Labs. Not the official website.">
+<meta property="og:title" content="POP · Design proposal">
+<meta property="og:description" content="Gourmet and topped popcorn on Great Western Road. A proposal by Jota Labs.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23f3eee2'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Georgia' font-weight='700' font-size='24' fill='%23b8963e'%3EPOP%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: Mix-Intro (Popcorn springt aus dem POP-Becher bis alles voll ist, dann goldenes Logo mit Schnörkeln und Krone), Hero mit Logo.
+   Top your pop, Geschenkbox, School's Out Deal, Students/Dogs, Jobs, Visit mit Live-Status (Mo zu).
+   Creme und Gold; Playfair Display + Montserrat. */
+:root {
+  --bg: #f3eee2; --bg-2: #ebe3d0; --bg-3: #fbf8f1; --ink: #2b2722; --line: rgba(43,39,34,.14); --soft: #4d463b; --muted: #80755f;
+  --green: #a8862f; --leaf: #a8862f; --brass: #b8963e; --pink: #ebe3d0; --fuji: #b8963e; --gold: #b8963e;
+  --f-display: "Playfair Display", Georgia, serif; --f-body: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif; --f-mono: "Montserrat", system-ui, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-family: var(--f-display); font-weight: 400; text-wrap: balance; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 800 13px/1.2 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--leaf); }
+:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+.proposal { background: #000; color: #e9ebee; font: 13px/1.4 var(--f-body); padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; }
+.proposal b { color: #ffd166; } .proposal a { color: #fff; font-weight: 800; }
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 22px/1 var(--f-display); letter-spacing: .06em; }
+.logo svg { width: 38px; height: 38px; }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 15px; font-weight: 700; color: var(--muted); }
+nav.links a:hover { color: var(--ink); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 800 15px/1 var(--f-body); padding: 15px 22px; border-radius: 6px; background: var(--green); color: #f6f0e2; border: 2px solid var(--green); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(229,67,45,.25); }
+.btn.ghost { background: transparent; color: var(--ink); border-color: rgba(26,23,20,.35); }
+.btn.ghost:hover { border-color: var(--ink); }
+nav.links a.btn { color: #f6f0e2; padding: 10px 16px; font-size: 14px; }
+.menu-btn { display: none; background: transparent; color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 8px 14px; font: 800 12px var(--f-body); letter-spacing: .08em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bg-3); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line); background: radial-gradient(60% 70% at 85% 30%, rgba(201,160,122,.35), transparent 70%), var(--bg); }
+@media (max-width: 860px) { .hero .seal { opacity: .07 !important; right: -30% !important; } }
+.hero .seal { position: absolute; right: -6%; top: 50%; width: min(52vw, 560px); transform: translateY(-50%); opacity: .14; z-index: 0; }
+.hero .wrap { position: relative; z-index: 1; padding-block: clamp(84px, 12vw, 140px) clamp(64px, 9vw, 110px); display: flex; flex-direction: column; gap: 16px; }
+.hero h1 { font-weight: 400; color: var(--green); text-shadow: 3px 3px 0 #fff; font-size: clamp(72px, 13vw, 168px); line-height: .9; letter-spacing: .04em; }
+.hero h1 small { color: var(--leaf); text-shadow: none; display: block; font: 700 clamp(14px, 2vw, 20px)/1 var(--f-mono); letter-spacing: .5em; color: var(--muted); margin-top: 14px; }
+.hero .lead { margin: 4px 0 0; font-size: clamp(18px, 2.2vw, 22px); color: var(--soft); max-width: 36ch; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.facts span { font: 700 14px var(--f-body); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; background: rgba(246,240,226,.85); }
+.facts span b { color: var(--ink); }
+.status::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); margin-right: 8px; vertical-align: 1px; }
+.status.open::before { background: #3aa35a; box-shadow: 0 0 10px #3aa35a; }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 7; font: 700 13px var(--f-body); color: var(--muted); background: rgba(246,240,226,.9); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.redo:hover { color: var(--ink); }
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero.reveal .wrap > :nth-child(2) { animation-delay: .06s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .12s }
+.hero.reveal .wrap > :nth-child(4) { animation-delay: .18s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .24s }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+section.block { padding-block: clamp(64px, 10vw, 104px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 40px; margin-bottom: 30px; }
+.head h2 { font-size: clamp(36px, 5.6vw, 64px); line-height: 1; margin-top: 10px; }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+.note { margin-top: 20px; font-size: 14px; color: var(--muted); padding: 10px 14px; border-left: 3px solid var(--green); background: var(--bg-2); border-radius: 0 10px 10px 0; }
+.sig { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 860px) { .sig { grid-template-columns: minmax(0,1fr); } }
+.sc { background: var(--bg-3); border: 1px solid var(--line); border-radius: 14px; padding: 24px; display: grid; gap: 8px; align-content: start; }
+.sc svg { width: 70px; height: 70px; }
+.sc h3 { font-size: 28px; } .sc .pr { font: 700 15px var(--f-mono); color: var(--green); } .sc p { margin: 0; color: var(--soft); font-size: 15px; }
+.menu { background: var(--bg-3); border: 1px solid var(--line); border-radius: 14px; padding: clamp(18px, 3vw, 32px); }
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.tabs button { font: 700 14px var(--f-mono); letter-spacing: .06em; text-transform: uppercase; padding: 10px 14px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; }
+.tabs button[aria-selected="true"] { background: var(--green); border-color: var(--green); color: #f6f0e2; }
+.pl { list-style: none; margin: 0; padding: 0; columns: 2; column-gap: 40px; }
+@media (max-width: 760px) { .pl { columns: 1; } }
+.pl li { break-inside: avoid; display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: baseline; padding: 10px 0; border-top: 1px dashed var(--line); font-family: var(--f-mono); }
+.pl li::after { content: ""; grid-column: 2; grid-row: 1; border-bottom: 1px dotted rgba(26,23,20,.25); transform: translateY(-4px); }
+.pl b { font-weight: 700; text-transform: uppercase; font-size: 15px; letter-spacing: .03em; } .pl em { font-style: normal; font-weight: 700; color: var(--green); grid-column: 3; }
+.pl i { font-style: normal; font-size: 11px; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 1px 5px; margin-left: 6px; vertical-align: 2px; }
+.pl small { grid-column: 1 / -1; grid-row: 2; color: var(--muted); font-size: 13px; margin-top: -4px; }
+.mnote { margin: 18px 0 0; font: 13px/1.5 var(--f-mono); color: var(--muted); text-align: center; }
+.story { background: var(--leaf) !important; color: #fffdf7 !important; } .story-x { background: var(--ink); color: #efe6d2; }
+.story .wrap { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: clamp(28px, 6vw, 80px); align-items: center; }
+@media (max-width: 860px) { .story .wrap { grid-template-columns: minmax(0,1fr); } }
+.story svg { width: min(100%, 380px); justify-self: center; }
+.story .kicker { color: #d9b37a; } .story h2 { font-size: clamp(36px, 5.6vw, 64px); line-height: 1; margin: 10px 0 18px; }
+.story p { margin: 0 0 14px; color: #d9cfbb; }
+.rev { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: 16px; }
+@media (max-width: 860px) { .rev { grid-template-columns: minmax(0,1fr); } }
+.score { background: var(--green); color: #f6f0e2; border-radius: 14px; padding: 28px; display: grid; gap: 6px; align-content: center; }
+.score .kicker { color: #cfe6d6; } .score b { font: clamp(48px, 7vw, 72px)/1 var(--f-display); } .score p { margin: 0; color: #cfe6d6; }
+.quote { background: var(--bg-3); border: 1px solid var(--line); border-radius: 14px; padding: 28px; display: grid; gap: 14px; align-content: center; }
+.quote p { margin: 0; font: clamp(20px, 2.6vw, 28px)/1.35 var(--f-display); } .quote small { color: var(--muted); }
+.visit { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 860px) { .visit { grid-template-columns: minmax(0,1fr); } }
+.map { border-radius: 14px; overflow: hidden; border: 1px solid var(--line); min-height: 320px; }
+.map iframe { width: 100%; height: 100%; min-height: 320px; border: 0; display: block; }
+.card { border: 1px solid var(--line); border-radius: 14px; padding: 26px; background: var(--bg-3); display: grid; gap: 10px; align-content: start; }
+.card h3 { font-size: 24px; } .card p { margin: 0; color: var(--soft); }
+.hours { display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; margin: 0; font-variant-numeric: tabular-nums; }
+.hours dt { color: var(--muted); } .hours dd { margin: 0; color: var(--soft); } .hours .today { color: var(--ink); font-weight: 800; }
+footer { padding-block: 40px 96px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 800 14px var(--f-body); padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.25); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+
+.stripes { position: absolute; left: 0; right: 0; display: grid; gap: 6px; z-index: 0; pointer-events: none; }
+.stripes i { display: block; height: 10px; } .stripes i:nth-child(1) { background: #7fbf8e; } .stripes i:nth-child(2) { background: var(--brass); } .stripes i:nth-child(3) { background: var(--pink); }
+.stripes.s1 { top: 26px; } .stripes.s2 { bottom: 26px; }
+.hero.reveal .stripes i { animation: sweep 1s cubic-bezier(.2,.7,.2,1) both; } .hero.reveal .stripes i:nth-child(2) { animation-delay: .08s; } .hero.reveal .stripes i:nth-child(3) { animation-delay: .16s; }
+@keyframes sweep { from { transform: scaleX(0); transform-origin: left; } to { transform: scaleX(1); transform-origin: left; } }
+.logo { font-family: var(--f-display); letter-spacing: 0; font-size: 26px; color: var(--green); }
+.pl b { text-transform: none; font-family: var(--f-body); font-weight: 800; letter-spacing: 0; } .pl li { font-family: var(--f-body); }
+.story { color: #fffdf7; } .story p { color: #eaf5ec; } .story .kicker { color: #fff3c4; } .story h2 { color: #fffdf7; }
+.story .btn { background: #fffdf7; color: var(--leaf); border-color: #fffdf7; }
+.sc h3, .head h2, .card h3 { font-weight: 400; } .sc .pr { color: var(--green); }
+.score { background: var(--green); }
+.tabs button { font-family: var(--f-body); font-weight: 800; }
+
+.hero { background: radial-gradient(60% 70% at 85% 40%, rgba(226,196,119,.3), transparent 70%), var(--bg) !important; }
+.hero h1 { font-family: var(--f-display) !important; font-weight: 700 !important; color: transparent !important; background: linear-gradient(100deg,#9c7a2c,#d9b968 45%,#fff2c4 52%,#b8963e 60%,#9c7a2c); -webkit-background-clip: text; background-clip: text; text-shadow: none !important; font-size: clamp(100px, 18vw, 210px) !important; }
+.front { position: absolute; right: 5%; top: 50%; transform: translateY(-50%); width: min(38vw, 440px); z-index: 0; pointer-events: none; }
+.front svg { width: 100%; height: auto; display: block; }
+@media (max-width: 860px) { .front { opacity: .16; width: 90vw; right: -25%; } }
+.logo { font: 700 26px var(--f-display) !important; color: var(--gold) !important; }
+.head h2, .story h2, .join h3, .gift h3 { font-family: var(--f-display); font-weight: 700 !important; font-style: normal !important; }
+.orn { width: min(260px, 60vw); margin: 0 0 18px; } .orn svg { width: 100%; height: auto; display: block; }
+.dishes { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 960px) { .dishes { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 520px) { .dishes { grid-template-columns: minmax(0,1fr); } }
+.dish { background: var(--bg-3); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; display: grid; align-content: start; }
+.dish .ph { aspect-ratio: 4/3; display: grid; place-items: center; font-size: 56px; background: repeating-linear-gradient(90deg, #fbf6ea 0 22px, #e8d18e 22px 44px); }
+.dish h3 { font: 700 19px var(--f-display); margin: 16px 18px 4px; } .dish p { margin: 0 18px 18px; color: var(--soft); font-size: 15px; }
+.gift { margin-top: 18px; border: 1.5px solid rgba(184,150,62,.55); border-radius: 18px; padding: 22px 24px; display: flex; flex-wrap: wrap; gap: 14px 30px; align-items: center; justify-content: space-between; background: #fbf8f1; }
+.gift h3 { font-size: 24px; margin: 4px 0; } .gift p { margin: 0; color: var(--soft); }
+.story { background: #2b2722 !important; } .story .kicker { color: #e2c477 !important; } .story p { color: #f3eee2 !important; } .story h2 { color: #e2c477; font-size: clamp(38px, 6vw, 70px); }
+.deals { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 18px; }
+.deal { display: flex; gap: 16px; align-items: center; border: 1.5px solid rgba(226,196,119,.5); border-radius: 16px; padding: 16px 22px; color: #f3eee2; }
+.deal b { font: 700 44px var(--f-display); color: #e2c477; } .deal span { font-size: 15px; line-height: 1.4; }
+.cat { font-size: clamp(90px, 14vw, 160px); text-align: center; }
+.duo { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; } @media (max-width: 760px) { .duo { grid-template-columns: minmax(0,1fr); } }
+.join { border: 1px solid var(--line); border-top: 4px solid var(--gold); border-radius: 18px; padding: 24px; background: var(--bg-3); display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; justify-content: space-between; }
+.join h3 { font-size: clamp(22px, 2.6vw, 28px); margin: 6px 0; } .join p { margin: 0; color: var(--soft); max-width: 60ch; }
+.card h3 { font: 700 20px var(--f-display) !important; font-style: normal !important; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></symbol>
+</svg>
+
+
+<div class="proposal"><span><b>Design proposal</b> for POP · not the official website</span><span>Made by <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">Jota Labs</a></span></div>
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top">POP</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENU</button>
+    <nav class="links" id="links">
+      <a href="#menu">Menu</a>
+      <a href="#deal">Deals</a>
+      <a href="#jobs">Jobs</a>
+      <a href="#visit">Visit</a>
+      <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=713%20Great%20Western%20Road%20Glasgow%20G12%208QX" target="_blank" rel="noopener">Directions</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero pre" id="top">
+  <div class="front" aria-hidden="true"><svg viewBox="0 0 200 200"><g fill="none" stroke="#b8963e" stroke-width="2.2" stroke-linecap="round"><path d="M100 52C80 42 55 58 30 51C18 46 22 36 32 40" /><path d="M100 52C120 42 145 58 170 51C182 46 178 36 168 40" /><path d="M100 142C80 152 55 136 30 143C18 148 22 158 32 154" /><path d="M100 142C120 152 145 136 170 143C182 148 178 158 168 154" /></g><path d="M100 38Q105 50 100 60Q95 50 100 38Z M100 156Q105 146 100 134Q95 146 100 156Z" fill="#b8963e"/><text x="100" y="117" text-anchor="middle" font-family="Playfair Display, Georgia, serif" font-weight="700" font-size="58" fill="#b8963e">POP</text><path d="M88 186L87 176L94 180L100 172L106 180L113 176L112 186Z" fill="#b8963e"/></svg></div>
+  <div class="wrap">
+    <div class="kicker">Gourmet &amp; topped popcorn · West End</div>
+    <h1>POP</h1>
+    <p class="lead">Popcorn with your choice of toppings, plus drinks, bakes and sundaes on Great Western Road.</p>
+    <div class="ctas"><a class="btn" href="#menu">Top your pop</a><a class="btn ghost" href="#visit">Find us</a></div>
+    <div class="facts"><span class="status" id="statusChip">Tue–Sun</span><span><b>Dog</b> friendly 🐕</span><span><b>Students</b> welcome</span></div>
+  </div>
+  <button class="redo" type="button" id="redo" hidden>↻ Pop it again</button>
+</section>
+
+<section class="block" id="menu">
+  <div class="wrap">
+    <div class="orn" aria-hidden="true"><svg viewBox="0 0 200 30"><g fill="none" stroke="#b8963e" stroke-width="2" stroke-linecap="round"><path d="M100 18C80 8 55 24 30 17C18 12 22 2 32 6" /><path d="M100 18C120 8 145 24 170 17C182 12 178 2 168 6" /></g><path d="M100 8Q104 18 100 26Q96 18 100 8Z" fill="#b8963e"/></svg></div>
+    <div class="head"><div><div class="kicker">The menu</div><h2>Top your pop</h2></div><p>Pick your popcorn, pile on the toppings. On the final site the full menu and prices live here, and you can update them yourself.</p></div>
+    <div class="dishes">
+      <article class="dish"><div class="ph p1" aria-hidden="true">🍿</div><h3>Topped popcorn</h3><p>Caramel, cheesy and more, with your choice of toppings.</p></article>
+      <article class="dish"><div class="ph p2" aria-hidden="true">🍨</div><h3>Sundaes</h3><p>Soft serve, topped with popcorn.</p></article>
+      <article class="dish"><div class="ph p3" aria-hidden="true">🍵</div><h3>Drinks</h3><p>Matcha, hot chocolate and cold cans.</p></article>
+      <article class="dish"><div class="ph p4" aria-hidden="true">🍰</div><h3>Bakes</h3><p>Chocolate brownie, caramel slice, Empire biscuit, scones, strawberry tarts and meringues with fresh cream.</p></article>
+    </div>
+    <div class="gift">
+      <div><div class="kicker">Gift box</div><h3>Choose your chocolate · Top your pop</h3><p>A box of your favourites, made to take away or to give.</p></div>
+      <a class="btn ghost" href="https://www.instagram.com/pop_glasgow/" target="_blank" rel="noopener">See it on Instagram</a>
+    </div>
+  </div>
+</section>
+
+<section class="block story" id="deal">
+  <div class="wrap">
+    <div class="cat">🎒</div>
+    <div>
+      <div class="kicker">Thursday + Friday</div>
+      <h2>School’s Out Deal</h2>
+      <div class="deals">
+        <div class="deal"><b>£9</b><span>2 toppings popcorn<br>+ hot chocolate</span></div>
+        <div class="deal"><b>£8</b><span>2 toppings popcorn<br>+ can of juice</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="welcome">
+  <div class="wrap">
+    <div class="duo">
+      <div class="join"><div><div class="kicker">Students welcome</div><h3>A little study. A little snack.</h3><p>Bring your laptop, grab a coffee and a bag of popcorn.</p></div></div>
+      <div class="join"><div><div class="kicker">We’re dog friendly</div><h3>Good company, paws included.</h3><p>Bring your dog along.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="jobs" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">We’re hiring</div><h2>Join the POP team</h2></div><p>On the final site, job openings get their own page with an apply button.</p></div>
+    <div class="duo">
+      <div class="join"><div><div class="kicker">35–40 hours per week</div><h3>Store Manager</h3></div><a class="btn ghost" href="https://www.instagram.com/pop_glasgow/" target="_blank" rel="noopener">Apply</a></div>
+      <div class="join"><div><div class="kicker">Kitchen team</div><h3>Popcorn Makers</h3><p>Great people. Good energy. Plenty of popcorn.</p></div><a class="btn ghost" href="https://www.instagram.com/pop_glasgow/" target="_blank" rel="noopener">Apply</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="visit" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Visit us</div><h2>713 Great Western Road</h2></div><p>West End, Glasgow G12.</p></div>
+    <div class="visit">
+      <div class="map"><iframe title="Map: POP, 713 Great Western Road" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-4.2953%2C55.8745%2C-4.2823%2C55.8803&amp;layer=mapnik&amp;marker=55.877365%2C-4.288787"></iframe></div>
+      <div class="card">
+        <h3>Opening hours</h3>
+        <dl class="hours" id="hours"></dl>
+        <h3 style="margin-top:6px">Address</h3>
+        <p>POP<br>713 Great Western Road<br>Glasgow G12</p>
+        <div class="ctas"><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=713%20Great%20Western%20Road%20Glasgow%20G12%208QX" target="_blank" rel="noopener">Directions ↗</a><a class="btn ghost" href="https://www.instagram.com/pop_glasgow/" target="_blank" rel="noopener">Instagram</a></div>
+      </div>
+    </div>
+    <p class="note">Hours from your Instagram story. Changes would show here and at the top automatically.</p>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>POP · Gourmet &amp; topped popcorn · 713 Great Western Road, Glasgow G12</span><span>Design proposal by Jota Labs · <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">more work</a></span></div></footer>
+
+<a class="like" href="https://wa.me/5491130331893?text=Hi%20Jan%2C%20I%20saw%20the%20website%20proposal%20for%20POP%20and%20I%27d%20like%20to%20know%20more." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Like it? Let's talk</a>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+  const hero = $("#top");
+
+  /* ---------- Hours + open now (Glasgow) ---------- */
+  const H = { Mon: null, Tue: [780, 1200], Wed: [780, 1200], Thu: [780, 1200], Fri: [600, 1320], Sat: [600, 1320], Sun: [600, 1200] };
+  const names = { Mon: "Monday", Tue: "Tuesday", Wed: "Wednesday", Thu: "Thursday", Fri: "Friday", Sat: "Saturday", Sun: "Sunday" };
+  const order = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  const fmt = (m) => { const h = Math.floor(m / 60), mm = m % 60; return (h > 12 ? h - 12 : h) + (mm ? ":" + String(mm).padStart(2, "0") : "") + (h >= 12 ? "pm" : "am"); };
+  function status() {
+    const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/London", weekday: "short", hour: "numeric", minute: "numeric", hour12: false }).formatToParts(new Date());
+    const get = (t) => parts.find((x) => x.type === t).value, wd = get("weekday"), m = (+get("hour") % 24) * 60 + +get("minute"), t = H[wd];
+    $("#hours").innerHTML = order.map((d) => `<dt class="${d === wd ? "today" : ""}">${names[d]}</dt><dd class="${d === wd ? "today" : ""}">${H[d] ? fmt(H[d][0]) + " – " + fmt(H[d][1]) : "Closed"}</dd>`).join("");
+    const chip = $("#statusChip"), open = !!t && m >= t[0] && m < t[1];
+    chip.classList.toggle("open", open);
+    if (open) chip.innerHTML = `<b>Open now</b> · until ${fmt(t[1])}`;
+    else if (t && m < t[0]) chip.innerHTML = `Opens today at <b>${fmt(t[0])}</b>`;
+    else { const i = order.indexOf(wd); for (let n = 1; n <= 7; n++) { const d = order[(i + n) % 7]; if (H[d]) { chip.innerHTML = `Closed now · opens <b>${names[d]} ${fmt(H[d][0])}</b>`; break; } } }
+  }
+  status(); setInterval(status, 60000);
+
+  /* ---------- Intro: Popcorn + Gold-Logo ---------- */
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const tween = (ms, fn, tk, ez = (t) => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2)) => new Promise((res) => { const t0 = performance.now(); const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(ez(k), k); k < 1 ? requestAnimationFrame(step) : res(); }; requestAnimationFrame(step); });
+  const canvas = (parent, cls, z) => { const w = parent.clientWidth, h = parent.clientHeight, dpr = Math.min(2, devicePixelRatio || 1); const c = document.createElement("canvas"); c.className = "fxl " + cls; c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); c.style.cssText = `position:absolute;left:0;top:0;width:${w}px;height:${h}px;z-index:${z};pointer-events:none`; c.setAttribute("aria-hidden", "true"); parent.append(c); const ctx = c.getContext("2d"); ctx.scale(dpr, dpr); return { c, ctx, w, h }; };
+  const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); hero.querySelectorAll(".cover").forEach((n) => (n.style.opacity = "0")); };
+  const POP_GOLD = "#b8963e", POP_GOLD_L = "#e2c477", POP_CREAM = "#f3eee2", POP_INK = "#2b2722";
+  function popKernel(ctx, x, y, s, rot, caramel) {
+    ctx.save(); ctx.translate(x, y); ctx.rotate(rot);
+    const base = caramel ? ["#c98a2e", "#e0a64a", "#f0c46e"] : ["#efd9a0", "#fbf3dc", "#fffdf6"];
+    const blobs = [[0, 0, .55], [-.45, -.25, .42], [.42, -.3, .44], [-.2, .42, .4], [.35, .35, .38]];
+    for (const [bx, by, r] of blobs) { const g = ctx.createRadialGradient(bx * s - r * s * .3, by * s - r * s * .3, 1, bx * s, by * s, r * s); g.addColorStop(0, base[2]); g.addColorStop(.7, base[1]); g.addColorStop(1, base[0]); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(bx * s, by * s, r * s, 0, 7); ctx.fill(); }
+    if (!caramel) { ctx.fillStyle = "#d9a441"; ctx.beginPath(); ctx.ellipse(.05 * s, .05 * s, .13 * s, .08 * s, .5, 0, 7); ctx.fill(); }
+    ctx.restore();
+  }
+  function popStroke(ctx, p, L, path) { if (p <= 0) return; ctx.save(); ctx.setLineDash([L * Math.min(1, p), L * 2]); ctx.beginPath(); path(); ctx.stroke(); ctx.restore(); }
+  /* Schnörkel wie über/unter ihrem POP-Schriftzug: Spiralen links und rechts, gespiegelt */
+  function popScroll(ctx, cx, y, W, p, flip) {
+    const d = flip ? -1 : 1;
+    for (const s of [-1, 1]) popStroke(ctx, p, W * 1.6, () => {
+      ctx.moveTo(cx, y); ctx.bezierCurveTo(cx + s * W * .25, y - d * W * .12, cx + s * W * .55, y + d * W * .08, cx + s * W * .8, y - d * W * .02);
+      ctx.bezierCurveTo(cx + s * W * .95, y - d * W * .07, cx + s * W * .9, y - d * W * .2, cx + s * W * .78, y - d * W * .16);
+      ctx.bezierCurveTo(cx + s * W * .7, y - d * W * .12, cx + s * W * .74, y - d * W * .04, cx + s * W * .8, y - d * W * .07); });
+    for (const s of [-1, 1]) popStroke(ctx, p * 1.3 - .3, W * .6, () => { ctx.moveTo(cx + s * W * .08, y - d * W * .02); ctx.bezierCurveTo(cx + s * W * .2, y - d * W * .2, cx + s * W * .38, y - d * W * .14, cx + s * W * .34, y - d * W * .06); });
+    if (p > .6) { ctx.save(); ctx.globalAlpha *= Math.min(1, (p - .6) * 2.5); ctx.fillStyle = ctx.strokeStyle; ctx.beginPath(); ctx.moveTo(cx, y - d * W * .1); ctx.quadraticCurveTo(cx + W * .05, y, cx, y + d * W * .06); ctx.quadraticCurveTo(cx - W * .05, y, cx, y - d * W * .1); ctx.fill(); ctx.restore(); }
+  }
+  function popCrown(ctx, x, y, s) { ctx.beginPath(); ctx.moveTo(x - s, y); ctx.lineTo(x - s * 1.05, y - s * .7); ctx.lineTo(x - s * .5, y - s * .3); ctx.lineTo(x, y - s * .95); ctx.lineTo(x + s * .5, y - s * .3); ctx.lineTo(x + s * 1.05, y - s * .7); ctx.lineTo(x + s, y); ctx.closePath(); ctx.fill(); ctx.fillRect(x - s, y + s * .08, s * 2, s * .18);
+    for (const dx of [-1.05, 0, 1.05]) { ctx.beginPath(); ctx.arc(x + dx * s, y - (dx ? s * .78 : s * 1.05), s * .12, 0, 7); ctx.fill(); } }
+  function popGoldFill(ctx, x0, y0, x1, y1, shine) { const g = ctx.createLinearGradient(x0, y0, x1, y1); g.addColorStop(0, "#9c7a2c"); g.addColorStop(Math.min(1, Math.max(0, shine - .12)), POP_GOLD); g.addColorStop(Math.max(0, Math.min(1, shine)), "#fff2c4"); g.addColorStop(Math.max(0, Math.min(1, shine + .12)), POP_GOLD); g.addColorStop(1, "#9c7a2c"); return g; }
+  function popWord(ctx, w, cx, y, F, a, shine, o, sub) { if (a <= 0) return; ctx.save(); ctx.globalAlpha *= Math.min(1, a); ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ctx.font = `700 ${F}px ${o.family || "\"Playfair Display\", serif"}`; ctx.fillStyle = popGoldFill(ctx, cx - F * 1.2, y - F / 2, cx + F * 1.2, y + F / 2, shine); ctx.fillText("POP", cx, y);
+    if (sub !== false) { ctx.font = `600 ${Math.max(10, F * .12)}px ${o.ufamily || "system-ui"}`; ctx.letterSpacing = `${F * .04}px`; ctx.fillStyle = "#8a7444"; ctx.fillText(sub || "GOURMET POPCORN · GREAT WESTERN ROAD", cx, y + F * .95, w * .92); }
+    ctx.restore(); }
+
+  /* ---------- Gold-Logo: Schnörkel zeichnen sich, POP glänzt golden, Krone, ein paar Popcorn springen ---------- */
+  async function popgold(scr, tk, o = {}) {
+    const { c, ctx, w, h } = canvas(scr, "popgold", 5), cx = w / 2, cy = h * .42, F = Math.min(w * .3, h * .17), W = F * 1.2;
+    let scroll = 0, word = 0, shine = -.2, crown = 0, bgA = 1, zoom = 1; const kern = [];
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h); ctx.save(); ctx.globalAlpha = bgA; ctx.fillStyle = POP_CREAM; ctx.fillRect(0, 0, w, h);
+      const v = ctx.createRadialGradient(cx, cy, 10, cx, cy, Math.max(w, h) * .7); v.addColorStop(0, "rgba(255,255,255,.6)"); v.addColorStop(1, "rgba(184,150,62,.12)"); ctx.fillStyle = v; ctx.fillRect(0, 0, w, h);
+      ctx.translate(cx, cy); ctx.scale(zoom, zoom); ctx.translate(-cx, -cy);
+      ctx.strokeStyle = POP_GOLD; ctx.lineWidth = Math.max(1.5, F * .025); ctx.lineCap = "round";
+      popScroll(ctx, cx, cy - F * .72, W, scroll, false); popScroll(ctx, cx, cy + F * .62, W, scroll, true);
+      popWord(ctx, w, cx, cy, F, word, shine, o, false);
+      if (crown > 0) { ctx.save(); ctx.globalAlpha *= crown; ctx.fillStyle = POP_GOLD; popCrown(ctx, cx, cy + F * 1.55 + (1 - crown) * 10, F * .14); ctx.restore();
+        ctx.save(); ctx.globalAlpha *= crown; ctx.textAlign = "center"; ctx.fillStyle = "#8a7444"; const f2 = Math.min(w * .032, h * .019); ctx.font = `600 ${f2}px ${o.ufamily || "system-ui"}`; ctx.letterSpacing = `${f2 * .35}px`;
+        ctx.fillText("GOURMET & TOPPED POPCORN", cx, cy + F * 2, w * .92); ctx.font = `${f2 * 1.05}px ${o.ufamily || "system-ui"}`; ctx.letterSpacing = "1px"; ctx.fillStyle = "#6f6450"; ctx.fillText("Drinks · Bakes · Sundaes", cx, cy + F * 2 + f2 * 2.1, w * .92); ctx.restore(); }
+      for (const k of kern) popKernel(ctx, k.x, k.y, k.s, k.r, k.c);
+      ctx.restore();
+    };
+    let live = true; let prev = performance.now();
+    const lp = (now) => { if (!live || tk.cancelled) return; const dt = Math.min(40, now - prev) / 16.7; prev = now;
+      for (const k of kern) { k.vy += .35 * dt; k.x += k.vx * dt; k.y += k.vy * dt; k.r += k.vr * dt; } for (let i = kern.length - 1; i >= 0; i--) if (kern[i].y > h + 60) kern.splice(i, 1);
+      draw(); requestAnimationFrame(lp); }; requestAnimationFrame(lp);
+    const burst = (n) => { for (let i = 0; i < n; i++) kern.push({ x: cx + (Math.random() - .5) * F * 1.6, y: cy + (Math.random() - .5) * F * .5, vx: (Math.random() - .5) * 9, vy: -6 - Math.random() * 9, s: F * (.07 + Math.random() * .06), r: Math.random() * 6, vr: (Math.random() - .5) * .2, c: Math.random() < .45 }); };
+    await sleep(250);
+    await tween(1300, (e, k) => { scroll = k * 1.3; }, tk, (q) => 1 - Math.pow(1 - q, 2));
+    await tween(500, (e) => { word = e; }, tk);
+    burst(14);
+    await tween(900, (e, k) => { shine = -.2 + k * 1.4; crown = Math.min(1, k * 1.6); }, tk, (q) => q);
+    burst(10);
+    await sleep(o.hold || 900); if (tk.cancelled) { live = false; return c.remove(); }
+    reveal(); await tween(800, (e) => { zoom = 1 + e * 4; bgA = 1 - e; c.style.opacity = 1 - e; }, tk, (q) => q * q); live = false; c.remove();
+  }
+
+  /* ---------- Popcorn-Explosion: Körner springen aus dem gestreiften POP-Becher, immer mehr, bis alles voll ist ---------- */
+  function popBucket(ctx, x, y, bw, bh, o) {
+    const t = bw * .5, b = bw * .38; ctx.save();
+    ctx.beginPath(); ctx.moveTo(x - t, y); ctx.lineTo(x + t, y); ctx.lineTo(x + b, y + bh); ctx.lineTo(x - b, y + bh); ctx.closePath(); ctx.clip();
+    ctx.fillStyle = "#fbf6ea"; ctx.fillRect(x - t, y, bw, bh); ctx.fillStyle = POP_GOLD_L; for (let i = -6; i < 6; i += 2) { ctx.beginPath(); const x0 = x + i * t / 6, x1 = x + (i + 1) * t / 6; ctx.moveTo(x0, y); ctx.lineTo(x1, y); ctx.lineTo(x + (i + 1) * b / 6, y + bh); ctx.lineTo(x + i * b / 6, y + bh); ctx.fill(); }
+    ctx.fillStyle = "#fbf6ea"; ctx.beginPath(); ctx.ellipse(x, y + bh * .5, bw * .2, bh * .17, 0, 0, 7); ctx.fill(); ctx.strokeStyle = POP_GOLD; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = "#9c7a2c"; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.font = `700 ${bh * .16}px ${o.family || "\"Playfair Display\", serif"}`; ctx.fillText("POP", x, y + bh * .51);
+    ctx.restore(); ctx.fillStyle = POP_GOLD; ctx.fillRect(x - t - 3, y - 4, bw + 6, 8);
+  }
+  async function popburst(scr, tk, o = {}) {
+    const { c, ctx, w, h } = canvas(scr, "popburst", 5), BW = Math.min(w * .5, h * .26), BH = BW * 1.05, bx = w / 2, by = h * .62;
+    let rate = 0, fill = 0, word = 0, shine = -.2, bgA = 1, bucketY = h * .5, bucketA = 0, cover = 0; const ks = [], pile = [];
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h); ctx.save(); ctx.globalAlpha = bgA; ctx.fillStyle = POP_CREAM; ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = "rgba(184,150,62,.08)"; for (let x = 0; x < w; x += 36) ctx.fillRect(x, 0, 18, h);
+      for (const k of pile) popKernel(ctx, k.x, k.y, k.s, k.r, k.c);
+      ctx.save(); ctx.globalAlpha *= bucketA; ctx.translate(0, bucketY);
+      for (let i = 0; i < Math.min(26, fill); i++) { const a = i * 2.4, rr = (i % 7) / 7; popKernel(ctx, bx + Math.cos(a) * BW * .42 * rr, by - BW * .05 - Math.abs(Math.sin(a)) * BW * .2 * (1 - rr * .5), BW * .09, a, i % 3 === 0); }
+      popBucket(ctx, bx, by, BW, BH, o); ctx.restore();
+      for (const k of ks) popKernel(ctx, k.x, k.y, k.s, k.r, k.c);
+      if (cover > 0) { ctx.fillStyle = `rgba(243,238,226,${cover * .85})`; ctx.fillRect(0, 0, w, h); }
+      popWord(ctx, w, w / 2, h * .36, Math.min(w * .3, h * .17), word, shine, o, "GOURMET & TOPPED POPCORN");
+      ctx.restore();
+    };
+    let live = true, prev = performance.now(), acc = 0;
+    const spawn = (big) => { const k = { x: bx + (Math.random() - .5) * BW * .6, y: by - BW * .05, vx: (Math.random() - .5) * (big ? 22 : 8), vy: -(big ? 14 : 9) - Math.random() * (big ? 14 : 8), s: BW * (.07 + Math.random() * .05) * (big ? 1.3 : 1), r: Math.random() * 6, vr: (Math.random() - .5) * .3, c: Math.random() < .4, big }; ks.push(k); };
+    const lp = (now) => { if (!live || tk.cancelled) return; const dt = Math.min(40, now - prev) / 16.7; prev = now; acc += rate * dt; while (acc >= 1) { acc--; spawn(rate > 6); }
+      for (let i = ks.length - 1; i >= 0; i--) { const k = ks[i]; k.vy += .45 * dt; k.x += k.vx * dt; k.y += k.vy * dt; k.r += k.vr * dt;
+        if (!k.big && k.vy > 0 && k.y > by - BW * .1 && Math.abs(k.x - bx) < BW * .45) { ks.splice(i, 1); fill++; continue; }
+        if (k.y > h - k.s * .6 - (pile.length / 900) * h * .4) { if (pile.length < 900) pile.push({ x: k.x, y: k.y, s: k.s, r: k.r, c: k.c }); ks.splice(i, 1); continue; }
+        if (k.x < -40 || k.x > w + 40) ks.splice(i, 1); }
+      draw(); requestAnimationFrame(lp); }; requestAnimationFrame(lp);
+    await sleep(200);
+    await tween(500, (e) => { bucketA = e; bucketY = (1 - e) * h * .3; }, tk, (q) => 1 - Math.pow(1 - q, 3));
+    await tween(1600, (e, k) => { rate = .15 + k * k * 3; }, tk, (q) => q);
+    rate = 18; await sleep(700); rate = 0;
+    if (o.chain) { await tween(650, (e) => { cover = e / .85; }, tk); live = false; return c; }
+    await tween(600, (e) => { cover = e; word = e; }, tk);
+    await tween(800, (e, k) => { shine = -.2 + k * 1.4; }, tk, (q) => q);
+    await sleep(o.hold || 700); if (tk.cancelled) { live = false; return c.remove(); }
+    reveal(); await tween(700, (e) => { bgA = 1 - e; c.style.opacity = 1 - e; }, tk); live = false; c.remove();
+  }
+
+  /* ---------- Mix: erst Popcorn-Explosion, dann das goldene Logo auf Creme ---------- */
+  async function popmix(scr, tk, o = {}) {
+    const c1 = await popburst(scr, tk, { ...o, chain: true }); if (tk.cancelled) { c1 && c1.remove(); return; }
+    const p = popgold(scr, tk, o); requestAnimationFrame(() => requestAnimationFrame(() => c1 && c1.remove())); await p;
+  }
+  const redo = $("#redo");
+  let token = { cancelled: true };
+  async function play() {
+    token.cancelled = true; const tk = (token = { cancelled: false });
+    hero.querySelectorAll(".fxl, .stage").forEach((n) => n.remove());
+    hero.classList.remove("reveal"); hero.classList.add("pre"); redo.hidden = true;
+    const top = Math.max(0, hero.getBoundingClientRect().top), vis = Math.max(320, Math.min(hero.clientHeight, innerHeight - top));
+    const stage = document.createElement("div"); stage.className = "stage"; stage.style.cssText = `position:absolute;left:0;right:0;top:0;height:${hero.clientHeight}px;z-index:5;pointer-events:none;overflow:hidden`; hero.append(stage);
+    const inner = document.createElement("div"); inner.style.cssText = `position:absolute;left:0;right:0;top:0;height:${vis}px`; stage.append(inner);
+    if (vis < hero.clientHeight) { const cv = document.createElement("div"); cv.className = "cover"; cv.style.cssText = `position:absolute;left:0;right:0;top:${vis}px;bottom:0;background:#f3eee2;transition:opacity .6s`; stage.append(cv); }
+    await popmix(inner, tk, { family: "\"Playfair Display\", serif", ufamily: "Montserrat, sans-serif" });
+    stage.remove();
+    if (!tk.cancelled) redo.hidden = false;
+  }
+  redo.addEventListener("click", play);
+  if (reduce) hero.classList.remove("pre"); else document.fonts.ready.then(play);
+})();
+</script>
+</body>
+</html>
