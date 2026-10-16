@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>HUG Café · Design proposal</title>
+<meta name="description" content="A website proposal for HUG Café, 17 Skirving Street, Shawlands, Glasgow, by Jota Labs. Not the official website.">
+<meta property="og:title" content="HUG Café · Design proposal">
+<meta property="og:description" content="Food that feels like a warm hug, in Shawlands. A proposal by Jota Labs.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%236e8064'/%3E%3Ccircle cx='32' cy='32' r='26' fill='none' stroke='%23c62b3b' stroke-width='3'/%3E%3Ctext x='32' y='40' text-anchor='middle' font-family='Arial' font-weight='700' font-size='20' fill='%23fff'%3EHUG%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&family=Nunito+Sans:wght@400;600;700;800&display=swap">
+<style>
+/* Layout: Logo-Intro (rote und weiße Ringe, HUG doppelt in Weiß/Rot, Ringe drücken zu wie eine Umarmung), ganze Seite in Logo-Salbeigrün.
+   Hintergrund: schwebende Marshmallows (Canvas, fixed). Food, Coffee/Café bar, Exhibitions, Visit mit Live-Status.
+   Salbeigrün, Rot, Weiß, Creme; Quicksand + Nunito Sans. */
+:root {
+  --bg: #6e8064; --bg-2: #63745a; --bg-3: #f6f1e7; --ink: #fffaf2; --line: rgba(255,255,255,.22); --soft: rgba(255,250,242,.9); --muted: rgba(255,250,242,.78);
+  --green: #c62b3b; --leaf: #f6e3c6; --brass: #c62b3b; --pink: #f6c6d2; --fuji: #c62b3b; --red: #c62b3b;
+  --f-display: "Quicksand", system-ui, sans-serif; --f-body: "Nunito Sans", system-ui, -apple-system, "Segoe UI", sans-serif; --f-mono: "Nunito Sans", system-ui, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-family: var(--f-display); font-weight: 400; text-wrap: balance; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 800 13px/1.2 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--leaf); }
+:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+.proposal { background: #000; color: #e9ebee; font: 13px/1.4 var(--f-body); padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; }
+.proposal b { color: #ffd166; } .proposal a { color: #fff; font-weight: 800; }
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 22px/1 var(--f-display); letter-spacing: .06em; }
+.logo svg { width: 38px; height: 38px; }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 15px; font-weight: 700; color: var(--muted); }
+nav.links a:hover { color: var(--ink); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 800 15px/1 var(--f-body); padding: 15px 22px; border-radius: 6px; background: var(--green); color: #f6f0e2; border: 2px solid var(--green); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,.25); }
+.btn.ghost { background: transparent; color: var(--ink); border-color: rgba(26,23,20,.35); }
+.btn.ghost:hover { border-color: var(--ink); }
+nav.links a.btn { color: #f6f0e2; padding: 10px 16px; font-size: 14px; }
+.menu-btn { display: none; background: transparent; color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 8px 14px; font: 800 12px var(--f-body); letter-spacing: .08em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bg-3); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line); background: radial-gradient(60% 70% at 85% 30%, rgba(201,160,122,.35), transparent 70%), var(--bg); }
+@media (max-width: 860px) { .hero .seal { opacity: .07 !important; right: -30% !important; } }
+.hero .seal { position: absolute; right: -6%; top: 50%; width: min(52vw, 560px); transform: translateY(-50%); opacity: .14; z-index: 0; }
+.hero .wrap { position: relative; z-index: 1; padding-block: clamp(84px, 12vw, 140px) clamp(64px, 9vw, 110px); display: flex; flex-direction: column; gap: 16px; }
+.hero h1 { font-weight: 400; color: var(--green); text-shadow: 3px 3px 0 #fff; font-size: clamp(72px, 13vw, 168px); line-height: .9; letter-spacing: .04em; }
+.hero h1 small { color: var(--leaf); text-shadow: none; display: block; font: 700 clamp(14px, 2vw, 20px)/1 var(--f-mono); letter-spacing: .5em; color: var(--muted); margin-top: 14px; }
+.hero .lead { margin: 4px 0 0; font-size: clamp(18px, 2.2vw, 22px); color: var(--soft); max-width: 36ch; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.facts span { font: 700 14px var(--f-body); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; background: rgba(246,240,226,.85); }
+.facts span b { color: var(--ink); }
+.status::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); margin-right: 8px; vertical-align: 1px; }
+.status.open::before { background: #3aa35a; box-shadow: 0 0 10px #3aa35a; }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 7; font: 700 13px var(--f-body); color: var(--muted); background: rgba(246,240,226,.9); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.redo:hover { color: var(--ink); }
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero.reveal .wrap > :nth-child(2) { animation-delay: .06s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .12s }
+.hero.reveal .wrap > :nth-child(4) { animation-delay: .18s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .24s }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+section.block { padding-block: clamp(64px, 10vw, 104px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 40px; margin-bottom: 30px; }
+.head h2 { font-size: clamp(36px, 5.6vw, 64px); line-height: 1; margin-top: 10px; }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+.note { margin-top: 20px; font-size: 14px; color: var(--muted); padding: 10px 14px; border-left: 3px solid var(--green); background: var(--bg-2); border-radius: 0 10px 10px 0; }
+.sig { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 860px) { .sig { grid-template-columns: minmax(0,1fr); } }
+.sc { background: var(--bg-3); border: 1px solid var(--line); border-radius: 14px; padding: 24px; display: grid; gap: 8px; align-content: start; }
+.sc svg { width: 70px; height: 70px; }
+.sc h3 { font-size: 28px; } .sc .pr { font: 700 15px var(--f-mono); color: var(--green); } .sc p { margin: 0; color: var(--soft); font-size: 15px; }
+.menu { background: var(--bg-3); border: 1px solid var(--line); border-radius: 14px; padding: clamp(18px, 3vw, 32px); }
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.tabs button { font: 700 14px var(--f-mono); letter-spacing: .06em; text-transform: uppercase; padding: 10px 14px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; }
+.tabs button[aria-selected="true"] { background: var(--green); border-color: var(--green); color: #f6f0e2; }
+.pl { list-style: none; margin: 0; padding: 0; columns: 2; column-gap: 40px; }
+@media (max-width: 760px) { .pl { columns: 1; } }
+.pl li { break-inside: avoid; display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: baseline; padding: 10px 0; border-top: 1px dashed var(--line); font-family: var(--f-mono); }
+.pl li::after { content: ""; grid-column: 2; grid-row: 1; border-bottom: 1px dotted rgba(26,23,20,.25); transform: translateY(-4px); }
+.pl b { font-weight: 700; text-transform: uppercase; font-size: 15px; letter-spacing: .03em; } .pl em { font-style: normal; font-weight: 700; color: var(--green); grid-column: 3; }
+.pl i { font-style: normal; font-size: 11px; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 1px 5px; margin-left: 6px; vertical-align: 2px; }
+.pl small { grid-column: 1 / -1; grid-row: 2; color: var(--muted); font-size: 13px; margin-top: -4px; }
+.mnote { margin: 18px 0 0; font: 13px/1.5 var(--f-mono); color: var(--muted); text-align: center; }
+.story { background: var(--leaf) !important; color: #fffdf7 !important; } .story-x { background: var(--ink); color: #efe6d2; }
+.story .wrap { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: clamp(28px, 6vw, 80px); align-items: center; }
+@media (max-width: 860px) { .story .wrap { grid-template-columns: minmax(0,1fr); } }
+.story svg { width: min(100%, 380px); justify-self: center; }
+.story .kicker { color: #d9b37a; } .story h2 { font-size: clamp(36px, 5.6vw, 64px); line-height: 1; margin: 10px 0 18px; }
+.story p { margin: 0 0 14px; color: #d9cfbb; }
+.rev { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: 16px; }
+@media (max-width: 860px) { .rev { grid-template-columns: minmax(0,1fr); } }
+.score { background: var(--green); color: #f6f0e2; border-radius: 14px; padding: 28px; display: grid; gap: 6px; align-content: center; }
+.score .kicker { color: #cfe6d6; } .score b { font: clamp(48px, 7vw, 72px)/1 var(--f-display); } .score p { margin: 0; color: #cfe6d6; }
+.quote { background: var(--bg-3); border: 1px solid var(--line); border-radius: 14px; padding: 28px; display: grid; gap: 14px; align-content: center; }
+.quote p { margin: 0; font: clamp(20px, 2.6vw, 28px)/1.35 var(--f-display); } .quote small { color: var(--muted); }
+.visit { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 860px) { .visit { grid-template-columns: minmax(0,1fr); } }
+.map { border-radius: 14px; overflow: hidden; border: 1px solid var(--line); min-height: 320px; }
+.map iframe { width: 100%; height: 100%; min-height: 320px; border: 0; display: block; }
+.card { border: 1px solid var(--line); border-radius: 14px; padding: 26px; background: var(--bg-3); display: grid; gap: 10px; align-content: start; }
+.card h3 { font-size: 24px; } .card p { margin: 0; color: var(--soft); }
+.hours { display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; margin: 0; font-variant-numeric: tabular-nums; }
+.hours dt { color: var(--muted); } .hours dd { margin: 0; color: var(--soft); } .hours .today { color: var(--ink); font-weight: 800; }
+footer { padding-block: 40px 96px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 800 14px var(--f-body); padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.25); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+
+.stripes { position: absolute; left: 0; right: 0; display: grid; gap: 6px; z-index: 0; pointer-events: none; }
+.stripes i { display: block; height: 10px; } .stripes i:nth-child(1) { background: #7fbf8e; } .stripes i:nth-child(2) { background: var(--brass); } .stripes i:nth-child(3) { background: var(--pink); }
+.stripes.s1 { top: 26px; } .stripes.s2 { bottom: 26px; }
+.hero.reveal .stripes i { animation: sweep 1s cubic-bezier(.2,.7,.2,1) both; } .hero.reveal .stripes i:nth-child(2) { animation-delay: .08s; } .hero.reveal .stripes i:nth-child(3) { animation-delay: .16s; }
+@keyframes sweep { from { transform: scaleX(0); transform-origin: left; } to { transform: scaleX(1); transform-origin: left; } }
+.logo { font-family: var(--f-display); letter-spacing: 0; font-size: 26px; color: var(--green); }
+.pl b { text-transform: none; font-family: var(--f-body); font-weight: 800; letter-spacing: 0; } .pl li { font-family: var(--f-body); }
+.story { color: #fffdf7; } .story p { color: #eaf5ec; } .story .kicker { color: #fff3c4; } .story h2 { color: #fffdf7; }
+.story .btn { background: #fffdf7; color: var(--leaf); border-color: #fffdf7; }
+.sc h3, .head h2, .card h3 { font-weight: 400; } .sc .pr { color: var(--green); }
+.score { background: var(--green); }
+.tabs button { font-family: var(--f-body); font-weight: 800; }
+
+#mallows { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.proposal, header.nav { position: relative; z-index: 30; } header.nav { position: sticky; }
+section, footer { position: relative; z-index: 1; }
+.hero { background: radial-gradient(60% 70% at 80% 45%, rgba(255,255,255,.1), transparent 70%) !important; }
+.hero h1 { font-family: var(--f-display) !important; font-weight: 700 !important; color: #fff !important; text-shadow: -6px 4px 0 var(--red) !important; letter-spacing: .06em; font-size: clamp(96px, 17vw, 200px) !important; }
+.front { position: absolute; right: 5%; top: 50%; transform: translateY(-50%); width: min(38vw, 440px); z-index: 0; pointer-events: none; }
+.front svg { width: 100%; height: auto; display: block; }
+@media (max-width: 860px) { .front { opacity: .18; width: 90vw; right: -28%; } }
+.logo { font: 700 26px var(--f-display) !important; color: #fff !important; text-shadow: -2px 1px 0 var(--red); letter-spacing: .08em; }
+.head h2, .story h2, .join h3, .card h3, .dish h3 { font-family: var(--f-display) !important; font-weight: 700 !important; font-style: normal !important; }
+.btn.ghost { color: #fffaf2; border-color: rgba(255,255,255,.55); } .btn.ghost:hover { border-color: #fff; }
+.facts span { background: rgba(0,0,0,.14); color: #fffaf2; } .facts span b { color: #fff; }
+.redo { background: rgba(0,0,0,.2); color: #fffaf2; }
+@media (max-width: 860px) { nav.links { background: #63745a; } }
+.note { background: rgba(0,0,0,.14); border-left-color: var(--red); }
+.card, .dish, .join { background: rgba(40,52,36,.35); border: 1px solid rgba(255,255,255,.18); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.dishes { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 960px) { .dishes { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 520px) { .dishes { grid-template-columns: minmax(0,1fr); } }
+.dish { border-radius: 18px; overflow: hidden; display: grid; align-content: start; }
+.dish .ph { aspect-ratio: 4/3; display: grid; place-items: center; font-size: 56px; }
+.dish .p1 { background: linear-gradient(140deg,#f7e7c4,#e9b949); } .dish .p2 { background: linear-gradient(140deg,#e7c79c,#a8692e); } .dish .p3 { background: linear-gradient(140deg,#fff3ea,#f6c6d2); } .dish .p4 { background: linear-gradient(140deg,#f5b6a0,#c62b3b); }
+.dish h3 { font-size: 20px; margin: 16px 18px 4px; } .dish p { margin: 0 18px 18px; color: var(--soft); font-size: 15px; }
+.duo { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; } @media (max-width: 760px) { .duo { grid-template-columns: minmax(0,1fr); } }
+.join { border-radius: 18px; padding: 26px; border-top: 4px solid var(--red); }
+.join h3 { font-size: clamp(22px, 2.6vw, 28px); margin: 6px 0; } .join p { margin: 0; color: var(--soft); }
+.story { background: rgba(40,52,36,.4) !important; border-block: 1px solid rgba(255,255,255,.14); }
+.story .wrap { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.3fr); gap: 40px; align-items: center; }
+@media (max-width: 860px) { .story .wrap { grid-template-columns: minmax(0,1fr); } }
+.story h2 { font-size: clamp(38px, 6vw, 68px); margin: 8px 0 14px; } .story p { color: var(--soft); max-width: 52ch; }
+.frames { position: relative; aspect-ratio: 1; max-width: 380px; width: 100%; margin-inline: auto; }
+.frames span { position: absolute; border: 8px solid #1f1f1f; background: #fbf8f2; box-shadow: 0 10px 24px rgba(0,0,0,.25); }
+.frames span::after { content: ""; position: absolute; inset: 14%; }
+.frames span:nth-child(1) { left: 4%; top: 6%; width: 44%; height: 52%; } .frames span:nth-child(1)::after { background: linear-gradient(140deg,#e9c46a,#e76f51); }
+.frames span:nth-child(2) { right: 4%; top: 0; width: 40%; height: 40%; } .frames span:nth-child(2)::after { background: linear-gradient(140deg,#a8dadc,#457b9d); }
+.frames span:nth-child(3) { right: 8%; bottom: 6%; width: 44%; height: 46%; } .frames span:nth-child(3)::after { background: linear-gradient(140deg,#f4a261,#264653); }
+.frames span:nth-child(4) { left: 10%; bottom: 0; width: 34%; height: 32%; } .frames span:nth-child(4)::after { background: linear-gradient(140deg,#d62828,#fcbf49); }
+.card { color: var(--ink); }
+.story .btn.ghost { background: transparent !important; color: #fffaf2 !important; border-color: rgba(255,255,255,.55) !important; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></symbol>
+</svg>
+
+
+<canvas id="mallows" aria-hidden="true"></canvas>
+<div class="proposal"><span><b>Design proposal</b> for HUG Café · not the official website</span><span>Made by <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">Jota Labs</a></span></div>
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top">HUG</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENU</button>
+    <nav class="links" id="links">
+      <a href="#food">Food</a>
+      <a href="#bakes">Bakes &amp; coffee</a>
+      <a href="#art">Exhibitions</a>
+      <a href="#visit">Visit</a>
+      <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=HUG%20Cafe%2017%20Skirving%20Street%20Glasgow%20G41%203AB" target="_blank" rel="noopener">Directions</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero pre" id="top">
+  <div class="front" aria-hidden="true"><svg viewBox="0 0 220 220"><circle cx="110" cy="110" r="100" fill="none" stroke="#c62b3b" stroke-width="4.5"/><circle cx="110" cy="110" r="88.0" fill="none" stroke="#fff" stroke-width="4.5"/><g fill="none" stroke-width="5" stroke-linejoin="round"><path stroke="#c62b3b" d="M52.4 92.0V132.0M77.2 92.0V132.0M52.4 112.0H77.2M86.8 92.0V118.8A13.2 13.2 0 0 0 113.2 118.8V92.0M154.6 97.2A19.2 19.2 0 1 0 161.6 111.9L161.6 112.0H144.3"/><path stroke="#fff" d="M55.2 90.0V130.0M80.0 90.0V130.0M55.2 110.0H80.0M89.6 90.0V116.8A13.2 13.2 0 0 0 116.0 116.8V90.0M157.4 95.2A19.2 19.2 0 1 0 164.4 109.9L164.4 110.0H147.1"/></g></svg></div>
+  <div class="wrap">
+    <div class="kicker">Café · 17 Skirving Street, Shawlands</div>
+    <h1>HUG</h1>
+    <p class="lead">Food that feels like a warm hug. Breakfast, lunch, in-house bakes and good coffee, with art on the walls.</p>
+    <div class="ctas"><a class="btn" href="#food">See the food</a><a class="btn ghost" href="#visit">Find us</a></div>
+    <div class="facts"><span class="status" id="statusChip">Mon–Sat 9–5 · Sun 10–5</span><span><b>Fully licenced</b> café bar</span></div>
+  </div>
+  <button class="redo" type="button" id="redo" hidden>↻ Hug again</button>
+</section>
+
+<section class="block" id="food">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">From the kitchen</div><h2>Food that feels like a warm hug</h2></div><p>A few favourites from our Instagram. On the final site the full menu lives here, and you can update it yourself.</p></div>
+    <div class="dishes">
+      <article class="dish"><div class="ph p1" aria-hidden="true">🍳</div><h3>Daily breakfast</h3><p>Poached eggs and more, every morning.</p></article>
+      <article class="dish"><div class="ph p2" aria-hidden="true">🥖</div><h3>Roast chicken sandwich</h3><p>With roast potatoes and gravy.</p></article>
+      <article class="dish"><div class="ph p3" aria-hidden="true">☕</div><h3>Hot chocolate</h3><p>Topped with marshmallows.</p></article>
+      <article class="dish"><div class="ph p4" aria-hidden="true">🍰</div><h3>In-house bakes</h3><p>Like our Sangria cake.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="bakes" style="padding-top:0">
+  <div class="wrap">
+    <div class="duo">
+      <div class="join"><div><div class="kicker">Coffee</div><h3>Carraro 1927 Crema Espresso</h3><p>Our coffee comes from Carraro, roasting in Italy since 1927.</p></div></div>
+      <div class="join"><div><div class="kicker">Café bar</div><h3>Fully licenced</h3><p>Cocktails, live music and events. On the final site, the next events show up here.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="block story" id="art">
+  <div class="wrap">
+    <div class="frames" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+    <div>
+      <div class="kicker">Exhibitions</div>
+      <h2>Art on the walls</h2>
+      <p>Local artists show their work at HUG, like “Southside Scenes” by Frank Boyle. On the final site, each exhibition gets its own page with photos and the opening night.</p>
+      <div class="ctas"><a class="btn ghost" href="https://www.instagram.com/hugshawlands/" target="_blank" rel="noopener">See past exhibitions</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="visit">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Visit us</div><h2>17 Skirving Street</h2></div><p>Shawlands, Glasgow G41 3AB. Outdoor seating out front.</p></div>
+    <div class="visit">
+      <div class="map"><iframe title="Map: HUG Café, 17 Skirving Street" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-4.2874%2C55.8270%2C-4.2744%2C55.8328&amp;layer=mapnik&amp;marker=55.829889%2C-4.280882"></iframe></div>
+      <div class="card">
+        <h3>Opening hours</h3>
+        <dl class="hours" id="hours"></dl>
+        <h3 style="margin-top:6px">Address</h3>
+        <p>HUG Café<br>17 Skirving Street, Shawlands<br>Glasgow G41 3AB</p>
+        <div class="ctas"><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=HUG%20Cafe%2017%20Skirving%20Street%20Glasgow%20G41%203AB" target="_blank" rel="noopener">Directions ↗</a><a class="btn ghost" href="https://www.instagram.com/hugshawlands/" target="_blank" rel="noopener">Instagram</a></div>
+      </div>
+    </div>
+    <p class="note">Hours from your Instagram bio. Holiday hours would show here and at the top automatically.</p>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>HUG Café · 17 Skirving Street, Shawlands, Glasgow G41 3AB</span><span>Design proposal by Jota Labs · <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">more work</a></span></div></footer>
+
+<a class="like" href="https://wa.me/5491130331893?text=Hi%20Jan%2C%20I%20saw%20the%20website%20proposal%20for%20HUG%20Cafe%20and%20I%27d%20like%20to%20know%20more." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Like it? Let's talk</a>
+
+<script>
+(() => {
+  const c = document.getElementById("mallows"), x = c.getContext("2d"), still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let W, H, ms = [];
+  const size = () => { const d = Math.min(2, devicePixelRatio || 1); W = innerWidth; H = innerHeight; c.width = W * d; c.height = H * d; x.setTransform(d, 0, 0, d, 0, 0);
+    const n = Math.round(Math.min(26, W * H / 36000)); ms = Array.from({ length: n }, () => ({ x: Math.random() * W, y: Math.random() * H, s: 13 + Math.random() * 14, r: Math.random() * 6, vr: (Math.random() - .5) * .006, vy: .15 + Math.random() * .35, sw: Math.random() * 6, pink: Math.random() < .4, a: .62 + Math.random() * .2 })); };
+  const one = (m) => { x.save(); x.translate(m.x + Math.sin(m.sw) * 10, m.y); x.rotate(m.r); x.globalAlpha = m.a; const s = m.s, hw = s * .8, hh = s * .7;
+    x.shadowColor = "rgba(30,40,25,.22)"; x.shadowBlur = 10; x.shadowOffsetY = 4;
+    const g = x.createLinearGradient(-hw, 0, hw, 0); g.addColorStop(0, m.pink ? "#f3b5c4" : "#ece4d6"); g.addColorStop(.45, m.pink ? "#ffe3ea" : "#ffffff"); g.addColorStop(1, m.pink ? "#eaa2b4" : "#e4dccc"); x.fillStyle = g;
+    x.beginPath(); x.roundRect(-hw, -hh, hw * 2, hh * 2, s * .32); x.fill(); x.shadowColor = "transparent";
+    x.fillStyle = m.pink ? "#ffeef2" : "#fffdf8"; x.beginPath(); x.ellipse(0, -hh + s * .16, hw * .92, s * .2, 0, 0, 7); x.fill(); x.restore(); };
+  const frame = () => { x.clearRect(0, 0, W, H); for (const m of ms) { if (!still) { m.y -= m.vy; m.r += m.vr; m.sw += .01; if (m.y < -50) { m.y = H + 50; m.x = Math.random() * W; } } one(m); } if (!still) requestAnimationFrame(frame); };
+  size(); addEventListener("resize", size); frame(); if (still) addEventListener("resize", frame);
+})();
+</script>
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+  const hero = $("#top");
+
+  /* ---------- Hours + open now (Glasgow) ---------- */
+  const H = { Mon: [540, 1020], Tue: [540, 1020], Wed: [540, 1020], Thu: [540, 1020], Fri: [540, 1020], Sat: [540, 1020], Sun: [600, 1020] };
+  const names = { Mon: "Monday", Tue: "Tuesday", Wed: "Wednesday", Thu: "Thursday", Fri: "Friday", Sat: "Saturday", Sun: "Sunday" };
+  const order = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  const fmt = (m) => { const h = Math.floor(m / 60), mm = m % 60; return (h > 12 ? h - 12 : h) + (mm ? ":" + String(mm).padStart(2, "0") : "") + (h >= 12 ? "pm" : "am"); };
+  function status() {
+    const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/London", weekday: "short", hour: "numeric", minute: "numeric", hour12: false }).formatToParts(new Date());
+    const get = (t) => parts.find((x) => x.type === t).value, wd = get("weekday"), m = (+get("hour") % 24) * 60 + +get("minute"), t = H[wd];
+    $("#hours").innerHTML = order.map((d) => `<dt class="${d === wd ? "today" : ""}">${names[d]}</dt><dd class="${d === wd ? "today" : ""}">${H[d] ? fmt(H[d][0]) + " – " + fmt(H[d][1]) : "Closed"}</dd>`).join("");
+    const chip = $("#statusChip"), open = !!t && m >= t[0] && m < t[1];
+    chip.classList.toggle("open", open);
+    if (open) chip.innerHTML = `<b>Open now</b> · until ${fmt(t[1])}`;
+    else if (t && m < t[0]) chip.innerHTML = `Opens today at <b>${fmt(t[0])}</b>`;
+    else { const i = order.indexOf(wd); for (let n = 1; n <= 7; n++) { const d = order[(i + n) % 7]; if (H[d]) { chip.innerHTML = `Closed now · opens <b>${names[d]} ${fmt(H[d][0])}</b>`; break; } } }
+  }
+  status(); setInterval(status, 60000);
+
+  /* ---------- Intro: Logo-Umarmung ---------- */
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const tween = (ms, fn, tk, ez = (t) => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2)) => new Promise((res) => { const t0 = performance.now(); const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(ez(k), k); k < 1 ? requestAnimationFrame(step) : res(); }; requestAnimationFrame(step); });
+  const canvas = (parent, cls, z) => { const w = parent.clientWidth, h = parent.clientHeight, dpr = Math.min(2, devicePixelRatio || 1); const c = document.createElement("canvas"); c.className = "fxl " + cls; c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); c.style.cssText = `position:absolute;left:0;top:0;width:${w}px;height:${h}px;z-index:${z};pointer-events:none`; c.setAttribute("aria-hidden", "true"); parent.append(c); const ctx = c.getContext("2d"); ctx.scale(dpr, dpr); return { c, ctx, w, h }; };
+  const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); hero.querySelectorAll(".cover").forEach((n) => (n.style.opacity = "0")); };
+  const HUG_SAGE = "#6e8064", HUG_RED = "#c62b3b", HUG_CREAM = "#f4efe6";
+  function hugStroke(ctx, p, L, path) { if (p <= 0) return; ctx.save(); ctx.setLineDash([L * Math.min(1, p), L * 2]); ctx.beginPath(); path(); ctx.stroke(); ctx.restore(); }
+  /* Buchstaben H U G als Linien wie im Logo, Einheit u = Buchstabenhöhe */
+  function hugLetters(ctx, x, y, u, p, col) {
+    ctx.strokeStyle = col; ctx.lineCap = "butt"; ctx.lineJoin = "round";
+    const H = (a) => hugStroke(ctx, a, u * 3, () => { ctx.moveTo(x, y - u / 2); ctx.lineTo(x, y + u / 2); ctx.moveTo(x + u * .62, y - u / 2); ctx.lineTo(x + u * .62, y + u / 2); ctx.moveTo(x, y); ctx.lineTo(x + u * .62, y); });
+    const U = (a) => { const ux = x + u * .86, w = u * .66; hugStroke(ctx, a, u * 2.8, () => { ctx.moveTo(ux, y - u / 2); ctx.lineTo(ux, y + u / 2 - w / 2); ctx.arc(ux + w / 2, y + u / 2 - w / 2, w / 2, Math.PI, 0, true); ctx.lineTo(ux + w, y - u / 2); }); };
+    const G = (a) => { const gx = x + u * 2.25, r = u * .48; hugStroke(ctx, a, u * 3.8, () => { ctx.arc(gx, y, r, -Math.PI * .28, Math.PI * 1.98, true); ctx.lineTo(gx + r, y); ctx.lineTo(gx + r * .1, y); }); };
+    H(p * 3); U(p * 3 - 1); G(p * 3 - 2);
+  }
+  function hugLogo(ctx, cx, cy, R, ring, letters, bg) {
+    if (bg) { ctx.fillStyle = HUG_SAGE; ctx.beginPath(); ctx.arc(cx, cy, R * 1.04, 0, 7); ctx.fill(); }
+    ctx.lineWidth = R * .045; ctx.strokeStyle = HUG_RED; hugStroke(ctx, ring, 2 * Math.PI * R, () => ctx.arc(cx, cy, R, -Math.PI / 2, Math.PI * 1.5));
+    ctx.strokeStyle = "#fff"; hugStroke(ctx, ring * 1.15 - .15, 2 * Math.PI * R * .88, () => ctx.arc(cx, cy, R * .88, Math.PI / 2, Math.PI * 2.5));
+    const u = R * .4, lx = cx - u * 1.37; ctx.lineWidth = R * .05;
+    hugLetters(ctx, lx - u * .07, cy + u * .05, u, letters, HUG_RED); hugLetters(ctx, lx, cy, u, letters, "#fff");
+  }
+  function hugSub(ctx, w, cx, y, a, o, l1, l2, col1, col2) { if (a <= 0) return; ctx.save(); ctx.globalAlpha *= a; ctx.textAlign = "center"; ctx.textBaseline = "middle"; const f = Math.min(w * .045, 22);
+    ctx.font = `600 ${f}px ${o.ufamily || "system-ui"}`; ctx.fillStyle = col1 || "#fff"; ctx.fillText(l1, cx, y, w * .9);
+    if (l2) { ctx.font = `700 ${f * .62}px ${o.ufamily || "system-ui"}`; ctx.letterSpacing = `${f * .2}px`; ctx.fillStyle = col2 || "rgba(255,255,255,.8)"; ctx.fillText(l2, cx, y + f * 1.5, w * .9); } ctx.restore(); }
+
+  /* ---------- Logo-Umarmung: die zwei Ringe zeichnen sich, HUG schreibt sich doppelt, dann drücken die Ringe einmal zu wie eine Umarmung ---------- */
+  async function hugring(scr, tk, o = {}) {
+    const { c, ctx, w, h } = canvas(scr, "hugring", 5), cx = w / 2, cy = h * .42, R0 = Math.min(w * .36, h * .21);
+    let ring = 0, let_ = 0, sq = 0, sub = 0, bgA = 1, zoom = 1;
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h); ctx.save(); ctx.globalAlpha = bgA; ctx.fillStyle = HUG_SAGE; ctx.fillRect(0, 0, w, h);
+      ctx.translate(cx, cy); ctx.scale(zoom, zoom); ctx.translate(-cx, -cy);
+      const R = R0 * (1 - Math.sin(sq * Math.PI) * .1), wob = Math.sin(sq * Math.PI * 3) * (1 - sq) * .03;
+      ctx.save(); ctx.translate(cx, cy); ctx.scale(1 + wob, 1 - wob); ctx.translate(-cx, -cy); hugLogo(ctx, cx, cy, R, ring, let_, false); ctx.restore();
+      if (sq > 0 && sq < 1) { ctx.save(); ctx.globalAlpha *= Math.sin(sq * Math.PI) * .5; ctx.strokeStyle = "#fff"; ctx.lineWidth = 2; for (const k of [1.18, 1.3]) { ctx.beginPath(); ctx.arc(cx, cy, R0 * k * (1 + sq * .1), 0, 7); ctx.stroke(); } ctx.restore(); }
+      ctx.restore();
+      hugSub(ctx, w, cx, cy + R0 * 1.45, sub * bgA, o, "Food that feels like a warm hug", "CAFÉ · SHAWLANDS");
+    };
+    let live = true; const lp = () => { if (!live || tk.cancelled) return; draw(); requestAnimationFrame(lp); }; requestAnimationFrame(lp);
+    await sleep(250);
+    await tween(1100, (e, k) => { ring = k * 1.15; }, tk, (q) => 1 - Math.pow(1 - q, 2));
+    await tween(1200, (e, k) => { let_ = k; }, tk, (q) => q);
+    await tween(700, (e, k) => { sq = k; }, tk, (q) => q);
+    await tween(500, (e) => { sub = e; }, tk);
+    await sleep(o.hold || 900); if (tk.cancelled) { live = false; return c.remove(); }
+    reveal(); await tween(800, (e) => { zoom = 1 + e * 4; bgA = 1 - e; c.style.opacity = 1 - e; }, tk, (q) => q * q); live = false; c.remove();
+  }
+
+  const redo = $("#redo");
+  let token = { cancelled: true };
+  async function play() {
+    token.cancelled = true; const tk = (token = { cancelled: false });
+    hero.querySelectorAll(".fxl, .stage").forEach((n) => n.remove());
+    hero.classList.remove("reveal"); hero.classList.add("pre"); redo.hidden = true;
+    const top = Math.max(0, hero.getBoundingClientRect().top), vis = Math.max(320, Math.min(hero.clientHeight, innerHeight - top));
+    const stage = document.createElement("div"); stage.className = "stage"; stage.style.cssText = `position:absolute;left:0;right:0;top:0;height:${hero.clientHeight}px;z-index:5;pointer-events:none;overflow:hidden`; hero.append(stage);
+    const inner = document.createElement("div"); inner.style.cssText = `position:absolute;left:0;right:0;top:0;height:${vis}px`; stage.append(inner);
+    if (vis < hero.clientHeight) { const cv = document.createElement("div"); cv.className = "cover"; cv.style.cssText = `position:absolute;left:0;right:0;top:${vis}px;bottom:0;background:#6e8064;transition:opacity .6s`; stage.append(cv); }
+    await hugring(inner, tk, { family: "Quicksand, sans-serif", ufamily: "\"Nunito Sans\", sans-serif" });
+    stage.remove();
+    if (!tk.cancelled) redo.hidden = false;
+  }
+  redo.addEventListener("click", play);
+  if (reduce) hero.classList.remove("pre"); else document.fonts.ready.then(play);
+})();
+</script>
+</body>
+</html>
