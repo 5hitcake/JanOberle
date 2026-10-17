@@ -51,7 +51,6 @@ nav.links a.btn { color: var(--acc-fg); padding: 9px 16px; font-size: 14px; }
 }
 
 .hero { position: relative; overflow: hidden; isolation: isolate; background: var(--surface); border-bottom: 1px solid var(--line); }
-.hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; }
 .hero .wrap { padding-block: 86px 92px; display: grid; grid-template-columns: minmax(0,1.25fr) minmax(0,.75fr); gap: 40px; align-items: center; }
 .hero h1 { font-size: clamp(44px, 7.4vw, 96px); margin-top: 14px; }
 .hero h1 em { font-style: normal; color: var(--acc); }
@@ -135,110 +134,130 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 footer a { color: var(--dark-fg); }
 .like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 600 14px var(--f-body); padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.3); display: inline-flex; gap: 8px; align-items: center; }
 .like svg { width: 18px; height: 18px; }
+
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; } .hero.reveal .wrap > :nth-child(2) { animation-delay: .1s; }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 7; font: 600 13px var(--f-body); color: var(--muted); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.glance { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 10px 16px; margin: 0; font-size: 15px; }
+.glance dt { font: 600 11px var(--f-mono); color: var(--muted); text-transform: uppercase; letter-spacing: .08em; padding-top: 3px; } .glance dd { margin: 0; font-weight: 600; }
+.status::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #9aa0aa; margin-right: 8px; vertical-align: 1px; }
+.status.open::before { background: #2fa35a; box-shadow: 0 0 8px #2fa35a; }
+.compare img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.compare { aspect-ratio: 4/3; max-width: 860px; }
+.gtitle { font-size: 24px; margin: 44px 0 16px; }
+.gallery { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; }
+@media (max-width: 860px) { .gallery { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+.gallery figure { margin: 0; border-radius: 10px; overflow: hidden; background: var(--surface); border: 1px solid var(--line); }
+.gallery img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+.gallery figcaption { font: 600 12px var(--f-mono); color: var(--muted); padding: 8px 10px; letter-spacing: .04em; }
+.preview { margin: 0; font-size: 15px; line-height: 1.55; background: var(--bg); border-radius: 8px; padding: 14px; border: 1px dashed var(--line); }
+.btn.wa { background: #25d366; border-color: #25d366; color: #fff; }
+.map { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); min-height: 340px; } .map iframe { width: 100%; height: 100%; min-height: 340px; border: 0; display: block; }
 </style>
 </head>
 <body>
-<div class="proposal"><span><b>Website-Entwurf</b> für Galban Pintura GmbH · nicht die offizielle Website</span><span>Erstellt von <a href="https://5hitcake.github.io/JanOberle/#de" target="_blank" rel="noopener">Jota Labs</a></span></div>
 
+<div class="proposal"><span><b>Website-Entwurf</b> für Galban Pintura GmbH · nicht die offizielle Website</span><span>Erstellt von <a href="https://5hitcake.github.io/JanOberle/#de" target="_blank" rel="noopener">Jota Labs</a></span></div>
 <header class="nav">
   <div class="wrap">
-    <a class="logo" href="#start"><i>GP</i><span>Galban Pintura<small>Maler & Gipser · Zürich</small></span></a>
+    <a class="logo" href="#start"><i>GP</i><span>Galban Pintura<small>Maler &amp; Gipser · Zürich</small></span></a>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">Menü</button>
     <nav class="links" id="links">
       <a href="#leistungen">Leistungen</a>
-      <a href="#farben">Farben</a>
-      <a href="#offerte">Offertrechner</a>
+      <a href="#projekte">Projekte</a>
+      <a href="#anfrage">Anfrage</a>
       <a href="#kontakt">Kontakt</a>
-      <a class="btn" href="#kontakt">Offerte anfragen</a>
+      <a class="btn" href="tel:+41768370444">076 837 04 44</a>
     </nav>
   </div>
 </header>
 
-<section class="hero" id="start">
-  <canvas id="paint" aria-hidden="true"></canvas>
+<section class="hero pre" id="start">
   <div class="wrap">
     <div>
-      <span class="eyebrow">Maler & Gipser · Zürich-Wollishofen</span>
+      <span class="eyebrow">Maler &amp; Gipser · Zürich-Wollishofen</span>
       <h1>Malen und Gipsen <em>aus einer Hand.</em></h1>
-      <p>Galban Pintura in Wollishofen: Malerarbeiten und Gipserarbeiten für Wohnungen und Häuser in Zürich. Ein Team, ein Termin, eine Offerte.</p>
-      <div class="ctas"><a class="btn" href="tel:+41768370444">Jetzt anrufen</a><a class="btn line" href="#offerte">Preis berechnen</a></div>
+      <p>Galban Pintura GmbH: Malerarbeiten, Gipserarbeiten und Renovationen für Wohnungen und Häuser in Zürich.</p>
+      <div class="ctas"><a class="btn" href="tel:+41768370444">Jetzt anrufen</a><a class="btn line" href="#anfrage">Anfrage per WhatsApp</a></div>
     </div>
     <div class="card">
-      <h3>Darauf können Sie zählen</h3>
-      <ul class="checks"><li>Maler- und Gipserarbeiten kombiniert</li><li>Kostenlose Besichtigung</li><li>Klare, schriftliche Offerte</li><li>Sauber und termingerecht</li></ul>
-      <p class="note" style="margin:12px 0 0">Beispieltexte für diesen Entwurf, werden mit Ihren Angaben ersetzt.</p>
+      <h3>Auf einen Blick</h3>
+      <dl class="glance">
+        <dt>Arbeiten</dt><dd>Maler · Gipser · Renovation</dd>
+        <dt>Zeiten</dt><dd><span class="status" id="status">Mo–Fr 8–17 Uhr</span></dd>
+        <dt>Adresse</dt><dd>Balberstrasse 47, 8038 Zürich</dd>
+        <dt>Telefon</dt><dd><a href="tel:+41768370444">076 837 04 44</a></dd>
+      </dl>
     </div>
   </div>
+  <button class="redo" type="button" id="redo" hidden>↻ Nochmal streichen</button>
 </section>
 
 <section class="block" id="leistungen">
   <div class="wrap">
-    <div class="head"><div><span class="eyebrow">Leistungen</span><h2>Maler- und Gipserarbeiten</h2></div><p>Alles für schöne Wände: vom Verputz bis zum letzten Anstrich.</p></div>
-    <div class="services"><div class="service"><b>01</b><h3>Innenmalerei</h3><p>Wände, Decken, Treppenhäuser. Weiss oder im Wunschton, sauber abgedeckt.</p></div><div class="service"><b>02</b><h3>Gipserarbeiten</h3><p>Abrieb, Weissputz, Trennwände und Reparaturen.</p></div><div class="service"><b>03</b><h3>Fassaden</h3><p>Reinigen, ausbessern, neu streichen. Mit Farbberatung.</p></div><div class="service"><b>04</b><h3>Tapezieren</h3><p>Vlies, Raufaser, Mustertapete. Alte Tapeten entfernen wir vorher.</p></div><div class="service"><b>05</b><h3>Renovation</h3><p>Risse, Feuchtschäden und Abnutzung fachgerecht beheben.</p></div><div class="service"><b>06</b><h3>Umzugsreinigung & Übergabe</h3><p>Malerarbeiten vor der Wohnungsabgabe, termingerecht.</p></div></div>
-    <p class="note">Leistungen gemäss Branchenverzeichnis, Texte als Beispiel. Fotos Ihrer Arbeiten ergänzen wir.</p>
-  </div>
-</section>
-
-<section class="block" id="farben" style="padding-top:0">
-  <div class="wrap">
-    <div class="head"><div><span class="eyebrow">Vorher / Nachher</span><h2>Ziehen Sie den Regler.</h2></div><p>Wählen Sie rechts einen Farbton und sehen Sie, wie der Raum wirkt. Hier kommen später Fotos Ihrer eigenen Arbeiten hin.</p></div>
-    <div class="ba">
-      <div class="compare" id="compare">
-        <svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" aria-label="Raum vorher">
-          <rect width="800" height="500" fill="#b8b2a4"/><rect y="400" width="800" height="100" fill="#7b6a58"/>
-          <g stroke="#9c9586" stroke-width="2" fill="none"><path d="M120 60 l20 40 l-10 30 l25 50"/><path d="M620 90 l-15 35 l20 25"/></g>
-          <ellipse cx="690" cy="70" rx="70" ry="35" fill="#8e8675" opacity=".45"/>
-          <rect x="300" y="110" width="200" height="140" fill="#cdc6b3" stroke="#89816e" stroke-width="6"/>
-          <rect x="250" y="320" width="300" height="90" rx="10" fill="#5a5048"/><rect x="230" y="300" width="60" height="110" rx="10" fill="#5a5048"/><rect x="510" y="300" width="60" height="110" rx="10" fill="#5a5048"/>
-        </svg>
-        <svg class="after" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" aria-label="Raum nachher">
-          <rect id="wall" width="800" height="500" fill="#8fa3ad"/><rect y="400" width="800" height="100" fill="#a8835a"/>
-          <rect x="300" y="110" width="200" height="140" fill="#f4f2ec" stroke="#ffffff" stroke-width="10"/>
-          <circle cx="400" cy="180" r="38" fill="#e9a23b" opacity=".85"/>
-          <rect x="250" y="320" width="300" height="90" rx="10" fill="#ece7dd"/><rect x="230" y="300" width="60" height="110" rx="10" fill="#ece7dd"/><rect x="510" y="300" width="60" height="110" rx="10" fill="#ece7dd"/>
-          <rect y="392" width="800" height="12" fill="#ffffff"/>
-          <rect x="640" y="230" width="14" height="170" fill="#3d454a"/><ellipse cx="647" cy="225" rx="40" ry="20" fill="#3d454a"/>
-        </svg>
-        <span class="lbl l">VORHER</span><span class="lbl r">NACHHER</span>
-        <div class="handle"></div>
-        <input type="range" id="baRange" min="0" max="100" value="50" aria-label="Vorher-Nachher-Regler">
-      </div>
-      <div>
-        <h3 style="font-size:22px">Farbton ausprobieren</h3>
-        <p style="margin:6px 0 0;color:var(--muted);font-size:15px">Nach NCS und RAL, auf Wunsch mischen wir jeden Ton nach.</p>
-        <div class="swatches" id="swatches"></div>
-      </div>
+    <div class="head"><div><span class="eyebrow">Leistungen</span><h2>Was wir machen</h2></div><p>Auf der fertigen Website beschreiben Sie hier Ihre Arbeiten in Ihren eigenen Worten.</p></div>
+    <div class="services">
+      <div class="service"><b>01</b><h3>Malerarbeiten</h3><p>Wände, Decken, Türen und Treppenhäuser, innen und aussen.</p></div>
+      <div class="service"><b>02</b><h3>Gipserarbeiten</h3><p>Verputz und Reparaturen am Untergrund, damit die Farbe hält.</p></div>
+      <div class="service"><b>03</b><h3>Renovation</h3><p>Ganze Räume und Wohnungen wieder frisch machen.</p></div>
     </div>
   </div>
 </section>
 
-<section class="block" id="offerte" style="padding-top:0">
+<section class="block" id="projekte" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><span class="eyebrow">Vorher / Nachher</span><h2>Ziehen Sie den Regler.</h2></div><p>Ein Wohnzimmer aus Ihren Projektfotos: die orange Wand vor dem Streichen und danach.</p></div>
+    <div class="compare" id="compare">
+      <img src="img/p3.webp" alt="Wohnzimmer vorher: orange Wand, Boden abgedeckt" loading="lazy">
+      <img class="after" src="img/p2.webp" alt="Wohnzimmer nachher: weisse Wände" loading="lazy">
+      <span class="lbl l">VORHER</span><span class="lbl r">NACHHER</span>
+      <div class="handle"></div>
+      <input type="range" id="baRange" min="0" max="100" value="50" aria-label="Vorher-Nachher-Regler">
+    </div>
+    <h3 class="gtitle">Aus unseren Projekten</h3>
+    <div class="gallery" id="gallery">
+      <figure><img src="img/p8.webp" alt="Grüne Altbau-Haustür mit Ziergitter" loading="lazy"><figcaption>Haustür</figcaption></figure>
+      <figure><img src="img/p12.webp" alt="Bad mit Wanne und Fliesen" loading="lazy"><figcaption>Bad</figcaption></figure>
+      <figure><img src="img/p1.webp" alt="Heller Gang mit Parkett" loading="lazy"><figcaption>Gang</figcaption></figure>
+      <figure><img src="img/p6.webp" alt="Wohnküche mit grossen Fenstern" loading="lazy"><figcaption>Wohnküche</figcaption></figure>
+      <figure><img src="img/p7.webp" alt="Grau gestrichener Boden und Wand" loading="lazy"><figcaption>Boden</figcaption></figure>
+      <figure><img src="img/p5.webp" alt="Helles Bad mit Fenster" loading="lazy"><figcaption>Bad</figcaption></figure>
+      <figure><img src="img/p9.webp" alt="Haustür während der Arbeit, Boden abgeklebt" loading="lazy"><figcaption>Haustür, in Arbeit</figcaption></figure>
+      <figure><img src="img/p10.webp" alt="Gang während der Renovation" loading="lazy"><figcaption>Gang, in Arbeit</figcaption></figure>
+    </div>
+    <p class="note">Fotos aus Ihrem Eintrag auf search.ch. Auf der fertigen Website laden Sie neue Projekte selbst hoch.</p>
+  </div>
+</section>
+
+<section class="block" id="anfrage" style="padding-top:0">
   <div class="wrap">
     <div class="calc">
       <div>
-        <span class="eyebrow">Offertrechner</span>
-        <h2>Was kostet mein Zimmer?</h2>
-        <label>Bodenfläche <output id="oArea">20 m²</output><input type="range" id="area" min="6" max="150" value="20"></label>
-        <label>Arbeit
+        <span class="eyebrow">Anfrage</span>
+        <h2>Was dürfen wir für Sie machen?</h2>
+        <label>Art der Arbeit
           <select id="work">
-            <option value="19">Wände streichen, weiss (2 Anstriche)</option>
-            <option value="23">Wände streichen, Farbton</option>
-            <option value="34">Tapete / Vlies + Anstrich</option>
-            <option value="44">Abrieb oder Weissputz + Anstrich</option>
+            <option>Wände und Decken streichen</option>
+            <option>Gipserarbeiten / Verputz</option>
+            <option>Renovation ganze Wohnung</option>
+            <option>Türen, Fenster, Lackierarbeiten</option>
+            <option>Anderes</option>
           </select>
         </label>
+        <label>Grösse <output id="oRooms">3 Zimmer</output><input type="range" id="rooms" min="1" max="8" value="3"></label>
         <div class="toggles">
-          <label><input type="checkbox" id="ceiling" checked> Decke</label>
-          <label><input type="checkbox" id="repair"> Risse ausbessern</label>
-          <label><input type="checkbox" id="move"> Möbel verschieben</label>
+          <label><input type="checkbox" id="ceiling" checked> inkl. Decken</label>
+          <label><input type="checkbox" id="empty"> Wohnung ist leer</label>
+          <label><input type="checkbox" id="soon"> möglichst bald</label>
         </div>
       </div>
       <div class="result" aria-live="polite">
-        <span class="eyebrow">Richtpreis inkl. MWST</span>
-        <div class="big" id="price">–</div>
-        <div class="rows" id="rows"></div>
-        <a class="btn dark" href="#kontakt" id="calcCta">Verbindliche Offerte anfragen</a>
-        <small>Beispielwerte für diesen Entwurf. Im fertigen Rechner stehen Ihre eigenen Ansätze.</small>
+        <span class="eyebrow">Ihre Nachricht</span>
+        <p id="preview" class="preview"></p>
+        <a class="btn wa" id="waBtn" href="#" target="_blank" rel="noopener">Per WhatsApp senden</a>
+        <small>Die Nachricht geht direkt an Galban Pintura. Gern Fotos vom Raum mitschicken.</small>
       </div>
     </div>
   </div>
@@ -246,12 +265,12 @@ footer a { color: var(--dark-fg); }
 
 <section class="block" style="padding-top:0">
   <div class="wrap">
-    <div class="head"><div><span class="eyebrow">Ablauf</span><h2>So einfach geht's.</h2></div></div>
+    <div class="head"><div><span class="eyebrow">Ablauf</span><h2>So geht's.</h2></div></div>
     <div class="steps">
-      <div><h3>Anfrage</h3><p>Anruf, WhatsApp oder Formular, gern mit Fotos.</p></div>
-      <div><h3>Besichtigung</h3><p>Wir schauen uns den Raum an und beraten zu Farbe und Untergrund.</p></div>
-      <div><h3>Offerte</h3><p>Schriftlich und transparent, ohne versteckte Posten.</p></div>
-      <div><h3>Ausführung</h3><p>Abdecken, malen, aufräumen. Übergabe gemeinsam mit Ihnen.</p></div>
+      <div><h3>Anfrage</h3><p>Anruf, WhatsApp oder E-Mail, gern mit Fotos.</p></div>
+      <div><h3>Besichtigung</h3><p>Wir schauen uns den Raum vor Ort an.</p></div>
+      <div><h3>Offerte</h3><p>Sie erhalten eine schriftliche Offerte.</p></div>
+      <div><h3>Ausführung</h3><p>Abdecken, gipsen, malen, übergeben.</p></div>
     </div>
   </div>
 </section>
@@ -260,22 +279,17 @@ footer a { color: var(--dark-fg); }
   <div class="wrap contact">
     <div>
       <span class="eyebrow">Kontakt</span>
-      <h2 style="font-size:clamp(32px,4.6vw,54px);margin-top:10px">Offerte anfragen</h2>
+      <h2 style="font-size:clamp(32px,4.6vw,54px);margin-top:10px">Galban Pintura GmbH</h2>
       <dl>
-        <dt>Adresse</dt><dd>Balberstrasse 47, 8038 Zürich</dd>
+        <dt>Adresse</dt><dd>Balberstrasse 47, 8038 Zürich-Wollishofen</dd>
         <dt>Telefon</dt><dd><a href="tel:+41768370444">076 837 04 44</a></dd>
-        
-        <dt>Gebiet</dt><dd>Stadt Zürich und Umgebung</dd>
+        <dt>E-Mail</dt><dd><a href="mailto:chris@g-pintura.ch">chris@g-pintura.ch</a></dd>
+        <dt>Zeiten</dt><dd>Montag bis Freitag, 8–17 Uhr</dd>
       </dl>
-      <div class="ctas"><a class="btn" href="tel:+41768370444">Jetzt anrufen</a><a class="btn line" href="https://www.google.com/maps/search/?api=1&query=Galban%20Pintura%20GmbH%20Balberstrasse%2047%2C%208038%20Z%C3%BCrich" target="_blank" rel="noopener">Karte ↗</a></div>
+      <div class="ctas"><a class="btn" href="tel:+41768370444">Jetzt anrufen</a><a class="btn line" href="https://wa.me/41768370444" target="_blank" rel="noopener">WhatsApp</a></div>
+      <p class="note">Ihre Domain g-pintura.ch ist schon registriert. Diese Website kann direkt dort laufen.</p>
     </div>
-    <form class="cb" id="cbForm" novalidate>
-      <label>Name<input id="fName" autocomplete="name"></label>
-      <label>Telefon<input id="fPhone" type="tel" autocomplete="tel"></label>
-      <label class="full">Ihr Vorhaben<textarea id="fMsg" rows="3" placeholder="z. B. 3½-Zimmer-Wohnung, Wände weiss, Decken neu"></textarea></label>
-      <button class="btn dark full" type="submit">Rückruf anfordern</button>
-      <div class="ok" id="fOk" hidden></div>
-    </form>
+    <div class="map"><iframe title="Karte: Balberstrasse 47, Zürich" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=8.5211%2C47.3359%2C8.5341%2C47.3417&amp;layer=mapnik&amp;marker=47.3387987%2C8.5276053"></iframe></div>
   </div>
 </section>
 
@@ -289,61 +303,82 @@ footer a { color: var(--dark-fg); }
   const mb = $("#menuBtn"), links = $("#links");
   mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
   links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+  const cmp = $("#compare"), rng = $("#baRange"); const setPos = () => cmp.style.setProperty("--pos", rng.value + "%"); rng.addEventListener("input", setPos); setPos();
 
-  const cmp = $("#compare"), rng = $("#baRange");
-  const setPos = () => cmp.style.setProperty("--pos", rng.value + "%");
-  rng.addEventListener("input", setPos); setPos();
-  const SW = [["NCS S 3010-B10G", "Taubenblau", "#8fa3ad"], ["NCS S 0502-Y", "Weiss, warm", "#f1eee4"], ["NCS S 1005-G50Y", "Salbei hell", "#d9d9c3"], ["NCS S 2010-Y30R", "Sandstein", "#d6bf9f"], ["NCS S 4020-G10Y", "Moosgrün", "#7f9474"], ["NCS S 6005-R80B", "Anthrazit", "#4a4f57"]];
-  let cur = 0;
-  function renderSw() {
-    $("#swatches").innerHTML = SW.map(([c, n, hex], i) => `<button type="button" data-i="${i}" aria-pressed="${i === cur}"><i style="background:${hex}"></i>${c}<span>${n}</span></button>`).join("");
-    $("#swatches").querySelectorAll("button").forEach((b) => b.addEventListener("click", () => { cur = +b.dataset.i; $("#wall").setAttribute("fill", SW[cur][2]); if (+rng.value > 60) { rng.value = 30; setPos(); } renderSw(); }));
-  }
-  renderSw();
+  /* Live-Status Mo–Fr 8–17 (Zürich-Zeit) */
+  const now = new Date(new Date().toLocaleString("en-US", { timeZone: "Europe/Zurich" })), d = now.getDay(), m = now.getHours() * 60 + now.getMinutes(), st = $("#status");
+  const open = d >= 1 && d <= 5 && m >= 480 && m < 1020; st.classList.toggle("open", open);
+  st.innerHTML = open ? "<b>Jetzt erreichbar</b> · bis 17 Uhr" : "Mo–Fr 8–17 Uhr" + (d >= 1 && d <= 5 && m < 480 ? " · ab 8 Uhr" : "");
 
-  const chf = (n) => "CHF " + Math.round(n).toLocaleString("de-CH").replace(/[’,]/g, "'");
-  function calc() {
-    const a = +$("#area").value; $("#oArea").textContent = a + " m²";
-    const rate = +$("#work").value, wall = Math.round(Math.sqrt(a) * 4 * 2.5 * 0.85);
-    const rows = [["Wandfläche ca. " + wall + " m²", wall * rate]];
-    if ($("#ceiling").checked) rows.push(["Decke " + a + " m²", a * 16]);
-    if ($("#repair").checked) rows.push(["Risse ausbessern", 80 + a * 4]);
-    if ($("#move").checked) rows.push(["Möbel verschieben", 120]);
-    rows.push(["Abdecken und Reinigung", 90 + a * 2.5]);
-    const sum = rows.reduce((s, r) => s + r[1], 0);
-    $("#price").textContent = chf(Math.round(sum * 0.92 / 10) * 10) + " – " + chf(Math.round(sum * 1.1 / 10) * 10);
-    $("#rows").innerHTML = rows.map(([l, v]) => `<div><span>${l}</span><span>${chf(v)}</span></div>`).join("");
-  }
-  ["#area", "#work", "#ceiling", "#repair", "#move"].forEach((s) => $(s).addEventListener("input", calc));
-  calc();
-  $("#calcCta").addEventListener("click", () => { $("#fMsg").value = `Ca. ${$("#area").value} m², ${$("#work").selectedOptions[0].text}${$("#ceiling").checked ? ", inkl. Decke" : ""}. Richtpreis laut Rechner: ${$("#price").textContent}`; });
-  $("#cbForm").addEventListener("submit", (e) => { e.preventDefault(); const ok = $("#fOk"); ok.hidden = false; ok.textContent = "Danke! In diesem Entwurf wird nichts versendet. Auf der fertigen Website geht Ihre Anfrage direkt an Galban Pintura."; });
+  /* Anfrage per WhatsApp */
+  function msg() { const r = +$("#rooms").value; $("#oRooms").textContent = r + (r === 1 ? " Zimmer" : r === 8 ? "+ Zimmer" : " Zimmer");
+    const t = `Grüezi Galban Pintura, ich interessiere mich für: ${$("#work").value}, ca. ${$("#oRooms").textContent}${$("#ceiling").checked ? ", inkl. Decken" : ""}${$("#empty").checked ? ", Wohnung ist leer" : ""}${$("#soon").checked ? ", möglichst bald" : ""}. Können Sie mir eine Offerte machen?`;
+    $("#preview").textContent = t; $("#waBtn").href = "https://wa.me/41768370444?text=" + encodeURIComponent(t); }
+  ["#work", "#rooms", "#ceiling", "#empty", "#soon"].forEach((s) => $(s).addEventListener("input", msg)); msg();
 
-  const cv = $("#paint"), ctx = cv.getContext("2d");
-  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const COLS = ["#e9a23b","#8fa3ad","#14213d","#d6bf9f","#7f9474"];
-  let W = 0, H = 0, strokes = [], n = 0;
-  function size() { const dpr = Math.min(devicePixelRatio || 1, 2); W = cv.clientWidth; H = cv.clientHeight; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
-  function stroke(t, i) { const nar = W < 860; return { c: COLS[i % COLS.length], y: H * (0.12 + Math.random() * 0.8), w: (nar ? 26 : 46) + Math.random() * 30, start: t, dur: 2600 + Math.random() * 1600, x0: nar ? W * 0.1 : W * 0.52, amp: 10 + Math.random() * 18, life: 9000 + Math.random() * 4000 }; }
-  function frame(t) {
-    ctx.clearRect(0, 0, W, H);
-    if (strokes.length < 5 && (!strokes.length || t - strokes[strokes.length - 1].start > 1500)) strokes.push(stroke(t, n++));
-    strokes = strokes.filter((s) => t - s.start < s.life);
-    for (const s of strokes) {
-      const k = Math.min(1, (t - s.start) / s.dur), e = 1 - Math.pow(1 - k, 3), age = (t - s.start) / s.life;
-      const alpha = (age > .8 ? (1 - age) / .2 : 1) * (W < 860 ? .14 : .22), xEnd = s.x0 + (W * 1.05 - s.x0) * e;
-      ctx.globalAlpha = alpha; ctx.fillStyle = s.c; ctx.beginPath();
-      for (let x = s.x0; x <= xEnd; x += 8) { const y = s.y + Math.sin(x / 140 + s.amp) * s.amp; x === s.x0 ? ctx.moveTo(x, y - s.w / 2) : ctx.lineTo(x, y - s.w / 2); }
-      for (let x = xEnd; x >= s.x0; x -= 8) { const y = s.y + Math.sin(x / 140 + s.amp) * s.amp + Math.sin(x / 9) * 1.5; ctx.lineTo(x, y + s.w / 2); }
-      ctx.closePath(); ctx.fill();
-      if (k < 1) { const ry = s.y + Math.sin(xEnd / 140 + s.amp) * s.amp; ctx.globalAlpha = Math.min(1, alpha * 4); ctx.fillStyle = "#2b3134"; ctx.fillRect(xEnd - 3, ry - s.w / 2 - 4, 8, s.w + 8); }
-    }
-    ctx.globalAlpha = 1;
-    if (!reduce) requestAnimationFrame(frame);
+  /* ---------- Intro: Farbroller ---------- */
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const ease = (t) => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+  const tween = (ms, fn, tk, ez = ease) => new Promise((res) => {
+    const t0 = performance.now();
+    const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(ez(k), k); k < 1 ? requestAnimationFrame(step) : res(); };
+    requestAnimationFrame(step);
+  });
+  const loop = (fn, tk) => { let prev = performance.now(); const step = (now) => { if (tk.cancelled) return; const dt = Math.min(50, now - prev) / 16.7; prev = now; fn(dt, now); requestAnimationFrame(step); }; requestAnimationFrame(step); };
+  const el = (scr, tag, cls, css = "") => { const n = document.createElement(tag); n.className = "fxl " + cls; if (css) n.style.cssText = css; scr.append(n); return n; };
+  const canvas = (parent, cls, z) => {
+    const w = parent.clientWidth, h = parent.clientHeight, dpr = Math.min(2, devicePixelRatio || 1);
+    const c = document.createElement("canvas"); c.className = "fxl " + cls; c.width = Math.round(w * dpr); c.height = Math.round(h * dpr);
+    c.style.cssText = `position:absolute;inset:0;width:100%;height:100%;z-index:${z};pointer-events:none`;
+    c.setAttribute("aria-hidden", "true");
+    parent.append(c); const ctx = c.getContext("2d"); ctx.scale(dpr, dpr); return { c, ctx, w, h };
+  };
+  const GB_NAVY = "#14213d", GB_AMBER = "#e9a23b", GB_WHITE = "#f7f4ee";
+  function gbWord(ctx, w, h, y, a, o, sub, col) { if (a <= 0) return; ctx.save(); ctx.globalAlpha *= Math.min(1, a); ctx.textAlign = "center"; ctx.textBaseline = "middle"; const F = Math.min(w * .13, h * .075);
+    ctx.font = `800 ${F}px ${o.family || "system-ui"}`; ctx.fillStyle = col || GB_NAVY; ctx.fillText("Galban Pintura", w / 2, y, w * .92);
+    ctx.font = `700 ${Math.min(w * .03, h * .018)}px ${o.ufamily || "system-ui"}`; ctx.fillStyle = GB_AMBER; ctx.letterSpacing = `${Math.min(4, w * .007)}px`; ctx.fillText(sub || "MALER & GIPSER · ZÜRICH-WOLLISHOFEN", w / 2, y + F * .85, w * .92); ctx.restore(); }
+  /* gesprenkelte Wand-Textur (Abrieb) einmal vorrechnen */
+  function gbTexture(w, h, base, dots, n) { const c = document.createElement("canvas"); c.width = w; c.height = h; const x = c.getContext("2d"); x.fillStyle = base; x.fillRect(0, 0, w, h);
+    for (let i = 0; i < n; i++) { x.fillStyle = dots[i % dots.length]; x.globalAlpha = .25 + Math.random() * .35; x.beginPath(); x.arc(Math.random() * w, Math.random() * h, .6 + Math.random() * 1.6, 0, 7); x.fill(); } return c; }
+
+  /* ---------- Farbroller: orange Schwammtechnik-Wand (wie auf ihrem Vorher-Foto), der Roller streicht sie weiss, darauf der Name ---------- */
+  async function galroller(scr, tk, o = {}) {
+    const { c, ctx, w, h } = canvas(scr, "galroller", 5), lanes = 3, LW = w / lanes;
+    const old = document.createElement("canvas"); old.width = w; old.height = h; const ox = old.getContext("2d");
+    const g = ox.createLinearGradient(0, 0, w, h); g.addColorStop(0, "#d9832e"); g.addColorStop(.5, "#e9a23b"); g.addColorStop(1, "#c96f22"); ox.fillStyle = g; ox.fillRect(0, 0, w, h);
+    for (let i = 0; i < 260; i++) { ox.globalAlpha = .08 + Math.random() * .12; ox.fillStyle = Math.random() < .5 ? "#a8521a" : "#f6c46a"; ox.beginPath(); ox.ellipse(Math.random() * w, Math.random() * h, 10 + Math.random() * 40, 8 + Math.random() * 30, Math.random() * 3, 0, 7); ox.fill(); }
+    const fresh = gbTexture(w, h, GB_WHITE, ["#e6dfd2", "#ffffff"], Math.round(w * h / 90));
+    const prog = [0, 0, 0]; let word = 0, bgA = 1;
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h); ctx.save(); ctx.globalAlpha = bgA; ctx.drawImage(old, 0, 0);
+      for (let i = 0; i < lanes; i++) { const p = prog[i]; if (p <= 0) continue; const y1 = -40 + (h + 80) * p, x0 = i * LW - 6;
+        ctx.save(); ctx.beginPath(); ctx.moveTo(x0, 0); ctx.lineTo(x0 + LW + 12, 0); ctx.lineTo(x0 + LW + 12, y1); for (let k = 10; k >= 0; k--) ctx.lineTo(x0 + (LW + 12) * k / 10, y1 + Math.sin(k * 1.7 + i) * 6); ctx.closePath(); ctx.clip(); ctx.drawImage(fresh, 0, 0);
+        ctx.fillStyle = "rgba(0,0,0,.035)"; for (let x = x0; x < x0 + LW + 12; x += 9) ctx.fillRect(x, 0, 2, y1); ctx.restore();
+        if (p < 1) { const rx = x0 + LW / 2 + 6, ry = y1; ctx.save(); ctx.translate(rx, ry); ctx.fillStyle = "#dcd5c8"; ctx.beginPath(); ctx.roundRect(-LW * .46, -LW * .1, LW * .92, LW * .2, LW * .08); ctx.fill();
+          ctx.fillStyle = "rgba(0,0,0,.08)"; for (let k = -4; k <= 4; k++) ctx.fillRect(k * LW * .1, -LW * .1, 2, LW * .2);
+          ctx.strokeStyle = "#8a8f99"; ctx.lineWidth = Math.max(3, LW * .025); ctx.beginPath(); ctx.moveTo(LW * .46, 0); ctx.lineTo(LW * .54, 0); ctx.lineTo(LW * .54, LW * .32); ctx.lineTo(0, LW * .42); ctx.lineTo(0, LW * .55); ctx.stroke();
+          ctx.fillStyle = GB_NAVY; ctx.beginPath(); ctx.roundRect(-LW * .045, LW * .52, LW * .09, LW * .55, LW * .04); ctx.fill(); ctx.restore(); } }
+      gbWord(ctx, w, h, h * .46, word, o); ctx.restore();
+    };
+    let live = true; const lp = () => { if (!live || tk.cancelled) return; draw(); requestAnimationFrame(lp); }; requestAnimationFrame(lp);
+    await sleep(300);
+    for (let i = 0; i < lanes && !tk.cancelled; i++) await tween(620, (e, k) => { prog[i] = k; }, tk, (q) => 1 - Math.pow(1 - q, 1.6));
+    await tween(600, (e) => { word = e; }, tk);
+    await sleep(o.hold || 900); if (tk.cancelled) { live = false; return c.remove(); }
+    reveal(); await tween(700, (e) => { bgA = 1 - e; c.style.opacity = 1 - e; }, tk); live = false; c.remove();
   }
-  size(); addEventListener("resize", size);
-  if (reduce) for (let i = 0; i < 4; i++) { const s = stroke(-1e6, i); s.life = 1e12; strokes.push(s); }
-  requestAnimationFrame(frame);
+
+
+  const hero = $("#start"), redo = $("#redo");
+  const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); };
+  let token = { cancelled: true };
+  async function play() { token.cancelled = true; hero.querySelectorAll(".fxl").forEach((n) => n.remove()); const tk = (token = { cancelled: false });
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { reveal(); redo.hidden = false; return; }
+    hero.classList.add("pre"); hero.classList.remove("reveal"); redo.hidden = true;
+    await galroller(hero, tk, { family: "\"Bricolage Grotesque\", sans-serif", ufamily: "Figtree, sans-serif" });
+    if (!tk.cancelled) redo.hidden = false; }
+  redo.addEventListener("click", play);
+  document.fonts && document.fonts.ready ? document.fonts.ready.then(play) : play();
 })();
 </script>
 </body>
