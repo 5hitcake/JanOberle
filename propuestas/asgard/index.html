@@ -102,6 +102,8 @@ section.block { padding-block: clamp(64px, 10vw, 104px); }
 .thor { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 22px; align-items: center; border: 1px solid rgba(232,181,82,.35); border-radius: 14px; padding: 26px; background: radial-gradient(60% 120% at 0% 50%, rgba(232,181,82,.12), transparent), var(--bg-2); margin-top: 16px; }
 @media (max-width: 560px) { .thor { grid-template-columns: minmax(0,1fr); } }
 .thor svg { width: 90px; height: 90px; }
+.thor-img { width: 240px; max-width: 100%; height: auto; aspect-ratio: 3/4; object-fit: cover; border-radius: 10px; border: 1px solid rgba(232,181,82,.45); box-shadow: 0 10px 30px rgba(0,0,0,.45); display: block; }
+@media (max-width: 560px) { .thor-img { width: 100%; } }
 .thor h3 { font-size: 26px; } .thor p { margin: 6px 0 0; color: var(--soft); }
 .visit { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 16px; }
 @media (max-width: 860px) { .visit { grid-template-columns: minmax(0,1fr); } }
@@ -156,7 +158,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 <section class="block" id="experiencias">
   <div class="wrap">
     <div class="head"><div><div class="kicker">Experiencias</div><h2>El legado de Odín</h2></div><p>Un rincón del norte en el corazón de San Telmo. Entrá, probá y llevate un pedacito de Asgard.</p></div>
-    <div class="thor"><svg viewBox="0 0 100 100" aria-hidden="true"><rect x="20" y="14" width="60" height="34" rx="5" fill="#8f949a" stroke="#4a4f55" stroke-width="3"/><path d="M28 22h44M28 40h44" stroke="#5a6068" stroke-width="2"/><text x="50" y="37" text-anchor="middle" font-family="Noto Sans Runic" font-size="16" fill="#e8b552">ᚦ</text><rect x="45" y="48" width="10" height="40" rx="3" fill="#6b4a2e"/><path d="M45 58h10M45 66h10M45 74h10" stroke="#3a2a1a" stroke-width="2"/><circle cx="50" cy="92" r="4" fill="none" stroke="#e8b552" stroke-width="2"/></svg>
+    <div class="thor"><img class="thor-img" src="thor.webp" alt="Thor con su martillo y escudo en El Legado de Odín" loading="lazy" width="1000" height="1333">
       <div><div class="kicker">Los domingos</div><h3>¡El mismísimo Thor te está esperando!</h3><p>Vení a conocerlo en persona y sacate una foto con el dios del trueno.</p></div></div>
     <div class="exp" id="exp"></div>
     <p class="note">Experiencias tomadas de tu Instagram; las descripciones son ejemplos. En el sitio final podrías sumar precios y horarios de cada una.</p>
