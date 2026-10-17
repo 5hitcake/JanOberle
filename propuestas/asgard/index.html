@@ -127,6 +127,8 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 .game .keys { display: none; font: 600 14px var(--f-body); color: var(--muted); }
 .game kbd { font: 700 12px var(--f-body); border: 1px solid var(--line); border-radius: 4px; padding: 2px 7px; background: rgba(18,12,8,.7); color: var(--fg); }
 @media (pointer: fine) { .game .keys { display: block; } }
+.game-dl { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 14px; font: 600 15px var(--f-body); color: var(--muted); }
+.game-dl b { color: var(--fg); font-weight: 700; }
 .game:hover .btn { transform: translateY(-2px); }
 </style>
 </head>
@@ -165,7 +167,8 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   </div>
 </section>
 <section class="block" id="juego" style="padding-top:0">
-  <div class="wrap"><a class="game" href="juego/"><div><div class="kicker">Minijuego</div><h3>Mjölnir Lost</h3><p>Loki robó el martillo de Thor. Saltá por once mundos, juntá monedas y recuperá a Mjölnir. Se juega en el celular o en la compu.</p><span class="btn">⚡ Jugar ahora</span><span class="keys"><kbd>←</kbd> <kbd>→</kbd> para moverte · <kbd>Espacio</kbd> para saltar</span></div></a></div>
+  <div class="wrap"><a class="game" href="juego/"><div><div class="kicker">Minijuego</div><h3>Mjölnir Lost</h3><p>Loki robó el martillo de Thor. Saltá por once mundos, juntá monedas y recuperá a Mjölnir. Se juega en el celular o en la compu.</p><span class="btn">⚡ Jugar ahora</span><span class="keys"><kbd>←</kbd> <kbd>→</kbd> para moverte · <kbd>Espacio</kbd> para saltar</span></div></a>
+    <div class="game-dl"><a class="btn ghost" href="juego/mjolnir-lost.html" download="Mjolnir-Lost.html">⬇ Descargar para PC</a><span>En el celular: abrí el juego y tocá <b>Compartir → «Agregar a inicio»</b> (iPhone) o <b>«Instalar app»</b> (Android). Después funciona sin internet.</span></div></div>
 </section>
 <section class="block" id="celebraciones" style="padding-top:0">
   <div class="wrap">
