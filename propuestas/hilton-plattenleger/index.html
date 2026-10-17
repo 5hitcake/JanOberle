@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Hilton Plattenleger · Entwurf</title>
+<meta name="description" content="Website-Entwurf für Hilton Plattenleger, erstellt von Jota Labs. Nicht die offizielle Website.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+:root {
+  --bg: #f3f2ef; --surface: #ffffff; --ink: #1c1c1e; --muted: #5f5f66; --line: #e2e0dc;
+  --acc: #d0161c; --acc-fg: #ffffff; --acc-soft: #fbe0e1; --dark: #1c1c1e; --dark-fg: #f4f4f4;
+  --f-display: "Inter", Arial, sans-serif; --f-body: "Inter", Arial, sans-serif; --f-mono: "Inter", Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 800; margin: 0; line-height: 1.04; letter-spacing: -.02em; text-wrap: balance; }
+.wrap { max-width: 1160px; margin: 0 auto; padding-inline: 20px; }
+.eyebrow { font: 600 12px var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); display: inline-flex; gap: 8px; align-items: center; }
+.eyebrow::before { content: ""; width: 18px; height: 4px; background: var(--acc); }
+:focus-visible { outline: 3px solid var(--acc); outline-offset: 2px; }
+.proposal { background: #111; color: #f2f2f2; font: 13px/1.4 var(--f-body); padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; }
+.proposal b { color: #ffd166; } .proposal a { color: #fff; font-weight: 600; }
+
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding-block: 12px; }
+.logo { text-decoration: none; display: inline-flex; align-items: center; gap: 10px; font: 800 20px var(--f-display); letter-spacing: -.02em; }
+.logo i { width: 30px; height: 30px; border-radius: 6px; background: var(--acc); display: grid; place-items: center; color: var(--acc-fg); font-style: normal; font: 700 15px var(--f-body); }
+.logo small { display: block; font: 500 11px var(--f-mono); color: var(--muted); letter-spacing: .04em; }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 15px; color: var(--muted); font-weight: 500; }
+nav.links a:hover { color: var(--ink); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 700 15px var(--f-body); padding: 13px 22px; border-radius: 10px; background: var(--acc); color: var(--acc-fg); border: 2px solid var(--acc); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 6px 0 var(--ink); }
+.btn.dark { background: var(--dark); color: var(--dark-fg); border-color: var(--dark); }
+.btn.line { background: transparent; color: var(--ink); border-color: var(--ink); }
+nav.links a.btn { color: var(--acc-fg); padding: 9px 16px; font-size: 14px; }
+.menu-btn { display: none; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 8px 12px; font: 600 13px var(--f-body); color: var(--ink); }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--surface); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 12px 0; border-bottom: 1px solid var(--line); }
+  nav.links a.btn { margin-top: 12px; }
+  nav.links:not(.open) { display: none; }
+}
+
+.hero { position: relative; overflow: hidden; isolation: isolate; background: var(--surface); border-bottom: 1px solid var(--line); }
+.hero .wrap { padding-block: 86px 92px; display: grid; grid-template-columns: minmax(0,1.25fr) minmax(0,.75fr); gap: 40px; align-items: center; }
+.hero h1 { font-size: clamp(44px, 7.4vw, 96px); margin-top: 14px; }
+.hero h1 em { font-style: normal; color: var(--acc); }
+.hero p { font-size: 19px; color: var(--muted); max-width: 38ch; margin: 22px 0 28px; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+.card { background: color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border: 1px solid var(--line); border-radius: 10px; padding: 22px; box-shadow: 0 20px 40px -24px rgba(0,0,0,.35); }
+.card h3 { font-size: 20px; margin-bottom: 12px; }
+.checks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.checks li { display: flex; gap: 10px; font-size: 15px; }
+.checks li::before { content: "✓"; flex: 0 0 22px; height: 22px; border-radius: 50%; background: var(--acc); color: var(--acc-fg); display: grid; place-items: center; font-size: 12px; font-weight: 700; }
+@media (max-width: 860px) { .hero .wrap { grid-template-columns: minmax(0,1fr); padding-block: 56px 64px; } }
+
+section.block { padding-block: 88px; }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px 40px; margin-bottom: 36px; }
+.head h2 { font-size: clamp(34px, 5vw, 58px); margin-top: 10px; }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+.services { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 900px) { .services { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 560px) { .services { grid-template-columns: minmax(0,1fr); } }
+.service { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 8px; transition: transform .2s, border-color .2s; }
+.service:hover { transform: translateY(-3px); border-color: var(--ink); }
+.service b { font: 600 12px var(--f-mono); color: var(--acc); letter-spacing: .08em; }
+.service h3 { font-size: 22px; }
+.service p { margin: 0; color: var(--muted); font-size: 15px; }
+
+.ba { display: grid; grid-template-columns: minmax(0,1.5fr) minmax(0,.8fr); gap: 28px; align-items: start; }
+@media (max-width: 900px) { .ba { grid-template-columns: minmax(0,1fr); } }
+.compare { position: relative; aspect-ratio: 16/10; max-width: 100%; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); user-select: none; touch-action: pan-y; }
+.compare svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.compare .after { clip-path: inset(0 0 0 var(--pos, 50%)); }
+.compare .handle { position: absolute; top: 0; bottom: 0; left: var(--pos, 50%); width: 3px; background: #fff; transform: translateX(-1.5px); pointer-events: none; }
+.compare .handle::after { content: "⟷"; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 44px; height: 44px; border-radius: 50%; background: #fff; color: #222; display: grid; place-items: center; font-size: 18px; box-shadow: 0 4px 14px rgba(0,0,0,.25); }
+.compare .lbl { position: absolute; top: 14px; font: 600 11px var(--f-mono); letter-spacing: .1em; background: rgba(0,0,0,.7); color: #fff; padding: 4px 8px; border-radius: 3px; }
+.compare .lbl.l { left: 14px; } .compare .lbl.r { right: 14px; background: var(--acc); color: var(--acc-fg); }
+.compare input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; margin: 0; }
+.swatches { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; margin-top: 14px; }
+.swatches button { border: 2px solid transparent; border-radius: 6px; background: var(--surface); padding: 6px; cursor: pointer; text-align: left; font: 500 11px var(--f-mono); color: var(--ink); display: flex; flex-direction: column; gap: 6px; }
+.swatches button i { display: block; height: 34px; border-radius: 3px; border: 1px solid rgba(0,0,0,.08); }
+.swatches button[aria-pressed="true"] { border-color: var(--ink); }
+.swatches button span { color: var(--muted); }
+
+.calc { background: var(--dark); color: var(--dark-fg); border-radius: 14px; padding: clamp(22px, 4vw, 44px); display: grid; grid-template-columns: minmax(0,1fr) minmax(0,.9fr); gap: 40px; }
+@media (max-width: 860px) { .calc { grid-template-columns: minmax(0,1fr); } }
+.calc h2 { font-size: clamp(30px, 4.2vw, 50px); margin: 10px 0 22px; }
+.calc .eyebrow { color: color-mix(in srgb, var(--dark-fg) 70%, transparent); }
+.calc label { display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 600; margin-bottom: 18px; }
+.calc output { font: 600 14px var(--f-mono); color: var(--acc); }
+.calc input[type=range] { accent-color: var(--acc); width: 100%; }
+.calc select { font: 15px var(--f-body); padding: 11px; border-radius: 6px; border: 1px solid color-mix(in srgb, var(--dark-fg) 25%, transparent); background: color-mix(in srgb, var(--dark) 85%, var(--dark-fg)); color: var(--dark-fg); }
+.toggles { display: flex; flex-wrap: wrap; gap: 8px; }
+.toggles label { flex-direction: row; align-items: center; gap: 8px; margin: 0; font-weight: 500; background: color-mix(in srgb, var(--dark) 85%, var(--dark-fg)); padding: 9px 12px; border-radius: 6px; cursor: pointer; }
+.toggles input { accent-color: var(--acc); width: 16px; height: 16px; }
+.result { background: var(--surface); color: var(--ink); border-radius: 10px; padding: 26px; display: flex; flex-direction: column; gap: 14px; align-self: start; }
+.result .big { font: 800 clamp(32px, 4.4vw, 46px)/1 var(--f-display); font-variant-numeric: tabular-nums; }
+.result .rows { display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
+.result .rows div { display: flex; justify-content: space-between; gap: 10px; border-bottom: 1px dashed var(--line); padding-bottom: 6px; }
+.result .rows span:last-child { font-family: var(--f-mono); }
+.result small { color: var(--muted); font-size: 12px; }
+
+.steps { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); counter-reset: s; border-top: 4px solid var(--ink); }
+@media (max-width: 860px) { .steps { grid-template-columns: minmax(0,1fr); } }
+.steps div { padding: 22px 22px 0 0; counter-increment: s; }
+.steps div::before { content: counter(s, decimal-leading-zero); font: 600 13px var(--f-mono); color: var(--muted); display: block; margin-bottom: 8px; }
+.steps h3 { font-size: 21px; margin-bottom: 6px; }
+.steps p { margin: 0; color: var(--muted); font-size: 15px; }
+
+.contact { display: grid; grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); gap: 40px; align-items: start; }
+@media (max-width: 860px) { .contact { grid-template-columns: minmax(0,1fr); } }
+.contact dl { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 10px 18px; margin: 24px 0; }
+.contact dt { font: 600 12px var(--f-mono); color: var(--muted); text-transform: uppercase; letter-spacing: .08em; padding-top: 3px; }
+.contact dd { margin: 0; font-weight: 500; }
+form.cb { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 28px; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
+form.cb label { display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; min-width: 0; }
+form.cb .full { grid-column: 1 / -1; }
+form.cb input, form.cb select, form.cb textarea { font: 15px var(--f-body); padding: 11px 12px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--ink); width: 100%; min-width: 0; }
+.ok { grid-column: 1 / -1; background: var(--acc-soft); border-radius: 6px; padding: 14px; font-weight: 600; }
+@media (max-width: 560px) { form.cb { grid-template-columns: minmax(0,1fr); padding: 20px; } }
+.note { font-size: 13px; color: var(--muted); margin-top: 14px; }
+footer { background: var(--dark); color: color-mix(in srgb, var(--dark-fg) 75%, transparent); padding-block: 40px 90px; font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px 30px; }
+footer a { color: var(--dark-fg); }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 600 14px var(--f-body); padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.3); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+
+h1, h2, h3 { letter-spacing: -.01em !important; }
+h1 { font-family: "Playfair Display", Georgia, serif !important; font-weight: 700 !important; }
+.btn:hover { box-shadow: 0 6px 0 #7a0c10 !important; }
+.hlogo img { display: block; height: 44px; width: auto; filter: drop-shadow(0 0 0 transparent); }
+.hlogo { background: #1c1c1e; padding: 6px 10px; border-radius: 8px; }
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; } .hero.reveal .wrap > :nth-child(2) { animation-delay: .1s; }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 7; font: 600 13px var(--f-body); color: var(--muted); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.glance { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 10px 16px; margin: 0; font-size: 15px; }
+.glance dt { font: 600 12px var(--f-mono); color: var(--muted); text-transform: uppercase; letter-spacing: .06em; padding-top: 2px; } .glance dd { margin: 0; font-weight: 500; overflow-wrap: anywhere; }
+.dm { position: relative; width: 84px; height: 84px; margin: 6px 0 22px 10px; } .dm i, .dm::before { content: ""; position: absolute; inset: 10px; transform: rotate(45deg); } .dm::before { background: #000; left: 2px; right: 18px; } .dm i { background: var(--acc); }
+.dm b { position: absolute; inset: 0; display: grid; place-items: center; color: #fff; font: 700 34px "Playfair Display", Georgia, serif; }
+.services { grid-template-columns: repeat(5, minmax(0,1fr)) !important; } @media (max-width: 960px) { .services { grid-template-columns: repeat(2, minmax(0,1fr)) !important; } } @media (max-width: 560px) { .services { grid-template-columns: minmax(0,1fr) !important; } }
+.service .sw { height: 90px; border-radius: 6px; margin-bottom: 10px; }
+.sw.t1 { background: linear-gradient(#e9e6df,#e9e6df) 0 0/50% 50% no-repeat, linear-gradient(#dcd8cf,#dcd8cf) 100% 0/50% 50% no-repeat, linear-gradient(#dcd8cf,#dcd8cf) 0 100%/50% 50% no-repeat, #e9e6df; box-shadow: inset 0 0 0 3px #fff; }
+.sw.t2 { background: radial-gradient(circle at 20% 30%, #555 2px, transparent 3px) 0 0/14px 14px, radial-gradient(circle at 70% 60%, #c9c3b8 2px, transparent 3px) 0 0/11px 11px, #8b8682; }
+.sw.t3 { background: linear-gradient(115deg, #e8dfcf, #cbbfa9 40%, #e3d8c4 60%, #b8ab95); }
+.sw.t4 { background: repeating-linear-gradient(90deg, transparent 0 9px, #fff 9px 11px), repeating-linear-gradient(0deg, transparent 0 9px, #fff 9px 11px), conic-gradient(from 45deg, #b9b0a1, #d8d0c2, #9d968b, #cfc7b8, #b9b0a1); }
+.sw.t5 { background: linear-gradient(135deg, #f4f2ee 45%, #fff 45% 55%, #f4f2ee 55%); border: 1px solid var(--line); }
+section.dark { background: var(--dark); color: var(--dark-fg); } section.dark .head p, section.dark .eyebrow { color: rgba(244,244,244,.75); }
+.ph-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; } @media (max-width: 760px) { .ph-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+.ph-grid div { aspect-ratio: 4/3; border: 2px dashed rgba(255,255,255,.25); border-radius: 10px; display: grid; place-items: center; background: repeating-linear-gradient(45deg, rgba(255,255,255,.03) 0 14px, transparent 14px 28px); }
+.ph-grid span { font: 600 13px var(--f-mono); color: rgba(255,255,255,.6); }
+.btn.wa { background: #25d366 !important; border-color: #25d366 !important; color: #fff !important; }
+.preview { margin: 0; font-size: 15px; line-height: 1.55; background: var(--bg); border-radius: 8px; padding: 14px; border: 1px dashed var(--line); }
+.map { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); min-height: 340px; } .map iframe { width: 100%; height: 100%; min-height: 340px; border: 0; display: block; }
+</style>
+</head>
+<body>
+
+<div class="proposal"><span><b>Website-Entwurf</b> für Hilton Plattenleger · nicht die offizielle Website</span><span>Erstellt von <a href="https://5hitcake.github.io/JanOberle/#de" target="_blank" rel="noopener">Jota Labs</a></span></div>
+<header class="nav">
+  <div class="wrap">
+    <a class="hlogo" href="#start" aria-label="Hilton Plattenleger"><img src="logo.png" alt="Hilton Plattenleger – Wand &amp; Bodenbeläg" width="183" height="50"></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">Menü</button>
+    <nav class="links" id="links">
+      <a href="#leistungen">Leistungen</a><a href="#projekte">Projekte</a><a href="#anfrage">Anfrage</a><a href="#kontakt">Kontakt</a>
+      <a class="btn" href="tel:+41763304324">076 330 43 24</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero pre" id="start">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Wand- &amp; Bodenbeläge · Zürich-Altstetten</span>
+      <h1>Fliesen, Stein und Mosaik, <em>sauber verlegt.</em></h1>
+      <p>Hilton Plattenleger: Fliesen, Granit, Naturstein, Mosaik und Kittfugen für Bad, Küche, Boden und Wand.</p>
+      <div class="ctas"><a class="btn" href="tel:+41763304324">Jetzt anrufen</a><a class="btn line" href="#anfrage">Anfrage per WhatsApp</a></div>
+    </div>
+    <div class="card diamond-card">
+      <div class="dm" aria-hidden="true"><i></i><b>H</b></div>
+      <dl class="glance">
+        <dt>Inhaber</dt><dd>Ibrahim</dd>
+        <dt>Telefon</dt><dd><a href="tel:+41763304324">076 330 43 24</a></dd>
+        <dt>E-Mail</dt><dd><a href="mailto:info@hilton-plattenleger.ch">info@hilton-plattenleger.ch</a></dd>
+        <dt>Adresse</dt><dd>Bernerstrasse Nord 230, 8064 Zürich</dd>
+      </dl>
+    </div>
+  </div>
+  <button class="redo" type="button" id="redo" hidden>↻ Nochmal</button>
+</section>
+
+<section class="block" id="leistungen">
+  <div class="wrap">
+    <div class="head"><div><span class="eyebrow">Leistungen</span><h2>Was wir verlegen</h2></div><p>Auf der fertigen Website beschreiben Sie hier Ihre Arbeiten in Ihren eigenen Worten.</p></div>
+    <div class="services">
+      <div class="service"><div class="sw t1" aria-hidden="true"></div><h3>Fliesen</h3><p>Keramik und Feinsteinzeug für Boden und Wand, in Bad, Küche und Wohnräumen.</p></div>
+      <div class="service"><div class="sw t2" aria-hidden="true"></div><h3>Granit</h3><p>Robuste Beläge aus Granit, innen und aussen.</p></div>
+      <div class="service"><div class="sw t3" aria-hidden="true"></div><h3>Naturstein</h3><p>Platten aus Naturstein, jede ein Unikat.</p></div>
+      <div class="service"><div class="sw t4" aria-hidden="true"></div><h3>Mosaik</h3><p>Kleinformatige Steinchen für Akzente, Duschen und Rückwände.</p></div>
+      <div class="service"><div class="sw t5" aria-hidden="true"></div><h3>Kittfugen</h3><p>Elastische Fugen an Wanne, Dusche und Übergängen, neu oder ersetzt.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block dark" id="projekte">
+  <div class="wrap">
+    <div class="head"><div><span class="eyebrow">Projekte</span><h2>Ihre Arbeiten, gross gezeigt</h2></div><p>Hier kommen Fotos Ihrer eigenen Bäder, Böden und Mosaike hin. Neue Projekte laden Sie auf der fertigen Seite selbst hoch.</p></div>
+    <div class="ph-grid" aria-hidden="true"><div><span>Bad</span></div><div><span>Boden</span></div><div><span>Küche</span></div><div><span>Mosaik</span></div><div><span>Naturstein</span></div><div><span>Vorher / Nachher</span></div></div>
+  </div>
+</section>
+
+<section class="block" id="anfrage">
+  <div class="wrap">
+    <div class="calc">
+      <div>
+        <span class="eyebrow">Anfrage</span>
+        <h2>Was dürfen wir verlegen?</h2>
+        <label>Material
+          <select id="work"><option>Fliesen / Feinsteinzeug</option><option>Granit</option><option>Naturstein</option><option>Mosaik</option><option>Kittfugen erneuern</option></select>
+        </label>
+        <label>Raum
+          <select id="room"><option>Bad / Dusche</option><option>Küche</option><option>Wohnraum</option><option>Eingang / Treppe</option><option>Balkon / Terrasse</option></select>
+        </label>
+        <label>Fläche <output id="oArea">15 m²</output><input type="range" id="area" min="1" max="120" value="15"></label>
+      </div>
+      <div class="result" aria-live="polite">
+        <span class="eyebrow">Ihre Nachricht</span>
+        <p id="preview" class="preview"></p>
+        <a class="btn wa" id="waBtn" href="#" target="_blank" rel="noopener">Per WhatsApp senden</a>
+        <small>Geht direkt an 076 330 43 24. Gern Fotos vom Raum mitschicken.</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="kontakt" style="padding-top:0">
+  <div class="wrap contact">
+    <div>
+      <span class="eyebrow">Kontakt</span>
+      <h2 style="font-size:clamp(32px,4.6vw,54px);margin-top:10px">Hilton Plattenleger</h2>
+      <dl>
+        <dt>Adresse</dt><dd>Bernerstrasse Nord 230, 8064 Zürich</dd>
+        <dt>Telefon</dt><dd><a href="tel:+41763304324">076 330 43 24</a></dd>
+        <dt>E-Mail</dt><dd><a href="mailto:info@hilton-plattenleger.ch">info@hilton-plattenleger.ch</a></dd>
+      </dl>
+      <div class="ctas"><a class="btn" href="tel:+41763304324">Anrufen</a><a class="btn line" href="https://wa.me/41763304324" target="_blank" rel="noopener">WhatsApp</a></div>
+    </div>
+    <div class="map"><iframe title="Karte: Bernerstrasse Nord 230, Zürich" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=8.4759%2C47.3937%2C8.4889%2C47.3995&amp;layer=mapnik&amp;marker=47.3966468%2C8.482376"></iframe></div>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>Hilton Plattenleger · Inhaber Ibrahim · Bernerstrasse Nord 230, 8064 Zürich</span><span>Entwurf von Jota Labs · <a href="https://5hitcake.github.io/JanOberle/#de" target="_blank" rel="noopener">weitere Arbeiten</a></span></div></footer>
+
+<a class="like" href="https://wa.me/5491130331893?text=Hallo%20Jan%2C%20ich%20habe%20den%20Website-Entwurf%20f%C3%BCr%20Hilton%20Plattenleger%20gesehen%20und%20m%C3%B6chte%20mehr%20erfahren." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></svg>Gefällt's Ihnen?</a>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+  function msg() { $("#oArea").textContent = $("#area").value + " m²";
+    const t = `Grüezi Hilton Plattenleger, ich interessiere mich für: ${$("#work").value}, ${$("#room").value}, ca. ${$("#area").value} m². Können Sie mir eine Offerte machen?`;
+    $("#preview").textContent = t; $("#waBtn").href = "https://wa.me/41763304324?text=" + encodeURIComponent(t); }
+  ["#work", "#room", "#area"].forEach((s) => $(s).addEventListener("input", msg)); msg();
+  /* ---------- Intro: Logo aus Fliesen ---------- */
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const ease = (t) => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+  const tween = (ms, fn, tk, ez = ease) => new Promise((res) => {
+    const t0 = performance.now();
+    const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(ez(k), k); k < 1 ? requestAnimationFrame(step) : res(); };
+    requestAnimationFrame(step);
+  });
+  const loop = (fn, tk) => { let prev = performance.now(); const step = (now) => { if (tk.cancelled) return; const dt = Math.min(50, now - prev) / 16.7; prev = now; fn(dt, now); requestAnimationFrame(step); }; requestAnimationFrame(step); };
+  const el = (scr, tag, cls, css = "") => { const n = document.createElement(tag); n.className = "fxl " + cls; if (css) n.style.cssText = css; scr.append(n); return n; };
+  const canvas = (parent, cls, z) => {
+    const w = document.documentElement.clientWidth, h = window.innerHeight, dpr = Math.min(2, devicePixelRatio || 1);
+    const c = document.createElement("canvas"); c.className = "fxl " + cls; c.width = Math.round(w * dpr); c.height = Math.round(h * dpr);
+    c.style.cssText = `position:fixed;left:0;top:0;width:${w}px;height:${h}px;z-index:60;pointer-events:none`;
+    c.setAttribute("aria-hidden", "true");
+    document.body.append(c); const ctx = c.getContext("2d"); ctx.scale(dpr, dpr); return { c, ctx, w, h };
+  };
+  const HP_RED = "#d0161c", HP_DARK = "#1c1c1e";
+  /* Logo wie bei Hilton: rote Raute mit schwarzer Schatten-Raute, weisses Serif-H; daneben/darunter Name */
+  function hpDiamond(ctx, cx, cy, s, k) { /* k: 0..1 Aufbau, sh: Schatten */
+    ctx.save(); ctx.translate(cx, cy); ctx.rotate(Math.PI / 4);
+    if (k.shadow > 0) { ctx.save(); ctx.globalAlpha *= k.shadow; ctx.fillStyle = "#000"; ctx.fillRect(-s / 2 - s * .14, -s / 2 + s * .14 * 0, s, s); ctx.restore(); }
+    ctx.fillStyle = HP_RED; if (k.fill >= 1) ctx.fillRect(-s / 2, -s / 2, s, s);
+    ctx.strokeStyle = "#fff"; ctx.lineWidth = s * .035; if (k.frame > 0) { ctx.save(); ctx.globalAlpha *= k.frame; ctx.strokeRect(-s * .28, -s * .28, s * .56, s * .56); ctx.restore(); }
+    ctx.restore();
+    if (k.h > 0) { ctx.save(); ctx.globalAlpha *= k.h; ctx.fillStyle = "#fff"; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.font = `700 ${s * .5}px "Playfair Display", Georgia, serif`; ctx.fillText("H", cx, cy + s * .03); ctx.restore(); }
+  }
+  function hpName(ctx, w, cx, y, a, o, dark) { if (a <= 0) return; ctx.save(); ctx.globalAlpha *= a; ctx.textAlign = "center"; ctx.textBaseline = "middle"; const F = Math.min(w * .095, 46);
+    ctx.font = `700 ${F}px "Playfair Display", Georgia, serif`; ctx.fillStyle = HP_RED; ctx.fillText("Hilton Plattenleger", cx, y, w * .92);
+    ctx.font = `500 ${F * .5}px ${o.ufamily || "system-ui"}`; ctx.fillStyle = dark ? "#fff" : HP_DARK; ctx.fillText("Wand- & Bodenbeläge · Zürich", cx, y + F * .95, w * .92); ctx.restore(); }
+
+  /* ---------- Logo: kleine Fliesen setzen sich zur roten Raute zusammen, Schatten, weisser Rahmen, H, Name ---------- */
+  async function hplogo(scr, tk, o = {}) {
+    const { c, ctx, w, h } = canvas(scr, "hplogo", 5), cx = w / 2, cy = h * .38, S = Math.min(w * .42, h * .24), n = 6, ts = S / n;
+    const tiles = []; for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) tiles.push({ i, j, d: (i + j) / (2 * n - 2) + Math.random() * .15, sx: (Math.random() - .5) * w * 1.4, sy: (Math.random() - .5) * h * 1.4, r: (Math.random() - .5) * 4 });
+    let lay = 0, k = { shadow: 0, fill: 0, frame: 0, h: 0 }, name = 0, bgA = 1, zoom = 1;
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h); ctx.save(); ctx.globalAlpha = bgA; ctx.fillStyle = "#f3f2ef"; ctx.fillRect(0, 0, w, h);
+      ctx.strokeStyle = "rgba(0,0,0,.06)"; ctx.lineWidth = 1; const g = Math.max(36, w / 10); for (let x = 0; x < w; x += g) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke(); } for (let y = 0; y < h; y += g) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke(); }
+      ctx.translate(cx, cy); ctx.scale(zoom, zoom); ctx.translate(-cx, -cy);
+      if (k.shadow > 0) hpDiamond(ctx, cx, cy, S, { shadow: k.shadow, fill: 0, frame: 0, h: 0 });
+      if (k.fill < 1) { ctx.save(); ctx.translate(cx, cy); ctx.rotate(Math.PI / 4);
+        for (const t of tiles) { const p = Math.max(0, Math.min(1, (lay - t.d * .7) / .3)); if (!p) continue; const e = 1 - Math.pow(1 - p, 3), x = -S / 2 + t.i * ts, y = -S / 2 + t.j * ts;
+          ctx.save(); ctx.translate(x + ts / 2 + t.sx * (1 - e), y + ts / 2 + t.sy * (1 - e)); ctx.rotate(t.r * (1 - e)); ctx.fillStyle = (t.i + t.j) % 2 ? HP_RED : "#c0121a"; ctx.fillRect(-ts / 2 + 1.5, -ts / 2 + 1.5, ts - 3, ts - 3); ctx.restore(); }
+        ctx.restore(); }
+      hpDiamond(ctx, cx, cy, S, k);
+      ctx.restore();
+      hpName(ctx, w, cx, cy + S * 1.05, name * bgA, o);
+    };
+    let live = true; const lp = () => { if (!live || tk.cancelled) return; draw(); requestAnimationFrame(lp); }; requestAnimationFrame(lp);
+    await sleep(250);
+    await tween(1500, (e, kk) => { lay = kk; }, tk, (q) => q);
+    k.fill = 1; await tween(350, (e) => { k.shadow = e; }, tk);
+    await tween(400, (e) => { k.frame = e; }, tk);
+    await tween(400, (e) => { k.h = e; name = e; }, tk);
+    await sleep(o.hold || 1000); if (tk.cancelled) { live = false; return c.remove(); }
+    reveal(); await tween(800, (e) => { zoom = 1 + e * 5; bgA = 1 - e; c.style.opacity = 1 - e; }, tk, (q) => q * q); live = false; c.remove();
+  }
+
+
+  const hero = $("#start"), redo = $("#redo");
+  const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); };
+  let token = { cancelled: true };
+  async function play() { token.cancelled = true; document.querySelectorAll(".fxl").forEach((n) => n.remove()); scrollTo(0, 0); document.documentElement.style.overflow = "hidden"; const tk = (token = { cancelled: false });
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { reveal(); redo.hidden = false; return; }
+    hero.classList.add("pre"); hero.classList.remove("reveal"); redo.hidden = true;
+    await hplogo(hero, tk, { family: "\"Playfair Display\", serif", ufamily: "Inter, sans-serif" });
+    document.documentElement.style.overflow = "";
+    if (!tk.cancelled) redo.hidden = false; }
+  redo.addEventListener("click", play);
+  document.fonts && document.fonts.ready ? document.fonts.ready.then(play) : play();
+})();
+</script>
+</body>
+</html>
