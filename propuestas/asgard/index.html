@@ -102,6 +102,13 @@ section.block { padding-block: clamp(64px, 10vw, 104px); }
 .thor { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 22px; align-items: center; border: 1px solid rgba(232,181,82,.35); border-radius: 14px; padding: 26px; background: radial-gradient(60% 120% at 0% 50%, rgba(232,181,82,.12), transparent), var(--bg-2); margin-top: 16px; }
 @media (max-width: 560px) { .thor { grid-template-columns: minmax(0,1fr); } }
 .thor svg { width: 90px; height: 90px; }
+.shop { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+@media (max-width: 760px) { .shop { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; } }
+.pr { margin: 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--bg-2); }
+.pr img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; }
+.pr figcaption { padding: 10px 12px 12px; display: grid; gap: 2px; } .pr b { color: var(--gold); font-size: 17px; } .pr span { color: var(--soft); font-size: 15px; }
+.buy { margin-top: 16px; border: 1px solid rgba(232,181,82,.35); border-radius: 12px; padding: 20px 22px; background: var(--bg-2); display: grid; gap: 10px; justify-items: start; }
+.buy ul { margin: 0; padding-left: 20px; color: var(--soft); display: grid; gap: 4px; }
 .thor-img { width: 240px; max-width: 100%; height: auto; aspect-ratio: 3/4; object-fit: cover; border-radius: 10px; border: 1px solid rgba(232,181,82,.45); box-shadow: 0 10px 30px rgba(0,0,0,.45); display: block; }
 @media (max-width: 560px) { .thor-img { width: 100%; } }
 .thor h3 { font-size: 26px; } .thor p { margin: 6px 0 0; color: var(--soft); }
@@ -141,7 +148,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   <div class="wrap">
     <a class="logo" href="#top"><i>ᚨ</i>ASGARD</a>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENÚ</button>
-    <nav class="links" id="links"><a href="#experiencias">Experiencias</a><a href="#juego">Juego</a><a href="#celebraciones">Celebraciones</a><a href="#eventos">Eventos</a><a href="#visita">Visitanos</a><a class="btn" href="#visita">Cómo llegar</a></nav>
+    <nav class="links" id="links"><a href="#experiencias">Experiencias</a><a href="#tienda">Tienda</a><a href="#juego">Juego</a><a href="#celebraciones">Celebraciones</a><a href="#eventos">Eventos</a><a href="#visita">Visitanos</a><a class="btn" href="#visita">Cómo llegar</a></nav>
   </div>
 </header>
 <section class="hero pre" id="top">
@@ -163,7 +170,14 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     <div class="thor"><img class="thor-img" src="thor.webp" alt="Thor con su martillo y escudo en El Legado de Odín" loading="lazy" width="1000" height="1333">
       <div><div class="kicker">Los domingos</div><h3>¡El mismísimo Thor te está esperando!</h3><p>Vení a conocerlo en persona y sacate una foto con el dios del trueno.</p></div></div>
     <div class="exp" id="exp"></div>
-    <p class="note">Experiencias tomadas de tu Instagram; las descripciones son ejemplos. En el sitio final podrías sumar precios y horarios de cada una.</p>
+    <p class="note">Precios y novedades: consultanos por <a href="https://wa.me/5491167093542?text=Hola%20Asgard!%20Quiero%20consultar%20por%20las%20experiencias." target="_blank" rel="noopener">WhatsApp</a>.</p>
+  </div>
+</section>
+<section class="block" id="tienda" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Tienda</div><h2>Tradición · Artesanía · Espiritualidad</h2></div><p>Regalá algo que tenga una historia para contar.</p></div>
+    <div class="shop"><figure class="pr"><img src="tienda/pirita.webp" alt="Pirita" loading="lazy" width="710" height="710"><figcaption><b>Pirita</b><span>Piedras y cristales</span></figcaption></figure><figure class="pr"><img src="tienda/cristales.webp" alt="Cristales de la Tierra" loading="lazy" width="710" height="710"><figcaption><b>Cristales de la Tierra</b><span>Para regalar o regalarte</span></figcaption></figure><figure class="pr"><img src="tienda/vegvisir.webp" alt="Vegvísir" loading="lazy" width="710" height="710"><figcaption><b>Vegvísir</b><span>Arte nórdico en madera y metal</span></figcaption></figure><figure class="pr"><img src="tienda/valknut.webp" alt="Valknut e Yggdrasil" loading="lazy" width="710" height="710"><figcaption><b>Valknut e Yggdrasil</b><span>Piezas con simbología nórdica</span></figcaption></figure><figure class="pr"><img src="tienda/escudo.webp" alt="Escudos vikingos" loading="lazy" width="710" height="710"><figcaption><b>Escudos vikingos</b><span>Decoración nórdica</span></figcaption></figure><figure class="pr"><img src="tienda/artesanias.webp" alt="Artesanías" loading="lazy" width="710" height="710"><figcaption><b>Artesanías</b><span>Carteras, gorros y cinturones artesanales</span></figcaption></figure></div>
+    <div class="buy"><h3>Elegí cómo comprar</h3><ul><li>Compra presencial en Asgard</li><li>Reservas y pedidos por WhatsApp</li><li>Regalos personalizados y combos especiales</li><li>Consultá por envíos a domicilio</li></ul><a class="btn" href="https://wa.me/5491167093542?text=Hola%20Asgard!%20Quiero%20consultar%20por%20un%20producto." target="_blank" rel="noopener">Consultar por WhatsApp</a></div>
   </div>
 </section>
 <section class="block" id="juego" style="padding-top:0">
@@ -173,7 +187,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 <section class="block" id="celebraciones" style="padding-top:0">
   <div class="wrap">
     <div class="feast">
-      <div><div class="kicker">Celebraciones</div><h2>Festejá como en el gran salón de Odín</h2><p>Cumpleaños, despedidas y banquetes con hidromiel, comida y ambiente vikingo. Armamos tu celebración a medida.</p><ul><li>CUMPLEAÑOS</li><li>DESPEDIDAS</li><li>BANQUETES</li></ul><div class="ctas" style="justify-content:flex-start;margin-top:20px"><a class="btn" href="https://wa.me/5491167093542?text=Hola%20Asgard!%20Quiero%20consultar%20por%20una%20celebraci%C3%B3n." target="_blank" rel="noopener">Consultar fecha</a></div></div>
+      <div><div class="kicker">Celebraciones</div><h2>Festejá como en el gran salón de Odín</h2><p>Tu celebración, una experiencia diferente: banquetes, bebidas nórdicas, música, ambientación, runas y experiencias ancestrales.</p><ul><li>CUMPLEAÑOS</li><li>DESPEDIDAS</li><li>ANIVERSARIOS</li><li>REUNIONES ESPECIALES</li></ul><div class="ctas" style="justify-content:flex-start;margin-top:20px"><a class="btn" href="https://wa.me/5491167093542?text=Hola%20Asgard!%20Quiero%20consultar%20por%20una%20celebraci%C3%B3n." target="_blank" rel="noopener">Consultar fecha</a></div></div>
       <figure class="skal"><img src="skal.webp" alt="Vikingos brindando con jarras de cerveza en el gran salón" loading="lazy" width="1200" height="896"><figcaption>¡SKÅL!</figcaption></figure>
     </div>
   </div>
@@ -182,14 +196,14 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   <div class="wrap">
     <div class="head"><div><div class="kicker">Eventos</div><h2>Bajo las auroras</h2></div><p>Encuentros, ceremonias y talleres. Seguí nuestras redes para las próximas fechas.</p></div>
     <div class="events">
-      <article class="ev"><span class="k">NOCHES DE VÖLVA</span><h3>La vidente habla</h3><p>Noches de lectura y relatos con la völva, entre velas y runas.</p></article>
-      <article class="ev"><span class="k">CEREMONIAS</span><h3>Equinoccio y solsticio</h3><p>Celebramos los ciclos del año como los antiguos pueblos del norte.</p></article>
-      <article class="ev"><span class="k">TALLERES</span><h3>Taller de runas</h3><p>Aprendé el Futhark antiguo, su significado y cómo leer las runas.</p></article>
+      <article class="ev"><span class="k">TALLER DE RUNAS · VIERNES 18:30</span><h3>El llamado de las runas</h3><p>Con la Völva Silvia (Laberinto Pagano): el Futhark antiguo, origen y significado de las runas, interpretación simbólica, armonización ancestral y tu amuleto del destino. Cupos limitados, inscripción por WhatsApp.</p></article>
+      <article class="ev"><span class="k">CEREMONIAS</span><h3>El despertar del nuevo ciclo</h3><p>Junto a la Comunidad Pagana Germano-Nórdica celebramos los ciclos del año, como el Equinoccio de Primavera.</p></article>
+      <article class="ev"><span class="k">ENCUENTROS</span><h3>Degustación de té</h3><p>Un momento para habitar el tiempo y desconectar del ruido.</p></article>
     </div>
   </div>
 </section>
 <section class="block" style="padding-top:0">
-  <div class="wrap"><div class="card" style="grid-template-columns:minmax(0,1fr) auto;align-items:center"><div><div class="kicker">Convocatoria</div><h3 style="margin-top:6px;font-size:26px">Artesanos del norte</h3><p style="margin-top:6px">¿Hacés artesanía nórdica, joyería, cuero o tallado? Sumate a la feria de Asgard.</p></div><a class="btn ghost" href="https://wa.me/5491167093542?text=Hola%20Asgard!%20Quiero%20hacer%20una%20reserva." target="_blank" rel="noopener">Escribinos</a></div></div>
+  <div class="wrap"><div class="card" style="grid-template-columns:minmax(0,1fr) auto;align-items:center"><div><div class="kicker">Convocatoria</div><h3 style="margin-top:6px;font-size:26px">¡Asgard abre su convocatoria de artesanos!</h3><p style="margin-top:6px">Si creás piezas inspiradas en la cultura germano-nórdica, esta es tu oportunidad de mostrar tu trabajo. ¡Los cupos son limitados!</p></div><a class="btn ghost" href="https://wa.me/5491167093542?text=Hola%20Leonardo!%20Quiero%20participar%20de%20la%20convocatoria%20de%20artesanos." target="_blank" rel="noopener">Escribinos</a></div></div>
 </section>
 <section class="block" id="visita" style="padding-top:0">
   <div class="wrap">
@@ -211,7 +225,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
   links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
 
-  const E = [["ᚱ", "Lectura de runas", "Consultá a las runas del Futhark antiguo y descubrí lo que tienen para decirte."], ["ᛗ", "Hidromiel", "La bebida de los dioses, servida como en los salones del norte."], ["ᛉ", "Amuletos rúnicos", "Amuletos y talismanes con runas, para protección y buena fortuna."], ["ᚹ", "Armonización rúnica", "Un ritual de equilibrio y energía guiado por las runas."], ["ᛚ", "Bebidas ancestrales y té", "Degustaciones de té y bebidas inspiradas en las tradiciones nórdicas."], ["ᛋ", "Cristales y cosmética", "Cristales de la Tierra y cosmética natural Zaid."]];
+  const E = [["ᚱ", "Lecturas de runas", "Lecturas de runas a voluntad: consultá a las runas del Futhark antiguo."], ["ᛗ", "Hidromiel de Asgard", "El clásico néctar de los dioses."], ["ᚹ", "Armonización personal", "Reconectá con tu esencia ancestral: respiración, calma y concentración, inspiradas en la sabiduría de los antiguos pueblos nórdicos. Turnos por WhatsApp."], ["ᛚ", "Bebidas legendarias", "Vino especiado nórdico, aromático, cálido y ancestral, y tragos nórdicos exclusivos de Asgard."], ["ᛉ", "Amuletos rúnicos", "Amuletos con runas y símbolos nórdicos como el Vegvísir."], ["ᛋ", "Cristales y cosmética", "Cristales de la Tierra y Zaid Cosmética, la antigua alquimia de las plantas."]];
   $("#exp").innerHTML = E.map(([r, t, d]) => `<article class="ex"><span class="r" aria-hidden="true">${r}</span><span class="r big" aria-hidden="true">${r}</span><h3>${t}</h3><p>${d}</p></article>`).join("");
 
   /* ---------- Horarios + abierto ahora (Buenos Aires) ---------- */
