@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>ander-art-project · Entwurf</title>
+<meta name="description" content="Website-Entwurf für ander-art-project, Alfred J. Blatter-Roos, erstellt von Jota Labs. Nicht die offizielle Website.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono&display=swap">
+<style>
+:root {
+  --bg: #f4f1ec; --surface: #fbfaf7; --ink: #1d1d1f; --muted: #6b6660; --line: #e2ddd5;
+  --acc: #e0782a; --acc-fg: #ffffff; --acc-soft: #fbe3d0; --dark: #1d1d1f; --dark-fg: #f4f1ec;
+  --f-display: "Space Grotesk", Arial, sans-serif; --f-body: "Space Grotesk", Arial, sans-serif; --f-mono: "Space Mono", ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 800; margin: 0; line-height: 1.04; letter-spacing: -.02em; text-wrap: balance; }
+.wrap { max-width: 1160px; margin: 0 auto; padding-inline: 20px; }
+.eyebrow { font: 600 12px var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); display: inline-flex; gap: 8px; align-items: center; }
+.eyebrow::before { content: ""; width: 18px; height: 4px; background: var(--acc); }
+:focus-visible { outline: 3px solid var(--acc); outline-offset: 2px; }
+.proposal { background: #111; color: #f2f2f2; font: 13px/1.4 var(--f-body); padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; }
+.proposal b { color: #ffd166; } .proposal a { color: #fff; font-weight: 600; }
+
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding-block: 12px; }
+.logo { text-decoration: none; display: inline-flex; align-items: center; gap: 10px; font: 800 20px var(--f-display); letter-spacing: -.02em; }
+.logo i { width: 30px; height: 30px; border-radius: 6px; background: var(--acc); display: grid; place-items: center; color: var(--acc-fg); font-style: normal; font: 700 15px var(--f-body); }
+.logo small { display: block; font: 500 11px var(--f-mono); color: var(--muted); letter-spacing: .04em; }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 15px; color: var(--muted); font-weight: 500; }
+nav.links a:hover { color: var(--ink); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 700 15px var(--f-body); padding: 13px 22px; border-radius: 10px; background: var(--acc); color: var(--acc-fg); border: 2px solid var(--acc); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 6px 0 var(--ink); }
+.btn.dark { background: var(--dark); color: var(--dark-fg); border-color: var(--dark); }
+.btn.line { background: transparent; color: var(--ink); border-color: var(--ink); }
+nav.links a.btn { color: var(--acc-fg); padding: 9px 16px; font-size: 14px; }
+.menu-btn { display: none; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 8px 12px; font: 600 13px var(--f-body); color: var(--ink); }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--surface); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 12px 0; border-bottom: 1px solid var(--line); }
+  nav.links a.btn { margin-top: 12px; }
+  nav.links:not(.open) { display: none; }
+}
+
+.hero { position: relative; overflow: hidden; isolation: isolate; background: var(--surface); border-bottom: 1px solid var(--line); }
+.hero .wrap { padding-block: 86px 92px; display: grid; grid-template-columns: minmax(0,1.25fr) minmax(0,.75fr); gap: 40px; align-items: center; }
+.hero h1 { font-size: clamp(44px, 7.4vw, 96px); margin-top: 14px; }
+.hero h1 em { font-style: normal; color: var(--acc); }
+.hero p { font-size: 19px; color: var(--muted); max-width: 38ch; margin: 22px 0 28px; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+.card { background: color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border: 1px solid var(--line); border-radius: 10px; padding: 22px; box-shadow: 0 20px 40px -24px rgba(0,0,0,.35); }
+.card h3 { font-size: 20px; margin-bottom: 12px; }
+.checks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.checks li { display: flex; gap: 10px; font-size: 15px; }
+.checks li::before { content: "✓"; flex: 0 0 22px; height: 22px; border-radius: 50%; background: var(--acc); color: var(--acc-fg); display: grid; place-items: center; font-size: 12px; font-weight: 700; }
+@media (max-width: 860px) { .hero .wrap { grid-template-columns: minmax(0,1fr); padding-block: 56px 64px; } }
+
+section.block { padding-block: 88px; }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px 40px; margin-bottom: 36px; }
+.head h2 { font-size: clamp(34px, 5vw, 58px); margin-top: 10px; }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+.services { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 900px) { .services { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 560px) { .services { grid-template-columns: minmax(0,1fr); } }
+.service { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 8px; transition: transform .2s, border-color .2s; }
+.service:hover { transform: translateY(-3px); border-color: var(--ink); }
+.service b { font: 600 12px var(--f-mono); color: var(--acc); letter-spacing: .08em; }
+.service h3 { font-size: 22px; }
+.service p { margin: 0; color: var(--muted); font-size: 15px; }
+
+.ba { display: grid; grid-template-columns: minmax(0,1.5fr) minmax(0,.8fr); gap: 28px; align-items: start; }
+@media (max-width: 900px) { .ba { grid-template-columns: minmax(0,1fr); } }
+.compare { position: relative; aspect-ratio: 16/10; max-width: 100%; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); user-select: none; touch-action: pan-y; }
+.compare svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.compare .after { clip-path: inset(0 0 0 var(--pos, 50%)); }
+.compare .handle { position: absolute; top: 0; bottom: 0; left: var(--pos, 50%); width: 3px; background: #fff; transform: translateX(-1.5px); pointer-events: none; }
+.compare .handle::after { content: "⟷"; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 44px; height: 44px; border-radius: 50%; background: #fff; color: #222; display: grid; place-items: center; font-size: 18px; box-shadow: 0 4px 14px rgba(0,0,0,.25); }
+.compare .lbl { position: absolute; top: 14px; font: 600 11px var(--f-mono); letter-spacing: .1em; background: rgba(0,0,0,.7); color: #fff; padding: 4px 8px; border-radius: 3px; }
+.compare .lbl.l { left: 14px; } .compare .lbl.r { right: 14px; background: var(--acc); color: var(--acc-fg); }
+.compare input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; margin: 0; }
+.swatches { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; margin-top: 14px; }
+.swatches button { border: 2px solid transparent; border-radius: 6px; background: var(--surface); padding: 6px; cursor: pointer; text-align: left; font: 500 11px var(--f-mono); color: var(--ink); display: flex; flex-direction: column; gap: 6px; }
+.swatches button i { display: block; height: 34px; border-radius: 3px; border: 1px solid rgba(0,0,0,.08); }
+.swatches button[aria-pressed="true"] { border-color: var(--ink); }
+.swatches button span { color: var(--muted); }
+
+.calc { background: var(--dark); color: var(--dark-fg); border-radius: 14px; padding: clamp(22px, 4vw, 44px); display: grid; grid-template-columns: minmax(0,1fr) minmax(0,.9fr); gap: 40px; }
+@media (max-width: 860px) { .calc { grid-template-columns: minmax(0,1fr); } }
+.calc h2 { font-size: clamp(30px, 4.2vw, 50px); margin: 10px 0 22px; }
+.calc .eyebrow { color: color-mix(in srgb, var(--dark-fg) 70%, transparent); }
+.calc label { display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 600; margin-bottom: 18px; }
+.calc output { font: 600 14px var(--f-mono); color: var(--acc); }
+.calc input[type=range] { accent-color: var(--acc); width: 100%; }
+.calc select { font: 15px var(--f-body); padding: 11px; border-radius: 6px; border: 1px solid color-mix(in srgb, var(--dark-fg) 25%, transparent); background: color-mix(in srgb, var(--dark) 85%, var(--dark-fg)); color: var(--dark-fg); }
+.toggles { display: flex; flex-wrap: wrap; gap: 8px; }
+.toggles label { flex-direction: row; align-items: center; gap: 8px; margin: 0; font-weight: 500; background: color-mix(in srgb, var(--dark) 85%, var(--dark-fg)); padding: 9px 12px; border-radius: 6px; cursor: pointer; }
+.toggles input { accent-color: var(--acc); width: 16px; height: 16px; }
+.result { background: var(--surface); color: var(--ink); border-radius: 10px; padding: 26px; display: flex; flex-direction: column; gap: 14px; align-self: start; }
+.result .big { font: 800 clamp(32px, 4.4vw, 46px)/1 var(--f-display); font-variant-numeric: tabular-nums; }
+.result .rows { display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
+.result .rows div { display: flex; justify-content: space-between; gap: 10px; border-bottom: 1px dashed var(--line); padding-bottom: 6px; }
+.result .rows span:last-child { font-family: var(--f-mono); }
+.result small { color: var(--muted); font-size: 12px; }
+
+.steps { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); counter-reset: s; border-top: 4px solid var(--ink); }
+@media (max-width: 860px) { .steps { grid-template-columns: minmax(0,1fr); } }
+.steps div { padding: 22px 22px 0 0; counter-increment: s; }
+.steps div::before { content: counter(s, decimal-leading-zero); font: 600 13px var(--f-mono); color: var(--muted); display: block; margin-bottom: 8px; }
+.steps h3 { font-size: 21px; margin-bottom: 6px; }
+.steps p { margin: 0; color: var(--muted); font-size: 15px; }
+
+.contact { display: grid; grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); gap: 40px; align-items: start; }
+@media (max-width: 860px) { .contact { grid-template-columns: minmax(0,1fr); } }
+.contact dl { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 10px 18px; margin: 24px 0; }
+.contact dt { font: 600 12px var(--f-mono); color: var(--muted); text-transform: uppercase; letter-spacing: .08em; padding-top: 3px; }
+.contact dd { margin: 0; font-weight: 500; }
+form.cb { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 28px; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
+form.cb label { display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; min-width: 0; }
+form.cb .full { grid-column: 1 / -1; }
+form.cb input, form.cb select, form.cb textarea { font: 15px var(--f-body); padding: 11px 12px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--ink); width: 100%; min-width: 0; }
+.ok { grid-column: 1 / -1; background: var(--acc-soft); border-radius: 6px; padding: 14px; font-weight: 600; }
+@media (max-width: 560px) { form.cb { grid-template-columns: minmax(0,1fr); padding: 20px; } }
+.note { font-size: 13px; color: var(--muted); margin-top: 14px; }
+footer { background: var(--dark); color: color-mix(in srgb, var(--dark-fg) 75%, transparent); padding-block: 40px 90px; font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px 30px; }
+footer a { color: var(--dark-fg); }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 600 14px var(--f-body); padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.3); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+
+.eyebrow { text-transform: none !important; letter-spacing: .02em !important; }
+.logo i { font: 700 12px var(--f-mono) !important; width: 34px !important; }
+.hero h1 { letter-spacing: -.03em; }
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; } .hero.reveal .wrap > :nth-child(2) { animation-delay: .1s; }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 7; font: 600 13px var(--f-body); color: var(--muted); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.glance { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 10px 16px; margin: 0; font-size: 15px; }
+.glance dt { font: 400 12px var(--f-mono); color: var(--muted); padding-top: 2px; } .glance dd { margin: 0; font-weight: 500; }
+.status::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #9aa0aa; margin-right: 8px; vertical-align: 1px; }
+.status.open::before { background: #2fa35a; box-shadow: 0 0 8px #2fa35a; }
+.sw { display: flex; margin-top: 18px; height: 14px; border-radius: 3px; overflow: hidden; } .sw i { flex: 1; }
+.service b { font-family: var(--f-mono) !important; font-weight: 400 !important; letter-spacing: 0 !important; }
+.service.core { background: var(--acc); border-color: var(--acc); color: #fff; } .service.core p, .service.core b { color: #fff !important; }
+section.dark { background: var(--dark); color: var(--dark-fg); } section.dark .head p, section.dark .eyebrow { color: rgba(244,241,236,.7); }
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.tabs button { font: 400 14px var(--f-mono); background: transparent; color: var(--dark-fg); border: 1px solid rgba(244,241,236,.3); border-radius: 999px; padding: 8px 16px; cursor: pointer; }
+.tabs button.on { background: var(--acc); border-color: var(--acc); }
+.gallery { columns: 4 220px; column-gap: 12px; }
+.gallery figure { break-inside: avoid; margin: 0 0 12px; border-radius: 8px; overflow: hidden; background: #2b2b2e; }
+.gallery img { width: 100%; height: auto; display: block; } .gallery figcaption { font: 400 12px var(--f-mono); color: rgba(244,241,236,.7); padding: 8px 10px; }
+.gallery figure.hide { display: none; }
+.about { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: 44px; align-items: center; }
+@media (max-width: 860px) { .about { grid-template-columns: minmax(0,1fr); } }
+.about h2 { font-size: clamp(32px, 4.6vw, 54px); margin: 10px 0 14px; } .about p { color: var(--muted); max-width: 56ch; }
+.me { margin: 0; border-radius: 12px; overflow: hidden; } .me img { width: 100%; display: block; }
+.cv { list-style: none; padding: 0; margin: 22px 0; border-left: 3px solid var(--acc); }
+.cv li { padding: 6px 0 6px 16px; font-size: 15px; } .cv b { font: 400 13px var(--f-mono); display: inline-block; min-width: 92px; color: var(--acc); }
+.map { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); min-height: 340px; } .map iframe { width: 100%; height: 100%; min-height: 340px; border: 0; display: block; }
+</style>
+</head>
+<body>
+
+<div class="proposal"><span><b>Website-Entwurf</b> für ander-art-project · nicht die offizielle Website</span><span>Erstellt von <a href="https://5hitcake.github.io/JanOberle/#de" target="_blank" rel="noopener">Jota Labs</a></span></div>
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#start"><i>aap</i><span>ander-art-project<small>_handwerk, farbe &amp; design</small></span></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">Menü</button>
+    <nav class="links" id="links">
+      <a href="#leistungen">Leistungen</a><a href="#projekte">Projekte</a><a href="#about">Über mich</a><a href="#kontakt">Kontakt</a>
+      <a class="btn" href="tel:+41443126692">044 312 66 92</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero pre" id="start">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">_handwerk, farbe &amp; design · zürich-oerlikon</span>
+      <h1>Colour, it’s <em>different.</em></h1>
+      <p>Durch das Phänomen Farbe Lebensraum nachhaltig gestalten, verdichten, inszenieren. Malerhandwerk und Farbgestaltung seit 2007.</p>
+      <div class="ctas"><a class="btn" href="#projekte">Projekte ansehen</a><a class="btn line" href="tel:+41796388093">079 638 80 93</a></div>
+    </div>
+    <div class="card">
+      <h3>Auf einen Blick</h3>
+      <dl class="glance">
+        <dt>Wer</dt><dd>Alfred J. Blatter-Roos, Maler · Künstler · Farbgestalter HF</dd>
+        <dt>Seit</dt><dd>2007, Einzelfirma</dd>
+        <dt>Zeiten</dt><dd><span class="status" id="status">Mo–Fr 8–18 · Sa 8–12</span></dd>
+        <dt>Adresse</dt><dd>Bülachstrasse 2, 8057 Zürich</dd>
+      </dl>
+      <div class="sw" aria-hidden="true"><i style="background:#e8c83a"></i><i style="background:#e0782a"></i><i style="background:#d9573f"></i><i style="background:#2f9fc4"></i><i style="background:#d9878f"></i><i style="background:#4caf3c"></i><i style="background:#b8aea2"></i><i style="background:#2b2d30"></i></div>
+    </div>
+  </div>
+  <button class="redo" type="button" id="redo" hidden>↻ Nochmal</button>
+</section>
+
+<section class="block" id="leistungen">
+  <div class="wrap">
+    <div class="head"><div><span class="eyebrow">_services</span><h2>Handwerk, Farbe &amp; Design</h2></div><p>Funktionale Oberflächen und anspruchsvolle dekorative Techniken, mit den bestgeeigneten Materialien.</p></div>
+    <div class="services">
+      <div class="service core"><b>_colourdesign · Kernkompetenz</b><h3>Farbgestaltung</h3><p>Material- und Farbkonzepte vom einzelnen Produkt bis zur Architektur, innen und aussen. Mit Analyse von Bau, Umgebung und Nutzung, Farbfächern und eigens erstellten Bemusterungstafeln.</p></div>
+      <div class="service"><b>_paintwork</b><h3>Malerarbeiten</h3><p>Seidenmatter Ölfarbanstrich fürs Holzwerk, kalkmatte Wände im Bürstenschlag statt Rollerstruktur. Für historische Altbauten wie für den bauökologischen Neubau.</p></div>
+      <div class="service"><b>_advice &amp; review</b><h3>Beratung &amp; Gutachten</h3><p>Beratung von Beginn an zum Erhalt der Bausubstanz, Analyse vor Ort, Sachverständigung bei Schadensfällen. Bei Bedarf Bauleitung und Organisation weiterer Handwerker.</p></div>
+      <div class="service"><b>_craftwork</b><h3>Kunsthandwerk &amp; Restaurierung</h3><p>Dekoration jeglicher Art, Restaurierung von Möbeln und ganzen Räumen, Farbbefunde bei Renovationen.</p></div>
+      <div class="service"><b>_to craft</b><h3>Qualität vor Quantität</h3><p>Ein Produkt, das mit Sorgfalt, Wissen und Können individuell für Sie hergestellt wird, in gutem Preis-Leistungs-Verhältnis.</p></div>
+      <div class="service"><b>_sustainability</b><h3>Nachhaltig</h3><p>Traditionell nachhaltiges wie rationell modernes Handwerk. Alle Projekte in eigener Person und im erweiterten Team.</p></div>
+    </div>
+    <p class="note">Texte aus Ihrer bisherigen Website, leicht gekürzt.</p>
+  </div>
+</section>
+
+<section class="block dark" id="projekte">
+  <div class="wrap">
+    <div class="head"><div><span class="eyebrow">_projects</span><h2>Projekte</h2></div><p>Auf Ihrer jetzigen Website steht hier noch „work in progress“. Diese Fotos stammen aus Ihrem Eintrag auf search.ch.</p></div>
+    <div class="tabs" role="tablist"><button class="on" data-f="all">Alle</button><button data-f="raum">Räume</button><button data-f="moebel">Möbel</button><button data-f="detail">Details</button></div>
+    <div class="gallery" id="gallery"><figure data-c="raum"><img src="img/p5.webp" alt="Gang in Gelb" loading="lazy"><figcaption>Gang in Gelb</figcaption></figure><figure data-c="raum"><img src="img/p13.webp" alt="Wand in Orange" loading="lazy"><figcaption>Wand in Orange</figcaption></figure><figure data-c="raum"><img src="img/p17.webp" alt="Koralle und Schwarz" loading="lazy"><figcaption>Koralle und Schwarz</figcaption></figure><figure data-c="raum"><img src="img/p8.webp" alt="Jugendstil-Halle mit Marmorimitation" loading="lazy"><figcaption>Jugendstil-Halle mit Marmorimitation</figcaption></figure><figure data-c="raum"><img src="img/p12.webp" alt="Raum in Grau mit Stuck" loading="lazy"><figcaption>Raum in Grau mit Stuck</figcaption></figure><figure data-c="raum"><img src="img/p1.webp" alt="Bad mit Fenster" loading="lazy"><figcaption>Bad mit Fenster</figcaption></figure><figure data-c="raum"><img src="img/p25.webp" alt="Dunkle Wand, weisse Balkendecke" loading="lazy"><figcaption>Dunkle Wand, weisse Balkendecke</figcaption></figure><figure data-c="raum"><img src="img/p22.webp" alt="Metallic-Oberfläche" loading="lazy"><figcaption>Metallic-Oberfläche</figcaption></figure><figure data-c="raum"><img src="img/p20.webp" alt="Wand mit Ofentürchen" loading="lazy"><figcaption>Wand mit Ofentürchen</figcaption></figure><figure data-c="raum"><img src="img/p4.webp" alt="Kellerraum, weiss" loading="lazy"><figcaption>Kellerraum, weiss</figcaption></figure><figure data-c="raum"><img src="img/p2.webp" alt="Wandfeld, Ton in Ton" loading="lazy"><figcaption>Wandfeld, Ton in Ton</figcaption></figure><figure data-c="moebel"><img src="img/p19.webp" alt="Truhe, innen Türkis" loading="lazy"><figcaption>Truhe, innen Türkis</figcaption></figure><figure data-c="moebel"><img src="img/p3.webp" alt="Konsolentisch, restauriert" loading="lazy"><figcaption>Konsolentisch, restauriert</figcaption></figure><figure data-c="moebel"><img src="img/p15.webp" alt="Möbel in Rosa" loading="lazy"><figcaption>Möbel in Rosa</figcaption></figure><figure data-c="moebel"><img src="img/p9.webp" alt="Scherenhocker, schwarz" loading="lazy"><figcaption>Scherenhocker, schwarz</figcaption></figure><figure data-c="moebel"><img src="img/p16.webp" alt="Beistelltisch mit Muster" loading="lazy"><figcaption>Beistelltisch mit Muster</figcaption></figure><figure data-c="moebel"><img src="img/p18.webp" alt="Gartentisch in Gelb" loading="lazy"><figcaption>Gartentisch in Gelb</figcaption></figure><figure data-c="moebel"><img src="img/p14.webp" alt="Schreibtisch, grau lackiert" loading="lazy"><figcaption>Schreibtisch, grau lackiert</figcaption></figure><figure data-c="moebel"><img src="img/p7.webp" alt="Runder Tisch, grau lackiert" loading="lazy"><figcaption>Runder Tisch, grau lackiert</figcaption></figure><figure data-c="moebel"><img src="img/p26.webp" alt="Regal, weiss" loading="lazy"><figcaption>Regal, weiss</figcaption></figure><figure data-c="detail"><img src="img/p10.webp" alt="Deckenrosette" loading="lazy"><figcaption>Deckenrosette</figcaption></figure><figure data-c="detail"><img src="img/p21.webp" alt="Stuckgesims" loading="lazy"><figcaption>Stuckgesims</figcaption></figure><figure data-c="detail"><img src="img/p11.webp" alt="Fensterläden in Grün" loading="lazy"><figcaption>Fensterläden in Grün</figcaption></figure><figure data-c="detail"><img src="img/p23.webp" alt="Strukturtapete" loading="lazy"><figcaption>Strukturtapete</figcaption></figure><figure data-c="detail"><img src="img/p24.webp" alt="Kastenschloss an weisser Tür" loading="lazy"><figcaption>Kastenschloss an weisser Tür</figcaption></figure></div>
+  </div>
+</section>
+
+<section class="block" id="about">
+  <div class="wrap about">
+    <figure class="me"><img src="img/p6.webp" alt="Bei der Arbeit an einer Fachwerkwand" loading="lazy"></figure>
+    <div>
+      <span class="eyebrow">_about me · _life is colour</span>
+      <h2>Alfred J. Blatter-Roos</h2>
+      <p>Geboren 1961 in Wattwil im Toggenburg, Leben und Arbeit heute in Zürich-Oerlikon. Die persönliche Farbwahrnehmung prägten der Speer, die Churfirsten und das Säntismassiv, wechselnde Wetterstimmungen und das bunte Brauchtum der Ostschweiz.</p>
+      <ol class="cv">
+        <li><b>2007</b> Gründung von ander-art-project für Handwerk, Farbe &amp; Design</li>
+        <li><b>2003–2006</b> Ausbildung zum Farbgestalter HF am Haus der Farbe, Zürich</li>
+        <li><b>2000–2002</b> Maler, Kunden- und Dekorationsmaler, Zürich</li>
+        <li><b>2000</b> Volontariat Restaurierung und Denkmalpflege, Rapperswil-Jona</li>
+      </ol>
+      <div class="ctas"><a class="btn line" href="https://www.ander-art.ch/" target="_blank" rel="noopener">ander-art.ch · Galerie ↗</a><a class="btn line" href="https://www.ars-re-manufacta.ch/" target="_blank" rel="noopener">ars-re-manufacta.ch ↗</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="kontakt" style="padding-top:0">
+  <div class="wrap contact">
+    <div>
+      <span class="eyebrow">_contact · _office</span>
+      <h2 style="font-size:clamp(32px,4.6vw,54px);margin-top:10px">ander-art-project</h2>
+      <dl>
+        <dt>Adresse</dt><dd>Bülachstrasse 2, 8057 Zürich</dd>
+        <dt>Telefon</dt><dd><a href="tel:+41443126692">044 312 66 92</a></dd>
+        <dt>Mobile</dt><dd><a href="tel:+41796388093">079 638 80 93</a></dd>
+        <dt>E-Mail</dt><dd><a href="mailto:ander.art@bluewin.ch">ander.art@bluewin.ch</a></dd>
+        <dt>Zeiten</dt><dd>Mo–Fr 8–18 Uhr, Sa 8–12 Uhr</dd>
+      </dl>
+      <div class="ctas"><a class="btn" href="tel:+41443126692">Anrufen</a><a class="btn line" href="https://wa.me/41796388093?text=Gr%C3%BCezi%20Herr%20Blatter%2C%20ich%20interessiere%20mich%20f%C3%BCr%20eine%20Beratung." target="_blank" rel="noopener">WhatsApp</a></div>
+    </div>
+    <div class="map"><iframe title="Karte: Bülachstrasse 2, Zürich" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=8.5425%2C47.3982%2C8.5555%2C47.4040&amp;layer=mapnik&amp;marker=47.401061%2C8.5489858"></iframe></div>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>ander-art-project · Alfred J. Blatter-Roos · Bülachstrasse 2, 8057 Zürich</span><span>Entwurf von Jota Labs · <a href="https://5hitcake.github.io/JanOberle/#de" target="_blank" rel="noopener">weitere Arbeiten</a></span></div></footer>
+
+<a class="like" href="https://wa.me/5491130331893?text=Hallo%20Jan%2C%20ich%20habe%20den%20Website-Entwurf%20f%C3%BCr%20ander-art-project%20gesehen%20und%20m%C3%B6chte%20mehr%20erfahren." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></svg>Gefällt's Ihnen?</a>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+  document.querySelectorAll(".tabs button").forEach((b) => b.addEventListener("click", () => { document.querySelectorAll(".tabs button").forEach((x) => x.classList.toggle("on", x === b));
+    document.querySelectorAll("#gallery figure").forEach((f) => f.classList.toggle("hide", b.dataset.f !== "all" && f.dataset.c !== b.dataset.f)); }));
+  /* Live-Status Mo–Fr 8–18, Sa 8–12 (Zürich-Zeit) */
+  const now = new Date(new Date().toLocaleString("en-US", { timeZone: "Europe/Zurich" })), d = now.getDay(), m = now.getHours() * 60 + now.getMinutes(), st = $("#status");
+  const end = d >= 1 && d <= 5 ? 1080 : d === 6 ? 720 : 0, open = end && m >= 480 && m < end; st.classList.toggle("open", !!open);
+  if (open) st.innerHTML = `<b>Jetzt erreichbar</b> · bis ${end / 60} Uhr`;
+  /* ---------- Intro: Rosette + Farbfächer ---------- */
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const ease = (t) => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+  const tween = (ms, fn, tk, ez = ease) => new Promise((res) => {
+    const t0 = performance.now();
+    const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(ez(k), k); k < 1 ? requestAnimationFrame(step) : res(); };
+    requestAnimationFrame(step);
+  });
+  const loop = (fn, tk) => { let prev = performance.now(); const step = (now) => { if (tk.cancelled) return; const dt = Math.min(50, now - prev) / 16.7; prev = now; fn(dt, now); requestAnimationFrame(step); }; requestAnimationFrame(step); };
+  const el = (scr, tag, cls, css = "") => { const n = document.createElement(tag); n.className = "fxl " + cls; if (css) n.style.cssText = css; scr.append(n); return n; };
+  const canvas = (parent, cls, z) => {
+    const w = parent.clientWidth, h = parent.clientHeight, dpr = Math.min(2, devicePixelRatio || 1);
+    const c = document.createElement("canvas"); c.className = "fxl " + cls; c.width = Math.round(w * dpr); c.height = Math.round(h * dpr);
+    c.style.cssText = `position:absolute;inset:0;width:100%;height:100%;z-index:${z};pointer-events:none`;
+    c.setAttribute("aria-hidden", "true");
+    parent.append(c); const ctx = c.getContext("2d"); ctx.scale(dpr, dpr); return { c, ctx, w, h };
+  };
+  const AA_COLS = [["#e8c83a", "gelb"], ["#e0782a", "orange"], ["#d9573f", "koralle"], ["#2f9fc4", "petrol"], ["#d9878f", "rosa"], ["#4caf3c", "grün"], ["#b8aea2", "kalkgrau"], ["#2b2d30", "schwarz"]];
+  function aaWord(ctx, w, h, y, a, o, col, sub) { if (a <= 0) return; ctx.save(); ctx.globalAlpha *= Math.min(1, a); ctx.textAlign = "center"; ctx.textBaseline = "middle"; const F = Math.min(w * .1, h * .058);
+    ctx.font = `700 ${F}px ${o.family || "system-ui"}`; ctx.fillStyle = col || "#1d1d1f"; ctx.fillText("ander-art-project", w / 2, y, w * .92);
+    ctx.font = `${Math.min(w * .036, h * .021)}px ${o.ufamily || "monospace"}`; ctx.fillStyle = col ? "rgba(255,255,255,.8)" : "#6b6660"; ctx.fillText(sub || "_handwerk, farbe & design", w / 2, y + F * .95, w * .92); ctx.restore(); }
+
+  /* ---------- Mix: oben zeichnet sich die Stuckrosette wie ein Logo, unten fächert der Farbfächer auf, Orange flutet ---------- */
+  async function aamix(scr, tk, o = {}) {
+    const { c, ctx, w, h } = canvas(scr, "aamix", 5), rx = w / 2, ry = h * .23, R = Math.min(w * .26, h * .14);
+    const fx = w / 2, fy = h * .97, L = Math.min(w * .56, h * .36), SW = L * .22;
+    let dr = 0, fan = 0, pickK = 0, word = 0, flood = 0, bgA = 1;
+    const stroke = (p, Ln, fn) => { if (p <= 0) return; ctx.save(); ctx.setLineDash([Ln * Math.min(1, p), Ln * 2]); ctx.beginPath(); fn(); ctx.stroke(); ctx.restore(); };
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h); ctx.save(); ctx.globalAlpha = bgA; ctx.fillStyle = "#f4f1ec"; ctx.fillRect(0, 0, w, h);
+      if (flood > 0) { ctx.fillStyle = AA_COLS[1][0]; ctx.beginPath(); ctx.arc(fx, fy - L * .8, Math.hypot(w, h) * flood, 0, 7); ctx.fill(); }
+      /* Rosette */
+      ctx.save(); if (pickK > 0) { ctx.fillStyle = AA_COLS[1][0]; ctx.globalAlpha *= pickK; ctx.beginPath(); ctx.arc(rx, ry, R * 1.08, 0, 7); ctx.fill(); ctx.globalAlpha = bgA; }
+      ctx.strokeStyle = "#ffffff"; ctx.lineCap = "round"; ctx.shadowColor = "rgba(0,0,0,.28)"; ctx.shadowBlur = 4; ctx.shadowOffsetY = 2;
+      ctx.lineWidth = R * .06; stroke(dr * 1.2, 2 * Math.PI * R, () => ctx.arc(rx, ry, R, 0, Math.PI * 2));
+      ctx.lineWidth = R * .035; stroke(dr * 1.3 - .1, 2 * Math.PI * R * .82, () => ctx.arc(rx, ry, R * .82, 0, Math.PI * 2));
+      for (let i = 0; i < 12; i++) { const a = i / 12 * Math.PI * 2, p = dr * 1.6 - .3 - i * .02; ctx.lineWidth = R * .04;
+        stroke(p, R * 1.2, () => { const x1 = rx + Math.cos(a) * R * .2, y1 = ry + Math.sin(a) * R * .2, x2 = rx + Math.cos(a) * R * .74, y2 = ry + Math.sin(a) * R * .74;
+          ctx.moveTo(x1, y1); ctx.quadraticCurveTo(rx + Math.cos(a + .28) * R * .55, ry + Math.sin(a + .28) * R * .55, x2, y2); ctx.quadraticCurveTo(rx + Math.cos(a - .28) * R * .55, ry + Math.sin(a - .28) * R * .55, x1, y1); });
+        ctx.lineWidth = R * .025; stroke(p - .2, R * .3, () => ctx.arc(rx + Math.cos(a + Math.PI / 12) * R * .91, ry + Math.sin(a + Math.PI / 12) * R * .91, R * .05, 0, Math.PI * 2)); }
+      ctx.lineWidth = R * .045; stroke(dr * 2 - 1, 2 * Math.PI * R * .16, () => ctx.arc(rx, ry, R * .16, 0, Math.PI * 2)); ctx.restore();
+      /* Fächer */
+      const n = AA_COLS.length;
+      for (let i = 0; i < n; i++) { const ang = (i - (n - 1) / 2) / (n - 1) * 1.5 * fan; ctx.save(); ctx.translate(fx, fy); ctx.rotate(ang); ctx.translate(0, i === 1 ? -pickK * L * .16 : 0);
+        ctx.fillStyle = "rgba(0,0,0,.12)"; ctx.fillRect(-SW / 2 + 3, -L + 4, SW, L); ctx.fillStyle = "#fbfaf7"; ctx.fillRect(-SW / 2, -L, SW, L);
+        ctx.fillStyle = AA_COLS[i][0]; ctx.fillRect(-SW / 2 + 4, -L + 4, SW - 8, L * .62);
+        ctx.fillStyle = "#555"; ctx.font = `${SW * .17}px ${o.ufamily || "monospace"}`; ctx.textAlign = "center"; ctx.fillText(AA_COLS[i][1], 0, -L * .26); ctx.restore(); }
+      ctx.fillStyle = "#2b2d30"; ctx.beginPath(); ctx.arc(fx, fy, SW * .14, 0, 7); ctx.fill();
+      aaWord(ctx, w, h, h * .45, word, o, flood > .4 ? "#fff" : null, "_colour, it’s different"); ctx.restore();
+    };
+    let live = true; const lp = () => { if (!live || tk.cancelled) return; draw(); requestAnimationFrame(lp); }; requestAnimationFrame(lp);
+    await sleep(300);
+    await tween(1700, (e, k) => { dr = k; fan = Math.max(0, (k - .45) / .55); }, tk, (q) => q);
+    await tween(500, (e) => { fan = 1; }, tk);
+    await tween(500, (e) => { pickK = e; word = e; }, tk);
+    await sleep(500);
+    await tween(800, (e) => { flood = e; }, tk, (q) => q * q);
+    await sleep(o.hold || 600); if (tk.cancelled) { live = false; return c.remove(); }
+    reveal(); await tween(700, (e) => { bgA = 1 - e; c.style.opacity = 1 - e; }, tk); live = false; c.remove();
+  }
+  const hero = $("#start"), redo = $("#redo");
+  const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); };
+  let token = { cancelled: true };
+  async function play() { token.cancelled = true; hero.querySelectorAll(".fxl").forEach((n) => n.remove()); const tk = (token = { cancelled: false });
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { reveal(); redo.hidden = false; return; }
+    hero.classList.add("pre"); hero.classList.remove("reveal"); redo.hidden = true;
+    await aamix(hero, tk, { family: "\"Space Grotesk\", sans-serif", ufamily: "\"Space Mono\", monospace" });
+    if (!tk.cancelled) redo.hidden = false; }
+  redo.addEventListener("click", play);
+  document.fonts && document.fonts.ready ? document.fonts.ready.then(play) : play();
+})();
+</script>
+</body>
+</html>
