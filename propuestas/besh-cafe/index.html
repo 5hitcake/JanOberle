@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Besh Café & Bakery · Entwurf</title>
+<meta name="description" content="Website-Entwurf für Besh Café &amp; Bakery, Brauerstrasse 80, Zürich, von Jota Labs. Nicht die offizielle Website.">
+<meta property="og:title" content="Besh Café & Bakery · Entwurf">
+<meta property="og:description" content="Asian-inspired café &amp; bakery mit Filipino roots in Zürich. Ein Entwurf von Jota Labs.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111'/%3E%3Ccircle cx='32' cy='32' r='18' fill='%23d6f22c'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+/* Layout: Logo-Intro (Limetten-Punkte, BESH plumpst rein), Vollbild. Menü-Karten, Cloud Lattes, Catering/Jobs, Besuch mit Live-Status (Okt Fr–So). Schwarz/Limette/Ube; Bagel Fat One + DM Sans. */
+:root {
+  --bg: #ffffff; --bg-2: #f2f2ee; --bg-3: #fafaf7; --ink: #111111; --line: rgba(0,0,0,.12); --soft: #333; --muted: #666;
+  --green: #111111; --leaf: #111111; --brass: #d6f22c; --pink: #f2f2ee; --fuji: #8b5bc4; --lime: #d6f22c; --ube: #8b5bc4;
+  --f-display: "Bagel Fat One", system-ui, sans-serif; --f-body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif; --f-mono: "DM Sans", system-ui, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-family: var(--f-display); font-weight: 400; text-wrap: balance; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 800 13px/1.2 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--leaf); }
+:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+.proposal { background: #000; color: #e9ebee; font: 13px/1.4 var(--f-body); padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; }
+.proposal b { color: #ffd166; } .proposal a { color: #fff; font-weight: 800; }
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 22px/1 var(--f-display); letter-spacing: .06em; }
+.logo svg { width: 38px; height: 38px; }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 15px; font-weight: 700; color: var(--muted); }
+nav.links a:hover { color: var(--ink); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 800 15px/1 var(--f-body); padding: 15px 22px; border-radius: 6px; background: var(--green); color: #f6f0e2; border: 2px solid var(--green); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,.2); }
+.btn.ghost { background: transparent; color: var(--ink); border-color: rgba(26,23,20,.35); }
+.btn.ghost:hover { border-color: var(--ink); }
+nav.links a.btn { color: #f6f0e2; padding: 10px 16px; font-size: 14px; }
+.menu-btn { display: none; background: transparent; color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 8px 14px; font: 800 12px var(--f-body); letter-spacing: .08em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bg-3); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line); background: radial-gradient(60% 70% at 85% 30%, rgba(201,160,122,.35), transparent 70%), var(--bg); }
+@media (max-width: 860px) { .hero .seal { opacity: .07 !important; right: -30% !important; } }
+.hero .seal { position: absolute; right: -6%; top: 50%; width: min(52vw, 560px); transform: translateY(-50%); opacity: .14; z-index: 0; }
+.hero .wrap { position: relative; z-index: 1; padding-block: clamp(84px, 12vw, 140px) clamp(64px, 9vw, 110px); display: flex; flex-direction: column; gap: 16px; }
+.hero h1 { font-weight: 400; color: var(--green); text-shadow: 3px 3px 0 #fff; font-size: clamp(72px, 13vw, 168px); line-height: .9; letter-spacing: .04em; }
+.hero h1 small { color: var(--leaf); text-shadow: none; display: block; font: 700 clamp(14px, 2vw, 20px)/1 var(--f-mono); letter-spacing: .5em; color: var(--muted); margin-top: 14px; }
+.hero .lead { margin: 4px 0 0; font-size: clamp(18px, 2.2vw, 22px); color: var(--soft); max-width: 36ch; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.facts span { font: 700 14px var(--f-body); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; background: rgba(246,240,226,.85); }
+.facts span b { color: var(--ink); }
+.status::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); margin-right: 8px; vertical-align: 1px; }
+.status.open::before { background: #3aa35a; box-shadow: 0 0 10px #3aa35a; }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 7; font: 700 13px var(--f-body); color: var(--muted); background: rgba(246,240,226,.9); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.redo:hover { color: var(--ink); }
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero.reveal .wrap > :nth-child(2) { animation-delay: .06s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .12s }
+.hero.reveal .wrap > :nth-child(4) { animation-delay: .18s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .24s }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+section.block { padding-block: clamp(64px, 10vw, 104px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 40px; margin-bottom: 30px; }
+.head h2 { font-size: clamp(36px, 5.6vw, 64px); line-height: 1; margin-top: 10px; }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+.note { margin-top: 20px; font-size: 14px; color: var(--muted); padding: 10px 14px; border-left: 3px solid var(--green); background: var(--bg-2); border-radius: 0 10px 10px 0; }
+.sig { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 860px) { .sig { grid-template-columns: minmax(0,1fr); } }
+.sc { background: var(--bg-3); border: 1px solid var(--line); border-radius: 14px; padding: 24px; display: grid; gap: 8px; align-content: start; }
+.sc svg { width: 70px; height: 70px; }
+.sc h3 { font-size: 28px; } .sc .pr { font: 700 15px var(--f-mono); color: var(--green); } .sc p { margin: 0; color: var(--soft); font-size: 15px; }
+.menu { background: var(--bg-3); border: 1px solid var(--line); border-radius: 14px; padding: clamp(18px, 3vw, 32px); }
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.tabs button { font: 700 14px var(--f-mono); letter-spacing: .06em; text-transform: uppercase; padding: 10px 14px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; }
+.tabs button[aria-selected="true"] { background: var(--green); border-color: var(--green); color: #f6f0e2; }
+.pl { list-style: none; margin: 0; padding: 0; columns: 2; column-gap: 40px; }
+@media (max-width: 760px) { .pl { columns: 1; } }
+.pl li { break-inside: avoid; display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: baseline; padding: 10px 0; border-top: 1px dashed var(--line); font-family: var(--f-mono); }
+.pl li::after { content: ""; grid-column: 2; grid-row: 1; border-bottom: 1px dotted rgba(26,23,20,.25); transform: translateY(-4px); }
+.pl b { font-weight: 700; text-transform: uppercase; font-size: 15px; letter-spacing: .03em; } .pl em { font-style: normal; font-weight: 700; color: var(--green); grid-column: 3; }
+.pl i { font-style: normal; font-size: 11px; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 1px 5px; margin-left: 6px; vertical-align: 2px; }
+.pl small { grid-column: 1 / -1; grid-row: 2; color: var(--muted); font-size: 13px; margin-top: -4px; }
+.mnote { margin: 18px 0 0; font: 13px/1.5 var(--f-mono); color: var(--muted); text-align: center; }
+.story { background: var(--leaf) !important; color: #fffdf7 !important; } .story-x { background: var(--ink); color: #efe6d2; }
+.story .wrap { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: clamp(28px, 6vw, 80px); align-items: center; }
+@media (max-width: 860px) { .story .wrap { grid-template-columns: minmax(0,1fr); } }
+.story svg { width: min(100%, 380px); justify-self: center; }
+.story .kicker { color: #d9b37a; } .story h2 { font-size: clamp(36px, 5.6vw, 64px); line-height: 1; margin: 10px 0 18px; }
+.story p { margin: 0 0 14px; color: #d9cfbb; }
+.rev { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: 16px; }
+@media (max-width: 860px) { .rev { grid-template-columns: minmax(0,1fr); } }
+.score { background: var(--green); color: #f6f0e2; border-radius: 14px; padding: 28px; display: grid; gap: 6px; align-content: center; }
+.score .kicker { color: #cfe6d6; } .score b { font: clamp(48px, 7vw, 72px)/1 var(--f-display); } .score p { margin: 0; color: #cfe6d6; }
+.quote { background: var(--bg-3); border: 1px solid var(--line); border-radius: 14px; padding: 28px; display: grid; gap: 14px; align-content: center; }
+.quote p { margin: 0; font: clamp(20px, 2.6vw, 28px)/1.35 var(--f-display); } .quote small { color: var(--muted); }
+.visit { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 860px) { .visit { grid-template-columns: minmax(0,1fr); } }
+.map { border-radius: 14px; overflow: hidden; border: 1px solid var(--line); min-height: 320px; }
+.map iframe { width: 100%; height: 100%; min-height: 320px; border: 0; display: block; }
+.card { border: 1px solid var(--line); border-radius: 14px; padding: 26px; background: var(--bg-3); display: grid; gap: 10px; align-content: start; }
+.card h3 { font-size: 24px; } .card p { margin: 0; color: var(--soft); }
+.hours { display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; margin: 0; font-variant-numeric: tabular-nums; }
+.hours dt { color: var(--muted); } .hours dd { margin: 0; color: var(--soft); } .hours .today { color: var(--ink); font-weight: 800; }
+footer { padding-block: 40px 96px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 800 14px var(--f-body); padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.25); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+
+.stripes { position: absolute; left: 0; right: 0; display: grid; gap: 6px; z-index: 0; pointer-events: none; }
+.stripes i { display: block; height: 10px; } .stripes i:nth-child(1) { background: #7fbf8e; } .stripes i:nth-child(2) { background: var(--brass); } .stripes i:nth-child(3) { background: var(--pink); }
+.stripes.s1 { top: 26px; } .stripes.s2 { bottom: 26px; }
+.hero.reveal .stripes i { animation: sweep 1s cubic-bezier(.2,.7,.2,1) both; } .hero.reveal .stripes i:nth-child(2) { animation-delay: .08s; } .hero.reveal .stripes i:nth-child(3) { animation-delay: .16s; }
+@keyframes sweep { from { transform: scaleX(0); transform-origin: left; } to { transform: scaleX(1); transform-origin: left; } }
+.logo { font-family: var(--f-display); letter-spacing: 0; font-size: 26px; color: var(--green); }
+.pl b { text-transform: none; font-family: var(--f-body); font-weight: 800; letter-spacing: 0; } .pl li { font-family: var(--f-body); }
+.story { color: #fffdf7; } .story p { color: #eaf5ec; } .story .kicker { color: #fff3c4; } .story h2 { color: #fffdf7; }
+.story .btn { background: #fffdf7; color: var(--leaf); border-color: #fffdf7; }
+.sc h3, .head h2, .card h3 { font-weight: 400; } .sc .pr { color: var(--green); }
+.score { background: var(--green); }
+.tabs button { font-family: var(--f-body); font-weight: 800; }
+
+.btn { background: var(--lime) !important; color: #111 !important; border-color: #111 !important; } .btn.ghost { background: transparent !important; }
+nav.links a.btn { color: #111 !important; }
+.hero { background: #fff !important; }
+.hero h1 { font-family: var(--f-display) !important; font-weight: 400 !important; color: #111 !important; text-shadow: none !important; font-size: clamp(110px, 22vw, 240px) !important; letter-spacing: 0 !important; }
+.hero .kicker { color: var(--ube) !important; }
+.front { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; } .front svg { position: absolute; right: -4%; top: 50%; transform: translateY(-50%); width: min(50vw, 560px); height: auto; opacity: .9; }
+@media (max-width: 860px) { .front svg { width: 110vw; right: -40%; opacity: .35; } }
+.logo { font: 400 28px var(--f-display) !important; color: #111 !important; }
+.head h2, .story h2, .join h3, .card h3, .dish h3 { font-family: var(--f-display) !important; font-weight: 400 !important; font-style: normal !important; }
+.dish h3 { font-family: var(--f-body) !important; font-weight: 700 !important; }
+.dishes { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 960px) { .dishes { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 520px) { .dishes { grid-template-columns: minmax(0,1fr); } }
+.dish { background: var(--bg-3); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; display: grid; align-content: start; position: relative; }
+.dish .ph { aspect-ratio: 4/3; display: grid; place-items: center; font-size: 56px; background: #ececea; }
+.dish .p1 { background: linear-gradient(140deg,#fbe9c8,#e8a64a); } .dish .p2 { background: linear-gradient(140deg,#fff6c9,#f2d34c); } .dish .p3 { background: linear-gradient(140deg,#d8b48c,#6b4423); } .dish .p4 { background: linear-gradient(140deg,#fbe1a6,#d98b2b); }
+.dish .p5 { background: linear-gradient(140deg,#c9a7e8,#5c3794); } .dish .p6 { background: linear-gradient(140deg,#ffe2a8,#f2a33a); } .dish .p7 { background: linear-gradient(140deg,#eaf7a8,#a9c93a); } .dish .p8 { background: linear-gradient(140deg,#ffd9c2,#e98d64); }
+.dish h3 { font-size: 18px; margin: 16px 18px 4px; } .dish p { margin: 0 18px 18px; color: var(--soft); font-size: 15px; }
+.dish .tag { position: absolute; top: 12px; left: 12px; background: var(--lime); font: 700 12px var(--f-body); padding: 4px 10px; border-radius: 999px; }
+.story { background: #111 !important; } .story .kicker { color: var(--lime) !important; } .story p { color: #eee !important; } .story h2 { color: #fff; font-size: clamp(44px, 7vw, 84px); }
+.story .wrap { display: grid; grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); gap: 40px; align-items: center; } @media (max-width: 860px) { .story .wrap { grid-template-columns: minmax(0,1fr); } }
+.cups { display: flex; gap: 18px; justify-content: center; align-items: end; height: 220px; }
+.cups i { width: 74px; height: 140px; clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%); position: relative; border-top: 16px solid #fffdf8; }
+.cups .m { background: linear-gradient(#c8dd8e 55%, #8fb54a 62%); } .cups .u { background: linear-gradient(#c9a7e8 55%, #8b5bc4 62%); height: 160px; } .cups .s { background: linear-gradient(#e6c9a4 55%, #9c6a3c 62%); }
+.duo { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; } @media (max-width: 760px) { .duo { grid-template-columns: minmax(0,1fr); } }
+.join { border: 2px solid #111; border-radius: 18px; padding: 24px; background: var(--bg-3); display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; justify-content: space-between; }
+.join h3 { font-size: clamp(24px, 3vw, 32px); margin: 6px 0; } .join p { margin: 0; color: var(--soft); }
+.join:nth-child(2) { background: var(--lime); }
+.card .small { margin: 0; font-size: 14px; color: var(--muted); }
+.kicker { color: var(--ube) !important; }
+.status.open::before { background: #3aa35a; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></symbol>
+</svg>
+
+
+<div class="proposal"><span><b>Website-Entwurf</b> für Besh Café &amp; Bakery · nicht die offizielle Website</span><span>Erstellt von <a href="https://5hitcake.github.io/JanOberle/#de" target="_blank" rel="noopener">Jota Labs</a></span></div>
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top">BESH</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENÜ</button>
+    <nav class="links" id="links">
+      <a href="#menu">Menü</a><a href="#drinks">Drinks</a><a href="#catering">Catering</a><a href="#visit">Besuch</a>
+      <a class="btn" href="https://www.instagram.com/besh.zurich/" target="_blank" rel="noopener">Brunch reservieren</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero pre" id="top">
+  <div class="front" aria-hidden="true"><svg viewBox="0 0 560 540"><circle cx="0" cy="0" r="6.0" fill="#d6f22c"/><circle cx="40" cy="0" r="8.6" fill="#d6f22c"/><circle cx="80" cy="0" r="11.0" fill="#d6f22c"/><circle cx="120" cy="0" r="8.3" fill="#d6f22c"/><circle cx="160" cy="0" r="6.0" fill="#d6f22c"/><circle cx="200" cy="0" r="8.9" fill="#d6f22c"/><circle cx="240" cy="0" r="11.0" fill="#d6f22c"/><circle cx="280" cy="0" r="8.0" fill="#d6f22c"/><circle cx="320" cy="0" r="6.1" fill="#d6f22c"/><circle cx="360" cy="0" r="9.1" fill="#d6f22c"/><circle cx="400" cy="0" r="10.9" fill="#d6f22c"/><circle cx="440" cy="0" r="7.7" fill="#d6f22c"/><circle cx="480" cy="0" r="6.2" fill="#d6f22c"/><circle cx="520" cy="0" r="9.4" fill="#d6f22c"/><circle cx="20" cy="40" r="10.3" fill="#d6f22c"/><circle cx="60" cy="40" r="10.1" fill="#d6f22c"/><circle cx="100" cy="40" r="6.6" fill="#d6f22c"/><circle cx="140" cy="40" r="7.0" fill="#d6f22c"/><circle cx="180" cy="40" r="10.5" fill="#d6f22c"/><circle cx="220" cy="40" r="9.9" fill="#d6f22c"/><circle cx="260" cy="40" r="6.4" fill="#d6f22c"/><circle cx="300" cy="40" r="7.2" fill="#d6f22c"/><circle cx="340" cy="40" r="10.7" fill="#d6f22c"/><circle cx="380" cy="40" r="9.7" fill="#d6f22c"/><circle cx="420" cy="40" r="6.2" fill="#d6f22c"/><circle cx="460" cy="40" r="7.5" fill="#d6f22c"/><circle cx="500" cy="40" r="10.8" fill="#d6f22c"/><circle cx="540" cy="40" r="9.4" fill="#d6f22c"/><circle cx="0" cy="80" r="8.3" fill="#d6f22c"/><circle cx="40" cy="80" r="6.0" fill="#d6f22c"/><circle cx="80" cy="80" r="8.9" fill="#d6f22c"/><circle cx="120" cy="80" r="11.0" fill="#d6f22c"/><circle cx="160" cy="80" r="8.0" fill="#d6f22c"/><circle cx="200" cy="80" r="6.1" fill="#d6f22c"/><circle cx="240" cy="80" r="9.1" fill="#d6f22c"/><circle cx="280" cy="80" r="10.9" fill="#d6f22c"/><circle cx="320" cy="80" r="7.7" fill="#d6f22c"/><circle cx="360" cy="80" r="6.2" fill="#d6f22c"/><circle cx="400" cy="80" r="9.4" fill="#d6f22c"/><circle cx="440" cy="80" r="10.8" fill="#d6f22c"/><circle cx="480" cy="80" r="7.4" fill="#d6f22c"/><circle cx="520" cy="80" r="6.3" fill="#d6f22c"/><circle cx="20" cy="120" r="7.0" fill="#d6f22c"/><circle cx="60" cy="120" r="10.5" fill="#d6f22c"/><circle cx="100" cy="120" r="9.9" fill="#d6f22c"/><circle cx="140" cy="120" r="6.4" fill="#d6f22c"/><circle cx="180" cy="120" r="7.2" fill="#d6f22c"/><circle cx="220" cy="120" r="10.7" fill="#d6f22c"/><circle cx="260" cy="120" r="9.7" fill="#d6f22c"/><circle cx="300" cy="120" r="6.2" fill="#d6f22c"/><circle cx="340" cy="120" r="7.5" fill="#d6f22c"/><circle cx="380" cy="120" r="10.8" fill="#d6f22c"/><circle cx="420" cy="120" r="9.4" fill="#d6f22c"/><circle cx="460" cy="120" r="6.1" fill="#d6f22c"/><circle cx="500" cy="120" r="7.8" fill="#d6f22c"/><circle cx="540" cy="120" r="10.9" fill="#d6f22c"/><circle cx="0" cy="160" r="11.0" fill="#d6f22c"/><circle cx="40" cy="160" r="8.0" fill="#d6f22c"/><circle cx="80" cy="160" r="6.1" fill="#d6f22c"/><circle cx="120" cy="160" r="9.1" fill="#d6f22c"/><circle cx="160" cy="160" r="10.9" fill="#d6f22c"/><circle cx="200" cy="160" r="7.7" fill="#d6f22c"/><circle cx="240" cy="160" r="6.2" fill="#d6f22c"/><circle cx="280" cy="160" r="9.4" fill="#d6f22c"/><circle cx="320" cy="160" r="10.8" fill="#d6f22c"/><circle cx="360" cy="160" r="7.4" fill="#d6f22c"/><circle cx="400" cy="160" r="6.3" fill="#d6f22c"/><circle cx="440" cy="160" r="9.7" fill="#d6f22c"/><circle cx="480" cy="160" r="10.7" fill="#d6f22c"/><circle cx="520" cy="160" r="7.2" fill="#d6f22c"/><circle cx="20" cy="200" r="6.4" fill="#d6f22c"/><circle cx="60" cy="200" r="7.2" fill="#d6f22c"/><circle cx="100" cy="200" r="10.7" fill="#d6f22c"/><circle cx="140" cy="200" r="9.7" fill="#d6f22c"/><circle cx="180" cy="200" r="6.2" fill="#d6f22c"/><circle cx="220" cy="200" r="7.5" fill="#d6f22c"/><circle cx="260" cy="200" r="10.8" fill="#d6f22c"/><circle cx="300" cy="200" r="9.4" fill="#d6f22c"/><circle cx="340" cy="200" r="6.1" fill="#d6f22c"/><circle cx="380" cy="200" r="7.8" fill="#d6f22c"/><circle cx="420" cy="200" r="10.9" fill="#d6f22c"/><circle cx="460" cy="200" r="9.1" fill="#d6f22c"/><circle cx="500" cy="200" r="6.1" fill="#d6f22c"/><circle cx="540" cy="200" r="8.0" fill="#d6f22c"/><circle cx="0" cy="240" r="9.1" fill="#d6f22c"/><circle cx="40" cy="240" r="10.9" fill="#d6f22c"/><circle cx="80" cy="240" r="7.7" fill="#d6f22c"/><circle cx="120" cy="240" r="6.2" fill="#d6f22c"/><circle cx="160" cy="240" r="9.4" fill="#d6f22c"/><circle cx="200" cy="240" r="10.8" fill="#d6f22c"/><circle cx="240" cy="240" r="7.4" fill="#d6f22c"/><circle cx="280" cy="240" r="6.3" fill="#d6f22c"/><circle cx="320" cy="240" r="9.7" fill="#d6f22c"/><circle cx="360" cy="240" r="10.7" fill="#d6f22c"/><circle cx="400" cy="240" r="7.2" fill="#d6f22c"/><circle cx="440" cy="240" r="6.4" fill="#d6f22c"/><circle cx="480" cy="240" r="9.9" fill="#d6f22c"/><circle cx="520" cy="240" r="10.5" fill="#d6f22c"/><circle cx="20" cy="280" r="9.7" fill="#d6f22c"/><circle cx="60" cy="280" r="6.2" fill="#d6f22c"/><circle cx="100" cy="280" r="7.5" fill="#d6f22c"/><circle cx="140" cy="280" r="10.8" fill="#d6f22c"/><circle cx="180" cy="280" r="9.4" fill="#d6f22c"/><circle cx="220" cy="280" r="6.1" fill="#d6f22c"/><circle cx="260" cy="280" r="7.8" fill="#d6f22c"/><circle cx="300" cy="280" r="10.9" fill="#d6f22c"/><circle cx="340" cy="280" r="9.1" fill="#d6f22c"/><circle cx="380" cy="280" r="6.1" fill="#d6f22c"/><circle cx="420" cy="280" r="8.0" fill="#d6f22c"/><circle cx="460" cy="280" r="11.0" fill="#d6f22c"/><circle cx="500" cy="280" r="8.8" fill="#d6f22c"/><circle cx="540" cy="280" r="6.0" fill="#d6f22c"/><circle cx="0" cy="320" r="6.2" fill="#d6f22c"/><circle cx="40" cy="320" r="9.4" fill="#d6f22c"/><circle cx="80" cy="320" r="10.8" fill="#d6f22c"/><circle cx="120" cy="320" r="7.4" fill="#d6f22c"/><circle cx="160" cy="320" r="6.3" fill="#d6f22c"/><circle cx="200" cy="320" r="9.7" fill="#d6f22c"/><circle cx="240" cy="320" r="10.7" fill="#d6f22c"/><circle cx="280" cy="320" r="7.2" fill="#d6f22c"/><circle cx="320" cy="320" r="6.4" fill="#d6f22c"/><circle cx="360" cy="320" r="9.9" fill="#d6f22c"/><circle cx="400" cy="320" r="10.5" fill="#d6f22c"/><circle cx="440" cy="320" r="6.9" fill="#d6f22c"/><circle cx="480" cy="320" r="6.6" fill="#d6f22c"/><circle cx="520" cy="320" r="10.2" fill="#d6f22c"/><circle cx="20" cy="360" r="10.8" fill="#d6f22c"/><circle cx="60" cy="360" r="9.4" fill="#d6f22c"/><circle cx="100" cy="360" r="6.1" fill="#d6f22c"/><circle cx="140" cy="360" r="7.8" fill="#d6f22c"/><circle cx="180" cy="360" r="10.9" fill="#d6f22c"/><circle cx="220" cy="360" r="9.1" fill="#d6f22c"/><circle cx="260" cy="360" r="6.1" fill="#d6f22c"/><circle cx="300" cy="360" r="8.0" fill="#d6f22c"/><circle cx="340" cy="360" r="11.0" fill="#d6f22c"/><circle cx="380" cy="360" r="8.8" fill="#d6f22c"/><circle cx="420" cy="360" r="6.0" fill="#d6f22c"/><circle cx="460" cy="360" r="8.3" fill="#d6f22c"/><circle cx="500" cy="360" r="11.0" fill="#d6f22c"/><circle cx="540" cy="360" r="8.5" fill="#d6f22c"/><circle cx="0" cy="400" r="7.4" fill="#d6f22c"/><circle cx="40" cy="400" r="6.3" fill="#d6f22c"/><circle cx="80" cy="400" r="9.7" fill="#d6f22c"/><circle cx="120" cy="400" r="10.7" fill="#d6f22c"/><circle cx="160" cy="400" r="7.2" fill="#d6f22c"/><circle cx="200" cy="400" r="6.4" fill="#d6f22c"/><circle cx="240" cy="400" r="9.9" fill="#d6f22c"/><circle cx="280" cy="400" r="10.5" fill="#d6f22c"/><circle cx="320" cy="400" r="6.9" fill="#d6f22c"/><circle cx="360" cy="400" r="6.6" fill="#d6f22c"/><circle cx="400" cy="400" r="10.2" fill="#d6f22c"/><circle cx="440" cy="400" r="10.3" fill="#d6f22c"/><circle cx="480" cy="400" r="6.7" fill="#d6f22c"/><circle cx="520" cy="400" r="6.8" fill="#d6f22c"/><circle cx="20" cy="440" r="7.8" fill="#d6f22c"/><circle cx="60" cy="440" r="10.9" fill="#d6f22c"/><circle cx="100" cy="440" r="9.1" fill="#d6f22c"/><circle cx="140" cy="440" r="6.1" fill="#d6f22c"/><circle cx="180" cy="440" r="8.0" fill="#d6f22c"/><circle cx="220" cy="440" r="11.0" fill="#d6f22c"/><circle cx="260" cy="440" r="8.8" fill="#d6f22c"/><circle cx="300" cy="440" r="6.0" fill="#d6f22c"/><circle cx="340" cy="440" r="8.3" fill="#d6f22c"/><circle cx="380" cy="440" r="11.0" fill="#d6f22c"/><circle cx="420" cy="440" r="8.5" fill="#d6f22c"/><circle cx="460" cy="440" r="6.0" fill="#d6f22c"/><circle cx="500" cy="440" r="8.6" fill="#d6f22c"/><circle cx="540" cy="440" r="11.0" fill="#d6f22c"/><circle cx="0" cy="480" r="10.7" fill="#d6f22c"/><circle cx="40" cy="480" r="7.2" fill="#d6f22c"/><circle cx="80" cy="480" r="6.4" fill="#d6f22c"/><circle cx="120" cy="480" r="9.9" fill="#d6f22c"/><circle cx="160" cy="480" r="10.5" fill="#d6f22c"/><circle cx="200" cy="480" r="6.9" fill="#d6f22c"/><circle cx="240" cy="480" r="6.6" fill="#d6f22c"/><circle cx="280" cy="480" r="10.2" fill="#d6f22c"/><circle cx="320" cy="480" r="10.3" fill="#d6f22c"/><circle cx="360" cy="480" r="6.7" fill="#d6f22c"/><circle cx="400" cy="480" r="6.8" fill="#d6f22c"/><circle cx="440" cy="480" r="10.4" fill="#d6f22c"/><circle cx="480" cy="480" r="10.1" fill="#d6f22c"/><circle cx="520" cy="480" r="6.5" fill="#d6f22c"/><circle cx="20" cy="520" r="6.1" fill="#d6f22c"/><circle cx="60" cy="520" r="8.0" fill="#d6f22c"/><circle cx="100" cy="520" r="11.0" fill="#d6f22c"/><circle cx="140" cy="520" r="8.8" fill="#d6f22c"/><circle cx="180" cy="520" r="6.0" fill="#d6f22c"/><circle cx="220" cy="520" r="8.3" fill="#d6f22c"/><circle cx="260" cy="520" r="11.0" fill="#d6f22c"/><circle cx="300" cy="520" r="8.5" fill="#d6f22c"/><circle cx="340" cy="520" r="6.0" fill="#d6f22c"/><circle cx="380" cy="520" r="8.6" fill="#d6f22c"/><circle cx="420" cy="520" r="11.0" fill="#d6f22c"/><circle cx="460" cy="520" r="8.2" fill="#d6f22c"/><circle cx="500" cy="520" r="6.0" fill="#d6f22c"/><circle cx="540" cy="520" r="8.9" fill="#d6f22c"/><rect x="70" y="200" width="420" height="140" rx="70" fill="#fff"/><text x="280" y="300" text-anchor="middle" font-family="Bagel Fat One, sans-serif" font-size="120" fill="#111">BESH</text></svg></div>
+  <div class="wrap">
+    <div class="kicker">Asian-inspired café &amp; bakery · Filipino roots in Zürich</div>
+    <h1>BESH</h1>
+    <p class="lead">Coffee &amp; pastries during the week, brunch on weekends. Brauerstrasse 80, Kreis 4.</p>
+    <div class="ctas"><a class="btn" href="https://www.instagram.com/besh.zurich/" target="_blank" rel="noopener">Brunch reservieren</a><a class="btn ghost" href="#menu">Menü ansehen</a></div>
+    <div class="facts"><span class="status" id="statusChip">Fr–So 10–16 Uhr</span><span><b>Ube</b> · Calamansi · Adobo</span></div>
+  </div>
+  <button class="redo" type="button" id="redo" hidden>↻ Nochmal</button>
+</section>
+
+<section class="block" id="menu">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Pastries &amp; brunch</div><h2>Aus der Küche</h2></div><p>Ein paar Favoriten aus unserem Instagram. Auf der fertigen Seite steht hier das ganze Menü mit Preisen, das Sie selbst pflegen.</p></div>
+    <div class="dishes">
+      <article class="dish"><div class="ph p1" aria-hidden="true">🍳</div><h3>Turkish eggs</h3><p>Mit Yuzu, Chili-Öl und Miso-Pilzen.</p><span class="tag">Brunch</span></article>
+      <article class="dish"><div class="ph p2" aria-hidden="true">🥪</div><h3>Tamago sandwich</h3><p>Japanisches Eiersandwich.</p></article>
+      <article class="dish"><div class="ph p3" aria-hidden="true">🍪</div><h3>Adobo chocolate chip cookie</h3><p>„The umami bomb you didn’t know you needed.“</p></article>
+      <article class="dish"><div class="ph p4" aria-hidden="true">🥐</div><h3>Leche flan danish</h3><p>„A little taste of golden hour.“</p></article>
+      <article class="dish"><div class="ph p5" aria-hidden="true">🍞</div><h3>Ube bread</h3><p>Innen leuchtend lila.</p></article>
+      <article class="dish"><div class="ph p6" aria-hidden="true">🥭</div><h3>Mango mascarpone cruffin</h3><p>Croissant trifft Muffin.</p></article>
+      <article class="dish"><div class="ph p7" aria-hidden="true">🍋</div><h3>Calamansi almond cake</h3><p>Glutenfrei.</p></article>
+      <article class="dish"><div class="ph p8" aria-hidden="true">🍑</div><h3>Peach vanilla choux</h3><p>Zwischen Sommer-Süsse und Klassiker.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="block story" id="drinks">
+  <div class="wrap">
+    <div class="cups" aria-hidden="true"><i class="m"></i><i class="u"></i><i class="s"></i></div>
+    <div>
+      <div class="kicker">Drinks</div>
+      <h2>Cloud lattes</h2>
+      <p>Iced Matcha Latte, Ube Cloud Coconut und Sea Salt Caramel Cloud Latte. Dazu unser Cinnamon Roll Latte mit Cream-Cheese-Frosting und Espresso.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="catering">
+  <div class="wrap">
+    <div class="duo">
+      <div class="join"><div><div class="kicker">Catering</div><h3>Besh für Ihren Anlass</h3><p>Catering von Besh, Anfragen per DM oder Telefon.</p></div><a class="btn ghost" href="tel:+41798119617">079 811 96 17</a></div>
+      <div class="join"><div><div class="kicker">We’re hiring</div><h3>Brunch Chef</h3><p>Freitag bis Sonntag, Teilzeit. Bewerbung per DM.</p></div><a class="btn ghost" href="https://www.instagram.com/besh.zurich/" target="_blank" rel="noopener">Instagram</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="visit" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Besuch</div><h2>Brauerstrasse 80</h2></div><p>8004 Zürich, Kreis 4.</p></div>
+    <div class="visit">
+      <div class="map"><iframe title="Karte: Besh, Brauerstrasse 80" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=8.5180%2C47.3764%2C8.5310%2C47.3822&amp;layer=mapnik&amp;marker=47.3792766%2C8.5244888"></iframe></div>
+      <div class="card">
+        <h3>Öffnungszeiten (Oktober)</h3>
+        <dl class="hours" id="hours"></dl>
+        <p class="small">Ab 2. November wieder reguläre Zeiten.</p>
+        <h3 style="margin-top:6px">Adresse</h3>
+        <p>Besh Café &amp; Bakery<br>Brauerstrasse 80<br>8004 Zürich</p>
+        <div class="ctas"><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Besh%20Cafe%20Brauerstrasse%2080%20Z%C3%BCrich" target="_blank" rel="noopener">Route ↗</a><a class="btn ghost" href="tel:+41798119617">Anrufen</a></div>
+      </div>
+    </div>
+    <p class="note">Zeiten aus Ihrem Oktober-Post. Änderungen erscheinen hier und oben automatisch.</p>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>Besh Café &amp; Bakery · Brauerstrasse 80, 8004 Zürich</span><span>Entwurf von Jota Labs · <a href="https://5hitcake.github.io/JanOberle/#de" target="_blank" rel="noopener">weitere Arbeiten</a></span></div></footer>
+
+<a class="like" href="https://wa.me/5491130331893?text=Hallo%20Jan%2C%20ich%20habe%20den%20Website-Entwurf%20f%C3%BCr%20Besh%20gesehen%20und%20m%C3%B6chte%20mehr%20erfahren." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Gefällt’s Ihnen?</a>
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+  const hero = $("#top");
+
+  /* ---------- Hours + open now (Glasgow) ---------- */
+  const H = { Mon: null, Tue: null, Wed: null, Thu: null, Fri: [600, 960], Sat: [600, 960], Sun: [600, 960] };
+  const names = { Mon: "Montag", Tue: "Dienstag", Wed: "Mittwoch", Thu: "Donnerstag", Fri: "Freitag", Sat: "Samstag", Sun: "Sonntag" };
+  const order = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  const fmt = (m) => { const h = Math.floor(m / 60), mm = m % 60; return h + (mm ? ":" + String(mm).padStart(2, "0") : "") + " Uhr"; };
+  function status() {
+    const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Zurich", weekday: "short", hour: "numeric", minute: "numeric", hour12: false }).formatToParts(new Date());
+    const get = (t) => parts.find((x) => x.type === t).value, wd = get("weekday"), m = (+get("hour") % 24) * 60 + +get("minute"), t = H[wd];
+    $("#hours").innerHTML = order.map((d) => `<dt class="${d === wd ? "today" : ""}">${names[d]}</dt><dd class="${d === wd ? "today" : ""}">${H[d] ? fmt(H[d][0]) + " – " + fmt(H[d][1]) : "geschlossen"}</dd>`).join("");
+    const chip = $("#statusChip"), open = !!t && m >= t[0] && m < t[1];
+    chip.classList.toggle("open", open);
+    if (open) chip.innerHTML = `<b>Jetzt offen</b> · bis ${fmt(t[1])}`;
+    else if (t && m < t[0]) chip.innerHTML = `Öffnet heute um <b>${fmt(t[0])}</b>`;
+    else { const i = order.indexOf(wd); for (let n = 1; n <= 7; n++) { const d = order[(i + n) % 7]; if (H[d]) { chip.innerHTML = `Geschlossen · öffnet <b>${names[d]} ${fmt(H[d][0])}</b>`; break; } } }
+  }
+  status(); setInterval(status, 60000);
+
+  /* ---------- Intro: BESH-Logo ---------- */
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const tween = (ms, fn, tk, ez = (t) => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2)) => new Promise((res) => { const t0 = performance.now(); const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(ez(k), k); k < 1 ? requestAnimationFrame(step) : res(); }; requestAnimationFrame(step); });
+  const canvas = (parent, cls, z) => { const w = parent.clientWidth, h = parent.clientHeight, dpr = Math.min(2, devicePixelRatio || 1); const c = document.createElement("canvas"); c.className = "fxl " + cls; c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); c.style.cssText = `position:absolute;left:0;top:0;width:${w}px;height:${h}px;z-index:${z};pointer-events:none`; c.setAttribute("aria-hidden", "true"); parent.append(c); const ctx = c.getContext("2d"); ctx.scale(dpr, dpr); return { c, ctx, w, h }; };
+  const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); hero.querySelectorAll(".cover").forEach((n) => (n.style.opacity = "0")); };
+  const BS_LIME = "#d6f22c", BS_INK = "#111111", BS_UBE = "#8b5bc4";
+  function bsWord(ctx, w, cx, y, F, a, o, col, squash) { if (a <= 0) return; ctx.save(); ctx.globalAlpha *= Math.min(1, a); ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ctx.translate(cx, y); ctx.scale(1 + (squash || 0), 1 - (squash || 0)); ctx.font = `${F}px ${o.family || "system-ui"}`; ctx.fillStyle = col || BS_INK; ctx.fillText("BESH", 0, 0, w * .9); ctx.restore(); }
+  function bsSub(ctx, w, cx, y, a, o, t1, t2, dark) { if (a <= 0) return; ctx.save(); ctx.globalAlpha *= a; ctx.textAlign = "center"; const f = Math.min(w * .042, 19);
+    ctx.font = `600 ${f}px ${o.ufamily || "system-ui"}`; ctx.fillStyle = dark ? BS_INK : "#fff"; ctx.fillText(t1, cx, y, w * .9);
+    if (t2) { ctx.font = `${f * .85}px ${o.ufamily || "system-ui"}`; ctx.globalAlpha *= .8; ctx.fillText(t2, cx, y + f * 1.6, w * .9); } ctx.restore(); }
+  /* Punktemuster wie auf ihren Bechern */
+  function bsDots(ctx, w, h, a, t) { if (a <= 0) return; ctx.save(); ctx.globalAlpha *= a; ctx.fillStyle = BS_LIME; const g = Math.max(26, w / 12);
+    for (let y = -g; y < h + g; y += g) for (let x = -g; x < w + g; x += g) { const r = g * (.16 + .12 * Math.sin(x * .02 + y * .03 + t)); ctx.beginPath(); ctx.arc(x + ((y / g) % 2) * g / 2, y, Math.max(1, r), 0, 7); ctx.fill(); } ctx.restore(); }
+
+  /* ---------- Logo: Limetten-Punkte wie auf ihren Bechern, das dicke BESH plumpst rein und federt, dann „Filipino roots in Zürich“ ---------- */
+  async function bslogo(scr, tk, o = {}) {
+    const { c, ctx, w, h } = canvas(scr, "bslogo", 5), cx = w / 2, cy = h * .44, F = Math.min(w * .3, h * .17);
+    let dots = 0, drop = 0, sq = 0, sub = 0, bgA = 1, zoom = 1, t0 = performance.now();
+    const draw = (now) => {
+      ctx.clearRect(0, 0, w, h); ctx.save(); ctx.globalAlpha = bgA; ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, w, h);
+      bsDots(ctx, w, h, dots, (now - t0) / 900);
+      ctx.translate(cx, cy); ctx.scale(zoom, zoom); ctx.translate(-cx, -cy);
+      if (drop > 0) { ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.roundRect(cx - F * 1.6, cy - F * .75, F * 3.2, F * 1.5, F * .75); ctx.fill(); }
+      bsWord(ctx, w, cx, cy - (1 - drop) * h * .6, F, drop > 0 ? 1 : 0, o, BS_INK, sq);
+      ctx.restore();
+      bsSub(ctx, w, cx, cy + F * 1.25, sub * bgA, o, "coffee · pastries · brunch", "Filipino roots in Zürich · Kreis 4", true);
+    };
+    let live = true; const lp = (now) => { if (!live || tk.cancelled) return; draw(now); requestAnimationFrame(lp); }; requestAnimationFrame(lp);
+    await sleep(250);
+    await tween(700, (e) => { dots = e; }, tk);
+    await tween(450, (e, k) => { drop = k; }, tk, (q) => q * q);
+    await tween(700, (e, k) => { sq = Math.sin(k * Math.PI * 3) * (1 - k) * .22; }, tk, (q) => q);
+    await tween(450, (e) => { sub = e; }, tk);
+    await sleep(o.hold || 1000); if (tk.cancelled) { live = false; return c.remove(); }
+    reveal(); await tween(800, (e) => { zoom = 1 + e * 5; bgA = 1 - e; c.style.opacity = 1 - e; }, tk, (q) => q * q); live = false; c.remove();
+  }
+
+  const redo = $("#redo");
+  let token = { cancelled: true };
+  async function play() {
+    token.cancelled = true; const tk = (token = { cancelled: false });
+    document.querySelectorAll(".stage").forEach((n) => n.remove());
+    hero.classList.remove("reveal"); hero.classList.add("pre"); redo.hidden = true;
+    const top = Math.max(0, hero.getBoundingClientRect().top), vis = Math.max(320, Math.min(hero.clientHeight, innerHeight - top));
+    scrollTo(0, 0); document.documentElement.style.overflow = "hidden"; const vh = innerHeight; const stage = document.createElement("div"); stage.className = "stage"; stage.style.cssText = `position:fixed;left:0;top:0;width:100%;height:${vh}px;z-index:60;pointer-events:none;overflow:hidden`; document.body.append(stage);
+    const inner = document.createElement("div"); inner.style.cssText = `position:absolute;left:0;right:0;top:0;height:${vh}px`; stage.append(inner);
+    if (false) { const cv = document.createElement("div"); cv.className = "cover"; cv.style.cssText = `position:absolute;left:0;right:0;top:${vis}px;bottom:0;background:#ffffff;transition:opacity .6s`; stage.append(cv); }
+    await bslogo(inner, tk, { family: "\"Bagel Fat One\", sans-serif", ufamily: "\"DM Sans\", sans-serif" });
+    stage.remove(); document.documentElement.style.overflow = "";
+    if (!tk.cancelled) redo.hidden = false;
+  }
+  redo.addEventListener("click", play);
+  if (reduce) hero.classList.remove("pre"); else document.fonts.ready.then(play);
+})();
+</script>
+</body>
+</html>
