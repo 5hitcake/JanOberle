@@ -302,8 +302,8 @@ section.dark { background: var(--dark); color: var(--dark-fg); } section.dark .h
 
   /* ---------- Mix: oben zeichnet sich die Stuckrosette wie ein Logo, unten fächert der Farbfächer auf, Orange flutet ---------- */
   async function aamix(scr, tk, o = {}) {
-    const { c, ctx, w, h } = canvas(scr, "aamix", 5), rx = w / 2, ry = h * .23, R = Math.min(w * .26, h * .14);
-    const fx = w / 2, fy = h * .97, L = Math.min(w * .56, h * .36), SW = L * .22;
+    const { c, ctx, w, h } = canvas(scr, "aamix", 5), vh = Math.min(h, Math.max(420, innerHeight - Math.max(0, scr.getBoundingClientRect().top))), rx = w / 2, ry = vh * .23, R = Math.min(w * .26, vh * .14);
+    const fx = w / 2, fy = vh * .97, L = Math.min(w * .56, vh * .36), SW = L * .22;
     let dr = 0, fan = 0, pickK = 0, word = 0, flood = 0, bgA = 1;
     const stroke = (p, Ln, fn) => { if (p <= 0) return; ctx.save(); ctx.setLineDash([Ln * Math.min(1, p), Ln * 2]); ctx.beginPath(); fn(); ctx.stroke(); ctx.restore(); };
     const draw = () => {
@@ -326,7 +326,7 @@ section.dark { background: var(--dark); color: var(--dark-fg); } section.dark .h
         ctx.fillStyle = AA_COLS[i][0]; ctx.fillRect(-SW / 2 + 4, -L + 4, SW - 8, L * .62);
         ctx.fillStyle = "#555"; ctx.font = `${SW * .17}px ${o.ufamily || "monospace"}`; ctx.textAlign = "center"; ctx.fillText(AA_COLS[i][1], 0, -L * .26); ctx.restore(); }
       ctx.fillStyle = "#2b2d30"; ctx.beginPath(); ctx.arc(fx, fy, SW * .14, 0, 7); ctx.fill();
-      aaWord(ctx, w, h, h * .45, word, o, flood > .4 ? "#fff" : null, "_colour, it’s different"); ctx.restore();
+      aaWord(ctx, w, vh, vh * .47, word, o, flood > .4 ? "#fff" : null, "_colour, it’s different"); ctx.restore();
     };
     let live = true; const lp = () => { if (!live || tk.cancelled) return; draw(); requestAnimationFrame(lp); }; requestAnimationFrame(lp);
     await sleep(300);
