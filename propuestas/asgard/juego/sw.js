@@ -1,6 +1,6 @@
 // offline support: online the game always loads fresh from the server (so installed apps update by themselves),
 // offline it starts from the copy saved on the device
-const CACHE = 'mjolnir-e8fe5c9e01';
+const CACHE = 'mjolnir-30f3a73441';
 const FILES = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './icon-maskable-512.png', './apple-touch-icon.png'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
