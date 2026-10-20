@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Cervecería Untertürkheim · Propuesta</title>
+<meta name="description" content="Propuesta de sitio web para la Cervecería Untertürkheim, Humberto Primo 899, Buenos Aires. Hecha por Jota Labs. No es el sitio oficial.">
+<meta property="og:title" content="Cervecería Untertürkheim">
+<meta property="og:description" content="Cervezas del mundo y cocina alemana en Humberto Primo 899.">
+<meta property="og:image" content="logo.webp">
+<link rel="icon" href="favicon.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Germania+One&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Untertürkheim: Intro Uhr von 1889 + zwei Masskrüge (¡Prost!) → Logo; Hero mit aufsteigenden Bierbläschen.
+   Carta (Tablas, Cazuelas, Platos, Entre panes, Postres) und ~104 Biere aus der Carta Septiembre 2026. */
+
+:root { --bg: #0f2412; --bg-2: #163018; --bg-3: #1d3b20; --line: rgba(246,231,191,.16); --fg: #f6e7bf; --soft: #e6dbbd; --muted: #a9b79a;
+  --gold: #e9b949; --gold-2: #f7cf62; --beer: #d8901a; --cream: #efe2c0; --wood: #3b2414;
+  --f-display: "Germania One", Georgia, serif; --f-body: "Inter", system-ui, sans-serif; color-scheme: dark; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 400 17px/1.55 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3, h4 { margin: 0; font-family: var(--f-display); font-weight: 400; text-wrap: balance; letter-spacing: .01em; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 700 12px/1.2 var(--f-body); letter-spacing: .22em; text-transform: uppercase; color: var(--gold); }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.proposal { background: #000; color: #e9ebee; font: 13px/1.4 system-ui, sans-serif; padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; }
+.proposal b { color: #ffd166; } .proposal a { color: #fff; font-weight: 700; }
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 8px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 400 24px/1 var(--f-display); color: var(--gold); }
+.logo img { width: 42px; height: 42px; border-radius: 50%; }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font: 600 15px var(--f-body); color: var(--muted); }
+nav.links a:hover { color: var(--fg); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 700 15px/1 var(--f-body); padding: 15px 22px; border-radius: 6px; background: var(--gold); color: #142a14; border: 2px solid var(--gold); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 0 26px rgba(233,185,73,.35); }
+.btn.ghost { background: transparent; color: var(--fg); border-color: rgba(246,231,191,.4); }
+.btn.ghost:hover { border-color: var(--fg); }
+nav.links a.btn { color: #142a14; padding: 10px 14px; font-size: 14px; }
+.menu-btn { display: none; background: transparent; color: var(--fg); border: 1px solid var(--line); border-radius: 6px; padding: 8px 14px; font: 700 12px var(--f-body); letter-spacing: .1em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bg-2); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+.hero { position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line); background: radial-gradient(70% 60% at 50% 0%, rgba(233,185,73,.16), transparent 70%), linear-gradient(180deg, #163018, #0f2412); }
+.bubbles { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; }
+.hero .wrap { position: relative; z-index: 1; padding-block: clamp(48px, 9vw, 110px) clamp(56px, 9vw, 100px); display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; }
+.hero .badge { width: clamp(150px, 26vw, 230px); height: auto; border-radius: 50%; box-shadow: 0 20px 50px rgba(0,0,0,.5), 0 0 0 6px rgba(233,185,73,.15); }
+.hero h1 { font-size: clamp(54px, 11vw, 130px); line-height: .95; color: var(--gold); text-shadow: 0 4px 30px rgba(0,0,0,.6); }
+.hero .sub { font: 700 clamp(13px, 1.8vw, 16px) var(--f-body); letter-spacing: .3em; text-transform: uppercase; color: var(--cream); }
+.hero .lead { margin: 4px 0 0; font-size: clamp(18px, 2.2vw, 22px); color: var(--soft); max-width: 36ch; }
+.ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 8px; }
+.facts { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 10px; }
+.facts span, .facts a { font: 600 14px var(--f-body); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; background: rgba(15,36,18,.75); text-decoration: none; }
+.facts b { color: var(--fg); }
+.status::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); margin-right: 8px; vertical-align: 1px; }
+.status.open::before { background: #6ee07a; box-shadow: 0 0 10px #6ee07a; }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 7; font: 600 12px var(--f-body); color: var(--muted); background: rgba(15,36,18,.8); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.redo:hover { color: var(--fg); }
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .9s cubic-bezier(.2,.7,.2,1) both; }
+.hero.reveal .wrap > :nth-child(2) { animation-delay: .07s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .14s } .hero.reveal .wrap > :nth-child(4) { animation-delay: .21s } .hero.reveal .wrap > :nth-child(5) { animation-delay: .28s } .hero.reveal .wrap > :nth-child(6) { animation-delay: .35s }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+.strip { background: var(--cream); color: #1d2a16; }
+.strip .wrap { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 0; }
+@media (max-width: 860px) { .strip .wrap { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+.strip div { padding: 22px 16px; border-right: 1px solid rgba(59,36,20,.18); display: grid; gap: 2px; }
+.strip div:last-child { border-right: 0; }
+@media (max-width: 860px) { .strip div:nth-child(2) { border-right: 0; } .strip div:nth-child(-n+2) { border-bottom: 1px solid rgba(59,36,20,.18); } }
+.strip b { font: 400 26px/1.05 var(--f-display); color: #163018; } .strip span { font-size: 14px; color: #4b4a36; }
+section.block { padding-block: clamp(60px, 9vw, 100px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 40px; margin-bottom: 26px; }
+.head h2 { font-size: clamp(38px, 6vw, 66px); line-height: 1; margin-top: 8px; color: var(--gold); }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+.tabs { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 18px; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tabs button { flex: 0 0 auto; font: 700 15px var(--f-body); color: var(--muted); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 10px 16px; cursor: pointer; }
+.tabs button[aria-selected="true"] { background: var(--gold); color: #142a14; border-color: var(--gold); }
+.panel[hidden] { display: none; }
+.note { margin-top: 18px; font-size: 14px; color: var(--muted); }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
+@media (max-width: 760px) { .grid { grid-template-columns: minmax(0,1fr); } }
+.tabla, .dish { border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; background: var(--bg-2); display: grid; gap: 6px; align-content: start; }
+.tabla.big { background: linear-gradient(160deg, #24452a, #163018); border-color: rgba(233,185,73,.35); }
+.th { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.th h3 { font-size: 26px; color: var(--fg); } .pp { font: 700 17px var(--f-body); color: var(--gold); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.pers { font: 700 12px var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.tabla p, .dish p { margin: 0; color: var(--soft); font-size: 15px; }
+.dish.star { border-color: rgba(233,185,73,.55); }
+.tag { justify-self: start; font: 700 12px var(--f-body); color: #142a14; background: var(--gold); border-radius: 999px; padding: 3px 10px; }
+.cols { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+@media (max-width: 860px) { .cols { grid-template-columns: minmax(0,1fr); } }
+.col { border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; background: var(--bg-2); }
+.col h3 { font-size: 24px; margin-bottom: 8px; color: var(--gold); }
+ul.pl { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+ul.pl li { display: flex; align-items: baseline; gap: 8px; font-size: 15px; }
+ul.pl li i { flex: 1; border-bottom: 1px dotted rgba(246,231,191,.25); transform: translateY(-4px); }
+ul.pl li b { font-weight: 600; color: var(--fg); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.taps { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+@media (max-width: 960px) { .taps { grid-template-columns: minmax(0,1fr); } }
+.tap { border: 1px solid var(--line); border-radius: 10px; padding: 20px; background: var(--bg-2); display: grid; gap: 14px; align-content: start; }
+.tap h3 { font-size: 30px; color: var(--gold); }
+ul.beers { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+ul.beers li { display: grid; gap: 1px; } ul.beers b { font-weight: 700; } ul.beers em { font-style: normal; color: var(--muted); font-size: 14px; } ul.beers span { color: var(--soft); font-size: 14px; }
+ul.sizes { list-style: none; margin: 0; padding: 12px 0 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 6px; text-align: center; }
+ul.sizes li { display: grid; gap: 2px; padding: 8px 2px; border-radius: 8px; background: rgba(0,0,0,.18); }
+ul.sizes span { font-size: 11px; color: var(--muted); } ul.sizes b { font-size: 13px; font-variant-numeric: tabular-nums; }
+ul.sizes li.bota { background: var(--gold); color: #142a14; } ul.sizes li.bota span { color: #3a3a1a; }
+.hh { display: grid; grid-template-columns: auto minmax(0,1fr) auto; gap: 18px 26px; align-items: center; margin-top: 16px; padding: 22px 24px; border-radius: 12px; background: linear-gradient(100deg, #e9b949, #f7cf62); color: #142a14; }
+@media (max-width: 700px) { .hh { grid-template-columns: minmax(0,1fr); } }
+.hh b { font: 400 clamp(32px, 5vw, 46px)/1 var(--f-display); } .hh p { margin: 0; font-weight: 500; } .hh .big { font: 400 40px/1 var(--f-display); white-space: nowrap; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.chip { font: 600 14px var(--f-body); color: var(--muted); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 7px 13px; cursor: pointer; }
+.chip[aria-pressed="true"] { color: #142a14; background: var(--cream); border-color: var(--cream); }
+.search { width: 100%; max-width: 360px; font: 16px var(--f-body); color: var(--fg); background: var(--bg-2); border: 1px solid var(--line); border-radius: 8px; padding: 11px 14px; margin-bottom: 12px; }
+.country { margin-bottom: 22px; } .country[hidden] { display: none; }
+.country > h3 { font-size: 30px; color: var(--gold); margin-bottom: 10px; }
+.brands { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; }
+@media (max-width: 960px) { .brands { grid-template-columns: repeat(2, minmax(0,1fr)); } } @media (max-width: 600px) { .brands { grid-template-columns: minmax(0,1fr); } }
+.brand { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; background: var(--bg-2); } .brand[hidden] { display: none; }
+.brand h4 { font-size: 22px; margin-bottom: 6px; }
+.brand ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.brand li { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 0 10px; font-size: 15px; } .brand li small { grid-column: 1; color: var(--muted); font-size: 12.5px; } .brand li b { grid-row: 1 / span 2; grid-column: 2; align-self: center; font-variant-numeric: tabular-nums; }
+.house { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.1fr); gap: 28px; align-items: center; }
+@media (max-width: 860px) { .house { grid-template-columns: minmax(0,1fr); } }
+.facade { position: relative; aspect-ratio: 4 / 5; border-radius: 14px; overflow: hidden; background: var(--cream); border: 1px solid rgba(233,185,73,.35); }
+.facade svg { width: 100%; height: 100%; display: block; }
+.house h2 { font-size: clamp(36px, 5vw, 58px); color: var(--gold); line-height: 1.02; }
+.house p { color: var(--soft); }
+.events { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; margin-top: 22px; }
+@media (max-width: 860px) { .events { grid-template-columns: minmax(0,1fr); } }
+.ev { border: 1px solid var(--line); border-radius: 10px; padding: 20px; background: var(--bg-2); display: grid; gap: 6px; }
+.ev .k { font: 700 11px var(--f-body); letter-spacing: .18em; color: var(--gold); text-transform: uppercase; }
+.ev h3 { font-size: 26px; } .ev p { margin: 0; color: var(--soft); font-size: 15px; }
+.visit { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 860px) { .visit { grid-template-columns: minmax(0,1fr); } }
+.map { border-radius: 10px; overflow: hidden; border: 1px solid var(--line); min-height: 340px; }
+.map iframe { width: 100%; height: 100%; min-height: 340px; border: 0; display: block; filter: sepia(.25) saturate(.85) brightness(.92); }
+.card { border: 1px solid var(--line); border-radius: 10px; padding: 24px; background: var(--bg-2); display: grid; gap: 10px; align-content: start; }
+.card h3 { font-size: 26px; color: var(--gold); } .card p { margin: 0; color: var(--soft); }
+.hours { display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; margin: 0; font-variant-numeric: tabular-nums; }
+.hours dt { color: var(--muted); } .hours dd { margin: 0; color: var(--soft); }
+.hours .today { color: var(--fg); font-weight: 700; }
+footer { padding-block: 40px 96px; border-top: 1px solid var(--line); color: var(--muted); font: 14px system-ui, sans-serif; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 700 14px system-ui, sans-serif; padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.35); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+.skip { position: fixed; left: 50%; bottom: calc(22px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); z-index: 61; font: 600 13px var(--f-body); color: #fff; background: rgba(0,0,0,.45); border: 1px solid rgba(255,255,255,.3); border-radius: 999px; padding: 8px 16px; cursor: pointer; }
+
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></symbol>
+</svg>
+<div class="proposal"><span><b>Propuesta de diseño</b> para la Cervecería Untertürkheim · no es el sitio oficial</span><span>Hecha por <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">Jota Labs</a></span></div>
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top"><img src="logo.webp" alt="" width="42" height="42">Untertürkheim</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENÚ</button>
+    <nav class="links" id="links"><a href="#carta">La carta</a><a href="#cervezas">Cervezas</a><a href="#casa">La casa</a><a href="#visita">Horarios</a><a class="btn" href="#visita">Cómo llegar</a></nav>
+  </div>
+</header>
+<section class="hero pre" id="top">
+  <canvas class="bubbles" id="bubbles" aria-hidden="true"></canvas>
+  <button class="redo" id="redo" type="button">↻ Intro</button>
+  <div class="wrap">
+    <img class="badge" src="logo.webp" alt="Logo de la Cervecería Untertürkheim: bota de cerveza dorada con espigas" width="600" height="600">
+    <h1>Untertürkheim</h1>
+    <div class="sub">Cervecería alemana</div>
+    <p class="lead">Cervezas del mundo y cocina alemana en Humberto Primo 899.</p>
+    <div class="ctas"><a class="btn" href="#carta">Ver la carta</a><a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query=Cervecer%C3%ADa%20Untert%C3%BCrkheim%20Humberto%20Primo%20899%20Buenos%20Aires" target="_blank" rel="noopener">Cómo llegar ↗</a></div>
+    <div class="facts"><span class="status" id="statusChip">Lunes a sábado desde las 16 hs</span><a href="tel:+541143073265">☎ <b>4307-3265</b></a></div>
+  </div>
+</section>
+<div class="strip"><div class="wrap">
+  <div><b>Bota de 2 litros</b><span>Clásicas desde $29.000</span></div>
+  <div><b>Happy Hour</b><span>Pinta clásica $6.500 · 16 a 20 hs</span></div>
+  <div><b>+100 cervezas</b><span>Tiradas, artesanales e importadas</span></div>
+  <div><b>Codillo</b><span>A la cerveza negra · vie y sáb</span></div>
+</div></div>
+
+<section class="block" id="carta">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">La carta</div><h2>Cocina alemana</h2></div><p>Tablas para compartir, salchichas, bondiola y codillo. Todo con pan.</p></div>
+    <div class="tabs" role="tablist" data-group="carta">
+      <button role="tab" aria-selected="true" data-p="p-tablas">Tablas</button><button role="tab" aria-selected="false" data-p="p-platos">Platos</button><button role="tab" aria-selected="false" data-p="p-caz">Cazuelas</button><button role="tab" aria-selected="false" data-p="p-panes">Entre panes</button><button role="tab" aria-selected="false" data-p="p-postres">Postres</button>
+    </div>
+    <div class="panel" id="p-tablas"><div class="grid"><article class="tabla big"><div class="th"><h3>Baden</h3><span class="pp">$50.000</span></div><span class="pers">2 personas · parte fría y parte caliente</span><p>Salame ahumado, lomo canadiense, paté con trufas, queso ahumado, queso gruyere, salchicha alemana, bondiola cocida ahumada, chucrut con panceta y dip de mostaza relish.</p></article><article class="tabla big"><div class="th"><h3>Stuttgart</h3><span class="pp">$75.000</span></div><span class="pers">3 personas · parte fría y parte caliente</span><p>Salame ahumado, lomo canadiense, paté con trufas, aceitunas, queso ahumado, queso gruyere, queso fontina, salchicha alemana, rosca polaca, lomo tiernizado, chucrut con panceta y dip de mostaza relish.</p></article><article class="tabla big"><div class="th"><h3>Untertürkheim</h3><span class="pp">$95.000</span></div><span class="pers">4 personas · parte fría y parte caliente</span><p>Salame ahumado, lomo canadiense, paté con trufas, salchichón con jamón, queso ahumado, queso gruyere, queso fontina, queso pategrás, queso azul, aceitunas, pepinillos, salchicha alemana, rosca polaca, lomo tiernizado, chucrut con panceta y dip de mostaza relish.</p></article><article class="tabla"><div class="th"><h3>Fiambres</h3><span class="pp">$40.000</span></div><span class="pers">2 personas</span><p>Lomo canadiense, salame ahumado, paté con trufas, salchichón con jamón, lomo tiernizado y dip de mostaza relish.</p></article><article class="tabla"><div class="th"><h3>Quesos</h3><span class="pp">$38.000</span></div><span class="pers">2 personas</span><p>Queso ahumado, queso gruyere, queso fontina, queso pategrás, queso azul.</p></article><article class="tabla"><div class="th"><h3>Fiambres y Quesos</h3><span class="pp">$44.000</span></div><span class="pers">2 personas</span><p>Lomo canadiense, salame ahumado, paté con trufas, queso ahumado, queso gruyere, queso azul.</p></article><article class="tabla"><div class="th"><h3>Fiambres Grillados</h3><span class="pp">$46.000</span></div><span class="pers">2 personas</span><p>Salchicha alemana, rosca polaca, salchicha picante, bondiola cocida ahumada, lomo tiernizado y dip de mostaza relish.</p></article><article class="tabla"><div class="th"><h3>Variedad de Salchichas</h3><span class="pp">$50.000</span></div><span class="pers">2 o 3 personas</span><p>Salchicha alemana, rosca polaca, salchicha blanca fina, salchicha al curry, salchicha picante, chucrut y dip de mostaza relish.</p></article></div><p class="note">Todas las tablas incluyen pan.</p></div>
+    <div class="panel" id="p-platos" hidden><div class="grid"><article class="dish"><div class="th"><h3>Salchicha Alemana</h3><span class="pp">$26.500</span></div><p>Con panceta ahumada y queso, acompañada de ensalada de papas, chucrut con panceta, pepinillos y dip de mostaza relish.</p></article><article class="dish"><div class="th"><h3>Bondiola Cocida Ahumada</h3><span class="pp">$32.000</span></div><p>Acompañada de ensalada de papas, chucrut con panceta, pepinillos y dip de mostaza relish.</p></article><article class="dish"><div class="th"><h3>Lomo de Cerdo Tiernizado</h3><span class="pp">$33.000</span></div><p>Acompañado de chucrut con panceta, puré de manzana y dip de mostaza relish.</p></article><article class="dish star"><div class="th"><h3>Codillo de Cerdo a la Cerveza Negra</h3><span class="pp">$41.000</span></div><span class=tag>Especial viernes y sábados</span><p>Con chucrut y ensalada de papas.</p></article><article class="dish"><div class="th"><h3>Ensalada Unter</h3><span class="pp">$17.000</span></div><p>Rúcula, tomates cherry, queso azul o pategrás, aceitunas negras y nueces.</p></article></div><p class="note">Todos los platos incluyen pan.</p></div>
+    <div class="panel" id="p-caz" hidden><div class="cols"><div class="col"><h3>Frías</h3><ul class="pl"><li><span>Queso Pategrás</span><i></i><b>$8.000</b></li><li><span>Queso Ahumado</span><i></i><b>$8.500</b></li><li><span>Queso Gruyere</span><i></i><b>$9.000</b></li><li><span>Queso Fontina</span><i></i><b>$8.500</b></li><li><span>Queso Azul</span><i></i><b>$9.000</b></li><li><span>Arenque</span><i></i><b>$10.800</b></li><li><span>Lomo Canadiense</span><i></i><b>$9.800</b></li><li><span>Jamón Cocido</span><i></i><b>$9.800</b></li><li><span>Salame Ahumado</span><i></i><b>$9.800</b></li><li><span>Salame Picante</span><i></i><b>$9.800</b></li><li><span>Paté con Trufas</span><i></i><b>$9.200</b></li><li><span>Salchichón con Jamón</span><i></i><b>$9.200</b></li></ul></div><div class="col"><h3>Calientes</h3><ul class="pl"><li><span>Salchicha Alemana</span><i></i><b>$9.500</b></li><li><span>Rosca Polaca</span><i></i><b>$9.500</b></li><li><span>Salchicha Picante</span><i></i><b>$9.500</b></li><li><span>Salchicha Blanca Fina</span><i></i><b>$9.500</b></li><li><span>Salchicha al Curry</span><i></i><b>$9.500</b></li><li><span>Bondiola de Cerdo Ahumada</span><i></i><b>$13.000</b></li><li><span>Lomo de Cerdo</span><i></i><b>$14.000</b></li><li><span>Chucrut con Panceta</span><i></i><b>$8.000</b></li><li><span>Bretzel (con dip de manteca)</span><i></i><b>$6.000</b></li></ul></div><div class="col"><h3>Acompañamientos y dips</h3><ul class="pl"><li><span>Ensalada de Papas</span><i></i><b>$8.000</b></li><li><span>Puré de Manzana</span><i></i><b>$9.700</b></li><li><span>Aceitunas</span><i></i><b>$6.000</b></li><li><span>Pepinillos</span><i></i><b>$6.000</b></li><li><span>Jalapeños Picantes</span><i></i><b>$6.000</b></li><li><span>Dip Mostaza Relish</span><i></i><b>$3.500</b></li><li><span>Dip Salsa del Diablo</span><i></i><b>$3.500</b></li></ul></div></div><p class="note">Todas las cazuelas incluyen pan.</p></div>
+    <div class="panel" id="p-panes" hidden><div class="grid"><article class="dish"><div class="th"><h3>Panchensen</h3><span class="pp">$24.000</span></div><p>Salchicha alemana, panceta cocida ahumada, queso, chucrut con panceta y mostaza relish.</p></article><article class="dish"><div class="th"><h3>Bondiolensen</h3><span class="pp">$26.500</span></div><p>Bondiola cocida ahumada, panceta cocida ahumada, queso, chucrut con panceta y mostaza relish.</p></article><article class="dish"><div class="th"><h3>Tostado Artesanal</h3><span class="pp">$16.000</span></div><p>Jamón cocido y queso.</p></article><article class="dish"><div class="th"><h3>Tostado Julius Cherry</h3><span class="pp">$18.000</span></div><p>Queso, pepinillos, tomates cherry y mostaza relish.</p></article></div></div>
+    <div class="panel" id="p-postres" hidden><div class="grid"><article class="dish"><div class="th"><h3>Torta de Manzana</h3><span class="pp">$16.000</span></div><p>Con helado de americana.</p></article><article class="dish"><div class="th"><h3>Brownie</h3><span class="pp">$15.000</span></div><p>Con salsa de frambuesa y helado de americana.</p></article><article class="dish"><div class="th"><h3>Helado de Americana</h3><span class="pp">$8.000</span></div><p>Con salsa de frambuesa.</p></article></div></div>
+    <p class="note">Precios de la carta de septiembre 2026. Efectivo, tarjetas (Visa y Mastercard) y Mercado Pago.</p>
+  </div>
+</section>
+
+<section class="block" id="cervezas" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Cervezas</div><h2>Cervezas del mundo</h2></div><p>Tiradas en pinta, litro, jarra o en la bota de 2 litros. Y una heladera con cervezas de Alemania, Bélgica, Países Bajos y más.</p></div>
+    <div class="tabs" role="tablist" data-group="cerv">
+      <button role="tab" aria-selected="true" data-p="p-tiradas">Tiradas</button><button role="tab" aria-selected="false" data-p="p-bot">Latas y botellas</button><button role="tab" aria-selected="false" data-p="p-mas">Otras bebidas</button>
+    </div>
+    <div class="panel" id="p-tiradas"><div class="taps"><article class="tap"><h3>Clásicas</h3><ul class="beers"><li><b>Lager</b> <em>Warsteiner</em><span>Fino carácter lupulado, de color dorado y delicada espuma.</span></li><li><b>Kölsch</b> <em>Antares</em><span>Dorada, fresca en aroma y con destellos finales de lúpulo.</span></li><li><b>Honey</b> <em>Kraken</em><span>Sutil, notas de miel, final seco.</span></li><li><b>Irish Red</b> <em>Kraken</em><span>Suave, acaramelada, cremosa.</span></li><li><b>Robust Porter</b> <em>Kraken</em><span>Aroma a chocolate con tostado, de buen cuerpo, compleja.</span></li><li><b>Mini NEIPA</b> <em>Gorilla</em><span>Aspecto turbio, bajo amargor, aroma frutado.</span></li><li><b>American Amber Ale</b> <em>Gorilla</em><span>Balance perfecto entre amargor y maltosidad con aromas tropicales.</span></li><li><b>Maibock</b> <em>Caldeus</em><span>Estilo lager alemán, relativamente fuerte, maltosa y con final seco.</span></li><li><b>Trigo Rubia</b> <em>Caldeus</em><span>Sensación en boca cremosa, con notas a banana, pera y clavo de olor.</span></li></ul><ul class="sizes"><li class=""><span>½ Pinta</span><b>$5.000</b></li><li class=""><span>Pinta</span><b>$8.000</b></li><li class=""><span>1 Litro</span><b>$14.500</b></li><li class=""><span>Jarra 1,5 L</span><b>$22.000</b></li><li class="bota"><span>Bota 2 L</span><b>$29.000</b></li></ul></article><article class="tap"><h3>Especiales</h3><ul class="beers"><li><b>American IPA</b> <em>Kraken</em><span>Lupulada, aromas cítricos y de frutas tropicales, refrescante.</span></li><li><b>East Coast IPA</b> <em>Kraken</em><span>Muy lupulada, cítrica y frutal.</span></li><li><b>Rotativa</b><span>Consultá cuál está tirada hoy.</span></li></ul><ul class="sizes"><li class=""><span>½ Pinta</span><b>$6.000</b></li><li class=""><span>Pinta</span><b>$9.000</b></li><li class=""><span>1 Litro</span><b>$17.000</b></li><li class=""><span>Jarra 1,5 L</span><b>$25.000</b></li><li class="bota"><span>Bota 2 L</span><b>$34.000</b></li></ul></article><article class="tap"><h3>Importadas</h3><ul class="beers"><li><b>Schöfferhofer</b> <em>Alemania</em><span>Trigo rubia, fresca y afrutada, con aromas cítricos.</span></li><li><b>Maisel&#x27;s Weisse / Ayinger</b> <em>Alemania</em><span>Rotativas de trigo rubia.</span></li></ul><ul class="sizes"><li class=""><span>330 ml</span><b>$8.000</b></li><li class=""><span>Pinta</span><b>$13.000</b></li><li class=""><span>Litro</span><b>$21.000</b></li><li class=""><span>Jarra 1,5 L</span><b>$30.000</b></li><li class="bota"><span>Bota 2 L</span><b>$42.000</b></li></ul></article></div>
+      <div class="hh"><b>Happy Hour</b><p>Pinta de cervezas clásicas, de 16 a 20 hs.</p><span class="big">$6.500</span></div></div>
+    <div class="panel" id="p-bot" hidden>
+      <input class="search" id="beerQ" type="search" placeholder="Buscar: weiss, stout, Gulden Draak …" aria-label="Buscar cerveza">
+      <div class="chips" id="chips"><button class="chip" aria-pressed="true" data-c="">Todas</button><button class="chip" aria-pressed="false" data-c="Argentina · latas artesanales">Artesanales AR</button><button class="chip" aria-pressed="false" data-c="Alemania">Alemania</button><button class="chip" aria-pressed="false" data-c="Bélgica">Bélgica</button><button class="chip" aria-pressed="false" data-c="Países Bajos">Países Bajos</button><button class="chip" aria-pressed="false" data-c="Irlanda">Irlanda</button><button class="chip" aria-pressed="false" data-c="Dinamarca">Dinamarca</button><button class="chip" aria-pressed="false" data-c="Francia">Francia</button><button class="chip" aria-pressed="false" data-c="España">España</button><button class="chip" aria-pressed="false" data-c="Perú">Perú</button><button class="chip" aria-pressed="false" data-c="Estados Unidos">Estados Unidos</button></div>
+      <div id="bottles"><div class="country" data-c="Argentina · latas artesanales"><h3>Argentina · latas artesanales</h3><div class="brands"><div class="brand"><h4>Astor</h4><ul><li><span>Tolosa (Pilsen)</span><small>4,3% · 473 ml</small><b>$8.000</b></li><li><span>American IPA</span><small>6,5% · 473 ml</small><b>$10.000</b></li><li><span>NEIPA (consultar)</span><small>473 ml</small><b>$11.000</b></li><li><span>Doble NEIPA (consultar)</span><small>473 ml</small><b>$12.000</b></li><li><span>Rotativa (consultar)</span><small></small><b>consultar</b></li></ul></div><div class="brand"><h4>Darwin</h4><ul><li><span>Irreal (Session IPA sin alcohol)</span><small>0,0% · 473 ml</small><b>$9.500</b></li><li><span>Desayuno de campeones (Cream Stout)</span><small>6,3% · 473 ml</small><b>$9.500</b></li></ul></div><div class="brand"><h4>Jabalina</h4><ul><li><span>Dragon Sour</span><small>3,8% · 473 ml</small><b>$10.000</b></li><li><span>Dry Stout</span><small>4,2% · 473 ml</small><b>$8.000</b></li><li><span>Citrus Hazy IPA</span><small>6,0% · 473 ml</small><b>$10.000</b></li><li><span>Rotativa (consultar)</span><small></small><b>consultar</b></li></ul></div><div class="brand"><h4>Minga</h4><ul><li><span>La Muerte (Imperial DDL Stout)</span><small>12% · 330 ml</small><b>$11.000</b></li><li><span>El Malo (Golden Barley Wine)</span><small>11% · 330 ml</small><b>$11.000</b></li></ul></div></div></div><div class="country" data-c="Alemania"><h3>Alemania</h3><div class="brands"><div class="brand"><h4>Erdinger</h4><ul><li><span>Trigo Rubia</span><small>5,3% · 500 ml</small><b>$14.000</b></li><li><span>Dunkel</span><small>5,3% · 500 ml</small><b>$14.000</b></li><li><span>Rubia sin alcohol</span><small>0,0% · 500 ml</small><b>$14.000</b></li></ul></div><div class="brand"><h4>Clausthaler</h4><ul><li><span>Rubia sin alcohol</span><small>0,49% · 500 ml</small><b>$12.000</b></li></ul></div><div class="brand"><h4>Kaiserdom</h4><ul><li><span>Trigo Rubia</span><small>5,3% · 1 L</small><b>$24.000</b></li><li><span>Pilsen</span><small>4,8% · 1 L</small><b>$24.000</b></li><li><span>Sin Filtrar</span><small>4,7% · 1 L</small><b>$24.000</b></li><li><span>Negra</span><small>4,7% · 1 L</small><b>$24.000</b></li><li><span>Strong</span><small>8,2% · 440 ml</small><b>$13.000</b></li><li><span>Smoked</span><small>5,3% · 440 ml</small><b>$13.000</b></li><li><span>IPA</span><small>5,1% · 440 ml</small><b>$13.000</b></li></ul></div><div class="brand"><h4>DAB</h4><ul><li><span>Export</span><small>5,0% · 500 ml</small><b>$12.000</b></li><li><span>Maibock</span><small>7,0% · 500 ml</small><b>$12.000</b></li><li><span>Dark</span><small>4,9% · 500 ml</small><b>$12.000</b></li></ul></div><div class="brand"><h4>Schlenkerla</h4><ul><li><span>Märzen</span><small>5,1% · 500 ml</small><b>$19.000</b></li><li><span>Weizen</span><small>5,2% · 500 ml</small><b>$19.000</b></li><li><span>Lager</span><small>4,3% · 500 ml</small><b>$19.000</b></li><li><span>Urbock</span><small>6,5% · 500 ml</small><b>$19.000</b></li></ul></div><div class="brand"><h4>Schöfferhofer</h4><ul><li><span>Trigo Rubia</span><small>5,0% · 500 ml</small><b>$14.000</b></li><li><span>Dunkel</span><small>5,0% · 500 ml</small><b>$14.000</b></li><li><span>Trigo con Pomelo</span><small>2,5% · 500 ml</small><b>$13.000</b></li><li><span>Trigo con Ananá</span><small>2,5% · 500 ml</small><b>$13.000</b></li></ul></div><div class="brand"><h4>Franziskaner</h4><ul><li><span>Weissbier (rotativa)</span><small>5% · 500 ml</small><b>$20.000</b></li></ul></div><div class="brand"><h4>Paulaner</h4><ul><li><span>Weissbier (rotativa)</span><small>5,5% · 500 ml</small><b>$17.000</b></li></ul></div><div class="brand"><h4>Ayinger</h4><ul><li><span>Doppelbock</span><small>6,7% · 330 ml</small><b>$14.000</b></li><li><span>Altbairisch Dunkel</span><small>5,0% · 500 ml</small><b>$15.000</b></li></ul></div><div class="brand"><h4>Jever</h4><ul><li><span>Pilsner</span><small>4,9% · 500 ml</small><b>$10.000</b></li></ul></div><div class="brand"><h4>Berliner</h4><ul><li><span>Pilsner</span><small>5% · 500 ml</small><b>$12.000</b></li></ul></div><div class="brand"><h4>Radeberger</h4><ul><li><span>Pilsner</span><small>4,8% · 500 ml</small><b>$12.000</b></li></ul></div><div class="brand"><h4>Benediktiner</h4><ul><li><span>Trigo Rubia</span><small>5,4% · 500 ml</small><b>$14.000</b></li></ul></div><div class="brand"><h4>Trooper</h4><ul><li><span>Progressive Lager</span><small>5% · 500 ml</small><b>$15.000</b></li></ul></div></div></div><div class="country" data-c="Bélgica"><h3>Bélgica</h3><div class="brands"><div class="brand"><h4>Gulden Draak</h4><ul><li><span>Smoked</span><small>10,5% · 300 ml</small><b>$19.000</b></li></ul></div><div class="brand"><h4>Delirium</h4><ul><li><span>Nocturnum</span><small>8,5% · 330 ml</small><b>$20.000</b></li><li><span>Argentum IPA</span><small>7,0% · 330 ml</small><b>$20.000</b></li><li><span>Red</span><small>8,0% · 330 ml</small><b>$20.000</b></li></ul></div><div class="brand"><h4>Averbode</h4><ul><li><span>Blond Ale</span><small>7,5% · 330 ml</small><b>$18.000</b></li></ul></div><div class="brand"><h4>La Guillotine</h4><ul><li><span>Strong Ale</span><small>8,5% · 330 ml</small><b>$19.000</b></li></ul></div><div class="brand"><h4>Gouden Carolus</h4><ul><li><span>Classic</span><small>8,5% · 330 ml</small><b>$19.000</b></li><li><span>Tripel</span><small>9,0% · 330 ml</small><b>$19.000</b></li></ul></div><div class="brand"><h4>Blanche des Neiges</h4><ul><li><span>Witbier</span><small>5,0% · 330 ml</small><b>$13.000</b></li></ul></div><div class="brand"><h4>Chimay</h4><ul><li><span>Brune</span><small>7,0% · 330 ml</small><b>$20.000</b></li></ul></div><div class="brand"><h4>Lindemans</h4><ul><li><span>Kriek</span><small>3,5% · 250 ml</small><b>$16.000</b></li><li><span>Framboise</span><small>3,5% · 250 ml</small><b>$16.000</b></li><li><span>Tarot Noir</span><small>8,0% · 250 ml</small><b>$16.000</b></li><li><span>Tarot D&#x27;or</span><small>8,0% · 250 ml</small><b>$16.000</b></li><li><span>Gueuze</span><small>5,0% · 250 ml</small><b>$16.000</b></li></ul></div><div class="brand"><h4>Leffe</h4><ul><li><span>Blond (rotativa)</span><small>6,6% · 330 ml</small><b>$16.000</b></li></ul></div></div></div><div class="country" data-c="Países Bajos"><h3>Países Bajos</h3><div class="brands"><div class="brand"><h4>La Trappe</h4><ul><li><span>Blond</span><small>6,5% · 330 ml</small><b>$19.000</b></li><li><span>Dubbel</span><small>7,0% · 330 ml</small><b>$19.000</b></li><li><span>Tripel</span><small>8,0% · 330 ml</small><b>$19.000</b></li><li><span>Quadrupel</span><small>10,0% · 330 ml</small><b>$19.000</b></li></ul></div><div class="brand"><h4>Bavaria</h4><ul><li><span>Premium Lager</span><small>5,0% · 500 ml</small><b>$11.000</b></li><li><span>Strong Lager</span><small>8,6% · 500 ml</small><b>$11.000</b></li><li><span>Strong Red Lager</span><small>7,9% · 500 ml</small><b>$11.000</b></li><li><span>IPA</span><small>7,0% · 500 ml</small><b>$11.000</b></li></ul></div><div class="brand"><h4>Heineken 0,0</h4><ul><li><span>Lager sin alcohol</span><small>0,0% · 473 ml</small><b>$7.000</b></li></ul></div></div></div><div class="country" data-c="Irlanda"><h3>Irlanda</h3><div class="brands"><div class="brand"><h4>Guinness</h4><ul><li><span>Draught Stout (rotativa)</span><small>4,4% · 440 ml</small><b>$25.000</b></li><li><span>Foreign Extra Stout (rotativa)</span><small>7,5% · 330 ml</small><b>$22.000</b></li><li><span>Extra Stout</span><small>5,0% · 473 ml</small><b>$9.000</b></li><li><span>Hop House</span><small>4,9% · 473 ml</small><b>$9.000</b></li></ul></div><div class="brand"><h4>Murphy&#x27;s</h4><ul><li><span>Irish Stout (rotativa)</span><small>4% · 500 ml</small><b>$23.000</b></li></ul></div></div></div><div class="country" data-c="Dinamarca"><h3>Dinamarca</h3><div class="brands"><div class="brand"><h4>Carlsberg</h4><ul><li><span>Pilsner (rotativa)</span><small>5% · 330 ml</small><b>$12.000</b></li></ul></div><div class="brand"><h4>Faxe</h4><ul><li><span>Lager Premium</span><small>5,0% · 1 L</small><b>$24.000</b></li><li><span>Extra Fuerte</span><small>10,0% · 1 L</small><b>$24.000</b></li></ul></div></div></div><div class="country" data-c="Francia"><h3>Francia</h3><div class="brands"><div class="brand"><h4>Kronenbourg 1664</h4><ul><li><span>Blanc (rotativa)</span><small>5% · 330 ml</small><b>$12.000</b></li></ul></div><div class="brand"><h4>Monastère</h4><ul><li><span>Blond</span><small>6,5% · 500 ml</small><b>$14.000</b></li><li><span>Double</span><small>6,4% · 500 ml</small><b>$14.000</b></li></ul></div></div></div><div class="country" data-c="España"><h3>España</h3><div class="brands"><div class="brand"><h4>Estrella Damm</h4><ul><li><span>Inedit</span><small>5,0% · 330 ml</small><b>$10.000</b></li><li><span>Voll Damm</span><small>7,2% · 330 ml</small><b>$10.000</b></li></ul></div><div class="brand"><h4>Estrella Galicia</h4><ul><li><span>Lager</span><small>4,7% · 473 ml</small><b>$9.000</b></li><li><span>Tostada sin alcohol</span><small>0,0% · 330 ml</small><b>$8.000</b></li><li><span>Sin TACC</span><small>5,5% · 330 ml</small><b>$8.000</b></li></ul></div></div></div><div class="country" data-c="Perú"><h3>Perú</h3><div class="brands"><div class="brand"><h4>Cusqueña</h4><ul><li><span>Lager</span><small>4,8% · 330 ml</small><b>$9.000</b></li><li><span>Negra</span><small>5,6% · 330 ml</small><b>$9.000</b></li><li><span>Trigo</span><small>4,9% · 330 ml</small><b>$9.000</b></li></ul></div></div></div><div class="country" data-c="Estados Unidos"><h3>Estados Unidos</h3><div class="brands"><div class="brand"><h4>Blue Moon</h4><ul><li><span>Belgian White</span><small>5,4% · 330 ml</small><b>$8.000</b></li></ul></div><div class="brand"><h4>Michelob Ultra</h4><ul><li><span>Cerveza sin TACC</span><small>4,5% · 473 ml</small><b>$7.000</b></li></ul></div></div></div></div>
+      <p class="note">Las marcas marcadas como rotativas cambian según disponibilidad.</p>
+    </div>
+    <div class="panel" id="p-mas" hidden><div class="cols" style="grid-template-columns:repeat(2,minmax(0,1fr))"><div class="col"><h3>Sin alcohol</h3><ul class="pl"><li><span>Agua</span><i></i><b>$3.500</b></li><li><span>Agua con gas</span><i></i><b>$3.500</b></li><li><span>Coca Cola</span><i></i><b>$4.000</b></li><li><span>Coca Cola Zero</span><i></i><b>$4.000</b></li><li><span>Sprite</span><i></i><b>$4.000</b></li><li><span>Sprite Zero</span><i></i><b>$4.000</b></li><li><span>Fanta</span><i></i><b>$4.000</b></li><li><span>Agua Tónica</span><i></i><b>$4.000</b></li><li><span>Jugo de naranja exprimido</span><i></i><b>$8.000</b></li></ul></div><div class="col"><h3>Con alcohol</h3><ul class="pl"><li><span>Fernet Branca con Coca-Cola</span><i></i><b>$11.000</b></li><li><span>Gin Tonic (Lumpen) 473 ml</span><i></i><b>$10.000</b></li><li><span>Sidra 1888 · 750 ml</span><i></i><b>$10.000</b></li><li><span>Sidra 1888 · 473 ml</span><i></i><b>$8.000</b></li><li><span>Vino Portillo · 750 ml</span><i></i><b>$16.000</b></li><li><span>Vino Portillo · copa</span><i></i><b>$6.000</b></li><li><span>Vino Trumpeter · 750 ml</span><i></i><b>$20.000</b></li><li><span>Whisky Johnnie Walker Black Label (medida)</span><i></i><b>$18.000</b></li><li><span>Jägermeister (medida)</span><i></i><b>$8.000</b></li></ul></div></div></div>
+  </div>
+</section>
+
+<section class="block" id="casa" style="padding-top:0">
+  <div class="wrap">
+    <div class="house">
+      <div class="facade"><svg viewBox="0 0 400 500" role="img" aria-label="Fachada con entramado de madera, reloj y el año 1889">
+<rect width="400" height="500" fill="#efe2c0"/>
+<g stroke="#3b2414" stroke-width="14" stroke-linecap="square" fill="none">
+<path d="M0 60H400M0 300H400M0 470H400M28 0V500M372 0V500M28 60L120 0M372 60L280 0M28 300L80 60M372 300L320 60M28 300L80 470M372 300L320 470"/></g>
+<rect x="150" y="28" width="100" height="34" rx="6" fill="#e8dcb8" stroke="#7a5a2c" stroke-width="2"/><text x="200" y="53" text-anchor="middle" font-family="Georgia, serif" font-weight="700" font-size="24" fill="#5a4020">1889</text>
+<circle cx="200" cy="170" r="88" fill="#1b1b1b"/><circle cx="200" cy="170" r="80" fill="none" stroke="#e9b949" stroke-width="3"/><circle cx="200" cy="170" r="54" fill="none" stroke="#e9b949" stroke-width="2"/>
+<g font-family="Georgia, serif" font-weight="700" font-size="12" fill="#e9b949" text-anchor="middle" dominant-baseline="middle"><text x="200.0" y="103.0">XII</text><text x="233.5" y="112.0">I</text><text x="258.0" y="136.5">II</text><text x="267.0" y="170.0">III</text><text x="258.0" y="203.5">IV</text><text x="233.5" y="228.0">V</text><text x="200.0" y="237.0">VI</text><text x="166.5" y="228.0">VII</text><text x="142.0" y="203.5">VIII</text><text x="133.0" y="170.0">IX</text><text x="142.0" y="136.5">X</text><text x="166.5" y="112.0">XI</text></g>
+<path d="M196 178L200 128L204 178Z" fill="#e9b949"/><path d="M196 174L232 186L198 168Z" fill="#e9b949"/><circle cx="200" cy="170" r="6" fill="#e9b949"/>
+<rect x="120" y="330" width="160" height="140" fill="#24452a"/><path d="M120 330h160" stroke="#3b2414" stroke-width="8"/>
+<text x="200" y="380" text-anchor="middle" font-family="Germania One, Georgia, serif" font-size="26" fill="#e9b949">Bier Haus</text>
+<text x="200" y="416" text-anchor="middle" font-family="Germania One, Georgia, serif" font-size="22" fill="#f6e7bf">Untertürkheim</text>
+</svg></div>
+      <div>
+        <div class="kicker">La casa</div>
+        <h2>Una esquina con reloj, entramado y el año 1889</h2>
+        <p>Entrás por Humberto Primo y te recibe una fachada de madera estilo alemán, con el reloj y el año 1889 sobre la puerta. Adentro, cervezas de todo el mundo y cocina alemana, de lunes a sábado desde las 16.</p>
+        <p>¿Vienen en grupo? Pidan la bota de 2 litros. ¡Prost!</p>
+        <div class="ctas" style="justify-content:flex-start"><a class="btn" href="https://www.instagram.com/cerveceria.unter_baires/" target="_blank" rel="noopener">Seguinos en Instagram</a></div>
+      </div>
+    </div>
+    <div class="events">
+      <article class="ev"><span class="k">Septiembre</span><h3>Oktoberfest</h3><p>Nuestra fiesta de la cerveza, con HB y mucho ¡Prost!</p></article>
+      <article class="ev"><span class="k">Octubre</span><h3>Belgian Week</h3><p>Una semana dedicada a Bélgica: Gulden Draak, Lindemans, Chouffe y más.</p></article>
+      <article class="ev"><span class="k">Catas</span><h3>Cata de cervezas belgas</h3><p>Probá varias cervezas en una noche. Fechas en nuestro Instagram.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="visita" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="kicker">Visitanos</div><h2>Humberto Primo 899</h2></div><p>Ciudad de Buenos Aires.</p></div>
+    <div class="visit">
+      <div class="map"><iframe title="Mapa: Cervecería Untertürkheim, Humberto Primo 899" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-58.3851%2C-34.6237%2C-58.3721%2C-34.6179&amp;layer=mapnik&amp;marker=-34.62083%2C-58.37858"></iframe></div>
+      <div class="card"><h3>Horarios</h3><dl class="hours" id="hours"></dl><p style="font-size:15px;color:var(--muted)">Cocina hasta las 23:45 (lun a jue) y hasta las 00:45 (vie y sáb).</p>
+        <h3 style="margin-top:6px">Contacto</h3><p>Humberto Primo 899, Buenos Aires</p><p>Teléfono: <a href="tel:+541143073265">4307-3265</a></p><p>Pagos: efectivo, Visa, Mastercard y Mercado Pago.</p>
+        <div class="ctas" style="justify-content:flex-start"><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Cervecer%C3%ADa%20Untert%C3%BCrkheim%20Humberto%20Primo%20899%20Buenos%20Aires" target="_blank" rel="noopener">Cómo llegar ↗</a><a class="btn ghost" href="tel:+541143073265">Llamar</a></div></div>
+    </div>
+  </div>
+</section>
+<footer><div class="wrap"><span>Cervecería Untertürkheim · Cervecería alemana · Humberto Primo 899, Buenos Aires · @cerveceria.unter_baires</span><span>Propuesta de Jota Labs · <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">más trabajos</a></span></div></footer>
+<a class="like" href="https://wa.me/5491130331893?text=Hola%20Jan%2C%20vi%20la%20propuesta%20web%20para%20la%20Cervecer%C3%ADa%20Untert%C3%BCrkheim%20y%20quiero%20saber%20m%C3%A1s." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>¿Te gusta? Hablemos</a>
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+  document.querySelectorAll(".tabs").forEach((t) => t.querySelectorAll("button").forEach((b) => b.addEventListener("click", () => {
+    t.querySelectorAll("button").forEach((x) => { x.setAttribute("aria-selected", String(x === b)); document.getElementById(x.dataset.p).hidden = x !== b; });
+  })));
+
+  /* ---------- Latas y botellas: Länder-Filter + Suche ---------- */
+  let country = "";
+  function filt() { const q = $("#beerQ").value.trim().toLowerCase();
+    document.querySelectorAll(".country").forEach((c) => { let any = false;
+      c.querySelectorAll(".brand").forEach((b) => { const ok = (!country || c.dataset.c === country) && (!q || b.textContent.toLowerCase().includes(q)); b.hidden = !ok; any ||= ok; });
+      c.hidden = !any; }); }
+  $("#chips").querySelectorAll(".chip").forEach((b) => b.addEventListener("click", () => { country = b.dataset.c; $("#chips").querySelectorAll(".chip").forEach((x) => x.setAttribute("aria-pressed", String(x === b))); filt(); }));
+  $("#beerQ").addEventListener("input", filt);
+
+  /* ---------- Horarios + abierto ahora (Buenos Aires), cierre después de medianoche ---------- */
+  const H = { Mon: [960, 1500], Tue: [960, 1500], Wed: [960, 1500], Thu: [960, 1500], Fri: [960, 1560], Sat: [960, 1560], Sun: null };
+  const D = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], names = { Mon: "Lunes", Tue: "Martes", Wed: "Miércoles", Thu: "Jueves", Fri: "Viernes", Sat: "Sábado", Sun: "Domingo" };
+  const fmt = (m) => `${String(Math.floor(m / 60) % 24).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`;
+  function status() { const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "America/Argentina/Buenos_Aires", weekday: "short", hour: "numeric", minute: "numeric", hour12: false }).formatToParts(new Date());
+    const get = (t) => parts.find((x) => x.type === t).value, wd = get("weekday"), m = (+get("hour") % 24) * 60 + +get("minute"), t = H[wd], y = H[D[(D.indexOf(wd) + 6) % 7]];
+    $("#hours").innerHTML = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d) => `<dt class="${d === wd ? "today" : ""}">${names[d]}</dt><dd class="${d === wd ? "today" : ""}">${H[d] ? fmt(H[d][0]) + " – " + fmt(H[d][1]) : "Cerrado"}</dd>`).join("");
+    let open = null; if (t && m >= t[0]) open = t[1]; else if (y && m + 1440 < y[1]) open = y[1];
+    const chip = $("#statusChip"); chip.classList.toggle("open", open !== null);
+    chip.innerHTML = open !== null ? `<b>Abierto ahora</b> · hasta las ${fmt(open)}` : t ? `Hoy abrimos a las <b>${fmt(t[0])}</b>` : "Hoy cerrado · <b>lunes desde las 16</b>"; }
+  status(); setInterval(status, 60000);
+
+  /* ---------- Hero: aufsteigende Bierbläschen ---------- */
+  const hero = $("#top"), bc = $("#bubbles"), bx = bc.getContext("2d"); let bub = [];
+  function bubbles() { const dpr = Math.min(2, devicePixelRatio || 1), w = hero.clientWidth, h = hero.clientHeight;
+    if (bc.width !== Math.round(w * dpr) || bc.height !== Math.round(h * dpr)) { bc.width = Math.round(w * dpr); bc.height = Math.round(h * dpr); bub = Array.from({ length: Math.round(w * h / 9000) }, () => [Math.random() * w, Math.random() * h, Math.random() * 3 + .8, Math.random() * .5 + .2, Math.random() * 6]); }
+    bx.setTransform(dpr, 0, 0, dpr, 0, 0); bx.clearRect(0, 0, w, h);
+    for (const b of bub) { b[1] -= b[3]; b[4] += .02; if (b[1] < -6) { b[1] = h + 6; b[0] = Math.random() * w; } const x = b[0] + Math.sin(b[4]) * 3;
+      bx.fillStyle = "rgba(247,207,98,.22)"; bx.beginPath(); bx.arc(x, b[1], b[2], 0, 7); bx.fill(); bx.fillStyle = "rgba(255,255,255,.35)"; bx.beginPath(); bx.arc(x - b[2] * .35, b[1] - b[2] * .35, b[2] * .3, 0, 7); bx.fill(); }
+    if (!reduce) requestAnimationFrame(bubbles); }
+  requestAnimationFrame(bubbles);
+
+  /* ---------- Intro (aus der Jota-Labs-Bibliothek): Uhr von 1889, ¡Prost!, Logo ---------- */
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const ease = (t) => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+  const tween = (ms, fn, tk, ez = ease) => new Promise((res) => {
+    const t0 = performance.now();
+    const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(ez(k), k); k < 1 ? requestAnimationFrame(step) : res(); };
+    requestAnimationFrame(step);
+  });
+  const loop = (fn, tk) => { let prev = performance.now(); const step = (now) => { if (tk.cancelled) return; const dt = Math.min(50, now - prev) / 16.7; prev = now; fn(dt, now); requestAnimationFrame(step); }; requestAnimationFrame(step); };
+  const canvas = (parent, cls, z) => { const w = innerWidth, h = innerHeight, dpr = Math.min(2, devicePixelRatio || 1);
+    const c = document.createElement("canvas"); c.className = "fxl " + cls; c.width = Math.round(w * dpr); c.height = Math.round(h * dpr);
+    c.style.cssText = "position:fixed;inset:0;width:100vw;height:100vh;z-index:60;pointer-events:none"; c.setAttribute("aria-hidden", "true");
+    document.body.append(c); const ctx = c.getContext("2d"); ctx.scale(dpr, dpr); return { c, ctx, w, h }; };
+  const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); };
+  /* ---------- Cervecería Untertürkheim: echtes Rund-Logo (o.logo), Grün/Gold, Germania One ---------- */
+  const UN_G = "#163018", UN_G2 = "#24452a", UN_GOLD = "#e9b949", UN_CREAM = "#f6e7bf";
+  const unImg = (src) => new Promise((res) => { const i = new Image(); i.onload = () => res(i); i.onerror = () => res(null); i.src = src || ""; });
+  function unBg(ctx, w, h, a = 1) { ctx.save(); ctx.globalAlpha = a; const g = ctx.createRadialGradient(w / 2, h * .4, 10, w / 2, h * .45, Math.max(w, h) * .8); g.addColorStop(0, UN_G2); g.addColorStop(1, "#0c1c0e"); ctx.fillStyle = g; ctx.fillRect(0, 0, w, h); ctx.restore(); }
+  function unFinal(ctx, img, w, cx, cy, R, a, s, o) { if (a <= 0) return; ctx.save(); ctx.globalAlpha *= a;
+    ctx.shadowColor = "rgba(0,0,0,.55)"; ctx.shadowBlur = R * .25; ctx.shadowOffsetY = R * .06;
+    if (img) ctx.drawImage(img, cx - R * s, cy - R * s, R * 2 * s, R * 2 * s); ctx.shadowColor = "transparent";
+    const F = Math.min(w * .062, 30); ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ctx.font = `400 ${F}px ${o.family || "Georgia, serif"}`; ctx.fillStyle = UN_GOLD; ctx.fillText("Cervezas del mundo · cocina alemana", cx, cy + R * 1.28, w * .9);
+    ctx.font = `600 ${F * .62}px ${o.ufamily || "system-ui"}`; ctx.fillStyle = UN_CREAM; ctx.fillText("HUMBERTO PRIMO 899 · BUENOS AIRES", cx, cy + R * 1.28 + F * 1.25, w * .9); ctx.restore(); }
+  async function unOut(scr, tk, c, set) { reveal(); await tween(800, (e) => { set(e); c.style.opacity = 1 - e; }, tk, (q) => q * q); c.remove(); }
+
+  function unMug(ctx, x, y, s, rot, flip, slosh) { ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(flip, 1); const W = 46 * s, H = 70 * s;
+    ctx.strokeStyle = "rgba(246,231,191,.95)"; ctx.lineWidth = 6 * s; ctx.beginPath(); ctx.moveTo(W / 2, -H * .25); ctx.bezierCurveTo(W / 2 + 26 * s, -H * .25, W / 2 + 26 * s, H * .28, W / 2, H * .28); ctx.stroke();
+    ctx.fillStyle = "rgba(255,255,255,.14)"; ctx.beginPath(); ctx.roundRect(-W / 2, -H / 2, W, H, 6 * s); ctx.fill();
+    ctx.save(); ctx.beginPath(); ctx.roundRect(-W / 2 + 3 * s, -H / 2 + 3 * s, W - 6 * s, H - 6 * s, 4 * s); ctx.clip();
+    const g = ctx.createLinearGradient(0, -H / 2, 0, H / 2); g.addColorStop(0, "#f8cc4c"); g.addColorStop(1, "#c4720e"); ctx.fillStyle = g; ctx.fillRect(-W, -H * .3 + slosh * s, W * 2, H);
+    ctx.fillStyle = "#fbf3df"; ctx.fillRect(-W, -H / 2, W * 2, H * .2 + slosh * s); ctx.restore();
+    ctx.strokeStyle = "rgba(255,255,255,.45)"; ctx.lineWidth = 2 * s; for (let i = 0; i < 3; i++) for (let j = 0; j < 4; j++) { ctx.beginPath(); ctx.arc(-W * .28 + i * W * .28, -H * .1 + j * H * .15, 3 * s, 0, 7); ctx.stroke(); }
+    ctx.strokeStyle = "rgba(246,231,191,.9)"; ctx.lineWidth = 2.5 * s; ctx.beginPath(); ctx.roundRect(-W / 2, -H / 2, W, H, 6 * s); ctx.stroke();
+    ctx.fillStyle = "#fffaf0"; for (let i = 0; i < 6; i++) { ctx.beginPath(); ctx.arc(-W / 2 + (i + .5) * W / 6, -H / 2 - 2 * s, 6.5 * s, 0, 7); ctx.fill(); } ctx.restore(); }
+  /* ---------- B+C: Uhr von 1889 auf Fachwerk, darunter versetzt zwei Masskrüge, ¡Prost!, dann das Logo ---------- */
+  const UN_ROM = ["XII", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI"];
+  function unClock(ctx, cx, cy, r, ang) {
+    ctx.fillStyle = "#1b1b1b"; ctx.beginPath(); ctx.arc(cx, cy, r * 1.12, 0, 7); ctx.fill();
+    ctx.strokeStyle = UN_GOLD; ctx.lineWidth = r * .03; ctx.beginPath(); ctx.arc(cx, cy, r * 1.04, 0, 7); ctx.stroke(); ctx.beginPath(); ctx.arc(cx, cy, r * .7, 0, 7); ctx.stroke();
+    for (let i = 0; i < 24; i++) { const a = i / 24 * 6.283; ctx.fillStyle = "#2c2c2c"; ctx.beginPath(); ctx.arc(cx + Math.cos(a) * r * 1.2, cy + Math.sin(a) * r * 1.2, r * .05, 0, 7); ctx.fill(); }
+    ctx.fillStyle = UN_GOLD; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.font = `700 ${r * .13}px Georgia, serif`;
+    UN_ROM.forEach((t, i) => { const a = i / 12 * 6.283 - Math.PI / 2; ctx.fillText(t, cx + Math.cos(a) * r * .86, cy + Math.sin(a) * r * .86); });
+    const hand = (a, L, W) => { ctx.save(); ctx.translate(cx, cy); ctx.rotate(a); ctx.fillStyle = UN_GOLD; ctx.beginPath(); ctx.moveTo(-W, r * .1); ctx.lineTo(0, -L); ctx.lineTo(W, r * .1); ctx.closePath(); ctx.fill(); ctx.restore(); };
+    hand(ang / 12, r * .5, r * .05); hand(ang, r * .68, r * .03); ctx.beginPath(); ctx.arc(cx, cy, r * .06, 0, 7); ctx.fill();
+    ctx.fillStyle = "#e8dcb8"; ctx.strokeStyle = "#7a5a2c"; ctx.lineWidth = 2; const pw = r * .9, ph = r * .3, py = cy - r * 1.62; ctx.beginPath(); ctx.roundRect(cx - pw / 2, py - ph / 2, pw, ph, ph * .2); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = "#5a4020"; ctx.font = `700 ${ph * .62}px Georgia, serif`; ctx.fillText("1889", cx, py + 1);
+  }
+  async function unmix(scr, tk, o = {}) {
+    const img = await unImg(o.logo); const { c, ctx, w, h } = canvas(scr, "unmix", 5), cx = w / 2, R = Math.min(w * .34, h * .19);
+    const cyC = h * .27, rC = Math.min(w * .29, h * .15), cyM = h * .69, cyL = h * .4, s = Math.min(w * .0056, h * .0032);
+    let beams = 0, face = 0, ang = 0, t1 = 0, t2 = 0, pl = 0, pr = 0, hit = 0, slosh = 0, morph = 0, zoom = 1, bgA = 1;
+    const B = [[0, .1, 1, .1], [0, .52, 1, .52], [0, .92, 1, .92], [.07, 0, .07, 1], [.93, 0, .93, 1], [.07, .1, .28, 0], [.93, .1, .72, 0], [.07, .52, .2, .1], [.93, .52, .8, .1], [.07, .52, .2, .92], [.93, .52, .8, .92]];
+    const sp = []; const burst = (x, y) => { for (let i = 0; i < 80; i++) { const a = -Math.PI / 2 + (Math.random() - .5) * 2.6, v = 2.5 + Math.random() * 7; sp.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, r: (1.5 + Math.random() * 3.5) * (w / 390), foam: Math.random() < .55, life: 1 }); } };
+    const draw = () => { ctx.clearRect(0, 0, w, h); ctx.save(); ctx.globalAlpha = bgA; ctx.fillStyle = "#efe2c0"; ctx.fillRect(0, 0, w, h);
+      ctx.strokeStyle = "#3b2414"; ctx.lineCap = "square"; ctx.lineWidth = Math.max(10, w * .035);
+      B.forEach(([x1, y1, x2, y2], i) => { const k = Math.max(0, Math.min(1, beams * 1.6 - i * .05)); if (!k) return; ctx.beginPath(); ctx.moveTo(x1 * w, y1 * h); ctx.lineTo((x1 + (x2 - x1) * k) * w, (y1 + (y2 - y1) * k) * h); ctx.stroke(); });
+      ctx.fillStyle = "rgba(0,0,0,.2)"; ctx.fillRect(0, 0, w, h); ctx.restore();
+      ctx.save(); ctx.translate(cx, cyL); ctx.scale(zoom, zoom); ctx.translate(-cx, -cyL); const a0 = (1 - morph) * bgA;
+      if (face > 0 && a0 > 0) { ctx.save(); ctx.globalAlpha = face * a0; unClock(ctx, cx, cyC, rC * (.7 + face * .3), ang); ctx.restore(); }
+      if (hit > 0 && a0 > 0) { ctx.save(); ctx.globalAlpha = (1 - hit) * .7 * a0; const g = ctx.createRadialGradient(cx, cyM - 40 * s, 1, cx, cyM - 40 * s, w * .6); g.addColorStop(0, "rgba(255,236,170,.9)"); g.addColorStop(1, "rgba(255,236,170,0)"); ctx.fillStyle = g; ctx.fillRect(0, 0, w, h); ctx.restore(); }
+      if (a0 > 0) { ctx.save(); ctx.globalAlpha = a0; const gap = 27 * s, eL = 1 - Math.pow(1 - pl, 3), eR = 1 - Math.pow(1 - pr, 3);
+        if (pl > 0) unMug(ctx, cx - gap - (1 - eL) * w * .75, cyM - eL * 8 * s, s, -.28 * eL, -1, slosh);
+        if (pr > 0) unMug(ctx, cx + gap + (1 - eR) * w * .75, cyM - eR * 8 * s, s, .28 * eR, 1, -slosh); ctx.restore(); }
+      for (const q of sp) { if (q.life <= 0) continue; ctx.globalAlpha = q.life * a0; ctx.fillStyle = q.foam ? "#fff8e6" : "#f2b632"; ctx.beginPath(); ctx.arc(q.x, q.y, q.r, 0, 7); ctx.fill(); } ctx.globalAlpha = 1;
+      const F = Math.min(w * .09, 42), ty = cyC + rC * 1.5;
+      ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.shadowColor = "rgba(0,0,0,.7)"; ctx.shadowBlur = 12;
+      if (t1 > 0) { ctx.globalAlpha = t1 * a0; ctx.font = `400 ${F}px ${o.family || "Georgia, serif"}`; ctx.fillStyle = "#fff4d6"; ctx.fillText("Abrimos a las 16hs", cx, ty, w * .9); }
+      if (t2 > 0) { ctx.globalAlpha = t2 * a0; ctx.font = `400 ${F * 1.5 * (.8 + t2 * .2)}px ${o.family || "Georgia, serif"}`; ctx.fillStyle = UN_GOLD; ctx.fillText("¡Prost!", cx, ty, w * .9); }
+      ctx.shadowColor = "transparent"; ctx.globalAlpha = 1; ctx.restore();
+      if (morph > 0) unBg(ctx, w, h, morph * bgA); unFinal(ctx, img, w, cx, cyL, R, morph * bgA, .9 + morph * .1, o); };
+    let live = true; const lp = () => { if (!live || tk.cancelled) return; for (const q of sp) { q.x += q.vx; q.y += q.vy; q.vy += .3; q.vx *= .985; q.life -= .013; } draw(); requestAnimationFrame(lp); }; requestAnimationFrame(lp);
+    await sleep(150); await tween(800, (e) => { beams = e; }, tk);
+    await tween(500, (e) => { face = e; }, tk);
+    await tween(1400, (e) => { ang = e * 6.283 * 16; }, tk);
+    tween(350, (e) => { t1 = e; }, tk);
+    await tween(650, (e, k) => { pl = k; }, tk, (q) => q); /* linker Krug, rechter versetzt */
+    await tween(650, (e, k) => { pr = k; pl = 1; }, tk, (q) => q);
+    burst(cx, cyM - 40 * s); tween(400, (e) => { t1 = 1 - e; t2 = e; }, tk);
+    await tween(500, (e) => { hit = e; slosh = Math.sin(e * 9) * 4 * (1 - e); }, tk);
+    await sleep(600);
+    await tween(700, (e) => { morph = e; }, tk);
+    await sleep(o.hold || 1100); if (tk.cancelled) { live = false; return c.remove(); }
+    await unOut(scr, tk, c, (e) => { zoom = 1 + e * 4; bgA = 1 - e; }); live = false;
+  }
+
+
+  let token = { cancelled: true }, skipBtn = null;
+  const finish = () => { document.querySelectorAll(".fxl").forEach((n) => n.remove()); skipBtn && skipBtn.remove(); skipBtn = null; document.documentElement.style.overflow = ""; };
+  async function play() { token.cancelled = true; finish(); const tk = (token = { cancelled: false });
+    if (reduce) { reveal(); return; }
+    scrollTo(0, 0); document.documentElement.style.overflow = "hidden"; hero.classList.add("pre"); hero.classList.remove("reveal");
+    skipBtn = document.createElement("button"); skipBtn.className = "skip fxl"; skipBtn.type = "button"; skipBtn.textContent = "Saltar intro";
+    skipBtn.addEventListener("click", () => { tk.cancelled = true; finish(); reveal(); }); document.body.append(skipBtn);
+    await unmix(document.body, tk, { logo: "logo.webp", family: '"Germania One", Georgia, serif', ufamily: "Inter, system-ui" });
+    if (token === tk) { if (tk.cancelled) reveal(); finish(); } }
+  $("#redo").addEventListener("click", play);
+  document.fonts && document.fonts.ready ? document.fonts.ready.then(play) : play();
+})();
+</script>
+</body>
+</html>
