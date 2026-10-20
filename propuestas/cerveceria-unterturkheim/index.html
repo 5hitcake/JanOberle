@@ -360,15 +360,15 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   async function unmix(scr, tk, o = {}) {
     const img = await unImg(o.logo); const { c, ctx, w, h } = canvas(scr, "unmix", 5), cx = w / 2, R = Math.min(w * .34, h * .19);
     const cyC = h * .27, rC = Math.min(w * .29, h * .15), cyM = h * .69, cyL = h * .4, s = Math.min(w * .0056, h * .0032);
-    let beams = 0, face = 0, ang = 0, t1 = 0, t2 = 0, pl = 0, pr = 0, hit = 0, slosh = 0, morph = 0, zoom = 1, bgA = 1;
+    let beams = 0, face = 0, ang = 0, t1 = 0, t2 = 0, pl = 0, pr = 0, hit = 0, slosh = 0, mA = 0, mB = 0, morph = 0, zoom = 1, bgA = 1;
     const B = [[0, .1, 1, .1], [0, .52, 1, .52], [0, .92, 1, .92], [.07, 0, .07, 1], [.93, 0, .93, 1], [.07, .1, .28, 0], [.93, .1, .72, 0], [.07, .52, .2, .1], [.93, .52, .8, .1], [.07, .52, .2, .92], [.93, .52, .8, .92]];
     const sp = []; const burst = (x, y) => { for (let i = 0; i < 80; i++) { const a = -Math.PI / 2 + (Math.random() - .5) * 2.6, v = 2.5 + Math.random() * 7; sp.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, r: (1.5 + Math.random() * 3.5) * (w / 390), foam: Math.random() < .55, life: 1 }); } };
     const draw = () => { ctx.clearRect(0, 0, w, h); ctx.save(); ctx.globalAlpha = bgA; ctx.fillStyle = "#efe2c0"; ctx.fillRect(0, 0, w, h);
       ctx.strokeStyle = "#3b2414"; ctx.lineCap = "square"; ctx.lineWidth = Math.max(10, w * .035);
       B.forEach(([x1, y1, x2, y2], i) => { const k = Math.max(0, Math.min(1, beams * 1.6 - i * .05)); if (!k) return; ctx.beginPath(); ctx.moveTo(x1 * w, y1 * h); ctx.lineTo((x1 + (x2 - x1) * k) * w, (y1 + (y2 - y1) * k) * h); ctx.stroke(); });
       ctx.fillStyle = "rgba(0,0,0,.2)"; ctx.fillRect(0, 0, w, h); ctx.restore();
-      ctx.save(); ctx.translate(cx, cyL); ctx.scale(zoom, zoom); ctx.translate(-cx, -cyL); const a0 = (1 - morph) * bgA;
-      if (face > 0 && a0 > 0) { ctx.save(); ctx.globalAlpha = face * a0; unClock(ctx, cx, cyC, rC * (.7 + face * .3), ang); ctx.restore(); }
+      ctx.save(); ctx.translate(cx, cyL); ctx.scale(zoom, zoom); ctx.translate(-cx, -cyL); const a0 = (1 - mB) * bgA;
+      if (face > 0 && mA < 1) { ctx.save(); ctx.globalAlpha = face * (1 - mA) * bgA; unClock(ctx, cx, cyC, rC * (.7 + face * .3), ang); ctx.restore(); }
       if (hit > 0 && a0 > 0) { ctx.save(); ctx.globalAlpha = (1 - hit) * .7 * a0; const g = ctx.createRadialGradient(cx, cyM - 40 * s, 1, cx, cyM - 40 * s, w * .6); g.addColorStop(0, "rgba(255,236,170,.9)"); g.addColorStop(1, "rgba(255,236,170,0)"); ctx.fillStyle = g; ctx.fillRect(0, 0, w, h); ctx.restore(); }
       if (a0 > 0) { ctx.save(); ctx.globalAlpha = a0; const gap = 27 * s, eL = 1 - Math.pow(1 - pl, 3), eR = 1 - Math.pow(1 - pr, 3);
         if (pl > 0) unMug(ctx, cx - gap - (1 - eL) * w * .75, cyM - eL * 8 * s, s, -.28 * eL, -1, slosh);
@@ -379,7 +379,11 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
       if (t1 > 0) { ctx.globalAlpha = t1 * a0; ctx.font = `400 ${F}px ${o.family || "Georgia, serif"}`; ctx.fillStyle = "#fff4d6"; ctx.fillText("Abrimos a las 16hs", cx, ty, w * .9); }
       if (t2 > 0) { ctx.globalAlpha = t2 * a0; ctx.font = `400 ${F * 1.5 * (.8 + t2 * .2)}px ${o.family || "Georgia, serif"}`; ctx.fillStyle = UN_GOLD; ctx.fillText("¡Prost!", cx, ty, w * .9); }
       ctx.shadowColor = "transparent"; ctx.globalAlpha = 1; ctx.restore();
-      if (morph > 0) unBg(ctx, w, h, morph * bgA); unFinal(ctx, img, w, cx, cyL, R, morph * bgA, .9 + morph * .1, o); };
+      if (mB > 0) unBg(ctx, w, h, mB * bgA);
+      if (mA > 0 && img) { const e = ease(mB), y = cyC + (cyL - cyC) * e, rad = rC * 1.12 + (R - rC * 1.12) * e; ctx.save(); ctx.globalAlpha = mA * bgA;
+        if (mB < 1) { ctx.save(); ctx.globalAlpha *= (1 - mB) * Math.sin(mA * Math.PI) * .9 + (1 - mB) * .2; const g = ctx.createRadialGradient(cx, y, rad * .8, cx, y, rad * 1.7); g.addColorStop(0, "rgba(255,220,120,.7)"); g.addColorStop(1, "rgba(255,220,120,0)"); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx, y, rad * 1.7, 0, 7); ctx.fill(); ctx.restore(); }
+        ctx.translate(cx, y); ctx.rotate((1 - mA) * -.9); ctx.shadowColor = "rgba(0,0,0,.55)"; ctx.shadowBlur = rad * .25; ctx.shadowOffsetY = rad * .06; ctx.drawImage(img, -rad, -rad, rad * 2, rad * 2); ctx.restore(); }
+      unFinal(ctx, null, w, cx, cyL, R, Math.max(0, mB * 2 - 1) * bgA, 1, o); };
     let live = true; const lp = () => { if (!live || tk.cancelled) return; for (const q of sp) { q.x += q.vx; q.y += q.vy; q.vy += .3; q.vx *= .985; q.life -= .013; } draw(); requestAnimationFrame(lp); }; requestAnimationFrame(lp);
     await sleep(150); await tween(800, (e) => { beams = e; }, tk);
     await tween(500, (e) => { face = e; }, tk);
@@ -390,7 +394,8 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     burst(cx, cyM - 40 * s); tween(400, (e) => { t1 = 1 - e; t2 = e; }, tk);
     await tween(500, (e) => { hit = e; slosh = Math.sin(e * 9) * 4 * (1 - e); }, tk);
     await sleep(600);
-    await tween(700, (e) => { morph = e; }, tk);
+    await tween(650, (e) => { mA = e; t2 = 1 - e * .6; }, tk); /* Logo geht aus der Uhr hervor */
+    await tween(750, (e, k) => { mB = k; }, tk, (q) => q);
     await sleep(o.hold || 1100); if (tk.cancelled) { live = false; return c.remove(); }
     await unOut(scr, tk, c, (e) => { zoom = 1 + e * 4; bgA = 1 - e; }); live = false;
   }
