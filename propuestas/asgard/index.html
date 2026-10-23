@@ -161,6 +161,11 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 .btn.shine::after { content: ""; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%; transform: skewX(-20deg); background: linear-gradient(90deg, transparent, rgba(255,255,255,.65), transparent); animation: shine 3.6s ease-in-out infinite 1.5s; }
 @keyframes shine { 0% { left: -60%; } 55%, 100% { left: 130%; } }
 @media (prefers-reduced-motion: reduce) { .btn.shine::after { display: none; } }
+@media (min-width: 901px) { .exp { grid-template-columns: repeat(4, minmax(0,1fr)) !important; } }
+.thor-img.poster-img { aspect-ratio: auto; object-fit: contain; }
+.card.artes { grid-template-columns: minmax(0,280px) minmax(0,1fr); gap: 26px; align-items: center; }
+@media (max-width: 700px) { .card.artes { grid-template-columns: minmax(0,1fr); } }
+.artes-img { width: 100%; height: auto; border-radius: 10px; border: 1px solid rgba(232,181,82,.4); box-shadow: 0 12px 30px rgba(0,0,0,.45); display: block; }
 .sw { white-space: nowrap; }
 .sc { display: inline-block; text-align: center; }
 .sc.rn { font-family: var(--f-rune); font-size: .78em; color: var(--gold); opacity: .75; text-shadow: 0 0 10px rgba(232,181,82,.45); }
@@ -203,8 +208,10 @@ html.js .bf.in { opacity: 1; filter: none; transform: none; }
     <div class="head"><div><div class="kicker">Experiencias</div><h2>El legado de Odín</h2></div><p>Un rincón del norte en el corazón de San Telmo. Entrá, probá y llevate un pedacito de Asgard.</p></div>
     <div class="thor"><img class="thor-img" src="runas.webp" alt="La völva en su rincón de lectura de runas en Asgard, con la mesa de runas y cristales" loading="lazy" width="1000" height="1333">
       <div><div class="kicker">A voluntad</div><h3>Lectura de runas</h3><p>Sentate a la mesa de la völva y consultá a las runas del Futhark antiguo. Las lecturas son a voluntad, cuando visitás Asgard.</p></div></div>
-    <div class="thor"><img class="thor-img" src="thor.webp" alt="Thor con su martillo y escudo en El Legado de Odín" loading="lazy" width="1000" height="1333">
+    <div class="thor"><img class="thor-img" src="thor.webp" alt="Thor alza su martillo junto a su escudo en El Legado de Odín" loading="lazy" width="1000" height="1333">
       <div><div class="kicker">Los domingos</div><h3>¡El mismísimo Thor te está esperando!</h3><p>Vení a conocerlo en persona y sacate una foto con el dios del trueno.</p></div></div>
+    <div class="thor"><img class="thor-img poster-img" src="hidromiel.webp" alt="Hidromiel Asgard: botellas de hidromiel y vino especiado con la runa Othala, degustaciones los fines de semana" loading="lazy" width="828" height="1083">
+      <div><div class="kicker">Degustaciones los fines de semana</div><h3>Hidromiel Asgard</h3><p>Descubrí la auténtica hidromiel de Asgard, elaborada artesanalmente para quienes buscan algo diferente. También hay vino especiado nórdico.</p></div></div>
     <div class="exp" id="exp"></div>
     <p class="note">Precios y novedades: consultanos por <a href="https://wa.me/5491167093542?text=Hola%20Asgard!%20Quiero%20consultar%20por%20las%20experiencias." target="_blank" rel="noopener">WhatsApp</a>.</p>
   </div>
@@ -239,7 +246,7 @@ html.js .bf.in { opacity: 1; filter: none; transform: none; }
   </div>
 </section>
 <section class="block" style="padding-top:0">
-  <div class="wrap"><div class="card" style="grid-template-columns:minmax(0,1fr) auto;align-items:center"><div><div class="kicker">Convocatoria</div><h3 style="margin-top:6px;font-size:26px">¡Asgard abre su convocatoria de artesanos!</h3><p style="margin-top:6px">Si creás piezas inspiradas en la cultura germano-nórdica, esta es tu oportunidad de mostrar tu trabajo. ¡Los cupos son limitados!</p></div><a class="btn ghost" href="https://wa.me/5491167093542?text=Hola%20Leonardo!%20Quiero%20participar%20de%20la%20convocatoria%20de%20artesanos." target="_blank" rel="noopener">Escribinos</a></div></div>
+  <div class="wrap"><div class="card artes"><img class="artes-img" src="artesanos.webp" alt="Afiche: ¡Asgard abre su convocatoria de artesanos! Escribinos al WhatsApp 11 6709-3542 (Leonardo). Los cupos son limitados." loading="lazy" width="828" height="1224"><div><div class="kicker">Convocatoria</div><h3 style="margin-top:6px;font-size:clamp(24px,3vw,34px)">¡Asgard abre su convocatoria de artesanos!</h3><p style="margin-top:8px">Si creás piezas inspiradas en la cultura germano-nórdica, esta es tu oportunidad de mostrar tu trabajo. ¡Los cupos son limitados!</p><p style="margin-top:8px">Escribile a Leonardo por WhatsApp: 11 6709-3542.</p><div class="ctas" style="justify-content:flex-start;margin-top:14px"><a class="btn shine" href="https://wa.me/5491167093542?text=Hola%20Leonardo!%20Quiero%20participar%20de%20la%20convocatoria%20de%20artesanos." target="_blank" rel="noopener">Escribile a Leonardo</a></div></div></div></div>
 </section>
 <section class="block" id="visita" style="padding-top:0">
   <div class="wrap">
@@ -261,7 +268,7 @@ html.js .bf.in { opacity: 1; filter: none; transform: none; }
   mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
   links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
 
-  const E = [["ᛗ", "Hidromiel de Asgard", "El clásico néctar de los dioses."], ["ᚹ", "Armonización personal", "Reconectá con tu esencia ancestral: respiración, calma y concentración, inspiradas en la sabiduría de los antiguos pueblos nórdicos. Turnos por WhatsApp."], ["ᛚ", "Bebidas legendarias", "Vino especiado nórdico, aromático, cálido y ancestral, y tragos nórdicos exclusivos de Asgard."], ["ᛉ", "Amuletos rúnicos", "Amuletos con runas y símbolos nórdicos como el Vegvísir."], ["ᛋ", "Cristales y cosmética", "Cristales de la Tierra y Zaid Cosmética, la antigua alquimia de las plantas."]];
+  const E = [["ᚹ", "Armonización personal", "Reconectá con tu esencia ancestral: respiración, calma y concentración, inspiradas en la sabiduría de los antiguos pueblos nórdicos. Turnos por WhatsApp."], ["ᛚ", "Bebidas legendarias", "Vino especiado nórdico, aromático, cálido y ancestral, y tragos nórdicos exclusivos de Asgard."], ["ᛉ", "Amuletos rúnicos", "Amuletos con runas y símbolos nórdicos como el Vegvísir."], ["ᛋ", "Cristales y cosmética", "Cristales de la Tierra y Zaid Cosmética, la antigua alquimia de las plantas."]];
   $("#exp").innerHTML = E.map(([r, t, d]) => `<article class="ex"><span class="r" aria-hidden="true">${r}</span><span class="r big" aria-hidden="true">${r}</span><h3>${t}</h3><p>${d}</p></article>`).join("");
 
   /* ---------- Horarios + abierto ahora (Buenos Aires) ---------- */
