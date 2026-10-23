@@ -161,8 +161,11 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 .btn.shine::after { content: ""; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%; transform: skewX(-20deg); background: linear-gradient(90deg, transparent, rgba(255,255,255,.65), transparent); animation: shine 3.6s ease-in-out infinite 1.5s; }
 @keyframes shine { 0% { left: -60%; } 55%, 100% { left: 130%; } }
 @media (prefers-reduced-motion: reduce) { .btn.shine::after { display: none; } }
-.scr { font-variant-ligatures: none; }
-.scr .rn { font-family: var(--f-rune); color: var(--gold); }
+.sw { white-space: nowrap; }
+.sc { display: inline-block; text-align: center; }
+.sc.rn { font-family: var(--f-rune); font-size: .78em; color: var(--gold); opacity: .75; text-shadow: 0 0 10px rgba(232,181,82,.45); }
+.sc.ok { animation: settle .45s ease-out both; }
+@keyframes settle { from { opacity: 0; filter: blur(4px); transform: translateY(.06em); } to { opacity: 1; filter: none; transform: none; } }
 html.js .bf { opacity: 0; filter: blur(8px); transform: translateY(16px); transition: opacity .8s ease, filter .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
 html.js .bf.in { opacity: 1; filter: none; transform: none; }
 @media (prefers-reduced-motion: reduce) { html.js .bf { opacity: 1; filter: none; transform: none; transition: none; } }
@@ -328,16 +331,24 @@ html.js .bf.in { opacity: 1; filter: none; transform: none; }
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const RUNES = "ᚠᚢᚦᚨᚱᚲᚷᚹᚺᚾᛁᛃᛇᛈᛉᛊᛏᛒᛖᛗᛚᛜᛞᛟ";
   /* Hyper Text mit Runen: jeder Buchstabe zeigt erst zufällige Runen, dann von links nach rechts den echten Buchstaben */
-  function scramble(el, ms = 1100) { if (reduce || el.dataset.done) return; el.dataset.done = 1; const txt = el.textContent; el.setAttribute("aria-label", txt); el.classList.add("scr");
-    const chars = [...txt], n = chars.length, t0 = performance.now();
-    const step = (now) => { const k = Math.min(1, (now - t0) / ms), fixed = Math.floor(k * n);
-      el.innerHTML = chars.map((c, i) => (i < fixed || c === " " || c === "·" ? c.replace(/&/g, "&amp;").replace(/</g, "&lt;") : `<span class="rn" aria-hidden="true">${RUNES[(Math.random() * RUNES.length) | 0]}</span>`)).join("");
-      if (k < 1) requestAnimationFrame(step); else { el.textContent = txt; el.classList.remove("scr"); } };
+  /* Hyper Text mit Runen, ruhiger: Runen wechseln nur alle ~120 ms, Buchstaben behalten ihre Breite (kein Springen),
+     jeder Buchstabe blendet beim Auflösen weich ein, von links nach rechts gestaffelt. */
+  const esc = (c) => c.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+  function scramble(el, ms = 1700) { if (reduce || el.dataset.done) return; el.dataset.done = 1; const txt = el.textContent; el.setAttribute("aria-label", txt);
+    el.innerHTML = txt.split(/(\s+)/).map((w) => /^\s+$/.test(w) || !w ? w : `<span class="sw" aria-hidden="true">${[...w].map((c) => `<span class="sc">${esc(c)}</span>`).join("")}</span>`).join("");
+    const sp = [...el.querySelectorAll(".sc")], n = sp.length; sp.forEach((x) => (x.style.width = x.getBoundingClientRect().width + "px"));
+    const fin = sp.map((x) => x.textContent), at = sp.map((_, i) => 200 + (i / Math.max(1, n - 1)) * ms * .8 + Math.random() * 120);
+    const rune = () => RUNES[(Math.random() * RUNES.length) | 0];
+    sp.forEach((x) => { if (/[A-Za-zÀ-ÿ0-9]/.test(x.textContent)) { x.textContent = rune(); x.classList.add("rn"); } });
+    const t0 = performance.now(); let last = 0;
+    const step = (now) => { const t = now - t0, tick = t - last > 120; if (tick) last = t; let open = 0;
+      sp.forEach((x, i) => { if (!x.classList.contains("rn")) return; if (t >= at[i]) { x.textContent = fin[i]; x.classList.remove("rn"); x.classList.add("ok"); } else { open++; if (tick && Math.random() < .6) x.textContent = rune(); } });
+      if (open) requestAnimationFrame(step); else setTimeout(() => { el.textContent = txt; el.removeAttribute("aria-label"); }, 500); };
     requestAnimationFrame(step); }
   const hero = document.getElementById("top"), h1 = hero.querySelector("h1");
-  const watch = new MutationObserver(() => { if (hero.classList.contains("reveal")) { scramble(h1, 900); watch.disconnect(); } });
+  const watch = new MutationObserver(() => { if (hero.classList.contains("reveal")) { scramble(h1, 1500); watch.disconnect(); } });
   watch.observe(hero, { attributes: true, attributeFilter: ["class"] });
-  if (!hero.classList.contains("pre")) scramble(h1, 900);
+  if (!hero.classList.contains("pre")) scramble(h1, 1500);
   /* Blur Fade + Scramble der Überschriften beim Scrollen */
   const targets = document.querySelectorAll(".ex, .pr, .ev, .thor, .feast, .game, .buy, .visit .card, .skal");
   targets.forEach((n) => n.classList.add("bf"));
