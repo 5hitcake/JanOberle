@@ -173,7 +173,62 @@ section, footer { position: relative; z-index: 1; }
 .frames span:nth-child(4) { left: 10%; bottom: 0; width: 34%; height: 32%; } .frames span:nth-child(4)::after { background: linear-gradient(140deg,#d62828,#fcbf49); }
 .card { color: var(--ink); }
 .story .btn.ghost { background: transparent !important; color: #fffaf2 !important; border-color: rgba(255,255,255,.55) !important; }
+
+/* v2: echte Fotos, 3D-Marshmallows (nach Magic UI Floating 3D Particles), Highlighter, Marquee, Bento, Lens, Blur Fade */
+.hero .lead, .hero .kicker, .head p, .chalk p, .art-text p { text-shadow: 0 1px 10px rgba(52,66,46,.85), 0 0 2px rgba(52,66,46,.6); }
+.hl { position: relative; white-space: nowrap; isolation: isolate; }
+.hl::before { content: ""; position: absolute; left: -.12em; right: -.12em; bottom: .02em; height: .5em; z-index: -1; background: var(--red); opacity: .9; border-radius: .3em .15em .35em .2em; transform: scaleX(0) rotate(-1.2deg); transform-origin: left center; transition: transform .9s cubic-bezier(.2,.7,.2,1) .25s; }
+.hl.on::before { transform: scaleX(1) rotate(-1.2deg); }
+@media (prefers-reduced-motion: reduce) { .hl::before { transition: none; transform: scaleX(1) rotate(-1.2deg); } }
+.mq-wrap { position: relative; z-index: 1; padding-block: 26px 10px; display: grid; gap: 14px; }
+.mq { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
+.mq .track { display: flex; gap: 14px; width: max-content; animation: mq 60s linear infinite; }
+.mq.rev .track { animation-direction: reverse; animation-duration: 70s; }
+.mq:hover .track { animation-play-state: paused; }
+.mq img { height: clamp(130px, 18vw, 200px); width: auto; border-radius: 14px; display: block; box-shadow: 0 10px 24px rgba(0,0,0,.22); }
+@keyframes mq { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .mq .track { animation: none; } .mq { overflow-x: auto; } }
+.bento { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); grid-auto-rows: 230px; gap: 14px; grid-auto-flow: dense; }
+.b.h2d { grid-row: span 2; }
+@media (max-width: 860px) { .b.dk { display: none; } }
+@media (max-width: 860px) { .bento { grid-template-columns: repeat(2, minmax(0,1fr)); grid-auto-rows: 180px; gap: 10px; } }
+.b { position: relative; margin: 0; border-radius: 18px; overflow: hidden; background: #4f5e47; box-shadow: 0 12px 28px rgba(0,0,0,.2); }
+.b.w2 { grid-column: span 2; } .b.h2 { grid-row: span 2; }
+.b img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .7s cubic-bezier(.2,.7,.2,1); }
+.b:hover img { transform: scale(1.05); }
+.b figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 46px 16px 14px; background: linear-gradient(180deg, transparent, rgba(22,30,20,.88)); display: grid; gap: 2px; }
+.b figcaption b { font: 700 clamp(17px, 2vw, 22px)/1.15 var(--f-display); color: #fff; }
+.b figcaption span { font-size: 14px; color: rgba(255,250,242,.88); line-height: 1.35; }
+@media (max-width: 520px) { .b figcaption { padding: 34px 12px 10px; } .b figcaption span { font-size: 12.5px; } }
+.b.card-t { background: rgba(40,52,36,.55); border: 1px solid rgba(255,255,255,.18); padding: 22px; display: grid; align-content: center; gap: 8px; }
+.b.card-t h3 { font: 700 clamp(22px, 2.6vw, 30px)/1.1 var(--f-display); } .b.card-t p { margin: 0; color: var(--soft); font-size: 15px; }
+.b.card-t .kicker { color: #ffd9e0; }
+.chalk { display: grid; grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); gap: 28px; align-items: center; }
+@media (max-width: 860px) { .chalk { grid-template-columns: minmax(0,1fr); } }
+.chalk img { width: 100%; height: auto; border-radius: 18px; display: block; box-shadow: 0 14px 30px rgba(0,0,0,.25); }
+.chalk h2 { font: 700 clamp(34px, 5vw, 56px)/1.02 var(--f-display); margin: 8px 0 16px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips span { font: 800 15px var(--f-body); padding: 9px 15px; border-radius: 999px; background: rgba(0,0,0,.16); border: 1px solid rgba(255,255,255,.25); }
+.chips span.r { background: var(--red); border-color: var(--red); }
+.lens { position: relative; cursor: zoom-in; touch-action: pan-y; }
+.lens .glass { position: absolute; width: 150px; height: 150px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 10px 30px rgba(0,0,0,.45); pointer-events: none; opacity: 0; transition: opacity .2s; background-repeat: no-repeat; transform: translate(-50%, -50%); z-index: 3; }
+.lens.on .glass { opacity: 1; }
+.lens:hover img { transform: none; }
+.lens-hint { position: absolute; top: 10px; left: 10px; z-index: 2; font: 800 12px var(--f-body); background: rgba(0,0,0,.55); color: #fff; padding: 5px 10px; border-radius: 999px; }
+.art-text p { color: var(--soft); }
+.poster { margin-top: 18px; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,.2); }
+.poster img { width: 100%; height: auto; display: block; }
+.poster figcaption { padding: 10px 14px; font-size: 14px; color: var(--soft); background: rgba(0,0,0,.2); }
+.out { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr) minmax(0,1fr); gap: 14px; }
+@media (max-width: 860px) { .out { grid-template-columns: repeat(2, minmax(0,1fr)); } .out figure:first-child { grid-column: span 2; } }
+.out figure { margin: 0; border-radius: 18px; overflow: hidden; } .out img { width: 100%; height: 100%; object-fit: cover; display: block; aspect-ratio: 4/3; }
+.card .shop { width: 100%; height: auto; border-radius: 10px; display: block; }
+.btn .arr { transition: transform .2s; } .btn:hover .arr { transform: translateX(4px); }
+html.js .bf { opacity: 0; filter: blur(8px); transform: translateY(16px); transition: opacity .8s ease, filter .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
+html.js .bf.in { opacity: 1; filter: none; transform: none; }
+@media (prefers-reduced-motion: reduce) { html.js .bf { opacity: 1; filter: none; transform: none; transition: none; } }
 </style>
+<script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -202,52 +257,96 @@ section, footer { position: relative; z-index: 1; }
   <div class="wrap">
     <div class="kicker">Café · 17 Skirving Street, Shawlands</div>
     <h1>HUG</h1>
-    <p class="lead">Food that feels like a warm hug. Breakfast, lunch, in-house bakes and good coffee, with art on the walls.</p>
-    <div class="ctas"><a class="btn" href="#food">See the food</a><a class="btn ghost" href="#visit">Find us</a></div>
-    <div class="facts"><span class="status" id="statusChip">Mon–Sat 9–5 · Sun 10–5</span><span><b>Fully licenced</b> café bar</span></div>
+    <p class="lead">Food that feels like a <span class="hl" id="heroHl">warm hug</span>. All-day breakfast, brunch, home baking and good strong coffee, with art on the walls.</p>
+    <div class="ctas"><a class="btn" href="#food">See the food <span class="arr">→</span></a><a class="btn ghost" href="#visit">Find us</a></div>
+    <div class="facts"><span class="status" id="statusChip">Mon–Sat 9–5 · Sun 10–5</span><span><b>Fully licenced</b> café bar</span><span>🐾 <b>Dogs welcome</b></span></div>
   </div>
   <button class="redo" type="button" id="redo" hidden>↻ Hug again</button>
 </section>
 
+<div class="mq-wrap" aria-label="Photos from HUG's Instagram"><div class="mq"><div class="track"><img src="img/t/breakfast.webp" alt="" width="365" height="440" loading=lazy decoding="async"><img src="img/t/hotchoc.webp" alt="" width="364" height="440" loading=lazy decoding="async"><img src="img/t/chicken.webp" alt="" width="365" height="440" loading=lazy decoding="async"><img src="img/t/latte.webp" alt="" width="440" height="390" loading=lazy decoding="async"><img src="img/t/dhal.webp" alt="" width="365" height="440" loading=lazy decoding="async"><img src="img/t/empire.webp" alt="" width="440" height="390" loading=lazy decoding="async"><img src="img/t/salmon.webp" alt="" width="365" height="440" loading=lazy decoding="async"><img src="img/t/scones.webp" alt="" width="440" height="390" loading=lazy decoding="async"><img src="img/t/granola.webp" alt="" width="364" height="440" loading=lazy decoding="async"><img src="img/t/bravas.webp" alt="" width="365" height="440" loading=lazy decoding="async"><img src="img/t/breakfast.webp" alt="" width="365" height="440" loading=lazy decoding="async"><img src="img/t/hotchoc.webp" alt="" width="364" height="440" loading=lazy decoding="async"><img src="img/t/chicken.webp" alt="" width="365" height="440" loading=lazy decoding="async"><img src="img/t/latte.webp" alt="" width="440" height="390" loading=lazy decoding="async"><img src="img/t/dhal.webp" alt="" width="365" height="440" loading=lazy decoding="async"><img src="img/t/empire.webp" alt="" width="440" height="390" loading=lazy decoding="async"><img src="img/t/salmon.webp" alt="" width="365" height="440" loading=lazy decoding="async"><img src="img/t/scones.webp" alt="" width="440" height="390" loading=lazy decoding="async"><img src="img/t/granola.webp" alt="" width="364" height="440" loading=lazy decoding="async"><img src="img/t/bravas.webp" alt="" width="365" height="440" loading=lazy decoding="async"></div></div><div class="mq rev"><div class="track"><img src="img/t/interior2.webp" alt="" width="365" height="440" loading=lazy decoding="async"><img src="img/t/friedeggs.webp" alt="" width="365" height="440" loading=lazy decoding="async"><img src="img/t/terrace.webp" alt="" width="365" height="440" loading=lazy decoding="async"><img src="img/t/plumcake.webp" alt="" width="440" height="308" loading=lazy decoding="async"><img src="img/t/brioche.webp" alt="" width="365" height="440" loading=lazy decoding="async"><img src="img/t/art40.webp" alt="" width="365" height="440" loading=lazy decoding="async"><img src="img/t/breakfast2.webp" alt="" width="365" height="440" loading=lazy decoding="async"><img src="img/t/store2.webp" alt="" width="440" height="330" loading=lazy decoding="async"><img src="img/t/interior1.webp" alt="" width="331" height="440" loading=lazy decoding="async"><img src="img/t/interior2.webp" alt="" width="365" height="440" loading=lazy decoding="async"><img src="img/t/friedeggs.webp" alt="" width="365" height="440" loading=lazy decoding="async"><img src="img/t/terrace.webp" alt="" width="365" height="440" loading=lazy decoding="async"><img src="img/t/plumcake.webp" alt="" width="440" height="308" loading=lazy decoding="async"><img src="img/t/brioche.webp" alt="" width="365" height="440" loading=lazy decoding="async"><img src="img/t/art40.webp" alt="" width="365" height="440" loading=lazy decoding="async"><img src="img/t/breakfast2.webp" alt="" width="365" height="440" loading=lazy decoding="async"><img src="img/t/store2.webp" alt="" width="440" height="330" loading=lazy decoding="async"><img src="img/t/interior1.webp" alt="" width="331" height="440" loading=lazy decoding="async"></div></div></div>
 <section class="block" id="food">
   <div class="wrap">
-    <div class="head"><div><div class="kicker">From the kitchen</div><h2>Food that feels like a warm hug</h2></div><p>A few favourites from our Instagram. On the final site the full menu lives here, and you can update it yourself.</p></div>
-    <div class="dishes">
-      <article class="dish"><div class="ph p1" aria-hidden="true">🍳</div><h3>Daily breakfast</h3><p>Poached eggs and more, every morning.</p></article>
-      <article class="dish"><div class="ph p2" aria-hidden="true">🥖</div><h3>Roast chicken sandwich</h3><p>With roast potatoes and gravy.</p></article>
-      <article class="dish"><div class="ph p3" aria-hidden="true">☕</div><h3>Hot chocolate</h3><p>Topped with marshmallows.</p></article>
-      <article class="dish"><div class="ph p4" aria-hidden="true">🍰</div><h3>In-house bakes</h3><p>Like our Sangria cake.</p></article>
+    <div class="head bf"><div><div class="kicker">From the kitchen</div><h2>Food that feels like a <span class="hl">warm hug</span></h2></div><p>All-day breakfast, brunch, sandwiches and light bites. The menu changes with the week, so check our Instagram for today's dishes.</p></div>
+    <div class="bento">
+      <figure class="b bf w2 h2"><img src="img/breakfast.webp" alt="The full breakfast" width="900" height="1085" loading=lazy decoding="async"><figcaption><b>The full breakfast</b><span>Bacon, sausage, egg, beans, potato scone, mushrooms, tomato and toast.</span></figcaption></figure>
+      <figure class="b bf "><img src="img/salmon.webp" alt="Scrambled eggs &amp; smoked salmon" width="900" height="1085" loading=lazy decoding="async"><figcaption><b>Scrambled eggs &amp; smoked salmon</b><span>On toast, with chives.</span></figcaption></figure>
+      <figure class="b bf "><img src="img/dhal.webp" alt="Poached eggs on dhal" width="900" height="1085" loading=lazy decoding="async"><figcaption><b>Poached eggs on dhal</b><span>Red lentils, spinach and flatbread.</span></figcaption></figure>
+      <figure class="b bf w2"><img src="img/chicken.webp" alt="Roast chicken sandwich" width="900" height="1085" loading=lazy decoding="async"><figcaption><b>Roast chicken sandwich</b><span>With garlic, baby potatoes and gravy.</span></figcaption></figure>
+      <figure class="b bf "><img src="img/bravas.webp" alt="Eggs &amp; crispy potatoes" width="900" height="1085" loading=lazy decoding="async"><figcaption><b>Eggs &amp; crispy potatoes</b><span>Poached eggs in a rich tomato sauce.</span></figcaption></figure>
+      <figure class="b bf "><img src="img/brioche.webp" alt="Breakfast brioche" width="900" height="1085" loading=lazy decoding="async"><figcaption><b>Breakfast brioche</b><span>Egg and bacon in a soft bun.</span></figcaption></figure>
+      <figure class="b bf "><img src="img/granola.webp" alt="Granola bowl" width="900" height="1088" loading=lazy decoding="async"><figcaption><b>Granola bowl</b><span>Yoghurt, strawberries and chia.</span></figcaption></figure>
+      <figure class="b bf "><img src="img/friedeggs.webp" alt="Eggs on toast" width="900" height="1085" loading=lazy decoding="async"><figcaption><b>Eggs on toast</b><span>Simple and golden.</span></figcaption></figure>
     </div>
   </div>
 </section>
-
+<section class="block" id="welcome" style="padding-top:0">
+  <div class="wrap chalk">
+    <img class="bf" src="img/chalk.webp" alt="HUG's chalkboard: all day breakfast, sandwiches, light bites, home baking, good strong coffee, brunch, dogs welcome" width="792" height="808" loading="lazy">
+    <div class="bf">
+      <div class="kicker">Skirving Street, Shawlands</div>
+      <h2>Come as you are</h2>
+      <div class="chips"><span>All day breakfast</span><span>Brunch!</span><span>Sandwiches</span><span>Light bites</span><span>Home baking</span><span>Good strong coffee</span><span class="r">🐾 Dogs welcome</span></div>
+      <p style="color:var(--soft);margin-top:16px">Straight from the board outside our door.</p>
+    </div>
+  </div>
+</section>
 <section class="block" id="bakes" style="padding-top:0">
   <div class="wrap">
-    <div class="duo">
-      <div class="join"><div><div class="kicker">Coffee</div><h3>Carraro 1927 Crema Espresso</h3><p>Our coffee comes from Carraro, roasting in Italy since 1927.</p></div></div>
-      <div class="join"><div><div class="kicker">Café bar</div><h3>Fully licenced</h3><p>Cocktails, live music and events. On the final site, the next events show up here.</p></div></div>
+    <div class="head bf"><div><div class="kicker">Bakes &amp; coffee</div><h2>Home baking, good strong coffee</h2></div><p>Cakes, scones and biscuits made in house, and a velvety hot chocolate with marshmallows on top.</p></div>
+    <div class="bento">
+      <figure class="b bf h2"><img src="img/hotchoc.webp" alt="Velvety hot chocolate" width="900" height="1088" loading=lazy decoding="async"><figcaption><b>Velvety hot chocolate</b><span>With cream and marshmallows.</span></figcaption></figure>
+      <figure class="b bf w2"><img src="img/latte.webp" alt="Good strong coffee" width="900" height="797" loading=lazy decoding="async"><figcaption><b>Good strong coffee</b><span>Carraro 1927 Crema Espresso.</span></figcaption></figure>
+      <figure class="b bf h2d dk"><img src="img/coffeebag.webp" alt="Carraro 1927" width="900" height="1450" loading=lazy decoding="async"><figcaption><b>Carraro 1927</b><span>Crema Espresso, roasted in Italy.</span></figcaption></figure>
+      <figure class="b bf "><img src="img/scones.webp" alt="Fresh scones" width="900" height="797" loading=lazy decoding="async"><figcaption><b>Fresh scones</b><span>Baked in house.</span></figcaption></figure>
+      <figure class="b bf "><img src="img/empire.webp" alt="Empire biscuits" width="900" height="797" loading=lazy decoding="async"><figcaption><b>Empire biscuits</b><span>A Scottish classic.</span></figcaption></figure>
+      <figure class="b bf w2"><img src="img/plumcake.webp" alt="Cake of the day" width="900" height="630" loading=lazy decoding="async"><figcaption><b>Cake of the day</b><span>Served with cream.</span></figcaption></figure>
+      <div class="b bf card-t w2"><div class="kicker">Café bar</div><h3>Fully licenced</h3><p>A drink with your brunch, and the bar stays open late on exhibition nights.</p></div>
     </div>
   </div>
 </section>
-
 <section class="block story" id="art">
   <div class="wrap">
-    <div class="frames" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
-    <div>
+    <div class="bf">
+      <figure class="b lens" style="aspect-ratio:3/4;max-width:420px;margin-inline:auto;grid-row:auto"><img src="img/art35.webp" alt="Black and white ink drawing in a black frame, for sale at £35" width="900" height="1197" loading=lazy decoding="async"><span class="lens-hint">Hover or touch to zoom</span><i class="glass"></i></figure>
+    </div>
+    <div class="art-text bf">
       <div class="kicker">Exhibitions</div>
       <h2>Art on the walls</h2>
-      <p>Local artists show their work at HUG, like “Southside Scenes” by Frank Boyle. On the final site, each exhibition gets its own page with photos and the opening night.</p>
-      <div class="ctas"><a class="btn ghost" href="https://www.instagram.com/hugshawlands/" target="_blank" rel="noopener">See past exhibitions</a></div>
+      <p>Our walls are a gallery for local artists, and most of the work is for sale. We've just had a glow up, with a brand-new exhibition to go with it.</p>
+      <p>Past shows include “Southside Scenes” by Frank Boyle and “The Magical Realms” with Moe Rocksmoore, Gilly Ferns and Ashley Cook, with the bar open until 11pm on opening night.</p>
+      <figure class="poster"><img src="img/realms.webp" alt="Poster: The Magical Realms, Moe Rocksmoore, Gilly Ferns, Ashley Cook, HUG Cafe, 21 September" width="900" height="507" loading=lazy decoding="async"><figcaption>The Magical Realms · opening night at HUG</figcaption></figure>
+      <div class="ctas"><a class="btn ghost" href="https://www.instagram.com/hugshawlands/" target="_blank" rel="noopener">See the exhibitions <span class="arr">→</span></a></div>
     </div>
   </div>
 </section>
-
+<section class="block" id="gallery" style="padding-top:0">
+  <div class="wrap">
+    <div class="bento" style="margin-top:clamp(40px,7vw,80px)">
+      <figure class="b bf w2 h2"><img src="img/interior1.webp" alt="The gallery wall" width="900" height="1197" loading=lazy decoding="async"><figcaption><b>The gallery wall</b><span>New work, hung above our green booths.</span></figcaption></figure>
+      <figure class="b bf lens h2"><img src="img/art40.webp" alt="Watercolour of orange freesias in a black frame, for sale at £40" width="900" height="1085" loading=lazy decoding="async"><span class="lens-hint">Zoom in</span><i class="glass"></i><figcaption><b>Freesias</b><span>Watercolour, £40</span></figcaption></figure>
+      <figure class="b bf "><img src="img/interior2.webp" alt="Tartan &amp; frames" width="900" height="1085" loading=lazy decoding="async"><figcaption><b>Tartan &amp; frames</b><span>Pull up a seat and take your time.</span></figcaption></figure>
+      <figure class="b bf "><img src="img/exh2018.webp" alt="Photography" width="900" height="1390" loading=lazy decoding="async"><figcaption><b>Photography</b><span>From one of our earlier exhibitions.</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+<section class="block" id="outside" style="padding-top:0">
+  <div class="wrap">
+    <div class="head bf"><div><div class="kicker">Out front</div><h2>Tables in the sunshine</h2></div><p>Seats outside on Skirving Street, with flowers, benches and room for the dog.</p></div>
+    <div class="out">
+      <figure class="bf"><img src="img/store1.webp" alt="HUG Café from the street, with tables and planters outside" width="900" height="797" loading=lazy decoding="async"></figure>
+      <figure class="bf"><img src="img/terrace.webp" alt="Outdoor tables and flower planters at HUG" width="900" height="1085" loading=lazy decoding="async"></figure>
+      <figure class="bf"><img src="img/store2.webp" alt="HUG Café shopfront with wooden benches outside" width="900" height="674" loading=lazy decoding="async"></figure>
+    </div>
+  </div>
+</section>
 <section class="block" id="visit">
   <div class="wrap">
-    <div class="head"><div><div class="kicker">Visit us</div><h2>17 Skirving Street</h2></div><p>Shawlands, Glasgow G41 3AB. Outdoor seating out front.</p></div>
+    <div class="head"><div><div class="kicker">Visit us</div><h2>17 Skirving Street</h2></div><p>Shawlands, Glasgow G41 3AB. Outdoor seating out front, dogs welcome.</p></div>
     <div class="visit">
       <div class="map"><iframe title="Map: HUG Café, 17 Skirving Street" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-4.2874%2C55.8270%2C-4.2744%2C55.8328&amp;layer=mapnik&amp;marker=55.829889%2C-4.280882"></iframe></div>
       <div class="card">
+        <img src="img/t/store1.webp" alt="HUG Café on Skirving Street" width="440" height="390" loading=lazy decoding="async" class=shop>
         <h3>Opening hours</h3>
         <dl class="hours" id="hours"></dl>
         <h3 style="margin-top:6px">Address</h3>
@@ -264,18 +363,43 @@ section, footer { position: relative; z-index: 1; }
 <a class="like" href="https://wa.me/5491130331893?text=Hi%20Jan%2C%20I%20saw%20the%20website%20proposal%20for%20HUG%20Cafe%20and%20I%27d%20like%20to%20know%20more." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Like it? Let's talk</a>
 
 <script>
+/* Marshmallows als pseudo-3D-Partikelfeld (Prinzip aus Magic UI "Floating 3D Particles"): Polarkoordinaten um eine
+   Mittelachse, perspektivische Projektion, langsame Rotation und Auftrieb, ferne zuerst gezeichnet. */
 (() => {
-  const c = document.getElementById("mallows"), x = c.getContext("2d"), still = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let W, H, ms = [];
-  const size = () => { const d = Math.min(2, devicePixelRatio || 1); W = innerWidth; H = innerHeight; c.width = W * d; c.height = H * d; x.setTransform(d, 0, 0, d, 0, 0);
-    const n = Math.round(Math.min(26, W * H / 36000)); ms = Array.from({ length: n }, () => ({ x: Math.random() * W, y: Math.random() * H, s: 13 + Math.random() * 14, r: Math.random() * 6, vr: (Math.random() - .5) * .006, vy: .15 + Math.random() * .35, sw: Math.random() * 6, pink: Math.random() < .4, a: .62 + Math.random() * .2 })); };
-  const one = (m) => { x.save(); x.translate(m.x + Math.sin(m.sw) * 10, m.y); x.rotate(m.r); x.globalAlpha = m.a; const s = m.s, hw = s * .8, hh = s * .7;
-    x.shadowColor = "rgba(30,40,25,.22)"; x.shadowBlur = 10; x.shadowOffsetY = 4;
-    const g = x.createLinearGradient(-hw, 0, hw, 0); g.addColorStop(0, m.pink ? "#f3b5c4" : "#ece4d6"); g.addColorStop(.45, m.pink ? "#ffe3ea" : "#ffffff"); g.addColorStop(1, m.pink ? "#eaa2b4" : "#e4dccc"); x.fillStyle = g;
-    x.beginPath(); x.roundRect(-hw, -hh, hw * 2, hh * 2, s * .32); x.fill(); x.shadowColor = "transparent";
-    x.fillStyle = m.pink ? "#ffeef2" : "#fffdf8"; x.beginPath(); x.ellipse(0, -hh + s * .16, hw * .92, s * .2, 0, 0, 7); x.fill(); x.restore(); };
-  const frame = () => { x.clearRect(0, 0, W, H); for (const m of ms) { if (!still) { m.y -= m.vy; m.r += m.vr; m.sw += .01; if (m.y < -50) { m.y = H + 50; m.x = Math.random() * W; } } one(m); } if (!still) requestAnimationFrame(frame); };
-  size(); addEventListener("resize", size); frame(); if (still) addEventListener("resize", frame);
+  const c = document.getElementById("mallows"), x = c.getContext("2d"), mq = matchMedia("(prefers-reduced-motion: reduce)");
+  const T = 0.5, fov = 800 - T * 600, pd = 100 + T * 700, dr = T * Math.min(400, fov + pd - 1), DRIFT = 0.32;
+  let W = 0, H = 0, ps = [], paused = false;
+  const spawn = () => ({ a: Math.random() * 6.283, r: Math.random() * Math.max(W, H) * 1.15, y: (Math.random() - .5) * H * 2, s: 18 + Math.random() * 16, as: .0012 + Math.random() * .0009,
+    rot: Math.random() * 6.283, vr: (Math.random() - .5) * .008, pink: Math.random() < .4, op: .7 + Math.random() * .25, sx: 0, sy: 0, k: 1 });
+  const size = () => { const d = Math.min(2, devicePixelRatio || 1); W = innerWidth; H = innerHeight; c.width = Math.round(W * d); c.height = Math.round(H * d); x.setTransform(d, 0, 0, d, 0, 0);
+    const n = innerWidth < 768 ? 18 : 42; ps = Array.from({ length: n }, spawn); };
+  const mallow = (p) => { const s = p.s * p.k, hw = s * .8, hh = s * .68, f = Math.max(0, Math.min(1, (p.k - .4) / .35));
+    x.save(); x.translate(p.sx, p.sy); x.rotate(p.rot); x.globalAlpha = p.op * (.35 + .4 * f);
+    x.shadowColor = "rgba(30,40,25," + (.12 + .18 * f) + ")"; x.shadowBlur = 6 + 10 * f; x.shadowOffsetY = 2 + 4 * f;
+    const g = x.createLinearGradient(-hw, 0, hw, 0); g.addColorStop(0, p.pink ? "#f3b5c4" : "#ece4d6"); g.addColorStop(.45, p.pink ? "#ffe3ea" : "#ffffff"); g.addColorStop(1, p.pink ? "#eaa2b4" : "#e4dccc");
+    x.fillStyle = g; x.beginPath(); x.roundRect(-hw, -hh, hw * 2, hh * 2, s * .32); x.fill(); x.shadowColor = "transparent";
+    x.fillStyle = p.pink ? "#ffeef2" : "#fffdf8"; x.beginPath(); x.ellipse(0, -hh + s * .15, hw * .92, s * .19, 0, 0, 7); x.fill(); x.restore(); };
+  const project = (p, still) => { const den = Math.max(1, fov + pd + (still ? 0 : Math.sin(p.a) * dr)), k = fov / den; p.sx = W / 2 + Math.cos(p.a) * p.r * k; p.sy = H / 2 + p.y * k; p.k = k * 1.6; };
+  const draw = () => { x.clearRect(0, 0, W, H); ps.sort((a, b) => a.k - b.k); for (const p of ps) mallow(p); };
+  const tick = () => { if (!paused && !mq.matches) { for (const p of ps) { p.a += p.as; p.y -= DRIFT; p.rot += p.vr;
+      if (p.y < -H) { p.y = H; p.r = Math.random() * Math.max(W, H) * 1.15; } project(p); } draw(); } requestAnimationFrame(tick); };
+  size(); ps.forEach((p) => project(p, true)); draw();
+  addEventListener("resize", () => { size(); ps.forEach((p) => project(p, true)); draw(); });
+  document.addEventListener("visibilitychange", () => { paused = document.hidden; });
+  requestAnimationFrame(tick);
+})();
+/* Blur Fade beim Scrollen, Highlighter, Lens */
+(() => {
+  const io = "IntersectionObserver" in window ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add(e.target.classList.contains("hl") ? "on" : "in"); io.unobserve(e.target); } }), { threshold: .15 }) : null;
+  document.querySelectorAll(".bf, .hl").forEach((n) => (io ? io.observe(n) : n.classList.add(n.classList.contains("hl") ? "on" : "in")));
+  document.querySelectorAll(".lens").forEach((L) => { const im = L.querySelector("img"), g = L.querySelector(".glass"), Z = 2.4;
+    const move = (e) => { const r = L.getBoundingClientRect(), ir = im.getBoundingClientRect(), px = e.clientX - r.left, py = e.clientY - r.top;
+      if (px < 0 || py < 0 || px > r.width || py > r.height) return L.classList.remove("on");
+      g.style.left = px + "px"; g.style.top = py + "px"; g.style.backgroundImage = `url("${im.currentSrc || im.src}")`;
+      g.style.backgroundSize = `${ir.width * Z}px ${ir.height * Z}px`;
+      g.style.backgroundPosition = `${-((e.clientX - ir.left) * Z - 75)}px ${-((e.clientY - ir.top) * Z - 75)}px`; L.classList.add("on"); };
+    L.addEventListener("pointermove", move); L.addEventListener("pointerdown", move);
+    L.addEventListener("pointerleave", () => L.classList.remove("on")); L.addEventListener("pointerup", (e) => { if (e.pointerType !== "mouse") setTimeout(() => L.classList.remove("on"), 900); }); });
 })();
 </script>
 <script>
