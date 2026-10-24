@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Miss Gertrude Salon · Fitzroy · Website proposal</title>
+<meta name="description" content="A website proposal for Miss Gertrude Salon, Gertrude St, Fitzroy. By Jota Labs, not the official website.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23111'/%3E%3Crect x='10' y='24' width='44' height='16' rx='5' fill='%23fbfaf7'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap">
+<style>
+/* Jota Labs Vorschlag: Miss Gertrude Salon (Fitzroy). Intro C: Geigenfeigen-Blätter wachsen herein, in der Mitte das Logo.
+   Farben aus ihrem Salon: Creme, Schwarz, Feigengrün, Backstein. */
+:root { --bg: #f3efe6; --bg-2: #ebe5d8; --paper: #fbfaf7; --ink: #111; --soft: #3a3a36; --muted: #6b6b64; --line: rgba(0,0,0,.14);
+  --fig: #2f5a2c; --fig-2: #47803f; --brick: #8a4430;
+  --f-ui: "Josefin Sans", system-ui, sans-serif; --f-serif: "Cormorant Garamond", Georgia, serif; color-scheme: light; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.6 var(--f-ui); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-family: var(--f-serif); font-weight: 500; line-height: 1.02; text-wrap: balance; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 600 12px/1.2 var(--f-ui); letter-spacing: .28em; text-transform: uppercase; color: var(--fig); }
+:focus-visible { outline: 2px solid var(--fig); outline-offset: 3px; }
+.proposal { background: var(--ink); color: #f3efe6; font: 13px/1.4 var(--f-ui); padding: 8px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 18px; text-align: center; }
+.proposal a { font-weight: 700; }
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: rgba(243,239,230,.88); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
+.logo svg { width: 48px; height: 48px; display: block; }
+.logo span { font: 600 15px var(--f-ui); letter-spacing: .2em; text-transform: uppercase; }
+nav.links { display: flex; align-items: center; gap: 24px; }
+nav.links a { text-decoration: none; font: 600 13px var(--f-ui); letter-spacing: .16em; text-transform: uppercase; color: var(--soft); }
+nav.links a:hover { color: var(--ink); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; font: 600 14px/1 var(--f-ui); letter-spacing: .14em; text-transform: uppercase; padding: 17px 26px 15px; background: var(--ink); color: #fff; border: 1.5px solid var(--ink); border-radius: 999px; text-decoration: none; cursor: pointer; transition: background .15s, transform .15s; }
+.btn:hover { background: var(--fig); border-color: var(--fig); transform: translateY(-2px); }
+.btn.ghost { background: transparent; color: var(--ink); }
+.btn.ghost:hover { background: var(--ink); color: #fff; }
+nav.links a.btn { color: #fff; padding: 12px 18px 10px; font-size: 12px; }
+.menu-btn { display: none; background: transparent; color: var(--ink); border: 1px solid var(--line); border-radius: 999px; padding: 9px 16px 7px; font: 600 12px var(--f-ui); letter-spacing: .2em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; } .logo span { display: none; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--paper); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 14px 0; border-bottom: 1px solid var(--line); }
+  nav.links a.btn { margin-top: 14px; }
+  nav.links:not(.open) { display: none; }
+}
+/* Hero */
+.hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--line); }
+.hero .wrap { display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,.95fr); gap: clamp(30px, 5vw, 70px); align-items: center; padding-block: clamp(50px, 8vw, 100px); }
+@media (max-width: 860px) { .hero .wrap { grid-template-columns: minmax(0,1fr); padding-top: 36px; } }
+.hero h1 { font-size: clamp(64px, 10vw, 128px); letter-spacing: -.01em; margin: 14px 0 18px; }
+.hero h1 em { font-style: italic; color: var(--fig); }
+.lead { font-size: clamp(18px, 2vw, 21px); color: var(--soft); max-width: 34ch; margin: 0 0 26px; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; font-size: 14px; }
+.facts span, .facts a { padding: 8px 14px 6px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.6); text-decoration: none; }
+.status.open b { color: var(--fig); }
+.status.open::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--fig-2); margin-right: 8px; vertical-align: 1px; box-shadow: 0 0 0 4px rgba(71,128,63,.18); }
+.photos { position: relative; aspect-ratio: 4/5; max-width: 480px; justify-self: center; width: 100%; }
+.photos figure { position: absolute; margin: 0; overflow: hidden; border-radius: 200px 200px 18px 18px; box-shadow: 0 30px 60px -30px rgba(0,0,0,.45); background: #ddd; }
+.photos figure img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.photos .p1 { left: 0; top: 0; width: 72%; height: 86%; }
+.photos .p2 { right: 0; bottom: 0; width: 46%; height: 50%; border-radius: 18px; border: 6px solid var(--bg); }
+.photos .stamp { position: absolute; left: -14px; bottom: 6%; width: 112px; height: 112px; border-radius: 50%; background: var(--ink); color: #fff; display: grid; place-items: center; text-align: center; font: 600 11px/1.3 var(--f-ui); letter-spacing: .14em; text-transform: uppercase; transform: rotate(-10deg); }
+.photos .stamp b { display: block; font: 500 30px/1 var(--f-serif); letter-spacing: 0; text-transform: none; }
+.redo { position: absolute; right: 16px; top: 14px; z-index: 3; font: 600 11px var(--f-ui); letter-spacing: .2em; text-transform: uppercase; color: var(--muted); background: rgba(255,255,255,.7); border: 1px solid var(--line); border-radius: 999px; padding: 8px 12px 6px; cursor: pointer; }
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .9s cubic-bezier(.2,.7,.2,1) both; } .hero.reveal .wrap > :nth-child(2) { animation-delay: .15s }
+@keyframes rise { from { transform: translateY(20px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+/* Booking-Hinweis */
+.alert { background: var(--fig); color: #f3efe6; }
+.alert .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 30px; padding-block: 22px; }
+.alert p { margin: 0; font: 500 clamp(20px, 2.4vw, 26px)/1.25 var(--f-serif); } .alert p i { opacity: .8; }
+.alert .btn { background: #f3efe6; color: var(--ink); border-color: #f3efe6; } .alert .btn:hover { background: #fff; color: var(--ink); }
+section.block { padding-block: clamp(70px, 10vw, 120px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px 40px; margin-bottom: 34px; }
+.head h2 { font-size: clamp(44px, 6.5vw, 80px); margin-top: 10px; } .head h2 em { color: var(--fig); }
+.head p { max-width: 44ch; margin: 0; color: var(--muted); }
+/* Arbeiten */
+.work { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+@media (max-width: 860px) { .work { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; } }
+.work figure { margin: 0; position: relative; overflow: hidden; border-radius: 16px; aspect-ratio: 4/5; background: #ddd; cursor: zoom-in; }
+.work figure:nth-child(3n+2) { transform: translateY(34px); } @media (max-width: 860px) { .work figure:nth-child(3n+2) { transform: none; } .work figure:nth-child(2n) { transform: translateY(26px); } }
+.work img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .7s; } .work figure:hover img { transform: scale(1.05); }
+.work figcaption { position: absolute; left: 10px; right: 10px; bottom: 10px; padding: 10px 14px 8px; border-radius: 12px; background: rgba(251,250,247,.9); font-size: 14px; line-height: 1.35; }
+.work figcaption b { display: block; font: 600 12px var(--f-ui); letter-spacing: .14em; text-transform: uppercase; color: var(--fig); }
+/* Services */
+.svc { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 14px; }
+@media (max-width: 960px) { .svc { grid-template-columns: repeat(2, minmax(0,1fr)); } } @media (max-width: 520px) { .svc { grid-template-columns: minmax(0,1fr); } }
+.card { background: var(--paper); border: 1px solid var(--line); border-radius: 20px; padding: 26px 24px; display: grid; gap: 10px; align-content: start; transition: transform .2s, box-shadow .2s; }
+.card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -24px rgba(0,0,0,.35); }
+.card .ic { width: 46px; height: 46px; border-radius: 50%; background: var(--bg-2); display: grid; place-items: center; color: var(--fig); }
+.card .ic svg { width: 24px; height: 24px; }
+.card h3 { font-size: 30px; } .card p { margin: 0; color: var(--soft); font-size: 16px; }
+/* Kundenstimme */
+.words { background: var(--ink); color: #f3efe6; position: relative; overflow: hidden; }
+.words .wrap { display: grid; grid-template-columns: minmax(0,.7fr) minmax(0,1.3fr); gap: clamp(30px, 6vw, 80px); align-items: center; }
+@media (max-width: 860px) { .words .wrap { grid-template-columns: minmax(0,1fr); } }
+.words figure { margin: 0; border-radius: 200px 200px 18px 18px; overflow: hidden; aspect-ratio: 4/5; max-width: 380px; cursor: zoom-in; }
+.words figure img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.words blockquote { margin: 0; font: italic 500 clamp(26px, 3.3vw, 40px)/1.25 var(--f-serif); }
+.words cite { display: block; margin-top: 20px; font: 600 13px var(--f-ui); letter-spacing: .2em; text-transform: uppercase; font-style: normal; color: #b9c9a5; }
+.words .kicker { color: #b9c9a5; margin-bottom: 18px; }
+/* Team + Salon */
+.team { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: clamp(30px, 6vw, 80px); align-items: center; }
+@media (max-width: 860px) { .team { grid-template-columns: minmax(0,1fr); } }
+.people { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; margin-top: 26px; }
+.people div { background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 18px 14px; text-align: center; }
+.people i { display: grid; place-items: center; width: 60px; height: 60px; margin: 0 auto 10px; border-radius: 50%; background: var(--ink); color: #fff; font: italic 500 28px var(--f-serif); }
+.people b { display: block; font: 500 26px var(--f-serif); } .people span { font-size: 13px; color: var(--muted); word-break: break-word; }
+@media (max-width: 520px) { .people { grid-template-columns: minmax(0,1fr); gap: 8px; } .people div { display: flex; align-items: center; gap: 14px; text-align: left; padding: 12px 14px; } .people i { margin: 0; width: 46px; height: 46px; font-size: 22px; flex: none; } .people b { font-size: 24px; line-height: 1; } }
+.salon { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 12px; }
+.salon figure { margin: 0; border-radius: 18px; overflow: hidden; aspect-ratio: 1; cursor: zoom-in; } .salon figure:first-child { border-radius: 200px 200px 18px 18px; }
+.salon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.eco { margin-top: 22px; display: flex; gap: 14px; align-items: center; background: #e2e8d6; border-radius: 18px; padding: 16px 18px; color: var(--fig); font-weight: 600; }
+.eco svg { width: 30px; height: 30px; flex: none; }
+/* Stuhl mieten */
+.chair { background: var(--bg-2); }
+.chair .wrap { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,.8fr); gap: 30px; align-items: center; }
+@media (max-width: 860px) { .chair .wrap { grid-template-columns: minmax(0,1fr); } }
+.chair h2 { font-size: clamp(40px, 5.5vw, 66px); margin: 10px 0 16px; }
+.chair ul { list-style: none; padding: 0; margin: 0 0 22px; display: flex; flex-wrap: wrap; gap: 8px; } .chair li { padding: 8px 14px 6px; border-radius: 999px; background: var(--paper); border: 1px solid var(--line); font-size: 14px; }
+.chair .big { text-align: center; background: var(--ink); color: #f3efe6; border-radius: 24px; padding: 30px 24px; }
+.chair .big b { display: block; font: 500 clamp(36px, 4vw, 48px)/1 var(--f-serif); margin: 10px 0 18px; }
+.chair .big .btn { background: #f3efe6; color: var(--ink); border-color: #f3efe6; }
+/* Buchen + Besuch */
+.visit { display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,.85fr); gap: 16px; }
+@media (max-width: 860px) { .visit { grid-template-columns: minmax(0,1fr); } }
+.panel { background: var(--paper); border: 1px solid var(--line); border-radius: 24px; padding: clamp(22px, 3vw, 34px); }
+.panel h3 { font-size: 40px; margin-bottom: 8px; } .panel > p { margin: 0 0 18px; color: var(--muted); }
+form.book { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 12px; }
+@media (max-width: 520px) { form.book { grid-template-columns: minmax(0,1fr); } }
+form.book label { display: grid; gap: 6px; font: 600 12px var(--f-ui); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+form.book .full { grid-column: 1 / -1; }
+form.book input, form.book select { font: 16px var(--f-ui); padding: 13px 14px 11px; border-radius: 12px; border: 1px solid var(--line); background: #fff; color: var(--ink); width: 100%; min-width: 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips button { font: 600 14px var(--f-ui); padding: 10px 14px 8px; border-radius: 999px; border: 1px solid var(--line); background: #fff; cursor: pointer; }
+.chips button[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+.small { font-size: 13px; color: var(--muted); margin: 6px 0 0; }
+dl.hours { display: grid; grid-template-columns: auto 1fr; gap: 8px 20px; margin: 0 0 18px; }
+dl.hours dt { font-weight: 600; } dl.hours dd { margin: 0; text-align: right; color: var(--soft); } dl.hours .today { color: var(--fig); font-weight: 700; }
+.contact { display: grid; gap: 8px; margin-bottom: 18px; } .contact a { font: 500 24px var(--f-serif); text-decoration: none; } .contact a:hover { color: var(--fig); }
+footer { padding-block: 40px 100px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 700 14px system-ui, sans-serif; padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.25); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+.skipi { position: fixed; left: 50%; bottom: calc(22px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); z-index: 61; font: 600 11px var(--f-ui); letter-spacing: .2em; text-transform: uppercase; color: var(--fig); background: rgba(255,255,255,.7); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px 6px; cursor: pointer; }
+html.js .bf { opacity: 0; transform: translateY(18px); transition: opacity .8s, transform .8s cubic-bezier(.2,.7,.2,1); } html.js .bf.in { opacity: 1; transform: none; }
+html.js .work.bf.in figure:nth-child(3n+2) { transition: transform .8s; }
+@media (prefers-reduced-motion: reduce) { html.js .bf { opacity: 1; transform: none; transition: none; } }
+/* Lightbox */
+.lb { position: fixed; inset: 0; z-index: 90; background: rgba(20,20,18,.94); display: grid; place-items: center; padding: 56px 16px 24px; opacity: 0; transition: opacity .25s; }
+.lb.on { opacity: 1; }
+.lb img { max-width: min(900px, 100%); max-height: calc(100vh - 110px); border-radius: 12px; display: block; }
+.lb .cap { position: absolute; left: 0; right: 0; bottom: 14px; text-align: center; color: #ddd; font-size: 14px; }
+.lb button { position: absolute; background: rgba(255,255,255,.12); color: #fff; border: 1px solid rgba(255,255,255,.25); border-radius: 50%; width: 44px; height: 44px; font-size: 20px; cursor: pointer; }
+.lb .x { top: 10px; right: 10px; } .lb .pv { left: 10px; top: 50%; transform: translateY(-50%); } .lb .nx { right: 10px; top: 50%; transform: translateY(-50%); }
+</style>
+<script>document.documentElement.classList.add("js")</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></symbol>
+  <symbol id="mglogo" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="#111"/><path d="M22 38h56a6 6 0 0 0 6 6v12a6 6 0 0 0-6 6H22a6 6 0 0 0-6-6V44a6 6 0 0 0 6-6z" fill="#fbfaf7"/><text x="50" y="53.5" text-anchor="middle" font-family="Josefin Sans, system-ui, sans-serif" font-weight="700" font-size="7.6" letter-spacing=".4" fill="#111">MISS GERTRUDE</text><circle cx="48.6" cy="58.6" r=".9" fill="#111"/><circle cx="51.4" cy="58.6" r=".9" fill="#111"/></symbol>
+  <symbol id="leaf" viewBox="0 0 24 24"><path fill="currentColor" d="M12 22c-.6-3.6-.4-7 1-10 1.6-3.4 4.4-5.6 8-7-.4 4-1.6 7.4-4 10-1.4 1.6-3 2.6-5 3.2l.2 3.8zM11 20C6 18 3 14 3 9c3 .4 5.6 1.8 7.4 4-.4 2.2-.4 4.6.6 7z"/></symbol>
+</svg>
+<div class="proposal"><span><b>Design proposal</b> for Miss Gertrude Salon · not the official website</span><span>Made by <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">Jota Labs</a></span></div>
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top"><svg aria-hidden="true"><use href="#mglogo"/></svg><span>Miss Gertrude</span></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENU</button>
+    <nav class="links" id="links"><a href="#work">Our work</a><a href="#services">Services</a><a href="#salon">The salon</a><a href="#chair">Chair rental</a><a class="btn" href="#book">Book online</a></nav>
+  </div>
+</header>
+<section class="hero pre" id="top">
+  <button class="redo" id="redo" type="button">↻ intro</button>
+  <div class="wrap">
+    <div>
+      <div class="kicker">Hair salon · Gertrude St, Fitzroy</div>
+      <h1>Miss <em>Gertrude</em></h1>
+      <p class="lead">Creative cuts and blonde specialists for 10+ years, in the heart of Fitzroy, Naarm. A sustainable salon.</p>
+      <div class="ctas"><a class="btn" href="#book">Book online →</a><a class="btn ghost" href="#work">See our work</a></div>
+      <div class="facts"><span class="status" id="statusChip">Tue–Sat</span><a href="tel:+61394195507">+61 3 9419 5507</a><a href="https://www.instagram.com/missgertrudesalon/" target="_blank" rel="noopener">@missgertrudesalon</a></div>
+    </div>
+    <div class="photos">
+      <figure class="p1"><img src="img/curls.webp" alt="Curly copper cut in front of fiddle-leaf fig leaves" width="1080" height="1570"></figure>
+      <figure class="p2"><img src="img/blonde1.webp" alt="Soft, creamy blonde with long layers" width="1080" height="1326"></figure>
+      <div class="stamp" aria-hidden="true"><span><b>10+</b>years in<br>Fitzroy</span></div>
+    </div>
+  </div>
+</section>
+<div class="alert"><div class="wrap"><p>Book your next cut or colour in under a minute, <i>day or night.</i></p><a class="btn" href="#book">Book online</a></div></div>
+
+<section class="block" id="work">
+  <div class="wrap">
+    <div class="head bf"><div><div class="kicker">Our work</div><h2>Cuts, curls &amp; <em>blonde</em></h2></div><p>A few favourites from the chair. Tap a photo to see it larger.</p></div>
+    <div class="work bf">
+      <figure><img src="img/blonde1.webp" alt="Sweet, creamy blonde transformation" width="1080" height="1326" loading="lazy"><figcaption><b>Blonde</b>Sweet, creamy blonde by Dom</figcaption></figure>
+      <figure><img src="img/copper.webp" alt="Red copper colour and cut" width="1080" height="1319" loading="lazy"><figcaption><b>Colour</b>Rejuvenated, renewed and rocking red copper</figcaption></figure>
+      <figure><img src="img/brunette.webp" alt="Brunette with caramel lengths and soft waves" width="1080" height="1440" loading="lazy"><figcaption><b>Refresh</b>Refresh by Shannon, cut and style by Suzi</figcaption></figure>
+      <figure><img src="img/curls2.webp" alt="Curly copper cut from behind" width="1080" height="1570" loading="lazy"><figcaption><b>Curls</b>Curly cut by Shannon</figcaption></figure>
+      <figure><img src="img/blonde3.webp" alt="Lived-in blonde with soft waves" width="1080" height="1220" loading="lazy"><figcaption><b>Blonde</b>Lived-in blonde, soft waves</figcaption></figure>
+      <figure><img src="img/blonde2.webp" alt="Blended blonde from behind" width="1080" height="1328" loading="lazy"><figcaption><b>Blonde</b>Blended, bright and healthy</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="services" style="padding-top:clamp(30px,5vw,60px)">
+  <div class="wrap">
+    <div class="head bf"><div><div class="kicker">Services</div><h2>What we <em>do</em></h2></div><p>Every appointment starts with a chat about your hair, your face and how you live with it day to day.</p></div>
+    <div class="svc">
+      <div class="card bf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.6 7.6 20 18M8.6 16.4 20 6"/></svg></span><h3>Creative cuts</h3><p>Precision cuts, layers and shape, including cuts made for curly hair.</p></div>
+      <div class="card bf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"/></svg></span><h3>Blonde &amp; colour</h3><p>Our speciality: creamy blondes, balayage, lived-in colour and rich coppers.</p></div>
+      <div class="card bf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 4c4 0 4 4 0 4s-4 4 0 4 4 4 0 4-4 4 0 4M14 4c4 0 4 4 0 4s-4 4 0 4 4 4 0 4-4 4 0 4"/></svg></span><h3>Perms</h3><p>Thinking about a perm? We customise the curl size to suit your face shape.</p></div>
+      <div class="card bf"><span class="ic"><svg viewBox="0 0 24 24"><use href="#leaf"/></svg></span><h3>Treatments</h3><p>Nano Plasty for frizzy, unmanageable or damaged hair: frizz-free and silky smooth.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block words">
+  <div class="wrap">
+    <figure class="bf"><img src="img/curls.webp" alt="Client with a fresh curly cut" width="1080" height="1570" loading="lazy"></figure>
+    <div class="bf"><div class="kicker">Client words</div>
+      <blockquote>“Dom cut my curly hair at Miss Gertrude this morning and I am yet again thrilled with the result! In your warm and calm nature you take the time to do just the right cut to suit me. I've been looking for an intuitive hairdresser forever!”</blockquote>
+      <cite>Frida · client</cite></div>
+  </div>
+</section>
+
+<section class="block" id="salon">
+  <div class="wrap team">
+    <div class="bf">
+      <div class="kicker">The salon</div>
+      <h2 style="font-size:clamp(44px,6vw,74px);margin:10px 0 18px">Timber, plants and <em style="color:var(--fig)">natural light</em></h2>
+      <p style="color:var(--soft);margin:0">Look for the white sign on Gertrude Street. Inside: a calm, green space where the team takes the time to get your hair right.</p>
+      <div class="people"><div><i>D</i><b>Dom</b><span>Cuts &amp; colour</span></div><div><i>S</i><b>Shannon</b><span>@scissoredbyshannon</span></div><div><i>S</i><b>Suzi</b><span>@hair_bysuzi</span></div></div>
+      <div class="eco"><svg viewBox="0 0 24 24"><use href="#leaf"/></svg><span>A sustainable salon in the heart of Fitzroy, Naarm.</span></div>
+    </div>
+    <div class="salon bf">
+      <figure><img src="img/salon.webp" alt="Salon interior with brick wall, mirrors and plants" width="353" height="343" loading="lazy"></figure>
+      <figure><img src="img/facade.webp" alt="The Miss Gertrude sign on the facade" width="352" height="343" loading="lazy"></figure>
+    </div>
+  </div>
+</section>
+
+<section class="block chair" id="chair">
+  <div class="wrap">
+    <div class="bf"><div class="kicker">Chair rental opportunity</div><h2>Your chair. Your clients. Your business.</h2>
+      <p style="color:var(--soft);margin:0 0 18px">Join our beautiful boutique salon in the heart of Fitzroy. A space to create, grow and thrive.</p>
+      <ul><li>Prime Fitzroy location</li><li>Established clientele</li><li>Supportive, friendly atmosphere</li><li>Fully equipped salon</li><li>Flexible rental options</li><li>Premium products</li></ul></div>
+    <div class="big bf"><div class="kicker" style="color:#b9c9a5">Interested? Let's chat</div><b>0414 454 809</b><a class="btn" href="tel:+61414454809">Arrange a viewing</a></div>
+  </div>
+</section>
+
+<section class="block" id="book">
+  <div class="wrap">
+    <div class="head bf"><div><div class="kicker">Book online</div><h2>Your next <em>appointment</em></h2></div><p>Pick a service, a stylist and a day. On the live site this connects straight to the salon's booking system.</p></div>
+    <div class="visit">
+      <div class="panel bf"><h3>Request a booking</h3><p>We'll confirm your time by phone or email.</p>
+        <form class="book" id="bookForm">
+          <div class="full"><label id="svcL">Service</label><div class="chips" role="group" aria-labelledby="svcL" data-name="service"><button type="button" aria-pressed="true">Cut</button><button type="button" aria-pressed="false">Blonde / colour</button><button type="button" aria-pressed="false">Cut &amp; colour</button><button type="button" aria-pressed="false">Perm</button><button type="button" aria-pressed="false">Treatment</button></div></div>
+          <div class="full"><label id="styL">Stylist</label><div class="chips" role="group" aria-labelledby="styL" data-name="stylist"><button type="button" aria-pressed="true">Anyone</button><button type="button" aria-pressed="false">Dom</button><button type="button" aria-pressed="false">Shannon</button><button type="button" aria-pressed="false">Suzi</button></div></div>
+          <label>Preferred day<select id="bDay"></select></label>
+          <label>Time<select id="bTime"><option>Morning</option><option>Afternoon</option><option>Evening</option></select></label>
+          <label>Name<input id="bName" required autocomplete="name"></label>
+          <label>Phone<input id="bPhone" type="tel" required autocomplete="tel"></label>
+          <div class="full"><button class="btn" type="submit" style="width:100%">Send booking request</button><p class="small">Opens your email app with the request ready to send to info@missgertrude.com.</p></div>
+        </form></div>
+      <div class="panel bf"><h3>Visit us</h3><p>Rear of 150 Gertrude St, Fitzroy VIC 3065</p>
+        <div class="contact"><a href="tel:+61394195507">+61 3 9419 5507</a><a href="mailto:info@missgertrude.com">info@missgertrude.com</a></div>
+        <dl class="hours" id="hours"></dl>
+        <a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query=Miss%20Gertrude%20Salon%20150%20Gertrude%20St%20Fitzroy" target="_blank" rel="noopener">Directions</a></div>
+    </div>
+  </div>
+</section>
+<footer><div class="wrap"><span>Miss Gertrude Salon · Rear of 150 Gertrude St, Fitzroy VIC 3065</span><span>Design proposal by Jota Labs · <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">more work</a></span></div></footer>
+<a class="like" href="https://wa.me/5491130331893?text=Hi%20Jan%2C%20I%20saw%20the%20website%20proposal%20for%20Miss%20Gertrude%20and%20I%27d%20like%20to%20know%20more." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Like it? Let's talk</a>
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+
+  /* ---------- Öffnungszeiten + jetzt geöffnet (Melbourne) ---------- */
+  const H = { Mon: null, Tue: [600, 1080], Wed: [600, 1260], Thu: [600, 1260], Fri: [600, 1140], Sat: [540, 1020], Sun: null };
+  const names = { Mon: "Monday", Tue: "Tuesday", Wed: "Wednesday", Thu: "Thursday", Fri: "Friday", Sat: "Saturday", Sun: "Sunday" };
+  const fmt = (m) => { const h = Math.floor(m / 60), mm = m % 60; return `${h > 12 ? h - 12 : h}${mm ? ":" + String(mm).padStart(2, "0") : ""}${h >= 12 ? "pm" : "am"}`; };
+  function status() { const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "Australia/Melbourne", weekday: "short", hour: "numeric", minute: "numeric", hour12: false }).formatToParts(new Date());
+    const get = (t) => parts.find((x) => x.type === t).value, wd = get("weekday"), m = (+get("hour") % 24) * 60 + +get("minute"), t = H[wd];
+    $("#hours").innerHTML = Object.keys(names).map((d) => `<dt class="${d === wd ? "today" : ""}">${names[d]}</dt><dd class="${d === wd ? "today" : ""}">${H[d] ? `${fmt(H[d][0])} – ${fmt(H[d][1])}` : "Closed"}</dd>`).join("");
+    const open = t && m >= t[0] && m < t[1], chip = $("#statusChip"); chip.classList.toggle("open", !!open);
+    chip.innerHTML = open ? `<b>Open now</b> · until ${fmt(t[1])}` : t && m < t[0] ? `Opens today at <b>${fmt(t[0])}</b>` : "Closed now · <b>book online</b>"; }
+  status(); setInterval(status, 60000);
+
+  /* ---------- Buchungsanfrage ---------- */
+  document.querySelectorAll(".chips").forEach((g) => g.addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; g.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", String(x === b))); }));
+  const days = []; const dn = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], mn = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  for (let i = 1; days.length < 10; i++) { const d = new Date(); d.setDate(d.getDate() + i); if (d.getDay() === 0 || d.getDay() === 1) continue; days.push(`${dn[d.getDay()]} ${d.getDate()} ${mn[d.getMonth()]}`); }
+  $("#bDay").innerHTML = days.map((d) => `<option>${d}</option>`).join("");
+  $("#bookForm").addEventListener("submit", (e) => { e.preventDefault(); const pick = (n) => document.querySelector(`.chips[data-name="${n}"] [aria-pressed="true"]`).textContent;
+    const body = `Hi Miss Gertrude,\n\nI'd like to book:\nService: ${pick("service")}\nStylist: ${pick("stylist")}\nDay: ${$("#bDay").value}, ${$("#bTime").value}\n\nName: ${$("#bName").value}\nPhone: ${$("#bPhone").value}\n\nThank you!`;
+    location.href = `mailto:info@missgertrude.com?subject=${encodeURIComponent("Booking request: " + pick("service"))}&body=${encodeURIComponent(body)}`; });
+
+  const io = "IntersectionObserver" in window ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 }) : null;
+  document.querySelectorAll(".bf").forEach((n) => (io ? io.observe(n) : n.classList.add("in")));
+
+  /* ---------- Lightbox ---------- */
+  (() => { const items = [...document.querySelectorAll(".work figure, .words figure, .salon figure")]; let lb = null, idx = 0;
+    items.forEach((el) => { el.tabIndex = 0; el.setAttribute("role", "button"); });
+    const render = () => { const el = items[idx], im = el.querySelector("img"), c = el.querySelector("figcaption"); lb.querySelector("img").src = im.currentSrc || im.src; lb.querySelector("img").alt = im.alt; lb.querySelector(".cap").textContent = c ? c.innerText.replace(/\n+/g, " · ") : im.alt; };
+    const close = () => { if (!lb) return; lb.classList.remove("on"); const n = lb; lb = null; document.documentElement.style.overflow = ""; setTimeout(() => n.remove(), 250); items[idx].focus({ preventScroll: true }); };
+    const go = (d) => { idx = (idx + d + items.length) % items.length; render(); };
+    const open = (i) => { idx = i; lb = document.createElement("div"); lb.className = "lb"; lb.setAttribute("role", "dialog"); lb.setAttribute("aria-modal", "true");
+      lb.innerHTML = '<img alt=""><div class="cap"></div><button class="x" type="button" aria-label="Close">✕</button><button class="pv" type="button" aria-label="Previous">‹</button><button class="nx" type="button" aria-label="Next">›</button>';
+      lb.addEventListener("click", (e) => { if (e.target.closest(".pv")) go(-1); else if (e.target.closest(".nx")) go(1); else if (e.target.tagName !== "IMG") close(); });
+      let sx = null; lb.addEventListener("touchstart", (e) => { sx = e.touches[0].clientX; }, { passive: true }); lb.addEventListener("touchend", (e) => { if (sx === null) return; const dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1); sx = null; });
+      document.body.append(lb); document.documentElement.style.overflow = "hidden"; render(); requestAnimationFrame(() => lb.classList.add("on")); lb.querySelector(".x").focus(); };
+    items.forEach((el, i) => { el.addEventListener("click", () => open(i)); el.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(i); } }); });
+    addEventListener("keydown", (e) => { if (!lb) return; if (e.key === "Escape") close(); else if (e.key === "ArrowRight") go(1); else if (e.key === "ArrowLeft") go(-1); }); })();
+
+  /* ---------- Intro C: Geigenfeigen-Blätter wachsen von den Rändern herein, in der Mitte das Logo (Jota Labs Intro-Bibliothek) ---------- */
+  const hero = $("#top");
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const tween = (ms, fn, tk, ez) => new Promise((res) => { const t0 = performance.now(); const st = (n) => { if (tk.cancelled) return res(); const k = Math.min(1, (n - t0) / ms); fn(ez ? ez(k) : k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2, k); k < 1 ? requestAnimationFrame(st) : res(); }; requestAnimationFrame(st); });
+  const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); };
+  function plaque(ctx, cx, cy, W, a) { if (a <= 0) return; const Hh = W * .36, r = Hh * .32; ctx.save(); ctx.globalAlpha *= a; ctx.translate(cx, cy);
+    ctx.beginPath(); ctx.moveTo(-W / 2 + r, -Hh / 2); ctx.lineTo(W / 2 - r, -Hh / 2); ctx.arc(W / 2, -Hh / 2, r, Math.PI, Math.PI / 2, true); ctx.lineTo(W / 2, Hh / 2 - r);
+    ctx.arc(W / 2, Hh / 2, r, -Math.PI / 2, Math.PI, true); ctx.lineTo(-W / 2 + r, Hh / 2); ctx.arc(-W / 2, Hh / 2, r, 0, -Math.PI / 2, true); ctx.lineTo(-W / 2, -Hh / 2 + r); ctx.arc(-W / 2, -Hh / 2, r, Math.PI / 2, 0, true); ctx.closePath();
+    ctx.fillStyle = "#fbfaf7"; ctx.fill(); ctx.fillStyle = "#111"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ctx.font = `700 ${W * .095}px "Josefin Sans", system-ui`; ctx.fillText("MISS GERTRUDE", 0, -Hh * .02, W * .78);
+    ctx.beginPath(); ctx.arc(-W * .02, Hh * .27, W * .008, 0, 7); ctx.arc(W * .02, Hh * .27, W * .008, 0, 7); ctx.fill(); ctx.restore(); }
+  function leaf(ctx, x, y, s, rot, k, col) { if (k <= 0) return; ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(k, k);
+    ctx.fillStyle = col; ctx.beginPath(); ctx.moveTo(0, 0); ctx.bezierCurveTo(-s * .55, -s * .25, -s * .62, -s * .95, 0, -s * 1.15); ctx.bezierCurveTo(s * .62, -s * .95, s * .55, -s * .25, 0, 0); ctx.fill();
+    ctx.strokeStyle = "rgba(200,230,170,.55)"; ctx.lineWidth = s * .03; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, -s * 1.08); for (let i = 1; i < 5; i++) { ctx.moveTo(0, -s * .2 * i); ctx.lineTo(-s * .3, -s * (.2 * i + .16)); ctx.moveTo(0, -s * .2 * i); ctx.lineTo(s * .3, -s * (.2 * i + .16)); } ctx.stroke(); ctx.restore(); }
+  let token = { cancelled: true };
+  async function intro(tk) { await Promise.race([document.fonts.load('700 40px "Josefin Sans"'), sleep(1500)]).catch(() => {}); if (tk.cancelled) return;
+    const w = innerWidth, h = innerHeight, d = w < 760 ? Math.min(2, devicePixelRatio || 1) : Math.min(1.5, devicePixelRatio || 1);
+    const c = document.createElement("canvas"); c.className = "fxl"; c.width = w * d; c.height = h * d; c.style.cssText = "position:fixed;inset:0;width:100vw;height:100vh;z-index:60;pointer-events:none"; document.body.append(c);
+    const ctx = c.getContext("2d"); ctx.scale(d, d); const cx = w / 2, cy = h * .44, W = Math.min(w * .62, 280), S = Math.min(w, h) * .3;
+    const cols = ["#2f5a2c", "#3a6b35", "#284d26", "#47803f"], leaves = [];
+    for (let i = 0; i < 28; i++) { const side = i % 4, f = Math.random();
+      const [x, y, r] = side === 0 ? [-10, h * f, Math.PI / 2 + (Math.random() - .5) * .9] : side === 1 ? [w + 10, h * f, -Math.PI / 2 + (Math.random() - .5) * .9] : side === 2 ? [w * f, h + 10, (Math.random() - .5) * .9] : [w * f, -10, Math.PI + (Math.random() - .5) * .9];
+      leaves.push({ x, y, r, s: S * (.7 + Math.random() * .6), d: Math.random() * .5, c: cols[i % 4] }); }
+    let g = 0, logo = 0, sub = 0, bgA = 1, zoom = 1, t = 0;
+    const draw = () => { ctx.clearRect(0, 0, w, h); ctx.save(); ctx.globalAlpha = bgA; ctx.fillStyle = "#efe9dd"; ctx.fillRect(0, 0, w, h); ctx.translate(cx, cy); ctx.scale(zoom, zoom); ctx.translate(-cx, -cy);
+      for (const L of leaves) { const k = Math.max(0, Math.min(1, (g - L.d) / .5)); leaf(ctx, L.x, L.y, L.s, L.r + Math.sin(t * .001 + L.d * 9) * .04, 1 - Math.pow(1 - k, 3), L.c); }
+      ctx.fillStyle = "#0d0d0d"; ctx.globalAlpha = bgA * logo; ctx.beginPath(); ctx.arc(cx, cy, W * .62 * (.85 + .15 * logo), 0, 7); ctx.fill(); ctx.globalAlpha = bgA; plaque(ctx, cx, cy, W, logo); ctx.restore();
+      if (sub > 0) { ctx.save(); ctx.globalAlpha = sub * bgA; ctx.fillStyle = "#1f3a1d"; ctx.textAlign = "center"; ctx.font = `600 ${Math.min(w * .036, 16)}px "Josefin Sans", system-ui`; ctx.fillText("SUSTAINABLE SALON · FITZROY, NAARM", cx, cy + W * .82, w * .9); ctx.restore(); } };
+    let live = true; const lp = (n) => { if (!live || tk.cancelled) return; t = n; draw(); requestAnimationFrame(lp); }; requestAnimationFrame(lp);
+    await sleep(150); await tween(1500, (e, k) => { g = k; }, tk, (q) => q); await tween(700, (e) => { logo = e; }, tk); await tween(400, (e) => { sub = e; }, tk);
+    await sleep(1000); if (tk.cancelled) { live = false; return c.remove(); }
+    reveal(); await tween(800, (e) => { zoom = 1 + e * 3; bgA = 1 - e; c.style.opacity = 1 - e; }, tk, (q) => q * q); live = false; c.remove(); }
+  async function play() { token.cancelled = true; document.querySelectorAll(".fxl, .skipi").forEach((n) => n.remove()); const tk = (token = { cancelled: false });
+    if (reduce) { reveal(); return; } scrollTo(0, 0); document.documentElement.style.overflow = "hidden"; hero.classList.add("pre"); hero.classList.remove("reveal");
+    const sk = document.createElement("button"); sk.className = "skipi"; sk.type = "button"; sk.textContent = "Skip intro"; sk.addEventListener("click", () => { tk.cancelled = true; document.querySelectorAll(".fxl, .skipi").forEach((n) => n.remove()); document.documentElement.style.overflow = ""; reveal(); }); document.body.append(sk);
+    await intro(tk); if (token === tk) { document.querySelectorAll(".fxl, .skipi").forEach((n) => n.remove()); document.documentElement.style.overflow = ""; if (tk.cancelled) reveal(); } }
+  $("#redo").addEventListener("click", play);
+  document.fonts.ready.then(play);
+})();
+</script>
+</body>
+</html>
