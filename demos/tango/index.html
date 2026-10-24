@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Cuarteto Farol Rojo · Tango · Demo de sitio web</title>
+<meta name="description" content="Sitio web de demostración para un cuarteto de tango ficticio, hecho por Jota Labs: intro, reproductor, fechas, galería, bio y contrataciones.">
+<meta property="og:title" content="Cuarteto Farol Rojo · demo de sitio web por Jota Labs">
+<meta property="og:description" content="Una plantilla de sitio web para músicos de tango: intro, reproductor, fechas, contrataciones.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23120b0a'/%3E%3Cpath d='M32 6l9 10v26H23V16z' fill='%23d4a646'/%3E%3Ccircle cx='32' cy='29' r='7' fill='%23c4242b'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Jota Labs Musik-Demo: Tango. Intro (Bandoneón öffnet den Balg, Fileteado-Rahmen zeichnet sich, Name), Hero mit Farol und Nebel,
+   Web-Audio-Player (synthetisierter Tango: Bandoneón, Piano, Kontrabass; Tango, Milonga, Vals), Fechas, Galerie, Bio, Contrataciones. */
+:root { --bg: #120b0a; --bg-2: #1a1110; --bg-3: #231816; --line: rgba(240,224,196,.12); --fg: #f3e7d3; --soft: #d6c6ad; --muted: #9a8a74;
+  --red: #c4242b; --red-2: #e23a40; --gold: #d4a646; --gold-2: #f0cb6e; --cream: #f3e7d3; --green: #2d6a4f;
+  --f-deco: "Abril Fatface", Georgia, serif; --f-serif: "Playfair Display", Georgia, serif; --f-body: "Inter", system-ui, sans-serif; color-scheme: dark; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 400 16px/1.65 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-family: var(--f-serif); font-weight: 700; text-wrap: balance; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 600 12px/1.2 var(--f-body); letter-spacing: .26em; text-transform: uppercase; color: var(--gold); }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.demo { background: var(--gold); color: #1a1110; font: 13px/1.4 var(--f-body); padding: 8px 16px; text-align: center; }
+.demo a { font-weight: 700; }
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: rgba(18,11,10,.88); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.logo { font: 400 22px/1 var(--f-deco); text-decoration: none; color: var(--gold-2); }
+.logo small { display: block; font: 600 9px var(--f-body); letter-spacing: .32em; color: var(--muted); margin-top: 3px; }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font: 500 14px var(--f-body); color: var(--soft); }
+nav.links a:hover { color: #fff; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; font: 600 14px/1 var(--f-body); letter-spacing: .06em; padding: 15px 24px; border-radius: 999px; background: var(--red); color: #fff; border: 2px solid var(--red); text-decoration: none; cursor: pointer; transition: transform .15s, background .15s; }
+.btn:hover { background: var(--red-2); transform: translateY(-2px); }
+.btn.gold { background: var(--gold); border-color: var(--gold); color: #1a1110; } .btn.gold:hover { background: var(--gold-2); }
+.btn.ghost { background: transparent; color: var(--fg); border-color: rgba(240,224,196,.4); } .btn.ghost:hover { border-color: #fff; }
+nav.links a.btn { color: #fff; padding: 10px 16px; font-size: 13px; }
+.menu-btn { display: none; background: transparent; color: var(--fg); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font: 600 12px var(--f-body); letter-spacing: .12em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bg-2); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 14px 0; border-bottom: 1px solid var(--line); }
+  nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+.hero { position: relative; overflow: hidden; isolation: isolate; min-height: min(92vh, 860px); display: grid; place-items: center; text-align: center; border-bottom: 1px solid var(--line);
+  background: radial-gradient(40% 50% at 78% 18%, rgba(240,203,110,.22), transparent 70%), radial-gradient(70% 60% at 50% 110%, rgba(196,36,43,.25), transparent 70%), var(--bg); }
+#fog { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.hero .wrap { position: relative; z-index: 1; padding-block: 80px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.frame { position: relative; padding: clamp(26px, 5vw, 46px) clamp(26px, 6vw, 70px); }
+.frame svg.orn { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.hero .pre-t { font: 500 italic clamp(18px, 2.4vw, 26px) var(--f-serif); color: var(--gold-2); }
+.hero h1 { font: 400 clamp(56px, 11vw, 140px)/.92 var(--f-deco); color: var(--cream); text-shadow: 0 3px 0 #000, 0 0 30px rgba(196,36,43,.35); }
+.hero h1 em { font-style: normal; color: var(--red-2); }
+.hero .tag { font: 600 clamp(12px, 1.5vw, 15px) var(--f-body); letter-spacing: .44em; text-transform: uppercase; color: var(--soft); margin-top: 10px; }
+.ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 8px; }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 3; font: 600 11px var(--f-body); letter-spacing: .14em; color: var(--muted); background: rgba(0,0,0,.45); border: 1px solid var(--line); border-radius: 999px; padding: 8px 12px; cursor: pointer; }
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .9s cubic-bezier(.2,.7,.2,1) both; } .hero.reveal .wrap > :nth-child(2) { animation-delay: .15s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .3s }
+@keyframes rise { from { transform: translateY(20px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+section.block { padding-block: clamp(70px, 10vw, 120px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px 40px; margin-bottom: 30px; }
+.head h2 { font-size: clamp(38px, 6vw, 68px); line-height: 1; margin-top: 10px; } .head h2 em { color: var(--gold-2); font-weight: 500; }
+.head p { max-width: 46ch; margin: 0; color: var(--muted); }
+/* Player */
+.player { display: grid; grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); border: 1px solid rgba(212,166,70,.35); background: var(--bg-2); border-radius: 18px; overflow: hidden; }
+@media (max-width: 860px) { .player { grid-template-columns: minmax(0,1fr); } }
+.player .art { aspect-ratio: 1; background: #000; } .player .art canvas { width: 100%; height: 100%; display: block; }
+.player .side { padding: clamp(20px, 3vw, 34px); display: grid; gap: 18px; align-content: start; }
+.now b { font: 700 clamp(24px, 3vw, 34px)/1.1 var(--f-serif); display: block; } .now span { color: var(--muted); font-size: 14px; }
+.viz { width: 100%; height: 86px; display: block; }
+.controls { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+@media (max-width: 560px) { .controls .bar { flex-basis: 100%; order: 5; } .controls .time { margin-left: auto; } }
+.play { width: 64px; height: 64px; flex: none; border-radius: 50%; border: 0; background: var(--red); color: #fff; display: grid; place-items: center; cursor: pointer; transition: transform .15s, background .15s; }
+.play:hover { background: var(--red-2); transform: scale(1.05); } .play svg { width: 26px; height: 26px; }
+.play.on { animation: pulse 1.4s infinite; } @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(226,58,64,.5); } 100% { box-shadow: 0 0 0 18px rgba(226,58,64,0); } }
+.skip { background: transparent; border: 1px solid var(--line); color: var(--soft); width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; cursor: pointer; }
+.bar { flex: 1; height: 6px; border-radius: 3px; background: rgba(255,255,255,.08); position: relative; } .bar i { position: absolute; inset: 0 auto 0 0; width: 0; border-radius: 3px; background: linear-gradient(90deg, var(--red), var(--gold)); }
+.time { font: 500 13px var(--f-body); color: var(--muted); min-width: 82px; text-align: right; font-variant-numeric: tabular-nums; }
+ol.tracks { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+ol.tracks li { display: grid; grid-template-columns: 30px minmax(0,1fr) auto auto; gap: 12px; align-items: center; padding: 13px 4px; border-bottom: 1px solid var(--line); cursor: pointer; }
+ol.tracks li:hover { background: rgba(255,255,255,.03); } ol.tracks li.cur .t { color: var(--gold-2); }
+ol.tracks .n { color: var(--muted); font-size: 13px; } ol.tracks .t { font: 500 italic 19px var(--f-serif); } ol.tracks .g { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--red-2); } ol.tracks .d { color: var(--muted); font-size: 13px; }
+.stream { display: flex; flex-wrap: wrap; gap: 8px; } .stream a { font: 600 12px var(--f-body); text-decoration: none; padding: 8px 13px; border-radius: 999px; border: 1px solid var(--line); color: var(--soft); } .stream a:hover { border-color: var(--gold); color: #fff; }
+.note { font-size: 13px; color: var(--muted); }
+/* Fechas */
+.dates { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+@media (max-width: 860px) { .dates { grid-template-columns: minmax(0,1fr); } }
+.date { border: 1px solid var(--line); border-radius: 16px; padding: 20px; background: var(--bg-2); display: grid; gap: 6px; position: relative; overflow: hidden; }
+.date::after { content: ""; position: absolute; right: -30px; top: -30px; width: 90px; height: 90px; border-radius: 50%; border: 2px solid rgba(212,166,70,.2); }
+.date .d { font: 400 38px/1 var(--f-deco); color: var(--gold-2); } .date .m { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+.date h3 { font-size: 22px; margin-top: 6px; } .date p { margin: 0; color: var(--soft); font-size: 14px; } .date .btn { justify-self: start; margin-top: 8px; padding: 11px 16px; font-size: 13px; }
+/* Galerie */
+.gallery { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); grid-auto-rows: 220px; gap: 10px; }
+@media (max-width: 860px) { .gallery { grid-template-columns: repeat(2, minmax(0,1fr)); grid-auto-rows: 160px; } }
+.gallery figure { margin: 0; position: relative; overflow: hidden; border-radius: 14px; background: #000; }
+.gallery figure.big { grid-column: span 2; grid-row: span 2; } .gallery figure.wide { grid-column: span 2; }
+.gallery canvas { width: 100%; height: 100%; display: block; transition: transform .6s; } .gallery figure:hover canvas { transform: scale(1.04); }
+.gallery figcaption { position: absolute; left: 10px; bottom: 10px; font: 500 italic 14px var(--f-serif); background: rgba(0,0,0,.6); padding: 4px 11px; border-radius: 999px; }
+/* Bio */
+.bio { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: clamp(30px, 6vw, 80px); align-items: start; }
+@media (max-width: 860px) { .bio { grid-template-columns: minmax(0,1fr); } }
+.bio p { color: var(--soft); margin: 0 0 14px; }
+.members { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
+.members div { border: 1px solid var(--line); border-radius: 14px; padding: 16px; background: var(--bg-2); } .members b { display: block; font: 500 italic 20px var(--f-serif); } .members span { color: var(--muted); font-size: 14px; }
+.quote { margin-top: 18px; border-left: 3px solid var(--gold); padding: 4px 0 4px 16px; font: 500 italic 21px/1.4 var(--f-serif); color: var(--cream); }
+/* Contrataciones */
+.hire { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; }
+@media (max-width: 860px) { .hire { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+.hire div { border: 1px solid rgba(212,166,70,.3); border-radius: 16px; padding: 20px; background: linear-gradient(160deg, var(--bg-3), var(--bg-2)); }
+.hire b { display: block; font: 700 21px var(--f-serif); margin: 8px 0 4px; } .hire span { color: var(--soft); font-size: 14px; } .hire i { font-style: normal; font-size: 26px; }
+.cta-band { margin-top: 18px; border-radius: 18px; padding: clamp(22px, 4vw, 38px); background: var(--red); display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 16px; align-items: center; }
+@media (max-width: 700px) { .cta-band { grid-template-columns: minmax(0,1fr); } }
+.cta-band h3 { font: 400 clamp(28px, 4vw, 42px)/1.05 var(--f-deco); } .cta-band p { margin: 6px 0 0; color: #ffe4e0; }
+footer { padding-block: 40px 100px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 700 14px system-ui, sans-serif; padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.4); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+.skipi { position: fixed; left: 50%; bottom: calc(22px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); z-index: 61; font: 600 11px var(--f-body); letter-spacing: .14em; color: var(--soft); background: rgba(0,0,0,.5); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+html.js .bf { opacity: 0; transform: translateY(18px); transition: opacity .8s, transform .8s cubic-bezier(.2,.7,.2,1); } html.js .bf.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { html.js .bf { opacity: 1; transform: none; transition: none; } }
+</style>
+<script>document.documentElement.classList.add("js")</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></symbol>
+  <symbol id="pl" viewBox="0 0 24 24"><path fill="currentColor" d="M7 4l14 8-14 8z"/></symbol>
+  <symbol id="pa" viewBox="0 0 24 24"><path fill="currentColor" d="M6 4h4v16H6zM14 4h4v16h-4z"/></symbol>
+  <symbol id="fil" viewBox="0 0 200 120"><g fill="none" stroke-linecap="round"><path d="M10 110 C 10 60, 40 30, 90 26 C 130 23, 150 46, 138 66 C 128 82, 104 78, 104 62 C 104 50, 120 46, 126 56" stroke="#d4a646" stroke-width="5"/><path d="M30 110 C 34 80, 56 58, 86 54 C 104 52, 112 62, 108 70" stroke="#c4242b" stroke-width="4"/><path d="M90 26 C 104 10, 132 6, 150 14 C 170 22, 176 42, 162 50 C 152 56, 142 48, 148 40" stroke="#f0cb6e" stroke-width="3"/><path d="M60 40 q-14 -12 -30 -6 q-8 4 -4 12" stroke="#2d6a4f" stroke-width="4"/><circle cx="126" cy="56" r="4" fill="#f0cb6e"/><circle cx="148" cy="40" r="3.5" fill="#c4242b"/></g></symbol>
+</svg>
+<div class="demo"><b>Sitio de demostración</b> para un cuarteto ficticio · hecho por <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">Jota Labs</a> · demo website for a fictional band · <a href="#contrataciones">¿querés uno?</a></div>
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top">Farol Rojo<small>CUARTETO DE TANGO</small></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENÚ</button>
+    <nav class="links" id="links"><a href="#musica">Música</a><a href="#fechas">Fechas</a><a href="#cuarteto">El cuarteto</a><a href="#galeria">Galería</a><a class="btn" href="#contrataciones">Contrataciones</a></nav>
+  </div>
+</header>
+<section class="hero pre" id="top">
+  <canvas id="fog" aria-hidden="true"></canvas>
+  <button class="redo" id="redo" type="button">↻ Intro</button>
+  <div class="wrap">
+    <div class="frame"><svg class="orn" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><rect x="1" y="1" width="98" height="98" fill="none" stroke="#d4a646" stroke-width=".5" vector-effect="non-scaling-stroke"/><rect x="3" y="3" width="94" height="94" fill="none" stroke="#c4242b" stroke-width=".5" vector-effect="non-scaling-stroke"/></svg>
+      <svg aria-hidden="true" style="position:absolute;left:-14px;top:-18px;width:120px;height:72px"><use href="#fil"/></svg>
+      <svg aria-hidden="true" style="position:absolute;right:-14px;top:-18px;width:120px;height:72px;transform:scaleX(-1)"><use href="#fil"/></svg>
+      <svg aria-hidden="true" style="position:absolute;left:-14px;bottom:-18px;width:120px;height:72px;transform:scaleY(-1)"><use href="#fil"/></svg>
+      <svg aria-hidden="true" style="position:absolute;right:-14px;bottom:-18px;width:120px;height:72px;transform:scale(-1,-1)"><use href="#fil"/></svg>
+      <div class="pre-t">Cuarteto</div>
+      <h1>Farol <em>Rojo</em></h1>
+      <div class="tag">Tango · Milonga · Vals</div>
+    </div>
+    <p style="margin:6px 0 0;max-width:46ch;color:var(--soft)">Bandoneón, piano, violín y contrabajo. Tango de salón y tango de esquina, desde San Telmo para el mundo.</p>
+    <div class="ctas"><a class="btn" href="#musica" id="heroPlay">▶ Escuchar</a><a class="btn ghost" href="#contrataciones">Contrataciones</a></div>
+  </div>
+</section>
+
+<section class="block" id="musica">
+  <div class="wrap">
+    <div class="head bf"><div><div class="kicker">Nuevo disco · 2026</div><h2>Noches de <em>adoquín</em></h2></div><p>Todo el disco suena acá mismo. En un sitio real, el reproductor pasa tus grabaciones o las trae de Spotify, Bandcamp o YouTube.</p></div>
+    <div class="player bf">
+      <div class="art"><canvas id="cover" width="900" height="900" aria-label="Tapa del disco Noches de adoquín"></canvas></div>
+      <div class="side">
+        <div class="now"><span id="nowNo">Tema 1</span><b id="nowT">La Madrugada</b></div>
+        <canvas class="viz" id="viz" aria-hidden="true"></canvas>
+        <div class="controls">
+          <button class="skip" id="prev" type="button" aria-label="Tema anterior">⏮</button>
+          <button class="play" id="play" type="button" aria-label="Reproducir"><svg><use href="#pl"/></svg></button>
+          <button class="skip" id="next" type="button" aria-label="Tema siguiente">⏭</button>
+          <div class="bar"><i id="prog"></i></div><span class="time" id="time">0:00 / 0:34</span>
+        </div>
+        <ol class="tracks" id="tracks"></ol>
+        <div class="stream"><a href="#musica">Spotify</a><a href="#musica">Bandcamp</a><a href="#musica">YouTube</a><a href="#musica">Apple Music</a></div>
+        <p class="note">El audio de la demo se genera en vivo en tu navegador: bandoneón, piano y contrabajo sintetizados.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="fechas" style="padding-top:0">
+  <div class="wrap">
+    <div class="head bf"><div><div class="kicker">Próximas fechas</div><h2>Dónde <em>tocamos</em></h2></div><p>Milongas, festivales y giras con link a entradas. Las fechas pasadas desaparecen solas.</p></div>
+    <div class="dates" id="dates"></div>
+  </div>
+</section>
+
+<section class="block" id="galeria" style="padding-top:0">
+  <div class="wrap">
+    <div class="head bf"><div><div class="kicker">Galería</div><h2>Bajo el <em>farol</em></h2></div><p>Fotos de shows, milongas y ensayos. Acá son ilustraciones generadas; en tu sitio, las fotos de tu fotógrafo.</p></div>
+    <div class="gallery bf">
+      <figure class="big"><canvas data-art="farol" width="800" height="800"></canvas><figcaption>Milonga en San Telmo</figcaption></figure>
+      <figure><canvas data-art="bando" width="500" height="440"></canvas><figcaption>El bandoneón</figcaption></figure>
+      <figure><canvas data-art="filete" width="500" height="440"></canvas><figcaption>Fileteado</figcaption></figure>
+      <figure class="wide"><canvas data-art="calle" width="1000" height="440"></canvas><figcaption>Calle Defensa, 3 a.m.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="cuarteto" style="padding-top:0">
+  <div class="wrap bio">
+    <div class="bf">
+      <div class="kicker">El cuarteto</div>
+      <h2 style="font-size:clamp(38px,5.6vw,64px);line-height:1;margin:10px 0 22px">Cuatro músicos, un <em style="color:var(--gold-2);font-weight:500">farol</em> encendido</h2>
+      <p>Farol Rojo nació en una milonga de San Telmo, cuando el cuarteto de la casa no llegó y cuatro músicos del público se animaron a tocar. Esa noche no paró nadie de bailar.</p>
+      <p>Hoy tocan tango clásico para bailar, milongas rápidas y valses lentos, y alguna composición propia que suena a calle mojada.</p>
+      <div class="quote">“Suenan como suena Buenos Aires a las tres de la mañana.”</div>
+      <p class="note" style="margin-top:8px">Texto de ejemplo para un cuarteto ficticio.</p>
+    </div>
+    <div class="members bf">
+      <div><b>Lucía Ferraro</b><span>Bandoneón</span></div><div><b>Tomás Iriarte</b><span>Piano</span></div>
+      <div><b>Ana Belgrano</b><span>Violín</span></div><div><b>Martín Quiroga</b><span>Contrabajo</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="contrataciones" style="padding-top:0">
+  <div class="wrap">
+    <div class="head bf"><div><div class="kicker">Contrataciones</div><h2>Tango en <em>vivo</em> para tu evento</h2></div><p>La sección que más trabajo trae: cada pedido llega directo por WhatsApp, con fecha y tipo de evento.</p></div>
+    <div class="hire bf">
+      <div><i>💍</i><b>Casamientos</b><span>El vals, la entrada y una tanda para bailar.</span></div>
+      <div><i>💃</i><b>Milongas</b><span>Tandas completas para la pista, con cortinas.</span></div>
+      <div><i>🏢</i><b>Eventos</b><span>Empresas, hoteles y cenas con show.</span></div>
+      <div><i>🎻</i><b>Clases y shows</b><span>Shows para turistas y clases con música en vivo.</span></div>
+    </div>
+    <div class="cta-band bf"><div><h3>¿Tenés una fecha?</h3><p>Contanos el día, el lugar y el tipo de evento. Te respondemos en el día.</p></div><a class="btn gold" href="https://wa.me/5491130331893?text=Hola%20Jan%2C%20vi%20la%20demo%20de%20sitio%20para%20m%C3%BAsicos%20y%20quiero%20uno." target="_blank" rel="noopener">Consultar por WhatsApp</a></div>
+  </div>
+</section>
+<footer><div class="wrap"><span>Farol Rojo es un cuarteto ficticio. Este sitio es una demo de Jota Labs.</span><span><a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">Jota Labs · sitios web para músicos</a></span></div></footer>
+<a class="like" href="https://wa.me/5491130331893?text=Hola%20Jan%2C%20vi%20la%20demo%20de%20sitio%20para%20m%C3%BAsicos%20y%20quiero%20uno%20para%20mi%20banda." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>¿Querés uno así?</a>
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+  let seed = 7; const rnd = (a, b) => { seed = (seed * 16807) % 2147483647; return a + (seed / 2147483647) * (b - a); };
+
+  /* ---------- Fileteado-Ornament (Canvas) ---------- */
+  function filete(x, cx, cy, s, flipX, flipY) { x.save(); x.translate(cx, cy); x.scale(s * (flipX ? -1 : 1), s * (flipY ? -1 : 1)); x.lineCap = "round";
+    const P = (d, c, w) => { x.strokeStyle = c; x.lineWidth = w; x.stroke(new Path2D(d)); };
+    P("M10 110 C 10 60, 40 30, 90 26 C 130 23, 150 46, 138 66 C 128 82, 104 78, 104 62 C 104 50, 120 46, 126 56", "#d4a646", 5);
+    P("M30 110 C 34 80, 56 58, 86 54 C 104 52, 112 62, 108 70", "#c4242b", 4); P("M90 26 C 104 10, 132 6, 150 14 C 170 22, 176 42, 162 50 C 152 56, 142 48, 148 40", "#f0cb6e", 3);
+    P("M60 40 q-14 -12 -30 -6 q-8 4 -4 12", "#2d6a4f", 4); x.fillStyle = "#f0cb6e"; x.beginPath(); x.arc(126, 56, 4, 0, 7); x.fill(); x.fillStyle = "#c4242b"; x.beginPath(); x.arc(148, 40, 3.5, 0, 7); x.fill(); x.restore(); }
+
+  /* ---------- Generative Artworks ---------- */
+  function cover(cv) { const x = cv.getContext("2d"), W = cv.width, H = cv.height; x.fillStyle = "#14090a"; x.fillRect(0, 0, W, H);
+    const g = x.createRadialGradient(W * .5, H * .38, 10, W * .5, H * .4, W * .6); g.addColorStop(0, "rgba(240,203,110,.35)"); g.addColorStop(1, "rgba(240,203,110,0)"); x.fillStyle = g; x.fillRect(0, 0, W, H);
+    x.strokeStyle = "#d4a646"; x.lineWidth = W * .006; x.strokeRect(W * .05, H * .05, W * .9, H * .9); x.strokeStyle = "#c4242b"; x.strokeRect(W * .075, H * .075, W * .85, H * .85);
+    [[.09, .09, 0, 0], [.91, .09, 1, 0], [.09, .91, 0, 1], [.91, .91, 1, 1]].forEach(([a, b, fx, fy]) => filete(x, W * a, H * b, W / 1000, fx, fy));
+    x.fillStyle = "#1d1513"; x.fillRect(W * .485, H * .45, W * .03, H * .38); x.fillStyle = "#2a1f1c"; x.beginPath(); x.moveTo(W * .44, H * .27); x.lineTo(W * .56, H * .27); x.lineTo(W * .54, H * .45); x.lineTo(W * .46, H * .45); x.closePath(); x.fill();
+    x.fillStyle = "#f0cb6e"; x.beginPath(); x.moveTo(W * .455, H * .29); x.lineTo(W * .545, H * .29); x.lineTo(W * .53, H * .43); x.lineTo(W * .47, H * .43); x.closePath(); x.fill(); x.fillStyle = "rgba(196,36,43,.8)"; x.beginPath(); x.arc(W * .5, H * .36, W * .028, 0, 7); x.fill();
+    x.textAlign = "center"; x.fillStyle = "#f3e7d3"; x.font = `400 ${W * .085}px "Abril Fatface", serif`; x.fillText("Farol Rojo", W / 2, H * .22);
+    x.font = `500 italic ${W * .05}px "Playfair Display", serif`; x.fillStyle = "#f0cb6e"; x.fillText("Noches de adoquín", W / 2, H * .88); }
+  function farolArt(cv) { const x = cv.getContext("2d"), W = cv.width, H = cv.height; x.fillStyle = "#0d0807"; x.fillRect(0, 0, W, H);
+    const g = x.createRadialGradient(W * .7, H * .2, 5, W * .7, H * .2, W * .7); g.addColorStop(0, "rgba(255,210,120,.6)"); g.addColorStop(.4, "rgba(240,160,80,.15)"); g.addColorStop(1, "rgba(0,0,0,0)"); x.fillStyle = g; x.fillRect(0, 0, W, H);
+    x.fillStyle = "#000"; x.fillRect(W * .69, H * .22, W * .02, H * .78); x.beginPath(); x.moveTo(W * .64, H * .1); x.lineTo(W * .76, H * .1); x.lineTo(W * .74, H * .23); x.lineTo(W * .66, H * .23); x.fill(); x.fillStyle = "#ffd98a"; x.fillRect(W * .66, H * .12, W * .08, H * .09);
+    x.fillStyle = "#000"; x.save(); x.translate(W * .36, H * .9); const s = W / 800; x.scale(s, s);
+    x.beginPath(); x.ellipse(-40, -420, 26, 30, 0, 0, 7); x.ellipse(40, -440, 24, 28, 0, 0, 7); x.fill();
+    x.beginPath(); x.moveTo(-70, -390); x.lineTo(10, -400); x.lineTo(20, -240); x.lineTo(-10, -60); x.lineTo(-30, 0); x.lineTo(-50, 0); x.lineTo(-40, -200); x.lineTo(-80, -240); x.closePath(); x.fill();
+    x.beginPath(); x.moveTo(10, -410); x.lineTo(75, -410); x.lineTo(70, -230); x.bezierCurveTo(120, -150, 150, -60, 200, -20); x.lineTo(190, 0); x.bezierCurveTo(120, -40, 60, -120, 30, -200); x.lineTo(20, -240); x.closePath(); x.fill();
+    x.beginPath(); x.moveTo(70, -230); x.bezierCurveTo(20, -100, 60, -40, 40, 0); x.lineTo(60, 0); x.bezierCurveTo(90, -60, 70, -150, 90, -230); x.fill();
+    x.lineWidth = 10; x.strokeStyle = "#000"; x.beginPath(); x.moveTo(-60, -380); x.lineTo(-130, -330); x.stroke(); x.beginPath(); x.moveTo(60, -390); x.lineTo(-10, -360); x.stroke(); x.restore();
+    for (let i = 0; i < 8; i++) { x.strokeStyle = `rgba(240,203,110,${.05 + i * .02})`; x.lineWidth = 2; x.beginPath(); x.ellipse(W * .45, H * .93, W * (.1 + i * .05), H * .02, 0, 0, 7); x.stroke(); } }
+  function bandoArt(cv) { const x = cv.getContext("2d"), W = cv.width, H = cv.height; x.fillStyle = "#1a0e0c"; x.fillRect(0, 0, W, H);
+    const bw = W * .16, bh = H * .5, y = H * .25; x.fillStyle = "#111"; x.fillRect(W * .1, y, bw, bh); x.fillRect(W * .74, y, bw, bh);
+    x.fillStyle = "#e9dcc4"; for (let i = 0; i < 18; i++) { x.beginPath(); x.arc(W * .13 + (i % 3) * bw * .3, y + bh * .12 + Math.floor(i / 3) * bh * .14, W * .012, 0, 7); x.fill(); x.beginPath(); x.arc(W * .77 + (i % 3) * bw * .3, y + bh * .12 + Math.floor(i / 3) * bh * .14, W * .012, 0, 7); x.fill(); }
+    for (let i = 0; i < 12; i++) { const x0 = W * .26 + i * (W * .48 / 12); x.fillStyle = i % 2 ? "#2a1a17" : "#3a2420"; x.beginPath(); x.moveTo(x0, y); x.lineTo(x0 + W * .04, y + bh * .06); x.lineTo(x0 + W * .04, y + bh * .94); x.lineTo(x0, y + bh); x.fill(); x.strokeStyle = "#d4a646"; x.lineWidth = 1; x.stroke(); }
+    x.strokeStyle = "#d4a646"; x.lineWidth = 3; x.strokeRect(W * .1, y, bw, bh); x.strokeRect(W * .74, y, bw, bh); }
+  function fileteArt(cv) { const x = cv.getContext("2d"), W = cv.width, H = cv.height; x.fillStyle = "#101010"; x.fillRect(0, 0, W, H);
+    [[.12, .15, 0, 0], [.88, .15, 1, 0], [.12, .85, 0, 1], [.88, .85, 1, 1]].forEach(([a, b, fx, fy]) => filete(x, W * a, H * b, W / 420, fx, fy));
+    x.textAlign = "center"; x.fillStyle = "#f0cb6e"; x.font = `400 ${W * .1}px "Abril Fatface", serif`; x.fillText("Dios", W / 2, H * .45); x.fillStyle = "#e23a40"; x.fillText("es tanguero", W / 2, H * .62);
+    x.strokeStyle = "#2d6a4f"; x.lineWidth = 4; x.beginPath(); x.moveTo(W * .25, H * .7); x.bezierCurveTo(W * .4, H * .78, W * .6, H * .78, W * .75, H * .7); x.stroke(); }
+  function calleArt(cv) { const x = cv.getContext("2d"), W = cv.width, H = cv.height; const g = x.createLinearGradient(0, 0, 0, H); g.addColorStop(0, "#1a1430"); g.addColorStop(.55, "#2a1a1a"); g.addColorStop(1, "#0b0706"); x.fillStyle = g; x.fillRect(0, 0, W, H);
+    x.fillStyle = "#0c0808"; for (let i = 0; i < 9; i++) { const bx = i * W / 8 - 20, bh = H * rnd(.3, .55); x.fillRect(bx, H * .55 - bh, W / 8 - 6, bh); x.fillStyle = "rgba(255,200,110,.6)"; for (let k = 0; k < 4; k++) if (rnd(0, 1) > .5) x.fillRect(bx + 14 + (k % 2) * 40, H * .55 - bh + 20 + Math.floor(k / 2) * 50, 18, 28); x.fillStyle = "#0c0808"; }
+    for (let r = 0; r < 14; r++) for (let c = 0; c < 40; c++) { const yy = H * .58 + r * r * 1.4, ww = 10 + r * 3; x.fillStyle = `rgba(${90 + rnd(0, 40)},${80 + rnd(0, 30)},${80},${.25 + r * .03})`; x.beginPath(); x.ellipse(c * ww * 1.1 + (r % 2) * ww * .5, yy, ww * .45, 3 + r * .6, 0, 0, 7); x.fill(); }
+    [[.2, 1], [.8, 1]].forEach(([p]) => { const gx = x.createRadialGradient(W * p, H * .25, 2, W * p, H * .25, W * .25); gx.addColorStop(0, "rgba(255,210,120,.6)"); gx.addColorStop(1, "rgba(255,210,120,0)"); x.fillStyle = gx; x.fillRect(0, 0, W, H); x.fillStyle = "#000"; x.fillRect(W * p - 3, H * .25, 6, H * .4); }); }
+  document.fonts.ready.then(() => { cover($("#cover")); document.querySelectorAll("[data-art]").forEach((c) => ({ farol: farolArt, bando: bandoArt, filete: fileteArt, calle: calleArt })[c.dataset.art](c)); });
+
+  /* ---------- Nebel im Hero ---------- */
+  const hero = $("#top"), fc = $("#fog"), fx = fc.getContext("2d"); let puffs = [];
+  function fog() { const d = Math.min(2, devicePixelRatio || 1), w = hero.clientWidth, h = hero.clientHeight;
+    if (fc.width !== Math.round(w * d)) { fc.width = Math.round(w * d); fc.height = Math.round(h * d); puffs = Array.from({ length: 22 }, () => [Math.random() * w, h * (.5 + Math.random() * .5), 80 + Math.random() * 160, .1 + Math.random() * .25]); }
+    fx.setTransform(d, 0, 0, d, 0, 0); fx.clearRect(0, 0, w, h);
+    for (const p of puffs) { p[0] += p[3]; if (p[0] - p[2] > w) p[0] = -p[2]; const g = fx.createRadialGradient(p[0], p[1], 0, p[0], p[1], p[2]); g.addColorStop(0, "rgba(220,200,180,.05)"); g.addColorStop(1, "rgba(220,200,180,0)"); fx.fillStyle = g; fx.fillRect(p[0] - p[2], p[1] - p[2], p[2] * 2, p[2] * 2); }
+    if (!reduce) requestAnimationFrame(fog); }
+  requestAnimationFrame(fog);
+
+  /* ---------- Fechas (relativ zu heute) ---------- */
+  const F = [[4, "Milonga del Farol", "San Telmo, Buenos Aires", "Tanda en vivo desde las 23 h", 1], [11, "Festival de Tango", "Montevideo", "Escenario principal, 21 h", 1], [19, "Noche de tango", "Zürich", "Show y milonga, 20 h", 1], [26, "Ciclo Tango Joven", "Boedo, Buenos Aires", "Entrada libre", 0], [33, "Gira Europa", "Berlín", "Konzert + Milonga", 1], [40, "Tango & Vino", "Mendoza", "Cena show", 1]];
+  const MES = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+  $("#dates").innerHTML = F.map(([o, n, l, t, tix]) => { const d = new Date(); d.setDate(d.getDate() + o); return `<article class="date bf"><span class="d">${String(d.getDate()).padStart(2, "0")}</span><span class="m">${MES[d.getMonth()]} · ${l}</span><h3>${n}</h3><p>${t}</p>${tix ? '<a class="btn" href="#fechas">Entradas</a>' : '<span class="note">Sin reserva</span>'}</article>`; }).join("");
+
+  const io = "IntersectionObserver" in window ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 }) : null;
+  document.querySelectorAll(".bf").forEach((n) => (io ? io.observe(n) : n.classList.add("in")));
+
+  /* ---------- Synth-Tango (Web Audio): Bandoneón (Zungen-Ton), Piano, Kontrabass ---------- */
+  const CH = { Dm: [[0, 3, 7], 0], Gm: [[5, 8, 12], 5], A7: [[7, 11, 14, 17], -5], F: [[3, 7, 10], 3], C7: [[-2, 2, 5, 8], -2], Bb: [[-4, 0, 3], -4], E7: [[2, 6, 9, 12], 2] };
+  const TRACKS = [
+    { t: "La Madrugada", g: "Tango", bpm: 118, beats: 8, style: "marcato", bars: ["Dm", "Dm", "A7", "A7", "Gm", "Gm", "A7", "Dm"],
+      mel: [[7, 2], [5, 1], [3, 1], [2, 2], [3, 2], [5, 3], [7, 1], [8, 2], [7, 2], [11, 2], [12, 2], [11, 1], [8, 1], [7, 2], [14, 4], [11, 4], [12, 3], [8, 1], [5, 2], [8, 2], [7, 2], [5, 2], [3, 2], [2, 2], [7, 2], [11, 2], [14, 4], [12, 6], [null, 2]], len: 34 },
+    { t: "Milonga del Puerto", g: "Milonga", bpm: 172, beats: 8, style: "habanera", bars: ["F", "F", "C7", "C7", "C7", "C7", "F", "F", "F", "Bb", "Bb", "F", "C7", "C7", "F", "F"],
+      mel: [[10, 1], [12, 1], [15, 2], [12, 1], [10, 1], [7, 2], [8, 3], [10, 3], [14, 2], [12, 6], [null, 2], [10, 2], [8, 2], [7, 2], [5, 2], [7, 3], [8, 3], [10, 2], [15, 6], [null, 2], [17, 2], [15, 2], [14, 2], [12, 2], [10, 3], [12, 3], [14, 2], [15, 4], [12, 4], [8, 3], [10, 3], [7, 2], [3, 6], [null, 2], [3, 2], [5, 2], [7, 4]], len: 30 },
+    { t: "Vals de San Telmo", g: "Vals", bpm: 168, beats: 6, style: "vals", bars: ["Dm", "Dm", "Gm", "Gm", "A7", "A7", "Dm", "Dm", "Dm", "Dm", "Gm", "Gm", "E7", "A7", "Dm", "Dm"],
+      mel: [[7, 4], [8, 2], [7, 2], [5, 2], [3, 2], [5, 4], [8, 2], [12, 6], [11, 4], [12, 2], [14, 2], [11, 2], [7, 2], [8, 6], [7, 4], [3, 2], [2, 6], [7, 4], [8, 2], [7, 2], [5, 2], [3, 2], [5, 4], [8, 2], [12, 6], [14, 2], [12, 2], [11, 2], [12, 6], [null, 6]], len: 34 },
+    { t: "Arrabal", g: "Tango", bpm: 112, beats: 8, style: "sincopa", bars: ["Dm", "A7", "Dm", "Dm", "Gm", "Dm", "A7", "Dm"],
+      mel: [[2, 1], [3, 1], [5, 1], [7, 3], [8, 2], [7, 2], [11, 1], [12, 1], [14, 4], [12, 2], [10, 1], [8, 3], [7, 4], [null, 4], [5, 1], [7, 1], [8, 2], [12, 4], [8, 2], [7, 2], [3, 2], [5, 2], [2, 4], [-1, 2], [2, 2], [5, 2], [7, 2], [11, 2], [14, 6], [null, 2]], len: 32 } ];
+  let ac = null, master, an, rev, cur = 0, playing = false, startT = 0, schedT = 0, step = 0, mi = 0, mt = 0, timer = null, raf = 0;
+  const D3 = 146.83, f = (s) => D3 * Math.pow(2, s / 12);
+  function init() { ac = new (window.AudioContext || window.webkitAudioContext)(); master = ac.createGain(); master.gain.value = .7; an = ac.createAnalyser(); an.fftSize = 1024;
+    const comp = ac.createDynamicsCompressor(); comp.threshold.value = -18; comp.ratio.value = 3; master.connect(comp); comp.connect(an); an.connect(ac.destination);
+    rev = ac.createConvolver(); const L = ac.sampleRate * 1.6, b = ac.createBuffer(2, L, ac.sampleRate); for (let c = 0; c < 2; c++) { const dd = b.getChannelData(c); for (let i = 0; i < L; i++) dd[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / L, 3); } rev.buffer = b;
+    const rg = ac.createGain(); rg.gain.value = .22; rev.connect(rg); rg.connect(master); }
+  function out(node, wet) { node.connect(master); if (wet) { const s = ac.createGain(); s.gain.value = wet; node.connect(s); s.connect(rev); } }
+  function bando(t, semi, dur) { const g = ac.createGain(), bp = ac.createBiquadFilter(), lp = ac.createBiquadFilter(); bp.type = "peaking"; bp.frequency.value = 1300; bp.gain.value = 6; lp.type = "lowpass"; lp.frequency.value = 2600;
+    const lfo = ac.createOscillator(), lg = ac.createGain(); lfo.frequency.value = 5.2; lg.gain.value = dur > .5 ? 3.5 : 0; lfo.connect(lg);
+    [[ "sawtooth", 0, .16], ["square", 6, .1], ["sawtooth", -1200, .08]].forEach(([ty, cents, v]) => { const o = ac.createOscillator(), og = ac.createGain(); o.type = ty; o.frequency.value = f(semi + 12); o.detune.value = cents; lg.connect(o.detune); og.gain.value = v; o.connect(og); og.connect(bp); o.start(t); o.stop(t + dur + .15); });
+    lfo.start(t); lfo.stop(t + dur + .15); bp.connect(lp); lp.connect(g); g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.55, t + .04); g.gain.setValueAtTime(.5, t + Math.max(.05, dur - .06)); g.gain.linearRampToValueAtTime(0, t + dur + .1); out(g, .5); }
+  function piano(t, notes, v) { notes.forEach((n) => { const o = ac.createOscillator(), o2 = ac.createOscillator(), g = ac.createGain(); o.type = "triangle"; o2.type = "sine"; o.frequency.value = f(n); o2.frequency.value = f(n) * 2; g.gain.setValueAtTime(v, t); g.gain.exponentialRampToValueAtTime(.001, t + .35); o.connect(g); o2.connect(g); out(g, .3); o.start(t); o2.start(t); o.stop(t + .4); o2.stop(t + .4); }); }
+  function bass(t, semi, dur) { const o = ac.createOscillator(), g = ac.createGain(), lp = ac.createBiquadFilter(); o.type = "triangle"; o.frequency.value = f(semi - 12); lp.type = "lowpass"; lp.frequency.value = 600; g.gain.setValueAtTime(.7, t); g.gain.exponentialRampToValueAtTime(.05, t + dur); g.gain.linearRampToValueAtTime(0, t + dur + .05); o.connect(lp); lp.connect(g); out(g, .1); o.start(t); o.stop(t + dur + .1); }
+  function schedule() { const tr = TRACKS[cur], e8 = 60 / tr.bpm / 2;
+    while (schedT < ac.currentTime + .15) { const t = schedT, bi = Math.floor(step / tr.beats) % tr.bars.length, pos = step % tr.beats, [ch, root] = CH[tr.bars[bi]];
+      const hit = (arr) => arr.includes(pos);
+      if (tr.style === "marcato") { if (hit([0, 2, 4, 6])) { piano(t, ch, pos % 4 === 0 ? .2 : .14); bass(t, pos === 4 ? root + 7 : root, e8 * 1.6); } }
+      else if (tr.style === "habanera" || tr.style === "sincopa") { if (hit([0, 3, 6])) { piano(t, ch, .17); bass(t, pos === 3 ? root + 7 : root, e8 * 2.4); } if (tr.style === "sincopa" && pos === 7) piano(t, ch.map((n) => n + 12), .08); }
+      else if (tr.style === "vals") { if (pos === 0) bass(t, root, e8 * 1.8); if (pos === 2 || pos === 4) piano(t, ch, .12); }
+      if (mt <= 0) { const m = tr.mel[mi % tr.mel.length]; mi++; mt = m[1]; if (m[0] !== null) bando(t, m[0], m[1] * e8 * .95); }
+      mt--; schedT += e8; step++; }
+    if (ac.currentTime - startT >= tr.len) next(); }
+  const fmt = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+  function ui() { const tr = TRACKS[cur]; $("#nowNo").textContent = `Tema ${cur + 1} · ${tr.g}`; $("#nowT").textContent = tr.t;
+    document.querySelectorAll("#tracks li").forEach((li, i) => li.classList.toggle("cur", i === cur));
+    $("#play").innerHTML = `<svg><use href="#${playing ? "pa" : "pl"}"/></svg>`; $("#play").classList.toggle("on", playing); $("#play").setAttribute("aria-label", playing ? "Pausa" : "Reproducir"); }
+  function start(i) { if (!ac) init(); if (ac.state === "suspended") ac.resume(); cur = i ?? cur; playing = true; startT = ac.currentTime + .05; schedT = startT; step = 0; mi = 0; mt = 0; clearInterval(timer); timer = setInterval(schedule, 25); ui(); }
+  function stop() { playing = false; clearInterval(timer); ui(); }
+  function next() { start((cur + 1) % TRACKS.length); } function prev() { start((cur + TRACKS.length - 1) % TRACKS.length); }
+  $("#tracks").innerHTML = TRACKS.map((t, i) => `<li data-i="${i}"><span class="n">${i + 1}</span><span class="t">${t.t}</span><span class="g">${t.g}</span><span class="d">${fmt(t.len)}</span></li>`).join("");
+  $("#tracks").querySelectorAll("li").forEach((li) => li.addEventListener("click", () => start(+li.dataset.i)));
+  $("#play").addEventListener("click", () => (playing ? stop() : start())); $("#next").addEventListener("click", next); $("#prev").addEventListener("click", prev);
+  $("#heroPlay").addEventListener("click", () => { if (!playing) start(0); });
+  const viz = $("#viz"), vx = viz.getContext("2d");
+  function draw() { const d = Math.min(2, devicePixelRatio || 1), w = viz.clientWidth, h = viz.clientHeight; if (viz.width !== Math.round(w * d)) { viz.width = Math.round(w * d); viz.height = Math.round(h * d); } vx.setTransform(d, 0, 0, d, 0, 0); vx.clearRect(0, 0, w, h);
+    vx.lineWidth = 2; vx.strokeStyle = "#d4a646"; vx.beginPath();
+    if (an) { const a = new Uint8Array(an.fftSize); an.getByteTimeDomainData(a); for (let i = 0; i < a.length; i += 4) { const xx = i / a.length * w, yy = h / 2 + (a[i] - 128) / 128 * h * .9; i ? vx.lineTo(xx, yy) : vx.moveTo(xx, yy); } } else { vx.moveTo(0, h / 2); vx.lineTo(w, h / 2); } vx.stroke();
+    if (playing && ac) { const el = Math.min(TRACKS[cur].len, ac.currentTime - startT); $("#prog").style.width = (el / TRACKS[cur].len) * 100 + "%"; $("#time").textContent = `${fmt(Math.max(0, el))} / ${fmt(TRACKS[cur].len)}`; }
+    raf = requestAnimationFrame(draw); }
+  ui(); draw();
+
+  /* ---------- Intro: Bandoneón öffnet den Balg, Fileteado zeichnet sich, Name ---------- */
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const tween = (ms, fn, tk) => new Promise((res) => { const t0 = performance.now(); const st = (n) => { if (tk.cancelled) return res(); const k = Math.min(1, (n - t0) / ms); fn(k); k < 1 ? requestAnimationFrame(st) : res(); }; requestAnimationFrame(st); });
+  const ease = (k) => (k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2);
+  const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); };
+  let token = { cancelled: true };
+  async function intro(tk) { const w = innerWidth, h = innerHeight, d = Math.min(2, devicePixelRatio || 1);
+    const c = document.createElement("canvas"); c.className = "fxl"; c.width = w * d; c.height = h * d; c.style.cssText = "position:fixed;inset:0;width:100vw;height:100vh;z-index:60;pointer-events:none"; document.body.append(c);
+    const x = c.getContext("2d"); x.scale(d, d); const cy = h * .45, bh = Math.min(h * .3, w * .45), bw = Math.min(w * .14, 70);
+    let open = 0, orn = 0, name = 0, fade = 1, closeK = 0;
+    const draw = () => { x.clearRect(0, 0, w, h); x.globalAlpha = fade; x.fillStyle = "#120b0a"; x.fillRect(0, 0, w, h);
+      const g = x.createRadialGradient(w / 2, cy, 10, w / 2, cy, Math.max(w, h) * .6); g.addColorStop(0, `rgba(196,36,43,${.25 * open})`); g.addColorStop(1, "rgba(0,0,0,0)"); x.fillStyle = g; x.fillRect(0, 0, w, h);
+      const span = (w * .86 - bw * 2) * open * (1 - closeK), left = w / 2 - span / 2 - bw, right = w / 2 + span / 2;
+      const bands = 14, top = cy - bh / 2; x.save(); x.globalAlpha = fade * (1 - closeK);
+      for (let i = 0; i < bands; i++) { const x0 = left + bw + i * span / bands, x1 = x0 + span / bands; x.fillStyle = i % 2 ? "#2a1a17" : "#3a2420"; x.beginPath(); x.moveTo(x0, top + 4); x.lineTo(x1, top); x.lineTo(x1, top + bh); x.lineTo(x0, top + bh - 4); x.fill(); x.strokeStyle = "rgba(212,166,70,.7)"; x.lineWidth = 1; x.stroke(); }
+      [left, right].forEach((bx) => { x.fillStyle = "#0b0909"; x.fillRect(bx, top - 6, bw, bh + 12); x.strokeStyle = "#d4a646"; x.lineWidth = 2; x.strokeRect(bx + 3, top - 3, bw - 6, bh + 6); x.fillStyle = "#e9dcc4"; for (let k = 0; k < 15; k++) { x.beginPath(); x.arc(bx + bw * (.25 + (k % 3) * .25), top + bh * (.1 + Math.floor(k / 3) * .19), Math.max(2, bw * .06), 0, 7); x.fill(); } });
+      x.restore();
+      if (orn > 0) { const fw = Math.min(w * .86, 620), fh = Math.min(h * .34, 300), fx0 = w / 2 - fw / 2, fy0 = cy - fh / 2;
+        x.save(); x.globalAlpha = fade * Math.min(1, orn * 1.5); x.strokeStyle = "#d4a646"; x.lineWidth = 2; x.setLineDash([(fw + fh) * 2]); x.lineDashOffset = (fw + fh) * 2 * (1 - orn); x.strokeRect(fx0, fy0, fw, fh); x.strokeStyle = "#c4242b"; x.strokeRect(fx0 + 7, fy0 + 7, fw - 14, fh - 14); x.setLineDash([]);
+        const s = Math.min(fw / 520, 1) * ease(orn); [[fx0 - 6, fy0 - 10, 0, 0], [fx0 + fw + 6, fy0 - 10, 1, 0], [fx0 - 6, fy0 + fh + 10, 0, 1], [fx0 + fw + 6, fy0 + fh + 10, 1, 1]].forEach(([a, b, xf, yf]) => filete(x, a, b, s * .9, xf, yf)); x.restore(); }
+      if (name > 0) { x.save(); x.globalAlpha = fade * name; x.textAlign = "center"; x.textBaseline = "middle"; const F = Math.min(w * .13, 96);
+        x.font = `500 italic ${F * .32}px "Playfair Display", serif`; x.fillStyle = "#f0cb6e"; x.fillText("Cuarteto", w / 2, cy - F * .75);
+        x.font = `400 ${F}px "Abril Fatface", serif`; x.fillStyle = "#f3e7d3"; const t1 = "Farol ", t2 = "Rojo", W1 = x.measureText(t1).width, W2 = x.measureText(t2).width; x.textAlign = "left"; x.fillText(t1, w / 2 - (W1 + W2) / 2, cy + F * .08); x.fillStyle = "#e23a40"; x.fillText(t2, w / 2 - (W1 + W2) / 2 + W1, cy + F * .08);
+        x.textAlign = "center"; x.font = `600 ${Math.min(w * .03, 14)}px Inter, sans-serif`; x.fillStyle = "#d6c6ad"; x.fillText("T A N G O  ·  B U E N O S  A I R E S", w / 2, cy + F * .82); x.restore(); }
+      x.globalAlpha = 1; };
+    let live = true; const lp = () => { if (!live || tk.cancelled) return; draw(); requestAnimationFrame(lp); }; requestAnimationFrame(lp);
+    await sleep(300); await tween(1300, (k) => { open = ease(k); }, tk); await sleep(250); await tween(600, (k) => { closeK = ease(k); }, tk);
+    await tween(1100, (k) => { orn = k; }, tk); await tween(600, (k) => { name = k; }, tk);
+    await sleep(1000); if (!tk.cancelled) reveal(); await tween(700, (k) => { fade = 1 - k; }, tk); live = false; c.remove(); }
+  async function play() { token.cancelled = true; document.querySelectorAll(".fxl, .skipi").forEach((n) => n.remove()); const tk = (token = { cancelled: false });
+    if (reduce) { reveal(); return; } scrollTo(0, 0); document.documentElement.style.overflow = "hidden"; hero.classList.add("pre"); hero.classList.remove("reveal");
+    const sk = document.createElement("button"); sk.className = "skipi"; sk.type = "button"; sk.textContent = "Saltar intro"; sk.addEventListener("click", () => { tk.cancelled = true; document.querySelectorAll(".fxl, .skipi").forEach((n) => n.remove()); document.documentElement.style.overflow = ""; reveal(); }); document.body.append(sk);
+    await intro(tk); if (token === tk) { document.querySelectorAll(".fxl, .skipi").forEach((n) => n.remove()); document.documentElement.style.overflow = ""; if (tk.cancelled) reveal(); } }
+  $("#redo").addEventListener("click", play);
+  document.fonts.ready.then(play);
+})();
+</script>
+</body>
+</html>
