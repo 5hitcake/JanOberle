@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>SAINT MARLO · Concrete Gospel · Artist website demo</title>
+<meta name="description" content="Demo website for a fictional hip hop artist, built by Jota Labs: intro, music player, videos, tour dates, gallery, bio, merch and press kit.">
+<meta property="og:title" content="SAINT MARLO · artist website demo by Jota Labs">
+<meta property="og:description" content="A website template for rappers and hip hop artists: intro, player, videos, tour, merch, press kit.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230a0810'/%3E%3Cellipse cx='32' cy='18' rx='18' ry='6' fill='none' stroke='%23f5a524' stroke-width='4'/%3E%3Ctext x='32' y='54' font-family='Impact,sans-serif' font-size='30' text-anchor='middle' fill='%23f6efe2'%3ESM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Anton&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Jota Labs Artist-Demo: Hip-Hop. Intro (Bass-Puls an der Graffiti-Wand, Sprühdose malt ein Wildstyle-Piece, das zu Chrom wird, Goldregen),
+   Web-Audio-Player (Boom-Bap und Trap, live synthetisiert), Videos, Tour, Galerie, Bio, Merch, EPK, Newsletter. */
+:root { --bg: #0a0810; --bg-2: #120e1a; --bg-3: #1a1424; --line: rgba(246,239,226,.11); --fg: #f6efe2; --soft: #d8cdbb; --muted: #9b90a6;
+  --gold: #f5a524; --gold-2: #ffd36b; --plum: #6e28a0; --ink: #1b0d2e;
+  --f-tag: "Permanent Marker", cursive; --f-head: "Anton", Impact, sans-serif; --f-body: "Inter", system-ui, sans-serif; color-scheme: dark; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 400 16px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-family: var(--f-head); font-weight: 400; text-transform: uppercase; letter-spacing: .02em; text-wrap: balance; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 600 12px/1.2 var(--f-body); letter-spacing: .28em; text-transform: uppercase; color: var(--gold); }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.demo { background: var(--gold); color: var(--ink); font: 13px/1.4 var(--f-body); padding: 8px 16px; text-align: center; }
+.demo a { font-weight: 700; }
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: rgba(10,8,16,.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.logo { font: 400 26px/1 var(--f-tag); text-decoration: none; color: var(--gold-2); transform: rotate(-3deg); display: inline-block; }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font: 600 13px var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--soft); }
+nav.links a:hover { color: #fff; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; font: 600 14px/1 var(--f-body); letter-spacing: .12em; text-transform: uppercase; padding: 16px 24px; background: var(--gold); color: var(--ink); border: 2px solid var(--gold); border-radius: 999px; text-decoration: none; cursor: pointer; transition: background .15s, transform .15s; }
+.btn:hover { background: var(--gold-2); transform: translateY(-2px); }
+.btn.ghost { background: transparent; color: var(--fg); border-color: rgba(246,239,226,.4); }
+.btn.ghost:hover { border-color: #fff; background: rgba(255,255,255,.06); }
+nav.links a.btn { color: var(--ink); padding: 11px 18px; font-size: 12px; }
+.menu-btn { display: none; background: transparent; color: var(--fg); border: 1px solid var(--line); border-radius: 999px; padding: 8px 16px; font: 600 12px var(--f-body); letter-spacing: .2em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bg-2); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 14px 0; border-bottom: 1px solid var(--line); }
+  nav.links a.btn { margin-top: 14px; }
+  nav.links:not(.open) { display: none; }
+}
+/* Hero */
+.hero { position: relative; overflow: hidden; isolation: isolate; min-height: min(92vh, 860px); display: grid; align-items: center; border-bottom: 1px solid var(--line); background: var(--bg); }
+.hero .bgimg { position: absolute; inset: 0; z-index: 0; background: url(img/hero.webp) 70% 30%/cover no-repeat; }
+.hero .bgimg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,8,16,.96) 0%, rgba(10,8,16,.75) 38%, rgba(10,8,16,.05) 70%), linear-gradient(0deg, rgba(10,8,16,.9), transparent 35%); }
+@media (max-width: 760px) { .hero { align-items: end; } .hero .bgimg { background-position: 72% 20%; } .hero .bgimg::after { background: linear-gradient(0deg, rgba(10,8,16,.98) 0%, rgba(10,8,16,.8) 45%, rgba(10,8,16,.1) 80%); } }
+#gold { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+.hero .wrap { position: relative; z-index: 2; padding-block: 90px 70px; display: flex; flex-direction: column; align-items: flex-start; gap: 14px; width: 100%; }
+.hero .tagline { font: 400 clamp(22px, 3vw, 30px)/1 var(--f-tag); color: var(--gold); transform: rotate(-3deg); }
+.hero h1 { font: 400 clamp(72px, 13vw, 170px)/.86 var(--f-head); letter-spacing: .01em; color: #fff; text-shadow: 0 6px 30px rgba(0,0,0,.5); }
+.hero h1 span { display: block; background: linear-gradient(180deg, #ffffff 0%, #c4ccd6 45%, #3a414c 50%, #f4f6f8 56%, #8a93a0 85%, #e5e9ee 100%); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 3px 0 rgba(245,165,36,.65)); }
+.release { margin-top: 10px; display: grid; grid-template-columns: auto minmax(0,1fr); gap: 16px; align-items: center; background: rgba(18,14,26,.72); border: 1px solid var(--line); border-radius: 14px; padding: 12px 18px 12px 12px; max-width: 480px; }
+.release canvas { width: 84px; height: 84px; display: block; border-radius: 8px; }
+.release b { display: block; font: 400 22px var(--f-head); letter-spacing: .04em; text-transform: uppercase; }
+.release span { color: var(--muted); font-size: 14px; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 3; font: 600 11px var(--f-body); letter-spacing: .2em; text-transform: uppercase; color: var(--soft); background: rgba(0,0,0,.5); border: 1px solid var(--line); border-radius: 999px; padding: 8px 12px; cursor: pointer; }
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .9s cubic-bezier(.2,.7,.2,1) both; } .hero.reveal .wrap > :nth-child(2) { animation-delay: .1s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .2s } .hero.reveal .wrap > :nth-child(4) { animation-delay: .3s }
+@keyframes rise { from { transform: translateY(20px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+section.block { padding-block: clamp(70px, 10vw, 120px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px 40px; margin-bottom: 30px; }
+.head h2 { font-size: clamp(44px, 7vw, 84px); line-height: .92; margin-top: 10px; }
+.head p { max-width: 46ch; margin: 0; color: var(--muted); }
+/* Player */
+.player { display: grid; grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; background: var(--bg-2); }
+@media (max-width: 860px) { .player { grid-template-columns: minmax(0,1fr); } }
+.player .art { position: relative; aspect-ratio: 1; background: #000; }
+.player .art canvas { width: 100%; height: 100%; display: block; }
+.player .side { padding: clamp(20px, 3vw, 34px); display: grid; gap: 18px; align-content: start; }
+.now b { font: 400 clamp(28px, 3.4vw, 40px)/1.02 var(--f-head); text-transform: uppercase; letter-spacing: .02em; display: block; }
+.now span { color: var(--muted); font-size: 14px; }
+.viz { width: 100%; height: 90px; display: block; }
+.controls { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+@media (max-width: 560px) { .controls .bar { flex-basis: 100%; order: 5; } .controls .time { margin-left: auto; } }
+.play { width: 64px; height: 64px; flex: none; border-radius: 50%; border: 0; background: var(--gold); color: var(--ink); display: grid; place-items: center; cursor: pointer; transition: transform .15s, background .15s; }
+.play:hover { background: var(--gold-2); transform: scale(1.05); }
+.play.on { animation: pulse 1.2s infinite; } @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(245,165,36,.55); } 100% { box-shadow: 0 0 0 18px rgba(245,165,36,0); } }
+.play svg { width: 26px; height: 26px; }
+.skip { background: transparent; border: 1px solid var(--line); border-radius: 50%; color: var(--soft); width: 44px; height: 44px; display: grid; place-items: center; cursor: pointer; }
+.skip:hover { color: #fff; border-color: var(--soft); }
+.bar { flex: 1; height: 6px; border-radius: 3px; background: rgba(255,255,255,.08); position: relative; cursor: pointer; overflow: hidden; }
+.bar i { position: absolute; inset: 0 auto 0 0; width: 0; background: linear-gradient(90deg, var(--plum), var(--gold)); }
+.time { font: 600 13px var(--f-body); color: var(--muted); letter-spacing: .06em; min-width: 82px; text-align: right; font-variant-numeric: tabular-nums; }
+ol.tracks { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+ol.tracks li { display: grid; grid-template-columns: 34px minmax(0,1fr) auto; gap: 12px; align-items: center; padding: 13px 4px; border-bottom: 1px solid var(--line); cursor: pointer; transition: background .15s; }
+ol.tracks li:hover { background: rgba(255,255,255,.03); }
+ol.tracks li.cur { color: var(--gold); }
+ol.tracks .n { font: 600 13px var(--f-body); color: var(--muted); }
+ol.tracks .t { font: 400 19px var(--f-head); text-transform: uppercase; letter-spacing: .03em; }
+ol.tracks .t small { display: block; font: 500 12px var(--f-body); letter-spacing: .04em; text-transform: none; color: var(--muted); }
+ol.tracks .d { font: 500 13px var(--f-body); color: var(--muted); }
+.stream { display: flex; flex-wrap: wrap; gap: 8px; }
+.stream a { font: 600 12px var(--f-body); letter-spacing: .1em; text-transform: uppercase; text-decoration: none; padding: 9px 14px; border: 1px solid var(--line); border-radius: 999px; color: var(--soft); }
+.stream a:hover { border-color: var(--gold); color: #fff; }
+.note { font-size: 13px; color: var(--muted); margin: 0; }
+/* Videos */
+.videos { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
+@media (max-width: 760px) { .videos { grid-template-columns: minmax(0,1fr); } }
+.videos figure { margin: 0; position: relative; overflow: hidden; border-radius: 16px; aspect-ratio: 16/9; background: #000; }
+.videos img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s; } .videos figure:hover img { transform: scale(1.04); }
+.videos .pb { position: absolute; left: 50%; top: 50%; width: 74px; height: 74px; margin: -37px 0 0 -37px; border-radius: 50%; background: rgba(245,165,36,.92); color: var(--ink); display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0,0,0,.5); transition: transform .2s; }
+.videos figure:hover .pb { transform: scale(1.08); } .videos .pb svg { width: 28px; height: 28px; margin-left: 4px; }
+.videos figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 18px 14px; background: linear-gradient(0deg, rgba(0,0,0,.85), transparent); }
+.videos figcaption b { display: block; font: 400 24px var(--f-head); text-transform: uppercase; letter-spacing: .03em; } .videos figcaption span { color: var(--soft); font-size: 14px; }
+/* Tour */
+.tour { border-top: 1px solid var(--line); }
+.tour .row { display: grid; grid-template-columns: 110px minmax(0,1fr) minmax(0,1fr) auto; gap: 16px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--line); }
+@media (max-width: 760px) { .tour .row { grid-template-columns: 76px minmax(0,1fr) auto; } .tour .venue { grid-column: 2; grid-row: 2; } }
+.tour .date { font: 600 14px/1.1 var(--f-body); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); } .tour .date b { display: block; font: 400 34px var(--f-head); color: var(--gold); }
+.tour .city { font: 400 24px var(--f-head); text-transform: uppercase; letter-spacing: .03em; } .tour .venue { color: var(--muted); }
+.tour .btn { padding: 12px 18px; font-size: 12px; } .tour .sold { font: 600 12px var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 11px 16px; }
+/* Gallery */
+.gallery { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); grid-auto-rows: 230px; gap: 10px; }
+@media (max-width: 860px) { .gallery { grid-template-columns: repeat(2, minmax(0,1fr)); grid-auto-rows: 170px; } }
+.gallery figure { margin: 0; position: relative; overflow: hidden; background: #000; border-radius: 14px; }
+.gallery figure.wide { grid-column: span 2; } .gallery figure.tall { grid-row: span 2; }
+.gallery img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s; } .gallery figure:hover img { transform: scale(1.04); }
+.gallery figcaption { position: absolute; left: 10px; bottom: 10px; font: 600 11px var(--f-body); letter-spacing: .16em; text-transform: uppercase; background: rgba(0,0,0,.6); border-radius: 999px; padding: 5px 10px; }
+/* Bio */
+.bio { display: grid; grid-template-columns: minmax(0,1.1fr) minmax(0,.9fr); gap: clamp(30px, 6vw, 80px); align-items: center; }
+@media (max-width: 860px) { .bio { grid-template-columns: minmax(0,1fr); } }
+.bio p { color: var(--soft); margin: 0 0 14px; }
+.bio figure { margin: 0; position: relative; overflow: hidden; border-radius: 18px; }
+.bio figure img { width: 100%; height: auto; aspect-ratio: 4/5; object-fit: cover; display: block; }
+.quote { margin-top: 18px; border-left: 3px solid var(--gold); padding: 4px 0 4px 16px; font: 400 26px/1.15 var(--f-tag); color: var(--gold-2); }
+.stats { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 22px; }
+.stats div b { display: block; font: 400 34px/1 var(--f-head); color: #fff; } .stats div span { font-size: 13px; color: var(--muted); }
+/* Merch */
+.merch { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 14px; }
+@media (max-width: 960px) { .merch { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 480px) { .merch { grid-template-columns: minmax(0,1fr); } }
+.item { border: 1px solid var(--line); background: var(--bg-2); border-radius: 16px; overflow: hidden; display: grid; }
+.item .pic, .lb .stage > .pic { position: relative; overflow: hidden; aspect-ratio: 1; container-type: inline-size; background: #111; }
+.item .pic img, .lb .stage > .pic img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s; } .item:hover .pic img { transform: scale(1.04); }
+.lb .stage > .pic { width: min(92vw, calc(100vh - 110px), 860px); } .lb .stage > .pic img { transform: none !important; }
+.item .t { padding: 16px; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.item b { font: 400 19px var(--f-head); text-transform: uppercase; letter-spacing: .03em; } .item span { color: var(--gold); font: 600 15px var(--f-body); }
+.print { position: absolute; pointer-events: none; text-align: center; transform: translate(-50%, -50%); }
+.p-hoodie { left: 50%; top: 45%; } .p-hoodie .halo { display: block; margin: 0 auto 1cqw; width: 12cqw; height: 3.4cqw; border: .8cqw solid var(--gold); border-radius: 50%; }
+.p-hoodie b { display: block; font: 400 7.6cqw/.9 var(--f-tag); color: #f6efe2; transform: rotate(-4deg); } .p-hoodie i { display: block; font: 600 1.7cqw var(--f-body); letter-spacing: .4em; color: var(--gold); font-style: normal; margin-top: 1.4cqw; }
+.p-cap { left: 50.5%; top: 32%; } .p-cap b { display: block; font: 400 5.4cqw/1 var(--f-tag); color: var(--gold); text-shadow: 0 1px 0 rgba(0,0,0,.6); opacity: .92; }
+.p-tape { left: 36.5%; top: 41.8%; width: 36cqw; transform: translate(-50%, -50%) rotate(-.4deg); } .p-tape b { display: block; font: 400 4.2cqw/1 var(--f-tag); color: var(--ink); } .p-tape i { display: block; font: 600 1.5cqw var(--f-body); letter-spacing: .3em; color: var(--ink); font-style: normal; opacity: .75; margin-top: .6cqw; }
+.p-vinyl { left: 70%; top: 37%; transform: translate(-50%, -50%) rotate(8deg); } .p-vinyl b { display: block; font: 400 5.4cqw/1 var(--f-tag); color: var(--gold-2); } .p-vinyl i { display: block; font: 600 1.6cqw var(--f-body); letter-spacing: .3em; color: var(--soft); font-style: normal; margin-top: .8cqw; }
+.p-label { left: 44.8%; top: 46.3%; } .p-label b { display: block; font: 400 2.4cqw/1 var(--f-tag); color: var(--gold); }
+/* EPK + Newsletter */
+.epk { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 860px) { .epk { grid-template-columns: minmax(0,1fr); } }
+.panel { border: 1px solid var(--line); background: var(--bg-2); border-radius: 18px; padding: clamp(20px, 3vw, 32px); display: grid; gap: 14px; align-content: start; }
+.panel h3 { font-size: 34px; } .panel p { margin: 0; color: var(--soft); }
+.panel ul { margin: 0; padding-left: 18px; color: var(--soft); display: grid; gap: 4px; }
+form.nl { display: flex; gap: 8px; flex-wrap: wrap; } form.nl input { flex: 1 1 200px; min-width: 0; font: 15px var(--f-body); padding: 14px 18px; border-radius: 999px; background: #000; border: 1px solid var(--line); color: var(--fg); }
+.ok { color: var(--gold); font-weight: 600; }
+footer { padding-block: 40px 100px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 700 14px system-ui, sans-serif; padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.4); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+.skipi { position: fixed; left: 50%; bottom: calc(22px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); z-index: 61; font: 600 11px var(--f-body); letter-spacing: .2em; text-transform: uppercase; color: var(--soft); background: rgba(0,0,0,.5); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+html.js .bf { opacity: 0; transform: translateY(18px); transition: opacity .8s, transform .8s cubic-bezier(.2,.7,.2,1); } html.js .bf.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { html.js .bf { opacity: 1; transform: none; transition: none; } }
+/* Lightbox */
+.zoomable { cursor: zoom-in; }
+.lb { position: fixed; inset: 0; z-index: 90; background: rgba(6,4,10,.95); display: grid; place-items: center; padding: 56px 16px 24px; opacity: 0; transition: opacity .25s; }
+.lb.on { opacity: 1; }
+.lb .stage { position: relative; max-width: 100%; max-height: 100%; display: grid; place-items: center; }
+.lb .stage > img { max-width: min(1100px, 100%); max-height: calc(100vh - 110px); width: auto; height: auto; display: block; border-radius: 10px; box-shadow: 0 20px 60px rgba(0,0,0,.7); }
+.lb .cap { position: absolute; left: 0; right: 0; bottom: -30px; text-align: center; color: var(--muted); font: 600 13px var(--f-body); letter-spacing: .12em; text-transform: uppercase; }
+.lb button { position: absolute; background: rgba(20,16,28,.85); color: #f6efe2; border: 1px solid var(--line); border-radius: 50%; width: 44px; height: 44px; font-size: 20px; cursor: pointer; }
+.lb .x { top: 10px; right: 10px; } .lb .pv { left: 10px; top: 50%; transform: translateY(-50%); } .lb .nx { right: 10px; top: 50%; transform: translateY(-50%); }
+/* Beispiel-Kennzeichnung */
+.gallery figure::after, .videos figure::after, .bio figure::after, .item .pic::after, .lb .stage::before, .hero::after { content: "Example · your photo here"; position: absolute; top: 10px; left: 10px; z-index: 3; padding: 4px 9px; border-radius: 999px; background: rgba(245,165,36,.95); color: var(--ink); font: 700 10.5px/1.2 var(--f-body); letter-spacing: .1em; text-transform: uppercase; pointer-events: none; }
+.videos figure::after { content: "Example · your video here"; }
+.hero::after { top: auto; bottom: 14px; left: auto; right: 14px; content: "Example artist photo · yours goes here"; }
+@media (max-width: 760px) { .hero::after { top: 64px; bottom: auto; right: 14px; } }
+</style>
+<script>document.documentElement.classList.add("js")</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></symbol>
+  <symbol id="pl" viewBox="0 0 24 24"><path fill="currentColor" d="M7 4l14 8-14 8z"/></symbol>
+  <symbol id="pa" viewBox="0 0 24 24"><path fill="currentColor" d="M6 4h4v16H6zM14 4h4v16h-4z"/></symbol>
+</svg>
+<div class="demo"><b>Demo website</b> for a fictional artist · built by <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">Jota Labs</a> · want one? <a href="#contact">get in touch ↓</a></div>
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top">Saint Marlo</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENU</button>
+    <nav class="links" id="links"><a href="#music">Music</a><a href="#videos">Videos</a><a href="#tour">Tour</a><a href="#about">About</a><a href="#merch">Merch</a><a href="#press">Booking</a><a class="btn" href="#tour">Tickets</a></nav>
+  </div>
+</header>
+<section class="hero pre" id="top">
+  <div class="bgimg" aria-hidden="true"></div>
+  <canvas id="gold" aria-hidden="true"></canvas>
+  <button class="redo" id="redo" type="button">↻ Intro</button>
+  <div class="wrap">
+    <div class="tagline">new album out now</div>
+    <h1><span>Saint</span><span>Marlo</span></h1>
+    <div class="release"><canvas id="cover0" width="168" height="168" aria-hidden="true"></canvas><div><span>Album · 2026</span><b>Concrete Gospel</b><span>12 tracks from the night shift.</span></div></div>
+    <div class="ctas"><a class="btn" href="#music" id="heroPlay">▶ Listen now</a><a class="btn ghost" href="#tour">Tour dates</a></div>
+  </div>
+</section>
+
+<section class="block" id="music">
+  <div class="wrap">
+    <div class="head bf"><div><div class="kicker">Concrete Gospel · 2026</div><h2>Press play</h2></div><p>Every track plays right here, with a live visualizer. On a real site this player streams your own masters or pulls them from Spotify, Apple Music or SoundCloud.</p></div>
+    <div class="player bf">
+      <div class="art"><canvas id="cover" width="900" height="900" aria-label="Album cover: Concrete Gospel"></canvas></div>
+      <div class="side">
+        <div class="now"><span id="nowNo">Track 1</span><b id="nowT">Concrete Gospel</b></div>
+        <canvas class="viz" id="viz" aria-hidden="true"></canvas>
+        <div class="controls">
+          <button class="skip" id="prev" type="button" aria-label="Previous track">⏮</button>
+          <button class="play" id="play" type="button" aria-label="Play"><svg><use href="#pl"/></svg></button>
+          <button class="skip" id="next" type="button" aria-label="Next track">⏭</button>
+          <div class="bar" id="bar"><i id="prog"></i></div><span class="time" id="time">0:00 / 0:32</span>
+        </div>
+        <ol class="tracks" id="tracks"></ol>
+        <div class="stream"><a href="#music">Spotify</a><a href="#music">Apple Music</a><a href="#music">SoundCloud</a><a href="#music">YouTube</a></div>
+        <p class="note">Demo beats are synthesized live in your browser. On your site, your own tracks play here.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="videos" style="padding-top:0">
+  <div class="wrap">
+    <div class="head bf"><div><div class="kicker">Videos</div><h2>Watch</h2></div><p>Music videos, live clips and studio sessions, embedded from YouTube or uploaded straight to your site.</p></div>
+    <div class="videos bf">
+      <figure><img src="img/live.webp" alt="Saint Marlo performing on stage in purple light" width="1376" height="768" loading="lazy"><span class="pb" aria-hidden="true"><svg><use href="#pl"/></svg></span><figcaption><b>Night Shift (Live)</b><span>Official live video</span></figcaption></figure>
+      <figure><img src="img/studio.webp" alt="Saint Marlo recording in the vocal booth" width="886" height="1100" loading="lazy" style="object-position:50% 25%"><span class="pb" aria-hidden="true"><svg><use href="#pl"/></svg></span><figcaption><b>In the booth</b><span>Making of Concrete Gospel</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="tour" style="padding-top:0">
+  <div class="wrap">
+    <div class="head bf"><div><div class="kicker">On the road</div><h2>Concrete Gospel tour</h2></div><p>Dates, venues and ticket links in one list. Sold-out shows mark themselves, past shows disappear on their own.</p></div>
+    <div class="tour bf" id="tourList"></div>
+  </div>
+</section>
+
+<section class="block" id="gallery" style="padding-top:0">
+  <div class="wrap">
+    <div class="head bf"><div><div class="kicker">Gallery</div><h2>City nights</h2></div><p>Press photos, live shots and artwork. Here they are AI-generated demo images; on your site, your photographer's best.</p></div>
+    <div class="gallery bf">
+      <figure class="wide"><img src="img/crowd.webp" alt="Packed club crowd with phone lights seen from the stage" width="1584" height="672" loading="lazy"><figcaption>Sold out</figcaption></figure>
+      <figure class="tall"><img src="img/artist.webp" alt="Saint Marlo under a streetlight at night" width="886" height="1100" loading="lazy"><figcaption>Press photo</figcaption></figure>
+      <figure class="tall"><img src="img/hero.webp" alt="Saint Marlo on a rooftop with the skyline behind him" width="928" height="1152" loading="lazy"><figcaption>Rooftop</figcaption></figure>
+      <figure class="wide"><img src="img/wall.webp" alt="Graffiti wall at night with reflections in a puddle" width="1376" height="768" loading="lazy"><figcaption>Video set</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="about" style="padding-top:0">
+  <div class="wrap bio">
+    <div class="bf">
+      <div class="kicker">About</div>
+      <h2 style="font-size:clamp(44px,6.5vw,78px);line-height:.92;margin:10px 0 22px">Raised on night buses and borrowed beats</h2>
+      <p>Saint Marlo grew up writing verses on the last bus home and recording them on a laptop mic in his cousin's closet. Ten years later the closet is a studio, but the stories still come from the same streets.</p>
+      <p>Concrete Gospel is his debut album: boom bap and trap side by side, with hooks for the crowd and verses for the people who listen twice.</p>
+      <div class="quote">“Every line sounds like it was written under a streetlight.”</div>
+      <p class="note" style="margin-top:8px">Sample text for a fictional artist.</p>
+      <div class="stats"><div><b>12</b><span>tracks on the album</span></div><div><b>6</b><span>cities on tour</span></div><div><b>1</b><span>closet studio, retired</span></div></div>
+    </div>
+    <figure class="bf"><img src="img/street.webp" alt="Saint Marlo leaning on a graffiti wall at dusk" width="886" height="1100" loading="lazy"></figure>
+  </div>
+</section>
+
+<section class="block" id="merch" style="padding-top:0">
+  <div class="wrap">
+    <div class="head bf"><div><div class="kicker">Merch</div><h2>Wear the gospel</h2></div><p>Hoodies, caps, tapes and vinyl with a shop link, so fans buy straight from you.</p></div>
+    <div class="merch">
+      <div class="item bf"><div class="pic"><img src="img/hoodie.webp" alt="Black Saint Marlo hoodie on a chrome rack" width="1024" height="1024" loading="lazy"><div class="print p-hoodie" aria-hidden="true"><span class="halo"></span><b>Saint Marlo</b><i>CONCRETE GOSPEL</i></div></div><div class="t"><b>Halo hoodie</b><span>€55</span></div></div>
+      <div class="item bf"><div class="pic"><img src="img/cap.webp" alt="Black cap with embroidered SM on a concrete block" width="1024" height="1024" loading="lazy"><div class="print p-cap" aria-hidden="true"><b>SM</b></div></div><div class="t"><b>Six-panel cap</b><span>€28</span></div></div>
+      <div class="item bf"><div class="pic"><img src="img/tape.webp" alt="Cassette with a gold Concrete Gospel label" width="1024" height="1024" loading="lazy"><div class="print p-tape" aria-hidden="true"><b>Saint Marlo</b><i>CONCRETE GOSPEL · SIDE A</i></div></div><div class="t"><b>Cassette</b><span>€12</span></div></div>
+      <div class="item bf"><div class="pic"><img src="img/vinyl.webp" alt="Gold vinyl record with a black sleeve" width="1024" height="1024" loading="lazy"><div class="print p-vinyl" aria-hidden="true"><b>Saint Marlo</b><i>CONCRETE GOSPEL</i></div><div class="print p-label" aria-hidden="true"><b>SM</b></div></div><div class="t"><b>Gold vinyl LP</b><span>€30</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="press" style="padding-top:0">
+  <div class="wrap epk">
+    <div class="panel bf"><div class="kicker">Press &amp; booking</div><h3>Electronic press kit</h3><p>Everything promoters, labels and press ask for, in one place:</p>
+      <ul><li>Short and long bio</li><li>Hi-res press photos and logos</li><li>Stage plot and tech rider</li><li>Streaming numbers and past shows</li><li>Booking and management contact</li></ul>
+      <div class="ctas"><a class="btn" href="#press">Download EPK</a><a class="btn ghost" href="#contact">Booking</a></div></div>
+    <div class="panel bf" id="contact"><div class="kicker">Newsletter</div><h3>First to know</h3><p>New drops, pre-sales and tour dates straight to your inbox.</p>
+      <form class="nl" id="nl"><input type="email" required placeholder="your@email.com" aria-label="Email"><button class="btn" type="submit">Sign up</button></form><p class="ok" id="nlok" hidden>You're on the list. (Demo, nothing was sent.)</p></div>
+  </div>
+</section>
+<footer><div class="wrap"><span>Saint Marlo is a fictional artist. This page is a website demo by Jota Labs.</span><span><a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">Jota Labs · websites for bands &amp; artists</a></span></div></footer>
+<a class="like" href="https://wa.me/5491130331893?text=Hi%20Jan%2C%20I%20saw%20your%20artist%20website%20demo%20and%20I%27d%20like%20one%20for%20my%20music." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Want this for your music?</a>
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+  const rnd = (a, b) => a + Math.random() * (b - a);
+
+  /* ---------- Albumcover: Foto plus Schrift ---------- */
+  const coverImg = new Image(); coverImg.src = "img/cover.webp";
+  function coverArt(cv) { const x = cv.getContext("2d"), W = cv.width, H = cv.height; const go = () => { x.drawImage(coverImg, 0, 0, W, H);
+    const g = x.createLinearGradient(0, 0, 0, H); g.addColorStop(0, "rgba(0,0,0,.55)"); g.addColorStop(.22, "rgba(0,0,0,0)"); g.addColorStop(.78, "rgba(0,0,0,0)"); g.addColorStop(1, "rgba(0,0,0,.7)"); x.fillStyle = g; x.fillRect(0, 0, W, H);
+    x.textAlign = "center"; x.fillStyle = "#f6efe2"; x.font = `400 ${W * .1}px Anton, Impact, sans-serif`; x.fillText("SAINT MARLO", W / 2, H * .14);
+    x.font = `400 ${W * .085}px "Permanent Marker", cursive`; x.fillStyle = "#f5a524"; x.save(); x.translate(W / 2, H * .92); x.rotate(-.04); x.fillText("Concrete Gospel", 0, 0); x.restore(); };
+    coverImg.complete && coverImg.naturalWidth ? go() : coverImg.addEventListener("load", go); }
+  document.fonts.ready.then(() => { coverArt($("#cover")); coverArt($("#cover0")); });
+
+  /* ---------- Goldstaub im Hero ---------- */
+  const hero = $("#top"), gc = $("#gold"), gx = gc.getContext("2d"); let dust = [];
+  function goldDust() { const d = Math.min(2, devicePixelRatio || 1), w = hero.clientWidth, h = hero.clientHeight;
+    if (gc.width !== Math.round(w * d)) { gc.width = Math.round(w * d); gc.height = Math.round(h * d); dust = Array.from({ length: Math.round(w * h / 14000) }, () => [rnd(0, w), rnd(0, h), rnd(.6, 2), rnd(.15, .5), rnd(0, 6)]); }
+    gx.setTransform(d, 0, 0, d, 0, 0); gx.clearRect(0, 0, w, h);
+    for (const p of dust) { p[1] += p[3]; p[4] += .04; if (p[1] > h + 5) { p[1] = -5; p[0] = rnd(0, w); } const a = .25 + .35 * Math.sin(p[4]); gx.fillStyle = `rgba(255,${190 + 30 * a | 0},90,${a})`; gx.fillRect(p[0] + Math.sin(p[4] * .7) * 6, p[1], p[2], p[2]); }
+    if (!reduce) requestAnimationFrame(goldDust); }
+  requestAnimationFrame(goldDust);
+
+  /* ---------- Tour (Daten relativ zu heute, damit die Demo nie veraltet wirkt) ---------- */
+  const T = [[10, "Berlin", "Astra Kulturhaus", 0], [12, "Hamburg", "Uebel & Gefährlich", 0], [15, "London", "Electric Brixton", 1], [17, "Paris", "La Cigale", 0], [20, "Zürich", "X-TRA", 0], [26, "Buenos Aires", "Niceto Club", 0]];
+  const M = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+  $("#tourList").innerHTML = T.map(([o, c, v, s]) => { const d = new Date(); d.setDate(d.getDate() + o * 3); return `<div class="row"><div class="date"><b>${String(d.getDate()).padStart(2, "0")}</b>${M[d.getMonth()]}</div><div class="city">${c}</div><div class="venue">${v}</div>${s ? '<span class="sold">Sold out</span>' : '<a class="btn" href="#tour">Tickets</a>'}</div>`; }).join("");
+
+  $("#nl").addEventListener("submit", (e) => { e.preventDefault(); $("#nl").hidden = true; $("#nlok").hidden = false; });
+
+  const io = "IntersectionObserver" in window ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 }) : null;
+  document.querySelectorAll(".bf").forEach((n) => (io ? io.observe(n) : n.classList.add("in")));
+
+  /* ---------- Beats (Web Audio): 808, Kick, Snare/Clap, Hi-Hats, Rhodes-Keys ---------- */
+  const TRACKS = [
+    { t: "Concrete Gospel", s: "Boom bap · 88 BPM", bpm: 88, style: "boombap", key: 57, prog: [[0, 3, 7, 10], [5, 8, 12, 15], [3, 7, 10, 14], [7, 11, 14, 17]], len: 32 },
+    { t: "Night Shift", s: "Trap · 140 BPM", bpm: 140, style: "trap", key: 48, prog: [[0, 3, 7, 10], [-4, 0, 3, 7], [-7, -3, 0, 5], [-5, -1, 2, 7]], len: 30 },
+    { t: "Halo Under the Bridge", s: "Lo-fi · 78 BPM", bpm: 78, style: "lofi", key: 53, prog: [[0, 4, 7, 11], [-1, 2, 7, 10], [-3, 0, 5, 9], [-5, -1, 4, 7]], len: 32 },
+    { t: "Gold Teeth, Paper Wings", s: "Trap · 150 BPM", bpm: 150, style: "trap2", key: 55, prog: [[0, 3, 7, 10], [0, 3, 7, 10], [-2, 2, 5, 9], [-4, 0, 3, 7]], len: 28 } ];
+  let ac = null, master, an, NB = null, cur = 0, playing = false, startT = 0, schedT = 0, step = 0, timer = null, raf = 0;
+  const hz = (m) => 440 * Math.pow(2, (m - 69) / 12);
+  function init() { ac = new (window.AudioContext || window.webkitAudioContext)(); master = ac.createGain(); master.gain.value = .7; an = ac.createAnalyser(); an.fftSize = 1024;
+    const comp = ac.createDynamicsCompressor(); comp.threshold.value = -14; comp.ratio.value = 4; master.connect(comp); comp.connect(an); an.connect(ac.destination);
+    const b = ac.createBuffer(1, ac.sampleRate * .5, ac.sampleRate), d = b.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; NB = b; }
+  function kick(t, hard) { const o = ac.createOscillator(), g = ac.createGain(); o.frequency.setValueAtTime(hard ? 170 : 130, t); o.frequency.exponentialRampToValueAtTime(48, t + .09); g.gain.setValueAtTime(1, t); g.gain.exponentialRampToValueAtTime(.001, t + .32); o.connect(g); g.connect(master); o.start(t); o.stop(t + .35); }
+  function bass808(t, m, dur, slide) { const o = ac.createOscillator(), g = ac.createGain(), sh = ac.createWaveShaper(), c = new Float32Array(256); for (let i = 0; i < 256; i++) { const x = i / 128 - 1; c[i] = Math.tanh(x * 2.2); } sh.curve = c;
+    o.frequency.setValueAtTime(hz(m) * (slide ? 1.5 : 1), t); o.frequency.exponentialRampToValueAtTime(hz(m), t + (slide ? .12 : .02)); g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(.9, t + .005); g.gain.setTargetAtTime(.0001, t + dur * .7, dur * .25);
+    o.connect(sh); sh.connect(g); g.connect(master); o.start(t); o.stop(t + dur + .4); }
+  function snare(t, clap) { const s = ac.createBufferSource(); s.buffer = NB; const f = ac.createBiquadFilter(); f.type = "bandpass"; f.frequency.value = clap ? 1400 : 2000; f.Q.value = clap ? 1.2 : .8; const g = ac.createGain();
+    if (clap) { g.gain.setValueAtTime(0, t); [0, .012, .024].forEach((o) => { g.gain.setValueAtTime(.8, t + o); g.gain.setTargetAtTime(.05, t + o + .002, .005); }); g.gain.setValueAtTime(.7, t + .034); g.gain.exponentialRampToValueAtTime(.001, t + .22); }
+    else { g.gain.setValueAtTime(.75, t); g.gain.exponentialRampToValueAtTime(.001, t + .2); const o = ac.createOscillator(), og = ac.createGain(); o.frequency.value = 185; og.gain.setValueAtTime(.45, t); og.gain.exponentialRampToValueAtTime(.001, t + .1); o.connect(og); og.connect(master); o.start(t); o.stop(t + .12); }
+    s.connect(f); f.connect(g); g.connect(master); s.start(t); s.stop(t + .3); }
+  function hat(t, vol, open) { const s = ac.createBufferSource(); s.buffer = NB; const f = ac.createBiquadFilter(); f.type = "highpass"; f.frequency.value = 8000; const g = ac.createGain(); g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.001, t + (open ? .22 : .04)); s.connect(f); f.connect(g); g.connect(master); s.start(t); s.stop(t + .25); }
+  function keys(t, notes, dur, vol) { const lp = ac.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 1900; const bus = ac.createGain(); bus.gain.value = vol; lp.connect(bus); bus.connect(master);
+    const trem = ac.createOscillator(), tg = ac.createGain(); trem.frequency.value = 4.5; tg.gain.value = .25 * vol; trem.connect(tg); tg.connect(bus.gain); trem.start(t); trem.stop(t + dur + .6);
+    notes.forEach((m) => [[1, "sine", .28], [2, "sine", .06], [1.003, "triangle", .08]].forEach(([mul, type, v]) => { const o = ac.createOscillator(), g = ac.createGain(); o.type = type; o.frequency.value = hz(m) * mul; g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(v, t + .01); g.gain.setTargetAtTime(v * .35, t + .02, .35); g.gain.setTargetAtTime(0, t + dur, .12); o.connect(g); g.connect(lp); o.start(t); o.stop(t + dur + .6); })); }
+  function schedule() { const tr = TRACKS[cur], sp = 60 / tr.bpm / 4, swing = tr.style === "boombap" ? .16 : tr.style === "lofi" ? .22 : 0;
+    while (schedT < ac.currentTime + .15) { const s16 = step % 16, barN = Math.floor(step / 16) % 4, t = schedT + (step % 2 ? sp * swing : 0), ch = tr.prog[barN].map((n) => n + tr.key), root = tr.key - 24 + tr.prog[barN][0];
+      if (tr.style === "boombap" || tr.style === "lofi") {
+        if (s16 === 0 || s16 === 10 || (tr.style === "boombap" && s16 === 7)) kick(t, tr.style === "boombap");
+        if (s16 === 4 || s16 === 12) snare(t, false);
+        if (step % 2 === 0) hat(t, s16 % 4 === 0 ? .16 : .1, false);
+        if (s16 === 0) keys(t, ch, sp * (tr.style === "lofi" ? 14 : 6), tr.style === "lofi" ? .55 : .45);
+        if (tr.style === "boombap" && s16 === 10) keys(t, ch.map((n) => n + 12).slice(1), sp * 2, .3);
+        if (s16 === 0 || s16 === 10) bass808(t, root + 12, sp * 4, false); }
+      else { const roll = tr.style === "trap2" && (s16 >= 12) && barN % 2 === 1;
+        if (s16 === 0 || s16 === 7 || s16 === 10 || (tr.style === "trap2" && s16 === 3)) bass808(t, root + (s16 === 10 ? 3 : 0), sp * (s16 === 0 ? 6 : 3), s16 === 10);
+        if (s16 === 0 || s16 === 10) kick(t, true);
+        if (s16 === 8) snare(t, true);
+        if (roll) { for (let k = 0; k < 3; k++) hat(t + k * sp / 3, .09, false); } else hat(t, s16 % 4 === 2 ? .14 : .08, s16 === 14 && barN === 3);
+        if (s16 === 0) keys(t, ch.map((n) => n + 12), sp * 10, .32); }
+      schedT += sp; step++; }
+    if (ac.currentTime - startT >= tr.len) next(); }
+  const fmt = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+  function ui() { const tr = TRACKS[cur]; $("#nowNo").textContent = `Track ${cur + 1} · ${tr.s}`; $("#nowT").textContent = tr.t;
+    document.querySelectorAll("#tracks li").forEach((li, i) => li.classList.toggle("cur", i === cur));
+    $("#play").innerHTML = `<svg><use href="#${playing ? "pa" : "pl"}"/></svg>`; $("#play").classList.toggle("on", playing); $("#play").setAttribute("aria-label", playing ? "Pause" : "Play"); }
+  function start(i) { if (!ac) init(); if (ac.state === "suspended") ac.resume(); cur = i ?? cur; playing = true; startT = ac.currentTime + .05; schedT = startT; step = 0; clearInterval(timer); timer = setInterval(schedule, 25); ui(); cancelAnimationFrame(raf); draw(); }
+  function stop() { playing = false; clearInterval(timer); ui(); }
+  function next() { start((cur + 1) % TRACKS.length); } function prev() { start((cur + TRACKS.length - 1) % TRACKS.length); }
+  $("#tracks").innerHTML = TRACKS.map((t, i) => `<li data-i="${i}"><span class="n">${String(i + 1).padStart(2, "0")}</span><span class="t">${t.t}<small>${t.s}</small></span><span class="d">${fmt(t.len)}</span></li>`).join("");
+  $("#tracks").querySelectorAll("li").forEach((li) => li.addEventListener("click", () => start(+li.dataset.i)));
+  $("#play").addEventListener("click", () => (playing ? stop() : start()));
+  $("#next").addEventListener("click", next); $("#prev").addEventListener("click", prev);
+  $("#heroPlay").addEventListener("click", () => { if (!playing) start(0); });
+  $("#bar").addEventListener("click", () => { if (!playing) start(); });
+  const viz = $("#viz"), vx = viz.getContext("2d");
+  function draw() { const d = Math.min(2, devicePixelRatio || 1), w = viz.clientWidth, h = viz.clientHeight; if (viz.width !== Math.round(w * d)) { viz.width = Math.round(w * d); viz.height = Math.round(h * d); } vx.setTransform(d, 0, 0, d, 0, 0); vx.clearRect(0, 0, w, h);
+    const n = 48, bw = w / n, a = an ? new Uint8Array(an.frequencyBinCount) : null; if (a) an.getByteFrequencyData(a);
+    const g = vx.createLinearGradient(0, h, 0, 0); g.addColorStop(0, "#6e28a0"); g.addColorStop(1, "#ffd36b"); vx.fillStyle = g;
+    for (let i = 0; i < n; i++) { const v = a ? a[Math.floor(i * a.length / n / 2)] / 255 : 0, bh = Math.max(3, v * h); vx.beginPath(); vx.roundRect ? vx.roundRect(i * bw + 1.5, h - bh, bw - 3, bh, 2) : vx.rect(i * bw + 1.5, h - bh, bw - 3, bh); vx.fill(); }
+    if (playing && ac) { const el = Math.min(TRACKS[cur].len, ac.currentTime - startT); $("#prog").style.width = (el / TRACKS[cur].len) * 100 + "%"; $("#time").textContent = `${fmt(Math.max(0, el))} / ${fmt(TRACKS[cur].len)}`; }
+    raf = requestAnimationFrame(draw); }
+  ui(); draw();
+
+  /* ---------- Lightbox ---------- */
+  (() => {
+    const items = [...document.querySelectorAll(".videos figure, .gallery figure, .bio figure, .merch .item .pic")];
+    items.forEach((el) => { el.classList.add("zoomable"); el.tabIndex = 0; el.setAttribute("role", "button"); });
+    let lb = null, idx = 0;
+    const caption = (el) => { const f = el.closest(".item"); if (f) return f.querySelector(".t b").textContent; const c = el.querySelector("figcaption"); return c ? c.innerText.replace(/\n+/g, " · ") : el.querySelector("img").alt; };
+    const render = () => { const el = items[idx], st = lb.querySelector(".stage"); st.innerHTML = ""; let node;
+      if (el.classList.contains("pic")) { node = el.cloneNode(true); node.classList.remove("zoomable"); node.removeAttribute("tabindex"); node.removeAttribute("role"); }
+      else { const im = el.querySelector("img"); node = new Image(); node.src = im.currentSrc || im.src; node.alt = im.alt; }
+      const cap = document.createElement("div"); cap.className = "cap"; cap.textContent = caption(el); st.append(node, cap); };
+    const close = () => { if (!lb) return; lb.classList.remove("on"); const n = lb; lb = null; document.documentElement.style.overflow = ""; setTimeout(() => n.remove(), 250); items[idx].focus({ preventScroll: true }); };
+    const go = (d) => { idx = (idx + d + items.length) % items.length; render(); };
+    const open = (i) => { idx = i; lb = document.createElement("div"); lb.className = "lb"; lb.setAttribute("role", "dialog"); lb.setAttribute("aria-modal", "true");
+      lb.innerHTML = '<div class="stage"></div><button class="x" type="button" aria-label="Close">✕</button><button class="pv" type="button" aria-label="Previous">‹</button><button class="nx" type="button" aria-label="Next">›</button>';
+      lb.addEventListener("click", (e) => { if (e.target.closest(".pv")) go(-1); else if (e.target.closest(".nx")) go(1); else if (e.target.closest(".x") || !e.target.closest(".stage")) close(); });
+      let sx = null; lb.addEventListener("touchstart", (e) => { sx = e.touches[0].clientX; }, { passive: true });
+      lb.addEventListener("touchend", (e) => { if (sx === null) return; const dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1); sx = null; });
+      document.body.append(lb); document.documentElement.style.overflow = "hidden"; render(); requestAnimationFrame(() => lb.classList.add("on")); lb.querySelector(".x").focus(); };
+    items.forEach((el, i) => { el.addEventListener("click", () => open(i)); el.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(i); } }); });
+    addEventListener("keydown", (e) => { if (!lb) return; if (e.key === "Escape") close(); else if (e.key === "ArrowRight") go(1); else if (e.key === "ArrowLeft") go(-1); });
+  })();
+
+  /* ---------- Intro: Bass-Puls an der Graffiti-Wand, Sprühdose malt ein Wildstyle-Piece, das zu Chrom wird, Goldregen ---------- */
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const tween = (ms, fn, tk, ez) => new Promise((res) => { const t0 = performance.now(); const st = (n) => { if (tk.cancelled) return res(); const k = Math.min(1, (n - t0) / ms); fn(ez ? ez(k) : k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2, k); k < 1 ? requestAnimationFrame(st) : res(); }; requestAnimationFrame(st); });
+  const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); };
+  let token = { cancelled: true };
+  async function intro(tk) { const w = innerWidth, h = innerHeight, mob = w < 760, d = mob ? 1 : Math.min(1.5, devicePixelRatio || 1);
+    const wallImg = new Image(); wallImg.src = "img/wall.webp";
+    await Promise.race([Promise.all([document.fonts.load('400 80px "Permanent Marker"'), document.fonts.load("400 80px Anton"), wallImg.decode()]), sleep(2500)]).catch(() => {});
+    if (tk.cancelled) return;
+    const mk = (cw, ch) => { const k = document.createElement("canvas"); k.width = Math.ceil(cw * d); k.height = Math.ceil(ch * d); const g = k.getContext("2d"); g.scale(d, d); return [k, g]; };
+    const c = document.createElement("canvas"); c.className = "fxl"; c.width = w * d; c.height = h * d; c.style.cssText = "position:fixed;inset:0;width:100vw;height:100vh;z-index:60;pointer-events:none"; document.body.append(c);
+    const x = c.getContext("2d"); const cx = w / 2, cy = h * .45, F = Math.min(w * .2, 150);
+    /* Wand: echtes Foto, abgedunkelt, mit Laternenlicht */
+    const [wall, wg] = mk(w, h); wg.fillStyle = "#0b0910"; wg.fillRect(0, 0, w, h);
+    if (wallImg.naturalWidth) { const s = Math.max(w / wallImg.naturalWidth, h / wallImg.naturalHeight), iw = wallImg.naturalWidth * s, ih = wallImg.naturalHeight * s; wg.globalAlpha = .55; wg.drawImage(wallImg, (w - iw) * .35, (h - ih) / 2, iw, ih); wg.globalAlpha = 1; }
+    const vg = wg.createRadialGradient(cx, cy, 0, cx, cy, Math.max(w, h) * .75); vg.addColorStop(0, "rgba(10,8,16,.25)"); vg.addColorStop(1, "rgba(10,8,16,.92)"); wg.fillStyle = vg; wg.fillRect(0, 0, w, h);
+    /* Wildstyle-Piece: jeder Buchstabe eigen gedreht, versetzt, skaliert; Pfeile, Sterne, Heiligenschein */
+    const word = "SAINT MARLO".split(""); const lay = []; let ax = 0;
+    const [mz, mzg] = mk(1, 1); mzg.font = `400 ${F}px "Permanent Marker", cursive`;
+    word.forEach((ch, i) => { const sc = ch === " " ? 1 : rnd(.86, 1.22), wch = mzg.measureText(ch).width * sc; lay.push({ ch, x: ax + wch / 2, y: ch === " " ? 0 : rnd(-F * .14, F * .14) + Math.sin(i * .9) * F * .08, r: rnd(-.22, .22), s: sc }); ax += ch === " " ? wch * 1.1 : wch * .82; });
+    const tw = ax, fit = Math.min(1, (w * .9) / tw), ox = cx - tw * fit / 2;
+    lay.forEach((l) => { l.x = ox + l.x * fit; l.y = cy + l.y * fit; l.s *= fit; });
+    const FS = F * fit, first = lay[0], last = lay[lay.length - 1];
+    const arrow = (g, x0, y0, x1, y1, bend) => { g.beginPath(); g.moveTo(x0, y0); g.quadraticCurveTo((x0 + x1) / 2, (y0 + y1) / 2 + bend, x1, y1); g.stroke(); const a = Math.atan2(y1 - ((y0 + y1) / 2 + bend), x1 - (x0 + x1) / 2); g.beginPath(); g.moveTo(x1 + Math.cos(a) * FS * .2, y1 + Math.sin(a) * FS * .2); g.lineTo(x1 + Math.cos(a + 2.4) * FS * .2, y1 + Math.sin(a + 2.4) * FS * .2); g.lineTo(x1 + Math.cos(a - 2.4) * FS * .2, y1 + Math.sin(a - 2.4) * FS * .2); g.closePath(); g.fill(); };
+    const star = (g, sx, sy, r) => { g.beginPath(); for (let i = 0; i < 8; i++) { const a = i * Math.PI / 4, rr = i % 2 ? r * .22 : r; g.lineTo(sx + Math.cos(a) * rr, sy + Math.sin(a) * rr); } g.closePath(); g.fill(); };
+    const stars = Array.from({ length: 5 }, () => [rnd(ox, ox + tw * fit), cy + rnd(-FS * .9, FS * .8), rnd(FS * .08, FS * .16)]);
+    const halo = [lay[0].x + FS * .05, lay[0].y - FS * .72];
+    const piece = (mode) => { const [k, g] = mk(w, h); g.lineJoin = "round"; g.lineCap = "round"; g.textAlign = "center"; g.textBaseline = "middle";
+      const eachL = (fn) => lay.forEach((l) => { if (l.ch === " ") return; g.save(); g.translate(l.x, l.y); g.rotate(l.r); g.font = `400 ${F * l.s}px "Permanent Marker", cursive`; fn(l); g.restore(); });
+      const fillFor = () => { if (mode === "paint") { const gg = g.createLinearGradient(0, -FS * .5, 0, FS * .5); gg.addColorStop(0, "#ffe08a"); gg.addColorStop(.55, "#f5a524"); gg.addColorStop(1, "#d4561e"); return gg; }
+        const cr = g.createLinearGradient(0, -FS * .5, 0, FS * .5); [[0, "#ffffff"], [.42, "#a9b3c0"], [.5, "#262b35"], [.57, "#ffffff"], [.82, "#6f7886"], [1, "#d9dee5"]].forEach(([s, col]) => cr.addColorStop(s, col)); return cr; };
+      /* 1 Wolke (äußere Kontur) */ g.strokeStyle = mode === "paint" ? "#c3368f" : "#f5a524"; g.lineWidth = FS * .34; eachL((l) => g.strokeText(l.ch, 0, 0));
+      g.fillStyle = g.strokeStyle; g.lineWidth = FS * .11; g.strokeStyle = g.fillStyle; arrow(g, first.x - FS * .5, first.y + FS * .55, first.x - FS * .85, first.y - FS * .35, FS * .4); arrow(g, last.x + FS * .3, last.y + FS * .4, last.x + FS * .7, last.y - FS * .55, -FS * .3);
+      /* 2 3D-Extrusion */ for (let s = 7; s > 0; s--) { g.fillStyle = "#1b0d2e"; eachL((l) => g.fillText(l.ch, s * FS * .012, s * FS * .012)); }
+      /* 3 dunkle Kontur und Füllung */ g.strokeStyle = "#1b0d2e"; g.lineWidth = FS * .09; eachL((l) => { g.strokeText(l.ch, 0, 0); g.fillStyle = fillFor(); g.fillText(l.ch, 0, 0); });
+      /* 4 Glanzstriche */ g.strokeStyle = "rgba(255,255,255,.75)"; g.lineWidth = FS * .022; eachL((l) => { g.beginPath(); g.moveTo(-FS * .18 * l.s, -FS * .26 * l.s); g.lineTo(-FS * .05 * l.s, -FS * .3 * l.s); g.stroke(); });
+      g.fillStyle = mode === "paint" ? "#fff6e0" : "#ffffff"; stars.forEach(([sx, sy, r]) => star(g, sx, sy, r));
+      g.strokeStyle = "#f5a524"; g.lineWidth = FS * .07; g.beginPath(); g.ellipse(halo[0], halo[1], FS * .42, FS * .12, -.15, 0, 7); g.stroke(); return k; };
+    const paint = piece("paint"), chrome = piece("chrome");
+    const x0 = Math.max(0, ox - FS * 1), x1 = Math.min(w, ox + tw * fit + FS * .9), y0 = cy - FS * 1.05, y1 = cy + FS * .95;
+    const [mask, mg] = mk(w, h), [mist, sg] = mk(w, h), [comp, cg] = mk(w, h);
+    const stamp = (px, py) => { const r = FS * .42, g = mg.createRadialGradient(px, py, 0, px, py, r); g.addColorStop(0, "rgba(0,0,0,1)"); g.addColorStop(.6, "rgba(0,0,0,.85)"); g.addColorStop(1, "rgba(0,0,0,0)"); mg.fillStyle = g; mg.fillRect(px - r, py - r, r * 2, r * 2);
+      for (let i = 0; i < 4; i++) { const a = rnd(0, 6.28), dd = rnd(FS * .35, FS * .8); sg.fillStyle = Math.random() < .5 ? "rgba(245,165,36,.2)" : "rgba(195,54,143,.18)"; sg.fillRect(px + Math.cos(a) * dd, py + Math.sin(a) * dd, 1.6, 1.6); } };
+    const rows = 4, path = []; for (let r = 0; r < rows; r++) { const yy = y0 + (r + .5) / rows * (y1 - y0); path.push(r % 2 ? [x1, yy] : [x0, yy], r % 2 ? [x0, yy] : [x1, yy]); }
+    const lens = path.slice(1).map((p, i) => Math.hypot(p[0] - path[i][0], p[1] - path[i][1])), total = lens.reduce((a, b) => a + b, 0);
+    const at = (k) => { let dd = k * total; for (let i = 0; i < lens.length; i++) { if (dd <= lens[i]) { const q = dd / lens[i]; return [path[i][0] + (path[i + 1][0] - path[i][0]) * q, path[i][1] + (path[i + 1][1] - path[i][1]) * q]; } dd -= lens[i]; } return path[path.length - 1]; };
+    const drips = Array.from({ length: 10 }, () => ({ x: rnd(ox + FS * .2, ox + tw * fit - FS * .2), y: cy + rnd(FS * .2, FS * .38), len: 0, max: rnd(FS * .25, FS * 1.1), on: false }));
+    const gold = []; let amp = 0, noz = null, can = 0, spraying = false, chromeK = 0, flash = 0, sub = 0, zoom = 1, bgA = 1, bounce = 1, lamp = 1;
+    const draw = (now) => { x.setTransform(1, 0, 0, 1, 0, 0); x.globalAlpha = 1; x.fillStyle = "#0a0810"; x.fillRect(0, 0, c.width, c.height); x.setTransform(d, 0, 0, d, 0, 0);
+      x.save(); x.globalAlpha = bgA; x.translate(cx, cy); x.scale(zoom, zoom); x.translate(-cx, -cy);
+      /* Hitzeflimmern beim Bass: Wand in Streifen versetzt */ if (amp > .3) { const sh = 6; for (let y = 0; y < h; y += sh) { const off = amp * Math.sin(y * .045 + now * .012) * (.4 + .6 * Math.sin(y * .011 + now * .004)); x.drawImage(wall, 0, y * d, wall.width, sh * d, off, y, w, sh); } } else x.drawImage(wall, 0, 0, w, h);
+      if (lamp < 1) { x.fillStyle = `rgba(0,0,0,${(1 - lamp) * .5})`; x.fillRect(0, 0, w, h); }
+      x.drawImage(mist, 0, 0, w, h);
+      x.save(); x.translate(cx, cy); x.scale(bounce, bounce); x.translate(-cx, -cy);
+      if (chromeK < 1) { cg.setTransform(1, 0, 0, 1, 0, 0); cg.globalCompositeOperation = "source-over"; cg.clearRect(0, 0, comp.width, comp.height); cg.drawImage(paint, 0, 0); cg.globalCompositeOperation = "destination-in"; cg.drawImage(mask, 0, 0); x.drawImage(comp, 0, 0, w, h); }
+      x.lineCap = "round"; x.strokeStyle = x.fillStyle = chromeK > .5 ? "#c9d0d8" : "#e88a1f"; for (const dr of drips) { if (!dr.on) continue; x.lineWidth = FS * .035; x.beginPath(); x.moveTo(dr.x, dr.y); x.lineTo(dr.x, dr.y + dr.len); x.stroke(); x.beginPath(); x.arc(dr.x, dr.y + dr.len, FS * .03, 0, 7); x.fill(); }
+      if (chromeK > 0) { const edge = x0 + (x1 - x0 + FS) * chromeK; x.save(); x.beginPath(); x.rect(0, 0, edge, h); x.clip(); x.drawImage(chrome, 0, 0, w, h); x.restore();
+        if (chromeK < 1) { const sg2 = x.createLinearGradient(edge - FS * .5, 0, edge + FS * .2, 0); sg2.addColorStop(0, "rgba(255,255,255,0)"); sg2.addColorStop(.7, "rgba(255,255,255,.85)"); sg2.addColorStop(1, "rgba(255,255,255,0)"); x.fillStyle = sg2; x.fillRect(edge - FS * .5, y0 - FS * .3, FS * .7, y1 - y0 + FS * .6); } }
+      x.restore();
+      if (noz && can > 0) { const [nx, ny] = noz; x.save(); x.globalAlpha *= can; if (spraying) { x.fillStyle = "rgba(255,200,120,.35)"; for (let i = 0; i < 12; i++) x.fillRect(nx + rnd(0, FS * .5), ny + rnd(-FS * .2, FS * .2), 1.8, 1.8); }
+        x.translate(nx + FS * .6, ny + FS * .08); x.rotate(-.35); const cw = FS * .42, chh = FS * 1.15, cgd = x.createLinearGradient(-cw / 2, 0, cw / 2, 0); cgd.addColorStop(0, "#2a2a30"); cgd.addColorStop(.45, "#d9dbe0"); cgd.addColorStop(1, "#3a3a42");
+        x.fillStyle = cgd; x.fillRect(-cw / 2, 0, cw, chh); x.fillStyle = "#f5a524"; x.fillRect(-cw / 2, chh * .3, cw, chh * .38); x.fillStyle = "#1b0d2e"; x.font = `400 ${cw * .5}px "Permanent Marker"`; x.textAlign = "center"; x.fillText("SM", 0, chh * .56);
+        x.fillStyle = "#c9ccd2"; x.beginPath(); x.ellipse(0, 0, cw / 2, cw * .22, 0, Math.PI, 0); x.fill(); x.fillStyle = "#111"; x.fillRect(-cw * .12, -cw * .38, cw * .24, cw * .2); x.restore(); }
+      for (const p of gold) { x.save(); x.translate(p.x, p.y); x.rotate(p.r); x.scale(Math.cos(p.f), 1); x.fillStyle = p.c; x.fillRect(-p.s, -p.s * .6, p.s * 2, p.s * 1.2); x.restore(); }
+      x.restore();
+      if (flash > 0) { x.fillStyle = `rgba(255,250,240,${flash})`; x.fillRect(0, 0, w, h); }
+      if (sub > 0) { x.save(); x.globalAlpha = sub * bgA; x.textAlign = "center"; x.textBaseline = "middle"; x.font = `600 ${Math.min(w * .032, 15)}px Inter, system-ui`; x.fillStyle = "#e8dcc4"; x.fillText("C O N C R E T E   G O S P E L   ·   O U T   N O W", cx, y1 + FS * .55); x.restore(); } };
+    let live = true; const lp = (n) => { if (!live || tk.cancelled) return; for (const dr of drips) if (dr.on && dr.len < dr.max) dr.len += (dr.max - dr.len) * .035 + .2; for (const p of gold) { p.y += p.vy; p.x += Math.sin(p.y * .02 + p.ph) * .6; p.r += p.vr; p.f += .12; } draw(n); requestAnimationFrame(lp); }; requestAnimationFrame(lp);
+    const thump = (a) => tween(360, (e, k) => { amp = a * Math.sin(k * Math.PI); lamp = 1 - .6 * Math.sin(k * Math.PI); }, tk, (q) => q);
+    /* 1 zwei Bass-Schläge an der Wand */ await sleep(150); await thump(12); await sleep(110); await thump(18);
+    /* 2 Sprühdose malt das Piece */ noz = [x0 - FS * .6, y0 + FS * .2]; await tween(320, (e) => { can = e; noz = [x0 - FS * .6 * (1 - e), y0 + FS * .2]; }, tk);
+    spraying = true; let last2 = at(0);
+    await tween(mob ? 1900 : 2200, (e, k) => { const p = at(k), dist = Math.hypot(p[0] - last2[0], p[1] - last2[1]), n = Math.max(1, Math.ceil(dist / 5)); for (let i = 1; i <= n; i++) stamp(last2[0] + (p[0] - last2[0]) * i / n, last2[1] + (p[1] - last2[1]) * i / n); last2 = p; noz = p;
+      if (k > .7) for (const dr of drips) if (!dr.on && Math.random() < .08) dr.on = true; }, tk, (q) => q);
+    spraying = false; drips.forEach((dr) => (dr.on = true));
+    await tween(300, (e) => { can = 1 - e; noz = [last2[0] + e * FS, last2[1] + e * FS * .5]; }, tk);
+    /* 3 Drop: Piece wird zu Chrom, Goldregen */ flash = .45; for (let i = 0; i < (mob ? 60 : 90); i++) gold.push({ x: rnd(0, w), y: rnd(-h * .7, -10), vy: rnd(1.6, 3.6), r: rnd(0, 6), vr: rnd(-.08, .08), f: rnd(0, 6), s: rnd(2, 5), ph: rnd(0, 6), c: ["#f5c542", "#ffdf7e", "#d99a1e"][i % 3] });
+    await tween(750, (e, k) => { chromeK = e; flash = .45 * (1 - k); amp = 16 * Math.exp(-k * 5); bounce = 1 + .07 * Math.sin(k * Math.PI) * Math.exp(-k * 2); }, tk); chromeK = 1; bounce = 1; amp = 0;
+    await tween(380, (e) => { sub = e; }, tk); await sleep(1000); if (tk.cancelled) { live = false; return c.remove(); }
+    reveal(); await tween(800, (e) => { zoom = 1 + e * 2.6; bgA = 1 - e; c.style.opacity = 1 - e; }, tk, (q) => q * q); live = false; c.remove(); }
+  async function play() { token.cancelled = true; document.querySelectorAll(".fxl, .skipi").forEach((n) => n.remove()); const tk = (token = { cancelled: false });
+    if (reduce) { reveal(); return; } scrollTo(0, 0); document.documentElement.style.overflow = "hidden"; hero.classList.add("pre"); hero.classList.remove("reveal");
+    const sk = document.createElement("button"); sk.className = "skipi"; sk.type = "button"; sk.textContent = "Skip intro"; sk.addEventListener("click", () => { tk.cancelled = true; document.querySelectorAll(".fxl, .skipi").forEach((n) => n.remove()); document.documentElement.style.overflow = ""; reveal(); }); document.body.append(sk);
+    await intro(tk); if (token === tk) { document.querySelectorAll(".fxl, .skipi").forEach((n) => n.remove()); document.documentElement.style.overflow = ""; if (tk.cancelled) reveal(); } }
+  $("#redo").addEventListener("click", play);
+  document.fonts.ready.then(play);
+})();
+</script>
+</body>
+</html>
