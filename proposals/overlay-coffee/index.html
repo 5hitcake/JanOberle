@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Overlay Coffee · Design proposal</title>
+<meta name="description" content="A website proposal for Overlay Coffee, 320 Little Lonsdale St, Melbourne. By Jota Labs, not the official website.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%239a5a2e'/%3E%3Ctext x='50' y='66' text-anchor='middle' font-family='Georgia' font-size='48' fill='%23fff'%3EO%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Overlay Coffee: Intro B (Schichten im Glas: Cold Brew, Espresso, Milch, Schaum → Logo). Creme/Kaffeebraun, Cormorant + Inter.
+   Abschnitte überlappen sich leicht wie Schichten ("overlay"): Hero, Fotoband, Limited only, Latte Art, Team, Events, Visit. */
+:root { --cream: #f4ece2; --paper: #ebdfcf; --milk: #fbf6ef; --brown: #9a5a2e; --dark: #3a2010; --soft: #5a3a22; --muted: #8a6a50; --cb: #2b160a; --line: rgba(58,32,16,.16);
+  --f-serif: "Cormorant Garamond", Georgia, serif; --f-sans: "Inter", system-ui, sans-serif; color-scheme: light; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--cream); color: var(--dark); font: 400 16px/1.65 var(--f-sans); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-family: var(--f-serif); font-weight: 500; text-wrap: balance; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 600 12px/1.2 var(--f-sans); letter-spacing: .18em; text-transform: uppercase; color: var(--brown); }
+:focus-visible { outline: 2px solid var(--brown); outline-offset: 3px; }
+.proposal { background: #000; color: #e9ebee; font: 12px/1.4 var(--f-sans); padding: 9px 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; text-align: center; }
+.proposal b { color: #ffd166; } .proposal a { color: #fff; font-weight: 700; }
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--cream) 90%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 8px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; } .logo svg { width: 44px; height: 44px; }
+.logo span { font: 500 24px/1 var(--f-serif); color: var(--brown); }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font-size: 14px; font-weight: 500; color: var(--soft); } nav.links a:hover { color: var(--dark); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 600 14px/1 var(--f-sans); padding: 14px 22px; border-radius: 999px; background: var(--brown); color: #fff; border: 2px solid var(--brown); text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(154,90,46,.25); }
+.btn.ghost { background: transparent; color: var(--dark); border-color: rgba(58,32,16,.3); }
+.btn.light { background: var(--milk); color: var(--dark); border-color: var(--milk); }
+.btn .arr { transition: transform .2s; } .btn:hover .arr { transform: translateX(4px); }
+nav.links a.btn { color: #fff; padding: 10px 16px; font-size: 13px; }
+.menu-btn { display: none; background: transparent; color: var(--dark); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font: 600 12px var(--f-sans); letter-spacing: .08em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--cream); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 15px; } nav.links a.btn { margin-top: 14px; border-bottom: 0; }
+  nav.links:not(.open) { display: none; }
+}
+.hero { position: relative; overflow: hidden; }
+.hero .wrap { padding-block: clamp(50px, 8vw, 100px) clamp(70px, 10vw, 120px); display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,.85fr); gap: 34px; align-items: center; }
+@media (max-width: 820px) { .hero .wrap { grid-template-columns: minmax(0,1fr); } }
+.hero h1 { font-size: clamp(76px, 12vw, 150px); line-height: .9; color: var(--brown); margin: 12px 0 16px; letter-spacing: -.01em; }
+.hero h1 sup { font-size: .14em; vertical-align: .9em; margin-left: .05em; }
+.hero .lead { margin: 0; font-size: clamp(17px, 1.9vw, 20px); color: var(--soft); max-width: 40ch; }
+.ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.facts span, .facts a { font-size: 13px; border: 1px solid var(--line); border-radius: 999px; padding: 6px 13px; background: rgba(255,255,255,.55); text-decoration: none; }
+.status::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); margin-right: 8px; vertical-align: 1px; }
+.status.open::before { background: #2e8a4a; box-shadow: 0 0 8px #2e8a4a; }
+/* Schichtglas im Hero */
+.glass { position: relative; width: min(100%, 320px); aspect-ratio: 3 / 4.2; justify-self: center; }
+.glass .cup { position: absolute; inset: 0; clip-path: polygon(0 0, 100% 0, 92% 100%, 8% 100%); background: rgba(255,255,255,.35); overflow: hidden; box-shadow: inset 0 0 0 3px rgba(255,255,255,.9); }
+.glass .ly { position: absolute; left: 0; right: 0; transform-origin: bottom; }
+.glass .l1 { bottom: 0; height: 42%; background: var(--cb); } .glass .l2 { bottom: 42%; height: 26%; background: #8a5530; }
+.glass .l3 { bottom: 68%; height: 18%; background: #e8d6bf; } .glass .l4 { bottom: 86%; height: 10%; background: #fbf5ec; }
+.glass .shine { position: absolute; left: 13%; top: 7%; bottom: 18%; width: 3px; background: rgba(255,255,255,.6); }
+.glass .tag { position: absolute; font: 500 13px var(--f-sans); color: var(--soft); white-space: nowrap; display: flex; align-items: center; gap: 8px; }
+.glass .tag::before { content: ""; width: 26px; height: 1px; background: var(--soft); order: var(--o, 0); }
+.glass .t1 { left: 100%; bottom: 18%; margin-left: 6px; --o: -1; } .glass .t2 { right: 100%; bottom: 52%; margin-right: 6px; --o: 1; }
+.glass .t3 { left: 100%; bottom: 75%; margin-left: 6px; --o: -1; } .glass .t4 { right: 100%; bottom: 89%; margin-right: 6px; --o: 1; }
+@media (max-width: 820px) { .glass { width: 38vw; margin-top: 10px; } .glass .tag { font-size: 11px; } .glass .tag::before { width: 14px; } }
+.redo { position: absolute; right: 14px; top: 14px; z-index: 3; font: 600 12px var(--f-sans); color: var(--soft); background: rgba(255,255,255,.6); border: 1px solid var(--line); border-radius: 999px; padding: 7px 12px; cursor: pointer; }
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .9s cubic-bezier(.2,.7,.2,1) both; } .hero.reveal .wrap > :nth-child(2) { animation-delay: .12s; }
+.hero.reveal .ly { animation: fill .7s cubic-bezier(.3,.8,.3,1) both; } .hero.reveal .l2 { animation-delay: .25s; } .hero.reveal .l3 { animation-delay: .45s; } .hero.reveal .l4 { animation-delay: .6s; }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes fill { from { transform: scaleY(0); } to { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > *, .hero.reveal .ly { animation: none; } }
+/* Schichten: jede Sektion legt sich mit runder Oberkante über die vorige */
+.layer { position: relative; border-radius: 34px 34px 0 0; margin-top: -34px; padding-block: clamp(60px, 9vw, 100px); box-shadow: 0 -10px 30px rgba(58,32,16,.08); }
+.layer.milk { background: var(--milk); } .layer.paper { background: var(--paper); } .layer.cb { background: var(--cb); color: #f4ece2; } .layer.brown { background: var(--brown); color: #fff; } .layer.cream { background: var(--cream); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px 40px; margin-bottom: 28px; }
+.head h2 { font-size: clamp(42px, 6vw, 72px); line-height: 1; margin-top: 8px; }
+.head p { max-width: 44ch; margin: 0; color: var(--soft); }
+.cb .head p, .cb p { color: rgba(244,236,226,.8); } .cb .kicker { color: #d9a877; }
+.brown .head p, .brown p { color: rgba(255,255,255,.85); } .brown .kicker { color: #ffe2c4; }
+.mq { overflow: hidden; padding-block: 6px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+.mq .track { display: flex; gap: 14px; width: max-content; animation: mq 60s linear infinite; } .mq:hover .track { animation-play-state: paused; }
+.mq img { height: clamp(150px, 20vw, 230px); width: auto; display: block; border-radius: 18px; }
+@keyframes mq { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .mq .track { animation: none; } .mq { overflow-x: auto; } }
+.split { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: clamp(26px, 5vw, 60px); align-items: center; }
+@media (max-width: 820px) { .split { grid-template-columns: minmax(0,1fr); } }
+.split img { width: 100%; height: auto; display: block; border-radius: 22px; box-shadow: 0 20px 40px rgba(0,0,0,.18); }
+.split h2 { font-size: clamp(42px, 6vw, 70px); line-height: 1; margin: 8px 0 14px; }
+.drinks { display: grid; gap: 10px; margin: 18px 0 6px; }
+.drinks div { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 16px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); }
+.drinks i { width: 22px; height: 34px; border-radius: 3px 3px 8px 8px; flex: none; }
+.drinks b { font: 500 26px/1 var(--f-serif); } .drinks span { display: block; font-size: 13px; opacity: .8; }
+.dates { display: inline-block; font: 600 13px var(--f-sans); letter-spacing: .12em; text-transform: uppercase; background: #fff; color: var(--cb); border-radius: 999px; padding: 7px 14px; }
+.art { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+@media (max-width: 760px) { .art { grid-template-columns: repeat(2, minmax(0,1fr)); } .art figure:first-child { grid-column: span 2; } }
+.art figure { margin: 0; position: relative; border-radius: 20px; overflow: hidden; aspect-ratio: 4 / 5; background: var(--paper); }
+.art img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .7s cubic-bezier(.2,.7,.2,1); } .art figure:hover img { transform: scale(1.05); }
+.art figcaption { position: absolute; left: 12px; bottom: 12px; font: 500 14px var(--f-sans); color: #fff; background: rgba(43,22,10,.6); padding: 5px 11px; border-radius: 999px; backdrop-filter: blur(4px); }
+.team-quote { font: italic 500 clamp(26px, 3.4vw, 38px)/1.2 var(--f-serif); margin: 0 0 14px; }
+.hire { margin-top: 20px; padding: 20px 22px; border-radius: 18px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25); display: grid; gap: 8px; }
+.hire h3 { font-size: 30px; } .hire ul { margin: 0; padding-left: 20px; display: grid; gap: 3px; font-size: 15px; }
+.events { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
+@media (max-width: 760px) { .events { grid-template-columns: minmax(0,1fr); } }
+.ev { display: grid; grid-template-columns: 140px minmax(0,1fr); gap: 16px; align-items: center; padding: 14px; border-radius: 20px; background: #fff; box-shadow: 0 8px 24px rgba(58,32,16,.08); }
+.ev img { width: 140px; height: 170px; object-fit: cover; border-radius: 14px; display: block; }
+.ev .k { font: 600 12px var(--f-sans); letter-spacing: .12em; text-transform: uppercase; color: var(--brown); } .ev h3 { font-size: 28px; line-height: 1.05; margin: 4px 0 6px; } .ev p { margin: 0; font-size: 14px; color: var(--soft); }
+.visit { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 860px) { .visit { grid-template-columns: minmax(0,1fr); } }
+.map { border-radius: 22px; overflow: hidden; min-height: 340px; } .map iframe { width: 100%; height: 100%; min-height: 340px; border: 0; display: block; filter: sepia(.2) saturate(.85); }
+.card { border-radius: 22px; padding: 26px; background: #fff; display: grid; gap: 10px; align-content: start; }
+.card h3 { font-size: 32px; color: var(--brown); } .card p { margin: 0; color: var(--soft); font-size: 15px; }
+.hours { display: grid; grid-template-columns: auto 1fr; gap: 4px 18px; margin: 0; font-size: 15px; font-variant-numeric: tabular-nums; }
+.hours dt { color: var(--muted); } .hours dd { margin: 0; } .hours .today { font-weight: 700; color: var(--dark); }
+.note { font-size: 13px; color: var(--muted); }
+footer { padding-block: 34px 96px; background: var(--cb); color: rgba(244,236,226,.7); font-size: 13px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 700 14px system-ui, sans-serif; padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.25); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+.stage { position: fixed; inset: 0; z-index: 60; }
+.skip { position: fixed; left: 50%; bottom: calc(22px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); z-index: 61; font: 600 12px var(--f-sans); color: var(--soft); background: rgba(255,255,255,.6); border: 1px solid var(--line); border-radius: 999px; padding: 8px 16px; cursor: pointer; }
+html.js .bf { opacity: 0; filter: blur(8px); transform: translateY(16px); transition: opacity .8s ease, filter .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
+html.js .bf.in { opacity: 1; filter: none; transform: none; }
+@media (prefers-reduced-motion: reduce) { html.js .bf { opacity: 1; filter: none; transform: none; transition: none; } }
+</style>
+<script>document.documentElement.classList.add("js")</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></symbol>
+</svg>
+<div class="proposal"><span><b>Design proposal</b> for Overlay Coffee · not the official website</span><span>Made by <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">Jota Labs</a></span></div>
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="50" fill="#9a5a2e"/><text x="48" y="58" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-weight="500" font-size="27" fill="#fff">Overlay</text><text x="84" y="62" font-family="Georgia,serif" font-size="6" fill="#fff">®</text></svg><span>Overlay Coffee</span></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENU</button>
+    <nav class="links" id="links"><a href="#limited">Limited</a><a href="#latte">Latte art</a><a href="#team">Team</a><a href="#visit">Visit</a><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Overlay%20Coffee%20320%20Little%20Lonsdale%20St%20Melbourne" target="_blank" rel="noopener">Directions</a></nav>
+  </div>
+</header>
+<section class="hero pre" id="top">
+  <button class="redo" id="redo" type="button">↻ intro</button>
+  <div class="wrap">
+    <div>
+      <div class="kicker">Specialty coffee · Melbourne CBD</div>
+      <h1>Overlay<sup>®</sup></h1>
+      <p class="lead">Five years of flat whites and latte art at 320 Little Lonsdale Street. Come by for your morning brew.</p>
+      <div class="ctas"><a class="btn" href="#visit">Find us <span class="arr">→</span></a><a class="btn ghost" href="#limited">Limited drinks</a></div>
+      <div class="facts"><span class="status" id="statusChip">Mon–Fri 7:30–4 · Sat–Sun 8–4</span><a href="https://www.instagram.com/overlaycoffee.com.au/" target="_blank" rel="noopener">@overlaycoffee.com.au</a></div>
+    </div>
+    <div class="glass" aria-hidden="true"><div class="cup"><i class="ly l1"></i><i class="ly l2"></i><i class="ly l3"></i><i class="ly l4"></i><i class="shine"></i></div>
+      <span class="tag t1">cold brew</span><span class="tag t2">espresso</span><span class="tag t3">milk</span><span class="tag t4">foam</span></div>
+  </div>
+</section>
+
+<section class="layer milk" aria-label="Photos from Overlay Coffee's Instagram" style="padding-block:28px 64px"><div class="mq"><div class="track" aria-hidden="true"><img src="img/fork.webp" alt="" width="356" height="406" loading="lazy" decoding="async"><img src="img/team.webp" alt="" width="1000" height="671" loading="lazy" decoding="async"><img src="img/barista.webp" alt="" width="1000" height="1000" loading="lazy" decoding="async"><img src="img/afl.webp" alt="" width="1000" height="879" loading="lazy" decoding="async"><img src="img/shop.webp" alt="" width="356" height="427" loading="lazy" decoding="async"><img src="img/flatwhite.webp" alt="" width="356" height="413" loading="lazy" decoding="async"><img src="img/team2.webp" alt="" width="356" height="427" loading="lazy" decoding="async"><img src="img/apron.webp" alt="" width="756" height="756" loading="lazy" decoding="async"><img src="img/chipi.webp" alt="" width="354" height="406" loading="lazy" decoding="async"><img src="img/fork.webp" alt="" width="356" height="406" loading="lazy" decoding="async"><img src="img/team.webp" alt="" width="1000" height="671" loading="lazy" decoding="async"><img src="img/barista.webp" alt="" width="1000" height="1000" loading="lazy" decoding="async"><img src="img/afl.webp" alt="" width="1000" height="879" loading="lazy" decoding="async"><img src="img/shop.webp" alt="" width="356" height="427" loading="lazy" decoding="async"><img src="img/flatwhite.webp" alt="" width="356" height="413" loading="lazy" decoding="async"><img src="img/team2.webp" alt="" width="356" height="427" loading="lazy" decoding="async"><img src="img/apron.webp" alt="" width="756" height="756" loading="lazy" decoding="async"><img src="img/chipi.webp" alt="" width="354" height="406" loading="lazy" decoding="async"></div></div></section>
+
+<section class="layer cb" id="limited">
+  <div class="wrap split">
+    <div class="bf"><img src="img/collab.webp" alt="Limited Only, 1 Nov to 24 Dec: a special drinks collaboration, Tofu Cloud and Crystal Cold Brew" width="1000" height="1245" loading="lazy" decoding="async"></div>
+    <div class="bf">
+      <div class="kicker">Limited only</div>
+      <h2>A special drinks collaboration</h2>
+      <span class="dates">1 Nov – 24 Dec</span>
+      <div class="drinks">
+        <div><i style="background:linear-gradient(#f3ead9 0 30%,#c39a72 30%)"></i><p style="margin:0"><b>Tofu Cloud</b><span>Only here until Christmas Eve.</span></p></div>
+        <div><i style="background:linear-gradient(#2b160a 0 0) bottom/100% 70% no-repeat,linear-gradient(#7a3f1a,#7a3f1a)"></i><p style="margin:0"><b>Crystal Cold Brew</b><span>Over ice, with berries and mint on top.</span></p></div>
+      </div>
+      <p class="note" style="color:rgba(244,236,226,.6)">On the final site, each new special gets its own spot here.</p>
+    </div>
+  </div>
+</section>
+
+<section class="layer cream" id="latte">
+  <div class="wrap">
+    <div class="head bf"><div><div class="kicker">Every cup</div><h2>Latte art, layer by layer</h2></div><p>Pegasus, swans, rosettas, even the AFL Grand Final. A few favourites from our Instagram.</p></div>
+    <div class="art">
+      <figure class="bf"><img src="img/apron.webp" alt="A winged latte art figure in a white cup, held in front of a brown Overlay apron" width="756" height="756" loading="lazy" decoding="async"><figcaption>Signature pour</figcaption></figure>
+      <figure class="bf"><img src="img/fork.webp" alt="Latte art swan with a fork and knife, a playful shot" width="356" height="406" loading="lazy" decoding="async"><figcaption>Coffee for dinner?</figcaption></figure>
+      <figure class="bf"><img src="img/afl.webp" alt="Latte art made for the AFL Grand Final" width="1000" height="879" loading="lazy" decoding="async"><figcaption>AFL Grand Final</figcaption></figure>
+      <figure class="bf"><img src="img/barista.webp" alt="A barista holding a latte art cup at knee height" width="1000" height="1000" loading="lazy" decoding="async"><figcaption>Morning brew</figcaption></figure>
+      <figure class="bf"><img src="img/flatwhite.webp" alt="A barista presenting a flat white" width="356" height="413" loading="lazy" decoding="async"><figcaption>Flat white</figcaption></figure>
+      <figure class="bf"><img src="img/shop.webp" alt="Guests enjoying coffee at the bench at 320 Little Lonsdale Street" width="356" height="427" loading="lazy" decoding="async"><figcaption>320 Little Lonsdale St</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="layer brown" id="team">
+  <div class="wrap split">
+    <div class="bf"><img src="img/team.webp" alt="Team Overlay in their brown aprons, holding Overlay name cards" width="1000" height="671" loading="lazy" decoding="async"></div>
+    <div class="bf">
+      <div class="kicker">Team Overlay</div>
+      <h2>Five years.</h2>
+      <p class="team-quote">“Every coffee, every visit, and every kind word means so much to our team. Thanks for growing with us.”</p>
+      <div class="hire"><span class="kicker">We're hiring</span><h3>Barista all-rounder wanted</h3>
+        <ul><li>Friendly personality with a positive attitude</li><li>Experience making quality coffee</li><li>4–5 days per week, Monday &amp; Tuesday a must</li></ul>
+        <div class="ctas" style="margin-top:8px"><a class="btn light" href="mailto:overlaycoffee.melb@gmail.com?subject=Barista%20application">Email your resume <span class="arr">→</span></a></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="layer paper" id="events">
+  <div class="wrap">
+    <div class="head bf"><div><div class="kicker">Happening at Overlay</div><h2>Takeovers &amp; long weekends</h2></div><p>Guest roasters, collabs and the odd special day. On the final site these show up here automatically.</p></div>
+    <div class="events">
+      <article class="ev bf"><img src="img/takeover.webp" alt="Cafe takeover poster: Nog Coffee Roasters bar takeover at Overlay Coffee, 8 July" width="356" height="474" loading="lazy" decoding="async"><div><span class="k">Good Coffee Week</span><h3>Nog Coffee Roasters bar takeover</h3><p>A guest roaster behind our bar for the day, as part of Friends of Coffee Weekend.</p></div></article>
+      <article class="ev bf"><img src="img/team2.webp" alt="The Overlay team waving at the camera" width="356" height="427" loading="lazy" decoding="async"><div><span class="k">Holiday hours</span><h3>Open, closed or opening later?</h3><p>Public holidays and special hours go here, so nobody walks up to a closed door.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="layer milk" id="visit">
+  <div class="wrap">
+    <div class="head bf"><div><div class="kicker">Visit</div><h2>320 Little Lonsdale St</h2></div><p>Melbourne CBD, VIC 3000.</p></div>
+    <div class="visit bf">
+      <div class="map"><iframe title="Map: Overlay Coffee, 320 Little Lonsdale Street" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=144.9553%2C-37.8141%2C144.9653%2C-37.8091&amp;layer=mapnik&amp;marker=-37.8116036%2C144.9603391"></iframe></div>
+      <div class="card"><h3>Opening hours</h3><dl class="hours" id="hours"></dl>
+        <h3 style="margin-top:6px">Say hello</h3><p><a href="mailto:overlaycoffee.melb@gmail.com">overlaycoffee.melb@gmail.com</a></p>
+        <div class="ctas" style="margin-top:4px"><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Overlay%20Coffee%20320%20Little%20Lonsdale%20St%20Melbourne" target="_blank" rel="noopener">Directions ↗</a><a class="btn ghost" href="https://www.instagram.com/overlaycoffee.com.au/" target="_blank" rel="noopener">Instagram</a></div></div>
+    </div>
+  </div>
+</section>
+<footer><div class="wrap"><span>Overlay Coffee · 320 Little Lonsdale St, Melbourne VIC 3000</span><span>Design proposal by Jota Labs · <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">more work</a></span></div></footer>
+<a class="like" href="https://wa.me/5491130331893?text=Hi%20Jan%2C%20I%20saw%20the%20website%20proposal%20for%20Overlay%20Coffee%20and%20I%27d%20like%20to%20know%20more." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Like it? Let's talk</a>
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+
+  /* ---------- Opening hours + open now (Melbourne) ---------- */
+  const H = { Mon: [450, 960], Tue: [450, 960], Wed: [450, 960], Thu: [450, 960], Fri: [450, 960], Sat: [480, 960], Sun: [480, 960] };
+  const names = { Mon: "Monday", Tue: "Tuesday", Wed: "Wednesday", Thu: "Thursday", Fri: "Friday", Sat: "Saturday", Sun: "Sunday" };
+  const fmt = (m) => { const h = Math.floor(m / 60), mm = m % 60; return `${h > 12 ? h - 12 : h}${mm ? ":" + String(mm).padStart(2, "0") : ""}${h >= 12 ? "pm" : "am"}`; };
+  function status() { const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "Australia/Melbourne", weekday: "short", hour: "numeric", minute: "numeric", hour12: false }).formatToParts(new Date());
+    const get = (t) => parts.find((x) => x.type === t).value, wd = get("weekday"), m = (+get("hour") % 24) * 60 + +get("minute"), t = H[wd];
+    $("#hours").innerHTML = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d) => `<dt class="${d === wd ? "today" : ""}">${names[d]}</dt><dd class="${d === wd ? "today" : ""}">${fmt(H[d][0])} – ${fmt(H[d][1])}</dd>`).join("");
+    const open = t && m >= t[0] && m < t[1], chip = $("#statusChip"); chip.classList.toggle("open", !!open);
+    chip.innerHTML = open ? `<b>Open now</b> · until ${fmt(t[1])}` : m < t[0] ? `Opens today at <b>${fmt(t[0])}</b>` : "Closed now · <b>back tomorrow</b>"; }
+  status(); setInterval(status, 60000);
+
+  const io = "IntersectionObserver" in window ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 }) : null;
+  document.querySelectorAll(".bf").forEach((n) => (io ? io.observe(n) : n.classList.add("in")));
+
+  /* ---------- Intro B: layers in the glass (Jota Labs intro library) ---------- */
+  const hero = $("#top");
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const ease = (t) => (t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+  const tween = (ms, fn, tk, ez = ease) => new Promise((res) => {
+    const t0 = performance.now();
+    const step = (now) => { if (tk.cancelled) return res(); const k = Math.max(0, Math.min(1, (now - t0) / ms)); fn(ez(k), k); k < 1 ? requestAnimationFrame(step) : res(); };
+    requestAnimationFrame(step);
+  });
+  const loop = (fn, tk) => { let prev = performance.now(); const step = (now) => { if (tk.cancelled) return; const dt = Math.min(50, now - prev) / 16.7; prev = now; fn(dt, now); requestAnimationFrame(step); }; requestAnimationFrame(step); };
+  const canvas = (parent, cls, z) => { const w = innerWidth, h = innerHeight, dpr = Math.min(2, devicePixelRatio || 1);
+    const c = document.createElement("canvas"); c.className = "fxl " + cls; c.width = Math.round(w * dpr); c.height = Math.round(h * dpr);
+    c.style.cssText = "position:fixed;inset:0;width:100vw;height:100vh;z-index:60;pointer-events:none"; c.setAttribute("aria-hidden", "true");
+    document.body.append(c); const ctx = c.getContext("2d"); ctx.scale(dpr, dpr); return { c, ctx, w, h }; };
+  const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); };
+  /* ---------- Overlay Coffee (Melbourne CBD): braunes Rund, weißes Serif "Overlay®", Latte Art ---------- */
+  const OV_B = "#9a5a2e", OV_D = "#4a2a16", OV_C = "#f4ece2";
+  function ovLogo(ctx, cx, cy, R, a, o) { if (a <= 0) return; ctx.save(); ctx.globalAlpha *= a; ctx.fillStyle = OV_B; ctx.beginPath(); ctx.arc(cx, cy, R, 0, 7); ctx.fill();
+    ctx.fillStyle = "#fff"; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.font = `500 ${R * .52}px ${o.family || "Georgia, serif"}`; ctx.fillText("Overlay", cx - R * .04, cy + R * .02);
+    const tw = ctx.measureText("Overlay").width; ctx.font = `500 ${R * .12}px Georgia, serif`; ctx.fillText("®", cx - R * .04 + tw / 2 + R * .07, cy + R * .16); ctx.restore(); }
+  function ovSub(ctx, w, cx, y, a, o, txt, col) { if (a <= 0) return; ctx.save(); ctx.globalAlpha *= a; ctx.fillStyle = col || OV_D; ctx.textAlign = "center"; ctx.font = `500 ${Math.min(w * .045, 20)}px ${o.ufamily || "system-ui"}`; ctx.fillText(txt || "320 LITTLE LONSDALE ST · MELBOURNE", cx, y, w * .9); ctx.restore(); }
+
+  /* B: "Overlay" wörtlich: Schichten legen sich im Glas übereinander (Cold Brew, Milch, Schaum), dann das Logo */
+  async function ovlayers(scr, tk, o = {}) {
+    const { c, ctx, w, h } = canvas(scr, "ovlayers", 5), cx = w / 2, gw = Math.min(w * .42, h * .25), gh = gw * 1.45, gx = cx - gw / 2, gy = h * .42 - gh / 2;
+    const L = [["#2b160a", .42, "cold brew"], ["#8a5530", .26, "espresso"], ["#e8d6bf", .2, "milk"], ["#fbf5ec", .12, "foam"]]; const lv = L.map(() => 0);
+    let words = 0, logo = 0, sub = 0, zoom = 1, bgA = 1;
+    const draw = () => { ctx.clearRect(0, 0, w, h); ctx.save(); ctx.globalAlpha = bgA; ctx.fillStyle = "#efe4d6"; ctx.fillRect(0, 0, w, h); ctx.restore();
+      ctx.save(); ctx.translate(cx, h * .42); ctx.scale(zoom, zoom); ctx.translate(-cx, -h * .42); const a = (1 - logo) * bgA;
+      if (a > 0) { ctx.save(); ctx.globalAlpha = a; const taper = gw * .08; const glass = () => { ctx.beginPath(); ctx.moveTo(gx, gy); ctx.lineTo(gx + gw, gy); ctx.lineTo(gx + gw - taper, gy + gh); ctx.lineTo(gx + taper, gy + gh); ctx.closePath(); };
+        ctx.save(); glass(); ctx.clip(); let y = gy + gh; L.forEach(([col, f], i) => { const hh = gh * f * lv[i]; if (hh <= 0) return; y -= hh; ctx.fillStyle = col; ctx.fillRect(gx - 4, y, gw + 8, hh + 1);
+          if (i && lv[i] < 1) { ctx.fillStyle = col; for (let k = 0; k < 6; k++) { ctx.beginPath(); ctx.arc(gx + gw * (.15 + k * .14), y + 4, gw * .06, 0, 7); ctx.fill(); } } }); ctx.restore();
+        ctx.lineWidth = 3; ctx.strokeStyle = "rgba(255,255,255,.9)"; glass(); ctx.stroke(); ctx.strokeStyle = "rgba(255,255,255,.5)"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(gx + gw * .14, gy + gh * .08); ctx.lineTo(gx + gw * .2, gy + gh * .8); ctx.stroke();
+        let yy = gy + gh; ctx.font = `500 ${Math.min(w * .038, 15)}px ${o.ufamily || "system-ui"}`; ctx.textBaseline = "middle"; L.forEach(([, f, n], i) => { const hh = gh * f; yy -= hh; if (lv[i] < 1 || !words) return; ctx.globalAlpha = a * words; ctx.fillStyle = OV_D; ctx.textAlign = i % 2 ? "right" : "left";
+          const x = i % 2 ? gx - gw * .18 : gx + gw * 1.18; ctx.fillText(n, x, yy + hh / 2); ctx.beginPath(); ctx.moveTo(i % 2 ? gx - gw * .14 : gx + gw * 1.14, yy + hh / 2); ctx.lineTo(i % 2 ? gx - 4 : gx + gw + 4, yy + hh / 2); ctx.strokeStyle = OV_D; ctx.lineWidth = 1; ctx.stroke(); }); ctx.restore(); }
+      ovLogo(ctx, cx, h * .42, gw * .75, logo * bgA, o); ctx.restore(); ovSub(ctx, w, cx, h * .42 + gw * 1.15, sub * bgA, o, "OVERLAY COFFEE · MELBOURNE"); };
+    let live = true; const lp = () => { if (!live || tk.cancelled) return; draw(); requestAnimationFrame(lp); }; requestAnimationFrame(lp);
+    await sleep(150); for (let i = 0; i < L.length; i++) { await tween(520, (e) => { lv[i] = e; }, tk); if (i === 0) words = 1; }
+    await sleep(600); await tween(700, (e) => { logo = e; }, tk); await tween(400, (e) => { sub = e; }, tk);
+    await sleep(o.hold || 1000); if (tk.cancelled) { live = false; return c.remove(); }
+    reveal(scr); await tween(800, (e) => { zoom = 1 + e * 3; bgA = 1 - e; c.style.opacity = 1 - e; }, tk, (q) => q * q); live = false; c.remove();
+  }
+
+
+  let token = { cancelled: true };
+  const finish = () => { document.querySelectorAll(".fxl, .skip").forEach((n) => n.remove()); document.documentElement.style.overflow = ""; };
+  async function play() { token.cancelled = true; finish(); const tk = (token = { cancelled: false });
+    if (reduce) { reveal(); return; }
+    scrollTo(0, 0); document.documentElement.style.overflow = "hidden"; hero.classList.add("pre"); hero.classList.remove("reveal");
+    const skip = document.createElement("button"); skip.className = "skip"; skip.type = "button"; skip.textContent = "skip intro";
+    skip.addEventListener("click", () => { tk.cancelled = true; finish(); reveal(); }); document.body.append(skip);
+    await ovlayers(document.body, tk, { family: '"Cormorant Garamond", Georgia, serif', ufamily: "Inter, system-ui" });
+    if (token === tk) { if (tk.cancelled) reveal(); finish(); } }
+  $("#redo").addEventListener("click", play);
+  document.fonts && document.fonts.ready ? document.fonts.ready.then(play) : play();
+})();
+</script>
+</body>
+</html>
