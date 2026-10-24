@@ -166,6 +166,10 @@ html.js .bf { opacity: 0; transform: translateY(18px); transition: opacity .8s, 
 .lb .cap { position: absolute; left: 0; right: 0; bottom: -30px; text-align: center; color: var(--muted); font: 600 14px var(--f-head); letter-spacing: .15em; text-transform: uppercase; }
 .lb button { position: absolute; background: rgba(20,16,15,.8); color: #f1e9df; border: 1px solid var(--line); width: 44px; height: 44px; font-size: 22px; cursor: pointer; }
 .lb .x { top: 10px; right: 10px; } .lb .pv { left: 10px; top: 50%; transform: translateY(-50%); } .lb .nx { right: 10px; top: 50%; transform: translateY(-50%); }
+.gallery figure::after, .members figure::after, .item .pic::after, .lb .stage::before, .hero::after { content: "Example · your photo here"; position: absolute; top: 10px; left: 10px; z-index: 3; padding: 4px 8px; background: rgba(200,36,28,.92); color: #fff; font: 600 11px/1.2 var(--f-head); letter-spacing: .12em; text-transform: uppercase; pointer-events: none; }
+.members figure { position: relative; }
+.lb .stage::before { top: 10px; left: 10px; }
+.hero::after { top: auto; bottom: 14px; left: 14px; content: "Example band photo · yours goes here"; }
 </style>
 <script>document.documentElement.classList.add("js")</script>
 </head>
