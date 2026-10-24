@@ -392,43 +392,52 @@ html.js .bf { opacity: 0; transform: translateY(18px); transition: opacity .8s, 
   const tween = (ms, fn, tk) => new Promise((res) => { const t0 = performance.now(); const st = (n) => { if (tk.cancelled) return res(); const k = Math.min(1, (n - t0) / ms); fn(k); k < 1 ? requestAnimationFrame(st) : res(); }; requestAnimationFrame(st); });
   const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); };
   let token = { cancelled: true };
-  async function intro(tk) { const w = innerWidth, h = innerHeight, d = Math.min(2, devicePixelRatio || 1);
+  async function intro(tk) { const w = innerWidth, h = innerHeight, mob = w < 760, d = mob ? 1 : Math.min(1.5, devicePixelRatio || 1);
+    try { await Promise.race([document.fonts.load('400 80px "Metal Mania"'), sleep(1500)]); } catch (e) {}
+    const mk = (cw, ch) => { const k = document.createElement("canvas"); k.width = Math.ceil(cw * d); k.height = Math.ceil(ch * d); const g = k.getContext("2d"); g.scale(d, d); return [k, g]; };
     const c = document.createElement("canvas"); c.className = "fxl"; c.width = w * d; c.height = h * d; c.style.cssText = "position:fixed;inset:0;width:100vw;height:100vh;z-index:60;pointer-events:none"; document.body.append(c);
-    const x = c.getContext("2d"); x.scale(d, d); const F = Math.min(w * .21, 200), cx = w / 2, cy = h * .46;
+    const x = c.getContext("2d"); const F = Math.min(w * .21, 200), cx = w / 2, cy = h * .46, R = Math.hypot(w, h) / 2;
     /* Szene in Offscreen-Canvas, damit sie am Ende in Scherben zerspringen kann */
-    const sc = document.createElement("canvas"); sc.width = w * d; sc.height = h * d; const s = sc.getContext("2d"); s.scale(d, d);
+    const [sc, s] = mk(w, h);
+    /* Leuchtende Teile einmal vorrendern (shadowBlur pro Frame ist auf Handys zu teuer) */
     const mkBolt = (x0) => { const p = []; let px = x0, py = -10; while (py < h * rnd(.55, 1)) { p.push([px, py]); px += rnd(-w * .07, w * .07); py += rnd(h * .03, h * .08); } return p; };
-    const bolts = [mkBolt(w * .2), mkBolt(w * .78), mkBolt(w * .5)];
-    const cracks = []; const crack = (x0, y0, a, len, depth) => { let px = x0, py = y0; const seg = [[px, py]]; for (let i = 0; i < 9; i++) { a += rnd(-.45, .45); px += Math.cos(a) * len / 9; py += Math.sin(a) * len / 9; seg.push([px, py]); if (depth < 2 && Math.random() < .22) crack(px, py, a + rnd(-1, 1), len * .5, depth + 1); } cracks.push(seg); };
+    const bolts = [mkBolt(w * .2), mkBolt(w * .78), mkBolt(w * .5)].map((b) => { const [k, g] = mk(w, h); g.strokeStyle = "#ffe6dc"; g.shadowColor = "#ff3b2a"; g.shadowBlur = 28; g.lineWidth = 3.5; g.lineJoin = "round"; g.beginPath(); b.forEach(([a, bb], i) => (i ? g.lineTo(a, bb) : g.moveTo(a, bb))); g.stroke(); return k; });
+    const [crk, cg] = mk(w, h); cg.strokeStyle = "rgba(255,120,60,.85)"; cg.shadowColor = "#ff3b2a"; cg.shadowBlur = 10; cg.lineWidth = 1.6;
+    const crack = (x0, y0, a, len, depth) => { let px = x0, py = y0; cg.beginPath(); cg.moveTo(px, py); for (let i = 0; i < 9; i++) { a += rnd(-.45, .45); px += Math.cos(a) * len / 9; py += Math.sin(a) * len / 9; cg.lineTo(px, py); if (depth < 2 && Math.random() < .22) { cg.stroke(); crack(px, py, a + rnd(-1, 1), len * .5, depth + 1); cg.beginPath(); cg.moveTo(px, py); } } cg.stroke(); };
     for (let i = 0; i < 14; i++) crack(cx + rnd(-F * 1.6, F * 1.6), cy + rnd(-F * .3, F * .3), (i / 14) * 6.283, Math.max(w, h) * rnd(.25, .55), 0);
+    const LW = F * 5, LH = F * 2.2, logo = (blur, glowK) => { const [k, g] = mk(LW, LH); g.translate(LW / 2, LH / 2); g.textAlign = "center"; g.textBaseline = "middle"; g.font = `400 ${F}px "Metal Mania", fantasy`; g.shadowColor = "#ff3b2a"; g.shadowBlur = blur; g.fillStyle = "#e9dfd2"; g.fillText("Vrakhold", 0, 0);
+      if (glowK) { g.shadowBlur = 0; g.globalCompositeOperation = "source-atop"; const gg = g.createLinearGradient(0, -F * .5, 0, F * .5); gg.addColorStop(0, `rgba(255,140,40,${.55 * glowK})`); gg.addColorStop(1, "rgba(200,36,28,0)"); g.fillStyle = gg; g.fillRect(-LW, -LH, LW * 2, LH * 2); } return k; };
+    const logoA = logo(20, 0), logoB = logo(60, 1);
     const parts = []; const burst = (n, px, py, sp) => { for (let i = 0; i < n; i++) { const a = rnd(0, 6.283), v = rnd(2, sp); parts.push({ x: px, y: py, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 2, r: rnd(1, 3.2), l: 1 }); } };
-    let pulse = 0, flash = 0, boltA = [0, 0, 0], slam = 0, ring = -1, crackK = 0, shake = 0, glow = 0, sub = 0, t = 0;
-    const scene = () => { s.setTransform(d, 0, 0, d, 0, 0); s.fillStyle = "#050303"; s.fillRect(0, 0, w, h);
+    let pulse = 0, flash = 0, boltA = [0, 0, 0], slam = 0, ring = -1, crackK = 0, shake = 0, glow = 0, sub = 0;
+    const scene = () => { s.setTransform(d, 0, 0, d, 0, 0); s.globalAlpha = 1; s.fillStyle = "#050303"; s.fillRect(0, 0, w, h);
       const g = s.createRadialGradient(cx, h, 10, cx, h, h * (.5 + .4 * pulse)); g.addColorStop(0, `rgba(200,36,28,${.15 + .45 * pulse})`); g.addColorStop(1, "rgba(200,36,28,0)"); s.fillStyle = g; s.fillRect(0, 0, w, h);
-      bolts.forEach((b, i) => { if (boltA[i] <= 0) return; s.save(); s.strokeStyle = `rgba(255,230,220,${boltA[i]})`; s.shadowColor = "#ff3b2a"; s.shadowBlur = 28; s.lineWidth = 3.5; s.beginPath(); b.forEach(([a, bb], k) => (k ? s.lineTo(a, bb) : s.moveTo(a, bb))); s.stroke(); s.restore(); });
-      if (crackK > 0) { s.save(); s.strokeStyle = "rgba(255,120,60,.85)"; s.shadowColor = "#ff3b2a"; s.shadowBlur = 10; s.lineWidth = 1.6; cracks.forEach((seg) => { const n = Math.max(1, Math.floor(seg.length * crackK)); s.beginPath(); seg.slice(0, n).forEach(([a, b], k) => (k ? s.lineTo(a, b) : s.moveTo(a, b))); s.stroke(); }); s.restore(); }
-      if (ring >= 0 && ring < 1) { s.save(); s.strokeStyle = `rgba(255,200,160,${1 - ring})`; s.lineWidth = 10 * (1 - ring) + 1; s.beginPath(); s.ellipse(cx, cy, Math.max(w, h) * ring, Math.max(w, h) * ring * .45, 0, 0, 7); s.stroke(); s.restore(); }
-      if (slam > 0) { const sz = 1 + (1 - slam) * 2.6; s.save(); s.translate(cx, cy); s.scale(sz, sz); s.textAlign = "center"; s.textBaseline = "middle"; s.font = `400 ${F}px "Metal Mania", fantasy`; s.globalAlpha = Math.min(1, slam * 1.4);
-        s.shadowColor = "#ff3b2a"; s.shadowBlur = 20 + 50 * glow; s.fillStyle = "#e9dfd2"; s.fillText("Vrakhold", 0, 0); s.shadowBlur = 0; s.globalCompositeOperation = "source-atop"; const gg = s.createLinearGradient(0, -F * .5, 0, F * .5); gg.addColorStop(0, `rgba(255,140,40,${.55 * glow})`); gg.addColorStop(1, "rgba(200,36,28,0)"); s.fillStyle = gg; s.fillRect(-w, -F, w * 2, F * 2); s.restore(); }
-      if (sub > 0) { s.save(); s.globalAlpha = sub; s.textAlign = "center"; s.font = `600 ${Math.min(w * .035, 18)}px Oswald, sans-serif`; s.fillStyle = "#c9bcb4"; s.fillText("A S H E N   C R O W N   ·   O U T   N O W", cx, cy + F * .78); s.restore(); }
-      for (const p of parts) { if (p.l <= 0) continue; s.fillStyle = `rgba(255,${130 + (p.r * 30 | 0)},40,${p.l})`; s.beginPath(); s.arc(p.x, p.y, p.r, 0, 7); s.fill(); }
+      bolts.forEach((k, i) => { if (boltA[i] <= 0) return; s.globalAlpha = boltA[i]; s.drawImage(k, 0, 0, w, h); }); s.globalAlpha = 1;
+      if (crackK > 0) { s.save(); s.beginPath(); s.arc(cx, cy, R * crackK + 1, 0, 7); s.clip(); s.drawImage(crk, 0, 0, w, h); s.restore(); }
+      if (ring >= 0 && ring < 1) { s.strokeStyle = `rgba(255,200,160,${1 - ring})`; s.lineWidth = 10 * (1 - ring) + 1; s.beginPath(); s.ellipse(cx, cy, Math.max(w, h) * ring, Math.max(w, h) * ring * .45, 0, 0, 7); s.stroke(); }
+      if (slam > 0) { const sz = 1 + (1 - slam) * 2.6, lw = LW * sz, lh = LH * sz, a = Math.min(1, slam * 1.4); s.globalAlpha = a * (1 - glow); s.drawImage(logoA, cx - lw / 2, cy - lh / 2, lw, lh); if (glow > 0) { s.globalAlpha = a * glow; s.drawImage(logoB, cx - lw / 2, cy - lh / 2, lw, lh); } s.globalAlpha = 1; }
+      if (sub > 0) { s.globalAlpha = sub; s.textAlign = "center"; s.textBaseline = "alphabetic"; s.font = `600 ${Math.min(w * .035, 18)}px Oswald, sans-serif`; s.fillStyle = "#c9bcb4"; s.fillText("A S H E N   C R O W N   ·   O U T   N O W", cx, cy + F * .78); s.globalAlpha = 1; }
+      for (const p of parts) { if (p.l <= 0) continue; s.fillStyle = `rgba(255,${130 + (p.r * 30 | 0)},40,${p.l})`; s.fillRect(p.x - p.r, p.y - p.r, p.r * 2, p.r * 2); }
       if (flash > 0) { s.fillStyle = `rgba(255,240,230,${flash})`; s.fillRect(0, 0, w, h); } };
     let shards = null;
-    const frame = () => { x.setTransform(d, 0, 0, d, 0, 0); x.clearRect(0, 0, w, h);
-      if (!shards) { scene(); const sx = shake ? rnd(-shake, shake) : 0, sy = shake ? rnd(-shake, shake) : 0; x.drawImage(sc, sx, sy, w, h); return; }
-      for (const p of shards) { x.save(); x.translate(p.cx + p.dx, p.cy + p.dy); x.rotate(p.rot); x.translate(-p.cx, -p.cy); x.beginPath(); p.poly.forEach(([a, b], i) => (i ? x.lineTo(a, b) : x.moveTo(a, b))); x.closePath(); x.clip(); x.globalAlpha = Math.max(0, 1 - p.dy / h); x.drawImage(sc, 0, 0, w, h); x.restore(); } };
-    let live = true; const lp = (n) => { if (!live || tk.cancelled) return; t = n; for (const p of parts) { p.x += p.vx; p.y += p.vy; p.vy += .12; p.vx *= .99; p.l -= .012; } if (shards) for (const p of shards) { p.vy += .55; p.dy += p.vy; p.dx += p.vx; p.rot += p.vr; } frame(); requestAnimationFrame(lp); }; requestAnimationFrame(lp);
+    const frame = () => { x.setTransform(1, 0, 0, 1, 0, 0); x.clearRect(0, 0, c.width, c.height);
+      if (!shards) { scene(); const sx = shake ? rnd(-shake, shake) * d : 0, sy = shake ? rnd(-shake, shake) * d : 0; if (sx || sy) { x.fillStyle = "#050303"; x.fillRect(0, 0, c.width, c.height); } x.drawImage(sc, sx, sy); return; }
+      for (const p of shards) { const al = 1 - p.dy / h; if (al <= 0) continue; x.globalAlpha = al; x.setTransform(d, 0, 0, d, 0, 0); x.translate(p.cx + p.dx, p.cy + p.dy); x.rotate(p.rot); x.drawImage(p.img, p.bx - p.cx, p.by - p.cy, p.bw, p.bh); } x.globalAlpha = 1; };
+    let live = true; const lp = () => { if (!live || tk.cancelled) return; for (const p of parts) { if (p.l <= 0) continue; p.x += p.vx; p.y += p.vy; p.vy += .12; p.vx *= .99; p.l -= .012; } if (shards) for (const p of shards) { p.vy += .55; p.dy += p.vy; p.dx += p.vx; p.rot += p.vr; } frame(); requestAnimationFrame(lp); }; requestAnimationFrame(lp);
     const boom = async (i) => { boltA[i] = 1; flash = .85; shake = 10; await tween(220, (k) => { flash = .85 * (1 - k); boltA[i] = 1 - k * .6; shake = 10 * (1 - k); }, tk); };
     /* 1 Herzschlag */ for (let i = 0; i < 2; i++) { await tween(260, (k) => { pulse = Math.sin(k * Math.PI); }, tk); await sleep(120); }
     /* 2 drei Blitze */ await boom(0); await sleep(140); await boom(1); await sleep(110); await boom(2);
     /* 3 Logo-Slam mit Schockwelle, Rissen und Glut */ await tween(200, (k) => { slam = k * k; boltA = boltA.map((v) => v * (1 - k)); }, tk);
-    flash = .6; shake = 22; ring = 0; burst(160, cx, cy, 12);
+    flash = .6; shake = 22; ring = 0; burst(mob ? 90 : 160, cx, cy, 12);
     await tween(700, (k) => { flash = .6 * (1 - k) * (1 - k); shake = 22 * (1 - k); ring = k; crackK = Math.min(1, k * 1.6); glow = k; }, tk); ring = -1;
-    await tween(350, (k) => { sub = k; }, tk); await sleep(900);
-    /* 4 Bildschirm zerspringt */ if (!tk.cancelled) { scene(); const cols = 6, rows = 8, pts = [];
+    await tween(350, (k) => { sub = k; }, tk);
+    /* 4 Bildschirm zerspringt: Scherben schon in der Pause vorbereiten, jede in ein eigenes kleines Canvas */ if (!tk.cancelled) { shake = 0; scene(); const cols = mob ? 4 : 6, rows = mob ? 6 : 8, pts = [];
       for (let r = 0; r <= rows; r++) { pts[r] = []; for (let q = 0; q <= cols; q++) pts[r][q] = [q / cols * w + (q % cols ? rnd(-w / cols * .3, w / cols * .3) : 0), r / rows * h + (r % rows ? rnd(-h / rows * .3, h / rows * .3) : 0)]; }
-      shards = []; for (let r = 0; r < rows; r++) for (let q = 0; q < cols; q++) { const A = pts[r][q], B = pts[r][q + 1], C = pts[r + 1][q + 1], D = pts[r + 1][q]; [[A, B, C], [A, C, D]].forEach((poly) => { const pcx = (poly[0][0] + poly[1][0] + poly[2][0]) / 3, pcy = (poly[0][1] + poly[1][1] + poly[2][1]) / 3; shards.push({ poly, cx: pcx, cy: pcy, dx: 0, dy: 0, vx: (pcx - cx) * rnd(.01, .03), vy: rnd(-6, -1) - (1 - pcy / h) * 4, rot: 0, vr: rnd(-.06, .06) }); }); }
-      reveal(); await sleep(1400); }
+      const prep = []; for (let r = 0; r < rows; r++) for (let q = 0; q < cols; q++) { const A = pts[r][q], B = pts[r][q + 1], C = pts[r + 1][q + 1], D = pts[r + 1][q]; [[A, B, C], [A, C, D]].forEach((poly) => {
+        const xs = poly.map((v) => v[0]), ys = poly.map((v) => v[1]), bx = Math.floor(Math.min(...xs)), by = Math.floor(Math.min(...ys)), bw = Math.ceil(Math.max(...xs)) - bx + 1, bh = Math.ceil(Math.max(...ys)) - by + 1;
+        const [img, g] = mk(bw, bh); g.beginPath(); poly.forEach(([a, b2], i) => (i ? g.lineTo(a - bx, b2 - by) : g.moveTo(a - bx, b2 - by))); g.closePath(); g.clip(); g.drawImage(sc, bx * d, by * d, bw * d, bh * d, 0, 0, bw, bh);
+        const pcx = (xs[0] + xs[1] + xs[2]) / 3, pcy = (ys[0] + ys[1] + ys[2]) / 3; prep.push({ img, bx, by, bw, bh, cx: pcx, cy: pcy, dx: 0, dy: 0, vx: (pcx - cx) * rnd(.01, .03), vy: rnd(-6, -1) - (1 - pcy / h) * 4, rot: 0, vr: rnd(-.06, .06) }); }); }
+      await sleep(800); shards = prep; reveal(); await sleep(1400); }
     live = false; c.remove(); }
   async function play() { token.cancelled = true; document.querySelectorAll(".fxl, .skipi").forEach((n) => n.remove()); const tk = (token = { cancelled: false });
     if (reduce) { reveal(); return; } scrollTo(0, 0); document.documentElement.style.overflow = "hidden"; hero.classList.add("pre"); hero.classList.remove("reveal");
