@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>VRAKHOLD · Ashen Crown · Band website demo</title>
+<meta name="description" content="Demo band website for a fictional heavy metal band, built by Jota Labs: intro, music player, tour dates, gallery, bio, merch and press kit.">
+<meta property="og:title" content="VRAKHOLD · band website demo by Jota Labs">
+<meta property="og:description" content="A website template for metal bands: intro, player, tour dates, merch, press kit.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23070606'/%3E%3Cpath d='M12 10l20 46 20-46h-9L32 38 21 10z' fill='%23c8241c'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Metal+Mania&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Jota Labs Band-Demo: Metal. Intro (Blitz spaltet die Nacht, Logo brennt ein, Glut), Hero mit Glut-Partikeln,
+   Web-Audio-Player (synthetisierte Demo-Riffs, Visualizer), Tour, Galerie (generative Artworks), Bio, Merch, EPK, Newsletter. */
+:root { --bg: #070606; --bg-2: #100d0c; --bg-3: #181312; --line: rgba(255,240,230,.1); --fg: #f1e9e4; --soft: #c9bcb4; --muted: #8a7d76;
+  --red: #c8241c; --red-2: #ff3b2a; --ember: #ff8a2a; --bone: #e9dfd2;
+  --f-logo: "Metal Mania", fantasy; --f-head: "Oswald", Impact, sans-serif; --f-body: "Inter", system-ui, sans-serif; color-scheme: dark; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 400 16px/1.6 var(--f-body); overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-family: var(--f-head); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; text-wrap: balance; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+.kicker { font: 600 12px/1.2 var(--f-head); letter-spacing: .3em; text-transform: uppercase; color: var(--red-2); }
+:focus-visible { outline: 2px solid var(--red-2); outline-offset: 3px; }
+.demo { background: var(--red); color: #fff; font: 13px/1.4 var(--f-body); padding: 8px 16px; text-align: center; }
+.demo a { font-weight: 700; }
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: rgba(7,6,6,.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+header.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.logo { font: 400 30px/1 var(--f-logo); text-decoration: none; color: var(--bone); letter-spacing: .04em; }
+nav.links { display: flex; align-items: center; gap: 22px; }
+nav.links a { text-decoration: none; font: 500 14px var(--f-head); letter-spacing: .14em; text-transform: uppercase; color: var(--soft); }
+nav.links a:hover { color: #fff; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; font: 600 14px/1 var(--f-head); letter-spacing: .14em; text-transform: uppercase; padding: 16px 24px; background: var(--red); color: #fff; border: 2px solid var(--red); text-decoration: none; cursor: pointer; clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%); transition: background .15s, transform .15s; }
+.btn:hover { background: var(--red-2); transform: translateY(-2px); }
+.btn.ghost { background: transparent; color: var(--fg); border-color: rgba(255,240,230,.4); }
+.btn.ghost:hover { border-color: #fff; background: rgba(255,255,255,.06); }
+nav.links a.btn { color: #fff; padding: 11px 16px; font-size: 13px; }
+.menu-btn { display: none; background: transparent; color: var(--fg); border: 1px solid var(--line); padding: 8px 14px; font: 600 12px var(--f-head); letter-spacing: .2em; }
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; }
+  nav.links { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bg-2); border-bottom: 1px solid var(--line); padding: 6px 20px 18px; }
+  nav.links a { padding: 14px 0; border-bottom: 1px solid var(--line); }
+  nav.links a.btn { margin-top: 14px; border-bottom: 2px solid var(--red); }
+  nav.links:not(.open) { display: none; }
+}
+.hero { position: relative; overflow: hidden; isolation: isolate; min-height: min(92vh, 860px); display: grid; place-items: center; text-align: center; border-bottom: 1px solid var(--line);
+  background: radial-gradient(60% 50% at 50% 100%, rgba(200,36,28,.35), transparent 70%), radial-gradient(40% 40% at 50% 40%, rgba(255,138,42,.08), transparent 70%), var(--bg); }
+#embers { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.hero .wrap { position: relative; z-index: 1; padding-block: 80px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.hero h1 { font: 400 clamp(84px, 17vw, 210px)/.85 var(--f-logo); color: var(--bone); letter-spacing: .02em; text-transform: none; text-shadow: 0 0 30px rgba(200,36,28,.6), 0 4px 0 #000; }
+.hero .tag { font: 500 clamp(14px, 1.8vw, 18px) var(--f-head); letter-spacing: .5em; text-transform: uppercase; color: var(--soft); margin-left: .5em; }
+.release { margin-top: 18px; display: grid; grid-template-columns: auto minmax(0,1fr); gap: 18px; align-items: center; text-align: left; background: rgba(16,13,12,.75); border: 1px solid var(--line); padding: 14px 18px 14px 14px; max-width: 520px; }
+.release canvas { width: 92px; height: 92px; display: block; }
+.release b { display: block; font: 600 20px var(--f-head); letter-spacing: .06em; text-transform: uppercase; }
+.release span { color: var(--muted); font-size: 14px; }
+.ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 8px; }
+.redo { position: absolute; right: 16px; top: 16px; z-index: 3; font: 600 11px var(--f-head); letter-spacing: .2em; text-transform: uppercase; color: var(--muted); background: rgba(0,0,0,.5); border: 1px solid var(--line); padding: 8px 12px; cursor: pointer; }
+.hero.pre .wrap > * { opacity: 0; }
+.hero.reveal .wrap > * { animation: rise .9s cubic-bezier(.2,.7,.2,1) both; } .hero.reveal .wrap > :nth-child(2) { animation-delay: .1s } .hero.reveal .wrap > :nth-child(3) { animation-delay: .2s } .hero.reveal .wrap > :nth-child(4) { animation-delay: .3s }
+@keyframes rise { from { transform: translateY(20px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero.reveal .wrap > * { animation: none; } }
+section.block { padding-block: clamp(70px, 10vw, 120px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px 40px; margin-bottom: 30px; }
+.head h2 { font-size: clamp(40px, 6.5vw, 76px); line-height: .95; margin-top: 10px; }
+.head p { max-width: 46ch; margin: 0; color: var(--muted); }
+/* Player */
+.player { display: grid; grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); gap: 0; border: 1px solid var(--line); background: var(--bg-2); }
+@media (max-width: 860px) { .player { grid-template-columns: minmax(0,1fr); } }
+.player .art { position: relative; aspect-ratio: 1; background: #000; }
+.player .art canvas { width: 100%; height: 100%; display: block; }
+.player .side { padding: clamp(20px, 3vw, 34px); display: grid; gap: 18px; align-content: start; }
+.now b { font: 600 clamp(24px, 3vw, 34px)/1.05 var(--f-head); text-transform: uppercase; letter-spacing: .04em; display: block; }
+.now span { color: var(--muted); font-size: 14px; }
+.viz { width: 100%; height: 90px; display: block; background: linear-gradient(180deg, rgba(200,36,28,.06), transparent); }
+.controls { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+@media (max-width: 560px) { .controls .bar { flex-basis: 100%; order: 5; } .controls .time { margin-left: auto; } }
+.play { width: 64px; height: 64px; flex: none; border-radius: 50%; border: 0; background: var(--red); color: #fff; display: grid; place-items: center; cursor: pointer; box-shadow: 0 0 0 0 rgba(255,59,42,.6); transition: transform .15s, background .15s; }
+.play:hover { background: var(--red-2); transform: scale(1.05); }
+.play.on { animation: pulse 1.2s infinite; } @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255,59,42,.55); } 100% { box-shadow: 0 0 0 18px rgba(255,59,42,0); } }
+.play svg { width: 26px; height: 26px; }
+.skip { background: transparent; border: 1px solid var(--line); color: var(--soft); width: 44px; height: 44px; display: grid; place-items: center; cursor: pointer; }
+.skip:hover { color: #fff; border-color: var(--soft); }
+.bar { flex: 1; height: 6px; background: rgba(255,255,255,.08); position: relative; cursor: pointer; }
+.bar i { position: absolute; inset: 0 auto 0 0; width: 0; background: linear-gradient(90deg, var(--red), var(--ember)); }
+.time { font: 500 13px var(--f-head); color: var(--muted); letter-spacing: .1em; min-width: 82px; text-align: right; }
+ol.tracks { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+ol.tracks li { display: grid; grid-template-columns: 34px minmax(0,1fr) auto; gap: 12px; align-items: center; padding: 13px 4px; border-bottom: 1px solid var(--line); cursor: pointer; transition: background .15s; }
+ol.tracks li:hover { background: rgba(255,255,255,.03); }
+ol.tracks li.cur { color: var(--red-2); }
+ol.tracks .n { font: 600 14px var(--f-head); color: var(--muted); }
+ol.tracks .t { font: 600 17px var(--f-head); text-transform: uppercase; letter-spacing: .05em; }
+ol.tracks .d { font: 500 13px var(--f-head); color: var(--muted); }
+.stream { display: flex; flex-wrap: wrap; gap: 8px; }
+.stream a { font: 600 12px var(--f-head); letter-spacing: .14em; text-transform: uppercase; text-decoration: none; padding: 9px 13px; border: 1px solid var(--line); color: var(--soft); }
+.stream a:hover { border-color: var(--red-2); color: #fff; }
+.note { font-size: 13px; color: var(--muted); }
+/* Tour */
+.tour { border-top: 1px solid var(--line); }
+.tour .row { display: grid; grid-template-columns: 110px minmax(0,1fr) minmax(0,1fr) auto; gap: 16px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--line); }
+@media (max-width: 760px) { .tour .row { grid-template-columns: 76px minmax(0,1fr) auto; } .tour .venue { grid-column: 2; grid-row: 2; } }
+.tour .date { font: 600 15px/1.1 var(--f-head); text-transform: uppercase; letter-spacing: .08em; } .tour .date b { display: block; font-size: 30px; color: var(--red-2); }
+.tour .city { font: 600 20px var(--f-head); text-transform: uppercase; letter-spacing: .05em; } .tour .venue { color: var(--muted); }
+.tour .btn { padding: 12px 16px; font-size: 12px; } .tour .sold { font: 600 12px var(--f-head); letter-spacing: .2em; color: var(--muted); border: 1px solid var(--line); padding: 11px 14px; }
+/* Gallery */
+.gallery { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); grid-auto-rows: 220px; gap: 10px; }
+@media (max-width: 860px) { .gallery { grid-template-columns: repeat(2, minmax(0,1fr)); grid-auto-rows: 160px; } }
+.gallery figure { margin: 0; position: relative; overflow: hidden; background: #000; }
+.gallery figure.big { grid-column: span 2; grid-row: span 2; } .gallery figure.wide { grid-column: span 2; }
+.gallery canvas { width: 100%; height: 100%; display: block; transition: transform .6s; } .gallery figure:hover canvas { transform: scale(1.04); }
+.gallery figcaption { position: absolute; left: 10px; bottom: 10px; font: 600 11px var(--f-head); letter-spacing: .2em; text-transform: uppercase; background: rgba(0,0,0,.6); padding: 5px 9px; }
+/* Bio */
+.bio { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: clamp(30px, 6vw, 80px); align-items: start; }
+@media (max-width: 860px) { .bio { grid-template-columns: minmax(0,1fr); } }
+.bio p { color: var(--soft); margin: 0 0 14px; } .bio p:first-of-type::first-letter { font: 400 64px/.8 var(--f-logo); float: left; margin: 6px 10px 0 0; color: var(--red-2); }
+.members { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
+.members div { border: 1px solid var(--line); padding: 16px; background: var(--bg-2); } .members b { display: block; font: 600 18px var(--f-head); text-transform: uppercase; letter-spacing: .05em; } .members span { color: var(--muted); font-size: 14px; }
+.quote { margin-top: 18px; border-left: 3px solid var(--red); padding: 4px 0 4px 16px; font: 500 18px/1.4 var(--f-head); letter-spacing: .02em; color: var(--bone); }
+/* Merch */
+.merch { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+@media (max-width: 860px) { .merch { grid-template-columns: minmax(0,1fr); } }
+.item { border: 1px solid var(--line); background: var(--bg-2); display: grid; }
+.item .pic { aspect-ratio: 4/3; display: grid; place-items: center; background: radial-gradient(circle at 50% 40%, #1d1716, #0b0909); }
+.item .pic svg { width: 62%; height: auto; }
+.item .t { padding: 16px; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.item b { font: 600 17px var(--f-head); text-transform: uppercase; letter-spacing: .05em; } .item span { color: var(--red-2); font: 600 16px var(--f-head); }
+/* EPK + Newsletter */
+.epk { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 16px; }
+@media (max-width: 860px) { .epk { grid-template-columns: minmax(0,1fr); } }
+.panel { border: 1px solid var(--line); background: var(--bg-2); padding: clamp(20px, 3vw, 32px); display: grid; gap: 14px; align-content: start; }
+.panel h3 { font-size: 28px; } .panel p { margin: 0; color: var(--soft); }
+.panel ul { margin: 0; padding-left: 18px; color: var(--soft); display: grid; gap: 4px; }
+form.nl { display: flex; gap: 8px; flex-wrap: wrap; } form.nl input { flex: 1 1 200px; min-width: 0; font: 15px var(--f-body); padding: 14px; background: #000; border: 1px solid var(--line); color: var(--fg); }
+.ok { color: var(--ember); font-weight: 600; }
+footer { padding-block: 40px 100px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px 30px; }
+.like { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: #25d366; color: #fff; font: 700 14px system-ui, sans-serif; padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.4); display: inline-flex; gap: 8px; align-items: center; }
+.like svg { width: 18px; height: 18px; }
+.skipi { position: fixed; left: 50%; bottom: calc(22px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); z-index: 61; font: 600 11px var(--f-head); letter-spacing: .2em; text-transform: uppercase; color: var(--soft); background: rgba(0,0,0,.5); border: 1px solid var(--line); padding: 8px 14px; cursor: pointer; }
+html.js .bf { opacity: 0; transform: translateY(18px); transition: opacity .8s, transform .8s cubic-bezier(.2,.7,.2,1); } html.js .bf.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { html.js .bf { opacity: 1; transform: none; transition: none; } }
+</style>
+<script>document.documentElement.classList.add("js")</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2-.2-.2-.4-.3z"/></symbol>
+  <symbol id="pl" viewBox="0 0 24 24"><path fill="currentColor" d="M7 4l14 8-14 8z"/></symbol>
+  <symbol id="pa" viewBox="0 0 24 24"><path fill="currentColor" d="M6 4h4v16H6zM14 4h4v16h-4z"/></symbol>
+</svg>
+<div class="demo"><b>Demo website</b> for a fictional band · built by <a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">Jota Labs</a> · want one for your band? <a href="#contact">get in touch ↓</a></div>
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top">Vrakhold</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links">MENU</button>
+    <nav class="links" id="links"><a href="#music">Music</a><a href="#tour">Tour</a><a href="#band">Band</a><a href="#merch">Merch</a><a href="#press">Press</a><a class="btn" href="#tour">Tickets</a></nav>
+  </div>
+</header>
+<section class="hero pre" id="top">
+  <canvas id="embers" aria-hidden="true"></canvas>
+  <button class="redo" id="redo" type="button">↻ Intro</button>
+  <div class="wrap">
+    <h1>Vrakhold</h1>
+    <div class="tag">Doom · Thrash · Fire</div>
+    <div class="release"><canvas id="cover0" width="184" height="184" aria-hidden="true"></canvas><div><span>New album · out now</span><b>Ashen Crown</b><span>8 tracks of slow-burning riffs and fast-burning cities.</span></div></div>
+    <div class="ctas"><a class="btn" href="#music" id="heroPlay">▶ Listen now</a><a class="btn ghost" href="#tour">Tour dates</a></div>
+  </div>
+</section>
+
+<section class="block" id="music">
+  <div class="wrap">
+    <div class="head bf"><div><div class="kicker">Ashen Crown · 2026</div><h2>Turn it up</h2></div><p>Every song plays right here, with a live visualizer. On a real site this player streams your own masters or pulls them from Bandcamp, Spotify or SoundCloud.</p></div>
+    <div class="player bf">
+      <div class="art"><canvas id="cover" width="900" height="900" aria-label="Album cover: Ashen Crown"></canvas></div>
+      <div class="side">
+        <div class="now"><span id="nowNo">Track 1</span><b id="nowT">Ashen Crown</b></div>
+        <canvas class="viz" id="viz" aria-hidden="true"></canvas>
+        <div class="controls">
+          <button class="skip" id="prev" type="button" aria-label="Previous track">⏮</button>
+          <button class="play" id="play" type="button" aria-label="Play"><svg><use href="#pl"/></svg></button>
+          <button class="skip" id="next" type="button" aria-label="Next track">⏭</button>
+          <div class="bar" id="bar"><i id="prog"></i></div><span class="time" id="time">0:00 / 0:32</span>
+        </div>
+        <ol class="tracks" id="tracks"></ol>
+        <div class="stream"><a href="#music">Bandcamp</a><a href="#music">Spotify</a><a href="#music">Apple Music</a><a href="#music">YouTube</a></div>
+        <p class="note">Demo audio is synthesized live in your browser, so every riff here is generated, not recorded.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="tour" style="padding-top:0">
+  <div class="wrap">
+    <div class="head bf"><div><div class="kicker">On the road</div><h2>Ashen Crown tour</h2></div><p>Dates, venues and ticket links in one list. Sold-out shows mark themselves, past shows disappear on their own.</p></div>
+    <div class="tour bf" id="tourList"></div>
+  </div>
+</section>
+
+<section class="block" id="gallery" style="padding-top:0">
+  <div class="wrap">
+    <div class="head bf"><div><div class="kicker">Gallery</div><h2>Smoke &amp; light</h2></div><p>Live shots, artwork and posters. Here they are generated artwork; on your site, your photographer's best.</p></div>
+    <div class="gallery bf">
+      <figure class="big"><canvas data-art="stage" width="800" height="800"></canvas><figcaption>Live · Main stage</figcaption></figure>
+      <figure><canvas data-art="crown" width="500" height="440"></canvas><figcaption>Artwork</figcaption></figure>
+      <figure><canvas data-art="smoke" width="500" height="440"></canvas><figcaption>Rehearsal</figcaption></figure>
+      <figure class="wide"><canvas data-art="crowd" width="1000" height="440"></canvas><figcaption>The pit</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="band" style="padding-top:0">
+  <div class="wrap bio">
+    <div class="bf">
+      <div class="kicker">The band</div>
+      <h2 style="font-size:clamp(40px,6vw,70px);line-height:.95;margin:10px 0 22px">Born in a basement, built for big rooms</h2>
+      <p>Vrakhold started as four friends, one borrowed amp and a rehearsal room with no windows. Three records later the amp is theirs, the rooms got bigger, and the songs got slower and heavier where it counts.</p>
+      <p>Ashen Crown is their most direct album yet: doom-paced verses that break into thrash, and choruses written to be shouted back.</p>
+      <div class="quote">“Heavy, honest and loud enough to rattle the bar glasses two streets away.”</div>
+      <p class="note" style="margin-top:8px">Sample text for a fictional band.</p>
+    </div>
+    <div class="members bf">
+      <div><b>Edda Rhan</b><span>Vocals</span></div><div><b>Joss Kalter</b><span>Guitar</span></div>
+      <div><b>Mira Voss</b><span>Bass</span></div><div><b>Teo Brandt</b><span>Drums</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="merch" style="padding-top:0">
+  <div class="wrap">
+    <div class="head bf"><div><div class="kicker">Merch</div><h2>Wear the fire</h2></div><p>Shirts, vinyl and patches with a shop link, so fans buy straight from you.</p></div>
+    <div class="merch">
+      <div class="item bf"><div class="pic"><svg viewBox="0 0 100 100"><path d="M30 14l-20 12 8 16 8-4v48h48V38l8 4 8-16-20-12c-4 6-10 9-20 9s-16-3-20-9z" fill="#111" stroke="#3a2f2c" stroke-width="1.5"/><text x="50" y="58" text-anchor="middle" font-family="Metal Mania" font-size="13" fill="#e9dfd2">Vrakhold</text><path d="M40 64l10 10 10-10" stroke="#c8241c" stroke-width="2" fill="none"/></svg></div><div class="t"><b>Ashen Crown tee</b><span>€25</span></div></div>
+      <div class="item bf"><div class="pic"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="#0a0a0a" stroke="#2a2422"/><circle cx="50" cy="50" r="30" fill="none" stroke="#1d1817" stroke-width="6"/><circle cx="50" cy="50" r="14" fill="#c8241c"/><circle cx="50" cy="50" r="2.5" fill="#000"/></svg></div><div class="t"><b>Vinyl LP, red</b><span>€32</span></div></div>
+      <div class="item bf"><div class="pic"><svg viewBox="0 0 100 100"><path d="M20 30h60l-6 40H26z" fill="#151111" stroke="#c8241c" stroke-width="2"/><text x="50" y="55" text-anchor="middle" font-family="Metal Mania" font-size="14" fill="#e9dfd2">V</text></svg></div><div class="t"><b>Woven patch</b><span>€6</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="press" style="padding-top:0">
+  <div class="wrap epk">
+    <div class="panel bf"><div class="kicker">Press &amp; booking</div><h3>Electronic press kit</h3><p>Everything promoters and press ask for, in one place:</p>
+      <ul><li>Short and long bio</li><li>Hi-res press photos and logos</li><li>Stage plot and tech rider</li><li>Booking contact and past venues</li></ul>
+      <div class="ctas" style="justify-content:flex-start"><a class="btn" href="#press">Download EPK</a><a class="btn ghost" href="#contact">Booking</a></div></div>
+    <div class="panel bf" id="contact"><div class="kicker">Newsletter</div><h3>Never miss a show</h3><p>New dates, pre-sales and releases straight to your inbox.</p>
+      <form class="nl" id="nl"><input type="email" required placeholder="your@email.com" aria-label="Email"><button class="btn" type="submit">Sign up</button></form><p class="ok" id="nlok" hidden>You're on the list. (Demo, nothing was sent.)</p></div>
+  </div>
+</section>
+<footer><div class="wrap"><span>Vrakhold is a fictional band. This page is a website demo by Jota Labs.</span><span><a href="https://5hitcake.github.io/JanOberle/" target="_blank" rel="noopener">Jota Labs · websites for bands &amp; artists</a></span></div></footer>
+<a class="like" href="https://wa.me/5491130331893?text=Hi%20Jan%2C%20I%20saw%20your%20band%20website%20demo%20and%20I%27d%20like%20one%20for%20my%20band." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Want this for your band?</a>
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mb = $("#menuBtn"), links = $("#links");
+  mb.addEventListener("click", () => { const o = links.classList.toggle("open"); mb.setAttribute("aria-expanded", String(o)); });
+  links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => links.classList.remove("open")));
+  const rnd = (a, b) => a + Math.random() * (b - a);
+
+  /* ---------- Generative Artworks ---------- */
+  function crownArt(cv, seed) { const x = cv.getContext("2d"), W = cv.width, H = cv.height;
+    const g = x.createRadialGradient(W / 2, H * .62, 10, W / 2, H * .6, W * .7); g.addColorStop(0, "#5a120c"); g.addColorStop(.5, "#1a0705"); g.addColorStop(1, "#050303"); x.fillStyle = g; x.fillRect(0, 0, W, H);
+    for (let i = 0; i < 900; i++) { x.fillStyle = `rgba(${200 + rnd(0, 55)},${80 + rnd(0, 60)},20,${rnd(.05, .5)})`; const r = rnd(.5, 2.5) * W / 900; x.beginPath(); x.arc(rnd(0, W), rnd(H * .2, H), r, 0, 7); x.fill(); }
+    x.save(); x.translate(W / 2, H * .5); const s = W / 900; x.scale(s, s);
+    x.fillStyle = "#0c0908"; x.strokeStyle = "#e9dfd2"; x.lineWidth = 6; x.beginPath(); x.moveTo(-230, 120); x.lineTo(-250, -90); x.lineTo(-150, 10); x.lineTo(-80, -160); x.lineTo(0, 0); x.lineTo(80, -160); x.lineTo(150, 10); x.lineTo(250, -90); x.lineTo(230, 120); x.closePath(); x.fill(); x.stroke();
+    x.beginPath(); x.moveTo(-230, 120); x.lineTo(230, 120); x.lineTo(222, 175); x.lineTo(-222, 175); x.closePath(); x.fill(); x.stroke();
+    x.fillStyle = "#c8241c"; [[-80, -160], [80, -160], [0, 0]].forEach(([a, b]) => { x.beginPath(); x.arc(a, b, 16, 0, 7); x.fill(); });
+    x.globalCompositeOperation = "destination-out"; for (let i = 0; i < 26; i++) { x.beginPath(); x.moveTo(rnd(-240, 240), rnd(-160, 170)); x.lineTo(rnd(-240, 240), rnd(-160, 170)); x.lineWidth = rnd(1, 4); x.stroke(); } x.restore(); x.globalCompositeOperation = "source-over";
+    x.fillStyle = "#e9dfd2"; x.textAlign = "center"; x.font = `400 ${W * .11}px "Metal Mania", fantasy`; x.fillText("VRAKHOLD", W / 2, H * .17);
+    x.font = `600 ${W * .045}px Oswald, sans-serif`; x.fillStyle = "#c9bcb4"; x.fillText("A S H E N   C R O W N", W / 2, H * .92); }
+  function stageArt(cv) { const x = cv.getContext("2d"), W = cv.width, H = cv.height; x.fillStyle = "#040303"; x.fillRect(0, 0, W, H);
+    x.globalCompositeOperation = "lighter"; [["255,59,42", .2], ["255,138,42", .5], ["255,59,42", .8]].forEach(([c, px]) => { const g = x.createLinearGradient(W * px, 0, W / 2, H * .9); g.addColorStop(0, `rgba(${c},.55)`); g.addColorStop(1, `rgba(${c},0)`); x.fillStyle = g; x.beginPath(); x.moveTo(W * px - 18, 0); x.lineTo(W * px + 18, 0); x.lineTo(W * .5 + W * .3 * (px - .5) + 140, H); x.lineTo(W * .5 + W * .3 * (px - .5) - 140, H); x.fill(); });
+    x.globalCompositeOperation = "source-over"; for (let i = 0; i < 400; i++) { x.fillStyle = `rgba(255,220,200,${rnd(0, .08)})`; x.beginPath(); x.arc(rnd(0, W), rnd(0, H), rnd(10, 60), 0, 7); x.fill(); }
+    x.fillStyle = "#000"; const fig = (cx, sc, guitar) => { x.save(); x.translate(cx, H * .62); x.scale(sc, sc); x.beginPath(); x.arc(0, -150, 26, 0, 7); x.fill(); x.beginPath(); x.moveTo(-40, -120); x.lineTo(40, -120); x.lineTo(55, 40); x.lineTo(30, 200); x.lineTo(8, 200); x.lineTo(0, 60); x.lineTo(-8, 200); x.lineTo(-30, 200); x.lineTo(-55, 40); x.closePath(); x.fill();
+      x.beginPath(); for (let k = 0; k < 7; k++) { x.moveTo(-20 + k * 6, -170); x.quadraticCurveTo(-60 + k * 14, -100, -50 + k * 15, -40); } x.lineWidth = 6; x.strokeStyle = "#000"; x.stroke();
+      if (guitar) { x.save(); x.rotate(-.5); x.fillRect(-130, -20, 200, 12); x.beginPath(); x.ellipse(50, -14, 52, 34, 0, 0, 7); x.fill(); x.restore(); } x.restore(); };
+    fig(W * .5, 1.15, false); fig(W * .22, .9, true); fig(W * .78, .9, true);
+    x.fillRect(0, H * .86, W, H * .14); x.fillStyle = "#0a0707"; for (let i = 0; i < 30; i++) { x.beginPath(); x.arc(rnd(0, W), H * .9 + rnd(0, 40), rnd(18, 34), 0, 7); x.fill(); } }
+  function smokeArt(cv) { const x = cv.getContext("2d"), W = cv.width, H = cv.height; x.fillStyle = "#080606"; x.fillRect(0, 0, W, H);
+    for (let i = 0; i < 260; i++) { x.fillStyle = `rgba(${rnd(120, 200)},${rnd(110, 150)},${rnd(110, 140)},${rnd(.01, .05)})`; x.beginPath(); x.arc(rnd(0, W), rnd(0, H), rnd(20, 120), 0, 7); x.fill(); }
+    x.strokeStyle = "rgba(233,223,210,.85)"; x.lineWidth = 3; for (let i = 0; i < 6; i++) { x.beginPath(); x.moveTo(W * .15, H * (.4 + i * .04)); x.lineTo(W * .85, H * (.38 + i * .045)); x.stroke(); }
+    x.fillStyle = "#c8241c"; x.beginPath(); x.ellipse(W * .5, H * .52, W * .32, H * .17, -.05, 0, 7); x.fill(); x.fillStyle = "#080606"; x.beginPath(); x.ellipse(W * .5, H * .52, W * .06, W * .06, 0, 0, 7); x.fill(); }
+  function crowdArt(cv) { const x = cv.getContext("2d"), W = cv.width, H = cv.height; const g = x.createLinearGradient(0, 0, 0, H); g.addColorStop(0, "#3a0a07"); g.addColorStop(1, "#060404"); x.fillStyle = g; x.fillRect(0, 0, W, H);
+    x.globalCompositeOperation = "lighter"; for (let i = 0; i < 6; i++) { const cx = rnd(0, W); const gg = x.createRadialGradient(cx, 0, 0, cx, 0, H * .9); gg.addColorStop(0, "rgba(255,120,40,.35)"); gg.addColorStop(1, "rgba(255,120,40,0)"); x.fillStyle = gg; x.fillRect(0, 0, W, H); }
+    x.globalCompositeOperation = "source-over"; x.fillStyle = "#000"; for (let i = 0; i < 70; i++) { const cx = rnd(-20, W + 20), cy = H * rnd(.62, .95), r = rnd(16, 30); x.beginPath(); x.arc(cx, cy, r, 0, 7); x.fill(); x.fillRect(cx - r * 1.3, cy + r * .6, r * 2.6, H);
+      if (Math.random() < .35) { x.save(); x.translate(cx + r * .8, cy - r); x.rotate(rnd(-.4, .4)); x.fillRect(-5, -r * 3, 10, r * 3); x.beginPath(); x.arc(0, -r * 3.2, 9, 0, 7); x.fill(); x.fillRect(-12, -r * 3.9, 6, 16); x.fillRect(6, -r * 3.9, 6, 16); x.restore(); } } }
+  document.fonts.ready.then(() => { crownArt($("#cover")); crownArt($("#cover0"));
+    document.querySelectorAll("[data-art]").forEach((c) => ({ stage: stageArt, crown: crownArt, smoke: smokeArt, crowd: crowdArt })[c.dataset.art](c)); });
+
+  /* ---------- Embers in the hero ---------- */
+  const hero = $("#top"), ec = $("#embers"), ex = ec.getContext("2d"); let em = [];
+  function embers() { const d = Math.min(2, devicePixelRatio || 1), w = hero.clientWidth, h = hero.clientHeight;
+    if (ec.width !== Math.round(w * d)) { ec.width = Math.round(w * d); ec.height = Math.round(h * d); em = Array.from({ length: Math.round(w * h / 9000) }, () => [rnd(0, w), rnd(0, h), rnd(.6, 2.4), rnd(.3, 1.1), rnd(0, 6)]); }
+    ex.setTransform(d, 0, 0, d, 0, 0); ex.clearRect(0, 0, w, h);
+    for (const p of em) { p[1] -= p[3]; p[4] += .03; if (p[1] < -5) { p[1] = h + 5; p[0] = rnd(0, w); } const a = .4 + .4 * Math.sin(p[4]); ex.fillStyle = `rgba(255,${120 + 60 * a | 0},40,${a})`; ex.beginPath(); ex.arc(p[0] + Math.sin(p[4]) * 8, p[1], p[2], 0, 7); ex.fill(); }
+    if (!reduce) requestAnimationFrame(embers); }
+  requestAnimationFrame(embers);
+
+  /* ---------- Tour (dates relative to today, so the demo never looks stale) ---------- */
+  const T = [[12, "Berlin", "Columbia Theater", 0], [14, "Hamburg", "Markthalle", 1], [17, "Zürich", "Dynamo", 0], [20, "London", "The Underworld", 0], [23, "Glasgow", "Cathouse", 0], [28, "Buenos Aires", "Uniclub", 0]];
+  const M = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+  $("#tourList").innerHTML = T.map(([o, c, v, s]) => { const d = new Date(); d.setDate(d.getDate() + o * 3); return `<div class="row"><div class="date"><b>${String(d.getDate()).padStart(2, "0")}</b>${M[d.getMonth()]}</div><div class="city">${c}</div><div class="venue">${v}</div>${s ? '<span class="sold">Sold out</span>' : '<a class="btn" href="#tour">Tickets</a>'}</div>`; }).join("");
+
+  /* ---------- Newsletter (demo) ---------- */
+  $("#nl").addEventListener("submit", (e) => { e.preventDefault(); $("#nl").hidden = true; $("#nlok").hidden = false; });
+
+  /* ---------- Blur fade ---------- */
+  const io = "IntersectionObserver" in window ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 }) : null;
+  document.querySelectorAll(".bf").forEach((n) => (io ? io.observe(n) : n.classList.add("in")));
+
+  /* ---------- Synth metal (Web Audio): Drums, verzerrte Gitarre, Bass, Patterns pro Track ---------- */
+  const TRACKS = [
+    { t: "Ashen Crown", bpm: 96, riff: "0-0-3-0 5-3-0-0 0-0-3-0 7-6-5-3", feel: "doom", len: 32 },
+    { t: "Iron in the Rain", bpm: 168, riff: "0000 0003 0000 0506", feel: "thrash", len: 30 },
+    { t: "Black Salt", bpm: 120, riff: "0-0-1-0 3-1-0-0 0-0-1-0 5-4-3-1", feel: "groove", len: 30 },
+    { t: "Pyre", bpm: 190, riff: "0000 1000 0000 3010", feel: "blast", len: 28 } ];
+  let ac = null, master, an, dist, cur = 0, playing = false, startT = 0, schedT = 0, step = 0, timer = null, raf = 0;
+  const N = (s) => 82.41 * Math.pow(2, s / 12); /* E2 */
+  function curve(k) { const n = 2048, c = new Float32Array(n); for (let i = 0; i < n; i++) { const x = i * 2 / n - 1; c[i] = (1 + k) * x / (1 + k * Math.abs(x)); } return c; }
+  function init() { ac = new (window.AudioContext || window.webkitAudioContext)(); master = ac.createGain(); master.gain.value = .55; an = ac.createAnalyser(); an.fftSize = 1024;
+    const comp = ac.createDynamicsCompressor(); comp.threshold.value = -16; comp.ratio.value = 6; master.connect(comp); comp.connect(an); an.connect(ac.destination);
+    dist = ac.createWaveShaper(); dist.curve = curve(220); dist.oversample = "4x"; const pre = ac.createBiquadFilter(); pre.type = "highpass"; pre.frequency.value = 90;
+    const cab = ac.createBiquadFilter(); cab.type = "lowpass"; cab.frequency.value = 3200; const mid = ac.createBiquadFilter(); mid.type = "peaking"; mid.frequency.value = 700; mid.gain.value = -5;
+    const gg = ac.createGain(); gg.gain.value = .22; pre.connect(dist); dist.connect(mid); mid.connect(cab); cab.connect(gg); gg.connect(master); dist._in = pre; }
+  const noiseBuf = () => { const b = ac.createBuffer(1, ac.sampleRate * .5, ac.sampleRate), d = b.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; return b; };
+  let NB = null;
+  function kick(t) { const o = ac.createOscillator(), g = ac.createGain(); o.frequency.setValueAtTime(150, t); o.frequency.exponentialRampToValueAtTime(42, t + .12); g.gain.setValueAtTime(1, t); g.gain.exponentialRampToValueAtTime(.001, t + .25); o.connect(g); g.connect(master); o.start(t); o.stop(t + .3); }
+  function snare(t) { const s = ac.createBufferSource(); s.buffer = NB; const f = ac.createBiquadFilter(); f.type = "bandpass"; f.frequency.value = 1800; const g = ac.createGain(); g.gain.setValueAtTime(.7, t); g.gain.exponentialRampToValueAtTime(.001, t + .18); s.connect(f); f.connect(g); g.connect(master); s.start(t); s.stop(t + .2);
+    const o = ac.createOscillator(), og = ac.createGain(); o.frequency.value = 190; og.gain.setValueAtTime(.4, t); og.gain.exponentialRampToValueAtTime(.001, t + .1); o.connect(og); og.connect(master); o.start(t); o.stop(t + .12); }
+  function hat(t, open) { const s = ac.createBufferSource(); s.buffer = NB; const f = ac.createBiquadFilter(); f.type = "highpass"; f.frequency.value = 7500; const g = ac.createGain(); g.gain.setValueAtTime(.18, t); g.gain.exponentialRampToValueAtTime(.001, t + (open ? .25 : .05)); s.connect(f); f.connect(g); g.connect(master); s.start(t); s.stop(t + .3); }
+  function chord(t, semi, dur, mute) { [0, 7, 12].forEach((iv, k) => { [-.06, .06].forEach((dt) => { const o = ac.createOscillator(), g = ac.createGain(); o.type = "sawtooth"; o.frequency.value = N(semi + iv) * (1 + dt / 100); g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.32 / (k + 1), t + .005);
+      g.gain.setTargetAtTime(mute ? 0 : .22 / (k + 1), t + .02, mute ? .03 : dur * .6); o.connect(g); g.connect(dist._in); o.start(t); o.stop(t + dur + .05); }); }); }
+  function bass(t, semi, dur) { const o = ac.createOscillator(), g = ac.createGain(), f = ac.createBiquadFilter(); o.type = "square"; o.frequency.value = N(semi) / 2; f.type = "lowpass"; f.frequency.value = 400; g.gain.setValueAtTime(.35, t); g.gain.setTargetAtTime(0, t + dur * .8, .03); o.connect(f); f.connect(g); g.connect(master); o.start(t); o.stop(t + dur + .1); }
+  function parse(r) { return r.replace(/ /g, "").split("").filter((c) => c !== "-" || true).map((c) => (c === "-" ? null : parseInt(c, 16))); }
+  function schedule() { const tr = TRACKS[cur], sp = 60 / tr.bpm / (tr.feel === "doom" || tr.feel === "groove" ? 2 : 4), pat = parse(tr.riff);
+    while (schedT < ac.currentTime + .15) { const i = step % pat.length, bar = step % 16, n = pat[i], t = schedT;
+      if (n !== null) { const nextNull = pat[(i + 1) % pat.length] === null; const mute = tr.feel === "thrash" || tr.feel === "blast" ? n === 0 : !nextNull && n === 0; chord(t, n, nextNull ? sp * 2 : sp, mute); bass(t, n, sp); }
+      if (tr.feel === "blast") { kick(t); if (step % 2) snare(t); hat(t); }
+      else if (tr.feel === "thrash") { if (step % 4 === 0 || step % 4 === 2) kick(t); if (step % 8 === 4) snare(t); if (step % 2 === 0) hat(t); }
+      else { if (bar === 0 || bar === 6 || bar === 10) kick(t); if (bar === 4 || bar === 12) snare(t); if (step % 2 === 0) hat(t, bar === 14); }
+      schedT += sp; step++; }
+    if (ac.currentTime - startT >= tr.len) next(); }
+  const fmt = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+  function ui() { const tr = TRACKS[cur]; $("#nowNo").textContent = `Track ${cur + 1}`; $("#nowT").textContent = tr.t;
+    document.querySelectorAll("#tracks li").forEach((li, i) => li.classList.toggle("cur", i === cur));
+    $("#play").innerHTML = `<svg><use href="#${playing ? "pa" : "pl"}"/></svg>`; $("#play").classList.toggle("on", playing); $("#play").setAttribute("aria-label", playing ? "Pause" : "Play"); }
+  function start(i) { if (!ac) { init(); NB = noiseBuf(); } if (ac.state === "suspended") ac.resume(); cur = i ?? cur; playing = true; startT = ac.currentTime + .05; schedT = startT; step = 0; clearInterval(timer); timer = setInterval(schedule, 25); ui(); cancelAnimationFrame(raf); draw(); }
+  function stop() { playing = false; clearInterval(timer); ui(); }
+  function next() { start((cur + 1) % TRACKS.length); } function prev() { start((cur + TRACKS.length - 1) % TRACKS.length); }
+  $("#tracks").innerHTML = TRACKS.map((t, i) => `<li data-i="${i}"><span class="n">${String(i + 1).padStart(2, "0")}</span><span class="t">${t.t}</span><span class="d">${fmt(t.len)}</span></li>`).join("");
+  $("#tracks").querySelectorAll("li").forEach((li) => li.addEventListener("click", () => start(+li.dataset.i)));
+  $("#play").addEventListener("click", () => (playing ? stop() : start()));
+  $("#next").addEventListener("click", next); $("#prev").addEventListener("click", prev);
+  $("#heroPlay").addEventListener("click", () => { if (!playing) start(0); });
+  $("#bar").addEventListener("click", (e) => { if (!playing) start(); });
+  const viz = $("#viz"), vx = viz.getContext("2d");
+  function draw() { const d = Math.min(2, devicePixelRatio || 1), w = viz.clientWidth, h = viz.clientHeight; if (viz.width !== Math.round(w * d)) { viz.width = Math.round(w * d); viz.height = Math.round(h * d); } vx.setTransform(d, 0, 0, d, 0, 0); vx.clearRect(0, 0, w, h);
+    if (an) { const a = new Uint8Array(an.frequencyBinCount); an.getByteFrequencyData(a); const n = 64, bw = w / n; for (let i = 0; i < n; i++) { const v = a[Math.floor(i * a.length / n / 2)] / 255; const g = vx.createLinearGradient(0, h, 0, 0); g.addColorStop(0, "#c8241c"); g.addColorStop(1, "#ff8a2a"); vx.fillStyle = g; vx.fillRect(i * bw + 1, h - v * h, bw - 2, v * h); } }
+    if (playing && ac) { const el = Math.min(TRACKS[cur].len, ac.currentTime - startT); $("#prog").style.width = (el / TRACKS[cur].len) * 100 + "%"; $("#time").textContent = `${fmt(Math.max(0, el))} / ${fmt(TRACKS[cur].len)}`; }
+    raf = requestAnimationFrame(draw); }
+  ui(); draw();
+
+  /* ---------- Intro: Blitz spaltet die Nacht, Logo brennt ein ---------- */
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const tween = (ms, fn, tk) => new Promise((res) => { const t0 = performance.now(); const st = (n) => { if (tk.cancelled) return res(); const k = Math.min(1, (n - t0) / ms); fn(k); k < 1 ? requestAnimationFrame(st) : res(); }; requestAnimationFrame(st); });
+  const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); };
+  let token = { cancelled: true };
+  async function intro(tk) { const w = innerWidth, h = innerHeight, d = Math.min(2, devicePixelRatio || 1);
+    const c = document.createElement("canvas"); c.className = "fxl"; c.width = w * d; c.height = h * d; c.style.cssText = "position:fixed;inset:0;width:100vw;height:100vh;z-index:60;pointer-events:none"; document.body.append(c);
+    const x = c.getContext("2d"); x.scale(d, d); const F = Math.min(w * .22, 190);
+    const bolt = []; let px = w * .55, py = 0; while (py < h) { bolt.push([px, py]); px += rnd(-w * .08, w * .08); py += rnd(h * .04, h * .09); } bolt.push([px, h]);
+    const parts = []; let flash = 0, boltK = 0, burn = 0, glow = 0, fade = 1;
+    const draw = () => { x.clearRect(0, 0, w, h); x.globalAlpha = fade; x.fillStyle = "#050303"; x.fillRect(0, 0, w, h);
+      if (flash > 0) { x.fillStyle = `rgba(255,240,230,${flash})`; x.fillRect(0, 0, w, h); }
+      if (boltK > 0) { x.save(); x.strokeStyle = `rgba(255,220,200,${Math.max(0, 1 - burn * 1.4)})`; x.shadowColor = "#ff3b2a"; x.shadowBlur = 30; x.lineWidth = 4; x.beginPath(); const n = Math.ceil(bolt.length * boltK); bolt.slice(0, n).forEach(([a, b], i) => (i ? x.lineTo(a, b) : x.moveTo(a, b))); x.stroke(); x.restore(); }
+      if (burn > 0) { x.save(); x.textAlign = "center"; x.textBaseline = "middle"; x.font = `400 ${F}px "Metal Mania", fantasy`;
+        x.save(); x.beginPath(); x.rect(0, h * .45 + F * .6 - F * 1.3 * burn, w, F * 1.4); x.clip();
+        x.shadowColor = "#ff3b2a"; x.shadowBlur = 40 * glow + 10; x.fillStyle = `rgb(${233},${223 - 90 * (1 - glow)},${210 - 170 * (1 - glow)})`; x.fillText("Vrakhold", w / 2, h * .45); x.restore();
+        const ly = h * .45 + F * .6 - F * 1.3 * burn; if (burn < 1) { const g = x.createLinearGradient(0, ly - 8, 0, ly + 8); g.addColorStop(0, "rgba(255,138,42,0)"); g.addColorStop(.5, "rgba(255,180,80,.9)"); g.addColorStop(1, "rgba(255,138,42,0)"); x.fillStyle = g; x.fillRect(w * .1, ly - 8, w * .8, 16); }
+        x.font = `500 ${Math.min(w * .035, 18)}px Oswald, sans-serif`; x.fillStyle = `rgba(201,188,180,${glow})`; x.fillText("A S H E N   C R O W N", w / 2, h * .45 + F * .85); x.restore(); }
+      for (const p of parts) { x.fillStyle = `rgba(255,${140 + rnd(0, 80) | 0},40,${p.l})`; x.beginPath(); x.arc(p.x, p.y, p.r, 0, 7); x.fill(); }
+      x.globalAlpha = 1; };
+    let live = true; const lp = () => { if (!live || tk.cancelled) return; for (const p of parts) { p.x += p.vx; p.y += p.vy; p.vy -= .02; p.l -= .008; } if (burn > 0 && burn < 1) for (let i = 0; i < 6; i++) parts.push({ x: w * rnd(.15, .85), y: h * .45 + F * .6 - F * 1.3 * burn, vx: rnd(-.6, .6), vy: rnd(-2.5, -.5), r: rnd(1, 2.8), l: 1 }); draw(); requestAnimationFrame(lp); }; requestAnimationFrame(lp);
+    await sleep(450); await tween(160, (k) => { boltK = k; flash = .9 * k; }, tk); await tween(260, (k) => { flash = .9 * (1 - k); }, tk);
+    await sleep(120); await tween(160, (k) => { flash = .5 * (1 - k); }, tk);
+    await tween(1400, (k) => { burn = k; }, tk); await tween(500, (k) => { glow = k; }, tk);
+    await sleep(900); if (!tk.cancelled) reveal(); await tween(700, (k) => { fade = 1 - k; }, tk); live = false; c.remove(); }
+  async function play() { token.cancelled = true; document.querySelectorAll(".fxl, .skipi").forEach((n) => n.remove()); const tk = (token = { cancelled: false });
+    if (reduce) { reveal(); return; } scrollTo(0, 0); document.documentElement.style.overflow = "hidden"; hero.classList.add("pre"); hero.classList.remove("reveal");
+    const sk = document.createElement("button"); sk.className = "skipi"; sk.type = "button"; sk.textContent = "Skip intro"; sk.addEventListener("click", () => { tk.cancelled = true; document.querySelectorAll(".fxl, .skipi").forEach((n) => n.remove()); document.documentElement.style.overflow = ""; reveal(); }); document.body.append(sk);
+    await intro(tk); if (token === tk) { document.querySelectorAll(".fxl, .skipi").forEach((n) => n.remove()); document.documentElement.style.overflow = ""; if (tk.cancelled) reveal(); } }
+  $("#redo").addEventListener("click", play);
+  document.fonts.ready.then(play);
+})();
+</script>
+</body>
+</html>
