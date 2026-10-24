@@ -50,12 +50,24 @@ nav.links a.btn { color: #fff; padding: 11px 16px; font-size: 13px; }
 }
 .hero { position: relative; overflow: hidden; isolation: isolate; min-height: min(92vh, 860px); display: grid; place-items: center; text-align: center; border-bottom: 1px solid var(--line);
   background: radial-gradient(60% 50% at 50% 100%, rgba(200,36,28,.35), transparent 70%), radial-gradient(40% 40% at 50% 40%, rgba(255,138,42,.08), transparent 70%), var(--bg); }
+.hero::before { content: ""; position: absolute; inset: 0; z-index: 0; background: linear-gradient(180deg, rgba(7,6,6,.55), rgba(7,6,6,.35) 40%, rgba(7,6,6,.95)), url(img/band.webp) center 30%/cover no-repeat; opacity: .75; }
+.members figure { margin: 0; border: 1px solid var(--line); background: var(--bg-2); overflow: hidden; }
+.members img { width: 100%; height: auto; aspect-ratio: 4/5; object-fit: cover; display: block; filter: contrast(1.05) saturate(1.05); transition: transform .6s; } .members figure:hover img { transform: scale(1.04); }
+.members figcaption { padding: 12px 14px; } .members figcaption b { display: block; font: 600 18px var(--f-head); text-transform: uppercase; letter-spacing: .05em; } .members figcaption span { color: var(--muted); font-size: 14px; }
+.gallery img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s; } .gallery figure:hover img { transform: scale(1.04); }
+.item .pic { position: relative; overflow: hidden; } .item .pic img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s; } .item:hover .pic img { transform: scale(1.04); }
+.tee-print { position: absolute; left: 50%; top: 60%; transform: translate(-50%, -50%); text-align: center; pointer-events: none; }
+.tee-print b { display: block; font: 400 clamp(16px, 2.2vw, 22px)/1 var(--f-logo); color: #e9dfd2; text-shadow: 0 0 6px rgba(200,36,28,.5); opacity: .92; }
+.tee-print i { display: block; margin: 4px auto 0; width: 24px; height: 21px; border: 2px solid #c8241c; border-top: 0; transform: skewX(0); clip-path: polygon(0 0, 100% 0, 50% 100%); background: #c8241c; opacity: .85; }
+.vinyl-sleeve { position: absolute; left: 6%; top: 10%; width: 52%; aspect-ratio: 1; box-shadow: 12px 12px 24px rgba(0,0,0,.6); }
+.vinyl-sleeve canvas { width: 100%; height: 100%; display: block; }
 #embers { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
 .hero .wrap { position: relative; z-index: 1; padding-block: 80px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
 .hero h1 { font: 400 clamp(84px, 17vw, 210px)/.85 var(--f-logo); color: var(--bone); letter-spacing: .02em; text-transform: none; text-shadow: 0 0 30px rgba(200,36,28,.6), 0 4px 0 #000; }
 .hero .tag { font: 500 clamp(14px, 1.8vw, 18px) var(--f-head); letter-spacing: .5em; text-transform: uppercase; color: var(--soft); margin-left: .5em; }
 .release { margin-top: 18px; display: grid; grid-template-columns: auto minmax(0,1fr); gap: 18px; align-items: center; text-align: left; background: rgba(16,13,12,.75); border: 1px solid var(--line); padding: 14px 18px 14px 14px; max-width: 520px; }
 .release canvas { width: 92px; height: 92px; display: block; }
+.player .art { position: relative; }
 .release b { display: block; font: 600 20px var(--f-head); letter-spacing: .06em; text-transform: uppercase; }
 .release span { color: var(--muted); font-size: 14px; }
 .ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 8px; }
@@ -202,12 +214,12 @@ html.js .bf { opacity: 0; transform: translateY(18px); transition: opacity .8s, 
 
 <section class="block" id="gallery" style="padding-top:0">
   <div class="wrap">
-    <div class="head bf"><div><div class="kicker">Gallery</div><h2>Smoke &amp; light</h2></div><p>Live shots, artwork and posters. Here they are generated artwork; on your site, your photographer's best.</p></div>
+    <div class="head bf"><div><div class="kicker">Gallery</div><h2>Smoke &amp; light</h2></div><p>Live shots, artwork and posters. Here they are AI-generated demo images; on your site, your photographer's best.</p></div>
     <div class="gallery bf">
-      <figure class="big"><canvas data-art="stage" width="800" height="800"></canvas><figcaption>Live · Main stage</figcaption></figure>
-      <figure><canvas data-art="crown" width="500" height="440"></canvas><figcaption>Artwork</figcaption></figure>
-      <figure><canvas data-art="smoke" width="500" height="440"></canvas><figcaption>Rehearsal</figcaption></figure>
-      <figure class="wide"><canvas data-art="crowd" width="1000" height="440"></canvas><figcaption>The pit</figcaption></figure>
+      <figure class="big"><img src="img/stage.webp" alt="Main stage in red light, seen from the crowd" width="886" height="618" loading="lazy"><figcaption>Live · Main stage</figcaption></figure>
+      <figure><img src="img/hands.webp" alt="Close-up of a guitarist's hands on the fretboard" width="768" height="714" loading="lazy"><figcaption>Riffs</figcaption></figure>
+      <figure><img src="img/cover.webp" alt="Album artwork: a burning peak of ash" width="715" height="714" loading="lazy"><figcaption>Artwork</figcaption></figure>
+      <figure class="wide"><img src="img/crowd.webp" alt="A packed hall under red lights" width="1189" height="460" loading="lazy"><figcaption>The pit</figcaption></figure>
     </div>
   </div>
 </section>
@@ -223,8 +235,10 @@ html.js .bf { opacity: 0; transform: translateY(18px); transition: opacity .8s, 
       <p class="note" style="margin-top:8px">Sample text for a fictional band.</p>
     </div>
     <div class="members bf">
-      <div><b>Edda Rhan</b><span>Vocals</span></div><div><b>Joss Kalter</b><span>Guitar</span></div>
-      <div><b>Mira Voss</b><span>Bass</span></div><div><b>Teo Brandt</b><span>Drums</span></div>
+      <figure><img src="img/m1.webp" alt="Edda Rhan, vocals" width="665" height="823" loading="lazy"><figcaption><b>Edda Rhan</b><span>Vocals</span></figcaption></figure>
+      <figure><img src="img/m2.webp" alt="Joss Kalter, guitar" width="665" height="823" loading="lazy"><figcaption><b>Joss Kalter</b><span>Guitar</span></figcaption></figure>
+      <figure><img src="img/m3.webp" alt="Mira Voss, bass" width="665" height="823" loading="lazy"><figcaption><b>Mira Voss</b><span>Bass</span></figcaption></figure>
+      <figure><img src="img/m4.webp" alt="Teo Brandt, drums" width="665" height="823" loading="lazy"><figcaption><b>Teo Brandt</b><span>Drums</span></figcaption></figure>
     </div>
   </div>
 </section>
@@ -233,9 +247,9 @@ html.js .bf { opacity: 0; transform: translateY(18px); transition: opacity .8s, 
   <div class="wrap">
     <div class="head bf"><div><div class="kicker">Merch</div><h2>Wear the fire</h2></div><p>Shirts, vinyl and patches with a shop link, so fans buy straight from you.</p></div>
     <div class="merch">
-      <div class="item bf"><div class="pic"><svg viewBox="0 0 100 100"><path d="M30 14l-20 12 8 16 8-4v48h48V38l8 4 8-16-20-12c-4 6-10 9-20 9s-16-3-20-9z" fill="#111" stroke="#3a2f2c" stroke-width="1.5"/><text x="50" y="58" text-anchor="middle" font-family="Metal Mania" font-size="13" fill="#e9dfd2">Vrakhold</text><path d="M40 64l10 10 10-10" stroke="#c8241c" stroke-width="2" fill="none"/></svg></div><div class="t"><b>Ashen Crown tee</b><span>€25</span></div></div>
-      <div class="item bf"><div class="pic"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="#0a0a0a" stroke="#2a2422"/><circle cx="50" cy="50" r="30" fill="none" stroke="#1d1817" stroke-width="6"/><circle cx="50" cy="50" r="14" fill="#c8241c"/><circle cx="50" cy="50" r="2.5" fill="#000"/></svg></div><div class="t"><b>Vinyl LP, red</b><span>€32</span></div></div>
-      <div class="item bf"><div class="pic"><svg viewBox="0 0 100 100"><path d="M20 30h60l-6 40H26z" fill="#151111" stroke="#c8241c" stroke-width="2"/><text x="50" y="55" text-anchor="middle" font-family="Metal Mania" font-size="14" fill="#e9dfd2">V</text></svg></div><div class="t"><b>Woven patch</b><span>€6</span></div></div>
+      <div class="item bf"><div class="pic"><img src="img/tee.webp" alt="Black Vrakhold t-shirt on a hanger" width="768" height="714" loading="lazy"><div class="tee-print" aria-hidden="true"><b>Vrakhold</b><i></i></div></div><div class="t"><b>Ashen Crown tee</b><span>€25</span></div></div>
+      <div class="item bf"><div class="pic"><img src="img/vinyl.webp" alt="Red vinyl LP" width="768" height="714" loading="lazy"><div class="vinyl-sleeve"><canvas id="cover2" width="400" height="400" aria-hidden="true"></canvas></div></div><div class="t"><b>Vinyl LP, red</b><span>€32</span></div></div>
+      <div class="item bf"><div class="pic"><img src="img/patch.webp" alt="Embroidered woven patch" width="583" height="407" loading="lazy"></div><div class="t"><b>Woven patch</b><span>€6</span></div></div>
     </div>
   </div>
 </section>
@@ -261,16 +275,12 @@ html.js .bf { opacity: 0; transform: translateY(18px); transition: opacity .8s, 
   const rnd = (a, b) => a + Math.random() * (b - a);
 
   /* ---------- Generative Artworks ---------- */
-  function crownArt(cv, seed) { const x = cv.getContext("2d"), W = cv.width, H = cv.height;
-    const g = x.createRadialGradient(W / 2, H * .62, 10, W / 2, H * .6, W * .7); g.addColorStop(0, "#5a120c"); g.addColorStop(.5, "#1a0705"); g.addColorStop(1, "#050303"); x.fillStyle = g; x.fillRect(0, 0, W, H);
-    for (let i = 0; i < 900; i++) { x.fillStyle = `rgba(${200 + rnd(0, 55)},${80 + rnd(0, 60)},20,${rnd(.05, .5)})`; const r = rnd(.5, 2.5) * W / 900; x.beginPath(); x.arc(rnd(0, W), rnd(H * .2, H), r, 0, 7); x.fill(); }
-    x.save(); x.translate(W / 2, H * .5); const s = W / 900; x.scale(s, s);
-    x.fillStyle = "#0c0908"; x.strokeStyle = "#e9dfd2"; x.lineWidth = 6; x.beginPath(); x.moveTo(-230, 120); x.lineTo(-250, -90); x.lineTo(-150, 10); x.lineTo(-80, -160); x.lineTo(0, 0); x.lineTo(80, -160); x.lineTo(150, 10); x.lineTo(250, -90); x.lineTo(230, 120); x.closePath(); x.fill(); x.stroke();
-    x.beginPath(); x.moveTo(-230, 120); x.lineTo(230, 120); x.lineTo(222, 175); x.lineTo(-222, 175); x.closePath(); x.fill(); x.stroke();
-    x.fillStyle = "#c8241c"; [[-80, -160], [80, -160], [0, 0]].forEach(([a, b]) => { x.beginPath(); x.arc(a, b, 16, 0, 7); x.fill(); });
-    x.globalCompositeOperation = "destination-out"; for (let i = 0; i < 26; i++) { x.beginPath(); x.moveTo(rnd(-240, 240), rnd(-160, 170)); x.lineTo(rnd(-240, 240), rnd(-160, 170)); x.lineWidth = rnd(1, 4); x.stroke(); } x.restore(); x.globalCompositeOperation = "source-over";
-    x.fillStyle = "#e9dfd2"; x.textAlign = "center"; x.font = `400 ${W * .11}px "Metal Mania", fantasy`; x.fillText("VRAKHOLD", W / 2, H * .17);
-    x.font = `600 ${W * .045}px Oswald, sans-serif`; x.fillStyle = "#c9bcb4"; x.fillText("A S H E N   C R O W N", W / 2, H * .92); }
+  const coverImg = new Image(); coverImg.src = "img/cover.webp";
+  function crownArt(cv) { const x = cv.getContext("2d"), W = cv.width, H = cv.height; const go = () => { x.drawImage(coverImg, 0, 0, W, H);
+    const g = x.createLinearGradient(0, 0, 0, H); g.addColorStop(0, "rgba(0,0,0,.65)"); g.addColorStop(.3, "rgba(0,0,0,0)"); g.addColorStop(.75, "rgba(0,0,0,0)"); g.addColorStop(1, "rgba(0,0,0,.75)"); x.fillStyle = g; x.fillRect(0, 0, W, H);
+    x.fillStyle = "#e9dfd2"; x.textAlign = "center"; x.shadowColor = "rgba(200,36,28,.8)"; x.shadowBlur = W * .03; x.font = `400 ${W * .13}px "Metal Mania", fantasy`; x.fillText("VRAKHOLD", W / 2, H * .17);
+    x.shadowBlur = 0; x.font = `600 ${W * .05}px Oswald, sans-serif`; x.fillStyle = "#e9dfd2"; x.fillText("A S H E N   C R O W N", W / 2, H * .93); };
+    coverImg.complete ? go() : coverImg.addEventListener("load", go); }
   function stageArt(cv) { const x = cv.getContext("2d"), W = cv.width, H = cv.height; x.fillStyle = "#040303"; x.fillRect(0, 0, W, H);
     x.globalCompositeOperation = "lighter"; [["255,59,42", .2], ["255,138,42", .5], ["255,59,42", .8]].forEach(([c, px]) => { const g = x.createLinearGradient(W * px, 0, W / 2, H * .9); g.addColorStop(0, `rgba(${c},.55)`); g.addColorStop(1, `rgba(${c},0)`); x.fillStyle = g; x.beginPath(); x.moveTo(W * px - 18, 0); x.lineTo(W * px + 18, 0); x.lineTo(W * .5 + W * .3 * (px - .5) + 140, H); x.lineTo(W * .5 + W * .3 * (px - .5) - 140, H); x.fill(); });
     x.globalCompositeOperation = "source-over"; for (let i = 0; i < 400; i++) { x.fillStyle = `rgba(255,220,200,${rnd(0, .08)})`; x.beginPath(); x.arc(rnd(0, W), rnd(0, H), rnd(10, 60), 0, 7); x.fill(); }
@@ -287,8 +297,7 @@ html.js .bf { opacity: 0; transform: translateY(18px); transition: opacity .8s, 
     x.globalCompositeOperation = "lighter"; for (let i = 0; i < 6; i++) { const cx = rnd(0, W); const gg = x.createRadialGradient(cx, 0, 0, cx, 0, H * .9); gg.addColorStop(0, "rgba(255,120,40,.35)"); gg.addColorStop(1, "rgba(255,120,40,0)"); x.fillStyle = gg; x.fillRect(0, 0, W, H); }
     x.globalCompositeOperation = "source-over"; x.fillStyle = "#000"; for (let i = 0; i < 70; i++) { const cx = rnd(-20, W + 20), cy = H * rnd(.62, .95), r = rnd(16, 30); x.beginPath(); x.arc(cx, cy, r, 0, 7); x.fill(); x.fillRect(cx - r * 1.3, cy + r * .6, r * 2.6, H);
       if (Math.random() < .35) { x.save(); x.translate(cx + r * .8, cy - r); x.rotate(rnd(-.4, .4)); x.fillRect(-5, -r * 3, 10, r * 3); x.beginPath(); x.arc(0, -r * 3.2, 9, 0, 7); x.fill(); x.fillRect(-12, -r * 3.9, 6, 16); x.fillRect(6, -r * 3.9, 6, 16); x.restore(); } } }
-  document.fonts.ready.then(() => { crownArt($("#cover")); crownArt($("#cover0"));
-    document.querySelectorAll("[data-art]").forEach((c) => ({ stage: stageArt, crown: crownArt, smoke: smokeArt, crowd: crowdArt })[c.dataset.art](c)); });
+  document.fonts.ready.then(() => { crownArt($("#cover")); crownArt($("#cover0")); crownArt($("#cover2")); });
 
   /* ---------- Embers in the hero ---------- */
   const hero = $("#top"), ec = $("#embers"), ex = ec.getContext("2d"); let em = [];
@@ -363,31 +372,49 @@ html.js .bf { opacity: 0; transform: translateY(18px); transition: opacity .8s, 
     raf = requestAnimationFrame(draw); }
   ui(); draw();
 
-  /* ---------- Intro: Blitz spaltet die Nacht, Logo brennt ein ---------- */
+  /* ---------- Intro: Herzschlag, drei Blitze, Logo-Slam mit Schockwelle und Rissen, Bildschirm zerspringt ---------- */
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
   const tween = (ms, fn, tk) => new Promise((res) => { const t0 = performance.now(); const st = (n) => { if (tk.cancelled) return res(); const k = Math.min(1, (n - t0) / ms); fn(k); k < 1 ? requestAnimationFrame(st) : res(); }; requestAnimationFrame(st); });
   const reveal = () => { hero.classList.remove("pre"); hero.classList.remove("reveal"); void hero.offsetWidth; hero.classList.add("reveal"); };
   let token = { cancelled: true };
   async function intro(tk) { const w = innerWidth, h = innerHeight, d = Math.min(2, devicePixelRatio || 1);
     const c = document.createElement("canvas"); c.className = "fxl"; c.width = w * d; c.height = h * d; c.style.cssText = "position:fixed;inset:0;width:100vw;height:100vh;z-index:60;pointer-events:none"; document.body.append(c);
-    const x = c.getContext("2d"); x.scale(d, d); const F = Math.min(w * .22, 190);
-    const bolt = []; let px = w * .55, py = 0; while (py < h) { bolt.push([px, py]); px += rnd(-w * .08, w * .08); py += rnd(h * .04, h * .09); } bolt.push([px, h]);
-    const parts = []; let flash = 0, boltK = 0, burn = 0, glow = 0, fade = 1;
-    const draw = () => { x.clearRect(0, 0, w, h); x.globalAlpha = fade; x.fillStyle = "#050303"; x.fillRect(0, 0, w, h);
-      if (flash > 0) { x.fillStyle = `rgba(255,240,230,${flash})`; x.fillRect(0, 0, w, h); }
-      if (boltK > 0) { x.save(); x.strokeStyle = `rgba(255,220,200,${Math.max(0, 1 - burn * 1.4)})`; x.shadowColor = "#ff3b2a"; x.shadowBlur = 30; x.lineWidth = 4; x.beginPath(); const n = Math.ceil(bolt.length * boltK); bolt.slice(0, n).forEach(([a, b], i) => (i ? x.lineTo(a, b) : x.moveTo(a, b))); x.stroke(); x.restore(); }
-      if (burn > 0) { x.save(); x.textAlign = "center"; x.textBaseline = "middle"; x.font = `400 ${F}px "Metal Mania", fantasy`;
-        x.save(); x.beginPath(); x.rect(0, h * .45 + F * .6 - F * 1.3 * burn, w, F * 1.4); x.clip();
-        x.shadowColor = "#ff3b2a"; x.shadowBlur = 40 * glow + 10; x.fillStyle = `rgb(${233},${223 - 90 * (1 - glow)},${210 - 170 * (1 - glow)})`; x.fillText("Vrakhold", w / 2, h * .45); x.restore();
-        const ly = h * .45 + F * .6 - F * 1.3 * burn; if (burn < 1) { const g = x.createLinearGradient(0, ly - 8, 0, ly + 8); g.addColorStop(0, "rgba(255,138,42,0)"); g.addColorStop(.5, "rgba(255,180,80,.9)"); g.addColorStop(1, "rgba(255,138,42,0)"); x.fillStyle = g; x.fillRect(w * .1, ly - 8, w * .8, 16); }
-        x.font = `500 ${Math.min(w * .035, 18)}px Oswald, sans-serif`; x.fillStyle = `rgba(201,188,180,${glow})`; x.fillText("A S H E N   C R O W N", w / 2, h * .45 + F * .85); x.restore(); }
-      for (const p of parts) { x.fillStyle = `rgba(255,${140 + rnd(0, 80) | 0},40,${p.l})`; x.beginPath(); x.arc(p.x, p.y, p.r, 0, 7); x.fill(); }
-      x.globalAlpha = 1; };
-    let live = true; const lp = () => { if (!live || tk.cancelled) return; for (const p of parts) { p.x += p.vx; p.y += p.vy; p.vy -= .02; p.l -= .008; } if (burn > 0 && burn < 1) for (let i = 0; i < 6; i++) parts.push({ x: w * rnd(.15, .85), y: h * .45 + F * .6 - F * 1.3 * burn, vx: rnd(-.6, .6), vy: rnd(-2.5, -.5), r: rnd(1, 2.8), l: 1 }); draw(); requestAnimationFrame(lp); }; requestAnimationFrame(lp);
-    await sleep(450); await tween(160, (k) => { boltK = k; flash = .9 * k; }, tk); await tween(260, (k) => { flash = .9 * (1 - k); }, tk);
-    await sleep(120); await tween(160, (k) => { flash = .5 * (1 - k); }, tk);
-    await tween(1400, (k) => { burn = k; }, tk); await tween(500, (k) => { glow = k; }, tk);
-    await sleep(900); if (!tk.cancelled) reveal(); await tween(700, (k) => { fade = 1 - k; }, tk); live = false; c.remove(); }
+    const x = c.getContext("2d"); x.scale(d, d); const F = Math.min(w * .21, 200), cx = w / 2, cy = h * .46;
+    /* Szene in Offscreen-Canvas, damit sie am Ende in Scherben zerspringen kann */
+    const sc = document.createElement("canvas"); sc.width = w * d; sc.height = h * d; const s = sc.getContext("2d"); s.scale(d, d);
+    const mkBolt = (x0) => { const p = []; let px = x0, py = -10; while (py < h * rnd(.55, 1)) { p.push([px, py]); px += rnd(-w * .07, w * .07); py += rnd(h * .03, h * .08); } return p; };
+    const bolts = [mkBolt(w * .2), mkBolt(w * .78), mkBolt(w * .5)];
+    const cracks = []; const crack = (x0, y0, a, len, depth) => { let px = x0, py = y0; const seg = [[px, py]]; for (let i = 0; i < 9; i++) { a += rnd(-.45, .45); px += Math.cos(a) * len / 9; py += Math.sin(a) * len / 9; seg.push([px, py]); if (depth < 2 && Math.random() < .22) crack(px, py, a + rnd(-1, 1), len * .5, depth + 1); } cracks.push(seg); };
+    for (let i = 0; i < 14; i++) crack(cx + rnd(-F * 1.6, F * 1.6), cy + rnd(-F * .3, F * .3), (i / 14) * 6.283, Math.max(w, h) * rnd(.25, .55), 0);
+    const parts = []; const burst = (n, px, py, sp) => { for (let i = 0; i < n; i++) { const a = rnd(0, 6.283), v = rnd(2, sp); parts.push({ x: px, y: py, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 2, r: rnd(1, 3.2), l: 1 }); } };
+    let pulse = 0, flash = 0, boltA = [0, 0, 0], slam = 0, ring = -1, crackK = 0, shake = 0, glow = 0, sub = 0, t = 0;
+    const scene = () => { s.setTransform(d, 0, 0, d, 0, 0); s.fillStyle = "#050303"; s.fillRect(0, 0, w, h);
+      const g = s.createRadialGradient(cx, h, 10, cx, h, h * (.5 + .4 * pulse)); g.addColorStop(0, `rgba(200,36,28,${.15 + .45 * pulse})`); g.addColorStop(1, "rgba(200,36,28,0)"); s.fillStyle = g; s.fillRect(0, 0, w, h);
+      bolts.forEach((b, i) => { if (boltA[i] <= 0) return; s.save(); s.strokeStyle = `rgba(255,230,220,${boltA[i]})`; s.shadowColor = "#ff3b2a"; s.shadowBlur = 28; s.lineWidth = 3.5; s.beginPath(); b.forEach(([a, bb], k) => (k ? s.lineTo(a, bb) : s.moveTo(a, bb))); s.stroke(); s.restore(); });
+      if (crackK > 0) { s.save(); s.strokeStyle = "rgba(255,120,60,.85)"; s.shadowColor = "#ff3b2a"; s.shadowBlur = 10; s.lineWidth = 1.6; cracks.forEach((seg) => { const n = Math.max(1, Math.floor(seg.length * crackK)); s.beginPath(); seg.slice(0, n).forEach(([a, b], k) => (k ? s.lineTo(a, b) : s.moveTo(a, b))); s.stroke(); }); s.restore(); }
+      if (ring >= 0 && ring < 1) { s.save(); s.strokeStyle = `rgba(255,200,160,${1 - ring})`; s.lineWidth = 10 * (1 - ring) + 1; s.beginPath(); s.ellipse(cx, cy, Math.max(w, h) * ring, Math.max(w, h) * ring * .45, 0, 0, 7); s.stroke(); s.restore(); }
+      if (slam > 0) { const sz = 1 + (1 - slam) * 2.6; s.save(); s.translate(cx, cy); s.scale(sz, sz); s.textAlign = "center"; s.textBaseline = "middle"; s.font = `400 ${F}px "Metal Mania", fantasy`; s.globalAlpha = Math.min(1, slam * 1.4);
+        s.shadowColor = "#ff3b2a"; s.shadowBlur = 20 + 50 * glow; s.fillStyle = "#e9dfd2"; s.fillText("Vrakhold", 0, 0); s.shadowBlur = 0; s.globalCompositeOperation = "source-atop"; const gg = s.createLinearGradient(0, -F * .5, 0, F * .5); gg.addColorStop(0, `rgba(255,140,40,${.55 * glow})`); gg.addColorStop(1, "rgba(200,36,28,0)"); s.fillStyle = gg; s.fillRect(-w, -F, w * 2, F * 2); s.restore(); }
+      if (sub > 0) { s.save(); s.globalAlpha = sub; s.textAlign = "center"; s.font = `600 ${Math.min(w * .035, 18)}px Oswald, sans-serif`; s.fillStyle = "#c9bcb4"; s.fillText("A S H E N   C R O W N   ·   O U T   N O W", cx, cy + F * .78); s.restore(); }
+      for (const p of parts) { if (p.l <= 0) continue; s.fillStyle = `rgba(255,${130 + (p.r * 30 | 0)},40,${p.l})`; s.beginPath(); s.arc(p.x, p.y, p.r, 0, 7); s.fill(); }
+      if (flash > 0) { s.fillStyle = `rgba(255,240,230,${flash})`; s.fillRect(0, 0, w, h); } };
+    let shards = null;
+    const frame = () => { x.setTransform(d, 0, 0, d, 0, 0); x.clearRect(0, 0, w, h);
+      if (!shards) { scene(); const sx = shake ? rnd(-shake, shake) : 0, sy = shake ? rnd(-shake, shake) : 0; x.drawImage(sc, sx, sy, w, h); return; }
+      for (const p of shards) { x.save(); x.translate(p.cx + p.dx, p.cy + p.dy); x.rotate(p.rot); x.translate(-p.cx, -p.cy); x.beginPath(); p.poly.forEach(([a, b], i) => (i ? x.lineTo(a, b) : x.moveTo(a, b))); x.closePath(); x.clip(); x.globalAlpha = Math.max(0, 1 - p.dy / h); x.drawImage(sc, 0, 0, w, h); x.restore(); } };
+    let live = true; const lp = (n) => { if (!live || tk.cancelled) return; t = n; for (const p of parts) { p.x += p.vx; p.y += p.vy; p.vy += .12; p.vx *= .99; p.l -= .012; } if (shards) for (const p of shards) { p.vy += .55; p.dy += p.vy; p.dx += p.vx; p.rot += p.vr; } frame(); requestAnimationFrame(lp); }; requestAnimationFrame(lp);
+    const boom = async (i) => { boltA[i] = 1; flash = .85; shake = 10; await tween(220, (k) => { flash = .85 * (1 - k); boltA[i] = 1 - k * .6; shake = 10 * (1 - k); }, tk); };
+    /* 1 Herzschlag */ for (let i = 0; i < 2; i++) { await tween(260, (k) => { pulse = Math.sin(k * Math.PI); }, tk); await sleep(120); }
+    /* 2 drei Blitze */ await boom(0); await sleep(140); await boom(1); await sleep(110); await boom(2);
+    /* 3 Logo-Slam mit Schockwelle, Rissen und Glut */ await tween(200, (k) => { slam = k * k; boltA = boltA.map((v) => v * (1 - k)); }, tk);
+    flash = .6; shake = 22; ring = 0; burst(160, cx, cy, 12);
+    await tween(700, (k) => { flash = .6 * (1 - k) * (1 - k); shake = 22 * (1 - k); ring = k; crackK = Math.min(1, k * 1.6); glow = k; }, tk); ring = -1;
+    await tween(350, (k) => { sub = k; }, tk); await sleep(900);
+    /* 4 Bildschirm zerspringt */ if (!tk.cancelled) { scene(); const cols = 6, rows = 8, pts = [];
+      for (let r = 0; r <= rows; r++) { pts[r] = []; for (let q = 0; q <= cols; q++) pts[r][q] = [q / cols * w + (q % cols ? rnd(-w / cols * .3, w / cols * .3) : 0), r / rows * h + (r % rows ? rnd(-h / rows * .3, h / rows * .3) : 0)]; }
+      shards = []; for (let r = 0; r < rows; r++) for (let q = 0; q < cols; q++) { const A = pts[r][q], B = pts[r][q + 1], C = pts[r + 1][q + 1], D = pts[r + 1][q]; [[A, B, C], [A, C, D]].forEach((poly) => { const pcx = (poly[0][0] + poly[1][0] + poly[2][0]) / 3, pcy = (poly[0][1] + poly[1][1] + poly[2][1]) / 3; shards.push({ poly, cx: pcx, cy: pcy, dx: 0, dy: 0, vx: (pcx - cx) * rnd(.01, .03), vy: rnd(-6, -1) - (1 - pcy / h) * 4, rot: 0, vr: rnd(-.06, .06) }); }); }
+      reveal(); await sleep(1400); }
+    live = false; c.remove(); }
   async function play() { token.cancelled = true; document.querySelectorAll(".fxl, .skipi").forEach((n) => n.remove()); const tk = (token = { cancelled: false });
     if (reduce) { reveal(); return; } scrollTo(0, 0); document.documentElement.style.overflow = "hidden"; hero.classList.add("pre"); hero.classList.remove("reveal");
     const sk = document.createElement("button"); sk.className = "skipi"; sk.type = "button"; sk.textContent = "Skip intro"; sk.addEventListener("click", () => { tk.cancelled = true; document.querySelectorAll(".fxl, .skipi").forEach((n) => n.remove()); document.documentElement.style.overflow = ""; reveal(); }); document.body.append(sk);
